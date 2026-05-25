@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Labs Site Build | Most Certainly Try Labs</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Case study</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="../new-project.html">New Entry</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="narrow">
+      <section class="page-title">
+        <p class="kicker">Build Log</p>
+        <h1>Building Most Certainly Try Labs</h1>
+        <p class="lede">A standalone GitHub Pages lab separates structured project documentation from the polished Squarespace marketing site.</p>
+      </section>
+
+      <section class="stat-strip" aria-label="Labs site build metrics">
+        <div><strong>1</strong><span>Custom subdomain</span></div>
+        <div><strong>2</strong><span>Published entries</span></div>
+        <div><strong>6</strong><span>Core files in the workflow</span></div>
+      </section>
+
+      <article class="case-study">
+        <h2>Executive Summary</h2>
+        <p>Most Certainly Try Labs was created to solve a practical split: Squarespace is good for polished brand pages, but it is not the best place to manage a growing library of structured experiments, build logs, workflow notes, and case studies.</p>
+        <p>The answer was a small static site hosted on GitHub Pages at labs.mostcertainlytry.com. Squarespace stays the front door for the main site. GitHub becomes the workspace for repeatable project documentation, version history, JSON data, and lightweight publishing.</p>
+
+        <h2>Problem</h2>
+        <p>The main site needed a place to show work in progress without turning Squarespace into a database. The project library needed repeated entries with the same fields: title, category, type, status, date, tools, summary, outcome, public URL, and source note.</p>
+        <p>That structure is awkward to maintain by hand in a visual site builder. It is simple to maintain in JSON.</p>
+
+        <h2>Build</h2>
+        <p>The first version used plain files on purpose: HTML for pages, CSS for layout, JavaScript for rendering and filters, JSON as the source of truth, Markdown for source notes, and Git for history.</p>
+        <p>The repository was created as a separate Git project so the Labs site has clean history and can be pushed without mixing in unrelated OpenClaw workspace files.</p>
+
+        <h2>Publishing</h2>
+        <p>The site was pushed to GitHub, published from the main branch with GitHub Pages, and connected to the custom subdomain through Squarespace DNS.</p>
+        <p>The DNS record is a CNAME from labs to ilanajill-png.github.io. After DNS propagated, the site loaded publicly at labs.mostcertainlytry.com.</p>
+
+        <h2>Result</h2>
+        <p>The project shipped as a working public library, not just a demo page. It now supports searchable, filterable, JSON-driven entries and can grow without rebuilding the homepage by hand each time.</p>
+
+        <h2>Reusable Pattern</h2>
+        <ol>
+          <li>Draft a project entry.</li>
+          <li>Add the object to projects.json.</li>
+          <li>Write rough notes in Markdown.</li>
+          <li>Promote the best entries into case-study pages.</li>
+          <li>Commit and push.</li>
+          <li>Let GitHub Pages publish the update.</li>
+        </ol>
+
+        <h2>Why This Belongs on GitHub</h2>
+        <p>This project benefits from JSON and GitHub because the content is structured, repeatable, and likely to grow. Each entry follows the same schema, which means cards, filters, tables, and counts can be generated from one data file.</p>
+        <p>Git also gives the site a memory. Every change has a commit, and every case study can be updated as the work matures.</p>
+      </article>
+    </main>
+  </body>
+</html>

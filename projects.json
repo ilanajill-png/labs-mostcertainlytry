@@ -18,13 +18,13 @@
     "title": "Labs Site Build",
     "category": "Build Log",
     "type": "Web Practice",
-    "status": "In Progress",
+    "status": "Published",
     "date": "2026-05-25",
     "featured": true,
     "tools": ["HTML", "CSS", "JavaScript", "JSON", "Git"],
-    "summary": "A small static site for learning enough frontend and Git fluency to prototype projects and direct AI coding tools more clearly.",
-    "outcome": "Created a JSON-driven project index, filterable table, case study page, and form preview workflow.",
-    "url": "index.html",
-    "source": "README.md"
+    "summary": "A standalone GitHub Pages lab that separates structured project documentation from the polished Squarespace marketing site.",
+    "outcome": "Published a JSON-driven project library with search, filters, reusable entry templates, Git history, GitHub Pages hosting, and Squarespace DNS.",
+    "url": "projects/labs-site-build.html",
+    "source": "docs/labs-site-build-case-study.md"
   }
 ]
