@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Main Street Schertz Field Guide | Most Certainly Try Labs</title>
-    <meta name="description" content="A local-first field guide generator for Main Street Schertz observations, captions, and content notes.">
+    <title>AI Meetup Field Guide | Most Certainly Try Labs</title>
+    <meta name="description" content="A practical field guide generator for choosing, attending, and writing up AI meetups around Austin and San Antonio.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -13,7 +13,7 @@
         <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
         <span>
           <strong>Most Certainly Try Labs</strong>
-          <small>Main Street Schertz field notes</small>
+          <small>AI meetup field notes</small>
         </span>
       </a>
       <nav aria-label="Primary navigation">
@@ -27,53 +27,54 @@
     <main>
       <section class="field-hero">
         <div>
-          <p class="kicker">Main Street Schertz</p>
-          <h1>Field Guide Generator</h1>
-          <p class="lede">Turn a short local walk into a structured field note: mood, tiny detail, observed behavior, and a caption seed for later posts.</p>
+          <p class="kicker">Austin + San Antonio AI meetups</p>
+          <h1>AI Meetup Field Guide</h1>
+          <p class="lede">Turn an AI event listing into a useful field note: who it is for, what signal it gives, what to ask, and what to capture afterward.</p>
           <div class="hero-actions">
-            <a class="button primary" href="https://www.google.com/maps/search/?api=1&amp;query=Main%20Street%20Schertz%20TX" target="_blank" rel="noopener">Open Main Street Map</a>
+            <a class="button primary" href="https://www.google.com/maps/search/?api=1&amp;query=AI%20meetups%20Austin%20San%20Antonio" target="_blank" rel="noopener">Open AI Meetup Map</a>
           </div>
         </div>
-        <form id="field-form" class="field-form" aria-label="Generate a field guide entry">
-          <label>Title <input name="title" placeholder="Lunch Break Recon"></label>
-          <label>Mood
-            <select name="mood">
-              <option>Curious</option>
-              <option>Playful</option>
-              <option>Warm</option>
-              <option>Quiet</option>
-              <option>Oddly specific</option>
+        <form id="field-form" class="field-form" aria-label="Generate an AI meetup field guide entry">
+          <label>Meetup title <input name="title" placeholder="AI Agents for Beginners"></label>
+          <label>Signal
+            <select name="signal">
+              <option>Beginner-friendly</option>
+              <option>Builder-heavy</option>
+              <option>Networking</option>
+              <option>Creator/business</option>
+              <option>Research-heavy</option>
             </select>
           </label>
-          <label>Time of day <input name="timeOfDay" placeholder="Late afternoon"></label>
-          <label>Archetype <input name="archetype" placeholder="Errand-run anthropologist"></label>
-          <label>Tiny detail <textarea name="tinyDetail" rows="3" placeholder="The one small thing worth remembering."></textarea></label>
-          <label>Observed behavior <textarea name="observedBehavior" rows="3" placeholder="What happened, in one vivid sentence."></textarea></label>
+          <label>Date / time <input name="when" placeholder="Tue, May 26, 6-8 PM"></label>
+          <label>Venue / city <input name="venue" placeholder="VenturePoint Medical, San Antonio"></label>
+          <label>Best for <textarea name="bestFor" rows="3" placeholder="Who should actually go, and why."></textarea></label>
+          <label>Question to ask <textarea name="questionToAsk" rows="3" placeholder="One useful question to bring into the room."></textarea></label>
+          <label>Follow-up note <textarea name="followUpNote" rows="3" placeholder="What to capture afterward for a post, DM, or recap."></textarea></label>
         </form>
       </section>
 
-      <section class="field-output-grid" aria-label="Generated field note and filters">
+      <section class="field-output-grid" aria-label="Generated AI meetup note and filters">
         <article class="field-card generated-card" id="generated-card"></article>
         <aside class="content-panel">
-          <h2>Browse Sample Notes</h2>
+          <h2>Browse Sample Meetups</h2>
           <label>
-            Mood
-            <select id="mood-filter">
-              <option value="all">All moods</option>
+            Signal
+            <select id="signal-filter">
+              <option value="all">All signals</option>
             </select>
           </label>
           <label>
             Search
-            <input id="field-search" type="search" placeholder="Try photos, caption, walk">
+            <input id="field-search" type="search" placeholder="Try agents, robotics, founders">
           </label>
         </aside>
       </section>
 
-      <section class="field-grid" id="field-grid" aria-label="Main Street Schertz sample field notes"></section>
+      <section class="field-grid" id="field-grid" aria-label="AI meetup sample field notes"></section>
     </main>
 
     <footer>
-      <span>Local notes, structured as JSON.</span>
+      <span>Meetup notes, structured as JSON.</span>
       <a href="index.html">Back to Labs</a>
     </footer>
 

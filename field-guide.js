@@ -1,7 +1,7 @@
 const fieldGrid = document.querySelector("#field-grid");
 const fieldForm = document.querySelector("#field-form");
 const generatedCard = document.querySelector("#generated-card");
-const moodFilter = document.querySelector("#mood-filter");
+const signalFilter = document.querySelector("#signal-filter");
 const fieldSearch = document.querySelector("#field-search");
 
 let fieldNotes = [];
@@ -9,16 +9,16 @@ let fieldNotes = [];
 async function loadFieldNotes() {
   const response = await fetch("field-guide-data.json");
   fieldNotes = await response.json();
-  populateMoodFilter(fieldNotes);
+  populateSignalFilter(fieldNotes);
   renderFieldNotes(fieldNotes);
   renderGeneratedCard();
 }
 
-function populateMoodFilter(notes) {
-  const moods = [...new Set(notes.map((note) => note.mood))].sort();
-  moodFilter.insertAdjacentHTML(
+function populateSignalFilter(notes) {
+  const signals = [...new Set(notes.map((note) => note.signal))].sort();
+  signalFilter.insertAdjacentHTML(
     "beforeend",
-    moods.map((mood) => `<option value="${mood}">${mood}</option>`).join("")
+    signals.map((signal) => `<option value="${signal}">${signal}</option>`).join("")
   );
 }
 
@@ -27,16 +27,16 @@ function fieldCard(note) {
   return `
     <article class="field-card">
       <div class="card-meta">
-        <span>${note.mood}</span>
-        <span>${note.timeOfDay}</span>
+        <span>${note.signal}</span>
+        <span>${note.when}</span>
       </div>
       <h2>${note.title}</h2>
-      <p class="project-type">${note.location}</p>
+      <p class="project-type">${note.venue}</p>
       <dl>
-        <div><dt>Archetype</dt><dd>${note.archetype}</dd></div>
-        <div><dt>Field mark</dt><dd>${note.fieldMark}</dd></div>
-        <div><dt>Observed behavior</dt><dd>${note.observedBehavior}</dd></div>
-        <div><dt>Tiny detail</dt><dd>${note.tinyDetail}</dd></div>
+        <div><dt>Best for</dt><dd>${note.bestFor}</dd></div>
+        <div><dt>Room read</dt><dd>${note.roomRead}</dd></div>
+        <div><dt>Question to ask</dt><dd>${note.questionToAsk}</dd></div>
+        <div><dt>Follow-up note</dt><dd>${note.followUpNote}</dd></div>
       </dl>
       <blockquote>${note.captionSeed}</blockquote>
       <div class="tool-list">${tags}</div>
@@ -50,24 +50,25 @@ function renderFieldNotes(notes) {
 
 function getGeneratedNote() {
   const data = new FormData(fieldForm);
-  const title = data.get("title") || "Main Street Micro-Sighting";
-  const mood = data.get("mood") || "Curious";
-  const timeOfDay = data.get("timeOfDay") || "Anytime";
-  const archetype = data.get("archetype") || "Local detail collector";
-  const tinyDetail = data.get("tinyDetail") || "A small detail stood out enough to become the whole point.";
-  const observedBehavior = data.get("observedBehavior") || "Walks slowly, notices one useful thing, and turns it into a note for later.";
+  const title = data.get("title") || "AI Meetup Recon Note";
+  const signal = data.get("signal") || "Beginner-friendly";
+  const when = data.get("when") || "Next available date";
+  const venue = data.get("venue") || "Austin / San Antonio area";
+  const bestFor = data.get("bestFor") || "Anyone deciding whether the room is worth the drive, the RSVP, or the follow-up.";
+  const questionToAsk = data.get("questionToAsk") || "What is the most useful real-world AI workflow you have seen this month?";
+  const followUpNote = data.get("followUpNote") || "Capture one practical takeaway, one person to follow up with, and one post-worthy detail.";
 
   return {
     title,
-    location: "Main Street Schertz",
-    mood,
-    timeOfDay,
-    archetype,
-    fieldMark: "Looks ordinary until it becomes a caption.",
-    observedBehavior,
-    tinyDetail,
-    captionSeed: `${title}: ${tinyDetail}`,
-    tags: ["draft", "main street", "schertz"]
+    venue,
+    signal,
+    when,
+    bestFor,
+    roomRead: "Useful if the topic is concrete enough to produce one workflow, one contact, or one clean content angle.",
+    questionToAsk,
+    followUpNote,
+    captionSeed: `${title}: ${followUpNote}`,
+    tags: ["draft", "ai meetup", "field note"]
   };
 }
 
@@ -79,20 +80,20 @@ function renderGeneratedCard() {
 }
 
 function filterFieldNotes() {
-  const mood = moodFilter.value;
+  const signal = signalFilter.value;
   const query = fieldSearch.value.trim().toLowerCase();
 
   const filtered = fieldNotes.filter((note) => {
-    const haystack = `${note.title} ${note.location} ${note.mood} ${note.timeOfDay} ${note.archetype} ${note.tinyDetail} ${note.captionSeed} ${note.tags.join(" ")}`.toLowerCase();
-    const matchesMood = mood === "all" || note.mood === mood;
+    const haystack = `${note.title} ${note.venue} ${note.signal} ${note.when} ${note.bestFor} ${note.roomRead} ${note.questionToAsk} ${note.followUpNote} ${note.captionSeed} ${note.tags.join(" ")}`.toLowerCase();
+    const matchesSignal = signal === "all" || note.signal === signal;
     const matchesQuery = !query || haystack.includes(query);
-    return matchesMood && matchesQuery;
+    return matchesSignal && matchesQuery;
   });
 
   renderFieldNotes(filtered);
 }
 
 fieldForm.addEventListener("input", renderGeneratedCard);
-moodFilter.addEventListener("change", filterFieldNotes);
+signalFilter.addEventListener("change", filterFieldNotes);
 fieldSearch.addEventListener("input", filterFieldNotes);
 loadFieldNotes();

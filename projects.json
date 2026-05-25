@@ -28,16 +28,16 @@
     "source": "docs/labs-site-build-case-study.md"
   },
   {
-    "id": "main-street-schertz-field-guide",
-    "title": "Main Street Schertz Field Guide Generator",
+    "id": "ai-meetup-field-guide",
+    "title": "AI Meetup Field Guide",
     "category": "Experiment",
-    "type": "Local Story Tool",
+    "type": "Event Research Tool",
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
-    "tools": ["HTML", "CSS", "JavaScript", "JSON", "Local Notes"],
-    "summary": "A playful local-first generator that turns Main Street Schertz outings into structured field-note cards.",
-    "outcome": "Published a JSON-backed mini-tool with sample observations, filters, a draft form, and reusable output for future local content.",
+    "tools": ["HTML", "CSS", "JavaScript", "JSON", "AI Events"],
+    "summary": "A practical generator that turns AI meetup listings into structured field notes for deciding what to attend and what to capture.",
+    "outcome": "Published a JSON-backed mini-tool with sample AI meetup notes, signal filters, a draft form, and reusable follow-up prompts.",
     "url": "field-guide.html",
     "source": "field-guide-data.json"
   }
