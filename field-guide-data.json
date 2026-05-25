@@ -1,0 +1,41 @@
+[
+  {
+    "id": "morning-window-wander",
+    "title": "Morning Window Wander",
+    "location": "Main Street Schertz",
+    "mood": "Curious",
+    "timeOfDay": "Morning",
+    "archetype": "Window-shopper with a coffee plan",
+    "fieldMark": "Pauses at reflective glass like it might reveal a clue.",
+    "observedBehavior": "Walks slowly, spots textures first, and treats every sign as a possible story hook.",
+    "tinyDetail": "A good doorway can carry an entire caption.",
+    "captionSeed": "Main Street Schertz is best approached at window-shopping speed.",
+    "tags": ["walk", "photos", "caption"]
+  },
+  {
+    "id": "golden-hour-scout",
+    "title": "Golden Hour Scout",
+    "location": "Main Street Schertz",
+    "mood": "Warm",
+    "timeOfDay": "Evening",
+    "archetype": "Light chaser with errands as a cover story",
+    "fieldMark": "Turns ordinary brick, pavement, and parked cars into composition practice.",
+    "observedBehavior": "Takes one useful photo, then three unnecessary ones, then keeps the unnecessary ones.",
+    "tinyDetail": "The best shot is usually five steps behind where you first stopped.",
+    "captionSeed": "A short local walk counts as research when the light is doing this much work.",
+    "tags": ["golden hour", "photos", "walk"]
+  },
+  {
+    "id": "saturday-note-taker",
+    "title": "Saturday Note Taker",
+    "location": "Main Street Schertz",
+    "mood": "Playful",
+    "timeOfDay": "Afternoon",
+    "archetype": "Local-story collector",
+    "fieldMark": "Carries a notes app full of fragments that make sense later.",
+    "observedBehavior": "Collects signs, snippets, textures, parking facts, and one oddly specific sentence.",
+    "tinyDetail": "The practical detail is often the thing people save.",
+    "captionSeed": "Tiny field note from Main Street Schertz: local details age better than generic travel copy.",
+    "tags": ["notes", "local", "content"]
+  }
+]

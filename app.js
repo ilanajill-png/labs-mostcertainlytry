@@ -52,7 +52,7 @@ function projectCard(project) {
       <p class="project-type">${project.type}</p>
       <p>${project.summary}</p>
       <div class="tool-list">${tools}</div>
-      <a class="text-link" href="${project.url}">Open case study</a>
+      <a class="text-link" href="${project.url}">Open project</a>
     </article>
   `;
 }

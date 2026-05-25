@@ -26,5 +26,19 @@
     "outcome": "Published a JSON-driven project library with search, filters, reusable entry templates, Git history, GitHub Pages hosting, and Squarespace DNS.",
     "url": "projects/labs-site-build.html",
     "source": "docs/labs-site-build-case-study.md"
+  },
+  {
+    "id": "main-street-schertz-field-guide",
+    "title": "Main Street Schertz Field Guide Generator",
+    "category": "Experiment",
+    "type": "Local Story Tool",
+    "status": "Published",
+    "date": "2026-05-25",
+    "featured": true,
+    "tools": ["HTML", "CSS", "JavaScript", "JSON", "Local Notes"],
+    "summary": "A playful local-first generator that turns Main Street Schertz outings into structured field-note cards.",
+    "outcome": "Published a JSON-backed mini-tool with sample observations, filters, a draft form, and reusable output for future local content.",
+    "url": "field-guide.html",
+    "source": "field-guide-data.json"
   }
 ]

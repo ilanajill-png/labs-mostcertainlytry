@@ -104,6 +104,26 @@ main {
   padding: 56px 0;
 }
 
+.field-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 460px);
+  align-items: start;
+  gap: clamp(24px, 5vw, 56px);
+  padding: 52px 0 30px;
+}
+
+.field-hero h1 {
+  max-width: 680px;
+}
+
+.field-form {
+  padding: 22px;
+  background: #fff8ee;
+  border: 1px solid #e2cfaa;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
 .kicker {
   margin: 0 0 10px;
   color: var(--coral);
@@ -148,7 +168,8 @@ h2 {
 
 .snapshot,
 .content-panel,
-.project-card {
+.project-card,
+.field-card {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -223,6 +244,56 @@ textarea {
 
 .project-card {
   padding: 22px;
+}
+
+.field-output-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: 18px;
+  align-items: start;
+  margin: 18px 0;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  gap: 18px;
+  padding: 18px 0 54px;
+}
+
+.field-card {
+  padding: 22px;
+}
+
+.generated-card {
+  background: #fff8ee;
+  border-color: #e2cfaa;
+}
+
+.field-card dl {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.field-card dt {
+  color: var(--coral);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.field-card dd {
+  margin: 2px 0 0;
+}
+
+.field-card blockquote {
+  margin: 18px 0 0;
+  padding: 14px;
+  border-left: 4px solid var(--gold);
+  background: #fbf4e7;
+  color: #4d3a19;
+  font-weight: 800;
 }
 
 .project-card h2 a {
@@ -396,6 +467,8 @@ footer {
 @media (max-width: 760px) {
   .site-header,
   .hero,
+  .field-hero,
+  .field-output-grid,
   .toolbar,
   .section-heading,
   .form-layout,
@@ -404,6 +477,8 @@ footer {
   }
 
   .hero,
+  .field-hero,
+  .field-output-grid,
   .form-layout,
   .toolbar {
     grid-template-columns: 1fr;

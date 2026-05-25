@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Main Street Schertz Field Guide | Most Certainly Try Labs</title>
+    <meta name="description" content="A local-first field guide generator for Main Street Schertz observations, captions, and content notes.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Main Street Schertz field notes</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="field-guide.html" aria-current="page">Field Guide</a>
+        <a href="new-project.html">New Entry</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="field-hero">
+        <div>
+          <p class="kicker">Main Street Schertz</p>
+          <h1>Field Guide Generator</h1>
+          <p class="lede">Turn a short local walk into a structured field note: mood, tiny detail, observed behavior, and a caption seed for later posts.</p>
+        </div>
+        <form id="field-form" class="field-form" aria-label="Generate a field guide entry">
+          <label>Title <input name="title" placeholder="Lunch Break Recon"></label>
+          <label>Mood
+            <select name="mood">
+              <option>Curious</option>
+              <option>Playful</option>
+              <option>Warm</option>
+              <option>Quiet</option>
+              <option>Oddly specific</option>
+            </select>
+          </label>
+          <label>Time of day <input name="timeOfDay" placeholder="Late afternoon"></label>
+          <label>Archetype <input name="archetype" placeholder="Errand-run anthropologist"></label>
+          <label>Tiny detail <textarea name="tinyDetail" rows="3" placeholder="The one small thing worth remembering."></textarea></label>
+          <label>Observed behavior <textarea name="observedBehavior" rows="3" placeholder="What happened, in one vivid sentence."></textarea></label>
+        </form>
+      </section>
+
+      <section class="field-output-grid" aria-label="Generated field note and filters">
+        <article class="field-card generated-card" id="generated-card"></article>
+        <aside class="content-panel">
+          <h2>Browse Sample Notes</h2>
+          <label>
+            Mood
+            <select id="mood-filter">
+              <option value="all">All moods</option>
+            </select>
+          </label>
+          <label>
+            Search
+            <input id="field-search" type="search" placeholder="Try photos, caption, walk">
+          </label>
+        </aside>
+      </section>
+
+      <section class="field-grid" id="field-grid" aria-label="Main Street Schertz sample field notes"></section>
+    </main>
+
+    <footer>
+      <span>Local notes, structured as JSON.</span>
+      <a href="index.html">Back to Labs</a>
+    </footer>
+
+    <script src="field-guide.js"></script>
+  </body>
+</html>
