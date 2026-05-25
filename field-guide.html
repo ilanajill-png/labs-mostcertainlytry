@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AI Meetup Field Guide | Most Certainly Try Labs</title>
-    <meta name="description" content="A practical field guide generator for choosing, attending, and writing up AI meetups around Austin and San Antonio.">
+    <title>AI Meetup Captain's Log | Most Certainly Try Labs</title>
+    <meta name="description" content="A practical captain's log for writing down what happened after an AI meetup: takeaways, people, quotes, follow-ups, and content angles.">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -13,12 +13,12 @@
         <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
         <span>
           <strong>Most Certainly Try Labs</strong>
-          <small>AI meetup field notes</small>
+          <small>AI meetup captain's log</small>
         </span>
       </a>
       <nav aria-label="Primary navigation">
         <a href="index.html">Projects</a>
-        <a href="field-guide.html" aria-current="page">Field Guide</a>
+        <a href="field-guide.html" aria-current="page">Captain's Log</a>
         <a href="new-project.html">New Entry</a>
         <a href="about.html">About</a>
       </nav>
@@ -27,54 +27,57 @@
     <main>
       <section class="field-hero">
         <div>
-          <p class="kicker">Austin + San Antonio AI meetups</p>
-          <h1>AI Meetup Field Guide</h1>
-          <p class="lede">Turn an AI event listing into a useful field note: who it is for, what signal it gives, what to ask, and what to capture afterward.</p>
+          <p class="kicker">After the meetup</p>
+          <h1>AI Meetup Captain's Log</h1>
+          <p class="lede">Turn what actually happened in the room into a clean post-meetup log: vibe, takeaways, people to follow up with, and the story worth saving.</p>
           <div class="hero-actions">
             <a class="button primary" href="https://www.google.com/maps/search/?api=1&amp;query=AI%20meetups%20Austin%20San%20Antonio" target="_blank" rel="noopener">Open AI Meetup Map</a>
           </div>
         </div>
-        <form id="field-form" class="field-form" aria-label="Generate an AI meetup field guide entry">
+        <form id="field-form" class="field-form" aria-label="Generate an AI meetup captain's log entry">
           <label>Meetup title <input name="title" placeholder="AI Agents for Beginners"></label>
-          <label>Signal
-            <select name="signal">
-              <option>Beginner-friendly</option>
-              <option>Builder-heavy</option>
+          <label>Log type
+            <select name="logType">
+              <option>Useful</option>
+              <option>Surprising</option>
+              <option>Technical</option>
               <option>Networking</option>
-              <option>Creator/business</option>
-              <option>Research-heavy</option>
+              <option>Content-worthy</option>
+              <option>Skip next time</option>
             </select>
           </label>
-          <label>Date / time <input name="when" placeholder="Tue, May 26, 6-8 PM"></label>
-          <label>Venue / city <input name="venue" placeholder="VenturePoint Medical, San Antonio"></label>
-          <label>Best for <textarea name="bestFor" rows="3" placeholder="Who should actually go, and why."></textarea></label>
-          <label>Question to ask <textarea name="questionToAsk" rows="3" placeholder="One useful question to bring into the room."></textarea></label>
-          <label>Follow-up note <textarea name="followUpNote" rows="3" placeholder="What to capture afterward for a post, DM, or recap."></textarea></label>
+          <label>When / where <input name="whenWhere" placeholder="Tue night at VenturePoint Medical"></label>
+          <label>Room vibe <textarea name="roomVibe" rows="3" placeholder="Who showed up, how the room felt, and whether the conversation had substance."></textarea></label>
+          <label>Best takeaway <textarea name="takeaway" rows="3" placeholder="The one thing worth remembering tomorrow."></textarea></label>
+          <label>Quote / moment <textarea name="moment" rows="3" placeholder="A useful quote, example, demo, tension, or weirdly specific moment."></textarea></label>
+          <label>People / follow-ups <textarea name="followUps" rows="3" placeholder="Names, handles, companies, or people to message later."></textarea></label>
+          <label>Content angle <textarea name="contentAngle" rows="3" placeholder="What this could become: post, carousel, blog note, video hook, or private lesson."></textarea></label>
+          <label>Next move <textarea name="nextMove" rows="3" placeholder="What to do next because you attended."></textarea></label>
         </form>
       </section>
 
-      <section class="field-output-grid" aria-label="Generated AI meetup note and filters">
+      <section class="field-output-grid" aria-label="Generated AI meetup captain's log and filters">
         <article class="field-card generated-card" id="generated-card"></article>
         <aside class="content-panel">
-          <h2>Browse Sample Meetups</h2>
+          <h2>Browse Sample Logs</h2>
           <label>
-            Signal
-            <select id="signal-filter">
-              <option value="all">All signals</option>
+            Log type
+            <select id="log-type-filter">
+              <option value="all">All log types</option>
             </select>
           </label>
           <label>
             Search
-            <input id="field-search" type="search" placeholder="Try agents, robotics, founders">
+            <input id="field-search" type="search" placeholder="Try takeaway, follow-up, demo">
           </label>
         </aside>
       </section>
 
-      <section class="field-grid" id="field-grid" aria-label="AI meetup sample field notes"></section>
+      <section class="field-grid" id="field-grid" aria-label="AI meetup sample captain's logs"></section>
     </main>
 
     <footer>
-      <span>Meetup notes, structured as JSON.</span>
+      <span>Post-meetup logs, structured as JSON.</span>
       <a href="index.html">Back to Labs</a>
     </footer>
 

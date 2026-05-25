@@ -28,16 +28,16 @@
     "source": "docs/labs-site-build-case-study.md"
   },
   {
-    "id": "ai-meetup-field-guide",
-    "title": "AI Meetup Field Guide",
+    "id": "ai-meetup-captains-log",
+    "title": "AI Meetup Captain's Log",
     "category": "Experiment",
-    "type": "Event Research Tool",
+    "type": "Event Reflection Tool",
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
     "tools": ["HTML", "CSS", "JavaScript", "JSON", "AI Events"],
-    "summary": "A practical generator that turns AI meetup listings into structured field notes for deciding what to attend and what to capture.",
-    "outcome": "Published a JSON-backed mini-tool with sample AI meetup notes, signal filters, a draft form, and reusable follow-up prompts.",
+    "summary": "A practical log generator for turning what happened at an AI meetup into takeaways, follow-ups, and content angles.",
+    "outcome": "Published a JSON-backed mini-tool with sample captain's logs, log-type filters, a draft form, and reusable post-meetup prompts.",
     "url": "field-guide.html",
     "source": "field-guide-data.json"
   }
