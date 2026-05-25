@@ -18,9 +18,11 @@ function getProject() {
   return {
     id,
     title,
+    category: data.get("category") || "Experiment",
     type: data.get("type") || "Experiment",
     status: data.get("status") || "Draft",
     date: data.get("date") || new Date().toISOString().slice(0, 10),
+    featured: data.has("featured"),
     tools: (data.get("tools") || "")
       .split(",")
       .map((tool) => tool.trim())
@@ -38,10 +40,11 @@ function renderPreview() {
 
   card.innerHTML = `
     <div class="card-meta">
-      <span>${project.type}</span>
+      <span>${project.category}</span>
       <span>${project.status}</span>
     </div>
     <h2>${project.title}</h2>
+    <p class="project-type">${project.type}</p>
     <p>${project.summary}</p>
     <div class="tool-list">${tools}</div>
   `;
@@ -51,4 +54,3 @@ function renderPreview() {
 
 form.addEventListener("input", renderPreview);
 renderPreview();
-

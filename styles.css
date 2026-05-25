@@ -177,7 +177,7 @@ h2 {
 
 .toolbar {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 260px);
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px) minmax(180px, 240px);
   gap: 14px;
   padding: 18px;
   margin-bottom: 22px;
@@ -205,6 +205,16 @@ textarea {
   font: inherit;
 }
 
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-label input {
+  width: auto;
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -219,6 +229,12 @@ textarea {
   text-decoration-color: rgba(36, 107, 79, 0.35);
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
+}
+
+.project-type {
+  color: var(--muted);
+  font-weight: 800;
+  margin: -2px 0 12px;
 }
 
 .card-meta {
@@ -402,4 +418,3 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-

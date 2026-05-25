@@ -26,11 +26,12 @@
       <section class="page-title">
         <p class="kicker">JSON practice</p>
         <h1>Draft a project entry.</h1>
-        <p class="lede">This form does not save to the server. It previews a clean JSON object you can paste into `projects.json` and commit with Git.</p>
+        <p class="lede">This form does not save to the server. It previews a clean JSON object you can paste into projects.json and commit with Git.</p>
       </section>
 
       <form id="project-form" class="content-panel">
         <label>Title <input name="title" required placeholder="R1 Video Reviewer Panel"></label>
+        <label>Category <input name="category" required placeholder="Case Study"></label>
         <label>Type <input name="type" required placeholder="Video QA"></label>
         <label>Status
           <select name="status">
@@ -40,6 +41,7 @@
           </select>
         </label>
         <label>Date <input name="date" type="date"></label>
+        <label class="checkbox-label"><input name="featured" type="checkbox"> Featured entry</label>
         <label>Tools <input name="tools" placeholder="HTML, CSS, JavaScript"></label>
         <label>Summary <textarea name="summary" rows="4" placeholder="What is this project?"></textarea></label>
         <label>Outcome <textarea name="outcome" rows="3" placeholder="What changed or shipped?"></textarea></label>
@@ -56,4 +58,3 @@
     <script src="form.js"></script>
   </body>
 </html>
-

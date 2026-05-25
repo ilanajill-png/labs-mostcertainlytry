@@ -2,9 +2,11 @@
   {
     "id": "r1-video-reviewers",
     "title": "R1 Video Reviewer Panel",
+    "category": "Case Study",
     "type": "Video QA",
     "status": "Published",
     "date": "2026-05-25",
+    "featured": true,
     "tools": ["HTML", "Markdown", "Reviewer Design", "AI Video"],
     "summary": "A role-based reviewer system that improved a personal-agent promo across craft, platform fit, business clarity, accessibility, and audio identity.",
     "outcome": "V19 reached a 9.1/10 average reviewer score, unanimous reviewer preference, and full export QA pass.",
@@ -14,9 +16,11 @@
   {
     "id": "labs-site",
     "title": "Labs Site Build",
+    "category": "Build Log",
     "type": "Web Practice",
     "status": "In Progress",
     "date": "2026-05-25",
+    "featured": true,
     "tools": ["HTML", "CSS", "JavaScript", "JSON", "Git"],
     "summary": "A small static site for learning enough frontend and Git fluency to prototype projects and direct AI coding tools more clearly.",
     "outcome": "Created a JSON-driven project index, filterable table, case study page, and form preview workflow.",
@@ -24,4 +28,3 @@
     "source": "README.md"
   }
 ]
-
