@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Project Entry | Most Certainly Try Labs</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Draft structured project data</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="new-project.html" aria-current="page">New Entry</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="form-layout">
+      <section class="page-title">
+        <p class="kicker">JSON practice</p>
+        <h1>Draft a project entry.</h1>
+        <p class="lede">This form does not save to the server. It previews a clean JSON object you can paste into `projects.json` and commit with Git.</p>
+      </section>
+
+      <form id="project-form" class="content-panel">
+        <label>Title <input name="title" required placeholder="R1 Video Reviewer Panel"></label>
+        <label>Type <input name="type" required placeholder="Video QA"></label>
+        <label>Status
+          <select name="status">
+            <option>Draft</option>
+            <option>In Progress</option>
+            <option>Published</option>
+          </select>
+        </label>
+        <label>Date <input name="date" type="date"></label>
+        <label>Tools <input name="tools" placeholder="HTML, CSS, JavaScript"></label>
+        <label>Summary <textarea name="summary" rows="4" placeholder="What is this project?"></textarea></label>
+        <label>Outcome <textarea name="outcome" rows="3" placeholder="What changed or shipped?"></textarea></label>
+      </form>
+
+      <aside class="content-panel preview-panel">
+        <h2>Preview</h2>
+        <article class="project-card" id="form-card"></article>
+        <h2>JSON</h2>
+        <pre id="json-output" tabindex="0"></pre>
+      </aside>
+    </main>
+
+    <script src="form.js"></script>
+  </body>
+</html>
+
