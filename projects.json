@@ -1,5 +1,19 @@
 [
   {
+    "id": "ai-product-video-creator-asset",
+    "title": "15-Second Product Video Creator Asset",
+    "category": "Case Study",
+    "type": "AI Video Workflow",
+    "status": "Published",
+    "date": "2026-05-25",
+    "featured": true,
+    "tools": ["AI Video", "Critique Loops", "Audio Testing", "Platform QA", "Creator Packaging"],
+    "summary": "How a rough AI product-video concept became a polished, platform-ready launch package through review, iteration, audio testing, proof-building, QA, and final packaging.",
+    "outcome": "Delivered an R1 package with 15 platform-specific exports, posting instructions, reusable templates, narrative materials, and QA history.",
+    "url": "projects/ai-product-video-creator-asset.html",
+    "source": "docs/ai-product-video-creator-asset-case-study.md"
+  },
+  {
     "id": "r1-video-reviewers",
     "title": "R1 Video Reviewer Panel",
     "category": "Case Study",
