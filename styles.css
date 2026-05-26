@@ -404,6 +404,60 @@ thead th {
   margin-top: 28px;
 }
 
+figure {
+  margin: 0;
+}
+
+figcaption {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.media-grid,
+.video-grid {
+  display: grid;
+  gap: 16px;
+  margin: 18px 0 8px;
+}
+
+.media-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.video-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+
+.media-grid figure,
+.video-grid figure {
+  overflow: hidden;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbf7ed;
+}
+
+.media-grid img,
+.video-grid video {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  background: #111;
+}
+
+.media-grid img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+.video-grid video {
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
 .stat-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -490,6 +544,11 @@ footer {
   }
 
   .stat-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .media-grid,
+  .video-grid {
     grid-template-columns: 1fr;
   }
 }

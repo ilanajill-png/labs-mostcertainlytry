@@ -18,6 +18,23 @@ Final package highlights:
 
 ## Iteration Map
 
+## R1 Proof Artifacts
+
+The restored project media shows the working proof behind the final package: screenshots from the workflow and QA process, plus playable examples of the final social exports. The final R1 audio direction used an ElevenLabs Eryn voice with a Schertz birds sound bed after testing other synthetic voice options.
+
+Screenshots restored from the R1 package:
+
+- `media/ai-product-video-r1/screenshots/01_v19_workflow_tabs.png` - V19 workflow tabs proof frame.
+- `media/ai-product-video-r1/screenshots/02_export_grid.png` - export-grid proof frame.
+- `media/ai-product-video-r1/screenshots/03_tiktok_safe_zone_overlay.png` - TikTok safe-zone overlay QA frame.
+- `media/ai-product-video-r1/screenshots/04_remotion_build_preview.png` - Remotion build preview.
+
+Video examples restored from the R1 package:
+
+- `media/ai-product-video-r1/videos/Personal_Agent_Video_R1_TikTok.mp4` - final R1 TikTok export with ElevenLabs Eryn voice and Schertz birds.
+- `media/ai-product-video-r1/videos/Personal_Agent_Video_R1_LinkedIn.mp4` - final R1 LinkedIn export.
+- `media/ai-product-video-r1/videos/Demo_15s_DesktopScreenshots_Mobile_View.mp4` - desktop screenshot-to-mobile-view demo.
+
 ### V1 - First Critique Set
 
 Started with a broad first-pass review instead of assuming the first cut was good enough. The review asked for reactions from different viewer types: Webby-style judge, TikTok/Instagram promotion lens, hiring CEO, investor, partner employee, tech-savvy graduate, sixth grader, and retired viewer.
