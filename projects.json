@@ -1,15 +1,15 @@
 [
   {
     "id": "ai-product-video-creator-asset",
-    "title": "15-Second Product Video Creator Asset",
+    "title": "15 Second Product Video Creator Asset",
     "category": "Case Study",
     "type": "AI Video Workflow",
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
     "tools": ["AI Video", "Critique Loops", "Audio Testing", "Platform QA", "Creator Packaging"],
-    "summary": "How a rough AI product-video concept became a polished, platform-ready launch package through review, iteration, audio testing, proof-building, QA, and final packaging.",
-    "outcome": "Delivered an R1 package with 15 platform-specific exports, posting instructions, reusable templates, narrative materials, and QA history.",
+    "summary": "How a rough AI product video concept became a polished launch package for platform use through review, iteration, audio testing, proof building, QA, and final packaging.",
+    "outcome": "Delivered an R1 package with 15 exports for specific platforms, posting instructions, reusable templates, narrative materials, and QA history.",
     "url": "projects/ai-product-video-creator-asset.html",
     "source": "docs/ai-product-video-creator-asset-case-study.md"
   },
@@ -22,7 +22,7 @@
     "date": "2026-05-25",
     "featured": true,
     "tools": ["HTML", "Markdown", "Reviewer Design", "AI Video"],
-    "summary": "A role-based reviewer system that improved a personal-agent promo across craft, platform fit, business clarity, accessibility, and audio identity.",
+    "summary": "A reviewer system with clear roles that improved a personal agent promo across craft, platform fit, business clarity, accessibility, and audio identity.",
     "outcome": "V19 reached a 9.1/10 average reviewer score, unanimous reviewer preference, and full export QA pass.",
     "url": "projects/r1-video-reviewers.html",
     "source": "docs/r1-video-reviewer-case-study.md"
@@ -37,7 +37,7 @@
     "featured": true,
     "tools": ["HTML", "CSS", "JavaScript", "JSON", "Git"],
     "summary": "A standalone GitHub Pages lab that separates structured project documentation from the polished Squarespace marketing site.",
-    "outcome": "Published a JSON-driven project library with search, filters, reusable entry templates, Git history, GitHub Pages hosting, and Squarespace DNS.",
+    "outcome": "Published a project library powered by JSON with search, filters, reusable entry templates, Git history, GitHub Pages hosting, and Squarespace DNS.",
     "url": "projects/labs-site-build.html",
     "source": "docs/labs-site-build-case-study.md"
   },
@@ -50,8 +50,8 @@
     "date": "2026-05-25",
     "featured": true,
     "tools": ["HTML", "CSS", "JavaScript", "JSON", "AI Events"],
-    "summary": "A practical log generator for turning what happened at an AI meetup into takeaways, follow-ups, and content angles.",
-    "outcome": "Published a JSON-backed mini-tool with sample captain's logs, log-type filters, a draft form, and reusable post-meetup prompts.",
+    "summary": "A practical log generator for turning what happened at an AI meetup into takeaways, follow up items, and content angles.",
+    "outcome": "Published a small tool powered by JSON with sample captain's logs, log type filters, a draft form, and reusable prompts for after a meetup.",
     "url": "field-guide.html",
     "source": "field-guide-data.json"
   }
