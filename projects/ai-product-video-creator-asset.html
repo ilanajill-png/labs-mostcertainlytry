@@ -1,174 +1,566 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>15-Second Product Video Case Study | Most Certainly Try Labs</title>
-    <meta name="description" content="How a rough AI product-video concept became a polished, platform-ready creator asset through critique loops, audio testing, QA, and final packaging.">
-    <link rel="stylesheet" href="../styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="../index.html">
-        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
-        <span>
-          <strong>Most Certainly Try Labs</strong>
-          <small>Case study</small>
-        </span>
-      </a>
-      <nav aria-label="Primary navigation">
-        <a href="../index.html">Projects</a>
-        <a href="../field-guide.html">Captain's Log</a>
-        <a href="../new-project.html">New Entry</a>
-        <a href="../about.html">About</a>
-      </nav>
-    </header>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Product Video Iteration Case Study - R1</title>
+  <style>
+    :root {
+      --ink: #20201d;
+      --muted: #656057;
+      --paper: #fffaf0;
+      --panel: #ffffff;
+      --line: #ded6c8;
+      --gold: #c89b3c;
+      --green: #315b50;
+      --rust: #a5543c;
+      --blue: #335f85;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.55;
+    }
+    header {
+      padding: 56px 24px 36px;
+      background: #233f38;
+      color: #fffaf0;
+    }
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: #e9cf8e;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 920px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+    .lede {
+      max-width: 780px;
+      margin: 22px 0 0;
+      color: #f4ead6;
+      font-size: 20px;
+    }
+    main {
+      padding: 28px 0 64px;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: 1.4fr .9fr;
+      gap: 18px;
+      margin: 0 0 22px;
+    }
+    section, .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px rgba(44, 36, 24, .06);
+    }
+    section {
+      padding: 24px;
+      margin: 18px 0;
+    }
+    .card {
+      padding: 20px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+    h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    p { margin: 0 0 12px; }
+    ul { margin: 10px 0 0; padding-left: 22px; }
+    li { margin: 5px 0; }
+    .quote {
+      padding: 18px;
+      border-left: 5px solid var(--gold);
+      background: #fff6df;
+      border-radius: 6px;
+      font-size: 19px;
+      font-weight: 700;
+    }
+    .stats {
+      display: grid;
+      gap: 10px;
+    }
+    .stat {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbf7ed;
+    }
+    .stat strong {
+      display: block;
+      color: var(--green);
+      font-size: 24px;
+      line-height: 1;
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .version {
+      position: relative;
+      padding: 18px 18px 18px 64px;
+      min-height: 176px;
+    }
+    .num {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+      font-size: 14px;
+    }
+    .tag {
+      display: inline-block;
+      margin: 0 0 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #e8efe9;
+      color: #24493f;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .changed {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .changed strong {
+      color: var(--ink);
+    }
+    .takeaway {
+      margin-top: 10px;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .two {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .video-pair {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: start;
+    }
+    .video-card {
+      overflow: hidden;
+      background: #fbf7ed;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    .iphone {
+      position: relative;
+      width: min(100%, 218px);
+      margin: 18px auto 0;
+      padding: 12px;
+      border: 2px solid #1e1f22;
+      border-radius: 42px;
+      background: linear-gradient(145deg, #2a2b2f, #08090a);
+      box-shadow: 0 18px 36px rgba(32, 32, 29, .24), inset 0 0 0 2px rgba(255, 255, 255, .07);
+    }
+    .iphone::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      z-index: 2;
+      width: 70px;
+      height: 19px;
+      transform: translateX(-50%);
+      border-radius: 0 0 16px 16px;
+      background: #070707;
+    }
+    .iphone-screen {
+      overflow: hidden;
+      aspect-ratio: 393 / 852;
+      display: grid;
+      place-items: center;
+      border-radius: 31px;
+      background: #111;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1);
+    }
+    .iphone-screen video {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      object-fit: contain;
+    }
+    .video-caption {
+      padding: 14px 16px 16px;
+    }
+    .video-caption p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .screenshot-stack {
+      display: grid;
+      gap: 18px;
+    }
+    .screenshot-frame {
+      margin: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbf7ed;
+    }
+    .screenshot-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 6px;
+      border: 1px solid #d8cfbf;
+      background: #fff;
+    }
+    .screenshot-frame figcaption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .path {
+      word-break: break-word;
+      color: #6b4b23;
+      font-size: 12px;
+    }
+    .resume {
+      background: #f7efe0;
+      border-color: #d4c4a9;
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f2eadc;
+      color: #53331f;
+    }
+    @media (max-width: 820px) {
+      .summary, .timeline, .two, .video-pair {
+        grid-template-columns: 1fr;
+      }
+      header {
+        padding-top: 36px;
+      }
+      .version {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <p class="eyebrow">HOWDY PARTNER R1 Case Study</p>
+      <h1>Turning a 15-second product video into a finished AI creator asset</h1>
+      <p class="lede">A 19-version iteration story showing how human direction, AI collaboration, critique loops, audio testing, proof design, QA, and packaging turned a rough concept into a platform-ready social video release kit.</p>
+    </div>
+  </header>
 
-    <main class="narrow">
-      <section class="page-title">
-        <p class="kicker">Case Study</p>
-        <h1>Turning a 15-Second Product Video Into a Finished AI Creator Asset</h1>
-        <p class="lede">A rough AI product-video concept became a platform-ready launch package through repeated human review, AI-assisted iteration, critique panels, audio testing, proof-building, QA, and final packaging.</p>
-      </section>
-
-      <section class="stat-strip" aria-label="Final package metrics">
-        <div><strong>15</strong><span>Platform exports</span></div>
-        <div><strong>19</strong><span>Versioned cuts</span></div>
-        <div><strong>R1</strong><span>Final handoff</span></div>
-      </section>
-
-      <article class="case-study">
+  <main class="wrap">
+    <div class="summary">
+      <section>
         <h2>Case Study Positioning</h2>
-        <p>The useful professional story is not just "we made a video." It is: we used AI as a creative production partner, then used human judgment to direct the strategy, improve the story, test the sound, harden the layout, and package the final asset for real publishing.</p>
-
-        <h2>Final Outcome</h2>
-        <p>The final R1 folder contains clean platform-specific exports, posting instructions, reusable post templates, and narrative materials for explaining the workflow.</p>
-        <ul>
-          <li>15 social video exports across TikTok, Instagram, YouTube Shorts, Facebook, LinkedIn, X, Reddit, Pinterest, Product Hunt, Medium/Substack, Nextdoor, Threads, and YouTube Community.</li>
-          <li>Platform-specific aspect ratios and filenames.</li>
-          <li>Posting templates and instructions for each platform.</li>
-          <li>Narrative materials that explain the project to technical, customer, presentation, and child-level audiences.</li>
-          <li>QA history covering dimensions, runtime, audio presence, safe zones, and review readiness.</li>
-        </ul>
-
-        <h2>AI Is Not Magic: The Video Stages</h2>
-        <p>The example stages show how the piece evolved from its first voiceover/audio state, to the first premium-voice audition, to the final R1 TikTok release.</p>
-        <ul>
-          <li><strong>V4:</strong> first voiceover/audio state.</li>
-          <li><strong>V8:</strong> first premium voice version.</li>
-          <li><strong>R1 TikTok export:</strong> final release.</li>
-        </ul>
-
-        <h2>R1 Proof Artifacts</h2>
-        <p>The restored project media shows the working proof behind the final package: screenshots from the workflow and QA process, plus playable examples of the final social exports. The final R1 audio direction used an ElevenLabs Eryn voice with a Schertz birds sound bed after testing other synthetic voice options.</p>
-
-        <div class="media-grid" aria-label="R1 proof screenshots">
-          <figure>
-            <img src="../media/ai-product-video-r1/screenshots/01_v19_workflow_tabs.png" alt="V19 workflow tabs proof frame">
-            <figcaption>V19 workflow tabs proof frame.</figcaption>
-          </figure>
-          <figure>
-            <img src="../media/ai-product-video-r1/screenshots/02_export_grid.png" alt="Export grid proof frame">
-            <figcaption>Export grid proof frame.</figcaption>
-          </figure>
-          <figure>
-            <img src="../media/ai-product-video-r1/screenshots/03_tiktok_safe_zone_overlay.png" alt="TikTok safe-zone overlay QA frame">
-            <figcaption>TikTok safe-zone overlay QA frame.</figcaption>
-          </figure>
-          <figure>
-            <img src="../media/ai-product-video-r1/screenshots/04_remotion_build_preview.png" alt="Remotion build preview">
-            <figcaption>Remotion build preview.</figcaption>
-          </figure>
+        <p>This project shows how a rough AI product-video concept became a polished, platform-ready launch package through repeated human review, AI-assisted iteration, critique panels, audio testing, proof-building, QA, and final packaging.</p>
+        <div class="quote">We used AI as a creative production partner, then used human judgment to direct the strategy, improve the story, test the sound, harden the layout, and package the final asset for real publishing.</div>
+      </section>
+      <aside class="card">
+        <h2>Final R1 Output</h2>
+        <div class="stats">
+          <div class="stat"><strong>15</strong> platform-specific video exports</div>
+          <div class="stat"><strong>15s</strong> final runtime for the core product video</div>
+          <div class="stat"><strong>R1</strong> packaged release with templates and posting instructions</div>
         </div>
+      </aside>
+    </div>
 
-        <div class="video-grid" aria-label="R1 video examples">
-          <figure>
-            <video controls preload="metadata" src="../media/ai-product-video-r1/videos/Personal_Agent_Video_R1_TikTok.mp4"></video>
-            <figcaption>Final R1 TikTok export with ElevenLabs Eryn voice and Schertz birds.</figcaption>
-          </figure>
-          <figure>
-            <video controls preload="metadata" src="../media/ai-product-video-r1/videos/Personal_Agent_Video_R1_LinkedIn.mp4"></video>
-            <figcaption>Final R1 LinkedIn export.</figcaption>
-          </figure>
-          <figure>
-            <video controls preload="metadata" src="../media/ai-product-video-r1/videos/Demo_15s_DesktopScreenshots_Mobile_View.mp4"></video>
-            <figcaption>Desktop screenshot-to-mobile-view demo.</figcaption>
-          </figure>
+    <section>
+      <h2>AI is not magic our Video Stages</h2>
+      <p>These example videos show how the piece evolved from its first voiceover/audio state, to the first premium-voice audition, to the final R1 TikTok release.</p>
+      <div class="video-pair">
+        <article class="video-card">
+          <div class="iphone" aria-label="iPhone video frame">
+            <div class="iphone-screen">
+              <video controls preload="metadata" src="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/TikTok/HOWDY_PARTNER_Personal_Agent_Video_TikTok_V4_Voice_Music_Cut.mp4"></video>
+            </div>
+          </div>
+          <div class="video-caption">
+            <h3>V4: First Voiceover/Audio State</h3>
+            <p>This is the first version found with voiceover and music added, marking the shift from visual proof-of-concept into a produced audio/video asset.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <div class="iphone" aria-label="iPhone video frame">
+            <div class="iphone-screen">
+              <video controls preload="metadata" src="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/TikTok/HOWDY_PARTNER_Personal_Agent_Video_TikTok_V8_Premium_Voice_Audition_Roger.mp4"></video>
+            </div>
+          </div>
+          <div class="video-caption">
+            <h3>V8: First Premium Voice Version</h3>
+            <p>This version auditions a premium voice, showing how audio quality became a creative variable instead of a simple production checkbox.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <div class="iphone" aria-label="iPhone video frame">
+            <div class="iphone-screen">
+              <video controls preload="metadata" src="TikTok/Personal_Agent_Video_R1_TikTok.mp4"></video>
+            </div>
+          </div>
+          <div class="video-caption">
+            <h3>Final Release: R1 TikTok Export</h3>
+            <p>This is the final packaged TikTok version from the R1 release folder, after the voice, birds, proof grid, safe-zone, layout, screenshot, and tab readability revisions.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Iteration Map</h2>
+      <div class="timeline">
+        <article class="card version">
+          <div class="num">1</div>
+          <span class="tag">V1</span>
+          <h3>First Critique Set</h3>
+          <p class="changed"><strong>What changed:</strong> You started with broad audience review instead of trusting the first cut. The panel included award, platform, hiring, investor, partner, young viewer, and retired viewer perspectives.</p>
+          <p class="takeaway">Why it mattered: The project became review-led from the beginning.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">2</div>
+          <span class="tag">V2</span>
+          <h3>Webby Recut</h3>
+          <p class="changed"><strong>What changed:</strong> You had the video recut after Webby-style critique, moving it from raw concept toward an award-aware social structure.</p>
+          <p class="takeaway">Why it mattered: It established the make, critique, revise, document loop.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">3</div>
+          <span class="tag">V3</span>
+          <h3>Human Signature Cut</h3>
+          <p class="changed"><strong>What changed:</strong> Added a warmer human review moment, plainer benefit language, stronger HOWDY PARTNER closing, and a clearer proof trail.</p>
+          <p class="takeaway">Why it mattered: It created the final story backbone: ask, build, review, proof, reuse.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">4</div>
+          <span class="tag">V4</span>
+          <h3>First Audio Foundation</h3>
+          <p class="changed"><strong>What changed:</strong> Added first-pass voiceover, original music bed, and a short sonic tag.</p>
+          <p class="takeaway">Why it mattered: It revealed audio quality as a core creative risk.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">5</div>
+          <span class="tag">V5</span>
+          <h3>Warmer Audio Cut</h3>
+          <p class="changed"><strong>What changed:</strong> Swapped in a slower, warmer voice direction, tightened the script, lowered music volume, and strengthened the tag.</p>
+          <p class="takeaway">Why it mattered: It improved tone while exposing the ceiling of local synthetic voice.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">6</div>
+          <span class="tag">V6</span>
+          <h3>Sparse Signature Audio</h3>
+          <p class="changed"><strong>What changed:</strong> Reduced narration, added intentional silence, used shorter voice cues, and leaned on sonic identity.</p>
+          <p class="takeaway">Why it mattered: It made the voice feel more intentional by using less of it.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">7</div>
+          <span class="tag">V7</span>
+          <h3>Song-First Audio</h3>
+          <p class="changed"><strong>What changed:</strong> Improved the music bed, added motif and lift, improved ducking, strengthened the closing tag, and added Emmy/Grammy review lenses.</p>
+          <p class="takeaway">Why it mattered: Audio started functioning as story structure.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">8</div>
+          <span class="tag">V8</span>
+          <h3>Premium Voice Audition</h3>
+          <p class="changed"><strong>What changed:</strong> Tested ElevenLabs Roger and lowered music so reviewers could judge the premium voice clearly.</p>
+          <p class="takeaway">Why it mattered: Premium quality helped, but the brand voice still needed better fit.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">9</div>
+          <span class="tag">V9</span>
+          <h3>Voice and Sound-Bed A/B Tests</h3>
+          <p class="changed"><strong>What changed:</strong> Compared Roger vs. Eryn and Eryn with birds vs. music. You selected Eryn plus Schertz birds.</p>
+          <p class="takeaway">Why it mattered: This locked the final distinctive sound: capable voice, real-place texture.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">10</div>
+          <span class="tag">V10</span>
+          <h3>Award Candidate With Directed Eryn</h3>
+          <p class="changed"><strong>What changed:</strong> Used a fresh directed Eryn take and aligned visuals to script beats: ask, build, review, package, reuse.</p>
+          <p class="takeaway">Why it mattered: Voice, sound, script, and visuals finally carried one promise.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">11</div>
+          <span class="tag">V11</span>
+          <h3>Logo Lockup and Participatory Ending</h3>
+          <p class="changed"><strong>What changed:</strong> Added a stronger logo lockup, tested marks, and changed the ending to "Ask. Build. Review. Reuse. What should we work on next?"</p>
+          <p class="takeaway">Why it mattered: The final frame became a brand landing and invitation.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">12</div>
+          <span class="tag">V12</span>
+          <h3>Original Logo Direction Restored</h3>
+          <p class="changed"><strong>What changed:</strong> Restored the original HOWDY PARTNER logo direction and removed the cactus/prickly-pear side-track.</p>
+          <p class="takeaway">Why it mattered: You chose clarity over a distracting visual experiment.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">13</div>
+          <span class="tag">V13</span>
+          <h3>Export Grid Proof</h3>
+          <p class="changed"><strong>What changed:</strong> Added the export-grid proof beat and removed extra template chrome that cluttered the frame.</p>
+          <p class="takeaway">Why it mattered: The video showed proof instead of only making a claim.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">14</div>
+          <span class="tag">V14</span>
+          <h3>App Logo Grid</h3>
+          <p class="changed"><strong>What changed:</strong> Added compact platform identity marks inside the export-grid circles.</p>
+          <p class="takeaway">Why it mattered: The proof became easier to scan quickly.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">15</div>
+          <span class="tag">V15</span>
+          <h3>Safe-Zone Candidate</h3>
+          <p class="changed"><strong>What changed:</strong> Moved text and grid content inside safe zones, removed bottom footer text, ran export QA, and gathered sign-off.</p>
+          <p class="takeaway">Why it mattered: The creative candidate became technically safer for publishing.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">16</div>
+          <span class="tag">V16</span>
+          <h3>Dense Safe-Zone Candidate</h3>
+          <p class="changed"><strong>What changed:</strong> Kept safe-zone discipline while increasing screenshot, export-grid, and top-tab scale.</p>
+          <p class="takeaway">Why it mattered: It solved the too-much-unused-space problem.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">17</div>
+          <span class="tag">V17</span>
+          <h3>Centered Beige Layout</h3>
+          <p class="changed"><strong>What changed:</strong> Removed the black top band, introduced the centered beige layout, recentered the vertical composition, and improved screenshot framing after the dense safe-zone experiment.</p>
+          <p class="takeaway">Why it mattered: It kept the safe-zone discipline while making the frame feel designed instead of cramped.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">18</div>
+          <span class="tag">V18</span>
+          <h3>Uncropped Screenshots</h3>
+          <p class="changed"><strong>What changed:</strong> Kept the centered beige safe-zone layout and switched screenshots back to contained framing so source screenshots were not cut off inside the cards.</p>
+          <p class="takeaway">Why it mattered: The proof felt more honest because the screenshots were no longer awkwardly cropped.</p>
+        </article>
+
+        <article class="card version">
+          <div class="num">19</div>
+          <span class="tag">V19</span>
+          <h3>Larger Tabs and Final Approved Candidate</h3>
+          <p class="changed"><strong>What changed:</strong> Kept the V17 layout and V18 screenshot framing, then increased the top workflow tab label size for better mobile readability.</p>
+          <p class="takeaway">Why it mattered: It solved the final readability issue and became the approved source candidate for R1.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>R1 Package</h2>
+      <p>After V19 was approved, R1 packaged the final cut into clean platform folders with posting instructions, reusable post templates, platform-specific dimensions, and clean filenames. R1 is the release package that came after the 19-version creative process.</p>
+    </section>
+
+    <section>
+      <h2>What This Proves</h2>
+      <div class="two">
+        <div>
+          <h3>AI Creator-Operator Skills</h3>
+          <ul>
+            <li>Directed AI through a long creative iteration process.</li>
+            <li>Used critique loops instead of relying on first drafts.</li>
+            <li>Ran structured A/B testing for voice and sound direction.</li>
+            <li>Separated visual, audio, strategic, and technical problems.</li>
+            <li>Turned one short video into a multi-platform campaign package.</li>
+            <li>Documented the workflow so it can be reused.</li>
+          </ul>
         </div>
+        <div>
+          <h3>Production Judgment</h3>
+          <ul>
+            <li>Restored brand clarity when experiments became distracting.</li>
+            <li>Used real proof artifacts to make the product claim credible.</li>
+            <li>Balanced mobile readability with platform safe-zone constraints.</li>
+            <li>Packaged final assets for actual publishing, not just review.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-        <h2>Iteration Map</h2>
-
-        <h3>V1 - First Critique Set</h3>
-        <p>The first pass used reviewers with different viewer lenses: Webby-style judge, TikTok/Instagram promotion lens, hiring CEO, investor, partner employee, tech-savvy graduate, sixth grader, and retired viewer. That exposed the core issue: the idea had promise, but it needed a clearer story, warmer human proof, and a more polished campaign shape.</p>
-
-        <h3>V2 - Webby Recut</h3>
-        <p>The video moved from raw concept into a more award-aware social video structure. This established the working pattern for the whole project: make a version, critique it, revise it, and document why the revision exists.</p>
-
-        <h3>V3 - Human Signature Cut</h3>
-        <p>This version added a warmer human review moment, plainer benefit language, a stronger HOWDY PARTNER closing signature, and a more visible proof trail. It set the 15-second story structure: hook, human review loop, proof/documents, workflow system, build preview, signature, CTA.</p>
-
-        <h3>V4 - First Audio Foundation</h3>
-        <p>The first HOWDY PARTNER voiceover, original music bed, and short sonic tag were added. This proved the next big improvement was not only visual. Audio quality, voice warmth, and sonic identity became major creative variables.</p>
-
-        <h3>V5 - Warmer Audio Cut</h3>
-        <p>The more robotic voice direction was replaced with a slower, warmer read. The spoken script tightened, music volume dropped, the pulse cleaned up, and the sonic tag got stronger. It helped, but it exposed the ceiling of local synthetic voice tools.</p>
-
-        <h3>V6 - Sparse Signature Audio</h3>
-        <p>The cut reduced continuous narration, added intentional silence, used shorter voice cues, and made the sonic signature carry more of the identity. If the synthetic voice was the weak point, the fix was to use less of it and make the audio feel intentional.</p>
-
-        <h3>V7 - Song-First Audio</h3>
-        <p>This version improved the music bed, added a clearer motif, improved ducking, and made the closing tag more memorable. Emmy and Grammy-style perspectives were added to the review panel. Audio began structuring the story instead of simply decorating it.</p>
-
-        <h3>V8 - Premium Voice Audition</h3>
-        <p>An ElevenLabs premium voice, Roger, was tested. The music was lowered so reviewers could judge the premium voice clearly. The test proved premium voice was worth using, but also showed that a polished voice was not automatically the right brand voice.</p>
-
-        <h3>V9 - Voice and Sound-Bed A/B Tests</h3>
-        <p>Roger was compared against Eryn, and Eryn with Schertz birds was compared against Eryn with the V7 music bed. Reviewers selected Eryn and Schertz birds. That made the video feel more personal and less like a generic SaaS ad.</p>
-
-        <h3>V10 - Award Candidate With Directed Eryn</h3>
-        <p>This version used a fresh directed Eryn take, kept the Schertz birds, and revised visuals to map directly to the spoken beats: ask, build, review, package, reuse. Voice, sound, script, and visuals started working as one clear promise.</p>
-
-        <h3>V11 - Logo Lockup and Participatory Ending</h3>
-        <p>A stronger logo lockup was added, logo and Texas mark options were tested, and the ending became: "Ask. Build. Review. Reuse. What should we work on next?" That made the final frame feel like a brand landing instead of just an ending.</p>
-
-        <h3>V12 - Original Logo Direction Restored</h3>
-        <p>The original HOWDY PARTNER logo direction returned, and the cactus/prickly-pear side track was removed. When an experiment distracts from the product story, cut it and return to the clearer brand mark.</p>
-
-        <h3>V13 - Export Grid Proof</h3>
-        <p>The final export-grid proof beat was added, template chrome was removed, and the multi-platform delivery matrix was shown instead of merely described. This turned the claim into visible proof.</p>
-
-        <h3>V14 - App Logo Grid</h3>
-        <p>Compact platform identity marks were added inside the export-grid circles. The proof became easier to scan because viewers recognize platform icons faster than text.</p>
-
-        <h3>V15 - Safe-Zone Candidate and Stakeholder Sign-Off</h3>
-        <p>Active text and grid content moved inside platform safe zones. Bottom footer text was removed. Conservative safe-zone assumptions were used for captions, top UI, and right-side UI. QA covered dimensions, 15-second duration, audio presence, and review readiness.</p>
-
-        <h3>V16 - Dense Safe-Zone Candidate</h3>
-        <p>The project kept safe-zone discipline while using the available space more aggressively. Screenshot scale, export-grid scale, and top-tab scale increased. This answered the "too much unused space" problem and pushed the layout closer to a stronger mobile-first composition.</p>
-
-        <h3>V17 - Centered Beige Layout</h3>
-        <p>The black top band was removed, the centered beige layout was introduced, and the vertical composition was recentered. This solved the composition problem created by the denser safe-zone pass.</p>
-
-        <h3>V18 - Uncropped Screenshots</h3>
-        <p>The centered beige layout stayed, but screenshots returned to contained framing. Source screenshots stopped being cut off inside the cards. This made the proof feel more honest and less overdesigned.</p>
-
-        <h3>V19 - Larger Tabs and Final Approved Candidate</h3>
-        <p>The final version kept the centered beige layout, kept uncropped screenshots, increased top workflow tab label size, and preserved the winning audio direction: Eryn voice plus Schertz birds. V19 became the approved source candidate for the R1 package.</p>
-
-        <h2>R1 Package - Final Handoff</h2>
-        <p>The approved V19 cut was packaged into clean platform folders with posting instructions, reusable post templates, platform-specific dimensions, and clean filenames. The final output was not just a video. It was a handoff-ready campaign asset.</p>
-
-        <h2>What This Proves</h2>
-        <ul>
-          <li>Directing an AI assistant through a long creative iteration process.</li>
-          <li>Using critique loops instead of relying on first drafts.</li>
-          <li>Comparing options through structured A/B testing.</li>
-          <li>Identifying when a problem is visual, audio, strategic, or technical.</li>
-          <li>Turning a short video into a multi-platform campaign package.</li>
-          <li>Documenting a creative workflow so it becomes reusable.</li>
-          <li>Balancing taste, brand, human proof, platform constraints, and QA.</li>
-        </ul>
-      </article>
-    </main>
-  </body>
+    <section>
+      <h2>15 Platforms V1 designed in under 30 minutes</h2>
+      <p>These are the full 3840 x 2160 source screenshots that appear inside the video proof section. Each image opens to the original file.</p>
+      <div class="screenshot-stack">
+        <figure class="screenshot-frame">
+          <a href="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/01-openclaw-proudest-chat.png">
+            <img src="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/01-openclaw-proudest-chat.png" alt="OpenClaw chat screenshot showing the proudest work prompt">
+          </a>
+          <figcaption>1. OpenClaw chat proof: the human request and review-loop starting point.</figcaption>
+        </figure>
+        <figure class="screenshot-frame">
+          <a href="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/02-document-library.png">
+            <img src="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/02-document-library.png" alt="Document library screenshot showing organized project materials">
+          </a>
+          <figcaption>2. Document library proof: the project became organized source material, not only a rendered video.</figcaption>
+        </figure>
+        <figure class="screenshot-frame">
+          <a href="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/03-remotion-build-preview.png">
+            <img src="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/03-remotion-build-preview.png" alt="Remotion build preview screenshot">
+          </a>
+          <figcaption>3. Remotion build proof: the video was produced through a reusable render workflow.</figcaption>
+        </figure>
+        <figure class="screenshot-frame">
+          <a href="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/04-workflow-chart.png">
+            <img src="../Most%20Certainly%20Try%20AI%20Prompts%20Promo%20Assets/Video%20Assets/Ocean%20Template%20-%20Use%20These/_Personal_Agent_Video_Template/assets/04-workflow-chart.png" alt="Workflow chart screenshot showing the production process">
+          </a>
+          <figcaption>4. Workflow chart proof: the final output came from a repeatable process.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+</body>
 </html>
