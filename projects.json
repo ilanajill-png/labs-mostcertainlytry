@@ -1,5 +1,19 @@
 [
   {
+    "id": "elevenlabs-application-deck",
+    "title": "ElevenLabs Application Deck",
+    "category": "Case Study",
+    "type": "AI Audio Presentation",
+    "status": "Published",
+    "date": "2026-05-26",
+    "featured": true,
+    "tools": ["ElevenLabs", "OpenClaw", "Codex", "HTML Deck", "AVFoundation", "Static Site"],
+    "summary": "A same-night pitch deck and narrated video built for an ElevenLabs application, using multi-voice AI audio, local slide rendering, timing QA, and a public Labs case study.",
+    "outcome": "Delivered an embedded 1:46 narrated deck video, synchronized slide cuts, reusable deck frames, and a documented case study for the Labs project library.",
+    "url": "projects/elevenlabs-application-deck.html",
+    "source": "docs/elevenlabs-application-deck-case-study.md"
+  },
+  {
     "id": "ai-product-video-creator-asset",
     "title": "15 Second Product Video Creator Asset",
     "category": "Case Study",

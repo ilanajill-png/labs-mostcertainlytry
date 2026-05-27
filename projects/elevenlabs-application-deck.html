@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ElevenLabs Application Deck | Most Certainly Try Labs</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Case study</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="../field-guide.html">Captain's Log</a>
+        <a href="../new-project.html">New Entry</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="narrow">
+      <section class="page-title">
+        <p class="kicker">Case Study</p>
+        <h1>Turning an ElevenLabs application into a narrated product proof</h1>
+        <p class="lede">A quick application artifact became a complete audio-first presentation: strategy, slide design, multi-voice narration, synchronized timing, QA, and a public Labs write-up.</p>
+      </section>
+
+      <section class="stat-strip" aria-label="Project outcome metrics">
+        <div><strong>1:46</strong><span>Final narrated deck</span></div>
+        <div><strong>8</strong><span>Presented slide frames</span></div>
+        <div><strong>Same night</strong><span>Concept to package</span></div>
+      </section>
+
+      <article class="case-study">
+        <h2>Final Video</h2>
+        <figure class="media-feature">
+          <video controls preload="metadata" poster="../media/elevenlabs-application-deck/images/video-poster.png" src="../media/elevenlabs-application-deck/videos/ilana-x-elevenlabs-deck-with-audio.mp4"></video>
+          <figcaption>The final application deck video with synchronized slide timing and ElevenLabs-generated narration.</figcaption>
+        </figure>
+
+        <h2>Executive Summary</h2>
+        <p>This project turned a job application into a proof artifact. Instead of only sending a resume and written note, the work became a short narrated deck showing how Ilana thinks, builds, reviews, and packages AI-powered communication work.</p>
+        <p>The build moved through deck design, slide export, AI voice segment generation, timing alignment, and video packaging. The key constraint was speed: make something polished enough to represent the work, but keep the process lightweight enough to finish while the idea still had momentum.</p>
+
+        <h2>Prototype Cut</h2>
+        <figure class="media-feature">
+          <video controls preload="metadata" poster="../media/elevenlabs-application-deck/images/prototype-old-deck-poster.png" src="../media/elevenlabs-application-deck/videos/prototype-old-deck.mp4"></video>
+          <figcaption>The first old-deck prototype that went through the internal reviewer panel before the final deck revision.</figcaption>
+        </figure>
+
+        <h2>First Review Feedback</h2>
+        <p>The first review panel scored the prototype at 6.4/10 and marked it as a strong concept that needed another revision before public viewing. The reviewers liked the differentiated ElevenLabs-specific premise, the multi-voice idea, the cleaner product-style visual system, and the early personal cue slides.</p>
+        <p>The blockers were practical: the opening read as novelty-first, the voices needed clearer casting, some phrasing felt too sharp for a communications role, the old deck did not show enough proof of real work, and the 2:20 runtime was too long for the amount of visual variation.</p>
+        <ul>
+          <li>Reframe the opening around the communication challenge, not the character verdict.</li>
+          <li>Make Ilana the anchor instead of using her voice only as section punctuation.</li>
+          <li>Replace defensive language with precise leadership language.</li>
+          <li>Cut the runtime closer to 75-100 seconds.</li>
+          <li>Add proof visuals from Most Certainly Try, scripts, prompt systems, case studies, and the build process.</li>
+          <li>End with a direct closing ask.</li>
+        </ul>
+
+        <h2>Production Approach</h2>
+        <p>The deck was built as local HTML so the design could be revised quickly and rendered into slide PNGs. ElevenLabs audio was handled as multiple voice segments rather than one stretched file, which made it possible to align slide cuts with the actual narration beats.</p>
+        <p>Several QA passes mattered: removing stale deck chrome, restoring the correct slide order, replacing a misleading sidebar, preserving the progress bar, removing footer clutter, and fixing the early export where audio timing drifted against the slides.</p>
+
+        <h2>What Changed During Review</h2>
+        <ol>
+          <li>Slide 4 was revised to use one large Most Certainly Try Labs screenshot.</li>
+          <li>Footer copy was removed while keeping the visual progress bar.</li>
+          <li>The repeated Application Studio identity box was removed from every slide.</li>
+          <li>The stale sidebar was removed because it did not match the actual presentation order.</li>
+          <li>The video renderer was corrected to use the real multi-voice ElevenLabs segments and segment-based slide cuts.</li>
+        </ol>
+
+        <h2>Tools and Roles</h2>
+        <ul>
+          <li><strong>ElevenLabs:</strong> generated the voice segments and showed audio direction as part of the communication craft.</li>
+          <li><strong>OpenClaw and Codex:</strong> managed edits, file organization, rendering, QA, and site publishing support.</li>
+          <li><strong>HTML and CSS:</strong> made the deck easy to revise without a heavyweight presentation tool.</li>
+          <li><strong>Swift and AVFoundation:</strong> assembled the final MP4 locally when ffmpeg was not available.</li>
+        </ul>
+
+        <h2>Why It Matters</h2>
+        <p>The result is not just a pitch video. It is a working sample of the workflow itself: a communicator using AI tools to create a clearer artifact, spot quality problems, revise quickly, and package the result for a real audience.</p>
+
+        <h2>Deck Frames</h2>
+        <figure class="media-feature">
+          <img src="../media/elevenlabs-application-deck/images/contact-sheet.png" alt="Contact sheet of the final ElevenLabs application deck slides">
+          <figcaption>The exported deck frames used to build the final narrated video.</figcaption>
+        </figure>
+      </article>
+    </main>
+  </body>
+</html>

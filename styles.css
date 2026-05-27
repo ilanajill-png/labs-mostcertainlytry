@@ -441,7 +441,9 @@ figcaption {
 }
 
 .media-grid img,
-.video-grid video {
+.video-grid video,
+.media-feature video,
+.media-feature img {
   display: block;
   width: 100%;
   border-radius: 6px;
@@ -455,6 +457,24 @@ figcaption {
 
 .video-grid video {
   aspect-ratio: 9 / 16;
+  object-fit: contain;
+}
+
+.media-feature {
+  overflow: hidden;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fbf7ed;
+}
+
+.media-feature + h2 {
+  margin-top: 32px;
+}
+
+.media-feature video,
+.media-feature img {
+  aspect-ratio: 16 / 9;
   object-fit: contain;
 }
 
