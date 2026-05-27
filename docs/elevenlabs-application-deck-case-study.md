@@ -7,7 +7,6 @@ This project turned an ElevenLabs application into a short proof artifact: a nar
 ## Final Output
 
 - Final video: `media/elevenlabs-application-deck/videos/ilana-x-elevenlabs-deck-with-audio.mp4`
-- Prototype video: `media/elevenlabs-application-deck/videos/prototype-old-deck.mp4`
 - Runtime: about 1:46
 - Slide frames: 8
 - Format: HTML deck rendered to PNG frames, then assembled with ElevenLabs-generated audio
@@ -31,14 +30,6 @@ What needed revision:
 - Cut the runtime closer to 75-100 seconds.
 - Add proof visuals from Most Certainly Try, scripts, prompt systems, case studies, and the build process.
 - End with a direct closing ask.
-
-## What Changed
-
-1. Slide 4 was revised to use one large Most Certainly Try Labs screenshot.
-2. Footer copy was removed while preserving the progress bar.
-3. The repeated Application Studio box was removed from the deck chrome.
-4. A stale sidebar was removed because it did not match the presented slide order.
-5. The video render was corrected to use real multi-voice ElevenLabs segments and narration-based slide cuts.
 
 ## Why It Matters
 

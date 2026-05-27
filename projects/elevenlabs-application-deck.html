@@ -47,12 +47,6 @@
         <p>This project turned a job application into a proof artifact. Instead of only sending a resume and written note, the work became a short narrated deck showing how Ilana thinks, builds, reviews, and packages AI-powered communication work.</p>
         <p>The build moved through deck design, slide export, AI voice segment generation, timing alignment, and video packaging. The key constraint was speed: make something polished enough to represent the work, but keep the process lightweight enough to finish while the idea still had momentum.</p>
 
-        <h2>Prototype Cut</h2>
-        <figure class="media-feature">
-          <video controls preload="metadata" poster="../media/elevenlabs-application-deck/images/prototype-old-deck-poster.png" src="../media/elevenlabs-application-deck/videos/prototype-old-deck.mp4"></video>
-          <figcaption>The first old-deck prototype that went through the internal reviewer panel before the final deck revision.</figcaption>
-        </figure>
-
         <h2>First Review Feedback</h2>
         <p>The first review panel scored the prototype at 6.4/10 and marked it as a strong concept that needed another revision before public viewing. The reviewers liked the differentiated ElevenLabs-specific premise, the multi-voice idea, the cleaner product-style visual system, and the early personal cue slides.</p>
         <p>The blockers were practical: the opening read as novelty-first, the voices needed clearer casting, some phrasing felt too sharp for a communications role, the old deck did not show enough proof of real work, and the 2:20 runtime was too long for the amount of visual variation.</p>
@@ -68,15 +62,6 @@
         <h2>Production Approach</h2>
         <p>The deck was built as local HTML so the design could be revised quickly and rendered into slide PNGs. ElevenLabs audio was handled as multiple voice segments rather than one stretched file, which made it possible to align slide cuts with the actual narration beats.</p>
         <p>Several QA passes mattered: removing stale deck chrome, restoring the correct slide order, replacing a misleading sidebar, preserving the progress bar, removing footer clutter, and fixing the early export where audio timing drifted against the slides.</p>
-
-        <h2>What Changed During Review</h2>
-        <ol>
-          <li>Slide 4 was revised to use one large Most Certainly Try Labs screenshot.</li>
-          <li>Footer copy was removed while keeping the visual progress bar.</li>
-          <li>The repeated Application Studio identity box was removed from every slide.</li>
-          <li>The stale sidebar was removed because it did not match the actual presentation order.</li>
-          <li>The video renderer was corrected to use the real multi-voice ElevenLabs segments and segment-based slide cuts.</li>
-        </ol>
 
         <h2>Tools and Roles</h2>
         <ul>
