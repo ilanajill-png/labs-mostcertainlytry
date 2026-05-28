@@ -15,6 +15,10 @@
     h1{font:300 clamp(42px,8vw,92px)/.95 'Arial Narrow',Arial,sans-serif;margin:16px 0 20px;color:#fff;max-width:820px}
     .lede{font-size:22px;color:var(--muted);max-width:780px}
     .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+    .tabs{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0;font-family:Arial,sans-serif}
+    .tab{border:1px solid var(--line);background:#171310;color:#fff;padding:9px 12px}
+    .tab:hover{border-color:var(--pink)}
+    .tab.featured{border-color:rgba(130,195,242,.75);background:rgba(130,195,242,.12);color:var(--blue)}
     a{color:var(--blue);font-weight:700;text-decoration:none}
     a:hover{color:var(--pink)}
     .button{border:1px solid var(--line);background:#171310;padding:11px 14px;display:inline-block;color:#fff;font-family:Arial,sans-serif}
@@ -43,6 +47,14 @@
       <a class="button" href="files/dialtones-europe-cobill-band-prospects.html">Co-bill artist prospects</a>
       <a class="button" href="files/europe-tour-grant-tracker.html">Grant tracker</a>
     </div>
+    <nav class="tabs" aria-label="Tour microsite sections">
+      <a class="tab" href="files/Dialtones_Europe_Tour_Options_Pitch_Deck.html">Pitch Deck</a>
+      <a class="tab" href="files/dialtones-europe-venue-prospects.html">Venues</a>
+      <a class="tab featured" href="files/dialtones-europe-cobill-band-prospects.html">CoBill Bands</a>
+      <a class="tab" href="files/europe-tour-grant-tracker.html">Grant Tracker</a>
+      <a class="tab" href="#route-options">Routes</a>
+      <a class="tab" href="#spreadsheets">Spreadsheets</a>
+    </nav>
   </header>
   <main>
     <section>
@@ -66,7 +78,7 @@
       </div>
     </section>
 
-    <section>
+    <section id="route-options">
       <h2>Route Options</h2>
       <div class="grid">
         <article class="card route-1"><h3>Option 1</h3><p>UK / Ireland / Netherlands</p><a href="files/tour_option_1_uk_ireland_netherlands_shortlist.html">Open shortlist</a></article>
@@ -91,7 +103,7 @@
 <li><a href="files/tour_option_5_italy_germany_austria_shortlist.html">Option 5: Italy / Germany / Austria shortlist</a></li>
       </ul>
     </section>
-    <section>
+    <section id="spreadsheets">
       <h2>Spreadsheets</h2>
       <ul class="file-list">
         <li><a href="files/dialtones-europe-cobill-band-prospects.csv">Dialtones Europe Cobill Band Prospects</a></li>
