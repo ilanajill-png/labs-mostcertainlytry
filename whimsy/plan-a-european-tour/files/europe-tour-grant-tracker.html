@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Europe Tour Grant Tracker</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f7f4;
+      --panel: #ffffff;
+      --text: #20252b;
+      --muted: #5d6670;
+      --line: #d7d9dc;
+      --header: #edf0f2;
+      --accent: #0b63ce;
+      --accent-soft: #e8f1ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+
+    main {
+      width: min(1500px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 28px 0 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .updated {
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1180px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 14px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: 0;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    th {
+      background: var(--header);
+      font-weight: 700;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    td:first-child {
+      font-weight: 700;
+      width: 190px;
+    }
+
+    a {
+      color: var(--accent);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .deadline {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      color: #083d7d;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .field-list {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .field-list li {
+      margin-bottom: 7px;
+    }
+
+    .note {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .research-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .research-card h2,
+    .questions h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 18px;
+      margin: 0 0 14px;
+    }
+
+    .profile-item {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+
+    .profile-item strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: var(--muted);
+      letter-spacing: .03em;
+    }
+
+    .sources {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .sources li {
+      margin-bottom: 5px;
+    }
+
+    .questions {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .questions ol {
+      margin: 0;
+      padding-left: 22px;
+    }
+
+    .questions li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100vw - 20px, 1500px);
+        padding-top: 18px;
+      }
+
+      header {
+        display: block;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .updated {
+        margin-top: 10px;
+        white-space: normal;
+      }
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>Europe Tour Grant Tracker</h1>
+        <p class="subtitle">Grant options for a U.S. band booking three or more Europe shows.</p>
+      </div>
+      <div class="updated">Updated May 28, 2026</div>
+    </header>
+
+    <section class="research-card" aria-labelledby="dialtones-profile">
+      <h2 id="dialtones-profile">Prefilled Application Profile: The Dialtones</h2>
+      <div class="profile-grid">
+        <div class="profile-item">
+          <strong>Applicant / Project Lead</strong>
+          Lauren Gurgiolo. Verify legal name before submission.
+        </div>
+        <div class="profile-item">
+          <strong>Band / Ensemble Name</strong>
+          The Dialtones.
+        </div>
+        <div class="profile-item">
+          <strong>Location / Home Market</strong>
+          Austin / Central Texas. Public booking page lists location as Central Texas; press identifies the band as Austin, TX.
+        </div>
+        <div class="profile-item">
+          <strong>Primary Contact</strong>
+          dialtonesproductions@gmail.com / 512.567.9906, from the official EPK.
+        </div>
+        <div class="profile-item">
+          <strong>Genre / Discipline</strong>
+          Public booking page lists genre as AAA. Press describes the current version as indie folk rock. For grant forms, use Music / Performing Arts unless a narrower option is required.
+        </div>
+        <div class="profile-item">
+          <strong>Website / EPK</strong>
+          <a href="https://thedialtones.org/" target="_blank" rel="noopener">thedialtones.org</a> /
+          <a href="https://thedialtones.org/epk" target="_blank" rel="noopener">thedialtones.org/epk</a>.
+        </div>
+        <div class="profile-item">
+          <strong>Recent Release</strong>
+          Static Sky EP, released April 11, 2025. Tracks listed publicly: Naming No Names, Love To Live, Monk, For Travis, Risa.
+        </div>
+        <div class="profile-item">
+          <strong>Project Framing</strong>
+          New/current Dialtones work documents Lauren Gurgiolo's experience with mania and recovery, using music to process that experience and support awareness. Use only with the band's approval because it is personal health-related material, even though it is public in the EPK.
+        </div>
+        <div class="profile-item">
+          <strong>Known Collaborators / Members</strong>
+          Public sources mention Lauren Gurgiolo, Mike St. Clair, Chris Hausler, Wiley Green, Mad Whitaker, Sahara Smith, and producer/engineer Brian Beattie. Confirm current touring lineup before applying.
+        </div>
+        <div class="profile-item">
+          <strong>Notable Prior Affiliations</strong>
+          Public sources connect members/collaborators with Okkervil River, White Denim, The Polyphonic Spree, The Heartless Bastards, Golden Dawn Arkestra, The Octopus Project, David Ramirez, Sailor Poon, Bill Callahan, and Roky Erickson.
+        </div>
+        <div class="profile-item">
+          <strong>Work Samples</strong>
+          Use the official EPK, Static Sky links, Bandcamp, Spotify, YouTube/Vimeo, and live-performance video if the band can identify the strongest current clips.
+        </div>
+        <div class="profile-item">
+          <strong>Recent Tour Evidence</strong>
+          2025 Texas dates found: Bastrop, Dallas/Fort Worth, Denton, San Antonio, Houston, and Austin. No confirmed Europe dates were found in public research.
+        </div>
+      </div>
+
+      <ul class="sources">
+        <li>Official site and EPK: <a href="https://thedialtones.org/epk" target="_blank" rel="noopener">thedialtones.org/epk</a></li>
+        <li>Booking/profile listing: <a href="https://www.meshedupproductions.com/the-dialtones/" target="_blank" rel="noopener">Meshed Up Productions</a></li>
+        <li>Release and Texas tour dates: <a href="https://www.scenepointblank.com/news/records/2025/03/15/the-dialtones-ring-in/" target="_blank" rel="noopener">Scene Point Blank</a></li>
+        <li>Additional release/member info: <a href="https://www.herecomestheflood.com/2025/03/the-dialtones-love-to-live.html" target="_blank" rel="noopener">Here Comes The Flood</a></li>
+        <li>Intermedia/project history: <a href="https://kutx.org/austin-music-minute/but-the-walls-do-talk/" target="_blank" rel="noopener">KUTX</a> and <a href="https://austin.culturemap.com/eventdetail/dialtones-presents-roomresonance" target="_blank" rel="noopener">CultureMap Austin</a></li>
+      </ul>
+    </section>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Grant Name</th>
+            <th>Grant Link</th>
+            <th>Grant Description</th>
+            <th>Grant Deadline</th>
+            <th>Required Form Fields / Info to Gather</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>USArtists International / Mid Atlantic Arts</td>
+            <td>
+              <a href="https://www.midatlanticarts.org/opportunity/usartists-international/" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Supports U.S. performing artists and ensembles with international festivals,
+              global performing arts markets, and other eligible international engagements.
+              Grants are up to $11,000 and require a 1:1 match.
+            </td>
+            <td>
+              <span class="deadline">2026 cycle closed</span><br />
+              Deadline was Feb. 25, 2026. Covered projects from June 1, 2026-June 30, 2027.
+              Watch for the next cycle.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / ensemble name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>U.S. citizenship / permanent residency confirmation: ____________________</li>
+                <li>International engagement name(s): ____________________</li>
+                <li>Host festival / presenter / market name: ____________________</li>
+                <li>Engagement city and country: ____________________</li>
+                <li>Performance date(s): ____________________</li>
+                <li>Invitation letter / contract attached: Yes / No</li>
+                <li>Artist fee amount: ____________________</li>
+                <li>Eligible expense budget: ____________________</li>
+                <li>1:1 match source and amount: ____________________</li>
+                <li>Work samples / performance links: EPK https://thedialtones.org/epk; Static Sky links on official site</li>
+                <li>Artist bio / project narrative: Use official EPK bio; confirm privacy-approved narrative framing</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Sonic Guild Tour Support Grant</td>
+            <td>
+              <a href="https://sonicguild.org/toursupport/" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Tour support for musicians based near Sonic Guild chapters, including Texas artists
+              within 30 miles of Austin. Eligible tours need at least three consecutive shows outside
+              the home market and 250+ miles of travel. Funding is $150 per eligible tour date,
+              up to $1,500 per year.
+            </td>
+            <td>
+              <span class="deadline">July 31, 2026</span><br />
+              For September-December 2026 tours.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / project name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>Home city / chapter eligibility: Austin / Central Texas; verify Sonic Guild radius eligibility</li>
+                <li>Age confirmation, 21+: Yes / No</li>
+                <li>Tour date 1 / city / venue: ____________________</li>
+                <li>Tour date 2 / city / venue: ____________________</li>
+                <li>Tour date 3 / city / venue: ____________________</li>
+                <li>Confirmation that shows are consecutive: Yes / No</li>
+                <li>Distance from home market, 250+ miles: ____________________</li>
+                <li>Tour routing summary: ____________________</li>
+                <li>Tour budget / expenses: ____________________</li>
+                <li>Projected career impact: ____________________</li>
+                <li>Artist links / music / socials: https://thedialtones.org; EPK, Instagram, Facebook, Bandcamp, YouTube linked from official site</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Foundation for Contemporary Arts Emergency Grants</td>
+            <td>
+              <a href="https://www.foundationforcontemporaryarts.org/grants/emergency-grants/" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Year-round emergency support for U.S.-based artists with sudden presentation
+              opportunities or unexpected expenses for projects close to completion. Can support
+              projects abroad. Typical grants are $500-$3,000.
+            </td>
+            <td>
+              <span class="deadline">Rolling</span><br />
+              Applications are accepted year-round.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / project name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>U.S. residence confirmation: ____________________</li>
+                <li>Discipline: Music / Sound; The Dialtones</li>
+                <li>Emergency type: sudden opportunity / unexpected expense</li>
+                <li>Performance date(s): ____________________</li>
+                <li>Committed venue / presenter / festival: ____________________</li>
+                <li>Documentation of confirmed dates: ____________________</li>
+                <li>Amount requested, $500-$3,000: ____________________</li>
+                <li>Short explanation of urgency: ____________________</li>
+                <li>Budget gap / unexpected cost: ____________________</li>
+                <li>Artist bio / work samples: Use official EPK bio and Static Sky work samples</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>globalFEST Touring Fund</td>
+            <td>
+              <a href="https://www.globalfest.org/apply/touring-fund" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Touring support for past globalFEST artists. Requires at least three confirmed public
+              performances in three different U.S. cities, with one new or cold market. Not currently
+              a Europe-tour fit, but useful as a comparison grant.
+            </td>
+            <td>
+              <span class="deadline">June 5, 2026</span><br />
+              Due at 11:00 PM EDT for July 1, 2026-Jan. 31, 2027 U.S. tours.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Past globalFEST artist status: Yes / No</li>
+                <li>Applicant / artist name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / ensemble name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>Tour period: ____________________</li>
+                <li>Confirmed public performance 1 / city: ____________________</li>
+                <li>Confirmed public performance 2 / city: ____________________</li>
+                <li>Confirmed public performance 3 / city: ____________________</li>
+                <li>New or cold market identified: ____________________</li>
+                <li>Contracts / commitment letters attached: Yes / No</li>
+                <li>Tour budget attached: Yes / No</li>
+                <li>Eligible reimbursable expenses: ____________________</li>
+                <li>Grant request, $3,000-$5,000: ____________________</li>
+                <li>Visa documentation if applicable: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>American Music Abroad</td>
+            <td>
+              <a href="https://exchanges.state.gov/us/program/american-music-abroad" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              U.S. State Department cultural exchange program for American bands. Selected ensembles
+              tour internationally for two to three weeks, with concerts, workshops, media interviews,
+              and community/education programming. This is not reimbursement for a self-booked route;
+              bands cannot choose the countries they visit.
+            </td>
+            <td>
+              <span class="deadline">November-January</span><br />
+              Public application period is listed as November through January.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Band / ensemble name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>Number of band members, 3-5 required: ____________________</li>
+                <li>Each member U.S. citizen confirmation: Yes / No</li>
+                <li>Each member age 18+ confirmation: Yes / No</li>
+                <li>Genre / musical style: AAA; indie folk rock; music / performing arts</li>
+                <li>Tour availability for 15-20 days: ____________________</li>
+                <li>International travel readiness: ____________________</li>
+                <li>Community and education programming plan: ____________________</li>
+                <li>Workshop / lecture / demonstration ideas: ____________________</li>
+                <li>Media interview readiness: ____________________</li>
+                <li>Felony / child-support eligibility confirmations: ____________________</li>
+                <li>Prior AMA participation history: ____________________</li>
+                <li>Performance samples / audition materials: ____________________</li>
+                <li>Band bio and member bios: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>23Arts Initiative</td>
+            <td>
+              <a href="https://www.23arts-initiative.org/" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Supports artists with creation and public performance of new work, especially jazz,
+              classical music, and dance. The organization says it helps realize performance
+              opportunities across the U.S. and Europe.
+            </td>
+            <td>
+              <span class="deadline">No public deadline found</span><br />
+              Application link is public, but a clear deadline was not visible on the public page.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / ensemble / project name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>Discipline: other / music; verify if 23Arts will accept AAA/indie folk rock</li>
+                <li>New work title or project title: ____________________</li>
+                <li>Project description / artistic goals: ____________________</li>
+                <li>European performance opportunity details: ____________________</li>
+                <li>Confirmed or proposed presenters / festivals: ____________________</li>
+                <li>Performance dates and locations: ____________________</li>
+                <li>Commission / creation budget: ____________________</li>
+                <li>Tour / production budget: ____________________</li>
+                <li>Amount requested: ____________________</li>
+                <li>Work samples / performance links: EPK https://thedialtones.org/epk; Static Sky links on official site</li>
+                <li>Artist bios and collaborators: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Performing Arts Discovery / PAD</td>
+            <td>
+              <a href="https://www.westarts.org/pad" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Western Arts Alliance program that promotes U.S. musicians, dance artists, and theatre
+              companies to international programmers, festival directors, and venue managers through
+              artist rosters, online showcases, and trade missions.
+            </td>
+            <td>
+              <span class="deadline">Varies by call</span><br />
+              PADX and showcase calls are posted as specific opportunities.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / company / ensemble name: The Dialtones</li>
+                <li>Primary contact name and email: dialtonesproductions@gmail.com / 512.567.9906</li>
+                <li>U.S.-based artist confirmation: Yes / No</li>
+                <li>Discipline / genre: Music; AAA; indie folk rock</li>
+                <li>International touring readiness statement: ____________________</li>
+                <li>Tourable production description: ____________________</li>
+                <li>Technical requirements / stage plot: ____________________</li>
+                <li>Performance video / showcase links: ____________________</li>
+                <li>EPK / press kit link: ____________________</li>
+                <li>Representative or booking contact: ____________________</li>
+                <li>Target market or trade mission call: ____________________</li>
+                <li>Passport / travel availability: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Creative Capital Award / State of the Art Prize</td>
+            <td>
+              <a href="https://creative-capital.org/applicationhandbook/" target="_blank" rel="noopener">
+                Application handbook
+              </a>
+            </td>
+            <td>
+              Major project-based support for innovative artists. Relevant only if the Europe shows
+              are part of a larger original performing arts or music project, not routine tour support
+              or normal band operations.
+            </td>
+            <td>
+              <span class="deadline">2027 call closed</span><br />
+              2027 open call deadline was April 2, 2026. Track future cycles.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Project title: The Dialtones Europe tour (working title; confirm)</li>
+                <li>Discipline: performing arts / music / interdisciplinary</li>
+                <li>Artist eligibility confirmation: ____________________</li>
+                <li>Project summary / concept: ____________________</li>
+                <li>Innovation / artistic risk statement: ____________________</li>
+                <li>Round I work sample link or upload: ____________________</li>
+                <li>Work sample caption, title, date, and description: ____________________</li>
+                <li>Round II itemized project budget PDF: ____________________</li>
+                <li>Round II one-page project timeline PDF: ____________________</li>
+                <li>Round II additional work samples, if advanced: ____________________</li>
+                <li>Proof of eligibility, if advanced: ____________________</li>
+                <li>Artist needs survey responses: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>New Music USA Creator Fund</td>
+            <td>
+              <a href="https://newmusicusa.org/program/new-music-creator-fund/" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Grants for individual music creators in any genre developing new work or collaborations.
+              Possible fit only if the Europe shows connect to new work, collaboration, public
+              dissemination, or creative development rather than simple tour reimbursement.
+            </td>
+            <td>
+              <span class="deadline">November 2026</span><br />
+              Next cycle serves West, South, and New York applicants. New York has extra frequency limits.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / music creator legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Age 21+ confirmation: Yes / No</li>
+                <li>Professional musician experience, 3+ years: ____________________</li>
+                <li>Eligible region / state: ____________________</li>
+                <li>Eligibility quiz completed: Yes / No</li>
+                <li>FAQ read and webinar attended/viewed: Yes / No</li>
+                <li>Project title: The Dialtones Europe tour (working title; confirm)</li>
+                <li>Collaborators, 1-5 required: ____________________</li>
+                <li>Work samples, 2-3 links or uploads: ____________________</li>
+                <li>Project and collaboration narrative, 250 words max: ____________________</li>
+                <li>Impact narrative, 100 words max: ____________________</li>
+                <li>Use of funds narrative, 100 words max: ____________________</li>
+                <li>Project timeline narrative, 100 words max: ____________________</li>
+                <li>Budget breakdown with funding received/projected: ____________________</li>
+                <li>Resume / CV: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Austin Live Music Fund / Elevate</td>
+            <td>
+              <a href="https://www.austintexas.gov/arts-culture/funding-programs" target="_blank" rel="noopener">
+                Funding programs page
+              </a>
+            </td>
+            <td>
+              City of Austin ACME funding programs for artists, musicians, creative businesses, and
+              cultural groups. These are local cultural/tourism grants, not Europe-tour grants, but
+              may help Austin-based musicians if the funded activity fits program rules.
+            </td>
+            <td>
+              <span class="deadline">Summer 2026</span><br />
+              Austin Live Music Fund and Elevate are both listed as opening Summer 2026.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / lead applicant legal name: ____________________</li>
+                <li>Band / business / organization name: The Dialtones or Dialtones Productions (verify legal entity)</li>
+                <li>Applicant type: professional musician / individual artist / creative business / nonprofit / sponsored project</li>
+                <li>Authority to sign grant agreement: Yes / No</li>
+                <li>Austin / ETJ / MSA eligibility: ____________________</li>
+                <li>Professional musician eligibility evidence: ____________________</li>
+                <li>Project title and public activity description: ____________________</li>
+                <li>How activity serves Austin residents, visitors, or tourists: ____________________</li>
+                <li>Venue / activity location: ____________________</li>
+                <li>Activity dates: ____________________</li>
+                <li>Project budget / operating budget documents: ____________________</li>
+                <li>Work samples / music links: ____________________</li>
+                <li>Required insurance plan: ____________________</li>
+                <li>Compliance status for prior City grants: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Artist Trust Grants for Artist Projects (GAP)</td>
+            <td>
+              <a href="https://artisttrust.org/grants/grants-for-artist-projects/" target="_blank" rel="noopener">
+                Grant page
+              </a>
+            </td>
+            <td>
+              Washington State project grants for artists. Useful only for Washington-based musicians
+              or band members applying as artists. Supports many project types, including performance
+              projects, but is not specifically a Europe tour fund.
+            </td>
+            <td>
+              <span class="deadline">June 22, 2026</span><br />
+              Deadline listed as 11:59 PM.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Washington State residency eligibility: Yes / No</li>
+                <li>Discipline category: performing / media / literary / visual</li>
+                <li>Career stage selection: ____________________</li>
+                <li>Project title: The Dialtones Europe tour (working title; confirm)</li>
+                <li>Project statement: who, what, when, where, and why: ____________________</li>
+                <li>Project timeline: ____________________</li>
+                <li>How funding supports the work: ____________________</li>
+                <li>Artist biography: ____________________</li>
+                <li>Progress statement: ____________________</li>
+                <li>Work samples, up to 10 sample units total: ____________________</li>
+                <li>Work sample details / captions: ____________________</li>
+                <li>Demographic information, optional/required as portal asks: ____________________</li>
+                <li>Submittable account/login: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Culture Moves Europe</td>
+            <td>
+              <a href="https://culture.ec.europa.eu/culture-moves-europe" target="_blank" rel="noopener">
+                Program page
+              </a>
+            </td>
+            <td>
+              EU mobility scheme supporting artists and cultural professionals traveling to carry out
+              projects in another Creative Europe country. Usually not a direct fit for U.S.-based bands,
+              but relevant for eligible Europe-based collaborators, hosts, or band members.
+            </td>
+            <td>
+              <span class="deadline">Calls run 2025-2028</span><br />
+              Check current Culture Moves Europe calls for exact deadlines.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Applicant / artist legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Creative Europe country eligibility: ____________________</li>
+                <li>Sector: music / performing arts / other</li>
+                <li>Mobility type: individual mobility / residency / host organization</li>
+                <li>Sending country and destination country: ____________________</li>
+                <li>Host / partner organization or collaborator: ____________________</li>
+                <li>Project title and artistic objective: ____________________</li>
+                <li>Travel dates and project dates: ____________________</li>
+                <li>Mobility budget / support requested: ____________________</li>
+                <li>Invitation or host confirmation: ____________________</li>
+                <li>Sustainability / access needs, if applicable: ____________________</li>
+                <li>Artist CV / portfolio / work samples: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>On the Move Funding Guides</td>
+            <td>
+              <a href="https://on-the-move.org/" target="_blank" rel="noopener">
+                Funding database
+              </a>
+            </td>
+            <td>
+              Not a grant itself. It is a funding guide and open-call database for cultural mobility,
+              including music and sound opportunities, country-specific mobility funds, residencies,
+              and presenter/partner-side support in Europe.
+            </td>
+            <td>
+              <span class="deadline">Ongoing</span><br />
+              Deadlines vary by listed opportunity.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Target countries for Europe tour: ____________________</li>
+                <li>Artform filter: music &amp; sound / performing arts</li>
+                <li>Opportunity type: grant / residency / presenting work / collaboration</li>
+                <li>Eligible applicant country requirements: ____________________</li>
+                <li>Eligible travel or project costs: ____________________</li>
+                <li>Host/presenter eligibility requirements: ____________________</li>
+                <li>Deadline for selected opportunity: ____________________</li>
+                <li>Application language: ____________________</li>
+                <li>Required documents from selected opportunity: ____________________</li>
+                <li>Contact person / program officer: ____________________</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr>
+            <td>Fractured Atlas Fiscal Sponsorship</td>
+            <td>
+              <a href="https://www.fracturedatlas.org/fiscal-sponsorship" target="_blank" rel="noopener">
+                Program page
+              </a>
+            </td>
+            <td>
+              Not a grant. Fiscal sponsorship can help a band raise tax-deductible donations and apply
+              to funders that require a nonprofit sponsor. Fractured Atlas reviews written solicitations
+              and grant applications for sponsored projects.
+            </td>
+            <td>
+              <span class="deadline">Rolling</span><br />
+              Membership and fiscal sponsorship applications are ongoing.
+            </td>
+            <td>
+              <ul class="field-list">
+                <li>Fractured Atlas membership status: ____________________</li>
+                <li>Applicant / project lead legal name: Lauren Gurgiolo (verify legal name)</li>
+                <li>Band / fiscally sponsored project name: The Dialtones Europe tour (verify project title)</li>
+                <li>Project description and charitable/artistic purpose: ____________________</li>
+                <li>Project activities and timeline: ____________________</li>
+                <li>Fundraising goal for Europe tour: ____________________</li>
+                <li>Budget / use of donated funds: ____________________</li>
+                <li>Donor solicitation language for review: ____________________</li>
+                <li>Grant applications needing sponsor review: ____________________</li>
+                <li>Investor involvement, if any: ____________________</li>
+                <li>Lobbying activity confirmation: Yes / No</li>
+                <li>Administrative fee acknowledged: Yes / No</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      Note: Required fields should be checked against the live application portals before submission,
+      because forms can change by cycle. Some rows are funding databases or fiscal sponsorship tools,
+      not direct grants, but they are included because they can support a Europe tour funding plan.
+    </p>
+
+    <section class="questions" aria-labelledby="open-questions">
+      <h2 id="open-questions">Open Questions to Confirm With The Dialtones</h2>
+      <ol>
+        <li>What is the legal applicant name for each grant: Lauren Gurgiolo individually, The Dialtones, Dialtones Productions, or a fiscal sponsor?</li>
+        <li>What is the current legal/business structure, if any: sole proprietor, LLC, nonprofit sponsored project, or informal band?</li>
+        <li>Who has legal authority to sign grant agreements and contracts?</li>
+        <li>What are the exact Europe show dates, cities, countries, venues/festivals, and presenter contacts?</li>
+        <li>Are at least three Europe shows already confirmed in writing, and can the band provide contracts or invitation letters?</li>
+        <li>Are any Europe dates festivals, showcases, global performing arts markets, or presenter-backed engagements that could qualify for USArtists International?</li>
+        <li>What is the confirmed touring lineup for Europe, and are all touring members U.S. citizens or permanent residents where required?</li>
+        <li>For American Music Abroad, is the touring lineup exactly 3-5 people, all U.S. citizens, all 18+, and available for a 15-20 day State Department itinerary?</li>
+        <li>For Sonic Guild, does the applicant live within 30 miles of Austin, and are the Europe dates consecutive and 250+ miles from the home market?</li>
+        <li>What is the complete tour budget: airfare, ground transport, lodging, per diem, visas/work permits, backline, merch, rehearsal, insurance, and admin?</li>
+        <li>What matching funds are secured or pending for grants that require a match?</li>
+        <li>What artist fees, guarantees, ticket splits, hospitality, lodging, backline, or travel reimbursements are being provided by each Europe presenter?</li>
+        <li>What is the requested amount for each grant, and what exact expenses should each fund cover?</li>
+        <li>Which work samples should be used: best live performance video, Static Sky tracks, music videos, Bandcamp, Spotify, YouTube, or Vimeo?</li>
+        <li>Can the band provide a current one-page bio, short bio, member bios, high-resolution photos, stage plot, input list, and tech rider?</li>
+        <li>Does the band want grant narratives to include the publicly available mental-health/recovery framing, or should applications use a less personal artistic-development framing?</li>
+        <li>Has Lauren or any collaborator received New Music USA individual funding in 2024 or 2025, or applied within a restricted cycle?</li>
+        <li>Is the project a new work/collaboration, a tour of existing repertoire, or both? This matters for New Music USA, Creative Capital, 23Arts, and Austin cultural grants.</li>
+        <li>For Austin Live Music Fund/Elevate, can the project be tied to Austin tourism/public benefit, and will any funded activity occur in Austin or the ETJ if required?</li>
+        <li>Does the band already have Fractured Atlas or another fiscal sponsor, or would they need to apply for sponsorship first?</li>
+        <li>Are there visa/work-permit requirements for the specific Europe countries on the route?</li>
+        <li>What are the band members' passport expiration dates and travel availability windows?</li>
+        <li>Are there accessibility, medical, or travel accommodation needs that should be budgeted or disclosed where appropriate?</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

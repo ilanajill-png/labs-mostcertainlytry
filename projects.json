@@ -1,5 +1,19 @@
 [
   {
+    "id": "plan-a-european-tour",
+    "title": "Plan a European Tour",
+    "category": "Whimsy",
+    "type": "Tour Planning Microsite",
+    "status": "Published",
+    "date": "2026-05-28",
+    "featured": true,
+    "tools": ["HTML", "CSV", "Tour Routing", "Venue Research", "Grant Planning"],
+    "summary": "A Dialtones European tour planning microsite with route options, a pitch deck, venue prospects, co-bill targets, grant strategy, map assets, hotels, and PR/radio outreach targets.",
+    "outcome": "Packaged the tour deck and associated HTML/CSV/Markdown/JSON files into a static microsite with direct links to the five shortlist routes and funding materials.",
+    "url": "whimsy/plan-a-european-tour/",
+    "source": "whimsy/plan-a-european-tour/files/Dialtones_Europe_Tour_Overview_and_Funding_Roadmap.md"
+  },
+  {
     "id": "coder-macbook-neo-setup",
     "title": "Coder MacBook Neo Setup",
     "category": "Case Study",
