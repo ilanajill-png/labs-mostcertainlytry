@@ -1,5 +1,19 @@
 [
   {
+    "id": "coder-macbook-neo-setup",
+    "title": "Coder MacBook Neo Setup",
+    "category": "Case Study",
+    "type": "Developer Environment",
+    "status": "Published",
+    "date": "2026-05-27",
+    "featured": true,
+    "tools": ["Coder", "Apple Silicon", "Homebrew", "Postgres", "Colima", "Docker"],
+    "summary": "A setup case study for installing Coder locally on a MacBook Neo, creating a workspace, and capturing the lessons from the install.",
+    "outcome": "Installed and bootstrapped Coder, created a template, started a healthy workspace, verified SSH access, and documented fixes for Postgres, Docker, socket, and process supervision issues.",
+    "url": "projects/coder-macbook-neo-setup.html",
+    "source": "docs/coder-macbook-neo-setup-case-study.md"
+  },
+  {
     "id": "elevenlabs-application-deck",
     "title": "ElevenLabs Application Deck",
     "category": "Case Study",

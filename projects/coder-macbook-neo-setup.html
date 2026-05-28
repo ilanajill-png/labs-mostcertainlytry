@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case Study Setting Up Coder on an Apple Silicon MacBook Neo</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --ink: #1f2933;
+      --muted: #5f6b77;
+      --accent: #1f6f8b;
+      --line: #d8d2c6;
+      --code-bg: #17202a;
+      --code-ink: #f5f7fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 40px auto;
+      padding: clamp(24px, 5vw, 56px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 18px 48px rgba(31, 41, 51, 0.08);
+    }
+
+    h1,
+    h2 {
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      max-width: 760px;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+    }
+
+    h2 {
+      margin: 40px 0 14px;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+    }
+
+    p {
+      margin: 0 0 18px;
+    }
+
+    ul,
+    ol {
+      margin: 0 0 22px;
+      padding-left: 1.35rem;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    code {
+      border-radius: 4px;
+      background: rgba(31, 111, 139, 0.1);
+      color: #12384a;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95em;
+      padding: 0.12em 0.32em;
+    }
+
+    pre {
+      overflow-x: auto;
+      margin: 18px 0 24px;
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      font-size: 0.92rem;
+    }
+
+    .dek {
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .meta {
+      margin-bottom: 30px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      main {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Case Study Setting Up Coder on an Apple Silicon MacBook Neo</h1>
+    <p>I wanted to see how quickly I could go from "I have a MacBook Neo" to "I have a working Coder environment with a real workspace." Not a polished production deployment. Not a theoretical read through of docs. A real, complete setup install Coder, create an admin, add a template, start a workspace, SSH into it, and build something from there.</p>
+
+    <p>The result Coder was up and bootstrapped in about 9 minutes, but the path had a few Mac specific snags worth documenting.</p>
+
+    <h2>The Goal</h2>
+    <p>The test was simple</p>
+    <ul>
+      <li>Install Coder locally on a MacBook Neo.</li>
+      <li>Bootstrap the first admin user.</li>
+      <li>Create a starter template.</li>
+      <li>Launch a workspace.</li>
+      <li>Verify that the workspace was actually usable, not just visible in a dashboard.</li>
+    </ul>
+    <p>This was intentionally a demo/quick start deployment. The goal was to evaluate setup friction and developer experience, not design a production architecture for a team.</p>
+
+    <h2>What Worked Well</h2>
+    <p>The Coder setup flow was better than expected. The instructions covered the right operational phases</p>
+    <ul>
+      <li>Discover the local environment.</li>
+      <li>Install the Coder CLI/server.</li>
+      <li>Create the first user.</li>
+      <li>Add a starter template.</li>
+      <li>Create the first workspace.</li>
+      <li>Verify that the workspace is healthy.</li>
+    </ul>
+    <p>That last part matters. A lot of dev environment tools look installed long before they are actually useful. In this case, the meaningful finish line was not "the server started." It was seeing Coder report a started, healthy workspace and then landing inside that workspace over SSH.</p>
+    <p>The workspace reported as <code>Started</code> and <code>HEALTHY true</code>, and SSH landed inside the workspace as the <code>coder</code> user. That is the point where I would call the demo install real.</p>
+
+    <h2>The First Snag Embedded Postgres on Apple Silicon</h2>
+    <p>The first real issue appeared almost immediately. Coder installed cleanly, but the built in Postgres binary failed on this Apple Silicon Mac with</p>
+    <pre><code>bad CPU type in executable</code></pre>
+    <p>That is not the kind of failure a new user wants to debug during a quick start. The fix was straightforward once diagnosed install and run Homebrew Postgres, create a Coder database/user, and start Coder with <code>CODER_PG_CONNECTION_URL</code>.</p>
+    <p>The lesson on Apple Silicon Macs, the setup path should explicitly mention external Postgres as the fallback if embedded Postgres fails. It turns a confusing architecture error into a known branch in the install guide.</p>
+
+    <h2>The Second Snag No Local Docker Runtime</h2>
+    <p>The next issue was compute. Coder could run, but the useful starter workspace needed a Docker compatible runtime. This Mac did not already have Docker, Colima, or Podman available from the shell.</p>
+    <p>For a free local setup, Colima was the practical answer. After installing Docker and Colima with Homebrew, I started a small local Colima VM and let Coder use it as the workspace backend.</p>
+    <p>Once Colima was running, the workspace could be created with the Docker starter template.</p>
+    <p>The lesson a Coder server without a working compute backend is only half a demo. If the goal is to show value quickly, the guide should treat "install a local container runtime" as part of the happy path on a fresh Mac.</p>
+
+    <h2>The Third Snag Docker Socket Confusion</h2>
+    <p>The Docker starter template appeared to expose a socket variable, but the workspace build still tried the default Docker socket until the Colima socket was wired directly.</p>
+    <p>That is fixable, but it is exactly the kind of small infrastructure detail that can derail a demo.</p>
+    <p>The lesson when using Colima on macOS, verify which Docker socket the template actually uses during workspace creation. Do not assume the variable is flowing all the way into the provider.</p>
+
+    <h2>The Fourth Snag Keeping the Server Alive</h2>
+    <p>Running <code>coder server</code> interactively worked. Trying to background it with <code>nohup</code> did not the process exited silently and left no useful log trail.</p>
+    <p>A detached <code>screen</code> session was more reliable. It gave the local demo server a simple place to keep running and made it easier to inspect logs or shut the server down later.</p>
+    <p>The lesson setup docs should include a simple process supervision fallback for local demos. For production, use a real service manager. For a time boxed local evaluation, <code>screen</code> is boring and effective.</p>
+
+    <h2>Final Running State</h2>
+    <p>By the end of the setup, the local Coder environment had</p>
+    <ul>
+      <li>Coder server running locally.</li>
+      <li>A browser URL exposed through Coder's tunnel.</li>
+      <li>An admin user created.</li>
+      <li>Credentials stored locally with restricted file permissions.</li>
+      <li>A Docker demo template.</li>
+      <li>A running demo workspace.</li>
+      <li>Verified SSH access into the workspace.</li>
+    </ul>
+    <p>The environment was good enough to build and test a small app from inside Coder, which is the whole point of the exercise.</p>
+
+    <h2>Time and Score</h2>
+    <p>Total setup time about 8 minutes 55 seconds.</p>
+    <p>Instruction quality 8/10.</p>
+    <p>That is a strong score. The core instructions were clear, operational, and verification oriented. The missing points were not about the basic flow. They were about platform specific sharp edges</p>
+    <ul>
+      <li>Apple Silicon embedded Postgres failure.</li>
+      <li>Fresh Mac with no Docker runtime.</li>
+      <li>Colima socket configuration.</li>
+      <li><code>nohup</code> not keeping the server alive.</li>
+    </ul>
+
+    <h2>What I Would Add to the Setup Guide</h2>
+    <p>If I were editing the quick start experience, I would add four things</p>
+    <ol>
+      <li>A macOS Apple Silicon note for the embedded Postgres failure, with a direct Homebrew Postgres fallback.</li>
+      <li>A free local Docker path using Colima, including the expected socket path.</li>
+      <li>A verification step that checks the Docker socket used by the starter template.</li>
+      <li>A fallback for local process supervision when <code>nohup coder server</code> does not stay alive.</li>
+    </ol>
+    <p>Those changes would turn the setup from "good if you can debug the host" into "smooth enough for someone evaluating Coder under time pressure."</p>
+
+    <h2>Bottom Line</h2>
+    <p>Coder passed the practical test. On a fairly fresh Apple Silicon MacBook Neo, I was able to install it, bootstrap an admin, create a template, start a workspace, and verify real shell access in under 10 minutes.</p>
+    <p>The experience was not frictionless, but the friction was understandable and fixable. The biggest lesson is that local developer environment tools need to be honest about their dependencies. Coder itself came together quickly; the hard parts were Postgres, Docker, and process management.</p>
+    <p>That is actually a useful finding. Coder's value proposition is strongest once the workspace is running. The faster the setup guide gets Mac users past the host machine details, the faster they reach the moment where Coder starts to feel useful.</p>
+  </main>
+</body>
+</html>
