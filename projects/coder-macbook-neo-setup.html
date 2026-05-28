@@ -129,23 +129,23 @@
 
     <h2>The Goal</h2>
     <ul>
-      <li>Install Coder locally on a MacBook Neo.</li>
-      <li>Bootstrap the first admin user.</li>
-      <li>Create a starter template.</li>
-      <li>Launch a workspace.</li>
-      <li>Verify that the workspace was actually usable, not just visible in a dashboard.</li>
+      <li>Install Coder locally on a MacBook Neo</li>
+      <li>Bootstrap the first admin user</li>
+      <li>Create a starter template</li>
+      <li>Launch a workspace</li>
+      <li>Verify that the workspace was actually usable, not just visible in a dashboard</li>
     </ul>
     <p>This was intentionally a demo/quick start deployment. The goal was to evaluate setup friction and developer experience, not design a production architecture for a team.</p>
 
     <h2>What Worked Well</h2>
     <p>The Coder setup flow was better than expected. The instructions covered the right operational phases</p>
     <ul>
-      <li>Discover the local environment.</li>
-      <li>Install the Coder CLI/server.</li>
-      <li>Create the first user.</li>
-      <li>Add a starter template.</li>
-      <li>Create the first workspace.</li>
-      <li>Verify that the workspace is healthy.</li>
+      <li>Discover the local environment</li>
+      <li>Install the Coder CLI/server</li>
+      <li>Create the first user</li>
+      <li>Add a starter template</li>
+      <li>Create the first workspace</li>
+      <li>Verify that the workspace is healthy</li>
     </ul>
     <p>That last part matters. A lot of dev environment tools look installed long before they are actually useful. In this case, the meaningful finish line was not "the server started." It was seeing Coder report a started, healthy workspace and then landing inside that workspace over SSH.</p>
     <p>The workspace reported as <code>Started</code> and <code>HEALTHY true</code>, and SSH landed inside the workspace as the <code>coder</code> user. That is the point where I would call the demo install real.</p>
@@ -175,13 +175,13 @@
     <h2>Final Running State</h2>
     <p>By the end of the setup, the local Coder environment had</p>
     <ul>
-      <li>Coder server running locally.</li>
-      <li>A browser URL exposed through Coder's tunnel.</li>
-      <li>An admin user created.</li>
-      <li>Credentials stored locally with restricted file permissions.</li>
-      <li>A Docker demo template.</li>
-      <li>A running demo workspace.</li>
-      <li>Verified SSH access into the workspace.</li>
+      <li>Coder server running locally</li>
+      <li>A browser URL exposed through Coder's tunnel</li>
+      <li>An admin user created</li>
+      <li>Credentials stored locally with restricted file permissions</li>
+      <li>A Docker demo template</li>
+      <li>A running demo workspace</li>
+      <li>Verified SSH access into the workspace</li>
     </ul>
     <p>The environment was good enough to build and test a small app from inside Coder, which is the whole point of the exercise.</p>
 
@@ -190,19 +190,19 @@
     <p>Instruction quality 8/10.</p>
     <p>That is a strong score. The core instructions were clear, operational, and verification oriented. The missing points were not about the basic flow. They were about platform specific sharp edges</p>
     <ul>
-      <li>Apple Silicon embedded Postgres failure.</li>
-      <li>Fresh Mac with no Docker runtime.</li>
-      <li>Colima socket configuration.</li>
-      <li><code>nohup</code> not keeping the server alive.</li>
+      <li>Apple Silicon embedded Postgres failure</li>
+      <li>Fresh Mac with no Docker runtime</li>
+      <li>Colima socket configuration</li>
+      <li><code>nohup</code> not keeping the server alive</li>
     </ul>
 
     <h2>What I Would Add to the Setup Guide</h2>
     <p>If I were editing the quick start experience, I would add four things</p>
     <ol>
-      <li>A macOS Apple Silicon note for the embedded Postgres failure, with a direct Homebrew Postgres fallback.</li>
-      <li>A free local Docker path using Colima, including the expected socket path.</li>
-      <li>A verification step that checks the Docker socket used by the starter template.</li>
-      <li>A fallback for local process supervision when <code>nohup coder server</code> does not stay alive.</li>
+      <li>A macOS Apple Silicon note for the embedded Postgres failure, with a direct Homebrew Postgres fallback</li>
+      <li>A free local Docker path using Colima, including the expected socket path</li>
+      <li>A verification step that checks the Docker socket used by the starter template</li>
+      <li>A fallback for local process supervision when <code>nohup coder server</code> does not stay alive</li>
     </ol>
     <p>Those changes would turn the setup from "good if you can debug the host" into "smooth enough for someone evaluating Coder under time pressure."</p>
 
