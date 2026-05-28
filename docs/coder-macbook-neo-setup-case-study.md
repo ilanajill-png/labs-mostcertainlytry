@@ -6,8 +6,6 @@ The result Coder was up and bootstrapped in about 9 minutes, but the path had a 
 
 ## The Goal
 
-The test was simple
-
 * Install Coder locally on a MacBook Neo.
 * Bootstrap the first admin user.
 * Create a starter template.
