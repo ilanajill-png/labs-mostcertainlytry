@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ilana's New York Favorites | Most Certainly Try Whimsy</title>
+  <meta name="description" content="A personal New York favorites microsite for museums, ferry days, neighborhood wanders, food stops, and quiet art pilgrimages.">
+  <style>
+    :root {
+      --ink: #211b17;
+      --muted: #695b52;
+      --paper: #fbf6ee;
+      --panel: #fffaf2;
+      --line: #d9cbbc;
+      --brick: #8f3f2e;
+      --river: #246e8a;
+      --leaf: #4e6f42;
+      --gold: #b98534;
+      --rose: #b94f5e;
+      --shadow: 0 24px 70px rgba(62, 38, 25, 0.14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: var(--river);
+      font-weight: 800;
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.22em;
+    }
+
+    a:hover { color: var(--rose); }
+
+    .hero {
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(32, 23, 17, 0.76), rgba(32, 23, 17, 0.2) 48%, rgba(32, 23, 17, 0.05)),
+        url("assets/nyc-favorites-hero.png") center / cover;
+      color: #fffaf2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 26vh;
+      background: linear-gradient(180deg, rgba(251, 246, 238, 0), var(--paper));
+      pointer-events: none;
+    }
+
+    .hero-inner,
+    main,
+    footer {
+      width: min(1120px, calc(100vw - 32px));
+      margin: auto;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 42px 0 16vh;
+    }
+
+    .crumb {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255, 250, 242, 0.4);
+      border-radius: 8px;
+      background: rgba(32, 23, 17, 0.42);
+      color: #fffaf2;
+      font-size: 0.82rem;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin: 20px 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 8vw, 7.4rem);
+      font-weight: 500;
+      line-height: 0.92;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 680px;
+      margin: 0;
+      color: rgba(255, 250, 242, 0.9);
+      font-size: clamp(1.08rem, 2vw, 1.35rem);
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .quick-links a,
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 13px;
+      background: var(--panel);
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .hero .quick-links a {
+      border-color: rgba(255, 250, 242, 0.48);
+      background: rgba(255, 250, 242, 0.92);
+    }
+
+    main { padding: 42px 0 0; }
+
+    section {
+      padding: 38px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+      gap: 24px;
+      align-items: start;
+      border-top: 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      color: var(--brick);
+      font-size: 1rem;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    p { margin: 0 0 14px; }
+
+    .muted { color: var(--muted); }
+
+    .note {
+      border: 1px solid #ddbf92;
+      border-radius: 8px;
+      padding: 18px;
+      background: #fff3dd;
+      color: #59483b;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      display: grid;
+      gap: 10px;
+      min-height: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      background: var(--panel);
+      box-shadow: 0 12px 34px rgba(62, 38, 25, 0.07);
+    }
+
+    .card p { color: var(--muted); }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .tag {
+      border: 1px solid #d8c2a8;
+      border-radius: 999px;
+      padding: 4px 9px;
+      color: #5b4a3a;
+      background: #fff6e9;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .route {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .route li {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .stop-number {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--river);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .map-panel {
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(120deg, rgba(36, 110, 138, 0.15), rgba(185, 79, 94, 0.08)),
+        repeating-linear-gradient(45deg, rgba(33, 27, 23, 0.05) 0 1px, transparent 1px 18px),
+        #f8ebda;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .boroughs {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .borough {
+      display: grid;
+      grid-template-columns: 120px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      padding: 11px 0;
+      border-top: 1px solid rgba(105, 91, 82, 0.22);
+    }
+
+    .borough strong { color: var(--brick); }
+
+    .callout {
+      padding: 24px;
+      border-radius: 8px;
+      background: #1f2d2f;
+      color: #fffaf2;
+    }
+
+    .callout a { color: #9fd4e6; }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 34px 0 46px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 860px) {
+      .hero { min-height: 86vh; background-position: 56% center; }
+      .intro,
+      .split,
+      .grid { grid-template-columns: 1fr; }
+      .borough { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <a class="crumb" href="../index.html">Most Certainly Try Whimsy</a>
+      <h1>Ilana's New York Favorites</h1>
+      <p class="lede">A personal guide to the New York that rewards wandering: shrine rooms, ferries, brownstone blocks, museum afternoons, unfussy food, and the side quests that make the city feel like a private map.</p>
+      <nav class="quick-links" aria-label="Microsite sections">
+        <a href="#art">Art stops</a>
+        <a href="#routes">Day routes</a>
+        <a href="#food">Food mood</a>
+        <a href="#map-links">Map links</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <h2>Use this when the city needs a softer plan.</h2>
+        <p class="muted">This is not a maximum-efficiency tourist checklist. It is a favorites file for trips built around one good anchor, a small number of flexible stops, and enough open space for the subway delay, the perfect bench, or the unexpected bakery.</p>
+      </div>
+      <aside class="note">
+        <strong>Best planning rule:</strong>
+        <p>Pick one borough anchor, one meal, and one wander. Anything after that is bonus New York.</p>
+      </aside>
+    </section>
+
+    <section id="art">
+      <h2>Quiet Art Pilgrimages</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Brooklyn Museum</h3>
+          <p>Start with the Rubin Museum Tibetan Buddhist Shrine Room installation, then let the rest of the museum be optional instead of obligatory.</p>
+          <div class="tag-row">
+            <span class="tag">Museum day</span>
+            <span class="tag">Subway friendly</span>
+          </div>
+          <a href="https://www.brooklynmuseum.org/exhibitions/rubin-museum-tibetan-buddhist-shrine-room">Open Brooklyn Museum page</a>
+        </article>
+        <article class="card">
+          <h3>Jacques Marchais Museum</h3>
+          <p>A Staten Island destination for Tibetan art and monastery-inspired architecture. Better as a slow day than a squeezed-in errand.</p>
+          <div class="tag-row">
+            <span class="tag">Staten Island</span>
+            <span class="tag">Quiet stop</span>
+          </div>
+          <a href="https://www.tibetanmuseum.org/">Open museum site</a>
+        </article>
+        <article class="card">
+          <h3>The Cloisters Mood</h3>
+          <p>For days that need stone, gardens, river air, and a little medieval drama before dinner somewhere farther downtown.</p>
+          <div class="tag-row">
+            <span class="tag">Upper Manhattan</span>
+            <span class="tag">Garden walk</span>
+          </div>
+          <a href="https://www.metmuseum.org/plan-your-visit/met-cloisters">Open Met Cloisters page</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="routes" class="split">
+      <div>
+        <h2>Favorite Day Shapes</h2>
+        <p class="muted">Each route has a clear anchor and a humane amount of ambition. New York is better when the plan can breathe.</p>
+        <div class="quick-links">
+          <a class="button" href="https://www.google.com/maps/dir/?api=1&origin=St.%20George%20Ferry%20Terminal%2C%201%20Bay%20Street%2C%20Staten%20Island%2C%20NY&destination=Nonnas%20of%20the%20World%2C%2027%20Hyatt%20Street%2C%20Staten%20Island%2C%20NY&waypoints=Jacques%20Marchais%20Museum%20of%20Tibetan%20Art%2C%20338%20Lighthouse%20Avenue%2C%20Staten%20Island%2C%20NY">Open Staten Island route</a>
+          <a class="button" href="https://www.google.com/maps/dir/?api=1&origin=Brooklyn%20Museum%2C%20200%20Eastern%20Pkwy%2C%20Brooklyn%2C%20NY&destination=Jacques%20Marchais%20Museum%20of%20Tibetan%20Art%2C%20338%20Lighthouse%20Ave%2C%20Staten%20Island%2C%20NY">Brooklyn to Staten Island</a>
+        </div>
+      </div>
+      <ol class="route">
+        <li>
+          <span class="stop-number">1</span>
+          <div><strong>Brooklyn Museum plus Prospect Heights</strong><br><span class="muted">Art first, then a neighborhood wander with coffee or dinner nearby.</span></div>
+        </li>
+        <li>
+          <span class="stop-number">2</span>
+          <div><strong>Ferry to Tibetan art</strong><br><span class="muted">Staten Island Ferry, Jacques Marchais Museum, then back toward St. George for dinner.</span></div>
+        </li>
+        <li>
+          <span class="stop-number">3</span>
+          <div><strong>West Village reset</strong><br><span class="muted">Bookstore, brownstones, tiny streets, and one unhurried table.</span></div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="food">
+      <h2>Food Mood</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Ferry-day dinner</h3>
+          <p>Enoteca Maria / Nonnas of the World near St. George keeps the Staten Island day feeling like a real itinerary, not just a commute.</p>
+          <a href="https://www.nonnasoftheworld.org/">Open Nonnas of the World</a>
+        </article>
+        <article class="card">
+          <h3>Classic comfort</h3>
+          <p>Pizza, dumplings, bagels, diner coffee, and the meal that is closest to where you already are. The favorite is often the one that does not require another transfer.</p>
+        </article>
+        <article class="card">
+          <h3>Table rule</h3>
+          <p>Lunch can be opportunistic. Dinner should be intentional. That balance keeps the day from turning into logistics with snacks.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="map-links" class="split">
+      <div class="map-panel">
+        <h2>Map Seeds</h2>
+        <p class="muted">A short list of starting points for a Google My Maps layer or a one-day route.</p>
+        <div class="boroughs">
+          <div class="borough"><strong>Brooklyn</strong><span>Brooklyn Museum, Prospect Park edges, Crown Heights and Prospect Heights wandering.</span></div>
+          <div class="borough"><strong>Staten Island</strong><span>St. George Ferry Terminal, Jacques Marchais Museum of Tibetan Art, Enoteca Maria.</span></div>
+          <div class="borough"><strong>Manhattan</strong><span>The Cloisters, West Village, river walks, bookstores, and one excellent dinner reservation.</span></div>
+        </div>
+      </div>
+      <div class="callout">
+        <h2>What Makes The Cut</h2>
+        <p>A favorite has to earn the trip twice: once as the destination and once as the path around it. If the surrounding walk is good, it belongs here.</p>
+        <p><a href="../../index.html">Back to Labs</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Built as a static microsite for Most Certainly Try Whimsy.</span>
+    <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+  </footer>
+</body>
+</html>
