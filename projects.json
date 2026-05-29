@@ -1,5 +1,19 @@
 [
   {
+    "id": "lauren-gurgiolo-life-portfolio",
+    "title": "Lauren Gurgiolo Life Portfolio",
+    "category": "Whimsy",
+    "type": "Public Archive Website",
+    "status": "Published",
+    "date": "2026-05-29",
+    "featured": true,
+    "tools": ["HTML", "CSS", "JavaScript", "Public Web Research", "Timeline Design", "Source Indexing"],
+    "summary": "A public-facing digital portfolio for Lauren Gurgiolo built from sourced web mentions across music credits, installation records, press, funding documents, and official artist pages.",
+    "outcome": "Published a self-contained Labs page with a visual hero, narrative threads, 40 filterable timeline entries, source links, and a companion research index.",
+    "url": "projects/lauren-gurgiolo-life-portfolio.html",
+    "source": "docs/lauren-gurgiolo-public-web-portfolio-index.md"
+  },
+  {
     "id": "plan-a-european-tour",
     "title": "Plan a European Tour",
     "category": "Whimsy",

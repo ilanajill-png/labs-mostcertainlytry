@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lauren Gurgiolo | Public Life Portfolio</title>
+  <meta name="description" content="A public-web portfolio timeline for Lauren Gurgiolo: guitarist, composer, intermedia artist, and Dialtones bandleader.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #181513;
+      --muted: #675f57;
+      --line: #d8d0c4;
+      --paper: #f8f5ef;
+      --white: #fffdf8;
+      --clay: #a84b37;
+      --moss: #526b55;
+      --gold: #c08b32;
+      --blue: #2d5f77;
+      --shadow: 0 20px 50px rgba(24, 21, 19, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(168, 75, 55, .08), transparent 36%, rgba(82, 107, 85, .1)),
+        var(--paper);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px clamp(18px, 4vw, 54px);
+      background: rgba(248, 245, 239, .9);
+      border-bottom: 1px solid rgba(216, 208, 196, .75);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    .nav-links a:hover { border-bottom-color: var(--clay); color: var(--ink); }
+
+    .hero {
+      min-height: calc(100vh - 54px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.03fr) minmax(280px, .72fr);
+      align-items: stretch;
+      gap: clamp(24px, 5vw, 64px);
+      padding: clamp(30px, 6vw, 72px) clamp(18px, 5vw, 72px) 36px;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 840px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--clay);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 8vw, 108px);
+      line-height: .9;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 720px;
+      margin: 24px 0 0;
+      font-size: clamp(18px, 2.1vw, 26px);
+      color: #342f2a;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 16px;
+      border: 1px solid var(--ink);
+      background: var(--ink);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 14px;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+    }
+
+    .hero-media {
+      display: flex;
+      min-height: 620px;
+      align-items: flex-end;
+    }
+
+    .image-frame {
+      width: 100%;
+      background: var(--white);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(24, 21, 19, .16);
+    }
+
+    .image-frame img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: 50% 35%;
+      filter: saturate(.94) contrast(1.04);
+    }
+
+    .caption {
+      margin: 0;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 42px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .stat {
+      min-height: 108px;
+      padding: 18px;
+      background: rgba(255, 253, 248, .74);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main section {
+      padding: clamp(42px, 7vw, 90px) clamp(18px, 5vw, 72px);
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(190px, .42fr) minmax(0, 1fr);
+      gap: clamp(18px, 4vw, 48px);
+      align-items: start;
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 5vw, 68px);
+      line-height: .98;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(17px, 2vw, 22px);
+      color: #3c3730;
+    }
+
+    .threads {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .thread {
+      min-height: 255px;
+      padding: 22px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 7px solid var(--clay);
+    }
+
+    .thread:nth-child(2) { border-top-color: var(--moss); }
+    .thread:nth-child(3) { border-top-color: var(--gold); }
+    .thread:nth-child(4) { border-top-color: var(--blue); }
+
+    .thread h3 {
+      margin: 0 0 12px;
+      font-size: 19px;
+      line-height: 1.2;
+    }
+
+    .thread p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .filters {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .filter {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--ink);
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .filter[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr) 170px;
+      gap: 22px;
+      padding: 18px;
+      background: rgba(255, 253, 248, .78);
+      border: 1px solid var(--line);
+    }
+
+    .item-year {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      font-weight: 850;
+      color: var(--clay);
+    }
+
+    .item-year small {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .item h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .item-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 5px 8px;
+      background: rgba(82, 107, 85, .13);
+      color: #344839;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .source-link {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--blue);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(45, 95, 119, .35);
+    }
+
+    .source-link:hover { border-bottom-color: currentColor; }
+
+    .source-link + .source-link { margin-top: -2px; }
+
+    .sources {
+      columns: 2 300px;
+      column-gap: 28px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .sources li {
+      break-inside: avoid;
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 28px clamp(18px, 5vw, 72px) 42px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-media {
+        min-height: 0;
+        max-width: 560px;
+      }
+
+      .stats,
+      .threads {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .item {
+        grid-template-columns: 130px minmax(0, 1fr);
+      }
+
+      .item-meta {
+        grid-column: 2;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .site-nav {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .stats,
+      .threads,
+      .section-head {
+        grid-template-columns: 1fr;
+      }
+
+      .item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .item-meta {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="brand">Lauren Gurgiolo</div>
+    <div class="nav-links">
+      <a href="../index.html">Labs Home</a>
+      <a href="#threads">Threads</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#sources">Sources</a>
+      <a href="../docs/lauren-gurgiolo-public-web-portfolio-index.md">Research Index</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Public web portfolio</p>
+      <h1>Lauren Gurgiolo</h1>
+      <p class="dek">A living archive of a guitarist, composer, intermedia artist, collaborator, and Dialtones bandleader whose work moves through Austin music, touring stages, experimental installation, and deeply personal songwriting.</p>
+      <div class="cta-row">
+        <a class="button" href="#timeline">Explore Timeline</a>
+        <a class="button secondary" href="#sources">Review Sources</a>
+      </div>
+      <div class="stats" aria-label="Portfolio summary">
+        <div class="stat"><strong>40</strong><span>tagged public mentions</span></div>
+        <div class="stat"><strong>2008</strong><span>earliest indexed public item</span></div>
+        <div class="stat"><strong>4</strong><span>primary narrative threads</span></div>
+        <div class="stat"><strong>18+</strong><span>years of documented work</span></div>
+      </div>
+    </div>
+    <div class="hero-media">
+      <figure class="image-frame">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Lauren_Gurgiolo_from_Okkervil_River.jpg?width=1200" alt="Lauren Gurgiolo performing with Okkervil River">
+        <figcaption class="caption">Public image via Wikimedia Commons: Lauren Gurgiolo from Okkervil River. License details should be checked before publication.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <main>
+    <section id="threads">
+      <div class="section-head">
+        <h2>Four Throughlines</h2>
+        <p>The sources point to a career shaped by collaboration and reinvention: touring guitar work, authored experimental projects, Austin arts infrastructure, and The Dialtones as a personal creative home.</p>
+      </div>
+      <div class="threads">
+        <article class="thread">
+          <h3>Guitarist and Touring Musician</h3>
+          <p>Okkervil River, The Octopus Project, Heartless Bastards, EMQ, Caliche, and related Austin projects form the performance backbone of the archive.</p>
+        </article>
+        <article class="thread">
+          <h3>Composer and Installation Artist</h3>
+          <p>Calculated Carelessness, The Quality or Condition, The Silent City, Silent City II, and Room of Resonance show recurring interest in interactive, immersive work.</p>
+        </article>
+        <article class="thread">
+          <h3>The Dialtones</h3>
+          <p>A long-running vehicle for experimental rock, intermedia composition, and later releases including Faces and Static Sky.</p>
+        </article>
+        <article class="thread">
+          <h3>Austin Arts Ecosystem</h3>
+          <p>Museum of Human Achievement, KUTX, Austin Chronicle, City of Austin cultural funding, Co-Lab Projects, and Mohawk recur across the record.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="section-head">
+        <h2>Public Timeline</h2>
+        <p>Each item is tagged by date, category, and location when the source supports it. Use filters to narrow the archive by creative role.</p>
+      </div>
+      <div class="filters" aria-label="Timeline filters">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="music" aria-pressed="false">Music</button>
+        <button class="filter" type="button" data-filter="installation" aria-pressed="false">Installation</button>
+        <button class="filter" type="button" data-filter="press" aria-pressed="false">Press</button>
+        <button class="filter" type="button" data-filter="funding" aria-pressed="false">Funding</button>
+      </div>
+      <div class="timeline" id="timelineItems"></div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>Source Base</h2>
+        <p>This site is built from public web research started on May 29, 2026. The next strongest improvement would be a rights-cleared media pass for photos, audio, and video embeds.</p>
+      </div>
+      <ul class="sources">
+        <li>Official / owned: The Dialtones site, EPK, Bandcamp.</li>
+        <li>Press / reviews: Austin Chronicle, KUTX, Houston Chronicle, Mystic Sons, Musicletter, Noisy Ghost PR.</li>
+        <li>Event / arts records: MoHA Wiki, Awesome Foundation, Glasstire, Withfriends, Vimeo.</li>
+        <li>Music credits: Bandcamp, AllMusic, Barnes & Noble, Shore Fire liner notes, Wikipedia/Wikimedia, BandToBand.</li>
+        <li>Public documents: City of Austin EDIMS, Luminaria catalog, Austin Chronicle PDFs.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    This portfolio uses public mentions and avoids private medical details. It is a working draft intended to become a fuller digital archive with verified media permissions.
+  </footer>
+
+  <script>
+    const entries = [
+      {date:"2026-05", type:"Official bio", category:"press", label:"Official portfolio / artist bio", location:"Austin and Los Angeles", title:"Official artist biography", body:"Guitarist, composer, interactive intermedia director; Okkervil River, Erika Wennerstrom/Heartless Bastards, The Dialtones; guitar, lap steel, mandolin; international touring and immersive installations.", links:[["The Dialtones", "https://thedialtones.org/"]]},
+      {date:"2025-04-14", type:"Publish date", category:"press music", label:"Music review", location:"Austin, TX", title:"Mystic Sons reviews Static Sky", body:"The review describes The Dialtones as Austin indie-rock innovators and frames Lauren as songwriter and bandleader.", links:[["Mystic Sons", "https://www.mysticsons.com/node/19729"]]},
+      {date:"2025-04-11", type:"Release date", category:"music press", label:"Music release / press kit", location:"Austin, TX", title:"Static Sky EP", body:"The Static Sky release and EPK position the record as a return to The Dialtones and summarize touring, TV, and film credits.", links:[["EPK", "https://thedialtones.org/epk"], ["Bandcamp", "https://laurengurgiolo.bandcamp.com/album/static-sky"], ["Noisy Ghost", "https://www.noisyghostpr.com/the-dialtones"]]},
+      {date:"2025-03-14", type:"Publish date", category:"press music", label:"Single/video announcement", location:"Austin, TX", title:"Love to Live announcement", body:"Noisy Ghost PR announces the single and video ahead of Static Sky, with resilience and renewal framing.", links:[["Noisy Ghost PR", "https://www.noisyghostpr.com/news/2025/3/17/the-dialtones-release-love-to-live-a-mantra-of-resilience-and-renewal"]]},
+      {date:"2025", type:"Publish date", category:"press", label:"Profile / culture list", location:"Austin, TX", title:"25 Austinites culture profile", body:"Houston Chronicle notes her work with The Dialtones, Okkervil River, The Octopus Project, and Heartless Bastards.", links:[["Houston Chronicle", "https://www.houstonchronicle.com/entertainment/article/25-austinites-entertainment-great-2025-austin-20358882.php"]]},
+      {date:"2024-07-29", type:"Release date", category:"music", label:"Music release", location:"Austin, TX", title:"Faces", body:"Faces by Lauren Gurgiolo // The Dialtones.", links:[["Bandcamp", "https://laurengurgiolo.bandcamp.com/album/faces"]]},
+      {date:"2023-07-15", type:"Event date", category:"music", label:"Live performance / new project", location:"Austin, TX", title:"Tailing Dams live debut", body:"A musical joint by Lauren Gurgiolo and David Lovas at Co-Lab Projects.", links:[["Withfriends", "https://withfriends.events/event/kx9ez1ce/cool/"]]},
+      {date:"2021-12-29", type:"Release date", category:"music", label:"Music release", location:"Austin, TX", title:"The Dialtones album", body:"Self-titled album by Lauren Gurgiolo // The Dialtones.", links:[["Bandcamp", "https://laurengurgiolo.bandcamp.com/album/the-dialtones-2"]]},
+      {date:"2021-09-13", type:"Publish date", category:"press music", label:"Album announcement / press", location:"Heartless Bastards context", title:"A Beautiful Life album announcement", body:"Musicletter names Lauren Gurgiolo as guitarist in the Heartless Bastards album lineup.", links:[["Musicletter", "https://www.musicletter.it/home/2021/09/13/gli-heartless-bastards-di-erika-wennerstrom-con-a-beautiful-life/"]]},
+      {date:"2021-09-10", type:"Release date", category:"music", label:"Album credit", location:"Heartless Bastards context", title:"Heartless Bastards: A Beautiful Life", body:"Lauren is credited on guitar.", links:[["Barnes & Noble", "https://www.barnesandnoble.com/w/a-beautiful-life-heartless-bastards/36639370"]]},
+      {date:"2021-09", type:"Publish date", category:"press music", label:"Album review", location:"Austin, TX", title:"Austin Chronicle reviews A Beautiful Life", body:"Review notes Wennerstrom leaning on backing from Jesse Ebaugh and Lauren Gurgiolo.", links:[["Austin Chronicle", "https://www.austinchronicle.com/music/review-heartless-bastards-a-beautiful-life-12124336/"]]},
+      {date:"2021-05-28", type:"Publish date / event coverage", category:"press music", label:"Concert review / live performance", location:"Mohawk, Austin, TX", title:"Heartless Bastards at Mohawk reopening", body:"Lauren appears on guitar, photographed with the band, and is praised for guitar solos.", links:[["Austin Chronicle", "https://www.austinchronicle.com/daily/music/2021-05-28/at-mohawks-reopening-an-air-of-gratefulness-and-growth/"]]},
+      {date:"2020-07-03", type:"Release date", category:"music", label:"Music credit", location:"Austin, TX", title:"Heartless Bastards: Revolution", body:"Lauren is credited on guitar.", links:[["Bandcamp", "https://heartlessbastards.bandcamp.com/track/revolution"]]},
+      {date:"2019-09-11", type:"Event date / publish date", category:"installation press", label:"Interactive installation", location:"Springdale Station, Austin, TX", title:"Room of Resonance", body:"An interactive room that listens and reacts to sound; a Dialtones Productions project featuring Tosca Strings and multiple artists.", links:[["KUTX", "https://kutx.org/austin-music-minute/but-the-walls-do-talk/"], ["Vimeo", "https://vimeo.com/350855302"]]},
+      {date:"2018 FY / 2019 proposed", type:"Document date", category:"funding", label:"Public arts funding", location:"Austin, TX", title:"City of Austin cultural funding", body:"Public funding document lists Center for Women & Their Work / Lauren Gurgiolo.", links:[["City of Austin", "https://services.austintexas.gov/edims/document.cfm?id=306986"]]},
+      {date:"2017-09-28", type:"Publish date", category:"installation press", label:"Press review / installation", location:"Museum of Human Achievement, Austin, TX", title:"Lost in the Silent City", body:"Austin Chronicle coverage of Silent City II, an audience-propelled sci-fi audio play.", links:[["Austin Chronicle", "https://www.austinchronicle.com/music/playback-lost-in-the-silent-city-11770635/"]]},
+      {date:"2017-07-16", type:"Release date", category:"music", label:"Music release", location:"Austin, TX", title:"Silent City", body:"Silent City by The Dialtones.", links:[["Bandcamp", "https://laurengurgiolo.bandcamp.com/album/silent-city"]]},
+      {date:"2017-04-07", type:"Release date", category:"music", label:"Album credit / band member", location:"Austin, TX", title:"The Octopus Project: Memory Mirror", body:"Written and performed by Toto Miranda, Yvonne Lambert, Josh Lambert, and Lauren Gurgiolo.", links:[["Bandcamp", "https://theoctopusproject.bandcamp.com/album/memory-mirror"]]},
+      {date:"2017", type:"Document date", category:"installation", label:"Festival catalog / visual arts", location:"San Antonio, TX", title:"Luminaria catalog", body:"Catalog mention with Yvonne Lambert, Josh Lambert, and Lauren Gurgiolo.", links:[["Luminaria PDF", "https://luminariasa.org/wp-content/uploads/2019/08/Luminaria_Catalog_2017.pdf"]]},
+      {date:"2016-09-08 to 2016-09-10", type:"Event date", category:"installation", label:"Exhibition / digital art / installation / music / sculpture", location:"Museum of Human Achievement, Austin, TX", title:"The Silent City", body:"Lauren Gurgiolo and Wendy Mitchell listed as event artists.", links:[["MoHA Wiki", "https://moha.wiki/The_Silent_City"]]},
+      {date:"2016-05-06", type:"Publication/listing date", category:"music", label:"Live listing", location:"Austin, TX", title:"Stanley Smith with Lauren Gurgiolo", body:"Austin Chronicle calendar listing.", links:[["Austin Chronicle PDF", "https://www.austinchronicle.com/wp-content/uploads/2025/09/chronicle-367.pdf-367.pdf"]]},
+      {date:"2015-10-24", type:"Release date", category:"music", label:"Music release / group credit", location:"Austin, TX", title:"EMQ: Shame", body:"Lauren credited on guitar; EMQ bio lists Elizabeth McQueen, Lauren Gurgiolo, and Lindsay Greene.", links:[["Bandcamp", "https://emqemq.bandcamp.com/"]]},
+      {date:"2015-05-28", type:"Publish date", category:"press music", label:"Music feature / new band", location:"Stay Gold, Austin, TX", title:"Caliche feature", body:"KUTX notes Christy Hays and longtime writing partner Lauren Gurgiolo forming Caliche with Geena Spigarelli and Andrew Gerfers.", links:[["KUTX", "https://kutx.org/austin-music-minute/this-is-how-it-feels/"]]},
+      {date:"2015-05", type:"Funding date", category:"installation funding", label:"Installation / grant", location:"Austin, TX", title:"The Quality or Condition", body:"Interactive multimedia installation with music, sculpture, storytelling, and sensors by Lauren Gurgiolo / Backstop Art Collective.", links:[["Awesome Foundation", "https://www.awesomefoundation.org/en/projects/46239-the-quality-or-condition"], ["Project page", "https://thedialtones.org/the-quality-or-condition"]]},
+      {date:"2015-04-30 to 2015-05-01", type:"Event date", category:"installation music", label:"Intermedia performance / EMQ", location:"Museum of Human Achievement, Austin, TX", title:"Infinity + Infinity", body:"Elizabeth McQueen performance featuring EMQ with guitarist Lauren Gurgiolo.", links:[["RajiWorld", "https://rajiworld.com/2015/04/"]]},
+      {date:"2014-10-30 / 2014-10-31", type:"Release / order date", category:"music", label:"Album credit", location:"Austin, TX", title:"Nightblooms: STAR-TAKER", body:"Album text credits Lauren's noise guitar work.", links:[["Bandcamp", "https://nightblooms.bandcamp.com/album/star-taker"]]},
+      {date:"2014-10-03", type:"Publication/listing date", category:"press music", label:"Festival supplement / profile mention", location:"Austin, TX", title:"Austin Chronicle ACL supplement", body:"Supplement mentions Okkervil River guitarist Lauren Gurgiolo.", links:[["Austin Chronicle PDF", "https://www.austinchronicle.com/download/2014-10-03/ACL2014supplementWEEK1.pdf"]]},
+      {date:"2013-09-21", type:"Publication date", category:"press music", label:"Music press", location:"Austin, TX", title:"Billboard mention", body:"Billboard PDF mentions Lauren as guitarist of Okkervil River.", links:[["Billboard PDF", "https://www.worldradiohistory.com/Archive-All-Music/Billboard/00s/2013/Billboard-2013-09-21.pdf"]]},
+      {date:"2013-09-06", type:"Publish date", category:"press music", label:"Band feature / photo credit", location:"Austin, TX / New Hampshire context", title:"Okkervil River: Darkness in the Heart of Town", body:"Austin Chronicle feature caption identifies Lauren among The Stand Ins lineup.", links:[["Austin Chronicle", "https://www.austinchronicle.com/music/2013-09-06/darkness-in-the-heart-of-town/"]]},
+      {date:"2013-05-02", type:"Broadcast/listing date", category:"press music", label:"Radio feature", location:"Austin, TX", title:"Texas Music Matters", body:"KUTX notes Okkervil River guitarist Lauren Gurgiolo speaking on Austin's shifting role as a music city.", links:[["KUTX", "https://kutx.org/features/big-broadcast-goodbyes-and-comebacks/"]]},
+      {date:"2013-05-01", type:"Release date", category:"music installation", label:"Music release / installation", location:"Museum of Human Achievement, Austin, TX", title:"Calculated Carelessness", body:"The Dialtones release with music by Lauren; related multimedia installation May 2-5, 2013.", links:[["Bandcamp", "https://laurengurgiolo.bandcamp.com/album/calculated-carelessness"], ["KUTX", "https://kutx.org/austin-music-minute/deconstructed-from-a-seducers-diary/"]]},
+      {date:"2013-04-11 to 2013-04-14", type:"Event date", category:"installation", label:"Art installation listing", location:"Museum of Human Achievement, Austin, TX", title:"Calculated Carelessness listing", body:"Glasstire lists the installation as conceived by Lauren Gurgiolo.", links:[["Glasstire", "https://glasstire.com/events/2013/04/03/calculated-carelessness/"]]},
+      {date:"2013-01-18 to 2013-02-17", type:"Campaign dates", category:"installation funding", label:"Crowdfunding / installation", location:"Austin, TX", title:"Calculated Carelessness Kickstarter", body:"BackerTracker page for the inter-media installation; image credited to Lauren Gurgiolo.", links:[["BackerTracker", "https://www.backerkit.com/projects/2019852060/calculated-carelessness-an-inter-media-installatio"]]},
+      {date:"2013", type:"Release / liner-note date", category:"music", label:"Album credit", location:"Not stated", title:"Okkervil River: The Silver Gymnasium", body:"Lauren credited with electric guitars and lap steel.", links:[["Shore Fire", "https://shorefire.com/album/liner-notes/the-silver-gymnasium"]]},
+      {date:"2013", type:"Document date", category:"funding", label:"Public funding", location:"Austin, TX", title:"City of Austin funding awards", body:"City council memo lists Lauren Gurgiolo in cultural funding awards.", links:[["City of Austin", "https://services.austintexas.gov/edims/document.cfm?id=176526"]]},
+      {date:"2011-05-10", type:"Release date", category:"music", label:"Album credit", location:"Okkervil River / Austin context", title:"Okkervil River: I Am Very Far", body:"Lauren credited on electric and acoustic guitars.", links:[["Wikipedia", "https://en.wikipedia.org/wiki/I_Am_Very_Far"]]},
+      {date:"2011-01-21", type:"Publish date", category:"press music", label:"Music profile / past band credit", location:"East Austin, TX", title:"Elizabeth McQueen profile", body:"Austin Chronicle names Lauren as a Firebrands guitarist and then-current Okkervil River member.", links:[["Austin Chronicle", "https://www.austinchronicle.com/music/2011-01-21/elizabeth-mcqueen-the-laziest-girl-in-town/"]]},
+      {date:"2010-04-20", type:"Release date", category:"music", label:"Album credit", location:"Okkervil River / Roky Erickson context", title:"True Love Cast Out All Evil", body:"Roky Erickson with Okkervil River; Lauren credited on electric guitar.", links:[["Wikipedia", "https://en.wikipedia.org/wiki/True_Love_Cast_Out_All_Evil"]]},
+      {date:"2008-2014", type:"Membership date range", category:"music", label:"Band history", location:"Austin, TX", title:"Okkervil River member history", body:"Former member on guitar and pedal steel guitar.", links:[["Wikipedia", "https://en.wikipedia.org/wiki/Okkervil_River"], ["AllMusic", "https://www.allmusic.com/artist/okkervil-river-mn0000460390"]]},
+      {date:"2008", type:"Photo date/page context", category:"music", label:"Public image archive", location:"Okkervil River context", title:"Wikimedia Commons image archive", body:"Public Okkervil River images naming Lauren Gurgiolo.", links:[["Wikimedia Commons", "https://commons.wikimedia.org/wiki/Category%3AOkkervil_River"]]}
+    ];
+
+    const timeline = document.querySelector("#timelineItems");
+    const filters = document.querySelectorAll(".filter");
+
+    function render(filter = "all") {
+      timeline.innerHTML = "";
+      entries
+        .filter((entry) => filter === "all" || entry.category.includes(filter))
+        .forEach((entry) => {
+          const article = document.createElement("article");
+          article.className = "item";
+          article.innerHTML = `
+            <div class="item-year">
+              <span>${entry.date}</span>
+              <small>${entry.type}</small>
+            </div>
+            <div>
+              <h3>${entry.title}</h3>
+              <p>${entry.body}</p>
+            </div>
+            <div class="item-meta">
+              <span class="tag">${entry.label}</span>
+              <span class="tag">${entry.location}</span>
+              ${entry.links.map(([label, url]) => `<a class="source-link" href="${url}" target="_blank" rel="noreferrer">${label}</a>`).join("")}
+            </div>
+          `;
+          timeline.appendChild(article);
+        });
+    }
+
+    filters.forEach((button) => {
+      button.addEventListener("click", () => {
+        filters.forEach((item) => item.setAttribute("aria-pressed", "false"));
+        button.setAttribute("aria-pressed", "true");
+        render(button.dataset.filter);
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>
