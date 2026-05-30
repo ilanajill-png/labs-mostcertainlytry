@@ -221,28 +221,6 @@
       font-weight: 900;
       text-decoration: none;
     }
-    .keyword-search {
-      display: grid;
-      gap: 7px;
-      margin-top: 12px;
-    }
-    .keyword-search label {
-      color: var(--green);
-      font-size: .8rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-    .keyword-search input {
-      width: 100%;
-      min-height: 42px;
-      padding: 10px 12px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--ink);
-      font: inherit;
-    }
     .preset-clear, .filter-enter {
       align-self: end;
       width: 100%;
@@ -377,6 +355,9 @@
       display: grid;
       grid-template-columns: repeat(6, minmax(0, 1fr));
       gap: 12px;
+    }
+    .filter-keyword {
+      grid-column: span 2;
     }
     .filters select, .filters input {
       width: 100%;
@@ -569,6 +550,7 @@
       .filter-panel summary { display: block; padding: 8px 4px; }
       .filter-panel[open] summary { margin-bottom: 10px; }
       .filter-fields { grid-template-columns: 1fr; }
+      .filter-keyword { grid-column: auto; }
       .wine-grid { grid-template-columns: 1fr; }
       .wine-card__top { align-items: start; }
       .delectable-record { grid-template-columns: 1fr; }
@@ -595,10 +577,6 @@
           <div class="live-event">
             <strong>Live tasting</strong>
             <a href="https://tickets.citywinery.com/event/andre-hueston-mack-presents-thirst-trap-shx415?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio" target="_blank" rel="noopener">An Evening With Andre Hueston Mack</a>
-          </div>
-          <div class="keyword-search">
-            <label for="keyword-search">Keyword search</label>
-            <input id="keyword-search" type="search" placeholder="Search Mack's thoughts, bottle, producer, region, source..." autocomplete="off">
           </div>
         </div>
         <div class="story-grid">
@@ -639,6 +617,9 @@
         <details class="filter-panel" open>
           <summary>332 wines ▾ FILTER</summary>
           <div class="filter-fields">
+            <label class="filter-keyword">Keyword search
+              <input id="keyword-search" type="search" placeholder="Bottle, producer, region, source..." autocomplete="off">
+            </label>
             <label>$
               <select id="dollar"><option value="">All $ ranks</option><option>$ budget</option><option>$$ value</option><option>$$$ standard</option><option>$$$$ premium</option><option>$$$$$ splurge</option></select>
             </label>
@@ -14024,6 +14005,13 @@
       for (const select of filters.querySelectorAll("select")) select.value = "";
       keywordSearch.value = "";
     };
+    const clearActivePreset = () => {
+      if (!activePreset) return;
+      activePreset = "";
+      const url = new URL(window.location.href);
+      url.searchParams.delete("preset");
+      history.replaceState(null, "", url);
+    };
     for (const button of presetButtons) {
       button.addEventListener("click", () => {
         activePreset = button.dataset.presetButton;
@@ -14053,8 +14041,14 @@
         filters.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
-    keywordSearch.addEventListener("input", applyFilters);
-    keywordSearch.addEventListener("search", applyFilters);
+    keywordSearch.addEventListener("input", () => {
+      clearActivePreset();
+      applyFilters();
+    });
+    keywordSearch.addEventListener("search", () => {
+      clearActivePreset();
+      applyFilters();
+    });
     if (window.matchMedia("(max-width: 980px)").matches) {
       filterPanel?.removeAttribute("open");
     }
