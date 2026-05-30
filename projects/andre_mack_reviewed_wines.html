@@ -157,6 +157,7 @@
       font: inherit;
     }
     .rank-section { margin-top: 26px; }
+    .rank-section[hidden] { display: none !important; }
     .rank-heading {
       display: flex;
       align-items: baseline;
@@ -14995,14 +14996,20 @@
         card.classList.toggle("hidden", !visible);
       }
       for (const section of sections) {
-        const visibleCount = section.querySelectorAll(".wine-card:not(.hidden)").length;
+        const visibleCards = [...section.querySelectorAll(".wine-card")].filter(card => !card.classList.contains("hidden"));
+        const visibleCount = visibleCards.length;
+        section.hidden = visibleCount === 0;
         section.classList.toggle("hidden", visibleCount === 0);
+        section.style.display = visibleCount === 0 ? "none" : "";
         const count = section.querySelector(".rank-heading span");
         if (count) count.textContent = visibleCount + " card" + (visibleCount === 1 ? "" : "s");
       }
     };
     filters.addEventListener("input", applyFilters);
+    filters.addEventListener("change", applyFilters);
+    window.addEventListener("pageshow", applyFilters);
     applyFilters();
+    requestAnimationFrame(applyFilters);
   </script>
 </body>
 </html>

@@ -166,7 +166,7 @@
   <main class="page">
     <a class="top-link" href="andre_mack_reviewed_wines.html">Back to Wine Cards</a>
     <section class="hero" aria-labelledby="title">
-      <p class="eyebrow">Build Notes · v3.17</p>
+      <p class="eyebrow">Build Notes · v3.18</p>
       <h1 id="title">André Hueston Mack Wine Project Build Notes</h1>
       <p class="dek">A running record of what changed, why it mattered, and where the project still needs verification.</p>
       <div class="stats" aria-label="Build stats">
@@ -176,7 +176,7 @@
       </div>
       <div class="summary-panel">
         <div>
-          <p><strong>Current version:</strong> v3.17. This version hides red-beanie section headers when filters leave no visible cards beneath them.</p>
+          <p><strong>Current version:</strong> v3.18. This version hides red-beanie section headers when filters leave no visible cards beneath them.</p>
           <p><strong>Main benefit:</strong> filtered views stay clean instead of showing empty rank groups.</p>
           <p><strong>Next best work:</strong> keep expanding verified outside sommelier, critic, community, and producer-context notes as new public sources are confirmed.</p>
         </div>
@@ -463,6 +463,12 @@
             <div class="version-meta">v3.17<span>14:24 CDT</span></div>
             <div><strong>What changed</strong><p>Updated the filter script so red-beanie rank sections hide themselves when no visible cards remain under that header.</p></div>
             <div><strong>Project benefit</strong><p>Keeps filtered views clean instead of showing empty section headers.</p></div>
+          </article>
+
+          <article class="version-card">
+            <div class="version-meta">v3.18<span>14:28 CDT</span></div>
+            <div><strong>What changed</strong><p>Hardened the section filter by using the native hidden attribute, inline display fallback, and both input/change events so browser-restored filter states cannot leave empty rank headers visible.</p></div>
+            <div><strong>Project benefit</strong><p>Makes filtered views collapse empty red-beanie groups reliably across browsers and cached form state.</p></div>
           </article>
       </div>
     </section>
