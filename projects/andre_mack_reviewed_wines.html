@@ -221,7 +221,7 @@
       font-weight: 900;
       text-decoration: none;
     }
-    .preset-clear, .filter-enter {
+    .preset-clear, .filter-enter, .filter-search {
       align-self: end;
       width: 100%;
       min-height: 41px;
@@ -237,6 +237,11 @@
     .filter-enter {
       border-color: var(--green);
       background: var(--green);
+      color: #fff;
+    }
+    .filter-search {
+      border-color: var(--accent-dark);
+      background: var(--accent-dark);
       color: #fff;
     }
     .story-grid {
@@ -620,6 +625,7 @@
             <label class="filter-keyword">Keyword search
               <input id="keyword-search" type="search" placeholder="Bottle, producer, region, source..." autocomplete="off">
             </label>
+            <button class="filter-search" type="submit" id="keyword-submit">Search</button>
             <label>$
               <select id="dollar"><option value="">All $ ranks</option><option>$ budget</option><option>$$ value</option><option>$$$ standard</option><option>$$$$ premium</option><option>$$$$$ splurge</option></select>
             </label>
