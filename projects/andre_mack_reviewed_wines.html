@@ -3,7 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>André Hueston Mack Reviewed Wines</title>
+  <title>Every Wine André Hueston Mack Reviewed, Ranked and Searchable</title>
+  <meta name="description" content="A searchable field guide to wines André Hueston Mack has reviewed, recommended, judged, or discussed, from under-$15 bottles to cult Burgundy, Champagne, celebrity wines, and the 2026 Paris tasting recreation.">
+  <link rel="canonical" href="https://labs.mostcertainlytry.com/projects/andre_mack_reviewed_wines.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Most Certainly Try Labs">
+  <meta property="og:title" content="Every Wine André Hueston Mack Reviewed, Ranked and Searchable">
+  <meta property="og:description" content="A searchable field guide to wines André Hueston Mack has reviewed, recommended, judged, or discussed, from under-$15 bottles to cult Burgundy, Champagne, celebrity wines, and the 2026 Paris tasting recreation.">
+  <meta property="og:url" content="https://labs.mostcertainlytry.com/projects/andre_mack_reviewed_wines.html">
+  <meta property="og:image" content="https://labs.mostcertainlytry.com/assets/andre-mack/andre-mack-wine-guide-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Every André Mack wine review we could verify, shown as a searchable wine guide with red-beanie ranking cues.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Every Wine André Hueston Mack Reviewed, Ranked and Searchable">
+  <meta name="twitter:description" content="A searchable field guide to wines André Hueston Mack has reviewed, recommended, judged, or discussed, from under-$15 bottles to cult Burgundy, Champagne, celebrity wines, and the 2026 Paris tasting recreation.">
+  <meta name="twitter:image" content="https://labs.mostcertainlytry.com/assets/andre-mack/andre-mack-wine-guide-og.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"Every Wine André Hueston Mack Reviewed, Ranked and Searchable","description":"A searchable field guide to wines André Hueston Mack has reviewed, recommended, judged, or discussed, from under-$15 bottles to cult Burgundy, Champagne, celebrity wines, and the 2026 Paris tasting recreation.","url":"https://labs.mostcertainlytry.com/projects/andre_mack_reviewed_wines.html","image":"https://labs.mostcertainlytry.com/assets/andre-mack/andre-mack-wine-guide-og.png","dateCreated":"2026-05-30","dateModified":"2026-05-30","creator":{"@type":"Organization","name":"Most Certainly Try Labs","url":"https://labs.mostcertainlytry.com/"},"about":["André Hueston Mack","wine reviews","Bon Appetit World of Wine","celebrity wines","budget wine","2026 Paris tasting recreation"],"keywords":["André Hueston Mack wines","André Mack wine reviews","Bon Appetit sommelier wines","best budget wines","celebrity wine reviews","Wine Industry Advisor Paris tasting"]}</script>
   <style>
     :root {
       color-scheme: light;
@@ -120,7 +136,7 @@
     }
     .hero-image {
       width: min(100%, 720px);
-      margin-top: 16px;
+      margin: 16px 0 0;
       border: 1px solid var(--line);
       border-radius: 8px;
       overflow: hidden;
@@ -131,6 +147,69 @@
       display: block;
       width: 100%;
       height: auto;
+    }
+    .editorial-lead {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+      gap: 18px;
+      margin: 24px 0 18px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .82);
+      box-shadow: 0 14px 30px rgba(35, 31, 32, .06);
+    }
+    .editorial-lead h2 {
+      margin: 0 0 10px;
+      padding: 0;
+      font-size: clamp(1.7rem, 2.8vw, 2.7rem);
+    }
+    .editorial-lead p {
+      margin: 0;
+      color: #3b2b23;
+    }
+    .angle-list {
+      display: grid;
+      gap: 9px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    .angle-list a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid rgba(143, 24, 56, .22);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--accent-dark);
+      font-size: .9rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      align-content: start;
+    }
+    .story-card {
+      min-height: 100%;
+      padding: 12px;
+      border: 1px solid rgba(33, 79, 70, .18);
+      border-radius: 7px;
+      background: rgba(244, 223, 182, .22);
+    }
+    .story-card strong {
+      display: block;
+      color: var(--green);
+      font-size: .94rem;
+    }
+    .story-card p {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .88rem;
     }
     .callout {
       max-width: 1040px;
@@ -366,6 +445,7 @@
     @media (max-width: 980px) {
       .shell { display: block; padding: 18px; }
       .stats, .filters, .meta { grid-template-columns: 1fr; }
+      .editorial-lead { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding-top: 24px; }
       .filters { position: static; }
     }
@@ -389,6 +469,48 @@
         <figure class="hero-image">
           <img src="../assets/andre-mack/character-red-beanie-wine.jpeg" alt="Red-beanie wine character holding a bottle of wine" loading="eager">
         </figure>
+      </section>
+
+      <section class="editorial-lead" aria-labelledby="story-title">
+        <div>
+          <p class="eyebrow">Why wine people might care</p>
+          <h2 id="story-title">A fan-made field guide to Mack's public wine trail.</h2>
+          <p>This page pulls public reviews, Bon Appetit tastings, Delectable notes, and panel appearances into one searchable guide. Source labels separate solo Mack tasting notes from judging-panel context, because wine people notice that kind of thing.</p>
+          <ul class="angle-list" aria-label="Shareable story angles">
+            <li><a href="#best-budget-wines">Budget bottles Mack liked</a></li>
+<li><a href="#celebrity-wines">Celebrity wine surprises</a></li>
+<li><a href="#paris-tasting-recreation">Paris tasting recreation</a></li>
+<li><a href="#highest-mack-scores">Highest Mack scores</a></li>
+<li><a href="#thumbs-down">Bottles Mack pushed back on</a></li>
+          </ul>
+        </div>
+        <div class="story-grid">
+          
+            <article class="story-card" id="best-budget-wines">
+              <strong>Budget bottles Mack liked</strong>
+              <p>51 budget-priced cards currently carry a thumbs-up Mack note, including under-$15, Costco, Trader Joe&#39;s, boxed-wine, and grocery-store finds.</p>
+            </article>
+
+            <article class="story-card" id="celebrity-wines">
+              <strong>Celebrity wine surprises</strong>
+              <p>30 celebrity-wine cards are separated from the rest of the database, with 24 currently marked thumbs-up from Mack&#39;s captured notes.</p>
+            </article>
+
+            <article class="story-card" id="paris-tasting-recreation">
+              <strong>Paris tasting recreation</strong>
+              <p>39 Wine Industry Advisor panel-tasting cards map the 2026 New York recreation across Chardonnay, Syrah, Chenin Blanc, and Cabernet Sauvignon rankings.</p>
+            </article>
+
+            <article class="story-card" id="highest-mack-scores">
+              <strong>Highest Mack scores</strong>
+              <p>5 cards sit in the top score band at 9.5 or higher where a public Mack score was captured.</p>
+            </article>
+
+            <article class="story-card" id="thumbs-down">
+              <strong>Bottles Mack pushed back on</strong>
+              <p>34 cards show a thumbs-down verdict from captured Mack notes, useful for the “skip this bottle” side of the guide.</p>
+            </article>
+        </div>
       </section>
 
       <form class="filters" id="filters">
