@@ -269,10 +269,28 @@
       border-radius: 7px;
       background: rgba(244, 223, 182, .22);
     }
-    .story-card strong {
+    .story-card strong, .story-card button {
       display: block;
       color: var(--green);
       font-size: .94rem;
+      font-weight: 900;
+    }
+    .story-card button {
+      appearance: none;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      text-decoration: underline;
+      text-decoration-color: rgba(33, 79, 70, .28);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+    .story-card button[aria-pressed="true"] {
+      color: var(--accent-dark);
+      text-decoration-color: var(--accent);
     }
     .story-card p {
       margin-top: 6px;
@@ -562,28 +580,28 @@
         <div class="story-grid">
           
             <article class="story-card" id="best-budget-wines">
-              <strong>Budget bottles Mack liked</strong>
-              <p>51 budget-priced cards currently carry a thumbs-up Mack note, including under-$15, Costco, Trader Joe&#39;s, boxed-wine, and grocery-store finds.</p>
+              <button type="button" data-preset-button="best-budget-wines">Budget bottles Mack liked</button>
+              <p>Affordable wins from under-$15 shelves, Costco runs, Trader Joe&#39;s finds, boxed pours, and grocery-store surprises that Mack thought delivered.</p>
             </article>
 
             <article class="story-card" id="celebrity-wines">
-              <strong>Celebrity wine surprises</strong>
-              <p>30 celebrity-wine cards are separated from the rest of the database, with 24 currently marked thumbs-up from Mack&#39;s captured notes.</p>
+              <button type="button" data-preset-button="celebrity-wines">Celebrity wine surprises</button>
+              <p>Star-backed bottles that earned real attention from Mack, including plenty that outperformed the usual celebrity-wine expectations.</p>
             </article>
 
             <article class="story-card" id="paris-tasting-recreation">
-              <strong>Paris tasting recreation</strong>
-              <p>39 Wine Industry Advisor panel-tasting cards map the 2026 New York recreation across Chardonnay, Syrah, Chenin Blanc, and Cabernet Sauvignon rankings.</p>
+              <button type="button" data-preset-button="paris-tasting-recreation">Paris tasting recreation</button>
+              <p>A 2026 New York panel tasting revisits the Paris-tasting idea through ranked Chardonnay, Syrah, Chenin Blanc, and Cabernet Sauvignon flights.</p>
             </article>
 
             <article class="story-card" id="highest-mack-scores">
-              <strong>Highest Mack scores</strong>
-              <p>5 cards sit in the top score band at 9.5 or higher where a public Mack score was captured.</p>
+              <button type="button" data-preset-button="highest-mack-scores">Highest Mack scores</button>
+              <p>The rare public bottles where Mack&#39;s score reached 9.5 or higher; a tight highlight reel rather than a broad ranking.</p>
             </article>
 
             <article class="story-card" id="thumbs-down">
-              <strong>Bottles Mack pushed back on</strong>
-              <p>34 cards show a thumbs-down verdict from captured Mack notes, useful for the “skip this bottle” side of the guide.</p>
+              <button type="button" data-preset-button="thumbs-down">Bottles Mack pushed back on</button>
+              <p>Bottles that drew thumbs-down notes from Mack, useful for seeing where the tasting record gets skeptical instead of celebratory.</p>
             </article>
         </div>
       </section>
