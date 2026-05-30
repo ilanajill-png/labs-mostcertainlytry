@@ -1,5 +1,19 @@
 [
   {
+    "id": "unread-message-triage-agent",
+    "title": "Unread Message Triage Agent",
+    "category": "Build Log",
+    "type": "Agent Workflow",
+    "status": "Published",
+    "date": "2026-05-30",
+    "featured": true,
+    "tools": ["OpenClaw", "Codex", "Local Messages", "Workflow Design", "Privacy Review"],
+    "summary": "Build notes for a draft-only agent workflow that reviews approved communication sources, identifies critical unread items, and prepares human-reviewed replies without sending texts.",
+    "outcome": "Published a public Labs build log with privacy boundaries, decision rules, implementation backlog, quality checks, and a redacted unread-message exhibit.",
+    "url": "projects/unread-message-triage-agent.html",
+    "source": "docs/human-reviewed-text-thread-followup-workflow.md"
+  },
+  {
     "id": "travisty-the-travis-nelsen-story",
     "title": "Travisty: The Travis Nelsen Story",
     "category": "Whimsy",
