@@ -278,11 +278,11 @@
           <p class="lede">A matched SVG playing-card set for the blackjack trainer: standard red and black suits, consistent card frames, cartoon corgi pips, and Texas corgi face-card characters with cowboy hats, bandanas, and lone star details.</p>
           <div class="actions">
             <a class="button primary" href="../media/blackjack-corgi-deck/manifest.json">Open Manifest</a>
-            <a class="button" href="../media/blackjack-corgi-deck/cards/BACK.svg">Open Card Back</a>
+            <a class="button" href="../media/blackjack-corgi-deck/cards/BACK.svg?v=texas-corgi-20260530">Open Card Back</a>
           </div>
         </div>
         <figure class="hero-card">
-          <img src="../media/blackjack-corgi-deck/cards/KH.svg" alt="Corgi king of hearts card">
+          <img src="../media/blackjack-corgi-deck/cards/KH.svg?v=texas-corgi-20260530" alt="Corgi king of hearts card">
           <figcaption class="card-name">Sample face card</figcaption>
         </figure>
       </section>
@@ -347,6 +347,7 @@
 
     <script>
       const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+      const deckAssetVersion = "texas-corgi-20260530";
       const suits = [
         ["S", "spades"],
         ["H", "hearts"],
@@ -358,10 +359,11 @@
         const grid = document.getElementById(id);
         for (const rank of ranks) {
           const file = `../media/blackjack-corgi-deck/cards/${rank}${suit}.svg`;
+          const versionedFile = `${file}?v=${deckAssetVersion}`;
           const link = document.createElement("a");
           link.className = "card-link";
-          link.href = file;
-          link.innerHTML = `<img src="${file}" alt="${rank}${suit} corgi playing card"><span class="card-name">${rank}${suit}</span>`;
+          link.href = versionedFile;
+          link.innerHTML = `<img src="${versionedFile}" alt="${rank}${suit} corgi playing card"><span class="card-name">${rank}${suit}</span>`;
           grid.appendChild(link);
         }
       }

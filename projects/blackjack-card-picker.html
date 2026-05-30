@@ -456,6 +456,7 @@
     <script>
       const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
       const dealerOrder = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"];
+      const deckAssetVersion = "texas-corgi-20260530";
       const state = {
         dealer: "6",
         player: []
@@ -506,7 +507,7 @@
       function cardAsset(rank) {
         const key = dealerKey(rank);
         const visualRank = key === "10" ? "10" : rank;
-        return `../media/blackjack-corgi-deck/cards/${visualRank}${suitByRank[visualRank] || "S"}.svg`;
+        return `../media/blackjack-corgi-deck/cards/${visualRank}${suitByRank[visualRank] || "S"}.svg?v=${deckAssetVersion}`;
       }
 
       function pairKey(rank) {
