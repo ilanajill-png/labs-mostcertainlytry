@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Choosing ChatGPT, Claude, Copilot, Gemini, and Similar AI Tools for Business</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #5d6978;
+      --line: #d9dee7;
+      --soft: #f5f7fb;
+      --accent: #0f766e;
+      --accent-dark: #0b4f49;
+      --paper: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #eef2f6;
+      color: var(--ink);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      background: var(--paper);
+      min-height: 100vh;
+      padding: 48px clamp(20px, 5vw, 72px) 72px;
+      box-shadow: 0 24px 80px rgba(23, 32, 42, 0.12);
+    }
+
+    header {
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 28px;
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      color: var(--accent-dark);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      margin: 0 0 12px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.35rem);
+      line-height: 1.08;
+      margin: 0 0 16px;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: 1.65rem;
+      line-height: 1.2;
+      margin: 42px 0 14px;
+      padding-top: 4px;
+    }
+
+    h3 {
+      font-size: 1.18rem;
+      margin: 28px 0 8px;
+    }
+
+    p { margin: 0 0 16px; }
+
+    section > p,
+    article > p,
+    .callout,
+    .sources {
+      max-width: 840px;
+    }
+
+    a {
+      color: #075985;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .subtitle {
+      font-size: 1.12rem;
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 0;
+    }
+
+    .meta {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .callout {
+      border-left: 5px solid var(--accent);
+      background: var(--soft);
+      padding: 18px 20px;
+      margin: 24px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin: 18px 0 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+      font-size: 0.94rem;
+    }
+
+    caption {
+      text-align: left;
+      padding: 12px 14px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
+      font-weight: 700;
+    }
+
+    th {
+      background: #e8f3f1;
+      text-align: left;
+      color: #153b37;
+      font-weight: 800;
+    }
+
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    ul, ol { padding-left: 1.35rem; }
+    li { margin: 6px 0; }
+
+    .tool {
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 14px 0 18px;
+    }
+
+    .fact {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--accent-dark);
+      margin-bottom: 2px;
+    }
+
+    .sources {
+      background: #fbfcfe;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px 22px;
+    }
+
+    .sources li {
+      margin-bottom: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .mobile-matrix {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+      padding: 14px 18px;
+      margin: 16px 0;
+    }
+
+    .cite {
+      font-size: 0.82em;
+      vertical-align: super;
+      font-weight: 700;
+    }
+
+    @media print {
+      body { background: #fff; }
+      main { box-shadow: none; padding: 24px 36px; }
+      a { color: #000; }
+      .sources a[href]::after { content: " (" attr(href) ")"; }
+      .tool, .fact, tr, h2, h3 { break-inside: avoid; page-break-inside: avoid; }
+      h2, h3 { break-after: avoid; page-break-after: avoid; }
+    }
+
+    @media (max-width: 720px) {
+      main { padding-top: 30px; }
+      .facts { grid-template-columns: 1fr; }
+      .mobile-matrix { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow">White Paper</p>
+      <h1>Choosing ChatGPT, Claude, Copilot, Gemini, and Similar AI Tools for Business</h1>
+      <p class="subtitle">A practical comparison by company size, cost, work type, available technical team, and mobile readiness.</p>
+      <p class="meta">Prepared May 30, 2026</p>
+    </header>
+
+    <section>
+      <h2>Executive Summary</h2>
+      <p>Business AI assistants have matured from novelty chatbots into work platforms. The right choice now depends less on which model is smartest and more on fit: company size, security needs, existing software stack, type of work, internal technical capability, and mobile access.</p>
+      <p>For most small and mid-sized companies, the best first purchase is usually <strong>ChatGPT Business</strong> or <strong>Claude Team</strong> because both are general-purpose, fast to deploy, and useful across writing, analysis, coding help, research, and document work. For companies standardized on Microsoft 365, <strong>Microsoft 365 Copilot</strong> is usually the best operational fit because it works inside Outlook, Teams, Word, Excel, PowerPoint, and SharePoint. For companies standardized on Google Workspace, <strong>Gemini for Workspace / Gemini Enterprise</strong> is the natural first choice. For engineering-heavy teams, <strong>GitHub Copilot</strong> should be evaluated separately from general chat assistants because it is purpose-built for software development workflows. For research-heavy teams, <strong>Perplexity Enterprise</strong> is useful as a specialized answer engine, but it should not be the only AI platform for most companies.</p>
+      <div class="callout">
+        <strong>Practical recommendation:</strong> Pick a primary platform based on where company data and daily work already live, then add specialist tools only where they clearly improve a job function.
+      </div>
+    </section>
+
+    <section>
+      <h2>Decision Matrix</h2>
+      <p>Employee-count ranges below are practical buying heuristics unless a vendor explicitly publishes a seat minimum or cap. They are meant to guide fit, not describe every plan's legal eligibility.</p>
+      <div class="mobile-matrix">
+        <strong>Mobile summary:</strong> Microsoft-first companies should start with Microsoft 365 Copilot. Google-first companies should start with Gemini. Companies without a dominant suite should pilot ChatGPT Business and Claude Team. Engineering teams should add GitHub Copilot, and research-heavy teams should consider Perplexity.
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Recommended first choice by company profile</caption>
+          <thead>
+            <tr>
+              <th scope="col">Company Profile</th>
+              <th scope="col">Best First Choice</th>
+              <th scope="col">Why</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1-10 employees, no IT team</td>
+              <td>ChatGPT Business or Claude Team</td>
+              <td>Fast setup, low admin burden, broad usefulness</td>
+            </tr>
+            <tr>
+              <td>10-150 employees, mixed office work</td>
+              <td>ChatGPT Business</td>
+              <td>Strong general assistant, connectors, admin controls, reasonable per-seat pricing</td>
+            </tr>
+            <tr>
+              <td>10-150 employees, writing/legal/research-heavy</td>
+              <td>Claude Team</td>
+              <td>Excellent long-form writing, reasoning, document analysis, and careful tone</td>
+            </tr>
+            <tr>
+              <td>Microsoft 365 company</td>
+              <td>Microsoft 365 Copilot</td>
+              <td>Best fit for Outlook, Teams, Office files, SharePoint, and Microsoft identity controls</td>
+            </tr>
+            <tr>
+              <td>Google Workspace company</td>
+              <td>Google Workspace Gemini / Gemini Enterprise</td>
+              <td>Best fit for Gmail, Docs, Sheets, Drive, Meet, and Google Admin</td>
+            </tr>
+            <tr>
+              <td>Software/product company</td>
+              <td>GitHub Copilot plus ChatGPT or Claude</td>
+              <td>Copilot for coding workflow; ChatGPT/Claude for strategy, docs, analysis, and cross-functional work</td>
+            </tr>
+            <tr>
+              <td>Enterprise with security/compliance requirements</td>
+              <td>ChatGPT Enterprise, Claude Enterprise, Microsoft 365 Copilot, or Gemini Enterprise</td>
+              <td>Requires SSO, SCIM, audit logs, data retention controls, legal terms, and governance</td>
+            </tr>
+            <tr>
+              <td>Research, consulting, competitive intelligence</td>
+              <td>Perplexity Enterprise plus ChatGPT/Claude</td>
+              <td>Strong web-grounded research and citations, but less complete as a full workplace AI system</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Executive Decision Guide</h2>
+      <ul>
+        <li><strong>Microsoft-first company:</strong> start with Microsoft 365 Copilot, then add ChatGPT or Claude only for teams that need broader reasoning, creative drafting, or workflows outside Microsoft apps.</li>
+        <li><strong>Google-first company:</strong> start with Gemini for Workspace or Gemini Enterprise, then add ChatGPT or Claude if users need a more flexible general assistant.</li>
+        <li><strong>No dominant suite:</strong> pilot ChatGPT Business and Claude Team side by side with 10-25 users and real work samples.</li>
+        <li><strong>Software team:</strong> add GitHub Copilot for developers regardless of the broader company assistant.</li>
+        <li><strong>Research-heavy team:</strong> add Perplexity Enterprise for research roles, not necessarily every employee.</li>
+        <li><strong>Before broad rollout:</strong> define data-use rules, approved use cases, review requirements, and who owns AI administration.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Buyer Scorecard</h2>
+      <div class="table-wrap">
+        <table>
+          <caption>Fit by employee range, cost signal, work type, technical burden, and mobile readiness</caption>
+          <thead>
+            <tr>
+              <th scope="col">Tool</th>
+              <th scope="col">Employee Fit</th>
+              <th scope="col">Public Cost Signal</th>
+              <th scope="col">Best Work Type</th>
+              <th scope="col">Internal Tech Need</th>
+              <th scope="col">Mobile Fit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ChatGPT Business / Enterprise</td>
+              <td>2+; Enterprise for scale</td>
+              <td>Business around $20-$25/user/month; Enterprise custom</td>
+              <td>General knowledge work, analysis, drafting, light coding</td>
+              <td>Low to medium</td>
+              <td>Strong</td>
+            </tr>
+            <tr>
+              <td>Claude Team / Enterprise</td>
+              <td>Team: 5-150; Enterprise for scale</td>
+              <td>Team standard around $20-$25/user/month; Enterprise usage-based</td>
+              <td>Writing, long docs, policy, reasoning</td>
+              <td>Low to high</td>
+              <td>Strong</td>
+            </tr>
+            <tr>
+              <td>Microsoft 365 Copilot</td>
+              <td>Best where Microsoft 365 is already deployed</td>
+              <td>$30/user/month plus qualifying Microsoft 365 license</td>
+              <td>Outlook, Teams, Office, SharePoint</td>
+              <td>Medium</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>Gemini Workspace / Enterprise</td>
+              <td>Workspace SMB to enterprise; Gemini Enterprise Business 1-300, Standard/Plus unlimited</td>
+              <td>Gemini Enterprise Business starts at $21/user/month; Standard/Plus starts at $30/user/month</td>
+              <td>Gmail, Drive, Docs, Sheets, agents, Google Cloud</td>
+              <td>Low to high</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>GitHub Copilot</td>
+              <td>Developers and engineering orgs</td>
+              <td>Business $19/user/month; Enterprise $39/user/month plus possible overages</td>
+              <td>Software development</td>
+              <td>Low to medium</td>
+              <td>Limited</td>
+            </tr>
+            <tr>
+              <td>Perplexity Enterprise</td>
+              <td>Research-heavy teams or departments</td>
+              <td>Enterprise Pro $40/user/month or $400/year; Max $325/user/month</td>
+              <td>Web research and cited briefings</td>
+              <td>Low</td>
+              <td>Good</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tool-by-Tool Assessment</h2>
+
+      <article class="tool">
+        <h3>1. ChatGPT Business / Enterprise <a class="cite" href="#source-openai-pricing">[1]</a> <a class="cite" href="#source-openai-business">[2]</a></h3>
+        <p><strong>Best for:</strong> broad company-wide AI adoption, business writing, analysis, data work, presentations, research synthesis, custom GPTs, coding assistance, and teams that need a flexible general-purpose assistant.</p>
+        <p><strong>Sources used for this assessment:</strong> OpenAI pricing and ChatGPT Business documentation.</p>
+        <div class="facts">
+          <div class="fact"><strong>Company size fit</strong> Practical fit is 2+ employees, with Business a strong default for small and mid-sized teams and Enterprise better for advanced security, analytics, retention controls, legal terms, or large-scale rollout. The 2-user minimum is vendor-published; the rest is a buying heuristic.</div>
+          <div class="fact"><strong>Cost profile</strong> Business is listed around $20/user/month annually or $25/user/month monthly in most countries, with a 2-user minimum. Enterprise is custom.</div>
+          <div class="fact"><strong>Internal tech team</strong> Low for Business; medium for Enterprise if connecting internal data sources and enforcing governance.</div>
+          <div class="fact"><strong>Mobile</strong> Strong. ChatGPT is available on web and mobile apps, with business controls tied to the workspace.</div>
+        </div>
+        <p><strong>Work fit:</strong> marketing, operations, HR, finance analysis, document drafting, spreadsheet help, meeting prep, internal knowledge Q&amp;A, and software support.</p>
+        <p><strong>Watch-outs:</strong> If the company lives entirely in Microsoft 365 or Google Workspace, ChatGPT may duplicate some native AI features. For regulated industries, Enterprise or API arrangements may be needed instead of self-serve Business.</p>
+      </article>
+
+      <article class="tool">
+        <h3>2. Claude Team / Enterprise <a class="cite" href="#source-claude-pricing">[3]</a> <a class="cite" href="#source-claude-enterprise">[4]</a></h3>
+        <p><strong>Best for:</strong> writing-intensive companies, professional services, legal-adjacent work, policy analysis, strategy memos, qualitative research, customer support drafts, product documentation, and teams that value careful long-form reasoning.</p>
+        <p><strong>Sources used for this assessment:</strong> Claude pricing and Anthropic Claude Enterprise documentation.</p>
+        <div class="facts">
+          <div class="fact"><strong>Company size fit</strong> Team is designed for 5-150 users. Enterprise adds audit logs, SCIM, role-based access, compliance API, retention controls, and HIPAA-ready options.</div>
+          <div class="fact"><strong>Cost profile</strong> Team standard seats are listed at $20/user/month annually or $25 monthly. Premium seats are $100 annually or $125 monthly. Enterprise adds usage-based costs.</div>
+          <div class="fact"><strong>Internal tech team</strong> Low for Team; medium to high for Enterprise connectors, skills, analytics, and governance.</div>
+          <div class="fact"><strong>Mobile</strong> Available on web, desktop, and mobile; Enterprise includes access across web, desktop, mobile, Claude Code, and Claude Cowork.</div>
+        </div>
+        <p><strong>Work fit:</strong> long documents, nuanced communication, drafting, summarization, policy, research synthesis, and coding assistance.</p>
+        <p><strong>Watch-outs:</strong> Claude is excellent as a reasoning layer, but Microsoft- or Google-centered companies may get a more seamless primary assistant from the AI embedded in those suites.</p>
+      </article>
+
+      <article class="tool">
+        <h3>3. Microsoft 365 Copilot <a class="cite" href="#source-ms-pricing">[5]</a> <a class="cite" href="#source-ms-guide">[6]</a></h3>
+        <p><strong>Best for:</strong> companies already running Microsoft 365, especially those that use Outlook, Teams, Word, Excel, PowerPoint, OneDrive, and SharePoint daily.</p>
+        <p><strong>Sources used for this assessment:</strong> Microsoft 365 Copilot pricing and Microsoft organizational guidance.</p>
+        <div class="facts">
+          <div class="fact"><strong>Company size fit</strong> Practical fit is 10+ employees when Microsoft 365 is already used across the company, and especially larger organizations where Entra ID, compliance, retention, and security tooling are already central. This is a deployment-fit heuristic, not a published Microsoft seat range.</div>
+          <div class="fact"><strong>Cost profile</strong> Microsoft 365 Copilot is listed at $30/user/month paid yearly and requires a qualifying Microsoft 365 license. Copilot Chat is included for eligible users.</div>
+          <div class="fact"><strong>Internal tech team</strong> Medium. Value depends on clean permissions, SharePoint hygiene, identity management, data labels, and user training.</div>
+          <div class="fact"><strong>Mobile</strong> Good. Microsoft lists Copilot voice on mobile, desktop, and web.</div>
+        </div>
+        <p><strong>Work fit:</strong> email triage, Teams meetings, Office document generation, PowerPoint drafts, Excel analysis, SharePoint knowledge, and workflows tied to Microsoft Graph.</p>
+        <p><strong>Watch-outs:</strong> If company data is scattered or SharePoint permissions are messy, deployment should start with governance cleanup.</p>
+      </article>
+
+      <article class="tool">
+        <h3>4. Google Gemini for Workspace / Gemini Enterprise <a class="cite" href="#source-google-ai">[7]</a> <a class="cite" href="#source-google-enterprise">[8]</a></h3>
+        <p><strong>Best for:</strong> companies already using Gmail, Google Drive, Docs, Sheets, Slides, Meet, and Google Admin.</p>
+        <p><strong>Sources used for this assessment:</strong> Google Workspace AI add-ons and Google Gemini Enterprise documentation.</p>
+        <div class="facts">
+          <div class="fact"><strong>Company size fit</strong> Workspace Business plans can work for small and mid-sized Google-centered organizations. Gemini Enterprise Business is listed for 1-300 seats; Standard and Plus are positioned for larger organizations with unlimited seats.</div>
+          <div class="fact"><strong>Cost profile</strong> Gemini capabilities are increasingly bundled into Workspace Business and Enterprise editions, with separate AI expansion add-ons. Google also lists Gemini Enterprise app Business edition starting at $21/user/month and Standard / Plus editions starting at $30/user/month. Enterprise terms, reseller pricing, and advanced capabilities can vary.</div>
+          <div class="fact"><strong>Internal tech team</strong> Low for Workspace features; medium to high for Gemini Enterprise, agents, data connectors, and governance.</div>
+          <div class="fact"><strong>Mobile</strong> Good through relevant Google, Gemini, and Workspace web/mobile apps where supported.</div>
+        </div>
+        <p><strong>Work fit:</strong> Gmail drafting, Docs and Slides help, Sheets formulas and analysis, Meet summaries, Drive search, NotebookLM-style research, and Google-native collaboration.</p>
+        <p><strong>Watch-outs:</strong> Gemini is strongest inside Google's ecosystem. Companies not using Google Workspace heavily may see less value unless adopting Gemini Enterprise as a broader agent/data platform.</p>
+      </article>
+
+      <article class="tool">
+        <h3>5. GitHub Copilot <a class="cite" href="#source-github">[9]</a></h3>
+        <p><strong>Best for:</strong> software engineering teams, product companies, agencies building software, internal tools teams, data engineering, DevOps, and QA automation.</p>
+        <p><strong>Sources used for this assessment:</strong> GitHub Copilot billing documentation.</p>
+        <div class="facts">
+          <div class="fact"><strong>Company size fit</strong> Practical fit is any software team using GitHub or supported IDEs. Copilot Business is usually enough for smaller developer teams; Copilot Enterprise fits larger GitHub Enterprise Cloud organizations. This is a deployment-fit heuristic, not a published GitHub seat range.</div>
+          <div class="fact"><strong>Cost profile</strong> GitHub lists Copilot Business at $19/user/month and Copilot Enterprise at $39/user/month, with included AI credits and charged overages.</div>
+          <div class="fact"><strong>Internal tech team</strong> Low for basic developer adoption; medium for policy, model controls, repository access, secret scanning, and enterprise rollout.</div>
+          <div class="fact"><strong>Mobile</strong> Limited compared with general assistants. Core value is in IDEs, GitHub, pull requests, and developer environments.</div>
+        </div>
+        <p><strong>Work fit:</strong> code completion, test generation, pull request help, refactoring, documentation, debugging, and developer workflow automation.</p>
+        <p><strong>Watch-outs:</strong> Copilot is not a full-company assistant. It should complement, not replace, ChatGPT, Claude, Microsoft Copilot, or Gemini.</p>
+      </article>
+
+      <article class="tool">
+        <h3>6. Perplexity Enterprise <a class="cite" href="#source-perplexity">[10]</a></h3>
+        <p><strong>Best for:</strong> research teams, consultants, analysts, sales intelligence, market research, executive briefing, competitive research, and teams that need cited answers from the web.</p>
+        <p><strong>Sources used for this assessment:</strong> Perplexity Enterprise pricing and billing FAQ.</p>
+        <div class="facts">
+          <div class="fact"><strong>Company size fit</strong> Practical fit is research-heavy teams or departments rather than every employee. It can serve small teams, but larger companies may license it selectively for analysts, executives, sales intelligence, or consulting groups. This is a buying heuristic, not a published Perplexity seat range.</div>
+          <div class="fact"><strong>Cost profile</strong> Perplexity lists Enterprise Pro at $40/seat/month or $400/year, and Enterprise Max at $325/seat/month or $3,250/year.</div>
+          <div class="fact"><strong>Internal tech team</strong> Low for basic use.</div>
+          <div class="fact"><strong>Mobile</strong> Good through Perplexity web/mobile apps where supported.</div>
+        </div>
+        <p><strong>Work fit:</strong> web research, source-backed answers, market scans, vendor comparisons, news monitoring, and quick briefings.</p>
+        <p><strong>Watch-outs:</strong> Perplexity is best as a research tool, not as the main internal work assistant.</p>
+      </article>
+    </section>
+
+    <section>
+      <h2>Recommendations by Company Type</h2>
+      <h3>Small Local Business, 1-10 Employees</h3>
+      <p>Use <strong>ChatGPT Business</strong> if the company needs help with emails, social media, proposals, SOPs, hiring docs, customer replies, light spreadsheets, and general planning. Use <strong>Claude Team</strong> instead if writing quality and careful document review matter more than connectors.</p>
+
+      <h3>Professional Services Firm, 10-150 Employees</h3>
+      <p>Use <strong>Claude Team</strong> or <strong>ChatGPT Business</strong> as the primary assistant. Claude is stronger for polished long-form memos and nuanced writing; ChatGPT is stronger as a broad workflow assistant with connectors and a wider tool ecosystem. Add <strong>Perplexity Enterprise</strong> for research-heavy roles only if the firm regularly needs source-backed external research.</p>
+
+      <h3>Microsoft-Centric Company</h3>
+      <p>Use <strong>Microsoft 365 Copilot</strong> first. The value comes from being inside Outlook, Teams, Word, Excel, PowerPoint, and SharePoint. Add ChatGPT or Claude for advanced reasoning, creative work, or teams that need a more flexible assistant outside Microsoft apps.</p>
+
+      <h3>Google-Centric Company</h3>
+      <p>Use <strong>Gemini for Workspace</strong> first. It fits naturally with Gmail, Docs, Sheets, Slides, Drive, and Meet. Consider <strong>Gemini Enterprise</strong> if the company wants agents, broader data connectors, or Google Cloud governance.</p>
+
+      <h3>Software Company or Internal Development Team</h3>
+      <p>Use <strong>GitHub Copilot</strong> for developers and pair it with <strong>ChatGPT Business</strong> or <strong>Claude Team</strong> for product specs, architecture discussions, documentation, customer-facing writing, and analysis. If the team is already heavily invested in Claude Code or Codex workflows, pilot both with real repositories before standardizing.</p>
+
+      <h3>Regulated or Enterprise Organization</h3>
+      <p>Shortlist <strong>ChatGPT Enterprise</strong>, <strong>Claude Enterprise</strong>, <strong>Microsoft 365 Copilot</strong>, and <strong>Gemini Enterprise</strong>. The decision should be led by security and data architecture: SSO, SCIM, audit logs, data retention, data residency, encryption, legal terms, compliance posture, and integration with existing identity and document systems.</p>
+    </section>
+
+    <section>
+      <h2>Practical Buying Guidance</h2>
+      <p>Start with a 30-60 day pilot, not a company-wide rollout. Pick 10-25 users across departments and measure actual work saved: emails drafted, documents summarized, proposals completed, support replies improved, code reviewed, meeting notes produced, or research cycles shortened.</p>
+      <p>Do not buy AI seats for everyone at once. Start with people who write, analyze, code, sell, support customers, manage projects, or handle repetitive knowledge work. Expand after usage proves value.</p>
+      <p>Expect the real cost to include more than seat price. Budget for prerequisite Microsoft or Google licenses, minimum seat counts, premium tiers, agent/API overages, implementation time, training, security review, admin work, and cleanup of permissions or shared drives.</p>
+      <p>The biggest blocker is usually not model quality. It is messy company data, unclear permissions, low user training, and no policy for what employees can paste into AI tools. A modest usage policy and short training session often matter more than picking the theoretical best model.</p>
+    </section>
+
+    <section>
+      <h2>Risk and Governance Caveats</h2>
+      <p>Every company should define rules before broad rollout:</p>
+      <ul>
+        <li><strong>Confidential data:</strong> Decide what employees may paste into AI tools and which tools are approved for customer, employee, financial, or regulated data.</li>
+        <li><strong>Accuracy:</strong> Require human review for customer-facing, legal, medical, HR, financial, compliance, or safety-sensitive work. AI systems can produce plausible but wrong answers.</li>
+        <li><strong>Source verification:</strong> Treat cited web answers as starting points, not final authority. Important claims should be checked against primary sources.</li>
+        <li><strong>Data retention and auditability:</strong> Confirm retention controls, audit logs, eDiscovery fit, and admin visibility before using AI for sensitive workflows.</li>
+        <li><strong>IP and copyright:</strong> Set policy for generated content, uploaded proprietary material, code generation, and use of third-party source material.</li>
+        <li><strong>Mobile and BYOD:</strong> If employees use mobile devices, confirm device management, sign-in controls, and whether company data can be copied outside managed apps.</li>
+        <li><strong>Vendor lock-in:</strong> Avoid building critical workflows that cannot be exported, audited, or moved if pricing or terms change.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Bottom Line</h2>
+      <ul>
+        <li><strong>ChatGPT Business:</strong> recommended general-purpose AI workspace for many small and mid-sized teams.</li>
+        <li><strong>Claude Team:</strong> recommended for careful writing, long documents, reasoning, and professional-service work.</li>
+        <li><strong>Microsoft 365 Copilot:</strong> recommended default for Microsoft-first companies.</li>
+        <li><strong>Gemini for Workspace / Gemini Enterprise:</strong> recommended default for Google-first companies.</li>
+        <li><strong>GitHub Copilot:</strong> recommended specialist tool for software teams.</li>
+        <li><strong>Perplexity Enterprise:</strong> recommended specialist tool for web research and cited briefings.</li>
+      </ul>
+      <p>For most companies, the winning setup is one primary workplace AI platform plus one or two specialist tools for high-value teams. Default to the suite-native tool when company work already lives in Microsoft or Google; otherwise pilot ChatGPT Business and Claude Team with real work samples. Add GitHub Copilot or Perplexity only for teams that clearly need them, and require governance before expanding beyond the pilot.</p>
+    </section>
+
+    <section>
+      <h2>Sources</h2>
+      <ol class="sources">
+        <li id="source-openai-pricing"><a href="https://openai.com/business/chatgpt-pricing/">OpenAI ChatGPT pricing and Business/Enterprise details</a></li>
+        <li id="source-openai-business"><a href="https://help.openai.com/en/articles/8792828-what-is-chatgpt-business">OpenAI Help Center: What is ChatGPT Business?</a></li>
+        <li id="source-claude-pricing"><a href="https://claude.com/pricing">Claude plans and pricing</a></li>
+        <li id="source-claude-enterprise"><a href="https://www.anthropic.com/product/enterprise">Anthropic Claude Enterprise</a></li>
+        <li id="source-ms-pricing"><a href="https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/enterprise">Microsoft 365 Copilot plans and pricing</a></li>
+        <li id="source-ms-guide"><a href="https://learn.microsoft.com/en-us/microsoft-365-copilot/which-copilot-for-your-organization">Microsoft Learn: Decide which Copilot is right for your organization</a></li>
+        <li id="source-google-ai"><a href="https://support.google.com/a/answer/14700766">Google Workspace Admin Help: Compare Google AI expansion add-ons</a></li>
+        <li id="source-google-enterprise"><a href="https://cloud.google.com/gemini-enterprise">Google Cloud Gemini Enterprise</a></li>
+        <li id="source-github"><a href="https://docs.github.com/en/copilot/concepts/billing/organizations-and-enterprises">GitHub Docs: Billing for GitHub Copilot in organizations and enterprises</a></li>
+        <li id="source-perplexity"><a href="https://www.perplexity.ai/help-center/en/articles/10352986-enterprise-pricing-and-billing-frequently-asked-questions">Perplexity Help Center: Enterprise pricing and billing FAQ</a></li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>
