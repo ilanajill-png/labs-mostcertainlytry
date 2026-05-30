@@ -13952,6 +13952,7 @@
     const clearPreset = document.querySelector("#clear-preset");
     const filterPanel = document.querySelector(".filter-panel");
     const keywordSearch = document.querySelector("#keyword-search");
+    const videoSources = new Set(["Bon Appetit", "Architectural Digest", "The Wine Show", "instagram.com"]);
     const params = new URLSearchParams(window.location.search);
     let activePreset = params.get("preset") || "";
     const setPresetButtonState = () => {
@@ -13982,13 +13983,13 @@
           (!source || card.dataset.source === source) &&
           (!activePreset || card.dataset.presets.split(" ").includes(activePreset));
         card.classList.toggle("hidden", !visible);
+        let order = videoSources.has(card.dataset.source) ? 0 : 100;
         if (keyword && visible) {
           const thoughtMatches = card.dataset.mackThought.toLowerCase().includes(keyword);
           const hasCompleteThought = card.dataset.mackStatus === "complete";
-          card.style.order = thoughtMatches ? "0" : hasCompleteThought ? "1" : "2";
-        } else {
-          card.style.order = "";
+          order += thoughtMatches ? 0 : hasCompleteThought ? 10 : 20;
         }
+        card.style.order = String(order);
       }
       for (const section of sections) {
         const visibleCards = [...section.querySelectorAll(".wine-card")].filter(card => !card.classList.contains("hidden"));
