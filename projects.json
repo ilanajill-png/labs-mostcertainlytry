@@ -1,5 +1,19 @@
 [
   {
+    "id": "travisty-the-travis-nelsen-story",
+    "title": "Travisty: The Travis Nelsen Story",
+    "category": "Whimsy",
+    "type": "Public Memory Archive",
+    "status": "Published",
+    "date": "2026-05-29",
+    "featured": true,
+    "tools": ["HTML", "CSS", "JavaScript", "Facebook Archive", "Photo Archive", "Memory Collection Form"],
+    "summary": "A public archive and collection form for memories of Travis Nelsen, built from visible Facebook memorial posts and downloaded photo references.",
+    "outcome": "Published a chronological archive with 115 visible entries, 148 local photos, source links, search and filters, plus a form for collecting additional memories.",
+    "url": "projects/travisty-the-travis-nelsen-story/",
+    "source": "projects/travisty-the-travis-nelsen-story/"
+  },
+  {
     "id": "lauren-gurgiolo-life-portfolio",
     "title": "Lauren Gurgiolo Life Portfolio",
     "category": "Whimsy",
