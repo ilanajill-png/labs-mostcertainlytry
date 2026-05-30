@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Build Notes | Blackjack Play Workflow</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17211f;
+        --muted: #5f6a66;
+        --line: #dbe4de;
+        --paper: #f7f9f5;
+        --white: #ffffff;
+        --green: #0f766e;
+        --blue: #3f5f9f;
+        --gold: #b45309;
+        --red: #9f3f3f;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+      }
+
+      a {
+        color: inherit;
+        text-decoration-color: var(--green);
+        text-underline-offset: 4px;
+      }
+
+      .topbar {
+        position: sticky;
+        z-index: 10;
+        top: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px clamp(18px, 4vw, 56px);
+        border-bottom: 1px solid rgba(23, 33, 31, 0.12);
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(18px);
+      }
+
+      .topbar a {
+        padding: 9px 10px;
+        border: 1px solid rgba(15, 118, 110, 0.18);
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .hero {
+        display: grid;
+        gap: 22px;
+        padding: 72px clamp(22px, 6vw, 92px) 56px;
+        background:
+          linear-gradient(120deg, rgba(15, 118, 110, 0.14), rgba(180, 83, 9, 0.12)),
+          var(--paper);
+      }
+
+      h1,
+      h2,
+      h3,
+      p { margin-top: 0; }
+
+      h1 {
+        max-width: 1040px;
+        margin-bottom: 0;
+        font-size: clamp(44px, 8vw, 98px);
+        line-height: 0.94;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 0;
+        font-size: clamp(30px, 4.2vw, 56px);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+        font-size: clamp(21px, 2.2vw, 28px);
+        line-height: 1.12;
+      }
+
+      .eyebrow,
+      .tag,
+      .meta,
+      dt {
+        margin: 0;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      .lede {
+        max-width: 920px;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(20px, 2vw, 28px);
+        line-height: 1.38;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        max-width: 1080px;
+      }
+
+      .summary div,
+      .card,
+      .note,
+      .artifact,
+      .decision-row {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 18px 46px rgba(23, 33, 31, 0.06);
+      }
+
+      .summary div {
+        display: grid;
+        gap: 4px;
+        padding: 16px;
+      }
+
+      .summary strong {
+        font-size: clamp(24px, 3vw, 36px);
+      }
+
+      .summary span,
+      dd,
+      .card p,
+      .note p,
+      .artifact p,
+      .decision-row p,
+      li {
+        color: var(--muted);
+      }
+
+      .section {
+        padding: 68px clamp(22px, 6vw, 92px);
+      }
+
+      .section.white { background: var(--white); }
+
+      .section.dark {
+        color: var(--white);
+        background: var(--ink);
+      }
+
+      .section.dark .eyebrow,
+      .section.dark dt { color: #8ee0c8; }
+
+      .section.dark .lede,
+      .section.dark p,
+      .section.dark dd { color: rgba(255, 255, 255, 0.78); }
+
+      .section.dark .card,
+      .section.dark .note,
+      .section.dark .artifact,
+      .section.dark .decision-row { color: var(--ink); }
+
+      .section.dark .card p,
+      .section.dark .note p,
+      .section.dark .artifact p,
+      .section.dark .decision-row p { color: var(--muted); }
+
+      .section-heading {
+        display: grid;
+        gap: 10px;
+        max-width: 860px;
+        margin-bottom: 28px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .two-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .card,
+      .note,
+      .artifact,
+      .decision-row {
+        padding: 22px;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--green);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      code {
+        padding: 2px 5px;
+        border-radius: 5px;
+        background: #edf4ef;
+      }
+
+      dl {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      dl div {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+      }
+
+      dd {
+        margin: 8px 0 0;
+        line-height: 1.5;
+      }
+
+      footer {
+        padding: 24px clamp(22px, 6vw, 92px);
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 860px) {
+        .summary,
+        .grid,
+        .two-grid,
+        dl {
+          grid-template-columns: 1fr;
+        }
+
+        .section,
+        .hero {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar" aria-label="Project navigation">
+      <a href="../index.html">Labs home</a>
+      <a href="../docs/blackjack-play-workflow.md">Workflow spec</a>
+      <a href="unread-message-triage-agent.html">Unread-message agent</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Build notes</p>
+        <h1>Blackjack Play Workflow</h1>
+        <p class="lede">A practical agent workflow for blackjack practice and casual play: track the hand state, apply conservative basic strategy, explain the move, and preserve a firm boundary around real-money actions.</p>
+        <div class="summary" aria-label="Project summary">
+          <div>
+            <strong>Practice</strong>
+            <span>primary mode</span>
+          </div>
+          <div>
+            <strong>Basic</strong>
+            <span>strategy source</span>
+          </div>
+          <div>
+            <strong>No bets</strong>
+            <span>agent boundary</span>
+          </div>
+          <div>
+            <strong>4 actions</strong>
+            <span>hit, stand, double, split</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section white">
+        <div class="section-heading">
+          <p class="eyebrow">Project premise</p>
+          <h2>A useful blackjack agent should reduce cognitive load, not encourage risk.</h2>
+        </div>
+        <div class="two-grid">
+          <article class="note">
+            <span class="tag">User problem</span>
+            <p>"Can you build a workflow to play blackjack?"</p>
+            <p>The build turns that request into a repeatable hand-by-hand assistant: identify the hand type, calculate the total, look up the basic-strategy action, and ask for the next card or result.</p>
+          </article>
+          <article class="note">
+            <span class="tag">Safety boundary</span>
+            <p>The workflow is for practice, education, and friendly play. The agent does not place bets, move money, log into gambling sites, chase losses, or operate a real-money account.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Build goals</p>
+          <h2>What the blackjack workflow should actually do.</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">Goal 01</span>
+            <h3>Track visible state</h3>
+            <p>Capture player cards, dealer upcard, available actions, table rules, and each new card after hit, split, or double.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Goal 02</span>
+            <h3>Classify the hand</h3>
+            <p>Check pair first, then soft hand, then hard hand. Calculate totals consistently so ace handling does not drift mid-hand.</p>
+          </article>
+          <article class="card">
+            <span class="tag">Goal 03</span>
+            <h3>Recommend the move</h3>
+            <p>Apply simplified multi-deck basic strategy, adjust for unavailable actions, and explain the recommendation in one plain sentence.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section dark">
+        <div class="section-heading">
+          <p class="eyebrow">Operating boundary</p>
+          <h2>The workflow can advise. It cannot gamble for the human.</h2>
+        </div>
+        <dl>
+          <div>
+            <dt>Allowed</dt>
+            <dd>Track cards, calculate totals, recommend hit/stand/double/split/surrender/insurance decisions, and run practice drills.</dd>
+          </div>
+          <div>
+            <dt>Not allowed</dt>
+            <dd>Place bets, move money, open accounts, run a gambling bot, or continue play when the human asks for loss-chasing advice.</dd>
+          </div>
+          <div>
+            <dt>Default posture</dt>
+            <dd>Use conservative basic strategy, flat-bet practice mode, and short explanations. "Stop playing" is a valid recommendation if real money is involved and limits are hit.</dd>
+          </div>
+          <div>
+            <dt>Known limitation</dt>
+            <dd>Basic strategy improves decision quality but does not guarantee winning. Blackjack outcomes remain probabilistic.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="section white">
+        <div class="section-heading">
+          <p class="eyebrow">System design</p>
+          <h2>Reference architecture for the first working version.</h2>
+        </div>
+        <div class="grid">
+          <article class="artifact">
+            <p class="meta">Layer 01</p>
+            <h3>Game intake</h3>
+            <p>Ask for dealer upcard, player cards, available actions, and rules. If missing, assume multi-deck, dealer stands soft 17, double after split allowed, no surrender.</p>
+          </article>
+          <article class="artifact">
+            <p class="meta">Layer 02</p>
+            <h3>Hand engine</h3>
+            <p>Normalize card ranks, calculate hard and soft totals, detect pairs, and choose the correct decision table.</p>
+          </article>
+          <article class="artifact">
+            <p class="meta">Layer 03</p>
+            <h3>Strategy lookup</h3>
+            <p>Apply pair, soft, or hard basic-strategy rules. Convert unavailable double/split/surrender actions into the documented fallback.</p>
+          </article>
+          <article class="artifact">
+            <p class="meta">Layer 04</p>
+            <h3>Output formatter</h3>
+            <p>Return hand total, dealer upcard, recommended action, brief reason, fallback if relevant, and the next input needed.</p>
+          </article>
+          <article class="artifact">
+            <p class="meta">Layer 05</p>
+            <h3>Practice tracker</h3>
+            <p>Generate random hands, ask the human for the move, grade the answer, explain the result, and track session score.</p>
+          </article>
+          <article class="artifact">
+            <p class="meta">Layer 06</p>
+            <h3>Risk guardrails</h3>
+            <p>Flag real-money play, avoid betting advice beyond limits and flat-bet practice, and refuse account operation or automated gambling.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Execution flow</p>
+          <h2>The workflow from dealt cards to next move.</h2>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>Action</th>
+                <th>Agent output</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>Capture hand state</td>
+                <td>Dealer upcard, player cards, allowed actions, and assumptions.</td>
+              </tr>
+              <tr>
+                <td>02</td>
+                <td>Classify hand</td>
+                <td>Pair, soft, or hard hand with calculated total.</td>
+              </tr>
+              <tr>
+                <td>03</td>
+                <td>Choose strategy table</td>
+                <td>Pair table first, soft table second, hard table last.</td>
+              </tr>
+              <tr>
+                <td>04</td>
+                <td>Apply fallbacks</td>
+                <td>Double becomes hit if unavailable; surrender becomes hit if unavailable; split becomes the best non-split action if unavailable.</td>
+              </tr>
+              <tr>
+                <td>05</td>
+                <td>Return recommendation</td>
+                <td>Short action, reason, fallback, and next input needed.</td>
+              </tr>
+              <tr>
+                <td>06</td>
+                <td>Repeat or close hand</td>
+                <td>Update with new cards or summarize the result and reset.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section dark">
+        <div class="section-heading">
+          <p class="eyebrow">Implementation backlog</p>
+          <h2>What to build next if this becomes an interactive tool.</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <span class="tag">V1</span>
+            <h3>Command workflow</h3>
+            <p>Use the Markdown spec to answer live hands from typed inputs like "dealer 6, I have 10/6."</p>
+          </article>
+          <article class="card">
+            <span class="tag">V2</span>
+            <h3>Practice generator</h3>
+            <p>Create random hands, ask for the human's move, grade decisions, and keep a session score.</p>
+          </article>
+          <article class="card">
+            <span class="tag">V3</span>
+            <h3>Rule variants</h3>
+            <p>Add strategy tables for H17/S17, surrender, double-after-split, and single-deck or double-deck variants.</p>
+          </article>
+          <article class="card">
+            <span class="tag">V4</span>
+            <h3>Visual trainer</h3>
+            <p>Build a small local HTML trainer with cards, dealer upcard, action buttons, and explanation panels.</p>
+          </article>
+          <article class="card">
+            <span class="tag">V5</span>
+            <h3>Counting practice</h3>
+            <p>Add optional Hi-Lo running count and true count drills for education only, with no real-money automation.</p>
+          </article>
+          <article class="card">
+            <span class="tag">V6</span>
+            <h3>Session review</h3>
+            <p>Export missed hands and recurring mistakes so the human can practice weak spots.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section white">
+        <div class="section-heading">
+          <p class="eyebrow">Quality checks</p>
+          <h2>How to know the workflow is working.</h2>
+        </div>
+        <div class="grid">
+          <article class="note">
+            <h3>Total accuracy</h3>
+            <p>Aces must be handled correctly across hits and split hands, including soft-to-hard transitions.</p>
+          </article>
+          <article class="note">
+            <h3>Strategy consistency</h3>
+            <p>The same hand and dealer upcard should always produce the same recommendation under the same rule assumptions.</p>
+          </article>
+          <article class="note">
+            <h3>Fallback clarity</h3>
+            <p>If double, split, or surrender is unavailable, the workflow must say what changed and what to do instead.</p>
+          </article>
+          <article class="note">
+            <h3>Risk safety</h3>
+            <p>The workflow should not encourage betting escalation, chasing losses, or account automation.</p>
+          </article>
+          <article class="note">
+            <h3>Practice usefulness</h3>
+            <p>Practice mode should surface patterns: missed soft doubles, pair split mistakes, and stiff-hand errors.</p>
+          </article>
+          <article class="note">
+            <h3>Output speed</h3>
+            <p>Live hand help should be short enough to use at a table or during a practice game.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Build notes prepared May 30, 2026. Source workflow: <strong>docs/blackjack-play-workflow.md</strong>.
+    </footer>
+  </body>
+</html>

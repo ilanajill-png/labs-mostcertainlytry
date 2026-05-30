@@ -1,5 +1,19 @@
 [
   {
+    "id": "blackjack-play-workflow",
+    "title": "Blackjack Play Workflow",
+    "category": "Build Log",
+    "type": "Game Workflow",
+    "status": "Published",
+    "date": "2026-05-30",
+    "featured": true,
+    "tools": ["OpenClaw", "Codex", "Workflow Design", "Basic Strategy", "Practice Mode"],
+    "summary": "Build notes for a blackjack assistant workflow that tracks hand state, applies conservative basic strategy, explains the next move, and preserves clear real-money guardrails.",
+    "outcome": "Published a Labs build log and source workflow with decision tables, hand classification, fallbacks, practice mode, quality checks, and a no-autonomous-gambling boundary.",
+    "url": "projects/blackjack-play-workflow.html",
+    "source": "docs/blackjack-play-workflow.md"
+  },
+  {
     "id": "unread-message-triage-agent",
     "title": "Unread Message Triage Agent",
     "category": "Build Log",
