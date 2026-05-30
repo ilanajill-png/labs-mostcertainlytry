@@ -6,6 +6,7 @@
   <rect x="15" y="15" width="220" height="320" rx="13" fill="none" stroke="#b42335" stroke-width="1.5" opacity=".22"/>
   <text x="125" y="30" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="900" fill="#b42335" opacity=".58">TEXAS CORGI</text>
   
+  
     <g >
       <text x="28" y="38" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="900" fill="#b42335">A</text>
       <text x="28" y="66" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, serif" font-size="27" font-weight="900" fill="#b42335" opacity="1">♥</text>
@@ -21,10 +22,11 @@
       
       <circle cx="125" cy="175" r="76" fill="#fde8ec" stroke="#b42335" stroke-width="5"/>
       
-    <g transform="translate(125 164) scale(1.12)">
-      <path d="M -54 -59 q 54 -22 108 0 q -20 15 -54 15 t -54 -15z" fill="#8b5a2b" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M -28 -61 q 28 -32 56 0 l -7 20 h -42z" fill="#b97835" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
-      <polygon points="4.286263797015736e-16,-65 1.728088641739871,-60.37850996346235 6.657395614066075,-60.16311896062463 2.7961061579077513,-57.09149003653766 4.114496766047312,-52.33688103937537 1.8002307947466092e-16,-55.06 -4.114496766047311,-52.33688103937537 -2.7961061579077513,-57.09149003653766 -6.6573956140660755,-60.16311896062463 -1.7280886417398713,-60.37850996346234" fill="#fff6e8" stroke="#17211f" stroke-width="1.2" stroke-linejoin="round"/>
+    <g transform="translate(125 157) scale(1.12)">
+      <path d="M -74 -56 q 74 -30 148 0 q -24 19 -74 19 t -74 -19z" fill="#9a682f" stroke="#17211f" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M -34 -60 q 34 -46 68 0 l -8 25 h -52z" fill="#c78b3f" stroke="#17211f" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M -58 -54 q 58 18 116 0" fill="none" stroke="#f4c95d" stroke-width="5" stroke-linecap="round"/>
+      <polygon points="5.817072295949927e-16,-72.5 2.3452631566469675,-66.22797780755604 9.035036904803958,-65.935661446562 3.7947155000176624,-61.76702219244396 5.583959896778495,-55.314338553438 2.4431703642989695e-16,-59.01 -5.583959896778493,-55.314338553438 -3.7947155000176624,-61.76702219244396 -9.03503690480396,-65.935661446562 -2.345263156646968,-66.22797780755604" fill="#fff6e8" stroke="#17211f" stroke-width="1.4615384615384615" stroke-linejoin="round"/>
       <path d="M -46 -22 L -26 -64 L -10 -30 Z" fill="#d89038" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <path d="M 46 -22 L 26 -64 L 10 -30 Z" fill="#d89038" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <path d="M -36 -22 q 0 -42 36 -42 t 36 42 q 8 14 2 36 q -7 33 -38 36 q -31 -3 -38 -36 q -6 -22 2 -36z" fill="#e3a146" stroke="#17211f" stroke-width="3"/>
@@ -34,9 +36,11 @@
       <path d="M -7 4 q 7 -7 14 0 q -4 8 -14 0z" fill="#17211f"/>
       <path d="M 0 12 q -10 13 -22 5" fill="none" stroke="#17211f" stroke-width="3" stroke-linecap="round"/>
       <path d="M 0 12 q 10 13 22 5" fill="none" stroke="#17211f" stroke-width="3" stroke-linecap="round"/>
-      <path d="M 116.03999999999999 198.72 q 8.96 15.680000000000001 17.92 0" fill="#e86f7a" stroke="#17211f" stroke-width="2.24" stroke-linecap="round"/>
+      <path d="M 116.03999999999999 191.72 q 8.96 15.680000000000001 17.92 0" fill="#e86f7a" stroke="#17211f" stroke-width="2.24" stroke-linecap="round"/>
       <circle cx="-29" cy="2" r="6" fill="#f3b283" opacity=".72"/>
       <circle cx="29" cy="2" r="6" fill="#f3b283" opacity=".72"/>
+      <path d="M -34 43 q 34 18 68 0 l -9 33 q -25 15 -50 0z" fill="#b42335" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M -8 53 h16 l -8 12z" fill="#fff6e8" stroke="#17211f" stroke-width="2" stroke-linejoin="round"/>
     </g>
       <path d="M 96 232 L 125 256 L 154 232 q -29 13 -58 0z" fill="#b42335" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <polygon points="125,233.5 126.85152354472129,238.45159646771893 132.13292387221364,238.6823725421879 127.99582802632973,241.97340353228108 129.40838939219356,247.0676274578121 125,244.15 120.59161060780646,247.0676274578121 122.00417197367027,241.97340353228108 117.86707612778635,238.6823725421879 123.14847645527871,238.45159646771893" fill="#fff6e8" stroke="#17211f" stroke-width="1.2" stroke-linejoin="round"/>

@@ -210,11 +210,14 @@
         background: #fbfdfb;
         text-align: center;
         text-decoration: none;
+        overflow: visible;
       }
 
       .card-link img {
         width: 100%;
+        aspect-ratio: 5 / 7;
         height: auto;
+        object-fit: contain;
         filter: drop-shadow(0 8px 12px rgba(23, 33, 31, 0.08));
       }
 
@@ -278,11 +281,11 @@
           <p class="lede">A matched SVG playing-card set for the blackjack trainer: standard red and black suits, consistent card frames, cartoon corgi pips, and Texas corgi face-card characters with cowboy hats, bandanas, and lone star details.</p>
           <div class="actions">
             <a class="button primary" href="../media/blackjack-corgi-deck/manifest.json">Open Manifest</a>
-            <a class="button" href="../media/blackjack-corgi-deck/cards/BACK.svg?v=texas-corgi-20260530">Open Card Back</a>
+            <a class="button" href="../media/blackjack-corgi-deck/cards/BACK.svg?v=texas-corgi-bold-20260530">Open Card Back</a>
           </div>
         </div>
         <figure class="hero-card">
-          <img src="../media/blackjack-corgi-deck/cards/KH.svg?v=texas-corgi-20260530" alt="Corgi king of hearts card">
+          <img src="../media/blackjack-corgi-deck/cards/KH.svg?v=texas-corgi-bold-20260530" alt="Corgi king of hearts card">
           <figcaption class="card-name">Sample face card</figcaption>
         </figure>
       </section>
@@ -347,7 +350,7 @@
 
     <script>
       const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
-      const deckAssetVersion = "texas-corgi-20260530";
+      const deckAssetVersion = "texas-corgi-bold-20260530";
       const suits = [
         ["S", "spades"],
         ["H", "hearts"],

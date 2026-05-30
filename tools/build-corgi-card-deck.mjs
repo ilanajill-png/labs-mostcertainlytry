@@ -74,13 +74,14 @@ function corner(rank, suit, rotate = false) {
     </g>`;
 }
 
-function corgiHead(x, y, scale = 1, mood = "happy") {
+function corgiHead(x, y, scale = 1, mood = "happy", suitColor = "#0f766e") {
   const tongue = mood === "happy" ? `<path d="M ${x - 8 * scale} ${y + 31 * scale} q ${8 * scale} ${14 * scale} ${16 * scale} 0" fill="#e86f7a" stroke="#17211f" stroke-width="${2 * scale}" stroke-linecap="round"/>` : "";
   return `
     <g transform="translate(${x} ${y}) scale(${scale})">
-      <path d="M -54 -59 q 54 -22 108 0 q -20 15 -54 15 t -54 -15z" fill="#8b5a2b" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M -28 -61 q 28 -32 56 0 l -7 20 h -42z" fill="#b97835" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
-      ${texasStar(0, -58, 14, "#fff6e8")}
+      <path d="M -74 -56 q 74 -30 148 0 q -24 19 -74 19 t -74 -19z" fill="#9a682f" stroke="#17211f" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M -34 -60 q 34 -46 68 0 l -8 25 h -52z" fill="#c78b3f" stroke="#17211f" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M -58 -54 q 58 18 116 0" fill="none" stroke="#f4c95d" stroke-width="5" stroke-linecap="round"/>
+      ${texasStar(0, -63, 19, "#fff6e8")}
       <path d="M -46 -22 L -26 -64 L -10 -30 Z" fill="#d89038" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <path d="M 46 -22 L 26 -64 L 10 -30 Z" fill="#d89038" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <path d="M -36 -22 q 0 -42 36 -42 t 36 42 q 8 14 2 36 q -7 33 -38 36 q -31 -3 -38 -36 q -6 -22 2 -36z" fill="#e3a146" stroke="#17211f" stroke-width="3"/>
@@ -93,6 +94,8 @@ function corgiHead(x, y, scale = 1, mood = "happy") {
       ${tongue}
       <circle cx="-29" cy="2" r="6" fill="#f3b283" opacity=".72"/>
       <circle cx="29" cy="2" r="6" fill="#f3b283" opacity=".72"/>
+      <path d="M -34 43 q 34 18 68 0 l -9 33 q -25 15 -50 0z" fill="${suitColor}" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M -8 53 h16 l -8 12z" fill="#fff6e8" stroke="#17211f" stroke-width="2" stroke-linejoin="round"/>
     </g>`;
 }
 
@@ -109,7 +112,7 @@ function corgiBody(rank, suit) {
     <g>
       ${rank.key === "A" ? "" : `<rect x="61" y="78" width="128" height="194" rx="18" fill="${suit.accent}" stroke="${suit.color}" stroke-width="4"/>`}
       ${accessory}
-      ${corgiHead(125, rank.key === "A" ? 164 : 163, rank.key === "A" ? 1.12 : 1)}
+      ${corgiHead(125, rank.key === "A" ? 157 : 156, rank.key === "A" ? 1.12 : 1, "happy", suit.color)}
       <path d="M 96 ${rank.key === "A" ? 232 : 231} L 125 ${rank.key === "A" ? 256 : 253} L 154 ${rank.key === "A" ? 232 : 231} q -29 13 -58 0z" fill="${suit.color}" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       ${texasStar(125, rank.key === "A" ? 241 : 239, 15, "#fff6e8")}
       <text x="125" y="${rank.key === "A" ? 267 : 304}" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="${suit.color}">${esc(faceLabel)} ${suit.symbol}</text>
@@ -117,12 +120,15 @@ function corgiBody(rank, suit) {
 }
 
 function cardSvg(rank, suit) {
+  const numbered = rank.value > 1 && rank.value <= 10;
   const pips = rank.value > 1 && rank.value <= 10
     ? pipLayouts[rank.value].map(([x, y], index) => suitPip(suit, x, y, 34, index % 2 && rank.value > 6 ? 0.88 : 1)).join("\n")
     : corgiBody(rank, suit);
 
-  const watermark = rank.value > 1 && rank.value <= 10
-    ? `<g opacity=".12">${corgiHead(125, 175, 0.92)}</g>`
+  const watermark = numbered
+    ? `<g opacity=".5">${corgiHead(125, 177, 0.82, "calm", suit.color)}</g>
+       <path d="M 68 265 q 57 25 114 0" fill="none" stroke="${suit.color}" stroke-width="10" stroke-linecap="round" opacity=".65"/>
+       ${texasStar(125, 267, 19, "#f4c95d")}`
     : "";
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -132,6 +138,7 @@ function cardSvg(rank, suit) {
   <rect x="7" y="7" width="236" height="336" rx="18" fill="#ffffff" stroke="#17211f" stroke-width="4"/>
   <rect x="15" y="15" width="220" height="320" rx="13" fill="none" stroke="${suit.color}" stroke-width="1.5" opacity=".22"/>
   <text x="125" y="30" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="900" fill="${suit.color}" opacity=".58">TEXAS CORGI</text>
+  ${numbered ? `<text x="125" y="322" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="${suit.color}" opacity=".82">LONE STAR ${suit.symbol}</text>` : ""}
   ${corner(rank, suit)}
   ${corner(rank, suit, true)}
   ${watermark}
@@ -155,7 +162,7 @@ function cardBackSvg() {
   </pattern>
   <rect x="29" y="29" width="192" height="292" rx="9" fill="url(#paws)"/>
   <circle cx="125" cy="175" r="77" fill="#fff6e8" stroke="#17211f" stroke-width="5"/>
-  ${corgiHead(125, 165, 1.1)}
+  ${corgiHead(125, 158, 1.1, "happy", "#0f766e")}
   <text x="125" y="275" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="900" fill="#17211f">TEXAS CORGI</text>
   <text x="125" y="296" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#0f766e">BLACKJACK</text>
 </svg>

@@ -187,14 +187,15 @@
         background: linear-gradient(180deg, #fff, #f5f8f4);
         box-shadow: 0 8px 18px rgba(23, 33, 31, 0.06);
         cursor: pointer;
-        overflow: hidden;
+        overflow: visible;
       }
 
       .card-btn img {
         display: block;
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        padding: 4px;
+        object-fit: contain;
       }
 
       .card-btn:hover,
@@ -231,7 +232,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 42px;
+        min-width: 52px;
         height: 42px;
         padding: 0 10px;
         border: 1px solid var(--line);
@@ -373,7 +374,7 @@
       <section class="hero">
         <p class="eyebrow">Blackjack trainer</p>
         <h1>Pick the cards. Get the move.</h1>
-        <p class="lede">Choose your cards and the dealer upcard to get a basic-strategy recommendation. This is for practice and learning, not autonomous real-money gambling.</p>
+        <p class="lede">Choose your cards and the dealer upcard to get a basic-strategy recommendation. Defaults are Vegas-style multi-deck, dealer stands soft 17, double after split allowed, with H17 and surrender available as toggles.</p>
       </section>
 
       <section class="app" aria-label="Blackjack card picker">
@@ -456,7 +457,7 @@
     <script>
       const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
       const dealerOrder = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"];
-      const deckAssetVersion = "texas-corgi-20260530";
+      const deckAssetVersion = "texas-corgi-bold-20260530";
       const state = {
         dealer: "6",
         player: []
@@ -486,6 +487,7 @@
         doubleAllowed: document.getElementById("doubleAllowed"),
         splitAllowed: document.getElementById("splitAllowed"),
         surrenderAllowed: document.getElementById("surrenderAllowed"),
+        dealerHitsSoft17: document.getElementById("dealerHitsSoft17"),
         recommendedMove: document.getElementById("recommendedMove"),
         handTotal: document.getElementById("handTotal"),
         handClass: document.getElementById("handClass"),
@@ -505,8 +507,7 @@
       }
 
       function cardAsset(rank) {
-        const key = dealerKey(rank);
-        const visualRank = key === "10" ? "10" : rank;
+        const visualRank = rank;
         return `../media/blackjack-corgi-deck/cards/${visualRank}${suitByRank[visualRank] || "S"}.svg?v=${deckAssetVersion}`;
       }
 
@@ -559,6 +560,8 @@
       };
 
       function hardAction(total, dealerIndex) {
+        if (total === 11 && dealerIndex === 9 && el.dealerHitsSoft17.checked) return "double";
+
         const table = {
           17: ["stand","stand","stand","stand","stand","stand","stand","stand","stand","stand"],
           16: ["stand","stand","stand","stand","stand","hit","hit","surrender/hit","surrender/hit","surrender/hit"],
@@ -587,6 +590,7 @@
         }
 
         if (info.type === "soft") {
+          if (el.dealerHitsSoft17.checked && info.total === 18 && dealerIndex === 0) return "double";
           return softStrategy[info.total]?.[dealerIndex] || hardAction(info.total, dealerIndex);
         }
 
@@ -726,7 +730,7 @@
         update();
       });
 
-      [el.doubleAllowed, el.splitAllowed, el.surrenderAllowed].forEach(input => {
+      [el.doubleAllowed, el.splitAllowed, el.surrenderAllowed, el.dealerHitsSoft17].forEach(input => {
         input.addEventListener("change", update);
       });
 
