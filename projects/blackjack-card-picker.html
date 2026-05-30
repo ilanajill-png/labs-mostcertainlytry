@@ -457,7 +457,7 @@
       const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
       const dealerOrder = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"];
       const state = {
-        dealer: null,
+        dealer: "6",
         player: []
       };
 
@@ -709,7 +709,7 @@
       });
 
       document.getElementById("resetHand").addEventListener("click", () => {
-        state.dealer = null;
+        state.dealer = "6";
         state.player = [];
         renderButtons();
         update();
