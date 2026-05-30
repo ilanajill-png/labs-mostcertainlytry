@@ -393,7 +393,7 @@
 
       
         <section class="rank-section" id="5-red-beanies">
-          <div class="rank-heading"><h2>5 red beanies</h2><span>5 cards</span></div>
+          <div class="rank-heading"><h2>5 red beanies</h2><span data-total="5">5 cards</span></div>
           <div class="wine-grid">
             
   <article class="wine-card" data-dollar="$$$ standard" data-beanie="5 red beanies" data-verdict="👍🏾 Thumbs up from Mack notes" data-variety="Other / blend" data-source="Delectable">
@@ -624,7 +624,7 @@
         </section>
 
         <section class="rank-section" id="4-red-beanies">
-          <div class="rank-heading"><h2>4 red beanies</h2><span>2 cards</span></div>
+          <div class="rank-heading"><h2>4 red beanies</h2><span data-total="2">2 cards</span></div>
           <div class="wine-grid">
             
   <article class="wine-card" data-dollar="$$$ standard" data-beanie="4 red beanies" data-verdict="👍🏾 Thumbs up from Mack notes" data-variety="Pinot Noir" data-source="Delectable">
@@ -720,7 +720,7 @@
         </section>
 
         <section class="rank-section" id="3-red-beanies">
-          <div class="rank-heading"><h2>3 red beanies</h2><span>3 cards</span></div>
+          <div class="rank-heading"><h2>3 red beanies</h2><span data-total="3">3 cards</span></div>
           <div class="wine-grid">
             
   <article class="wine-card" data-dollar="$$$ standard" data-beanie="3 red beanies" data-verdict="No thumbs verdict" data-variety="Pinot Noir" data-source="Delectable">
@@ -861,7 +861,7 @@
         </section>
 
         <section class="rank-section" id="2-red-beanies">
-          <div class="rank-heading"><h2>2 red beanies</h2><span>1 cards</span></div>
+          <div class="rank-heading"><h2>2 red beanies</h2><span data-total="1">1 cards</span></div>
           <div class="wine-grid">
             
   <article class="wine-card" data-dollar="$$$ standard" data-beanie="2 red beanies" data-verdict="No thumbs verdict" data-variety="Pinot Noir" data-source="Delectable">
@@ -912,7 +912,7 @@
         </section>
 
         <section class="rank-section" id="1-red-beanie">
-          <div class="rank-heading"><h2>1 red beanie</h2><span>3 cards</span></div>
+          <div class="rank-heading"><h2>1 red beanie</h2><span data-total="3">3 cards</span></div>
           <div class="wine-grid">
             
   <article class="wine-card" data-dollar="$$$$$ splurge" data-beanie="1 red beanie" data-verdict="No thumbs verdict" data-variety="Pinot Noir" data-source="Delectable">
@@ -1053,7 +1053,7 @@
         </section>
 
         <section class="rank-section" id="unknown-beanie-rank">
-          <div class="rank-heading"><h2>Unknown beanie rank (?)</h2><span>318 cards</span></div>
+          <div class="rank-heading"><h2>Unknown beanie rank (?)</h2><span data-total="318">318 cards</span></div>
           <div class="wine-grid">
             
   <article class="wine-card" data-dollar="$$$$$ splurge" data-beanie="Unknown beanie rank (?)" data-verdict="No thumbs verdict" data-variety="Cabernet / Bordeaux" data-source="Wine Industry Advisor">
@@ -14979,6 +14979,7 @@
   <script>
     const filters = document.querySelector("#filters");
     const cards = [...document.querySelectorAll(".wine-card")];
+    const sections = [...document.querySelectorAll(".rank-section")];
     const applyFilters = () => {
       const dollar = document.querySelector("#dollar").value;
       const beanie = document.querySelector("#beanie").value;
@@ -14993,8 +14994,15 @@
           (!source || card.dataset.source === source);
         card.classList.toggle("hidden", !visible);
       }
+      for (const section of sections) {
+        const visibleCount = section.querySelectorAll(".wine-card:not(.hidden)").length;
+        section.classList.toggle("hidden", visibleCount === 0);
+        const count = section.querySelector(".rank-heading span");
+        if (count) count.textContent = visibleCount + " card" + (visibleCount === 1 ? "" : "s");
+      }
     };
     filters.addEventListener("input", applyFilters);
+    applyFilters();
   </script>
 </body>
 </html>
