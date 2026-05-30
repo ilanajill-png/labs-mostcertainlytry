@@ -118,6 +118,20 @@
       font-weight: 900;
       text-decoration: none;
     }
+    .hero-image {
+      width: min(100%, 720px);
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 18px 34px rgba(35, 31, 32, .08);
+    }
+    .hero-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
     .callout {
       max-width: 1040px;
       margin: 22px 0 24px;
@@ -372,6 +386,9 @@
         <div class="project-links" aria-label="Project links">
           <a href="andre_mack_build_notes.html">How did we make this???? View Build Notes, Version Log, and Timer</a>
         </div>
+        <figure class="hero-image">
+          <img src="../assets/andre-mack/character-red-beanie-wine.jpeg" alt="Red-beanie wine character holding a bottle of wine" loading="eager">
+        </figure>
       </section>
 
       <form class="filters" id="filters">
