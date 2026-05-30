@@ -187,6 +187,14 @@
         background: linear-gradient(180deg, #fff, #f5f8f4);
         box-shadow: 0 8px 18px rgba(23, 33, 31, 0.06);
         cursor: pointer;
+        overflow: hidden;
+      }
+
+      .card-btn img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       .card-btn:hover,
@@ -356,6 +364,7 @@
       </a>
       <nav aria-label="Primary navigation">
         <a href="blackjack-play-workflow.html">Build Notes</a>
+        <a href="corgi-blackjack-deck.html">Corgi Deck</a>
         <a href="../docs/blackjack-play-workflow.md">Workflow Spec</a>
       </nav>
     </header>
@@ -452,6 +461,22 @@
         player: []
       };
 
+      const suitByRank = {
+        A: "H",
+        2: "S",
+        3: "H",
+        4: "C",
+        5: "D",
+        6: "S",
+        7: "H",
+        8: "C",
+        9: "D",
+        10: "S",
+        J: "H",
+        Q: "D",
+        K: "C"
+      };
+
       const el = {
         dealerGrid: document.getElementById("dealerGrid"),
         playerGrid: document.getElementById("playerGrid"),
@@ -476,6 +501,12 @@
 
       function dealerKey(rank) {
         return cardValue(rank) === 10 ? "10" : rank;
+      }
+
+      function cardAsset(rank) {
+        const key = dealerKey(rank);
+        const visualRank = key === "10" ? "10" : rank;
+        return `../media/blackjack-corgi-deck/cards/${visualRank}${suitByRank[visualRank] || "S"}.svg`;
       }
 
       function pairKey(rank) {
@@ -617,7 +648,7 @@
           const button = document.createElement("button");
           button.type = "button";
           button.className = `card-btn${state.dealer === rank ? " selected" : ""}`;
-          button.textContent = rank;
+          button.innerHTML = `<img src="${cardAsset(rank)}" alt="${rank} dealer card">`;
           button.addEventListener("click", () => {
             state.dealer = rank;
             update();
@@ -631,7 +662,7 @@
           const button = document.createElement("button");
           button.type = "button";
           button.className = "card-btn";
-          button.textContent = rank;
+          button.innerHTML = `<img src="${cardAsset(rank)}" alt="${rank} player card">`;
           button.addEventListener("click", () => {
             state.player.push(rank);
             update();
