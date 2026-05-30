@@ -54,6 +54,17 @@ function suitPip(suit, x, y, size = 34, opacity = 1) {
   return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-family="Georgia, serif" font-size="${size}" font-weight="900" fill="${suit.color}" opacity="${opacity}">${suit.symbol}</text>`;
 }
 
+function texasStar(x, y, size = 18, fill = "#f4c95d") {
+  const r1 = size / 2;
+  const r2 = r1 * 0.42;
+  const points = Array.from({ length: 10 }, (_, index) => {
+    const angle = -Math.PI / 2 + (index * Math.PI) / 5;
+    const radius = index % 2 === 0 ? r1 : r2;
+    return `${x + Math.cos(angle) * radius},${y + Math.sin(angle) * radius}`;
+  }).join(" ");
+  return `<polygon points="${points}" fill="${fill}" stroke="#17211f" stroke-width="${Math.max(1.2, size / 13)}" stroke-linejoin="round"/>`;
+}
+
 function corner(rank, suit, rotate = false) {
   const transform = rotate ? `transform="rotate(180 125 175)"` : "";
   return `
@@ -67,6 +78,9 @@ function corgiHead(x, y, scale = 1, mood = "happy") {
   const tongue = mood === "happy" ? `<path d="M ${x - 8 * scale} ${y + 31 * scale} q ${8 * scale} ${14 * scale} ${16 * scale} 0" fill="#e86f7a" stroke="#17211f" stroke-width="${2 * scale}" stroke-linecap="round"/>` : "";
   return `
     <g transform="translate(${x} ${y}) scale(${scale})">
+      <path d="M -54 -59 q 54 -22 108 0 q -20 15 -54 15 t -54 -15z" fill="#8b5a2b" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M -28 -61 q 28 -32 56 0 l -7 20 h -42z" fill="#b97835" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
+      ${texasStar(0, -58, 14, "#fff6e8")}
       <path d="M -46 -22 L -26 -64 L -10 -30 Z" fill="#d89038" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <path d="M 46 -22 L 26 -64 L 10 -30 Z" fill="#d89038" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
       <path d="M -36 -22 q 0 -42 36 -42 t 36 42 q 8 14 2 36 q -7 33 -38 36 q -31 -3 -38 -36 q -6 -22 2 -36z" fill="#e3a146" stroke="#17211f" stroke-width="3"/>
@@ -96,6 +110,8 @@ function corgiBody(rank, suit) {
       ${rank.key === "A" ? "" : `<rect x="61" y="78" width="128" height="194" rx="18" fill="${suit.accent}" stroke="${suit.color}" stroke-width="4"/>`}
       ${accessory}
       ${corgiHead(125, rank.key === "A" ? 164 : 163, rank.key === "A" ? 1.12 : 1)}
+      <path d="M 96 ${rank.key === "A" ? 232 : 231} L 125 ${rank.key === "A" ? 256 : 253} L 154 ${rank.key === "A" ? 232 : 231} q -29 13 -58 0z" fill="${suit.color}" stroke="#17211f" stroke-width="3" stroke-linejoin="round"/>
+      ${texasStar(125, rank.key === "A" ? 241 : 239, 15, "#fff6e8")}
       <text x="125" y="${rank.key === "A" ? 267 : 304}" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="900" fill="${suit.color}">${esc(faceLabel)} ${suit.symbol}</text>
     </g>`;
 }
@@ -112,9 +128,10 @@ function cardSvg(rank, suit) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="250" height="350" viewBox="0 0 250 350" role="img" aria-labelledby="title desc">
   <title id="title">${esc(rank.label)} of ${esc(suit.name)}</title>
-  <desc id="desc">A matched cartoon corgi playing card with standard ${esc(suit.name)} suit styling.</desc>
+  <desc id="desc">A matched Texas cartoon corgi playing card with standard ${esc(suit.name)} suit styling, cowboy hat, bandana, and lone star details.</desc>
   <rect x="7" y="7" width="236" height="336" rx="18" fill="#ffffff" stroke="#17211f" stroke-width="4"/>
   <rect x="15" y="15" width="220" height="320" rx="13" fill="none" stroke="${suit.color}" stroke-width="1.5" opacity=".22"/>
+  <text x="125" y="30" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="10" font-weight="900" fill="${suit.color}" opacity=".58">TEXAS CORGI</text>
   ${corner(rank, suit)}
   ${corner(rank, suit, true)}
   ${watermark}
@@ -126,8 +143,8 @@ function cardSvg(rank, suit) {
 function cardBackSvg() {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="250" height="350" viewBox="0 0 250 350" role="img" aria-labelledby="title desc">
-  <title id="title">Corgi card back</title>
-  <desc id="desc">A matched card back for the cartoon corgi blackjack deck.</desc>
+  <title id="title">Texas corgi card back</title>
+  <desc id="desc">A matched card back for the Texas cartoon corgi blackjack deck.</desc>
   <rect x="7" y="7" width="236" height="336" rx="18" fill="#0f766e" stroke="#17211f" stroke-width="4"/>
   <rect x="22" y="22" width="206" height="306" rx="12" fill="none" stroke="#fff6e8" stroke-width="5"/>
   <pattern id="paws" width="42" height="42" patternUnits="userSpaceOnUse">
@@ -139,7 +156,8 @@ function cardBackSvg() {
   <rect x="29" y="29" width="192" height="292" rx="9" fill="url(#paws)"/>
   <circle cx="125" cy="175" r="77" fill="#fff6e8" stroke="#17211f" stroke-width="5"/>
   ${corgiHead(125, 165, 1.1)}
-  <text x="125" y="275" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="900" fill="#17211f">CORGI BLACKJACK</text>
+  <text x="125" y="275" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="900" fill="#17211f">TEXAS CORGI</text>
+  <text x="125" y="296" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="900" fill="#0f766e">BLACKJACK</text>
 </svg>
 `;
 }
@@ -153,7 +171,7 @@ for (const suit of suits) {
 fs.writeFileSync(path.join(outDir, "BACK.svg"), cardBackSvg());
 
 const manifest = {
-  name: "Corgi Blackjack Deck",
+  name: "Texas Corgi Blackjack Deck",
   date: "2026-05-30",
   format: "SVG",
   cards: suits.flatMap(suit => ranks.map(rank => ({

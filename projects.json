@@ -1,15 +1,15 @@
 [
   {
     "id": "corgi-blackjack-deck",
-    "title": "Corgi Blackjack Deck",
+    "title": "Texas Corgi Blackjack Deck",
     "category": "Experiment",
     "type": "SVG Card Deck",
     "status": "Published",
     "date": "2026-05-30",
     "featured": true,
     "tools": ["SVG", "JavaScript", "Card Design", "Blackjack Trainer", "Cartoon Corgi Theme"],
-    "summary": "A full matched SVG playing-card deck for the blackjack trainer, using standard suits and colors with cartoon corgi face cards, pips, and card back.",
-    "outcome": "Generated 52 individual SVG card faces, one matching card back, a manifest, and a Labs preview page with direct links to every card asset.",
+    "summary": "A full matched SVG playing-card deck for the blackjack trainer, using standard suits and colors with Texas cartoon corgi face cards, pips, and card back.",
+    "outcome": "Generated 52 individual SVG card faces, one matching card back, a manifest, and a Labs preview page with cowboy hats, bandanas, lone star details, and direct links to every card asset.",
     "url": "projects/corgi-blackjack-deck.html",
     "source": "media/blackjack-corgi-deck/manifest.json"
   },
