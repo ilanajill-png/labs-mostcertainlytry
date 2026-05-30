@@ -1,15 +1,15 @@
 [
   {
     "id": "andre-mack-reviewed-wines",
-    "title": "André Hueston Mack Reviewed Wines",
+    "title": "Every Public André Mack Wine Recommendation We Could Verify",
     "category": "Build Log",
     "type": "Research Database",
     "status": "Published",
     "date": "2026-05-30",
     "featured": true,
     "tools": ["Public Web Research", "Node.js", "Static HTML", "Source Indexing", "Wine Review Analysis"],
-    "summary": "A searchable public-record database of wines André Hueston Mack tasted, evaluated, paired, judged, or explicitly discussed, built from sourced public review material.",
-    "outcome": "Published 332 bottle or wine-style cards with source links, captured review notes, red-beanie rankings, buy searches, build notes, and a white paper on the build method.",
+    "summary": "A searchable public-record guide to André Hueston Mack's public wine trail by bottle, price, score, source, verdict, celebrity wine, budget pick, and panel-tasting context.",
+    "outcome": "Published 332 bottle or wine-style cards with source links, captured review notes, red-beanie rankings, buy searches, share metadata, build notes, and a white paper on the build method.",
     "url": "projects/andre_mack_reviewed_wines.html",
     "source": "projects/andre-mack-reviewed-wines-white-paper.html"
   },
