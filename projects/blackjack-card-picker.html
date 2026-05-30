@@ -210,6 +210,12 @@
         color: var(--green-dark);
       }
 
+      .card-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.42;
+        box-shadow: none;
+      }
+
       .hands {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -457,6 +463,7 @@
 
     <script>
       const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+      const suits = ["S", "H", "D", "C"];
       const dealerOrder = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "A"];
       const deckAssetVersion = "texas-corgi-bold-20260530";
       const state = {
@@ -479,6 +486,8 @@
         Q: "D",
         K: "C"
       };
+
+      const deck = suits.flatMap(suit => ranks.map(rank => `${rank}${suit}`));
 
       const el = {
         dealerGrid: document.getElementById("dealerGrid"),
@@ -507,9 +516,20 @@
         return cardValue(rank) === 10 ? "10" : rank;
       }
 
-      function cardAsset(rank) {
-        const visualRank = rank;
-        return `../media/blackjack-corgi-deck/cards/${visualRank}${suitByRank[visualRank] || "S"}.svg?v=${deckAssetVersion}`;
+      function rankOf(card) {
+        return card.slice(0, -1);
+      }
+
+      function displayCardForRank(rank) {
+        return `${rank}${suitByRank[rank] || "S"}`;
+      }
+
+      function dealerCard() {
+        return state.dealer ? displayCardForRank(state.dealer) : null;
+      }
+
+      function cardAsset(card) {
+        return `../media/blackjack-corgi-deck/cards/${card}.svg?v=${deckAssetVersion}`;
       }
 
       function pairKey(rank) {
@@ -517,8 +537,9 @@
       }
 
       function scoreHand(cards) {
-        let total = cards.reduce((sum, rank) => sum + cardValue(rank), 0);
-        let aces = cards.filter(rank => rank === "A").length;
+        const ranksInHand = cards.map(rankOf);
+        let total = ranksInHand.reduce((sum, rank) => sum + cardValue(rank), 0);
+        let aces = ranksInHand.filter(rank => rank === "A").length;
         let soft = aces > 0;
         while (total > 21 && aces > 0) {
           total -= 10;
@@ -530,8 +551,9 @@
 
       function classify(cards) {
         const score = scoreHand(cards);
-        const isPair = cards.length === 2 && cardValue(cards[0]) === cardValue(cards[1]);
-        if (isPair) return { type: "pair", label: `pair of ${cardValue(cards[0]) === 10 ? "10s" : cards[0] + "s"}`, ...score };
+        const ranksInHand = cards.map(rankOf);
+        const isPair = ranksInHand.length === 2 && cardValue(ranksInHand[0]) === cardValue(ranksInHand[1]);
+        if (isPair) return { type: "pair", label: `pair of ${cardValue(ranksInHand[0]) === 10 ? "10s" : ranksInHand[0] + "s"}`, ...score };
         if (score.soft) return { type: "soft", label: `soft ${score.total}`, ...score };
         return { type: "hard", label: `hard ${score.total}`, ...score };
       }
@@ -585,8 +607,9 @@
         if (dealerIndex === -1) return "unknown";
 
         if (info.type === "pair") {
-          const value = cardValue(state.player[0]);
-          const key = value === 10 ? "10" : state.player[0];
+          const firstRank = rankOf(state.player[0]);
+          const value = cardValue(firstRank);
+          const key = value === 10 ? "10" : firstRank;
           return pairStrategy[key][dealerIndex];
         }
 
@@ -651,12 +674,14 @@
       function renderButtons() {
         el.dealerGrid.innerHTML = "";
         dealerOrder.forEach(rank => {
+          const card = displayCardForRank(rank);
           const button = document.createElement("button");
           button.type = "button";
           button.className = `card-btn${state.dealer === rank ? " selected" : ""}`;
-          button.innerHTML = `<img src="${cardAsset(rank)}" alt="${rank} dealer card">`;
+          button.innerHTML = `<img src="${cardAsset(card)}" alt="${rank} dealer card">`;
           button.addEventListener("click", () => {
             state.dealer = rank;
+            state.player = state.player.filter(playerCard => playerCard !== dealerCard());
             update();
             renderButtons();
           });
@@ -664,14 +689,21 @@
         });
 
         el.playerGrid.innerHTML = "";
-        ranks.forEach(rank => {
+        const unavailableCards = new Set(state.player);
+        if (dealerCard()) unavailableCards.add(dealerCard());
+        deck.forEach(card => {
+          const isUnavailable = unavailableCards.has(card);
           const button = document.createElement("button");
           button.type = "button";
-          button.className = "card-btn";
-          button.innerHTML = `<img src="${cardAsset(rank)}" alt="${rank} player card">`;
+          button.className = `card-btn${state.player.includes(card) ? " selected" : ""}`;
+          button.disabled = isUnavailable;
+          button.title = isUnavailable ? `${card} is already selected` : `Add ${card}`;
+          button.innerHTML = `<img src="${cardAsset(card)}" alt="${card} player card">`;
           button.addEventListener("click", () => {
-            state.player.push(rank);
+            if (state.player.includes(card) || card === dealerCard()) return;
+            state.player.push(card);
             update();
+            renderButtons();
           });
           el.playerGrid.appendChild(button);
         });
@@ -711,6 +743,7 @@
 
       document.getElementById("undoCard").addEventListener("click", () => {
         state.player.pop();
+        renderButtons();
         update();
       });
 
@@ -723,10 +756,11 @@
 
       document.getElementById("randomHand").addEventListener("click", () => {
         state.dealer = dealerOrder[Math.floor(Math.random() * dealerOrder.length)];
-        state.player = [
-          ranks[Math.floor(Math.random() * ranks.length)],
-          ranks[Math.floor(Math.random() * ranks.length)]
-        ];
+        const availableDeck = deck.filter(card => card !== dealerCard());
+        const firstIndex = Math.floor(Math.random() * availableDeck.length);
+        const firstCard = availableDeck.splice(firstIndex, 1)[0];
+        const secondCard = availableDeck[Math.floor(Math.random() * availableDeck.length)];
+        state.player = [firstCard, secondCard];
         renderButtons();
         update();
       });
