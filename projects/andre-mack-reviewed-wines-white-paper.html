@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>White Paper | André Hueston Mack Reviewed Wines</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #1f2328;
+        --muted: #5f6874;
+        --paper: #fbfaf7;
+        --panel: #ffffff;
+        --line: #d9ded8;
+        --green: #246b4f;
+        --green-dark: #174632;
+        --coral: #b7533f;
+        --gold: #b2842b;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.55;
+      }
+      a { color: inherit; text-decoration-color: var(--green); text-underline-offset: 4px; }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 12px clamp(18px, 4vw, 54px);
+        border-bottom: 1px solid var(--line);
+        background: rgba(251, 250, 247, 0.92);
+        backdrop-filter: blur(12px);
+      }
+      .topbar a {
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      main { width: min(1100px, calc(100% - 36px)); margin: 0 auto; }
+      .hero {
+        display: grid;
+        gap: 18px;
+        padding: 68px 0 44px;
+      }
+      .kicker {
+        margin: 0;
+        color: var(--coral);
+        font-size: .86rem;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+      h1, h2, h3, p { margin-top: 0; overflow-wrap: anywhere; }
+      h1 {
+        max-width: 940px;
+        margin-bottom: 0;
+        font-size: clamp(2.7rem, 7vw, 5.6rem);
+        line-height: .96;
+        letter-spacing: 0;
+      }
+      .lede {
+        max-width: 880px;
+        color: var(--muted);
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 10px;
+      }
+      .summary div, .card, .artifact {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: 0 18px 45px rgba(31, 35, 40, .07);
+      }
+      .summary div { padding: 16px; }
+      .summary strong {
+        display: block;
+        color: var(--green-dark);
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        line-height: 1;
+      }
+      .summary span, .meta {
+        color: var(--muted);
+        font-size: .78rem;
+        font-weight: 850;
+        text-transform: uppercase;
+      }
+      section { padding: 46px 0; border-top: 1px solid var(--line); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .card, .artifact { padding: 22px; }
+      .card h3, .artifact h3 { margin-bottom: 8px; }
+      .card p, li { color: var(--muted); }
+      .artifact {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 16px;
+      }
+      .artifact a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 42px;
+        padding: 9px 12px;
+        border: 1px solid var(--green);
+        border-radius: 8px;
+        color: #fff;
+        background: var(--green);
+        font-weight: 850;
+        text-decoration: none;
+      }
+      .note {
+        margin-top: 14px;
+        padding: 16px;
+        border-left: 5px solid var(--gold);
+        background: #fff8ee;
+      }
+      @media (max-width: 760px) {
+        .summary, .grid, .artifact { grid-template-columns: 1fr; }
+        .hero { padding-top: 44px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="topbar" aria-label="Project links">
+      <a href="../index.html">Labs Home</a>
+      <a href="andre_mack_reviewed_wines.html">Wine Cards</a>
+      <a href="andre_mack_build_notes.html">Build Notes</a>
+    </nav>
+
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <p class="kicker">White paper</p>
+        <h1 id="title">Building a Searchable André Hueston Mack Wine Review Database</h1>
+        <p class="lede">This project turned public wine-review material into a structured static research product: bottle cards with source links, captured notes, rank context, buy-search links, and filterable fields.</p>
+        <div class="summary" aria-label="Project summary">
+          <div><strong>332</strong><span>bottle or wine-style cards</span></div>
+          <div><strong>44</strong><span>review source links</span></div>
+          <div><strong>3.5 hr</strong><span>review and build pass</span></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="question-title">
+        <h2 id="question-title">The Research Question</h2>
+        <p>We needed a defensible way to say how long André Hueston Mack has been evaluating and recommending wine, then connect that credibility claim to a searchable database of his public wine discussion. The public-record framing matters because the site is not claiming access to private tasting notes or unpublished ratings.</p>
+        <div class="note">The copy used on the published site is intentionally conservative: “Sommelier and winemaker André Hueston Mack has been professionally evaluating and recommending wines for more than 23 years. We spent 3.5 hours reviewing his reviews.”</div>
+      </section>
+
+      <section aria-labelledby="method-title">
+        <h2 id="method-title">Method</h2>
+        <div class="grid">
+          <article class="card">
+            <h3>1. Source Inventory</h3>
+            <p>Public videos, article references, podcast pages, television references, and competition materials were inventoried first. Each source was classified by whether it produced bottle-level data, general context, or no clean additional bottle list.</p>
+          </article>
+          <article class="card">
+            <h3>2. Bottle Extraction</h3>
+            <p>Named wines, wine styles, pairings, judgments, and explicit discussions were converted into normalized cards. Each card preserves source context instead of flattening every mention into the same kind of rating.</p>
+          </article>
+          <article class="card">
+            <h3>3. Interface Structure</h3>
+            <p>The static page organizes cards with practical controls: dollar rank, beanie rank, thumbs verdict, wine type, and review source. Buy-search and review-search links keep the page useful without pretending to be a retail catalog.</p>
+          </article>
+          <article class="card">
+            <h3>4. Verification Layer</h3>
+            <p>Outside notes and rating context are shown only where a public outside source was captured. Missing outside notes are not hidden in the data model, but the public hero no longer emphasizes the backlog as a front-page stat.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="implementation-title">
+        <h2 id="implementation-title">Implementation Notes</h2>
+        <ul>
+          <li>The source record lives in Markdown and structured JSON support files.</li>
+          <li>A Node.js generator builds the wine-card site and the build-notes page from the same data model.</li>
+          <li>The generated HTML is static, so it can be published to Labs without a server or database.</li>
+          <li>The build notes preserve the version log, method decisions, and live elapsed timer for project transparency.</li>
+        </ul>
+      </section>
+
+      <section aria-labelledby="artifacts-title">
+        <h2 id="artifacts-title">Published Artifacts</h2>
+        <div class="grid">
+          <article class="artifact">
+            <div>
+              <p class="meta">Searchable site</p>
+              <h3>Wine Cards</h3>
+              <p>Filterable bottle cards for Mack-reviewed or Mack-discussed wines.</p>
+            </div>
+            <a href="andre_mack_reviewed_wines.html">Open</a>
+          </article>
+          <article class="artifact">
+            <div>
+              <p class="meta">Process record</p>
+              <h3>Build Notes</h3>
+              <p>Version log, build method, and timer for how the database was assembled.</p>
+            </div>
+            <a href="andre_mack_build_notes.html">Open</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
