@@ -362,6 +362,11 @@
       cursor: pointer;
       color: var(--accent-dark);
       font-weight: 900;
+      list-style: none;
+      text-transform: uppercase;
+    }
+    .filter-panel summary::-webkit-details-marker {
+      display: none;
     }
     .filter-fields {
       display: grid;
@@ -621,7 +626,7 @@
 
       <form class="filters" id="filters">
         <details class="filter-panel" open>
-          <summary>Filter wines</summary>
+          <summary>332 wines ▾ FILTER</summary>
           <div class="filter-fields">
             <label>$
               <select id="dollar"><option value="">All $ ranks</option><option>$ budget</option><option>$$ value</option><option>$$$ standard</option><option>$$$$ premium</option><option>$$$$$ splurge</option></select>
