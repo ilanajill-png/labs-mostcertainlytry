@@ -1,5 +1,19 @@
 [
   {
+    "id": "blackjack-card-picker",
+    "title": "Blackjack Card Picker",
+    "category": "Experiment",
+    "type": "Interactive Trainer",
+    "status": "Published",
+    "date": "2026-05-30",
+    "featured": true,
+    "tools": ["HTML", "CSS", "JavaScript", "Basic Strategy", "Blackjack Trainer"],
+    "summary": "A browser-based blackjack trainer that lets a user pick dealer and player cards, toggle available rules, and get a basic-strategy move recommendation.",
+    "outcome": "Published an interactive card picker with hand classification, totals, basic-strategy recommendations, fallbacks, random practice hands, and no-real-money guardrails.",
+    "url": "projects/blackjack-card-picker.html",
+    "source": "docs/blackjack-play-workflow.md"
+  },
+  {
     "id": "blackjack-play-workflow",
     "title": "Blackjack Play Workflow",
     "category": "Build Log",
