@@ -92,11 +92,11 @@ footer div { width: min(1120px, calc(100% - 32px)); margin: 0 auto; font-size: 1
       <div class="contribute-head">
         <div>
           <h2>Add a Memory</h2>
-          <p>Use this form to capture missing dates, places, photos, links, and stories. Submissions are saved in this browser until exported.</p>
+          <p>Use this form to capture missing dates, places, photos, links, and stories. Submissions are emailed for approval and will not appear publicly until reviewed.</p>
         </div>
         <div class="result-count" id="submissionCount">0 saved submissions</div>
       </div>
-      <form class="memory-form" id="memoryForm">
+      <form class="memory-form" id="memoryForm" data-endpoint="https://formsubmit.co/ajax/mostcertainly@gmail.com">
         <div class="form-grid">
           <div class="field">
             <label for="contributorName">Your name</label>
@@ -142,14 +142,14 @@ footer div { width: min(1120px, calc(100% - 32px)); margin: 0 auto; font-size: 1
             <input id="sourceLink" name="sourceLink" placeholder="https://...">
           </div>
           <div class="field full">
-            <label for="photoFiles">Photo files to remember</label>
+            <label for="photoFiles">Photo files to remember by name</label>
             <input id="photoFiles" name="photoFiles" type="file" accept="image/*,video/*" multiple>
           </div>
         </div>
         <div class="form-actions">
           <button type="submit">Save Memory</button>
         </div>
-        <div class="submission-note" id="submissionStatus">Saved memories stay on this device.</div>
+        <div class="submission-note" id="submissionStatus">Submissions are sent for approval before they are added to the archive.</div>
       </form>
       <div class="saved-list" id="savedList"></div>
     </div>
@@ -231,23 +231,42 @@ function renderSubmissions() {
   }
   savedList.innerHTML = items.slice().reverse().map(item => `
     <div class="saved-item">
-      <strong>${escapeHtml(item.contributorName || 'Unnamed contributor')} - ${escapeHtml(item.memoryDate || 'undated')}</strong>
+      <strong>${escapeHtml(item.contributorName || 'Unnamed contributor')} - ${escapeHtml(item.memoryDate || 'undated')} - ${escapeHtml(item.status || 'pending approval')}</strong>
       <p>${escapeHtml((item.memoryText || '').slice(0, 260))}${(item.memoryText || '').length > 260 ? '...' : ''}</p>
     </div>
   `).join('');
 }
-memoryForm.addEventListener('submit', event => {
+memoryForm.addEventListener('submit', async event => {
   event.preventDefault();
   const data = Object.fromEntries(new FormData(memoryForm).entries());
   data.savedAt = new Date().toISOString();
   data.photoFileNames = [...document.querySelector('#photoFiles').files].map(file => file.name);
   delete data.photoFiles;
-  data.status = 'new submission';
+  data.status = 'pending approval';
+  const emailData = new FormData(memoryForm);
+  emailData.delete('photoFiles');
+  emailData.append('_subject', 'TRAVISTY');
+  emailData.append('_template', 'table');
+  emailData.append('_captcha', 'false');
+  emailData.append('approval_status', 'pending approval');
+  emailData.append('saved_at', data.savedAt);
+  emailData.append('photo_file_names', data.photoFileNames.join('; '));
+  submissionStatus.textContent = 'Sending for approval...';
+  try {
+    const response = await fetch(memoryForm.dataset.endpoint, {
+      method: 'POST',
+      body: emailData,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!response.ok) throw new Error(`Email endpoint returned ${response.status}`);
+    submissionStatus.textContent = 'Submitted for approval. Thank you.';
+  } catch (error) {
+    submissionStatus.textContent = 'Saved as pending here, but the email could not be sent. Please copy your memory and send it directly.';
+  }
   const items = getSubmissions();
   items.push(data);
   setSubmissions(items);
   memoryForm.reset();
-  submissionStatus.textContent = 'Saved locally in this browser.';
 });
 renderSubmissions();
 render();
