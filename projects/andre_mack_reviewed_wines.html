@@ -243,7 +243,7 @@
       color: var(--ink);
       font: inherit;
     }
-    .preset-clear {
+    .preset-clear, .filter-enter {
       align-self: end;
       width: 100%;
       min-height: 41px;
@@ -255,6 +255,11 @@
       font-size: .86rem;
       font-weight: 900;
       text-align: center;
+    }
+    .filter-enter {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
     }
     .story-grid {
       display: grid;
@@ -652,6 +657,7 @@
             <label>Review Source
               <select id="source"><option value="">All review sources</option><option>Architectural Digest</option><option>Bon Appetit</option><option>Delectable</option><option>FT Weekend podcast</option><option>The Wine Show</option><option>Wine Centric Show</option><option>Wine Industry Advisor</option><option>instagram.com</option></select>
             </label>
+            <button class="filter-enter" type="submit" id="apply-filters">Enter</button>
             <button class="preset-clear" type="button" id="clear-preset">Show all wines</button>
           </div>
         </details>
@@ -13963,6 +13969,7 @@
     const sections = [...document.querySelectorAll(".rank-section")];
     const presetButtons = [...document.querySelectorAll("[data-preset-button]")];
     const clearPreset = document.querySelector("#clear-preset");
+    const filterPanel = document.querySelector(".filter-panel");
     const keywordSearch = document.querySelector("#keyword-search");
     const params = new URLSearchParams(window.location.search);
     let activePreset = params.get("preset") || "";
@@ -14038,10 +14045,18 @@
     });
     filters.addEventListener("input", applyFilters);
     filters.addEventListener("change", applyFilters);
+    filters.addEventListener("submit", (event) => {
+      event.preventDefault();
+      applyFilters();
+      if (window.matchMedia("(max-width: 980px)").matches) {
+        filterPanel?.removeAttribute("open");
+        filters.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
     keywordSearch.addEventListener("input", applyFilters);
     keywordSearch.addEventListener("search", applyFilters);
     if (window.matchMedia("(max-width: 980px)").matches) {
-      document.querySelector(".filter-panel")?.removeAttribute("open");
+      filterPanel?.removeAttribute("open");
     }
     window.addEventListener("pageshow", applyFilters);
     applyFilters();
