@@ -1,5 +1,19 @@
 [
   {
+    "id": "blackjack-corgi-build-notes",
+    "title": "Texas Corgi Blackjack Build Notes",
+    "category": "Build Log",
+    "type": "Project Notes",
+    "status": "Published",
+    "date": "2026-05-30",
+    "featured": true,
+    "tools": ["OpenAI Image Generation", "SVG", "JavaScript", "Blackjack Trainer", "Product Benchmarking"],
+    "summary": "Template-based build notes for the Texas corgi blackjack deck and picker, covering the product rationale, artifacts, visual iteration, strategy-tool benchmark, risks, and next steps.",
+    "outcome": "Published a reusable build-note page linked from the card picker and deck preview, with an explicit next step to upgrade the corgi portraits through the OpenAI image-generation workflow.",
+    "url": "projects/blackjack-corgi-build-notes.html",
+    "source": "projects/blackjack-corgi-build-notes.html"
+  },
+  {
     "id": "corgi-blackjack-deck",
     "title": "Texas Corgi Blackjack Deck",
     "category": "Experiment",
