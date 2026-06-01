@@ -8,8 +8,8 @@
     "date": "2026-05-31",
     "featured": true,
     "tools": ["HTML", "CSS", "JavaScript", "Responsive Form", "Static Site"],
-    "summary": "A phone-friendly intake form for collecting fixture, bulb, dimmer, color, quantity, photo-link, and deadline details before replacement bulbs are purchased.",
-    "outcome": "Added a static mobile-ready form with stacked narrow-screen sections, large tap targets, local summary generation, copy-to-clipboard support, and no server-side data storage.",
+    "summary": "A phone-friendly intake form for collecting and locally saving fixture, bulb, dimmer, color, quantity, photo-link, and deadline details before replacement bulbs are purchased.",
+    "outcome": "Added a static mobile-ready form with stacked narrow-screen sections, large tap targets, local summary generation, browser-saved requests, copy-to-clipboard support, and CSV/JSON export.",
     "url": "projects/las-jaras-lightbulb-intake.html",
     "source": "projects/las-jaras-lightbulb-intake.html"
   },

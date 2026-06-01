@@ -212,6 +212,45 @@
         overflow-wrap: anywhere;
       }
 
+      .saved-panel {
+        display: grid;
+        gap: 12px;
+        padding-top: 8px;
+      }
+
+      .saved-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .saved-list li {
+        display: grid;
+        gap: 4px;
+        padding: 12px;
+        border: 1px solid var(--lj-line);
+        border-radius: 8px;
+        background: #fff8ea;
+      }
+
+      .saved-list strong,
+      .saved-list span {
+        overflow-wrap: anywhere;
+      }
+
+      .saved-list small {
+        color: var(--lj-muted);
+        font-weight: 800;
+      }
+
+      .saved-empty {
+        margin: 0;
+        color: var(--lj-muted);
+        font-weight: 700;
+      }
+
       .copy-box {
         max-height: 340px;
         overflow: auto;
@@ -445,7 +484,7 @@
             <label>Notes
               <textarea name="notes" placeholder="Anything weird: flicker, too blue, too dim, needs to match other fixtures, ladder needed, etc."></textarea>
             </label>
-            <p class="helper-text">This page builds a local summary only. It does not submit or store the request on a server.</p>
+            <p class="helper-text">Saved requests stay in this browser and can be exported as CSV or JSON. No server or shared database is connected yet.</p>
           </fieldset>
         </form>
 
@@ -456,8 +495,19 @@
             <h2>Copy Block</h2>
             <pre class="copy-box" id="copy-block" tabindex="0"></pre>
             <div class="intake-actions">
-              <button class="button primary" id="copy-summary" type="button">Copy summary</button>
+              <button class="button primary" id="save-request" type="button">Save request</button>
+              <button class="button" id="copy-summary" type="button">Copy summary</button>
               <button class="button" id="clear-form" type="button">Clear form</button>
+            </div>
+            <div class="saved-panel" aria-live="polite">
+              <h2>Saved Requests</h2>
+              <p class="saved-empty" id="saved-empty">No saved requests yet.</p>
+              <ul class="saved-list" id="saved-list"></ul>
+              <div class="intake-actions">
+                <button class="button" id="export-csv" type="button">Export CSV</button>
+                <button class="button" id="export-json" type="button">Export JSON</button>
+                <button class="button" id="clear-saved" type="button">Clear saved</button>
+              </div>
             </div>
           </div>
         </aside>
@@ -475,6 +525,14 @@
       const copyBlock = document.querySelector("#copy-block");
       const copyButton = document.querySelector("#copy-summary");
       const clearButton = document.querySelector("#clear-form");
+      const saveButton = document.querySelector("#save-request");
+      const exportCsvButton = document.querySelector("#export-csv");
+      const exportJsonButton = document.querySelector("#export-json");
+      const clearSavedButton = document.querySelector("#clear-saved");
+      const savedEmpty = document.querySelector("#saved-empty");
+      const savedList = document.querySelector("#saved-list");
+
+      const storageKey = "lasJarasLightbulbRequests";
 
       const fields = [
         ["Requester", "requester"],
@@ -493,6 +551,14 @@
         ["Notes", "notes"]
       ];
 
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
       function getValue(name) {
         const data = new FormData(form);
         if (name === "options") {
@@ -502,14 +568,84 @@
         return data.get(name) || "Not provided";
       }
 
+      function getRequest() {
+        return Object.fromEntries(fields.map(([label, name]) => [label, getValue(name)]));
+      }
+
+      function loadSaved() {
+        try {
+          return JSON.parse(localStorage.getItem(storageKey)) || [];
+        } catch {
+          return [];
+        }
+      }
+
+      function storeSaved(requests) {
+        localStorage.setItem(storageKey, JSON.stringify(requests));
+      }
+
       function renderSummary() {
         const rows = fields.map(([label, name]) => [label, getValue(name)]);
         previewList.innerHTML = rows
           .slice(0, 12)
-          .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+          .map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`)
           .join("");
         copyBlock.textContent = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
       }
+
+      function renderSaved() {
+        const saved = loadSaved();
+        savedEmpty.hidden = saved.length > 0;
+        savedList.innerHTML = saved
+          .map((request) => {
+            const area = request.Area || "Area not provided";
+            const location = request.Location || "Location not provided";
+            const quantity = request.Quantity || "1";
+            const savedAt = request["Saved at"] || "Saved";
+            return `
+              <li>
+                <strong>${escapeHtml(area)} - ${escapeHtml(location)}</strong>
+                <span>${escapeHtml(quantity)} bulb(s), ${escapeHtml(request.Base || "base unknown")}, ${escapeHtml(request.Temperature || "temperature unknown")}</span>
+                <small>${escapeHtml(savedAt)}</small>
+              </li>
+            `;
+          })
+          .join("");
+      }
+
+      function downloadFile(filename, type, content) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function toCsv(requests) {
+        const headers = ["Saved at", ...fields.map(([label]) => label)];
+        const quote = (value) => `"${String(value || "").replace(/"/g, '""')}"`;
+        return [
+          headers.map(quote).join(","),
+          ...requests.map((request) => headers.map((header) => quote(request[header])).join(","))
+        ].join("\n");
+      }
+
+      saveButton.addEventListener("click", () => {
+        const request = {
+          "Saved at": new Date().toLocaleString(),
+          ...getRequest()
+        };
+        const saved = loadSaved();
+        saved.unshift(request);
+        storeSaved(saved);
+        renderSaved();
+        saveButton.textContent = "Saved";
+        window.setTimeout(() => {
+          saveButton.textContent = "Save request";
+        }, 1400);
+      });
 
       copyButton.addEventListener("click", async () => {
         await navigator.clipboard.writeText(copyBlock.textContent);
@@ -524,9 +660,25 @@
         renderSummary();
       });
 
+      exportCsvButton.addEventListener("click", () => {
+        const saved = loadSaved();
+        downloadFile("las-jaras-lightbulb-requests.csv", "text/csv", toCsv(saved));
+      });
+
+      exportJsonButton.addEventListener("click", () => {
+        const saved = loadSaved();
+        downloadFile("las-jaras-lightbulb-requests.json", "application/json", JSON.stringify(saved, null, 2));
+      });
+
+      clearSavedButton.addEventListener("click", () => {
+        localStorage.removeItem(storageKey);
+        renderSaved();
+      });
+
       form.addEventListener("input", renderSummary);
       form.addEventListener("change", renderSummary);
       renderSummary();
+      renderSaved();
     </script>
   </body>
 </html>
