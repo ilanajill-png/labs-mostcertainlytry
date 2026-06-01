@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Las Jaras Lightbulb Intake | Most Certainly Try Labs</title>
+    <meta name="description" content="A mobile-friendly intake form for collecting Las Jaras lightbulb and fixture requirements.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      :root {
+        --lj-ink: #221f1b;
+        --lj-muted: #6c6258;
+        --lj-paper: #fffaf1;
+        --lj-card: #ffffff;
+        --lj-line: #e4d7c2;
+        --lj-red: #ba3f31;
+        --lj-red-dark: #7f241d;
+        --lj-green: #315f45;
+        --lj-gold: #bd8b32;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(255, 250, 241, 0.9), rgba(248, 241, 226, 0.96)),
+          var(--lj-paper);
+        color: var(--lj-ink);
+      }
+
+      main.intake-page {
+        width: min(1120px, calc(100% - 32px));
+        padding-bottom: 48px;
+      }
+
+      .intake-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+        gap: clamp(22px, 5vw, 54px);
+        align-items: center;
+        padding: clamp(36px, 7vw, 72px) 0 28px;
+      }
+
+      .intake-hero h1 {
+        max-width: 760px;
+        font-size: clamp(2.4rem, 8vw, 5.2rem);
+      }
+
+      .intake-hero .lede {
+        max-width: 620px;
+      }
+
+      .intake-summary {
+        display: grid;
+        gap: 14px;
+        padding: clamp(18px, 4vw, 28px);
+        border: 1px solid var(--lj-line);
+        border-radius: 8px;
+        background: var(--lj-card);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-row {
+        display: grid;
+        grid-template-columns: 96px 1fr;
+        gap: 12px;
+        align-items: start;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--lj-line);
+      }
+
+      .summary-row:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .summary-row strong {
+        color: var(--lj-red-dark);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+      }
+
+      .intake-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .intake-form,
+      .intake-preview {
+        padding: clamp(18px, 4vw, 28px);
+        border: 1px solid var(--lj-line);
+        border-radius: 8px;
+        background: var(--lj-card);
+        box-shadow: var(--shadow);
+      }
+
+      .form-section {
+        display: grid;
+        gap: 16px;
+        padding: 0 0 26px;
+        margin: 0 0 26px;
+        border: 0;
+        border-bottom: 1px solid var(--lj-line);
+      }
+
+      .form-section:last-of-type {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: 0;
+      }
+
+      legend {
+        padding: 0;
+        margin-bottom: 14px;
+        color: var(--lj-red-dark);
+        font-size: 1.2rem;
+        font-weight: 900;
+      }
+
+      .field-pair,
+      .field-triple {
+        display: grid;
+        gap: 14px;
+      }
+
+      .field-pair {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .field-triple {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .option-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+      }
+
+      .option-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 48px;
+        padding: 11px 12px;
+        border: 1px solid var(--lj-line);
+        border-radius: 8px;
+        background: #fff8ea;
+        color: var(--lj-ink);
+        font-weight: 800;
+      }
+
+      .option-card input {
+        width: 20px;
+        min-width: 20px;
+        height: 20px;
+        margin: 0;
+        accent-color: var(--lj-red);
+      }
+
+      input,
+      select,
+      textarea {
+        min-height: 48px;
+        border-color: #c9bca8;
+        background: #fffdf8;
+      }
+
+      textarea {
+        min-height: 116px;
+        resize: vertical;
+      }
+
+      .helper-text {
+        margin: -2px 0 0;
+        color: var(--lj-muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .preview-card {
+        display: grid;
+        gap: 14px;
+        position: sticky;
+        top: 96px;
+      }
+
+      .preview-list {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+      }
+
+      .preview-list div {
+        display: grid;
+        gap: 2px;
+        padding: 12px;
+        border-radius: 8px;
+        background: #f7f0e3;
+      }
+
+      .preview-list dt {
+        color: var(--lj-red-dark);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .preview-list dd {
+        margin: 0;
+        color: var(--lj-ink);
+        overflow-wrap: anywhere;
+      }
+
+      .copy-box {
+        max-height: 340px;
+        overflow: auto;
+        margin: 0;
+        background: #251f1a;
+        color: #fff5df;
+      }
+
+      .intake-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .intake-actions .button {
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-color: var(--lj-red);
+        color: var(--lj-red-dark);
+        font-weight: 900;
+      }
+
+      .intake-actions .button.primary {
+        background: var(--lj-red);
+        border-color: var(--lj-red);
+        color: #fff;
+      }
+
+      @media (max-width: 860px) {
+        .intake-hero,
+        .intake-shell,
+        .field-pair,
+        .field-triple {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-card {
+          position: static;
+        }
+      }
+
+      @media (max-width: 560px) {
+        main.intake-page {
+          width: min(100% - 24px, 1120px);
+        }
+
+        .site-header {
+          gap: 14px;
+        }
+
+        .brand {
+          align-items: flex-start;
+        }
+
+        .brand small {
+          display: none;
+        }
+
+        nav a {
+          min-height: 42px;
+          padding: 8px 10px;
+        }
+
+        .intake-hero {
+          padding-top: 28px;
+        }
+
+        .summary-row {
+          grid-template-columns: 1fr;
+          gap: 3px;
+        }
+
+        .option-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .intake-actions {
+          display: grid;
+        }
+
+        .intake-actions .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="../field-guide.html">Captain's Log</a>
+        <a href="../new-project.html">New Entry</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="intake-page">
+      <section class="intake-hero">
+        <div>
+          <p class="kicker">Las Jaras lighting</p>
+          <h1>Lightbulb requirements intake.</h1>
+          <p class="lede">A fast phone-friendly form for collecting fixture, bulb, dimmer, color, quantity, and deadline details before anyone buys the wrong replacement.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#lightbulb-form">Start intake</a>
+            <a class="button" href="../index.html">Back to Labs</a>
+          </div>
+        </div>
+        <aside class="intake-summary" aria-label="What this form captures">
+          <div class="summary-row">
+            <strong>Fixture</strong>
+            <span>Room, location, mount type, base, and photos.</span>
+          </div>
+          <div class="summary-row">
+            <strong>Bulb</strong>
+            <span>Shape, wattage, lumens, color temperature, dimming, and voltage.</span>
+          </div>
+          <div class="summary-row">
+            <strong>Order</strong>
+            <span>Quantity, priority, needed-by date, and notes for purchasing.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="intake-shell" aria-label="Lightbulb intake workspace">
+        <form id="lightbulb-form" class="intake-form">
+          <fieldset class="form-section">
+            <legend>Request details</legend>
+            <div class="field-pair">
+              <label>Requester
+                <input name="requester" autocomplete="name" placeholder="Name">
+              </label>
+              <label>Needed by
+                <input name="neededBy" type="date">
+              </label>
+            </div>
+            <div class="field-pair">
+              <label>Room or area
+                <input name="area" required placeholder="Tasting room, hallway, patio">
+              </label>
+              <label>Fixture location
+                <input name="location" placeholder="North wall sconce, bar pendant 2">
+              </label>
+            </div>
+            <label>Priority
+              <select name="priority">
+                <option>Normal replacement</option>
+                <option>Urgent outage</option>
+                <option>Event prep</option>
+                <option>Design review</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Bulb requirements</legend>
+            <div class="field-triple">
+              <label>Bulb base
+                <select name="base">
+                  <option>Unknown</option>
+                  <option>E26 medium screw</option>
+                  <option>E12 candelabra</option>
+                  <option>GU10 twist lock</option>
+                  <option>G9 bi-pin</option>
+                  <option>T8 / tube</option>
+                  <option>Integrated LED</option>
+                </select>
+              </label>
+              <label>Bulb shape
+                <select name="shape">
+                  <option>Unknown</option>
+                  <option>A19 standard</option>
+                  <option>Globe</option>
+                  <option>Candelabra flame</option>
+                  <option>PAR / spotlight</option>
+                  <option>Tubular</option>
+                  <option>Vintage Edison</option>
+                </select>
+              </label>
+              <label>Quantity
+                <input name="quantity" inputmode="numeric" min="1" type="number" value="1">
+              </label>
+            </div>
+            <div class="field-triple">
+              <label>Color temperature
+                <select name="temperature">
+                  <option>Warm 2700K</option>
+                  <option>Soft warm 3000K</option>
+                  <option>Neutral 3500K</option>
+                  <option>Cool 4000K</option>
+                  <option>Match existing</option>
+                </select>
+              </label>
+              <label>Brightness
+                <input name="brightness" placeholder="800 lm, 60W equivalent">
+              </label>
+              <label>Voltage
+                <select name="voltage">
+                  <option>120V</option>
+                  <option>12V low voltage</option>
+                  <option>24V low voltage</option>
+                  <option>Unknown</option>
+                </select>
+              </label>
+            </div>
+            <label>Dimming and finish</label>
+            <div class="option-grid" role="group" aria-label="Dimming and finish options">
+              <label class="option-card"><input name="options" type="checkbox" value="Dimmable"> Dimmable</label>
+              <label class="option-card"><input name="options" type="checkbox" value="Clear glass"> Clear glass</label>
+              <label class="option-card"><input name="options" type="checkbox" value="Frosted glass"> Frosted glass</label>
+              <label class="option-card"><input name="options" type="checkbox" value="Outdoor rated"> Outdoor rated</label>
+              <label class="option-card"><input name="options" type="checkbox" value="High CRI"> High CRI</label>
+              <label class="option-card"><input name="options" type="checkbox" value="Match existing look"> Match existing</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-section">
+            <legend>Reference notes</legend>
+            <label>Photo or product links
+              <textarea name="links" placeholder="Paste photo links, existing bulb label text, product links, or fixture model numbers."></textarea>
+            </label>
+            <label>Notes
+              <textarea name="notes" placeholder="Anything weird: flicker, too blue, too dim, needs to match other fixtures, ladder needed, etc."></textarea>
+            </label>
+            <p class="helper-text">This page builds a local summary only. It does not submit or store the request on a server.</p>
+          </fieldset>
+        </form>
+
+        <aside class="intake-preview" aria-label="Generated intake summary">
+          <div class="preview-card">
+            <h2>Summary</h2>
+            <dl class="preview-list" id="preview-list"></dl>
+            <h2>Copy Block</h2>
+            <pre class="copy-box" id="copy-block" tabindex="0"></pre>
+            <div class="intake-actions">
+              <button class="button primary" id="copy-summary" type="button">Copy summary</button>
+              <button class="button" id="clear-form" type="button">Clear form</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+
+    <script>
+      const form = document.querySelector("#lightbulb-form");
+      const previewList = document.querySelector("#preview-list");
+      const copyBlock = document.querySelector("#copy-block");
+      const copyButton = document.querySelector("#copy-summary");
+      const clearButton = document.querySelector("#clear-form");
+
+      const fields = [
+        ["Requester", "requester"],
+        ["Needed by", "neededBy"],
+        ["Area", "area"],
+        ["Location", "location"],
+        ["Priority", "priority"],
+        ["Base", "base"],
+        ["Shape", "shape"],
+        ["Quantity", "quantity"],
+        ["Temperature", "temperature"],
+        ["Brightness", "brightness"],
+        ["Voltage", "voltage"],
+        ["Options", "options"],
+        ["Links", "links"],
+        ["Notes", "notes"]
+      ];
+
+      function getValue(name) {
+        const data = new FormData(form);
+        if (name === "options") {
+          const selected = data.getAll("options");
+          return selected.length ? selected.join(", ") : "None selected";
+        }
+        return data.get(name) || "Not provided";
+      }
+
+      function renderSummary() {
+        const rows = fields.map(([label, name]) => [label, getValue(name)]);
+        previewList.innerHTML = rows
+          .slice(0, 12)
+          .map(([label, value]) => `<div><dt>${label}</dt><dd>${value}</dd></div>`)
+          .join("");
+        copyBlock.textContent = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
+      }
+
+      copyButton.addEventListener("click", async () => {
+        await navigator.clipboard.writeText(copyBlock.textContent);
+        copyButton.textContent = "Copied";
+        window.setTimeout(() => {
+          copyButton.textContent = "Copy summary";
+        }, 1400);
+      });
+
+      clearButton.addEventListener("click", () => {
+        form.reset();
+        renderSummary();
+      });
+
+      form.addEventListener("input", renderSummary);
+      form.addEventListener("change", renderSummary);
+      renderSummary();
+    </script>
+  </body>
+</html>

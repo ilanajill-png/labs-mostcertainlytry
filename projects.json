@@ -1,5 +1,19 @@
 [
   {
+    "id": "las-jaras-lightbulb-intake",
+    "title": "Las Jaras Lightbulb Intake",
+    "category": "Tool",
+    "type": "Mobile Intake Form",
+    "status": "Published",
+    "date": "2026-05-31",
+    "featured": true,
+    "tools": ["HTML", "CSS", "JavaScript", "Responsive Form", "Static Site"],
+    "summary": "A phone-friendly intake form for collecting fixture, bulb, dimmer, color, quantity, photo-link, and deadline details before replacement bulbs are purchased.",
+    "outcome": "Added a static mobile-ready form with stacked narrow-screen sections, large tap targets, local summary generation, copy-to-clipboard support, and no server-side data storage.",
+    "url": "projects/las-jaras-lightbulb-intake.html",
+    "source": "projects/las-jaras-lightbulb-intake.html"
+  },
+  {
     "id": "andre-mack-reviewed-wines",
     "title": "Every Public André Mack Wine Recommendation We Could Verify",
     "category": "Build Log",
