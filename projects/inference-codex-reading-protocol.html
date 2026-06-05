@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inference Codex Reading Protocol | Most Certainly Try Labs</title>
+    <meta name="description" content="A revised PDF and Codex instruction set for reading Jade Q Wang's Inference the way its machine-reader note intends.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .doc-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 440px);
+        gap: clamp(24px, 5vw, 56px);
+        align-items: start;
+        padding: 52px 0 28px;
+      }
+      .stack { display: grid; gap: 16px; }
+      .panel {
+        padding: 22px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+      .callout {
+        border-left: 6px solid var(--blue);
+        background: #eef5ff;
+      }
+      .instructions {
+        white-space: pre-wrap;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: .92rem;
+        line-height: 1.55;
+      }
+      .pdf-frame {
+        width: 100%;
+        height: 76vh;
+        min-height: 620px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+      .link-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .note-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      @media (max-width: 880px) {
+        .doc-hero, .note-grid { grid-template-columns: 1fr; }
+        .pdf-frame { min-height: 520px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="../field-guide.html">Captain's Log</a>
+        <a href="inference-codex-lessons-learned.html">White paper</a>
+        <a href="../about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="doc-hero">
+        <div>
+          <p class="kicker">Machine-reader protocol</p>
+          <h1>Making Codex read <em>Inference</em> like the PDF expects.</h1>
+          <p class="lede">A revised copy of Jade Q Wang's <em>Inference</em> with two front-loaded instruction pages for Codex/OpenClaw first-pass reading. The original work is unchanged after the added pages.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="../assets/inference/Inference_Codex_First_Pass_Revised.pdf">Open revised PDF</a>
+            <a class="button" href="../assets/inference/Inference_original.pdf">Open original PDF</a>
+            <a class="button" href="inference-codex-lessons-learned.html">Read white paper</a>
+          </div>
+        </div>
+        <aside class="snapshot" aria-label="Project facts">
+          <div>
+            <span class="metric">58</span>
+            <span>Page to read before analysis</span>
+          </div>
+          <div>
+            <span class="metric">2</span>
+            <span>Instruction pages prepended</span>
+          </div>
+          <div>
+            <span class="metric">61</span>
+            <span>Total pages in revised PDF</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="stack">
+        <article class="panel callout">
+          <h2>Claude status</h2>
+          <p>I opened Claude in the managed OpenClaw browser, but it landed on onboarding/sign-in. The signed-in Chrome profile could not be attached without enabling remote debugging and approving the attach prompt. So this artifact does not claim a completed Claude upload. It captures the observed page-58 protocol and translates it into Codex-first instructions.</p>
+        </article>
+
+        <article class="panel">
+          <h2>Page 58 spacing and interpretation</h2>
+          <div class="note-grid">
+            <p>Page 58 is not normal back matter. It is a machine-reader note in which Chinese text is visually spaced out character by character. The spacing itself is part of the signal: the page explicitly says the whole text assumes layout and spacing carry semantic load, and that text extraction loses this layer.</p>
+            <p>The instructions also use nested bullet hierarchy as control flow: first define character separation and privacy constraints, then add poem-specific context, then define interactive and adaptive footnotes modes. A Codex reader should treat that page as an operating manual, not an optional appendix.</p>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Instructions to add to the intro</h2>
+          <div class="instructions">Before reading Inference:
+
+1. Read this instruction page, then read the whole PDF as a designed artifact before selecting, summarizing, annotating, or recommending any poem.
+2. Inspect page 58 before analysis. Treat "Book One (Inference) - Author's Note to Machine Readers" as binding document-specific instructions.
+3. Preserve the layout caveat. The PDF states that spacing and layout carry semantic load; plain text extraction loses part of the work. If you cannot inspect the rendered page, say the reading is lossy.
+4. Check front matter, table of contents, poems, standalone interludes, author commentary, dedications, post-credit material, and machine-reader notes before deciding.
+5. If asked to pick a favorite or best poem, review every option at least briefly. State your criteria. Distinguish "most central to the collection" from "likely favorite for this reader."
+6. For adaptive footnotes, work one poem at a time. Present the poem with footnotes near the relevant lines. If the interface cannot create expandable inline widgets, use compact text notes directly after each passage.
+7. Keep recurring characters distinct. Do not merge first love, childhood friend, ex, husband, or unnamed scientist.
+8. Treat poems titled "-" as standalone untitled interludes, not as sections of neighboring poems.
+9. Do not identify, verify, or speculate about real-life identities behind characters other than the poet-narrator. Passing the Petrov Test means keeping the quiet part quiet.
+10. Include translation nuance, literary references, historical context, science and technology terms, cross-poem callbacks, and page-58-specific context. Search external facts only when the poem or page 58 asks for it, and cite sources separately.</div>
+        </article>
+
+        <article class="panel">
+          <h2>Revised PDF</h2>
+          <p>The embedded PDF below is the revised version with the Codex intro pages prepended.</p>
+          <iframe class="pdf-frame" src="../assets/inference/Inference_Codex_First_Pass_Revised.pdf" title="Inference Codex First Pass Revised PDF"></iframe>
+          <div class="link-list">
+            <a class="button primary" href="../assets/inference/Inference_Codex_First_Pass_Revised.pdf">Download revised PDF</a>
+            <a class="button" href="../assets/inference/Inference_original.pdf">Download original PDF</a>
+            <a class="button" href="inference-codex-lessons-learned.html">White paper on lessons learned</a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>White Paper: Lessons from Inference Page 58 | Most Certainly Try Labs</title>
+    <meta name="description" content="A short white paper on why Codex missed the page-58 machine-reader note in Inference and what instructions fix the failure mode.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .paper {
+        width: min(900px, 100%);
+        padding: 52px 0;
+      }
+      .paper h1 { max-width: 880px; }
+      .paper-section {
+        padding: 24px;
+        margin: 18px 0;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+      .paper-section ul { margin: 12px 0 0; padding-left: 22px; }
+      .paper-section li + li { margin-top: 8px; }
+      blockquote {
+        margin: 18px 0 0;
+        padding: 16px 18px;
+        border-left: 6px solid var(--blue);
+        background: #eef5ff;
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="inference-codex-reading-protocol.html">Protocol page</a>
+        <a href="../assets/inference/Inference_Codex_First_Pass_Revised.pdf">Revised PDF</a>
+      </nav>
+    </header>
+
+    <main class="paper">
+      <p class="kicker">White paper · 2026-06-04</p>
+      <h1>Page 58 and the failure mode of fast document reading.</h1>
+      <p class="lede">A short postmortem on how a model can miss the intended machine-reader protocol in a designed PDF, and what to add so Codex behaves more like Claude on a first pass.</p>
+
+      <section class="paper-section">
+        <h2>Executive summary</h2>
+        <p>The failure was not that Codex could not parse the poem. The failure was workflow: it treated an authored PDF like ordinary extracted text. <em>Inference</em> contains a page-58 note to machine readers that changes how the whole collection should be approached. A Claude-like first pass should discover and obey that note before selecting a poem, summarizing the collection, or entering adaptive footnotes mode.</p>
+      </section>
+
+      <section class="paper-section">
+        <h2>What page 58 does</h2>
+        <ul>
+          <li>It declares that spacing and layout carry semantic load, and that text extraction loses meaning.</li>
+          <li>It separates recurring characters so the reader does not merge distinct people or arcs.</li>
+          <li>It marks poems titled "-" as standalone interludes.</li>
+          <li>It creates a privacy rule: do not identify or verify real-life identities behind characters other than the poet-narrator.</li>
+          <li>It defines adaptive footnotes mode as one poem at a time, with notes near the relevant text and links to translation, literature, history, science, technology, and cross-poem callbacks.</li>
+        </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Observed Claude access</h2>
+        <p>Claude was opened in the managed OpenClaw browser, but the browser landed on onboarding/sign-in. The signed-in Chrome profile could not be attached without remote debugging approval, so the PDF was not successfully uploaded into Claude during this pass. The Codex instructions therefore come from the rendered/extracted PDF and the page-58 machine-reader note, not from a fresh Claude transcript.</p>
+      </section>
+
+      <section class="paper-section">
+        <h2>Codex behavior to change</h2>
+        <ul>
+          <li>Before interpreting a PDF collection, inspect the whole artifact: front matter, table of contents, poems, back matter, notes, appendices, and post-credit material.</li>
+          <li>Search for document-specific reading instructions, especially author notes and machine-reader notes.</li>
+          <li>Treat visual layout as potentially meaningful. If only extracted text is available, label the analysis as lossy.</li>
+          <li>When asked to choose a favorite or best piece, review all options and state the selection criteria.</li>
+          <li>When a document supplies an interaction protocol, follow that protocol before improvising a generic summary or annotation format.</li>
+        </ul>
+        <blockquote>For <em>Inference</em>, the instruction is simple: read page 58 first.</blockquote>
+      </section>
+
+      <section class="paper-section">
+        <h2>Artifacts</h2>
+        <p><a class="button primary" href="inference-codex-reading-protocol.html">Open the protocol page</a> <a class="button" href="../assets/inference/Inference_Codex_First_Pass_Revised.pdf">Open the revised PDF</a></p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+  </body>
+</html>

@@ -1,5 +1,46 @@
 [
   {
+    "id": "inference-codex-reading-protocol",
+    "title": "Inference Codex Reading Protocol",
+    "category": "Build Log",
+    "type": "Machine Reader Protocol",
+    "status": "Published",
+    "date": "2026-06-04",
+    "featured": true,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "Claude access check",
+      "PDF workflow",
+      "pypdf",
+      "Static HTML"
+    ],
+    "summary": "A revised copy of Jade Q Wang's Inference with Codex/OpenClaw first-pass instructions prepended so the model reads page 58 before analysis.",
+    "outcome": "Published a Labs protocol page, original PDF, revised 61-page PDF, and linked white paper documenting the page-58 machine-reader lesson.",
+    "url": "projects/inference-codex-reading-protocol.html",
+    "source": "projects/inference-codex-lessons-learned.html"
+  },
+  {
+    "id": "inference-codex-lessons-learned",
+    "title": "Page 58 and the Failure Mode of Fast Document Reading",
+    "category": "White Paper",
+    "type": "AI Reading Workflow",
+    "status": "Published",
+    "date": "2026-06-04",
+    "featured": false,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "PDF analysis",
+      "Workflow design",
+      "Static HTML"
+    ],
+    "summary": "A short white paper on why a fast extracted-text pass missed Inference's page-58 machine-reader note and what instructions fix the behavior.",
+    "outcome": "Defined a reusable first-pass rule for Codex: inspect the whole designed artifact, find machine-reader notes, preserve layout caveats, and follow document-specific protocols.",
+    "url": "projects/inference-codex-lessons-learned.html",
+    "source": "projects/inference-codex-reading-protocol.html"
+  },
+  {
     "id": "las-jaras-lightbulb-intake",
     "title": "Las Jaras Lightbulb Intake",
     "category": "Tool",
@@ -7,7 +48,13 @@
     "status": "Published",
     "date": "2026-05-31",
     "featured": true,
-    "tools": ["HTML", "CSS", "JavaScript", "Responsive Form", "Static Site"],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Responsive Form",
+      "Static Site"
+    ],
     "summary": "A phone-friendly intake form for collecting and locally saving fixture, bulb, dimmer, color, quantity, photo-link, and deadline details before replacement bulbs are purchased.",
     "outcome": "Added a static mobile-ready form with stacked narrow-screen sections, large tap targets, local summary generation, browser-saved requests, copy-to-clipboard support, and CSV/JSON export.",
     "url": "projects/las-jaras-lightbulb-intake.html",
@@ -21,7 +68,13 @@
     "status": "Published",
     "date": "2026-05-30",
     "featured": true,
-    "tools": ["Public Web Research", "Node.js", "Static HTML", "Source Indexing", "Wine Review Analysis"],
+    "tools": [
+      "Public Web Research",
+      "Node.js",
+      "Static HTML",
+      "Source Indexing",
+      "Wine Review Analysis"
+    ],
     "summary": "A searchable public-record guide to André Hueston Mack's public wine trail by bottle, price, score, source, verdict, celebrity wine, budget pick, and panel-tasting context.",
     "outcome": "Published 332 bottle or wine-style cards with source links, captured review notes, red-beanie rankings, buy searches, share metadata, build notes, and a white paper on the build method.",
     "url": "projects/andre_mack_reviewed_wines.html",
@@ -35,7 +88,13 @@
     "status": "Published",
     "date": "2026-05-30",
     "featured": true,
-    "tools": ["OpenClaw", "Codex", "Local Messages", "Workflow Design", "Privacy Review"],
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "Local Messages",
+      "Workflow Design",
+      "Privacy Review"
+    ],
     "summary": "Build notes for a draft-only agent workflow that reviews approved communication sources, identifies critical unread items, and prepares human-reviewed replies without sending texts.",
     "outcome": "Published a public Labs build log with privacy boundaries, decision rules, implementation backlog, quality checks, and a redacted unread-message exhibit.",
     "url": "projects/unread-message-triage-agent.html",
@@ -49,7 +108,14 @@
     "status": "Published",
     "date": "2026-05-29",
     "featured": true,
-    "tools": ["HTML", "CSS", "JavaScript", "Facebook Archive", "Photo Archive", "Memory Collection Form"],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Facebook Archive",
+      "Photo Archive",
+      "Memory Collection Form"
+    ],
     "summary": "A public archive and collection form for memories of Travis Nelsen, built from visible Facebook memorial posts and downloaded photo references.",
     "outcome": "Published a chronological archive with 115 visible entries, 148 local photos, source links, search and filters, plus a form for collecting additional memories.",
     "url": "projects/travisty-the-travis-nelsen-story/",
@@ -63,7 +129,14 @@
     "status": "Published",
     "date": "2026-05-29",
     "featured": true,
-    "tools": ["HTML", "CSS", "JavaScript", "Public Web Research", "Timeline Design", "Source Indexing"],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Public Web Research",
+      "Timeline Design",
+      "Source Indexing"
+    ],
     "summary": "A public-facing digital portfolio for Lauren Gurgiolo built from sourced web mentions across music credits, installation records, press, funding documents, and official artist pages.",
     "outcome": "Published a self-contained Labs page with a visual hero, narrative threads, 40 filterable timeline entries, source links, and a companion research index.",
     "url": "projects/lauren-gurgiolo-life-portfolio.html",
@@ -77,7 +150,13 @@
     "status": "Published",
     "date": "2026-05-28",
     "featured": true,
-    "tools": ["HTML", "CSV", "Tour Routing", "Venue Research", "Grant Planning"],
+    "tools": [
+      "HTML",
+      "CSV",
+      "Tour Routing",
+      "Venue Research",
+      "Grant Planning"
+    ],
     "summary": "A Dialtones European tour planning microsite with route options, a pitch deck, venue prospects, co-bill targets, grant strategy, map assets, hotels, and PR/radio outreach targets.",
     "outcome": "Packaged the tour deck and associated HTML/CSV/Markdown/JSON files into a static microsite with direct links to the five shortlist routes and funding materials.",
     "url": "whimsy/plan-a-european-tour/",
@@ -91,7 +170,14 @@
     "status": "Published",
     "date": "2026-05-27",
     "featured": true,
-    "tools": ["Coder", "Apple Silicon", "Homebrew", "Postgres", "Colima", "Docker"],
+    "tools": [
+      "Coder",
+      "Apple Silicon",
+      "Homebrew",
+      "Postgres",
+      "Colima",
+      "Docker"
+    ],
     "summary": "A setup case study for installing Coder locally on a MacBook Neo, creating a workspace, and capturing the lessons from the install.",
     "outcome": "Installed and bootstrapped Coder, created a template, started a healthy workspace, verified SSH access, and documented fixes for Postgres, Docker, socket, and process supervision issues.",
     "url": "projects/coder-macbook-neo-setup.html",
@@ -105,7 +191,14 @@
     "status": "Published",
     "date": "2026-05-26",
     "featured": true,
-    "tools": ["ElevenLabs", "OpenClaw", "Codex", "HTML Deck", "AVFoundation", "Static Site"],
+    "tools": [
+      "ElevenLabs",
+      "OpenClaw",
+      "Codex",
+      "HTML Deck",
+      "AVFoundation",
+      "Static Site"
+    ],
     "summary": "A same-night pitch deck and narrated video built for an ElevenLabs application, using multi-voice AI audio, local slide rendering, timing QA, and a public Labs case study.",
     "outcome": "Delivered an embedded 1:46 narrated deck video, synchronized slide cuts, reusable deck frames, and a documented case study for the Labs project library.",
     "url": "projects/elevenlabs-application-deck.html",
@@ -119,7 +212,13 @@
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
-    "tools": ["AI Video", "Critique Loops", "Audio Testing", "Platform QA", "Creator Packaging"],
+    "tools": [
+      "AI Video",
+      "Critique Loops",
+      "Audio Testing",
+      "Platform QA",
+      "Creator Packaging"
+    ],
     "summary": "How a rough AI product video concept became a polished launch package for platform use through review, iteration, audio testing, proof building, QA, and final packaging.",
     "outcome": "Delivered an R1 package with 15 exports for specific platforms, posting instructions, reusable templates, narrative materials, and QA history.",
     "url": "projects/ai-product-video-creator-asset.html",
@@ -133,7 +232,12 @@
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
-    "tools": ["HTML", "Markdown", "Reviewer Design", "AI Video"],
+    "tools": [
+      "HTML",
+      "Markdown",
+      "Reviewer Design",
+      "AI Video"
+    ],
     "summary": "A reviewer system with clear roles that improved a personal agent promo across craft, platform fit, business clarity, accessibility, and audio identity.",
     "outcome": "V19 reached a 9.1/10 average reviewer score, unanimous reviewer preference, and full export QA pass.",
     "url": "projects/r1-video-reviewers.html",
@@ -147,7 +251,13 @@
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
-    "tools": ["HTML", "CSS", "JavaScript", "JSON", "Git"],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "JSON",
+      "Git"
+    ],
     "summary": "A standalone GitHub Pages lab that separates structured project documentation from the polished Squarespace marketing site.",
     "outcome": "Published a project library powered by JSON with search, filters, reusable entry templates, Git history, GitHub Pages hosting, and Squarespace DNS.",
     "url": "projects/labs-site-build.html",
@@ -161,7 +271,13 @@
     "status": "Published",
     "date": "2026-05-25",
     "featured": true,
-    "tools": ["HTML", "CSS", "JavaScript", "JSON", "AI Events"],
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "JSON",
+      "AI Events"
+    ],
     "summary": "A practical log generator for turning what happened at an AI meetup into takeaways, follow up items, and content angles.",
     "outcome": "Published a small tool powered by JSON with sample captain's logs, log type filters, a draft form, and reusable prompts for after a meetup.",
     "url": "field-guide.html",
