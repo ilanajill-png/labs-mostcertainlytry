@@ -644,9 +644,9 @@
 
         <section class="chat-handoff" id="chat-handoff" aria-labelledby="chat-handoff-title" hidden>
           <div>
-            <p class="label">Chat handoff</p>
-            <h2 id="chat-handoff-title">Photo-Aware Serafina Reply</h2>
-            <p class="hint">For the best answer, upload the same photo or video into chat, then paste this prompt. Serafina will use the actual media plus your question before answering.</p>
+            <p class="label">Investigation handoff</p>
+            <h2 id="chat-handoff-title">Howdy Buddy Investigation</h2>
+            <p class="hint">For the best answer, upload the same photo or video into chat, then paste this prompt. Howdy Buddy will use the media, your note, house context, and any useful research to explain what likely happened.</p>
           </div>
           <pre id="chat-prompt" tabindex="0"></pre>
           <div class="actions">
@@ -847,10 +847,12 @@
         ? record.mediaAttachments.map((item) => `${item.name} (${item.type}, ${item.size})`).join("; ")
         : "No media attached in the form.";
       return [
-        "Serafina, answer this human-informed field note in your Las Jaras garden-angel tone.",
+        "Howdy Buddy, investigate this human-informed Las Jaras field note.",
         "",
         "Use the photo or video uploaded in this chat as evidence. Do not pretend to see media if no media is attached in chat.",
-        "Use the human's question and form context together before giving the best practical answer.",
+        "Use the human's question, the form context, known Las Jaras context, and any useful research to give a better answer about what likely happened.",
+        "Separate the answer into: what is visible, what is inferred, what was researched or checked, what likely happened, and what to do next.",
+        "If this touches plants, weather, pests, wildlife, safety, house maintenance, or ritual context, look up or use relevant grounded information before answering.",
         "",
         `Human name: ${record.informedBy || "not given"}`,
         `Date observed: ${record.eventDate || "not given"} ${record.eventTime || ""}`.trim(),
@@ -865,7 +867,8 @@
         "",
         `Human question or observation: ${record.description}`,
         "",
-        "Deliver the answer as Serafina: practical, watchful, a little imperious, warm toward the household, and clear about the next best action."
+        "Deliver the main answer from Howdy Buddy: clear, researched where useful, careful about uncertainty, and practical.",
+        "End with a short optional Serafina note in her tone: watchful, a little imperious, warm toward the household, and clear about the next best action."
       ].join("\n");
     }
 
