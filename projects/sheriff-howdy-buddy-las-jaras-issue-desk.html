@@ -542,7 +542,7 @@
 
     <div class="layout">
       <form id="case-form" aria-describedby="case-help">
-        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through.</p>
+        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through. Browser-saved cases stay on this device unless you copy an import link or download the cases JSON.</p>
 
         <fieldset>
           <legend>Open a Las Jaras case</legend>
@@ -1017,6 +1017,19 @@
       return JSON.parse(new TextDecoder().decode(bytes));
     }
 
+    function encodeImportPayload(issue) {
+      const json = JSON.stringify(issue);
+      const bytes = new TextEncoder().encode(json);
+      let binary = "";
+      for (const byte of bytes) binary += String.fromCharCode(byte);
+      return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+    }
+
+    function importUrlFor(issue) {
+      const base = `${window.location.origin}${window.location.pathname}`;
+      return `${base}?importCase=${encodeImportPayload(issue)}`;
+    }
+
     function importCaseFromUrl() {
       const params = new URLSearchParams(window.location.search);
       const encoded = params.get("importCase");
@@ -1168,6 +1181,7 @@
             <div class="actions">
               <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
               <button type="button" data-copy="${escapeHtml(issue.id)}">Copy Prompt</button>
+              <button type="button" data-share="${escapeHtml(issue.id)}">Copy Import Link</button>
               ${issue.status === "Open" ? `<button type="button" data-close="${escapeHtml(issue.id)}">Case Closed By Sheriff</button>` : ""}
             </div>
           </article>
@@ -1253,6 +1267,7 @@
       const solution = solutionClickData(event);
       const readId = event.target?.dataset?.read;
       const copyId = event.target?.dataset?.copy;
+      const shareId = event.target?.dataset?.share;
       const closeId = event.target?.dataset?.close;
       const cases = loadCases();
       if (solution) {
@@ -1266,6 +1281,10 @@
       if (copyId) {
         const issue = cases.find((item) => item.id === copyId);
         if (issue) await navigator.clipboard.writeText(issue.investigationPrompt);
+      }
+      if (shareId) {
+        const issue = cases.find((item) => item.id === shareId);
+        if (issue) await navigator.clipboard.writeText(importUrlFor(issue));
       }
       if (closeId) {
         const issue = cases.find((item) => item.id === closeId);
