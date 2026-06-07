@@ -143,7 +143,7 @@
               <td>Deploy Worker</td>
               <td>In Progress</td>
               <td>5 to 10 minutes</td>
-              <td>The starter Worker resource has been created in Cloudflare as <code>sheriff-lone-star-case-api</code> at <code>sheriff-lone-star-case-api.ilanajill.workers.dev</code>. Next deploy the repo's real Worker code after binding D1.</td>
+              <td>The starter Worker resource has been created in Cloudflare. Next deploy the repo's real Worker code after binding D1 and publish the API URL only after the endpoint is secured.</td>
             </tr>
             <tr>
               <td>Wire Sheriff page to API</td>
@@ -198,13 +198,10 @@
       <section class="paper-section">
         <h2>Cloudflare Account And Tooling Notes</h2>
         <ul>
-          <li><strong>Account:</strong> Cloudflare dashboard is set up under <code>ilanajill@gmail.com</code>.</li>
-          <li><strong>Account ID:</strong> <code>5d8c12efe054ea86b292fe18142c2f41</code>.</li>
-          <li><strong>Worker created:</strong> <code>sheriff-lone-star-case-api</code>.</li>
-          <li><strong>Worker URL:</strong> <code>https://sheriff-lone-star-case-api.ilanajill.workers.dev</code>.</li>
-          <li><strong>Wrangler version:</strong> <code>4.98.0</code>, available through <code>npx wrangler</code>.</li>
-          <li><strong>Wrangler login:</strong> OAuth authorization completed successfully after the human approved account access.</li>
-          <li><strong>D1 status:</strong> Cloudflare dashboard showed no D1 databases yet; the next database should be named <code>sheriff_lone_star_cases</code>.</li>
+          <li><strong>Account setup:</strong> Cloudflare account access was configured for the production backend work. Account identifiers are intentionally omitted from this public build log.</li>
+          <li><strong>Worker created:</strong> a Sheriff API Worker has been created in Cloudflare. The public API URL will be listed after the endpoint is secured and wired to the Labs front end.</li>
+          <li><strong>Wrangler:</strong> Cloudflare Wrangler is available for local deployment and database setup. OAuth details are private operational metadata.</li>
+          <li><strong>D1 status:</strong> the next backend step is creating the Sheriff cases D1 database and applying the schema.</li>
         </ul>
       </section>
 
