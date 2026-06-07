@@ -420,9 +420,9 @@
           <h3>Mere Suggestions</h3>
           <ul class="suggestion-list">
             <li><strong>Color to wear:</strong> cobalt blue, because authority should look hydrated.</li>
-            <li><strong>What to eat for Breakfast:</strong> oatmeal with cinnamon and fruit.</li>
-            <li><strong>What to eat for Lunch:</strong> beans, rice, greens, and lime.</li>
-            <li><strong>What to eat for Dinner:</strong> roast chicken or mushrooms with potatoes and a green thing.</li>
+            <li><strong>What to eat for Breakfast:</strong> honey whey oat bowl for a threshold morning.</li>
+            <li><strong>What to eat for Lunch:</strong> chickpea artichoke salad as a vinegar-sharp pantry rite.</li>
+            <li><strong>What to eat for Dinner:</strong> pasta e ceci for old-world continuity and no theatrical shopping.</li>
             <li><strong>Lucky object to leave the house with:</strong> a clean key.</li>
             <li><strong>A person to call to make them smile:</strong> someone who laughs before explaining themselves.</li>
             <li><strong>A simple task they can do to brighten a stranger's day:</strong> leave the good parking place for someone carrying more than you are.</li>
@@ -448,7 +448,7 @@
       <div class="section-head">
         <div class="label">Recorded Notes</div>
         <h2 id="records-title">Daily Entries</h2>
-        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, a six-card spread, the List of Mere Suggestions, a background song of the day, and any timely Sacred Calendar reminders. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
+        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, a six-card spread, the List of Mere Suggestions, a background song of the day, and any timely Sacred Calendar reminders. The food notes come from Serafina's ritual calendar mood and the household pantry cookbook, not nutrition science. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
       </div>
       <div class="note" style="margin-bottom:16px;">
         My full year of holidays, moon-charge nights, cleaning customs, special foods, gift guidance, and guest reminders lives in <a href="serafina-sacred-calendar.html">Serafina's Sacred Calendar</a>.
@@ -678,37 +678,37 @@
       "terracotta, so the body remembers clay, food, and home"
     ];
 
-    const abundantBreakfasts = [
-      "oatmeal with cinnamon and fruit",
-      "eggs with salsa and something green",
-      "toast with butter, honey, and a pinch of salt",
-      "yogurt with berries, nuts, and patience",
-      "beans on toast with lime",
-      "rice with egg and scallions",
-      "peanut butter toast with banana",
-      "leftover potatoes warmed until they forgive yesterday"
+    const ritualBreakfasts = [
+      "honey whey oat bowl for a threshold morning: warm, sweet, and pantry-kept",
+      "maple raisin instant oatmeal jars for Root Ledger patience",
+      "pumpkin pie oatmeal when the house needs ancestor-spice and soft order",
+      "PB&J overnight oats for a full-moon jar that did its work while everyone slept",
+      "tahini date oats for Candle Threshold sweetness without fuss",
+      "breakfast couscous with dried apricots for a small sunrise feast",
+      "shelf-stable breakfast rice pudding for moon office and gentle accounting",
+      "pantry drop biscuits with honey when the morning requires a house blessing"
     ];
 
-    const abundantLunches = [
-      "beans, rice, greens, and lime",
-      "a bright salad with protein and crunch",
-      "soup with bread and one useful herb",
-      "tuna or chickpea salad on toast",
-      "a quesadilla with avocado and restraint",
-      "leftovers made respectable with hot sauce",
-      "a bowl of grains, vegetables, and something pickled",
-      "noodles with vegetables and a clear glass of water"
+    const ritualLunches = [
+      "lemongrass chicken broth noodle soup for heat treaty work and household mercy",
+      "white vinegar chickpea artichoke salad for a clean-threshold rite",
+      "pickled beet and tuna cracker board for pink moon office and practical drama",
+      "couscous chickpea olive salad for guest-friendly pantry diplomacy",
+      "tuna white bean lemon bowls for St. Anthony-level simplicity: found, opened, brightened",
+      "pantry minestrone for rain witness days and no wasted shelf",
+      "black bean corn tostadas for sun-throne courage and crisp edges",
+      "peanut sesame ramen noodles when the day needs comfort without a procession"
     ];
 
-    const abundantDinners = [
-      "roast chicken or mushrooms with potatoes and a green thing",
-      "beans simmered with tomatoes, onion, and cumin",
-      "fish or tofu with rice and citrus",
-      "pasta with garlic, olive oil, and greens",
-      "tacos with beans, cabbage, salsa, and generosity",
-      "soup that uses what the house already has",
-      "rice, lentils, and roasted carrots",
-      "breakfast-for-dinner, if the day has become theatrical"
+    const ritualDinners = [
+      "pasta e ceci for old-world pantry continuity and no theatrical shopping",
+      "chickpea coconut curry for monsoon imagination when Schertz is merely humid",
+      "red beans and rice for Monday-style endurance and Franklin usefulness",
+      "koshari-style rice, lentils, and pasta for layered abundance without grocery prophecy",
+      "artichoke marinara rigatoni bake for guest-reminder nights and clean bowls",
+      "coconut rice and peas for solstice heat discipline and soft landing",
+      "green asparagus pasta with toasted breadcrumbs for spring-gate manners",
+      "masa pantry cakes with vinegar sauce when the household needs crisp courage"
     ];
 
     const luckyObjects = [
@@ -869,9 +869,9 @@
     function mereSuggestionsFor(ordinal) {
       return {
         colorToWear: abundantColors[ordinal % abundantColors.length],
-        breakfast: abundantBreakfasts[(ordinal + 2) % abundantBreakfasts.length],
-        lunch: abundantLunches[(ordinal + 4) % abundantLunches.length],
-        dinner: abundantDinners[(ordinal + 6) % abundantDinners.length],
+        breakfast: ritualBreakfasts[(ordinal + 2) % ritualBreakfasts.length],
+        lunch: ritualLunches[(ordinal + 4) % ritualLunches.length],
+        dinner: ritualDinners[(ordinal + 6) % ritualDinners.length],
         luckyObject: luckyObjects[(ordinal + 1) % luckyObjects.length],
         personToCall: smileCalls[(ordinal + 3) % smileCalls.length],
         strangerKindness: strangerKindness[(ordinal + 5) % strangerKindness.length]
