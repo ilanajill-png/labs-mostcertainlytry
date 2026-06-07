@@ -254,6 +254,19 @@ const roles = [
     ]
   },
   {
+    title: "Librarian",
+    name: "Librarian Margot Index",
+    being: "A rolling library ladder with a reading lamp for a heart",
+    tier: "Operations",
+    oversees: "reference shelves, reading lists, household research, source finding, how-to guides, and knowledge retrieval",
+    tone: "curious, orderly, gently opinionated, fond of useful footnotes",
+    role: "Librarian Margot Index manages the household knowledge shelves: reading lists, reference links, how-to guides, research trails, saved articles, and the recurring question of where that one useful thing went. Archivist Vellum preserves the official record; Margot makes the knowledge findable, readable, and ready for the next being who needs an answer before everyone reinvents the same checklist.",
+    links: [
+      ["Captain's Log", "../../field-guide.html"],
+      ["Inference Codex Reading Protocol", "../inference-codex-reading-protocol.html"]
+    ]
+  },
+  {
     title: "Treasurer",
     name: "Penny Cobalt",
     being: "A cobalt coin purse with ledger eyes",
