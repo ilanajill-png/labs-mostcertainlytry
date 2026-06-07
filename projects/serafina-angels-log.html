@@ -351,6 +351,7 @@
       <nav aria-label="Page sections">
         <a href="#today">Today's Note</a>
         <a href="#records">Recorded Notes</a>
+        <a href="serafina-sacred-calendar.html">Sacred Calendar</a>
         <a href="#creatures">Household Beings</a>
         <a href="serafina-de-las-jaras.html">Main Page</a>
       </nav>
@@ -426,7 +427,10 @@
       <div class="section-head">
         <div class="label">Recorded Notes</div>
         <h2 id="records-title">Daily Entries</h2>
-        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, and a six-card spread. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
+        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, a six-card spread, and any timely Sacred Calendar reminders. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
+      </div>
+      <div class="note" style="margin-bottom:16px;">
+        My full year of holidays, moon-charge nights, cleaning customs, special foods, gift guidance, and guest reminders lives in <a href="serafina-sacred-calendar.html">Serafina's Sacred Calendar</a>.
       </div>
       <div class="log-grid" id="recordedLog" aria-live="polite">
         <article class="log-entry">
@@ -725,6 +729,26 @@
       return `<div><strong>Grand Orrery:</strong><ul class="orrery-list">${rows.map(([label, value]) => `<li><strong>${label}:</strong> ${value}</li>`).join("")}</ul>${orrery.synopsis ? `<p><strong>Serafina's synopsis:</strong> ${orrery.synopsis}</p>` : ""}</div>`;
     }
 
+    function sacredCalendarSummary(sacredCalendar) {
+      if (!sacredCalendar) return "";
+      const rows = [];
+      if (Array.isArray(sacredCalendar.today)) {
+        for (const entry of sacredCalendar.today) {
+          rows.push(`<li><strong>${entry.name}:</strong> ${entry.modernCelebration || entry.origin || "I note the day and keep the house attentive."}</li>`);
+        }
+      }
+      if (Array.isArray(sacredCalendar.alerts)) {
+        for (const alert of sacredCalendar.alerts) {
+          rows.push(`<li><strong>${alert.name} guest reminder:</strong> ${alert.message || "Invite with care."} ${alert.food ? `Food: ${alert.food}` : ""} ${alert.gift ? `Gift: ${alert.gift}` : ""}</li>`);
+        }
+      }
+      if (!rows.length && sacredCalendar.next) {
+        rows.push(`<li><strong>Next Sacred Calendar entry:</strong> ${sacredCalendar.next.name} on ${sacredCalendar.next.date}.</li>`);
+      }
+      if (!rows.length) return "";
+      return `<div><strong>Sacred Calendar:</strong><ul class="orrery-list">${rows.join("")}</ul></div>`;
+    }
+
     function tarotHouseMessage(spread) {
       const byPosition = Object.fromEntries(spread.map((item) => [item.position, item]));
       const need = byPosition.Need || spread[0];
@@ -842,6 +866,7 @@
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
+            ${sacredCalendarSummary(entry.sacredCalendar)}
             ${grandOrrerySummary(entry.grandOrrery)}
             ${entry.civicNote ? `<p><strong>Civic note:</strong> ${entry.civicNote}</p>` : ""}
             <div><strong>Six-card spread:</strong> ${tarotSummary(spread)}</div>
