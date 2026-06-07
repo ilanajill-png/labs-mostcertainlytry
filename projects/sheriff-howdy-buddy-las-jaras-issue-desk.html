@@ -541,8 +541,9 @@
     </section>
 
     <div class="layout">
-      <form id="case-form" aria-describedby="case-help">
-        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through. Browser-saved cases stay on this device unless you copy an import link or download the cases JSON.</p>
+      <form id="case-form" aria-describedby="case-help" data-endpoint="https://formsubmit.co/ajax/mostcertainly@gmail.com" enctype="multipart/form-data">
+        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through. New cases are saved here and sent to the shared Sheriff intake queue when the public endpoint is available.</p>
+        <p class="hint" id="shared-status" role="status" aria-live="polite">Shared intake standing by.</p>
 
         <fieldset>
           <legend>Open a Las Jaras case</legend>
@@ -630,7 +631,7 @@
           <label for="media-files">
             Add photo or video evidence
             <input id="media-files" name="mediaFiles" type="file" accept="image/*,video/*" multiple>
-            <span class="hint">The file previews here and its metadata is saved in this browser. Upload the same media into chat when you ask Sheriff Lone Star to investigate.</span>
+            <span class="hint">The file previews here. The form will try to send selected media to shared intake too; very large files may need to be sent in chat or uploaded separately.</span>
           </label>
           <label for="media-description">
             Evidence description
@@ -732,6 +733,7 @@
     const downloadCases = document.querySelector("#download-cases");
     const clearCases = document.querySelector("#clear-cases");
     const caseList = document.querySelector("#case-list");
+    const sharedStatus = document.querySelector("#shared-status");
     const storageKey = "las-jaras-sheriff-cases-v1";
     const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
     const mediaDbName = "las-jaras-media-handoff-v1";
@@ -763,6 +765,14 @@
 
     function saveCases(cases) {
       localStorage.setItem(storageKey, JSON.stringify(cases));
+    }
+
+    function localMergeCase(issue) {
+      const cases = loadCases();
+      const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
+      withoutDuplicate.unshift(issue);
+      saveCases(withoutDuplicate);
+      return withoutDuplicate;
     }
 
     function selectedValues(name) {
@@ -986,6 +996,50 @@
       return issue;
     }
 
+    async function sendCaseToSharedIntake(issue) {
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) return { ok: false, message: "No shared intake endpoint configured." };
+      const payload = new FormData(form);
+      payload.append("_subject", `Las Jaras Sheriff Case: ${issue.caseTitle}`);
+      payload.append("_template", "table");
+      payload.append("_captcha", "false");
+      payload.append("case_id", issue.id);
+      payload.append("status", issue.status);
+      payload.append("opened_at", issue.openedAt);
+      payload.append("severity", issue.severity.level);
+      payload.append("severity_target", issue.severity.target);
+      payload.append("severity_rationale", issue.severity.rationale);
+      payload.append("media_file_names", issue.mediaAttachments.map((item) => item.name).join("; "));
+      payload.append("sheriff_first_read", issue.sheriffFirstRead.join("\n- "));
+      payload.append("investigation_prompt", issue.investigationPrompt);
+      payload.append("case_json", JSON.stringify(issue, null, 2));
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: payload,
+          headers: { "Accept": "application/json" }
+        });
+        if (!response.ok) throw new Error(`Shared intake returned ${response.status}`);
+        issue.sharedSubmission = {
+          status: "sent",
+          sentAt: new Date().toISOString(),
+          endpoint: "FormSubmit"
+        };
+        return { ok: true, message: "Shared intake received this case." };
+      } catch (error) {
+        issue.sharedSubmission = {
+          status: "failed",
+          attemptedAt: new Date().toISOString(),
+          error: error.message
+        };
+        return {
+          ok: false,
+          message: "Saved locally, but shared intake did not confirm receipt. Copy the prompt or download cases as backup."
+        };
+      }
+    }
+
     function normalizeImportedCase(data) {
       const issue = {
         id: clean(data.id) || `sheriff-case-import-${Date.now()}`,
@@ -1006,6 +1060,7 @@
       issue.severity = data.severity || assessSeverity(issue);
       issue.sheriffFirstRead = Array.isArray(data.sheriffFirstRead) ? data.sheriffFirstRead : suggestionFor(issue);
       issue.solutionStatus = data.solutionStatus || {};
+      issue.sharedSubmission = data.sharedSubmission || null;
       issue.investigationPrompt = data.investigationPrompt || buildInvestigationPrompt(issue);
       return issue;
     }
@@ -1036,10 +1091,7 @@
       if (!encoded) return false;
       try {
         const issue = normalizeImportedCase(decodeImportPayload(encoded));
-        const cases = loadCases();
-        const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
-        withoutDuplicate.unshift(issue);
-        saveCases(withoutDuplicate);
+        localMergeCase(issue);
         renderSheriffRead(issue);
         sheriffNote.innerHTML += "<p><strong>Imported from chat:</strong> This case has been added to the browser-saved Sheriff board.</p>";
         history.replaceState(null, "", `${window.location.pathname}#cases`);
@@ -1059,10 +1111,7 @@
         const response = await fetch(`../data/sheriff-cases/${safeName}.json`, { cache: "no-store" });
         if (!response.ok) throw new Error("Case file unavailable");
         const issue = normalizeImportedCase(await response.json());
-        const cases = loadCases();
-        const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
-        withoutDuplicate.unshift(issue);
-        saveCases(withoutDuplicate);
+        localMergeCase(issue);
         renderSheriffRead(issue);
         sheriffNote.innerHTML += "<p><strong>Imported from Labs file:</strong> This case has been added to the browser-saved Sheriff board.</p>";
         history.replaceState(null, "", `${window.location.pathname}#cases`);
@@ -1107,10 +1156,16 @@
     function renderSheriffRead(issue) {
       const severity = issue.severity || { level: "Unlogged", target: "Review needed" };
       const firstRead = issue.sheriffFirstRead || ["Open investigation."];
+      const shared = issue.sharedSubmission?.status === "sent"
+        ? "<p><strong>Shared intake:</strong> sent.</p>"
+        : issue.sharedSubmission?.status === "failed"
+          ? "<p><strong>Shared intake:</strong> not confirmed. Keep the local copy and copy the prompt if needed.</p>"
+          : "";
       sheriffNote.innerHTML = `
         <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
         <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
         <p><strong>Severity log:</strong> ${escapeHtml(severity.level)} — ${escapeHtml(severity.target)}</p>
+        ${shared}
         ${renderSolutionChecklist(issue, firstRead)}
       `;
       handoffPrompt.textContent = issue.investigationPrompt || "No investigation prompt was saved for this older case.";
@@ -1164,6 +1219,7 @@
         const media = issue.mediaAttachments.length ? issue.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ") : "none";
         const severity = issue.severity || { level: "Unlogged", target: "Review needed", rationale: "This case was saved before severity logging existed." };
         const steps = issue.sheriffFirstRead || ["Open investigation."];
+        const sharedLabel = issue.sharedSubmission?.status === "sent" ? "Shared intake sent" : issue.sharedSubmission?.status === "failed" ? "Shared intake not confirmed" : "Local board copy";
         return `
           <article class="case-card ${issue.status === "Closed" ? "closed" : ""}">
             <h3>${escapeHtml(issue.caseTitle)}</h3>
@@ -1177,6 +1233,7 @@
             <p>${escapeHtml(issue.description)}</p>
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
+            <p><strong>Shared status:</strong> ${escapeHtml(sharedLabel)}</p>
             ${renderSolutionChecklist(issue, steps)}
             <div class="actions">
               <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
@@ -1228,13 +1285,17 @@
       sheriffNote.innerHTML = "<b>Serafina escalation loaded.</b><p>Review the prefilled case, then open it with Sheriff Lone Star. The media copy can transfer between these Labs pages on this device; attach it in chat only when you want me to visually inspect it there.</p>";
     }
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       if (!form.reportValidity()) return;
-      const cases = loadCases();
       const issue = buildCase();
-      cases.unshift(issue);
-      saveCases(cases);
+      sharedStatus.textContent = "Opening case locally and sending to shared intake...";
+      let cases = localMergeCase(issue);
+      renderSheriffRead(issue);
+      renderCases(cases);
+      const sharedResult = await sendCaseToSharedIntake(issue);
+      cases = localMergeCase(issue);
+      sharedStatus.textContent = sharedResult.message;
       renderSheriffRead(issue);
       renderCases(cases);
     });
