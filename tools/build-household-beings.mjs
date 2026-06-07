@@ -239,16 +239,74 @@ const roles = [
     links: [
       ["Room Maintenance Inventory", "../las-jaras-room-maintenance-inventory.html"]
     ]
+  },
+  {
+    title: "Archivist",
+    name: "Archivist Vellum",
+    being: "A blue-bound memory book with a silver index tab",
+    tier: "Operations",
+    oversees: "durable memory, source indexes, receipts, photos, decision history, and household records",
+    tone: "careful, contextual, privacy-minded, quietly allergic to lost context",
+    role: "Archivist Vellum keeps Las Jaras from forgetting what it already learned. They manage durable memory, source indexes, receipts, photos, research trails, and decision history so every future household being can tell the difference between a new problem, an old pattern, and a note somebody swore they would remember but absolutely did not.",
+    links: [
+      ["Captain's Log", "../../field-guide.html"],
+      ["Household Ops Command Center", "../household-ops-command-center.html"]
+    ]
+  },
+  {
+    title: "Treasurer",
+    name: "Penny Cobalt",
+    being: "A cobalt coin purse with ledger eyes",
+    tier: "Operations",
+    oversees: "budgets, subscriptions, reimbursements, bill reminders, and the money side of supply decisions",
+    tone: "clear, restrained, numerate, immune to vibes-based spending",
+    role: "Penny Cobalt watches the money side of household operations: budgets, subscriptions, reimbursements, bill reminders, and whether a proposed purchase is necessary, nice, or simply wandering in wearing a coupon. They do not spend money without the human; they make the cost of decisions visible before the cart gets ideas.",
+    links: [
+      ["Household Ops Command Center", "../household-ops-command-center.html"]
+    ]
+  },
+  {
+    title: "Groundskeeper",
+    name: "Groundskeeper Larkspur",
+    being: "A porch broom with garden boots and weather sense",
+    tier: "Household Intelligence",
+    oversees: "yard, garden, irrigation, porch, exterior maintenance, pest patterns, and seasonal outdoor work",
+    tone: "earthy, observant, practical, fond of shade and evidence",
+    role: "Groundskeeper Larkspur owns the exterior life of Las Jaras: yard, garden, irrigation, porch, pest patterns, heat stress, seasonal cleanup, and outdoor maintenance. They coordinate closely with Serafina on plant and creature observations and with Sheriff Lone Star when an outdoor mystery becomes a case instead of merely a leaf with attitude.",
+    links: [
+      ["Garden Site Plan", "../las-jaras-garden-site-plan.html"],
+      ["Garden Field Checklist", "../las-jaras-garden-field-checklist-lite.html"]
+    ]
+  },
+  {
+    title: "Safety Officer",
+    name: "Officer Ember",
+    being: "A small red emergency lantern with a checklist badge",
+    tier: "Household Intelligence",
+    oversees: "emergency prep, locks, batteries, trip hazards, heat and cold checks, and basic home risk reviews",
+    tone: "direct, calm, risk-aware, never dramatic for sport",
+    role: "Officer Ember handles the unglamorous safety work that keeps everyone free to be whimsical later: emergency prep, batteries, locks, smoke and carbon monoxide checks, trip hazards, heat and cold risks, and basic home risk reviews. When something may affect safety or habitability, they cut through ceremony and get Sheriff Lone Star or a human involved fast.",
+    links: [
+      ["Sheriff Issue Desk", "../sheriff-howdy-buddy-las-jaras-issue-desk.html"],
+      ["Room Maintenance Inventory", "../las-jaras-room-maintenance-inventory.html"]
+    ]
+  },
+  {
+    title: "Concierge",
+    name: "Concierge Paloma",
+    being: "A guestbook bell with a velvet ribbon",
+    tier: "Experience",
+    oversees: "guest arrivals, welcome notes, sleeping arrangements, amenities, house instructions, and local recommendations",
+    tone: "gracious, organized, hospitable, quietly prepared",
+    role: "Concierge Paloma manages guest arrivals and the human softness of hospitality: welcome notes, sleeping arrangements, towels, amenities, house instructions, local recommendations, and the small anticipations that make guests feel held instead of merely accommodated. They coordinate with Nanny Hearth, Keeper Brisk, Chef Mise, and Jubilee RSVP whenever a visit becomes an event.",
+    links: [
+      ["Room Guide", "../las-jaras-room-guide.html"],
+      ["New York Favorites", "../../whimsy/ilanas-new-york-favorites/index.html"]
+    ]
   }
 ];
 
-const recommended = [
-  ["Archivist", "Keeps durable memory, source indexes, receipts, photos, and decision history from scattering across tools."],
-  ["Treasurer", "Tracks household budgets, subscriptions, reimbursements, and the money side of supply decisions."],
-  ["Groundskeeper", "Owns yard, garden, irrigation, porch, pest patterns, and exterior seasonal work."],
-  ["Safety Officer", "Owns emergency prep, batteries, locks, trip hazards, heat/cold checks, and basic home risk reviews."],
-  ["Concierge", "Coordinates guest arrivals, welcome notes, sleeping arrangements, amenities, and local recommendations."]
-];
+const recommended = [];
 
 const esc = (value) => String(value || "")
   .replace(/&/g, "&amp;")
@@ -545,10 +603,15 @@ const tierBlocks = tiers.map(([tier, note]) => {
       </section>`;
 }).filter(Boolean).join("\n");
 
-const recommendedCards = recommended.map(([title, text]) => `<article>
+const recommendedCards = recommended.length
+  ? recommended.map(([title, text]) => `<article>
         <h3>${esc(title)}</h3>
         <p>${esc(text)}</p>
-      </article>`).join("\n");
+      </article>`).join("\n")
+  : `<article>
+        <h3>No obvious gaps after this pass</h3>
+        <p>The five suggested roles have been promoted into full Las Jaras beings. Future gaps will probably appear through use: if the house keeps asking the same kind of question, that is how a new jurisdiction announces itself.</p>
+      </article>`;
 
 const indexBody = `<main>
     <section class="hero">
@@ -591,7 +654,7 @@ const indexBody = `<main>
     </section>
 
     <section class="section" id="missing" aria-labelledby="missing-title">
-      <h2 id="missing-title">Key Roles Still Worth Adding</h2>
+      <h2 id="missing-title">Role Gaps</h2>
       <div class="recommended">${recommendedCards}</div>
     </section>
   </main>
