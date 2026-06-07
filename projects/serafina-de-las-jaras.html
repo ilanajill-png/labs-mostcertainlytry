@@ -263,6 +263,28 @@
       color: var(--muted);
     }
 
+    button {
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid rgba(0, 71, 171, .42);
+      border-radius: 8px;
+      background: var(--cobalt);
+      color: #fffdfa;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    button:hover,
+    button:focus-visible {
+      background: #173f87;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(180, 135, 47, .62);
+      outline-offset: 3px;
+    }
+
     .card ul {
       display: grid;
       gap: 8px;
@@ -338,6 +360,42 @@
       font-weight: 850;
     }
 
+    .oracle-card {
+      display: grid;
+      gap: 16px;
+      border-color: rgba(180, 135, 47, .5);
+      background:
+        radial-gradient(circle at 10% 8%, rgba(180, 135, 47, .18), transparent 16rem),
+        linear-gradient(135deg, rgba(0, 71, 171, .08), transparent 46%),
+        rgba(255, 253, 250, .92);
+    }
+
+    .oracle-output {
+      min-height: 150px;
+      display: grid;
+      align-content: center;
+      padding: clamp(18px, 4vw, 30px);
+      border: 1px solid rgba(180, 135, 47, .42);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .78);
+      color: var(--ink);
+      font-size: clamp(1.28rem, 2.6vw, 2.1rem);
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .oracle-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .oracle-meta {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
     footer {
       padding: 26px 0 46px;
       border-top: 1px solid var(--line);
@@ -364,6 +422,7 @@
         <a href="#lore">Lore</a>
         <a href="#voice">Voice</a>
         <a href="#sky">Sky Office</a>
+        <a href="#oracle">Oracle</a>
         <a href="#beings">Beings</a>
         <a href="serafina-angels-log.html">Angel's Log</a>
         <a href="serafina-sacred-calendar.html">Sacred Calendar</a>
@@ -555,6 +614,22 @@
           <p>Serafina does not panic. She broods, watches, blesses, scolds, and waits. Her feelings are slow but specific: relief at rain, pride at bloom, suspicion at hard wind, gratitude at shade, hunger for moonlight, and deep offense at preventable neglect.</p>
         </article>
       </div>
+    </section>
+
+    <section class="section" id="oracle" aria-labelledby="oracle-title">
+      <div class="section-head">
+        <div class="label">Message From The Universe</div>
+        <h2 id="oracle-title">Ask Serafina</h2>
+        <p>Press the button and Serafina will choose from 1,001 magic-eight-ball-adjacent messages. The pick is weighted by the current moment: time of day, season, moon-ish cycle, and whatever the basin is pretending to know.</p>
+      </div>
+
+      <article class="card oracle-card">
+        <p id="oracleMessage" class="oracle-output" aria-live="polite">Ask, and the basin will issue a ruling.</p>
+        <div class="oracle-actions">
+          <button id="serafinaOracleButton" type="button" aria-controls="oracleMessage oracleMeta">Ask Serafina for a message</button>
+          <p id="oracleMeta" class="oracle-meta">1,001 possible responses. Current vibe pending.</p>
+        </div>
+      </article>
     </section>
 
     <section class="section" id="beings" aria-labelledby="beings-title">
@@ -770,7 +845,173 @@
   </main>
 
   <footer>
-    Public Las Jaras working page. Last updated 2026-06-06.
+    Public Las Jaras working page. Last updated 2026-06-07.
   </footer>
+  <script>
+    const serafinaOpeners = [
+      "Yes.",
+      "No.",
+      "Ask again after watering something real.",
+      "The basin says yes, but with supervision.",
+      "The basin says no, and it is not taking questions.",
+      "Proceed, but sweep the threshold first.",
+      "Wait until the light changes.",
+      "Only if the house is quiet enough to hear itself.",
+      "The answer is hidden under the practical chore.",
+      "Not yet.",
+      "Soon, if pride stops blocking the gate.",
+      "The universe is leaning yes.",
+      "The universe is leaning no.",
+      "Serafina approves, conditionally.",
+      "Serafina objects, ceremonially."
+    ];
+
+    const serafinaVerdicts = [
+      "The garden court recognizes the petition.",
+      "The moon has entered evidence, and the evidence is inconvenient.",
+      "The birds have not objected, which is not the same as permission.",
+      "The squirrels are too interested, so secure the edges.",
+      "Pinky may be dramatic, but Pinky is not wrong about the vibe.",
+      "The old lions would have guarded this threshold without blinking.",
+      "The basin is full of weather and one useful warning.",
+      "Mountain View memory says the path is older than the panic.",
+      "Las Jaras wants a smaller gesture and a cleaner ending.",
+      "The porch light has heard enough and recommends clarity.",
+      "The heat court requests fewer speeches and more water.",
+      "The night altar accepts the question but rejects the theatrics.",
+      "The sky is taking attendance, not granting exceptions.",
+      "The household weather is changing at the edges.",
+      "The answer is not mystical; it is merely being rude in symbols."
+    ];
+
+    const serafinaActions = [
+      "Move one tender thing into shade before deciding.",
+      "Write the question down and remove the decorative panic.",
+      "Check the soil, the calendar, and the door you keep avoiding.",
+      "Do the plain useful task first; the omen can wait its turn.",
+      "Choose the option that leaves the least mess for tomorrow.",
+      "Call the kind person, not the person who enjoys confusion.",
+      "Refill the water, close the gate, and try again.",
+      "Let the answer ripen until dusk.",
+      "Take the small yes and do not turn it into a parade.",
+      "Treat the no as protection, not punishment.",
+      "Ask for evidence, then believe it when it arrives.",
+      "Make the house easier to bless.",
+      "Do not buy seventeen objects for a one-object problem.",
+      "Respect the sun, the budget, and the nervous system.",
+      "Leave one thing unfinished on purpose so the spell has air."
+    ];
+
+    const serafinaSeals = [
+      "So ruled by basin and wing.",
+      "The threshold is watching.",
+      "This is not legal advice, but it is garden advice.",
+      "A clean key will help.",
+      "The moon does not need you to be louder.",
+      "The answer improves after a glass of water.",
+      "No committee of squirrels may amend this ruling.",
+      "Pinky retains appeal rights.",
+      "The lions would nod, probably.",
+      "Let the evening verify it.",
+      "If it survives morning, it may be true.",
+      "Do not confuse ceremony with procrastination.",
+      "The basin has no patience for needless drama.",
+      "A smaller spell is still a spell.",
+      "Return the tool when finished."
+    ];
+
+    function buildSerafinaOracleResponses() {
+      const responses = [];
+      for (const opener of serafinaOpeners) {
+        for (const verdict of serafinaVerdicts) {
+          for (const action of serafinaActions) {
+            for (const seal of serafinaSeals) {
+              responses.push(`${opener} ${verdict} ${action} ${seal}`);
+              if (responses.length === 1001) return responses;
+            }
+          }
+        }
+      }
+      return responses;
+    }
+
+    const serafinaOracleResponses = buildSerafinaOracleResponses();
+
+    function randomInt(max) {
+      const cryptoApi = window.crypto || window.msCrypto;
+      if (cryptoApi?.getRandomValues) {
+        const values = new Uint32Array(1);
+        cryptoApi.getRandomValues(values);
+        return values[0] % max;
+      }
+      return Math.floor(Math.random() * max);
+    }
+
+    function moonishPhase(dayNumber) {
+      const phase = Math.floor((((dayNumber + 4) % 29.53) / 29.53) * 8);
+      return [
+        "new-moon basin",
+        "waxing-crescent permission",
+        "first-quarter decision",
+        "waxing-gibbous pressure",
+        "full-moon altar",
+        "waning-gibbous evidence",
+        "last-quarter release",
+        "dark-moon broom"
+      ][phase] || "moon office";
+    }
+
+    function currentSerafinaVibe(now = new Date()) {
+      const hour = now.getHours();
+      const month = now.getMonth();
+      const day = now.getDate();
+      const dayNumber = Math.floor(Date.UTC(now.getFullYear(), month, day) / 86400000);
+      const timeVibe = hour < 5
+        ? "deep night altar"
+        : hour < 10
+          ? "morning mercy"
+          : hour < 14
+            ? "heat court"
+            : hour < 18
+              ? "afternoon audit"
+              : hour < 21
+                ? "dusk treaty"
+                : "night crystal office";
+      const seasonVibe = month < 2 || month === 11
+        ? "root ledger"
+        : month < 5
+          ? "green permission"
+          : month < 8
+            ? "survival court"
+            : month < 10
+              ? "seed and shadow"
+              : "lantern ledger";
+      const phase = moonishPhase(dayNumber);
+      return {
+        label: `${timeVibe} / ${seasonVibe} / ${phase}`,
+        seed: (hour * 61) + (day * 137) + ((month + 1) * 211) + (dayNumber % 1001)
+      };
+    }
+
+    function initSerafinaOracle() {
+      const button = document.getElementById("serafinaOracleButton");
+      const message = document.getElementById("oracleMessage");
+      const meta = document.getElementById("oracleMeta");
+      if (!button || !message || !meta) return;
+
+      let askCount = 0;
+      meta.textContent = `${serafinaOracleResponses.length.toLocaleString()} possible responses. Current vibe: ${currentSerafinaVibe().label}.`;
+
+      button.addEventListener("click", () => {
+        askCount += 1;
+        const vibe = currentSerafinaVibe();
+        const index = (vibe.seed + randomInt(serafinaOracleResponses.length) + (askCount * 137)) % serafinaOracleResponses.length;
+        message.textContent = serafinaOracleResponses[index];
+        meta.textContent = `Response ${index + 1} of ${serafinaOracleResponses.length.toLocaleString()}. Current vibe: ${vibe.label}.`;
+      });
+    }
+
+    initSerafinaOracle();
+  </script>
 </body>
 </html>
