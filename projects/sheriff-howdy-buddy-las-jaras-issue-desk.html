@@ -192,12 +192,13 @@
       place-items: center;
       width: 112px;
       aspect-ratio: 1;
-      border-radius: 50%;
-      border: 3px solid rgba(169, 113, 31, .58);
-      background: radial-gradient(circle at center, #fff8dc, #d9a547);
+      clip-path: polygon(50% 0, 61% 26%, 89% 11%, 74% 39%, 100% 50%, 74% 61%, 89% 89%, 61% 74%, 50% 100%, 39% 74%, 11% 89%, 26% 61%, 0 50%, 26% 39%, 11% 11%, 39% 26%);
+      background:
+        radial-gradient(circle at center, #fff8dc 0 30%, #d9a547 31% 58%, #8c5d17 59% 100%);
       color: #4f3211;
-      font-size: 2.5rem;
+      font-size: 2.25rem;
       font-weight: 950;
+      text-shadow: 0 1px 0 rgba(255, 253, 250, .58);
     }
 
     .layout {
