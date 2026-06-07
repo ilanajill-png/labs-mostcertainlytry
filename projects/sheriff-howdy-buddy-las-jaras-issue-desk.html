@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sheriff Howdy Buddy | Las Jaras Issue Desk</title>
-  <meta name="description" content="Sheriff Howdy Buddy tracks Las Jaras household issues, researches likely causes, asks follow-up questions, and keeps cases open until closed.">
+  <title>Sheriff Lone Star | Las Jaras Issue Desk</title>
+  <meta name="description" content="Sheriff Lone Star tracks Las Jaras household issues, researches likely causes, asks follow-up questions, and keeps cases open until closed.">
   <style>
     :root {
       color-scheme: light;
@@ -466,13 +466,13 @@
     <section class="hero" aria-labelledby="title">
       <div>
         <p class="kicker">Las Jaras Sheriff</p>
-        <h1 id="title">Sheriff Howdy Buddy</h1>
-        <p class="lede">Sheriff Howdy Buddy is the Las Jaras issue desk: household mysteries, broken things, interpersonal friction, creature incidents, grocery shortages, and maintenance problems become open cases until the sheriff marks them closed.</p>
+        <h1 id="title">Sheriff Lone Star</h1>
+        <p class="lede">Sheriff Lone Star is the Las Jaras issue desk: household mysteries, broken things, interpersonal friction, creature incidents, grocery shortages, and maintenance problems become open cases until the sheriff marks them closed.</p>
       </div>
       <aside class="badge-card" aria-label="Sheriff identity">
-        <div class="badge-mark"><span>HB</span></div>
+        <div class="badge-mark"><span>LS</span></div>
         <h2>What Kind Of Being?</h2>
-        <p>A household tutelary sheriff: not exactly human, not a robot, not a decorative object. Think porch-light guardian, clerk of evidence, and practical Texas house spirit with a badge.</p>
+        <p>A household tutelary sheriff: not exactly human, not a robot, not a decorative object. Think porch-light guardian, clerk of evidence, and practical Texas house spirit with a badge. He is a light with jurisdiction.</p>
         <p><strong>Tone:</strong> calm, neighborly, exacting, lightly snarky, fair-minded, and allergic to vague panic.</p>
       </aside>
     </section>
@@ -567,7 +567,7 @@
           <label for="media-files">
             Add photo or video evidence
             <input id="media-files" name="mediaFiles" type="file" accept="image/*,video/*" multiple>
-            <span class="hint">The file previews here and its metadata is saved in this browser. Upload the same media into chat when you ask Howdy Buddy to investigate.</span>
+            <span class="hint">The file previews here and its metadata is saved in this browser. Upload the same media into chat when you ask Sheriff Lone Star to investigate.</span>
           </label>
           <label for="media-description">
             Evidence description
@@ -610,7 +610,7 @@
         <section class="handoff" id="handoff" hidden aria-labelledby="handoff-title">
           <div>
             <p class="label">Chat investigation handoff</p>
-            <h2 id="handoff-title">Ask Howdy Buddy To Investigate</h2>
+            <h2 id="handoff-title">Ask Sheriff Lone Star To Investigate</h2>
             <p class="hint">Upload the same photo or video into chat, paste this prompt, and I will investigate the issue with the evidence visible.</p>
           </div>
           <pre id="handoff-prompt" tabindex="0"></pre>
@@ -762,7 +762,7 @@
         ? issue.mediaAttachments.map((item) => `${item.name} (${item.type}, ${item.size})`).join("; ")
         : "No media selected in the form.";
       return [
-        "Howdy Buddy, open a Las Jaras sheriff investigation for this household case.",
+        "Sheriff Lone Star, open a Las Jaras sheriff investigation for this household case.",
         "",
         "Use any photo or video uploaded in this chat as evidence. Do not claim to see media unless it is attached in chat.",
         "Use the form context, known Las Jaras household context, and grounded research where useful.",
@@ -782,7 +782,7 @@
         "",
         `Issue description: ${issue.description}`,
         "",
-        "Tone: Sheriff Howdy Buddy. Practical, fair, neighborly, lightly snarky, careful with uncertainty, and more interested in closing the case than sounding mystical."
+        "Tone: Sheriff Lone Star. Practical, fair, neighborly, lightly snarky, careful with uncertainty, and more interested in closing the case than sounding mystical. Remember that he is a household light with jurisdiction."
       ].join("\n");
     }
 
@@ -877,7 +877,7 @@
     });
 
     clearCases.addEventListener("click", () => {
-      const ok = confirm("Clear Sheriff Howdy Buddy's browser-saved cases on this device?");
+      const ok = confirm("Clear Sheriff Lone Star's browser-saved cases on this device?");
       if (!ok) return;
       localStorage.removeItem(storageKey);
       sheriffNote.innerHTML = "<b>Case board cleared.</b><p>The sheriff has swept the desk. This does not mean the toilet is innocent.</p>";
