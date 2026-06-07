@@ -1128,7 +1128,9 @@
     ];
 
     function asOracleClause(text) {
-      return text.replace(/[.!?]+$/, "");
+      return text
+        .replace(/\bSt\./g, "Saint")
+        .replace(/[.!?]+/g, "");
     }
 
     function buildSerafinaOracleResponses() {
@@ -1159,6 +1161,34 @@
     }
 
     const serafinaOracleResponses = buildSerafinaOracleResponses();
+
+    function buildSerafinaLuckInstructions() {
+      const instructions = [];
+      for (let tipIndex = 0; tipIndex < serafinaLuckTips.length; tipIndex += 1) {
+        const base = serafinaLuckTips[tipIndex];
+        for (let signIndex = 0; signIndex < serafinaLoteriaSigns.length; signIndex += 1) {
+          const loteria = serafinaLoteriaSigns[(signIndex + tipIndex) % serafinaLoteriaSigns.length];
+          for (let sealIndex = 0; sealIndex < serafinaSeals.length; sealIndex += 1) {
+            const seal = serafinaSeals[(sealIndex + signIndex + tipIndex) % serafinaSeals.length];
+            instructions.push({
+              source: `${base.source} / Loteria ${((signIndex + tipIndex) % serafinaLoteriaSigns.length) + 1}`,
+              tip: `${asOracleClause(loteria)}; ${asOracleClause(base.tip)}; ${asOracleClause(seal)}.`
+            });
+          }
+        }
+      }
+
+      const mixed = [];
+      const stride = 73;
+      for (let offset = 0; mixed.length < 1001 && offset < stride; offset += 1) {
+        for (let index = offset; index < instructions.length && mixed.length < 1001; index += stride) {
+          mixed.push(instructions[index]);
+        }
+      }
+      return mixed;
+    }
+
+    const serafinaLuckInstructions = buildSerafinaLuckInstructions();
 
     function randomInt(max) {
       const cryptoApi = window.crypto || window.msCrypto;
@@ -1241,15 +1271,15 @@
       if (!button || !tip || !meta) return;
 
       let askCount = 0;
-      meta.textContent = `${serafinaLuckTips.length} luck practices loaded from Serafina's calendar lanes.`;
+      meta.textContent = `${serafinaLuckInstructions.length.toLocaleString()} luck practices loaded from Serafina's calendar lanes.`;
 
       button.addEventListener("click", () => {
         askCount += 1;
         const vibe = currentSerafinaVibe();
-        const index = (vibe.seed + randomInt(serafinaLuckTips.length) + (askCount * 11)) % serafinaLuckTips.length;
-        const selected = serafinaLuckTips[index];
+        const index = (vibe.seed + randomInt(serafinaLuckInstructions.length) + (askCount * 11)) % serafinaLuckInstructions.length;
+        const selected = serafinaLuckInstructions[index];
         tip.textContent = `${selected.tip}`;
-        meta.textContent = `${selected.source}. Tip ${index + 1} of ${serafinaLuckTips.length}. Current vibe: ${vibe.label}.`;
+        meta.textContent = `${selected.source}. Tip ${index + 1} of ${serafinaLuckInstructions.length.toLocaleString()}. Current vibe: ${vibe.label}.`;
       });
     }
 
