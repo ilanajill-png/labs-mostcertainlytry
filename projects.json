@@ -1,5 +1,26 @@
 [
   {
+    "id": "sheriff-lone-star-issue-resolution-white-paper",
+    "title": "Sheriff Lone Star Issue Resolution White Paper",
+    "category": "White Paper",
+    "type": "Household Issue Workflow",
+    "status": "Published",
+    "date": "2026-06-07",
+    "featured": true,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "HTML",
+      "Workflow Design",
+      "Accessibility",
+      "Prompt Engineering"
+    ],
+    "summary": "A quick operating paper for the Sheriff Lone Star issue desk, covering form intake, severity triage, research handoff prompts, and report-to-resolved household issue handling.",
+    "outcome": "Defined the Las Jaras issue flow from intake to severity log, evidence-aware chat investigation, recommended action, and Case Closed by Sheriff.",
+    "url": "projects/sheriff-lone-star-issue-resolution-white-paper.html",
+    "source": "projects/sheriff-lone-star-issue-resolution-white-paper.html"
+  },
+  {
     "id": "sheriff-howdy-buddy-las-jaras-issue-desk",
     "title": "Sheriff Lone Star Las Jaras Issue Desk",
     "category": "Tool",

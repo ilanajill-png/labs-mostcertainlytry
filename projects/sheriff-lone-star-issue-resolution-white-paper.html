@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>White Paper: Sheriff Lone Star Issue Resolution Flow | Most Certainly Try Labs</title>
+    <meta name="description" content="A quick white paper on the Sheriff Lone Star Las Jaras issue form, severity triage, research handoff prompts, and report-to-resolved workflow.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .paper {
+        width: min(980px, calc(100% - 34px));
+        margin: 0 auto;
+        padding: 52px 0;
+      }
+
+      .paper h1 {
+        max-width: 940px;
+      }
+
+      .paper-section,
+      .flow-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .paper-section {
+        display: grid;
+        gap: 14px;
+        padding: 24px;
+        margin: 18px 0;
+      }
+
+      .paper-section ul,
+      .paper-section ol {
+        margin: 0;
+        padding-left: 22px;
+      }
+
+      .paper-section li + li {
+        margin-top: 8px;
+      }
+
+      .flow-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .flow-card {
+        display: grid;
+        gap: 8px;
+        min-height: 150px;
+        padding: 16px;
+      }
+
+      .flow-card strong {
+        color: var(--blue);
+        font-size: 1.05rem;
+      }
+
+      .severity-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .severity-table th,
+      .severity-table td {
+        padding: 12px;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .severity-table th {
+        background: #eef5ff;
+      }
+
+      .callout {
+        padding: 16px;
+        border-left: 6px solid var(--blue);
+        border-radius: 8px;
+        background: #eef5ff;
+        font-weight: 800;
+      }
+
+      @media (max-width: 880px) {
+        .flow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 620px) {
+        .flow-grid { grid-template-columns: 1fr; }
+        .severity-table { font-size: .92rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="sheriff-howdy-buddy-las-jaras-issue-desk.html">Sheriff Issue Desk</a>
+        <a href="serafina-human-informed-field-log.html">Serafina Field Log</a>
+      </nav>
+    </header>
+
+    <main class="paper">
+      <p class="kicker">White paper · 2026-06-07</p>
+      <h1>Sheriff Lone Star: from household report to researched resolution.</h1>
+      <p class="lede">A quick operating paper for the Las Jaras issue desk: how the public form captures household problems, how Sheriff Lone Star triages severity, and how chat-based research turns a report plus media into practical next steps.</p>
+
+      <section class="paper-section">
+        <h2>Executive Summary</h2>
+        <p>The Sheriff Lone Star form is a lightweight, public, ADA-minded issue-intake desk for Las Jaras. Its job is to turn messy household observations into trackable cases with enough context for a useful investigation: reporter, room, issue type, urgency, photo or video evidence, desired outcome, and possible action lanes.</p>
+        <p>The system does not pretend the static page can inspect uploaded media by itself. It saves local file metadata and previews for the human, then generates a chat handoff prompt. The human uploads the same photo or video into chat, pastes the prompt, and Sheriff Lone Star researches the issue with the media and report context together.</p>
+      </section>
+
+      <section class="paper-section">
+        <h2>Design Principles</h2>
+        <ul>
+          <li><strong>One front door:</strong> every issue becomes a single case instead of scattered texts, memory, and guesses.</li>
+          <li><strong>Structured intake:</strong> location, category, urgency, desired outcome, and evidence are captured before recommendations.</li>
+          <li><strong>Severity before solution:</strong> safety, damage, water, electricity, access, and habitability concerns get priority.</li>
+          <li><strong>Evidence-aware research:</strong> the chat investigation uses attached photos or video, but only when they are actually present in chat.</li>
+          <li><strong>Practical closure:</strong> the case stays open until the human says it is closed, with next action, owner, supplies, vendor path, or follow-up questions documented.</li>
+        </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Issue Resolution Flow</h2>
+        <div class="flow-grid" aria-label="Sheriff Lone Star issue resolution flow">
+          <article class="flow-card">
+            <strong>1. Intake</strong>
+            <span>Capture who reported it, where it happened, what changed, the category, urgency, desired outcome, evidence description, and photo or video metadata.</span>
+          </article>
+          <article class="flow-card">
+            <strong>2. Triage</strong>
+            <span>Assign severity, protect people and property first, and identify whether this is research, DIY, shopping, vendor, maintenance, or conversation work.</span>
+          </article>
+          <article class="flow-card">
+            <strong>3. Investigate</strong>
+            <span>Use visible evidence, Las Jaras context, follow-up questions, and grounded research to separate likely causes from guesses.</span>
+          </article>
+          <article class="flow-card">
+            <strong>4. Resolve</strong>
+            <span>Recommend the next action, track owner and target timing, suggest supplies or pros when relevant, and close only when the human confirms Case Closed.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="paper-section">
+        <h2>Severity Log</h2>
+        <table class="severity-table">
+          <thead>
+            <tr>
+              <th scope="col">Severity</th>
+              <th scope="col">Use When</th>
+              <th scope="col">Response Target</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>S1 Emergency</strong></td>
+              <td>Possible life-safety, fire, gas, shock, flooding, sewage, injury, break-in, unsafe access, or immediate property-damage risk.</td>
+              <td>Stabilize now; investigate immediately. Stop damage before researching elegantly.</td>
+            </tr>
+            <tr>
+              <td><strong>S2 High</strong></td>
+              <td>Plumbing trouble, no hot water, active leak, no water, broken lock, HVAC in severe weather, pest concern, mold, or same-day household disruption.</td>
+              <td>Act today or within 24 hours. Decide DIY versus professional help quickly.</td>
+            </tr>
+            <tr>
+              <td><strong>S3 Standard</strong></td>
+              <td>Running toilet, slow drain, broken fixture, plant mystery, household interpersonal friction, shortage, repair, or important non-emergency issue.</td>
+              <td>Research and schedule within 2 to 7 days. Bundle related work when possible.</td>
+            </tr>
+            <tr>
+              <td><strong>S4 Watch</strong></td>
+              <td>Low-risk oddities, cosmetic issues, uncertain spiritual heartbeat notes, or cases that need more evidence before spending money.</td>
+              <td>Monitor, batch, or revisit within 1 to 2 weeks.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="paper-section">
+        <h2>Research And Prompt Workflow</h2>
+        <ol>
+          <li>The form creates a browser-local case and a first read from Sheriff Lone Star.</li>
+          <li>The form generates an investigation prompt with case title, reporter, room, category, urgency, severity, desired outcome, action lanes, media metadata, evidence description, and issue description.</li>
+          <li>The human uploads the same photo or video into chat and pastes the prompt.</li>
+          <li>In chat, Sheriff Lone Star examines the attached media, uses the report context, and researches likely causes when outside information would improve accuracy.</li>
+          <li>The answer is separated into visible evidence, inferred causes, checks performed, likely explanation, follow-up questions, solution options, and next action.</li>
+          <li>If the path is clear, Sheriff Lone Star recommends DIY steps, a TaskRabbit/pro option, H-E-B list items, a maintenance task, or a household conversation script.</li>
+        </ol>
+        <p class="callout">Core boundary: the form can preview media and save file metadata, but the actual visual analysis happens in chat after the human attaches the media there.</p>
+      </section>
+
+      <section class="paper-section">
+        <h2>Best-Practice Sources Folded Into The Flow</h2>
+        <ul>
+          <li><strong>Luxury hospitality:</strong> Ritz-Carlton-style service recovery emphasizes empowered, immediate problem ownership and privacy-aware care.</li>
+          <li><strong>Hotel operations:</strong> maintenance tools capture room or area, category, priority, photos, work orders, inspections, and closeout history.</li>
+          <li><strong>Property management:</strong> repair workflows triage emergency, urgent, routine, and low-priority work with response targets.</li>
+          <li><strong>Handyman/vendor practice:</strong> useful work orders include scope, evidence, access notes, materials, budget constraints, and stop-and-ask thresholds.</li>
+        </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Artifacts</h2>
+        <p>
+          <a class="button primary" href="sheriff-howdy-buddy-las-jaras-issue-desk.html">Open Sheriff Lone Star Issue Desk</a>
+          <a class="button" href="serafina-human-informed-field-log.html">Open Serafina Field Log</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+  </body>
+</html>
