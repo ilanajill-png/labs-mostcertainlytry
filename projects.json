@@ -1,5 +1,25 @@
 [
   {
+    "id": "sheriff-lone-star-cloudflare-build-log",
+    "title": "Sheriff Lone Star Cloudflare Backend Build Log",
+    "category": "Build Log",
+    "type": "Production Backend",
+    "status": "In Progress",
+    "date": "2026-06-07",
+    "featured": true,
+    "tools": [
+      "Cloudflare Workers",
+      "Cloudflare D1",
+      "Wrangler",
+      "JavaScript",
+      "GitHub Pages"
+    ],
+    "summary": "A build log for moving Sheriff Lone Star from browser-local storage to a shared Cloudflare Worker and D1 case board.",
+    "outcome": "Scaffolded the Worker API, D1 schema, setup sequence, timing estimates, and remaining deployment tasks needed for true cross-device Sheriff case tracking.",
+    "url": "projects/sheriff-lone-star-cloudflare-build-log.html",
+    "source": "workers/sheriff-lone-star-case-api/"
+  },
+  {
     "id": "sheriff-lone-star-issue-resolution-white-paper",
     "title": "Sheriff Lone Star Issue Resolution White Paper",
     "category": "White Paper",

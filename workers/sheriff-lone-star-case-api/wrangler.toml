@@ -1,0 +1,9 @@
+name = "sheriff-lone-star-case-api"
+main = "worker.js"
+compatibility_date = "2026-06-07"
+
+# After creating the D1 database, replace database_id with Cloudflare's generated ID.
+[[d1_databases]]
+binding = "DB"
+database_name = "sheriff_lone_star_cases"
+database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"

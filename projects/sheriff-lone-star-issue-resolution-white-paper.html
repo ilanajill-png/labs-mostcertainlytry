@@ -120,6 +120,7 @@
         <h2>Executive Summary</h2>
         <p>The Sheriff Lone Star form is a lightweight, public, ADA-minded issue-intake desk for Las Jaras. Its job is to turn messy household observations into trackable cases with enough context for a useful investigation: reporter, room, issue type, urgency, photo or video evidence, desired outcome, and possible action lanes.</p>
         <p>The system does not pretend the static page can inspect uploaded media by itself. It saves local file metadata and previews for the human, then generates a chat handoff prompt. The human uploads the same photo or video into chat, pastes the prompt, and Sheriff Lone Star researches the issue with the media and report context together.</p>
+        <p>For production use, the Sheriff board needs to move beyond browser-local storage. The prototype could open cases quickly, but local storage belongs to one browser on one device, which means a case entered on a phone may not appear on a laptop, in an admin view, or in a later resolution pass. Cloudflare Worker plus D1 gives Sheriff Lone Star a real shared case API: the static Labs page can create, list, update, check off, and close cases across devices without exposing private write credentials in the public HTML.</p>
       </section>
 
       <section class="paper-section">
@@ -218,6 +219,7 @@
         <p>
           <a class="button primary" href="sheriff-howdy-buddy-las-jaras-issue-desk.html">Open Sheriff Lone Star Issue Desk</a>
           <a class="button" href="serafina-human-informed-field-log.html">Open Serafina Field Log</a>
+          <a class="button" href="sheriff-lone-star-cloudflare-build-log.html">Cloudflare Backend Build Log</a>
         </p>
       </section>
     </main>

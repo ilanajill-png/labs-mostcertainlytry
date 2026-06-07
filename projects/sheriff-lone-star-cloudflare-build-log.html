@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Build Log: Sheriff Lone Star Cloudflare Backend | Most Certainly Try Labs</title>
+    <meta name="description" content="Build log for moving Sheriff Lone Star from browser-local storage to a Cloudflare Worker and D1 production case board.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .paper {
+        width: min(980px, calc(100% - 34px));
+        margin: 0 auto;
+        padding: 52px 0;
+      }
+
+      .paper-section {
+        display: grid;
+        gap: 14px;
+        padding: 24px;
+        margin: 18px 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .build-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .build-table th,
+      .build-table td {
+        padding: 12px;
+        border: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .build-table th {
+        background: #eef5ff;
+      }
+
+      code {
+        overflow-wrap: anywhere;
+      }
+
+      @media (max-width: 720px) {
+        .build-table {
+          display: block;
+          overflow-x: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="sheriff-howdy-buddy-las-jaras-issue-desk.html">Sheriff Issue Desk</a>
+        <a href="sheriff-lone-star-issue-resolution-white-paper.html">White Paper</a>
+      </nav>
+    </header>
+
+    <main class="paper">
+      <p class="kicker">Build log · 2026-06-07</p>
+      <h1>Sheriff Lone Star Cloudflare Worker + D1 backend setup.</h1>
+      <p class="lede">A practical build log for moving the Las Jaras Sheriff board from browser-local storage to a real shared production backend.</p>
+
+      <section class="paper-section">
+        <h2>Why This Upgrade Is Needed</h2>
+        <p>The first Sheriff Lone Star board used browser storage because it let the public static page work immediately: no login, no server, and no database. That was fine for a prototype, but it broke the production promise the moment a case was entered from a mobile phone. Browser storage belongs to one browser on one device, so a case created on a phone cannot reliably appear on a laptop, in an admin view, or in a later Sheriff investigation. A real Sheriff needs jurisdiction beyond a single browser tab. Cloudflare Worker plus D1 gives the form a small public API where cases can be created, listed, updated, checked off, and closed across devices while keeping write logic off the static GitHub Pages site.</p>
+      </section>
+
+      <section class="paper-section">
+        <h2>Backend Choice</h2>
+        <p><strong>Chosen first pass:</strong> Cloudflare Worker + D1.</p>
+        <p>D1 is a better first fit than KV for Sheriff cases because cases are records with status, update time, checklist state, and closeout history. KV is useful for simple key-value blobs, but D1 gives cleaner listing and updating for a case board.</p>
+      </section>
+
+      <section class="paper-section">
+        <h2>Setup Steps And Timing</h2>
+        <table class="build-table">
+          <thead>
+            <tr>
+              <th scope="col">Step</th>
+              <th scope="col">Status</th>
+              <th scope="col">Estimated Time</th>
+              <th scope="col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Confirm the production problem</td>
+              <td>Complete</td>
+              <td>5 minutes</td>
+              <td>Verified GitHub Pages is static and browser storage cannot sync cases across mobile and desktop.</td>
+            </tr>
+            <tr>
+              <td>Pick backend shape</td>
+              <td>Complete</td>
+              <td>10 minutes</td>
+              <td>Selected Worker + D1 so the static site can call a small API for create, list, update, and close actions.</td>
+            </tr>
+            <tr>
+              <td>Scaffold Worker API</td>
+              <td>Complete</td>
+              <td>20 minutes</td>
+              <td>Created <code>workers/sheriff-lone-star-case-api/worker.js</code> with CORS, list, create, read, and update routes.</td>
+            </tr>
+            <tr>
+              <td>Create D1 schema</td>
+              <td>Complete</td>
+              <td>8 minutes</td>
+              <td>Created a compact <code>cases</code> table storing case JSON plus indexed status and updated timestamps.</td>
+            </tr>
+            <tr>
+              <td>Create Cloudflare D1 database</td>
+              <td>Pending Cloudflare account access</td>
+              <td>5 to 10 minutes</td>
+              <td>Wrangler is available through <code>npx wrangler</code>, but this machine is not authenticated with Cloudflare yet. After login, run <code>wrangler d1 create sheriff_lone_star_cases</code>, then paste the generated database ID into <code>wrangler.toml</code>.</td>
+            </tr>
+            <tr>
+              <td>Apply schema to D1</td>
+              <td>Pending Cloudflare account access</td>
+              <td>3 to 5 minutes</td>
+              <td>Run <code>wrangler d1 execute sheriff_lone_star_cases --file=./schema.sql</code> from the Worker folder.</td>
+            </tr>
+            <tr>
+              <td>Deploy Worker</td>
+              <td>Pending Cloudflare account access</td>
+              <td>5 to 10 minutes</td>
+              <td>Run <code>wrangler deploy</code> and capture the Worker URL for the Labs front end.</td>
+            </tr>
+            <tr>
+              <td>Wire Sheriff page to API</td>
+              <td>Next</td>
+              <td>25 to 45 minutes</td>
+              <td>Replace local-only load/save with API-first load, create, update, and close calls, keeping local fallback for offline failure.</td>
+            </tr>
+            <tr>
+              <td>Test cross-device flow</td>
+              <td>Next</td>
+              <td>15 to 25 minutes</td>
+              <td>Submit one case on mobile, verify it appears on desktop, update checklist status, then close it.</td>
+            </tr>
+            <tr>
+              <td>Media handling decision</td>
+              <td>Open</td>
+              <td>20 to 40 minutes</td>
+              <td>D1 should store media metadata, not large photos/videos. For durable media files, add R2 or keep email/chat upload as the evidence path.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="paper-section">
+        <h2>Current Scaffold</h2>
+        <ul>
+          <li><code>GET /cases</code> lists recent cases.</li>
+          <li><code>POST /cases</code> creates or replaces a case.</li>
+          <li><code>GET /cases/:id</code> reads one case.</li>
+          <li><code>PUT /cases/:id</code> updates status, checklist state, closeout data, or other case fields.</li>
+          <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
+        </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Open Questions</h2>
+        <ul>
+          <li>Should the public form allow anonymous writes forever, or should admin-only actions like closing cases require a token?</li>
+          <li>Should evidence files live in Cloudflare R2, stay in FormSubmit email, or be attached only in chat for Sheriff investigation?</li>
+          <li>Should the Serafina form automatically create a Sheriff case through the same API when escalation is selected?</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files and a planned Worker backend.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+  </body>
+</html>
