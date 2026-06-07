@@ -698,6 +698,8 @@
     const clearCases = document.querySelector("#clear-cases");
     const caseList = document.querySelector("#case-list");
     const storageKey = "las-jaras-sheriff-cases-v1";
+    const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
+    let pendingSerafinaHandoff = null;
     let mediaPreviewUrls = [];
 
     function clean(value) {
@@ -729,6 +731,20 @@
       return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((item) => item.value);
     }
 
+    function setSelectValue(id, value) {
+      const field = document.querySelector(`#${id}`);
+      if (!field || !value) return;
+      const option = [...field.options].find((item) => item.value === value || item.textContent === value);
+      if (option) field.value = option.value;
+    }
+
+    function setActionLanes(values) {
+      const wanted = new Set(values || []);
+      for (const box of form.querySelectorAll('input[name="actionLane"]')) {
+        box.checked = wanted.has(box.value);
+      }
+    }
+
     function fileSizeLabel(bytes) {
       if (!Number.isFinite(bytes)) return "unknown size";
       if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
@@ -743,6 +759,14 @@
         sizeBytes: file.size,
         size: fileSizeLabel(file.size),
         lastModified: file.lastModified ? new Date(file.lastModified).toISOString() : null
+      }));
+    }
+
+    function handoffMediaMetadata() {
+      if (!pendingSerafinaHandoff || mediaFiles.files.length) return [];
+      return (pendingSerafinaHandoff.mediaAttachments || []).map((item) => ({
+        ...item,
+        transferredFrom: "Serafina Human-Informed Field Log"
       }));
     }
 
@@ -855,7 +879,7 @@
         desiredOutcome: clean(data.get("desiredOutcome")),
         description: clean(data.get("description")),
         mediaDescription: clean(data.get("mediaDescription")),
-        mediaAttachments: mediaMetadata(),
+        mediaAttachments: [...mediaMetadata(), ...handoffMediaMetadata()],
         actionLane: selectedValues("actionLane")
       };
       issue.severity = assessSeverity(issue);
@@ -937,6 +961,33 @@
       }).join("");
     }
 
+    function applySerafinaHandoff() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("from") !== "serafina") return;
+      try {
+        pendingSerafinaHandoff = JSON.parse(localStorage.getItem(serafinaHandoffKey) || "null");
+      } catch {
+        pendingSerafinaHandoff = null;
+      }
+      if (!pendingSerafinaHandoff) return;
+
+      document.querySelector("#case-title").value = pendingSerafinaHandoff.caseTitle || "";
+      document.querySelector("#reported-by").value = pendingSerafinaHandoff.reportedBy || "";
+      setSelectValue("location", pendingSerafinaHandoff.location);
+      setSelectValue("case-type", pendingSerafinaHandoff.caseType);
+      setSelectValue("urgency", pendingSerafinaHandoff.urgency);
+      setSelectValue("desired-outcome", pendingSerafinaHandoff.desiredOutcome);
+      document.querySelector("#description").value = pendingSerafinaHandoff.description || "";
+      document.querySelector("#media-description").value = pendingSerafinaHandoff.mediaDescription || "";
+      setActionLanes(pendingSerafinaHandoff.actionLane);
+
+      const media = pendingSerafinaHandoff.mediaAttachments || [];
+      mediaPreview.innerHTML = media.length
+        ? `<p class="hint">Serafina transferred media metadata: ${escapeHtml(media.map((item) => `${item.name} (${item.size})`).join(", "))}. Re-attach the same file here or in chat if Sheriff Lone Star needs to inspect it.</p>`
+        : '<p class="hint">Serafina transferred the report context. No media metadata came with it.</p>';
+      sheriffNote.innerHTML = "<b>Serafina escalation loaded.</b><p>Review the prefilled case, re-attach any photo or video if needed, then open the case with Sheriff Lone Star.</p>";
+    }
+
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       if (!form.reportValidity()) return;
@@ -998,6 +1049,7 @@
       renderCases([]);
     });
 
+    applySerafinaHandoff();
     renderCases(loadCases());
   </script>
 </body>

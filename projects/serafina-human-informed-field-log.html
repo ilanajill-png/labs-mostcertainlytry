@@ -652,6 +652,7 @@
           <pre id="chat-prompt" tabindex="0"></pre>
           <div class="actions">
             <button type="button" id="copy-chat-prompt">Copy Chat Prompt</button>
+            <button type="button" id="escalate-sheriff">Start Sheriff Lone Star Case</button>
           </div>
         </section>
 
@@ -706,6 +707,7 @@
     const chatHandoff = document.querySelector("#chat-handoff");
     const chatPrompt = document.querySelector("#chat-prompt");
     const copyChatPrompt = document.querySelector("#copy-chat-prompt");
+    const escalateSheriff = document.querySelector("#escalate-sheriff");
     const recordList = document.querySelector("#record-list");
     const jsonOutput = document.querySelector("#json-output");
     const copyLatest = document.querySelector("#copy-latest");
@@ -719,6 +721,7 @@
     const mediaFiles = document.querySelector("#media-files");
     const mediaPreview = document.querySelector("#media-preview");
     const storageKey = "serafina-human-informed-field-log-v1";
+    const sheriffHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
     const adminPassphrase = "serafina";
     let mediaPreviewUrls = [];
 
@@ -874,6 +877,65 @@
       ].join("\n");
     }
 
+    function sheriffCaseType(record) {
+      const typeMap = {
+        plant: "plant",
+        water: "plumbing",
+        creature: "plant",
+        house: "maintenance",
+        sky: "other",
+        ritual: "spiritual",
+        safety: "safety",
+        other: "other"
+      };
+      if (record.followUp === "shopping") return "food";
+      if (record.followUp === "maintenance") return "maintenance";
+      return typeMap[record.eventType] || "other";
+    }
+
+    function sheriffDesiredOutcome(record) {
+      if (record.followUp === "shopping") return "shop";
+      if (record.followUp === "maintenance") return "fix";
+      if (record.followUp === "remind") return "understand";
+      return record.urgency === "urgent" ? "hire" : "understand";
+    }
+
+    function sheriffActionLane(record) {
+      const lanes = new Set(["research"]);
+      if (record.followUp === "maintenance") lanes.add("maintenance log");
+      if (record.followUp === "shopping") lanes.add("HEB list");
+      if (record.urgency === "urgent") lanes.add("hire help");
+      if (record.eventType === "ritual") lanes.add("ask follow-up");
+      if (record.eventType === "house" || record.eventType === "water") lanes.add("DIY fix");
+      return [...lanes];
+    }
+
+    function buildSheriffHandoff(record) {
+      const media = record.mediaAttachments || [];
+      return {
+        source: "Serafina Human-Informed Field Log",
+        sourceRecordId: record.id,
+        createdAt: new Date().toISOString(),
+        caseTitle: `Serafina escalation: ${record.eventType || "household"} at ${record.location || "Las Jaras"}`,
+        reportedBy: record.informedBy,
+        location: record.location,
+        caseType: sheriffCaseType(record),
+        urgency: record.urgency,
+        desiredOutcome: sheriffDesiredOutcome(record),
+        description: [
+          record.description,
+          "",
+          `Serafina note: ${record.serafinaSuggestion?.headline || "No Serafina suggestion recorded."}`,
+          `Affected: ${record.affected?.length ? record.affected.join(", ") : "not specified"}`,
+          `Original Serafina event type: ${record.eventType || "not specified"}`,
+          `Follow-up requested: ${record.followUp || "none"}`
+        ].join("\n"),
+        mediaDescription: record.mediaDescription,
+        mediaAttachments: media,
+        actionLane: sheriffActionLane(record)
+      };
+    }
+
     function recordFromForm() {
       const data = new FormData(form);
       const record = {
@@ -982,6 +1044,14 @@
       setTimeout(() => {
         copyChatPrompt.textContent = "Copy Chat Prompt";
       }, 1800);
+    });
+
+    escalateSheriff.addEventListener("click", () => {
+      const records = loadRecords();
+      if (!records.length) return;
+      const latest = records[0];
+      localStorage.setItem(sheriffHandoffKey, JSON.stringify(buildSheriffHandoff(latest)));
+      window.location.href = "sheriff-howdy-buddy-las-jaras-issue-desk.html?from=serafina#case-form";
     });
 
     mediaFiles.addEventListener("change", renderMediaPreview);
