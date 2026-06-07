@@ -426,6 +426,7 @@
             <li><strong>Lucky object to leave the house with:</strong> a clean key.</li>
             <li><strong>A person to call to make them smile:</strong> someone who laughs before explaining themselves.</li>
             <li><strong>A simple task they can do to brighten a stranger's day:</strong> leave the good parking place for someone carrying more than you are.</li>
+            <li><strong>Song of the day:</strong> a 528 Hz ambient track for soft background focus, with no medical claims attached.</li>
           </ul>
         </article>
         <article class="card">
@@ -447,7 +448,7 @@
       <div class="section-head">
         <div class="label">Recorded Notes</div>
         <h2 id="records-title">Daily Entries</h2>
-        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, a six-card spread, the List of Mere Suggestions, and any timely Sacred Calendar reminders. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
+        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, a six-card spread, the List of Mere Suggestions, a background song of the day, and any timely Sacred Calendar reminders. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
       </div>
       <div class="note" style="margin-bottom:16px;">
         My full year of holidays, moon-charge nights, cleaning customs, special foods, gift guidance, and guest reminders lives in <a href="serafina-sacred-calendar.html">Serafina's Sacred Calendar</a>.
@@ -743,6 +744,51 @@
       "send a kind review to a small business that earned it"
     ];
 
+    const songCatalog = [
+      {
+        title: "528Hz | Heal Golden Chakra | Bring Positive Transformation | Ambient Awakening Hang Drum Music",
+        artist: "Meditative Mind",
+        frequency: "528 Hz",
+        url: "https://www.youtube.com/watch?v=X5-YdXY1J0k",
+        note: "Soft ambient background music for focus and ceremony; no medical claim is attached to the frequency."
+      },
+      {
+        title: "432 Hz Deep Healing Music",
+        artist: "Meditative Mind",
+        frequency: "432 Hz",
+        url: "https://www.youtube.com/results?search_query=432+Hz+Deep+Healing+Music+Meditative+Mind",
+        note: "Low-drama background music for tidying, watering, and lowering the household volume."
+      },
+      {
+        title: "528 Hz Positive Energy Meditation Music",
+        artist: "Healing Meditation Music",
+        frequency: "528 Hz",
+        url: "https://www.youtube.com/results?search_query=528+Hz+Positive+Energy+Meditation+Music",
+        note: "Bright ambient support for morning intention and practical mercy work."
+      },
+      {
+        title: "432 Hz Peaceful Piano Meditation",
+        artist: "Meditation Music Library",
+        frequency: "432 Hz",
+        url: "https://www.youtube.com/results?search_query=432+Hz+Peaceful+Piano+Meditation",
+        note: "A quieter lane for reading the day, making the list, and not arguing with the sun."
+      },
+      {
+        title: "528 Hz Ambient Music for Positive Transformation",
+        artist: "Frequency Tuning",
+        frequency: "528 Hz",
+        url: "https://www.youtube.com/results?search_query=528+Hz+ambient+music+positive+transformation",
+        note: "Warm background texture for house ceremony, soft focus, and steady chores."
+      },
+      {
+        title: "432 Hz Sleep And Restore Ambient Music",
+        artist: "Calm Frequency Music",
+        frequency: "432 Hz",
+        url: "https://www.youtube.com/results?search_query=432+Hz+sleep+restore+ambient+music",
+        note: "Evening-background music for closing the loop without turning the house theatrical."
+      }
+    ];
+
     const tarotSpreadPositions = [
       "Need",
       "Weather",
@@ -836,6 +882,27 @@
       return entry.mereSuggestions || mereSuggestionsFor(dateOrdinalFromIso(entry.date));
     }
 
+    function songOfDayFor(ordinal) {
+      return songCatalog[ordinal % songCatalog.length];
+    }
+
+    function normalizedSongOfDay(entry) {
+      return entry.songOfDay || songOfDayFor(dateOrdinalFromIso(entry.date));
+    }
+
+    function songOfDaySummary(song) {
+      if (!song) return "";
+      const track = song.url
+        ? `<a href="${song.url}" target="_blank" rel="noopener">${song.title || "ambient frequency music"}</a>`
+        : song.title || "ambient frequency music";
+      return `<div><strong>Song of the day:</strong><ul class="suggestion-list">
+        <li><strong>Track:</strong> ${track}</li>
+        <li><strong>Artist/channel:</strong> ${song.artist || "ambient frequency selection"}</li>
+        <li><strong>Frequency lane:</strong> ${song.frequency || "432/528 Hz"}</li>
+        <li><strong>Use:</strong> ${song.note || "background music for focus and ceremony; no medical claim attached"}</li>
+      </ul></div>`;
+    }
+
     function mereSuggestionsSummary(suggestions) {
       if (!suggestions) return "";
       return `<div><strong>Mere Suggestions:</strong><ul class="suggestion-list">
@@ -924,6 +991,7 @@
       const practicalRite = practicalRiteFor(ordinal, day);
       const tarot = tarotSpreadFor(calendarOrdinal);
       const mereSuggestions = mereSuggestionsFor(calendarOrdinal);
+      const songOfDay = songOfDayFor(calendarOrdinal);
       const title = fixed ? fixed[0] : season.title;
       const body = fixed ? fixed[1] : bodyFor({ monthIndex, day, season, ordinal, chore, creature });
       return {
@@ -936,6 +1004,7 @@
         intention,
         practicalRite,
         mereSuggestions,
+        songOfDay,
         tarot,
         sky: season.sky,
         moon: moonHint(ordinal),
@@ -996,6 +1065,7 @@
         target.innerHTML = entries.map((entry) => {
           const spread = normalizedTarotSpread(entry);
           const suggestions = normalizedMereSuggestions(entry);
+          const song = normalizedSongOfDay(entry);
           return `
           <article class="log-entry">
             <div class="date-line"><span>${entry.date}</span><span>${entry.weekday || "Angel's Log"}</span></div>
@@ -1003,6 +1073,7 @@
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             ${mereSuggestionsSummary(suggestions)}
+            ${songOfDaySummary(song)}
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
             ${sacredCalendarSummary(entry.sacredCalendar)}
             ${grandOrrerySummary(entry.grandOrrery)}
