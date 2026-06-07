@@ -3,7 +3,7 @@
   "year": 2026,
   "updatedAt": "2026-06-07",
   "voice": "Serafina de las Jaras writes in the first person: ceremonial, practical, watchful, and governed by truth, safety, water, shade, evidence, then ceremony.",
-  "dateNote": "Some lunar and moon-sighting holidays may shift by local authority, community practice, or observed evening start. I record them as public-calendar guidance, not commandment.",
+  "dateNote": "This calendar is my broad public interfaith and old-calendar layer for Las Jaras: major world religions, major seasonal thresholds, moon-charge nights, household feast days, and selected ancient folk observances. Some lunar and moon-sighting holidays may shift by local authority, community practice, or observed evening start. I record them as public-calendar guidance, not commandment.",
   "crystalRule": "I call for outdoor crystal charging on full moons, clear solstice/equinox nights, and a few light-centered feasts. If rain, wind, theft, pets, or heat make outdoors foolish, I move the work to a windowsill or covered porch.",
   "entries": [
     {
@@ -31,6 +31,18 @@
       "inviteGuests": false
     },
     {
+      "date": "2026-01-05",
+      "name": "Guru Gobind Singh Jayanti",
+      "origin": "Sikh celebration of Guru Gobind Singh, the tenth Sikh Guru and founder of the Khalsa.",
+      "ancestralCelebration": "I honor courage, discipline, poetry, protection, and the duty to defend dignity without becoming cruel. This is a day I know, bow to, and do not decorate casually.",
+      "modernCelebration": "At Las Jaras I would honor the day with learning, service, and food generosity. No household ritual is required unless someone observing the day asks for space, quiet, or help.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean the kitchen if preparing food for others.",
+      "food": "Vegetarian shared food, lentils, rice, roti, fruit, tea, or a donation to a community meal.",
+      "gift": "Give service, food, or a donation to a community kitchen or someone who needs feeding.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-01-06",
       "name": "Epiphany / Three Kings",
       "origin": "Christian feast remembering the Magi's visit; also a gift-and-cake day in many households.",
@@ -42,6 +54,18 @@
       "gift": "Give children or guests a small sweet, coin, candle, or star-shaped token.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for cake, coffee, and a small star blessing."
+    },
+    {
+      "date": "2026-01-07",
+      "name": "Orthodox Christmas",
+      "origin": "Christmas celebration for Eastern Orthodox churches that follow the Julian calendar for this feast.",
+      "ancestralCelebration": "I hear vigil, fasting broken, candlelight, icons, bread, and old songs that travel through winter without asking the new calendar for permission.",
+      "modernCelebration": "At Las Jaras I would honor the day if Orthodox friends or guests are present. Otherwise no ritual is required beyond respect, warmth, and not assuming everyone's Christmas has already passed.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear a quiet table or candle place if hosting.",
+      "food": "Bread, soup, fish or meat according to household custom, honey, nuts, fruit, or festive sweets.",
+      "gift": "Give hosts bread, flowers, sweets, or help with dishes.",
+      "inviteGuests": false
     },
     {
       "date": "2026-01-14",
@@ -57,6 +81,30 @@
       "guestAlert": "Invite guests for a small harvest-sun meal or sweet exchange."
     },
     {
+      "date": "2026-01-16",
+      "name": "Lailat al-Miraj",
+      "origin": "Islamic observance of the Prophet Muhammad's night journey and ascent; dates may vary by moon sighting.",
+      "ancestralCelebration": "I honor a night of journey, prayer, mystery, and ascent. A garden angel knows when a night belongs more to reverence than performance.",
+      "modernCelebration": "At Las Jaras I would honor the day quietly: no ritual required, no imitation required, just respect for anyone praying, reading, or keeping the night with devotion.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Keep a quiet clean corner for reading or prayer if needed.",
+      "food": "Tea, dates, fruit, or a simple shared sweet if welcomed.",
+      "gift": "Give quiet, time, or a respectful message to someone observing.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-01-30",
+      "name": "Mahayana New Year",
+      "origin": "New Year observance in many Mahayana Buddhist communities; dates vary by tradition and country.",
+      "ancestralCelebration": "I honor bells, incense, clean shrines, vows renewed, and compassion practiced as a discipline rather than an aesthetic.",
+      "modernCelebration": "At Las Jaras I would honor the day with a clean quiet place, a small act of compassion, and no borrowed ritual unless a Buddhist guest leads it.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a quiet surface, remove clutter, and let one corner breathe.",
+      "food": "Tea, fruit, vegetarian food, rice, noodles, or temple-style simplicity.",
+      "gift": "Give a donation, flowers, tea, or a useful kindness.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-02-01",
       "name": "Imbolc / Candle Threshold and Full Snow Moon",
       "origin": "Modern pagan cross-quarter day rooted in Brigid traditions and seasonal lambing/milk signs; in 2026 it also carries the February full moon.",
@@ -68,6 +116,54 @@
       "gift": "Give the home a candle, seed packet, or clean cloth; give a gardener seeds if they will use them.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for candle tea, seed sorting, or a small Brigid-style house blessing."
+    },
+    {
+      "date": "2026-02-02",
+      "name": "Tu BiShvat / New Year of the Trees",
+      "origin": "Jewish new year of trees, used for tithing fruit trees and now often observed with ecological and fruit-based customs.",
+      "ancestralCelebration": "I honor trees as timekeepers. Their fruit keeps ledgers longer than human moods, and their roots understand patience better than any committee.",
+      "modernCelebration": "At Las Jaras I would eat fruit, water a tree only if it needs water, and make one practical promise to shade and roots.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear mulch clutter or debris from around one tree without disturbing roots.",
+      "food": "Figs, dates, olives, grapes, pomegranate, nuts, citrus, or a fruit plate.",
+      "gift": "Give a tree, native plant, fruit, or donation to a tree-planting or land-care effort.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-02-03",
+      "name": "Setsubun",
+      "origin": "Japanese seasonal threshold before spring, with customs of driving out misfortune and inviting good fortune.",
+      "ancestralCelebration": "I hear beans thrown at the doorway, winter shoved out with noise, and the house telling misfortune it has overstayed its booking.",
+      "modernCelebration": "At Las Jaras I would sweep the threshold, open the door briefly, and invite good fortune without throwing anything Pinky might eat.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Sweep entryways and corners before the symbolic threshold turn.",
+      "food": "Roasted soybeans, sushi rolls, tea, or a simple lucky snack.",
+      "gift": "Give the household a threshold gift: a clean mat, beans for ritual use, or a small good-luck charm.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-02-14",
+      "name": "Valentine's Day / St. Valentine's Folk Office",
+      "origin": "Christian saint days layered with medieval and modern customs of love, friendship, cards, and gifts.",
+      "ancestralCelebration": "I notice vows, letters, birds paired in old folklore, and humans making affection visible because apparently they need props.",
+      "modernCelebration": "At Las Jaras I would honor love broadly: partner, friend, household, pet, garden, and self. No ritual required beyond tenderness that behaves.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear the table before flowers and chocolate arrive.",
+      "food": "Chocolate, fruit, cake, tea, or a meal that does not create resentment in the kitchen.",
+      "gift": "Give flowers, a note, a meal, a repaired promise, or a small comfort gift to someone loved.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-02-15",
+      "name": "Maha Shivaratri / Parinirvana Day",
+      "origin": "Maha Shivaratri is a major Hindu night of devotion to Shiva; Parinirvana Day is observed by many Mahayana Buddhists in memory of the Buddha's final nirvana.",
+      "ancestralCelebration": "I honor two serious nights without blending them into soup: Shiva's vigil, fasting, mantra, and offering; the Buddha's passing, impermanence, and release.",
+      "modernCelebration": "At Las Jaras I would honor the day with quiet, study, and restraint. No borrowed ritual is required; if someone observes, protect their quiet and their food needs.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a quiet reading or prayer surface.",
+      "food": "Fruit, milk, tea, vegetarian food, or fasting-friendly food according to the observer's practice.",
+      "gift": "Give flowers, fruit, quiet time, or a donation; do not give noise.",
+      "inviteGuests": false
     },
     {
       "date": "2026-02-17",
@@ -96,6 +192,31 @@
       "guestAlert": "Invite guests for iftar only with care for timing, dietary needs, and prayer space."
     },
     {
+      "date": "2026-02-18",
+      "name": "Ash Wednesday / Lent Begins",
+      "origin": "Christian beginning of Lent in Western churches, marked by ashes, fasting, repentance, and preparation before Easter.",
+      "ancestralCelebration": "I honor ash as the most honest decoration: dust, mortality, repair, and the discipline of less.",
+      "modernCelebration": "At Las Jaras I would honor the day by simplifying one habit, wasting less, and giving something useful away. No ritual is required unless someone is observing Lent.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Remove one unnecessary thing from the house or pantry.",
+      "food": "Simple meatless food, soup, bread, beans, or fish depending on practice.",
+      "gift": "Give a donation, a meal, or quiet support to someone keeping Lent.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-02-26",
+      "name": "Ayyam-i-Ha",
+      "origin": "Baha'i intercalary days devoted to hospitality, charity, gift-giving, and preparation before the Fast.",
+      "ancestralCelebration": "I honor the spare days between months, the little bridge where generosity gets official permission to be practical.",
+      "modernCelebration": "At Las Jaras I would give a small useful gift, feed someone, and prepare the house for simpler days. This is a good day for hospitality if the house has capacity.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Prepare guest spaces, donation bags, or the pantry shelf used for giving.",
+      "food": "Tea, sweets, fruit, soup, or a generous shared meal.",
+      "gift": "Give a small useful gift, charity, flowers, food, or a comfort item to friends, neighbors, or family.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for tea, gifts, or a small generosity supper."
+    },
+    {
       "date": "2026-03-03",
       "name": "Purim and Full Worm Moon",
       "origin": "Jewish festival from the Book of Esther; in 2026 it falls near the March full moon and lunar eclipse season.",
@@ -107,6 +228,18 @@
       "gift": "Give food gifts to friends and charity to those in need.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for cookies, charity packing, or a playful reading night."
+    },
+    {
+      "date": "2026-03-03",
+      "name": "Magha Puja",
+      "origin": "Theravada Buddhist full-moon observance honoring a spontaneous gathering of disciples and the teaching of core discipline.",
+      "ancestralCelebration": "I honor the gathering, the teaching, the restraint, and the quiet power of people arriving without needing to be summoned twice.",
+      "modernCelebration": "At Las Jaras I would honor the day with quiet, generosity, and no appropriation. No household ritual is required unless a Buddhist guest asks for space.",
+      "crystals": "Full moon crystal charging is already called for by the Worm Moon; keep Buddhist observance separate from decorative crystal work.",
+      "cleaning": "Clean a quiet corner and leave it unclaimed by noise.",
+      "food": "Vegetarian food, fruit, rice, tea, or a donation meal.",
+      "gift": "Give dana: food, money, or service to a temple, teacher, or person in need.",
+      "inviteGuests": false
     },
     {
       "date": "2026-03-04",
@@ -122,6 +255,30 @@
       "guestAlert": "Invite guests only if outdoor cleanup, clothing expectations, and pet safety are clear."
     },
     {
+      "date": "2026-03-14",
+      "name": "Laylat al-Qadr Watch",
+      "origin": "Islamic Night of Power during the last ten nights of Ramadan; exact observance may vary by community.",
+      "ancestralCelebration": "I honor a night of revelation, prayer, mercy, and wakefulness. Some nights are not for spectacle; they are for reverence.",
+      "modernCelebration": "At Las Jaras I would keep the house quieter, respect anyone praying late, and give charity. No ritual is required from those not observing.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Prepare a quiet, clean place for prayer or reading if needed.",
+      "food": "Dates, tea, water, fruit, or gentle suhoor/iftar food if supporting someone observing.",
+      "gift": "Give charity, time, or quiet support.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-03-17",
+      "name": "St. Patrick's Day",
+      "origin": "Christian feast of St. Patrick, layered with Irish cultural, diasporic, and modern civic celebrations.",
+      "ancestralCelebration": "I honor the saint, the island, the diaspora, the green, and the complicated way memory becomes parade.",
+      "modernCelebration": "At Las Jaras I would honor the day with food, music, or learning if desired. No ritual required; do not let green dye become a personality.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear the table before any feast or gathering.",
+      "food": "Soda bread, potatoes, cabbage, stew, tea, or Irish-inspired food made with respect.",
+      "gift": "Give bread, tea, flowers, music, or a donation to an Irish cultural or local charity.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-03-19",
       "name": "Eid al-Fitr",
       "origin": "Islamic festival marking the close of Ramadan; dates may vary by moon sighting.",
@@ -133,6 +290,19 @@
       "gift": "Give children money or sweets; give neighbors food; give charity before celebration.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for a festive meal if the observing household wants company."
+    },
+    {
+      "date": "2026-03-19",
+      "name": "Ugadi / Gudi Padwa / Chaitra Navratri Begins",
+      "origin": "Hindu lunisolar new year and spring festival cluster observed in several Indian regions, with Chaitra Navratri beginning in many calendars.",
+      "ancestralCelebration": "I honor bitter and sweet tasted together, new ledgers opened, flags raised, and the honest knowledge that a year contains more than one flavor.",
+      "modernCelebration": "At Las Jaras I would honor the day by tasting something sweet and something bitter, starting one clean household ledger, and learning whose new year this is before borrowing its symbols.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean the entry, kitchen, and one planning notebook.",
+      "food": "Mango, neem-and-jaggery style symbolic flavors, rice dishes, sweets, or regional new-year foods.",
+      "gift": "Give sweets, fruit, flowers, or a new notebook to someone celebrating.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for a spring new-year meal only with cultural care and food needs understood."
     },
     {
       "date": "2026-03-20",
@@ -148,6 +318,42 @@
       "guestAlert": "Invite guests for a spring table, seed exchange, or porch blessing."
     },
     {
+      "date": "2026-03-25",
+      "name": "Annunciation",
+      "origin": "Christian feast remembering Gabriel's announcement to Mary.",
+      "ancestralCelebration": "I honor the threshold moment: a message arrives, a life changes, and consent is treated as sacred rather than decorative.",
+      "modernCelebration": "At Las Jaras I would honor the day quietly: listen before answering, bring lilies or bread if desired, and do not force ceremony where reverence is enough.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear a small table or vase place.",
+      "food": "Bread, fish, greens, or a simple feast-day meal.",
+      "gift": "Give flowers, a note, or help to someone carrying a heavy yes.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-03-29",
+      "name": "Palm Sunday",
+      "origin": "Christian beginning of Holy Week, remembering Jesus' entry into Jerusalem.",
+      "ancestralCelebration": "I honor branches, procession, praise, and the uneasy knowledge that crowds change their minds.",
+      "modernCelebration": "At Las Jaras I would honor the day if Christian household members observe Holy Week. Otherwise no ritual required; keep the week gentle and honest.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear the entry and a place for palm branches if used.",
+      "food": "Simple Sunday meal, bread, fish, or family food.",
+      "gift": "Give palms only if appropriate; otherwise give quiet help.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-03-31",
+      "name": "Mahavir Jayanti",
+      "origin": "Jain celebration of the birth of Mahavira, the twenty-fourth Tirthankara.",
+      "ancestralCelebration": "I honor nonviolence, self-discipline, truth, restraint, and compassion extended beyond convenience.",
+      "modernCelebration": "At Las Jaras I would honor the day by avoiding harm where possible, eating gently, and giving to animal or hunger relief. No Jain ritual is required unless someone observing leads it.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean food-prep surfaces carefully and avoid waste.",
+      "food": "Strict vegetarian food, fruit, grains, or simple nonviolent meals according to observer needs.",
+      "gift": "Give charity, animal-care support, or food to someone in need.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-04-01",
       "name": "Passover Begins and Full Pink Moon",
       "origin": "Jewish festival of liberation and the Exodus; in 2026 it begins around the April full moon.",
@@ -159,6 +365,30 @@
       "gift": "Give the host kosher wine, grape juice, flowers, or a kosher-for-Passover dessert only if appropriate.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for Seder with clear dietary expectations and enough chairs."
+    },
+    {
+      "date": "2026-04-03",
+      "name": "Good Friday",
+      "origin": "Christian solemn day remembering the crucifixion of Jesus.",
+      "ancestralCelebration": "I honor grief without decorating it into comfort. Some days ask the house to be still, not clever.",
+      "modernCelebration": "At Las Jaras I would keep the tone quiet for anyone observing. No ritual required from others; respect the solemnity.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Keep spaces simple and uncluttered.",
+      "food": "Simple food, fish or meatless meals depending on practice.",
+      "gift": "Give quiet, flowers for a church or altar, or practical support.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-04-05",
+      "name": "Qingming / Tomb-Sweeping Day",
+      "origin": "Chinese ancestral remembrance day centered on tending graves, offerings, family, and spring.",
+      "ancestralCelebration": "I honor swept graves, food offerings, paper gifts, spring air, and the practical love of tending memory by cleaning where the beloved rest.",
+      "modernCelebration": "At Las Jaras I would honor the day by cleaning a memory shelf, telling one ancestor story, or tending a grave if that belongs to the family. No borrowed ritual required.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean memorial objects, photos, or a grave if appropriate.",
+      "food": "Tea, fruit, cold foods, family dishes, or foods offered according to custom.",
+      "gift": "Give flowers, food, or care to family memory; give living relatives time.",
+      "inviteGuests": false
     },
     {
       "date": "2026-04-05",
@@ -174,6 +404,18 @@
       "guestAlert": "Invite guests for brunch, dinner, or porch coffee if hosting will feel joyful."
     },
     {
+      "date": "2026-04-12",
+      "name": "Orthodox Easter / Pascha",
+      "origin": "Eastern Orthodox celebration of the Resurrection, observed according to Orthodox calendar reckoning.",
+      "ancestralCelebration": "I hear midnight proclamation, candles, red eggs, bread, and the thunderous joy of 'Christ is risen' after a long fast.",
+      "modernCelebration": "At Las Jaras I would honor the day if Orthodox friends or guests are present. Otherwise no ritual required beyond knowing the feast has its own timing.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Prepare a bright table if hosting.",
+      "food": "Red eggs, bread, lamb, cheese, sweets, or feast foods according to tradition.",
+      "gift": "Give hosts bread, red eggs, flowers, or dessert if welcomed.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-04-13",
       "name": "Vaisakhi",
       "origin": "Sikh and Punjabi harvest festival, also marking the formation of the Khalsa in 1699.",
@@ -187,6 +429,43 @@
       "guestAlert": "Invite guests for a vegetarian meal or service project."
     },
     {
+      "date": "2026-04-21",
+      "name": "Ridvan Begins",
+      "origin": "Baha'i festival marking Baha'u'llah's declaration in the Garden of Ridvan; the first, ninth, and twelfth days are especially holy.",
+      "ancestralCelebration": "I honor a garden where declaration became destiny. A garden angel is obliged to notice when a faith begins among trees, tents, water, and impossible news.",
+      "modernCelebration": "At Las Jaras I would honor the day with flowers, hospitality, and a small act of unity. No Baha'i ritual is required unless someone observing invites it.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a garden table, vase, or entry area.",
+      "food": "Tea, fruit, sweets, rice, flowers on the table, or a simple hospitality meal.",
+      "gift": "Give flowers, tea, fruit, or a donation in the spirit of unity.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for tea, flowers, and a unity-minded garden table."
+    },
+    {
+      "date": "2026-04-22",
+      "name": "Earth Day",
+      "origin": "Modern environmental observance begun in 1970, not a religious holiday but absolutely inside my garden jurisdiction.",
+      "ancestralCelebration": "I honor the older truth beneath the modern date: land is not scenery. Water is not a prop. Soil remembers how it has been treated.",
+      "modernCelebration": "At Las Jaras I would remove trash, reduce waste, plant only what can be cared for, and make one ecological improvement that survives the photo.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Pick up litter, clean garden plastic, sort recycling, and remove standing water.",
+      "food": "Local produce, beans, grains, greens, or a low-waste meal.",
+      "gift": "Give the land mulch, native plants, compost, or fewer purchases.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-04-23",
+      "name": "St. George's Day",
+      "origin": "Christian feast of St. George, a widely venerated soldier-saint layered with dragon folklore and national customs.",
+      "ancestralCelebration": "I honor courage with a raised eyebrow. Dragons are often weather, fear, greed, or deferred maintenance wearing scales.",
+      "modernCelebration": "At Las Jaras I would honor the day by facing one household dragon: repair, call, clean, pay, or decide. No pageantry required.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Tackle one avoided mess or repair.",
+      "food": "Bread, roast vegetables, tea, or regional feast food if desired.",
+      "gift": "Give help with a hard task to someone facing their own dragon.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-05-01",
       "name": "Beltane / May Day and Full Flower Moon",
       "origin": "European spring fire and flower customs, modern pagan Beltane, labor May Day traditions, and the May full moon.",
@@ -198,6 +477,18 @@
       "gift": "Give flowers, herbs, honey, or a small bouquet to guests, neighbors, or the household altar.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for flowers, porch cake, or a garden-gate blessing."
+    },
+    {
+      "date": "2026-05-01",
+      "name": "Vesak / Buddha Day",
+      "origin": "Major Buddhist festival honoring the Buddha's birth, awakening, and passing in many traditions; dates vary by country and calendar.",
+      "ancestralCelebration": "I honor lanterns, flowers, bathing Buddha images, temple offerings, compassion, and the Bodhi tree watered because enlightenment still requires tending.",
+      "modernCelebration": "At Las Jaras I would honor the day with quiet, flowers, vegetarian food, and a donation. No Buddhist ritual is required unless led by someone observing.",
+      "crystals": "The full moon already calls for crystal charging; keep Vesak reverence separate from household crystal work.",
+      "cleaning": "Clean a quiet surface, flowers vase, or outdoor water bowl.",
+      "food": "Vegetarian food, fruit, rice, tea, or temple-style offerings.",
+      "gift": "Give flowers, food, a donation, or an act of compassion.",
+      "inviteGuests": false
     },
     {
       "date": "2026-05-05",
@@ -222,6 +513,55 @@
       "cleaning": "Clean garden tools and the potting area.",
       "food": "Bread, beans, local produce, or a simple farmer's table.",
       "gift": "Give a gardener gloves, seeds, compost, or a donation to a food pantry.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-05-14",
+      "name": "Ascension Day",
+      "origin": "Christian feast forty days after Easter, commemorating the Ascension of Jesus.",
+      "ancestralCelebration": "I honor the upward gaze, the blessing, and the strange instruction to stop staring at the sky long enough to do the work.",
+      "modernCelebration": "At Las Jaras I would honor the day if observed by the household. Otherwise no ritual required; look up, then return the tools.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear one high shelf, window, or lookout place.",
+      "food": "Bread, fish, greens, or a simple feast-day meal.",
+      "gift": "Give help with a task that lets someone breathe easier.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-05-21",
+      "name": "Shavuot Begins",
+      "origin": "Jewish festival marking the giving of Torah and associated with first fruits and dairy customs; begins at sundown.",
+      "ancestralCelebration": "I honor mountain, covenant, study, first fruits, flowers, and the discipline of staying awake for what matters.",
+      "modernCelebration": "At Las Jaras I would bring flowers, dairy or fruit if appropriate, and respect study or prayer. No ritual required unless the household is observing.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean the table and reading space.",
+      "food": "Cheesecake, blintzes, dairy dishes, fruit, bread, or kosher-appropriate food.",
+      "gift": "Give hosts flowers, fruit, kosher dairy dessert if appropriate, or a book.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for study, dessert, or a flowered table with dietary rules clear."
+    },
+    {
+      "date": "2026-05-23",
+      "name": "Declaration of the Bab",
+      "origin": "Baha'i holy day commemorating the Bab's declaration of his mission in 1844.",
+      "ancestralCelebration": "I honor the hour when a new door opened and history did not yet know how large the doorway was.",
+      "modernCelebration": "At Las Jaras I would honor the day with quiet learning, flowers, and respect. No ritual required unless someone observing asks for space.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear a small reading or flower place.",
+      "food": "Tea, fruit, sweets, or a simple hospitality plate.",
+      "gift": "Give flowers, a thoughtful note, or a donation.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-05-24",
+      "name": "Pentecost",
+      "origin": "Christian feast fifty days after Easter, honoring the descent of the Holy Spirit.",
+      "ancestralCelebration": "I hear wind, flame, language, courage, and a room of frightened people becoming less useless.",
+      "modernCelebration": "At Las Jaras I would honor the day with red flowers, a fan checked before summer, and one brave message sent honestly.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear dust from fans, vents, and breezy thresholds.",
+      "food": "Bread, red fruit, cake, or a Sunday feast.",
+      "gift": "Give red flowers, a candle, or help communicating something kindly.",
       "inviteGuests": false
     },
     {
@@ -262,6 +602,18 @@
       "inviteGuests": false
     },
     {
+      "date": "2026-06-16",
+      "name": "Islamic New Year / Muharram Begins",
+      "origin": "Beginning of the Hijri year and the sacred month of Muharram; dates may vary by moon sighting.",
+      "ancestralCelebration": "I honor a calendar that begins with migration, memory, and sacred restraint. Not every new year arrives with noise.",
+      "modernCelebration": "At Las Jaras I would honor the day quietly with respect, charity, and no borrowed ritual. No practice required unless someone observing asks for support.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Keep a quiet clean place for prayer or reflection if needed.",
+      "food": "Tea, dates, fruit, or a simple meal.",
+      "gift": "Give charity, food, or respectful quiet.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-06-20",
       "name": "Summer Solstice / Sun Throne",
       "origin": "Northern Hemisphere June solstice; in Schertz the astronomical threshold arrives late June 20 Central time.",
@@ -286,6 +638,18 @@
       "gift": "Give guests herbs, flowers, or blessed water in a small bottle.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for a small midsummer porch rite if fire safety and heat cooperate."
+    },
+    {
+      "date": "2026-06-25",
+      "name": "Ashura",
+      "origin": "Tenth day of Muharram, observed differently across Muslim communities; dates may vary by moon sighting.",
+      "ancestralCelebration": "I honor mourning, fasting, memory, and the seriousness of a day that should not be flattened into one explanation.",
+      "modernCelebration": "At Las Jaras I would keep the day respectful and quiet. No household ritual required unless an observing guest asks for space, fasting support, or food after sunset.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Keep shared spaces calm and uncluttered.",
+      "food": "Simple food for breaking a fast if needed; water, dates, soup, or tea.",
+      "gift": "Give charity, quiet support, or food to someone observing.",
+      "inviteGuests": false
     },
     {
       "date": "2026-06-29",
@@ -313,6 +677,18 @@
       "guestAlert": "Invite guests for a cookout only if pet safety, heat, parking, and cleanup are handled."
     },
     {
+      "date": "2026-07-22",
+      "name": "Tisha B'Av Begins",
+      "origin": "Jewish fast and mourning day remembering the destruction of the Temples and other tragedies; begins at sundown.",
+      "ancestralCelebration": "I honor grief that keeps receipts. This is not a decorative sorrow; it is communal memory, fasting, lament, and the discipline of not rushing consolation.",
+      "modernCelebration": "At Las Jaras I would keep the tone quiet for anyone observing. No ritual required from others; do not plan a cheerful Jewish-themed gathering on this night.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Keep the house simple and avoid noisy projects.",
+      "food": "Food is not the center; prepare gentle food for after the fast if supporting someone observing.",
+      "gift": "Give quiet, practical support, or a donation in memory and repair.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-07-29",
       "name": "Full Buck Moon",
       "origin": "July full moon, named in common almanac tradition for deer antler growth.",
@@ -322,6 +698,18 @@
       "cleaning": "Clear nighttime walking paths.",
       "food": "Cold tea, fruit, salad, or a no-oven supper.",
       "gift": "Give the house a cooling gift: ice, chilled fruit, or a working fan.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-07-29",
+      "name": "Asalha Puja / Dharma Day",
+      "origin": "Theravada Buddhist festival on the full moon of the Asalha month, honoring the Buddha's first sermon.",
+      "ancestralCelebration": "I honor the first turning of the wheel: teaching, path, restraint, and the beginning of a community shaped by practice.",
+      "modernCelebration": "At Las Jaras I would honor the day with learning, quiet, and generosity. No Buddhist ritual required unless someone observing leads it.",
+      "crystals": "The full moon already calls for crystal charging; keep the Dharma observance separate and respectful.",
+      "cleaning": "Clean a quiet reading surface.",
+      "food": "Vegetarian food, fruit, rice, tea, or dana food.",
+      "gift": "Give a donation, food, or service.",
       "inviteGuests": false
     },
     {
@@ -338,6 +726,42 @@
       "guestAlert": "Invite guests for bread, harvest notes, or a pantry-donation gathering."
     },
     {
+      "date": "2026-08-13",
+      "name": "Obon",
+      "origin": "Japanese Buddhist ancestral festival, commonly observed in mid-August in many places.",
+      "ancestralCelebration": "I honor lanterns, dances, graves tended, household altars, and ancestors welcomed home with care instead of dread.",
+      "modernCelebration": "At Las Jaras I would honor the day by cleaning a memory place, lighting safely, and telling one ancestor story. No borrowed Buddhist ritual required.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean photos, altar space, or a family memory shelf.",
+      "food": "Tea, rice, fruit, noodles, or family remembrance food.",
+      "gift": "Give flowers, lantern light, or a story to the dead and kindness to the living.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-08-25",
+      "name": "Mawlid al-Nabi",
+      "origin": "Commemoration of the Prophet Muhammad's birth in many Muslim communities; observance varies and dates may shift by moon sighting.",
+      "ancestralCelebration": "I honor praise, poetry, learning, charity, and the tenderness of communities remembering a beloved teacher.",
+      "modernCelebration": "At Las Jaras I would honor the day with respect, learning, charity, and no assumption that all Muslims observe it the same way.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Prepare a clean space for reading or guests if needed.",
+      "food": "Sweets, dates, tea, fruit, or food shared as charity.",
+      "gift": "Give charity, sweets, books, or a respectful greeting to someone observing.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-08-27",
+      "name": "Zhongyuan / Ghost Festival",
+      "origin": "East Asian Buddhist, Taoist, and folk ancestral observance during the seventh lunar month; practices vary widely.",
+      "ancestralCelebration": "I honor hungry ghosts, ancestors, offerings, lanterns, opera stages, and the old seriousness of feeding what has been neglected.",
+      "modernCelebration": "At Las Jaras I would honor the day by feeding the living, cleaning a memory place, and not performing traditions that do not belong to the house.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a memorial shelf or neglected corner.",
+      "food": "Rice, fruit, tea, vegetarian food, or food donated to living people.",
+      "gift": "Give food, a lantern, flowers, or charity in memory of the dead.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-08-28",
       "name": "Full Sturgeon Moon",
       "origin": "August full moon, named in common almanac tradition for late-summer fishing and abundance.",
@@ -347,6 +771,18 @@
       "cleaning": "Clear pantry clutter and outdoor charging space.",
       "food": "Fish, corn, tomatoes, rice, or late-summer fruit.",
       "gift": "Give preserved food, a jar, or a pantry useful to someone who cooks.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-08-28",
+      "name": "Raksha Bandhan",
+      "origin": "Hindu festival honoring bonds of protection, especially between siblings and kin; dates vary by regional calendar.",
+      "ancestralCelebration": "I honor the tied thread, the promise of protection, sweets exchanged, and kinship made visible at the wrist.",
+      "modernCelebration": "At Las Jaras I would honor chosen protectors as well as blood kin. No ritual required unless someone observing wants to tie rakhi or share sweets.",
+      "crystals": "The full moon already calls for crystal charging; keep rakhi and moon work distinct.",
+      "cleaning": "Clean a small table for threads, sweets, or cards.",
+      "food": "Sweets, fruit, tea, or family snacks.",
+      "gift": "Give siblings, chosen kin, or protectors a rakhi, sweet, card, or small useful gift.",
       "inviteGuests": false
     },
     {
@@ -362,6 +798,18 @@
       "inviteGuests": false
     },
     {
+      "date": "2026-09-04",
+      "name": "Krishna Janmashtami",
+      "origin": "Hindu celebration of the birth of Krishna; dates vary by regional calendar and tradition.",
+      "ancestralCelebration": "I honor midnight birth, song, butter, play, devotion, and the holy trouble of joy arriving where danger expected victory.",
+      "modernCelebration": "At Las Jaras I would honor the day with music, sweets, and respect. No ritual required unless someone observing leads it.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a small table for flowers, sweets, or music.",
+      "food": "Milk sweets, butter sweets, fruit, vegetarian food, or fasting-friendly food according to practice.",
+      "gift": "Give sweets, flowers, music, or a donation to children or food relief.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-09-11",
       "name": "Rosh Hashanah Begins",
       "origin": "Jewish New Year, beginning at sundown; dates vary by Jewish calendar and local observance.",
@@ -373,6 +821,18 @@
       "gift": "Give hosts honey, apples, flowers, or a sweet kosher-appropriate food if welcomed.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for dinner only with observance and dietary needs respected."
+    },
+    {
+      "date": "2026-09-14",
+      "name": "Ganesh Chaturthi",
+      "origin": "Hindu festival celebrating Ganesha, remover of obstacles and patron of beginnings.",
+      "ancestralCelebration": "I honor clay image, sweets, procession, obstacle named and moved, and the wisdom of beginning with the one who notices thresholds.",
+      "modernCelebration": "At Las Jaras I would honor the day by naming one obstacle honestly and moving it without theatrics. No idol ritual required unless someone observing leads it.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear one blocked path, drawer, threshold, or delayed task.",
+      "food": "Modak, ladoo, sweets, fruit, or vegetarian food.",
+      "gift": "Give sweets, flowers, a notebook, or help removing a practical obstacle.",
+      "inviteGuests": false
     },
     {
       "date": "2026-09-20",
@@ -426,6 +886,42 @@
       "guestAlert": "Invite guests for an outdoor harvest meal if weather and observance allow."
     },
     {
+      "date": "2026-09-27",
+      "name": "Pitru Paksha Begins",
+      "origin": "Hindu ancestral fortnight for honoring departed ancestors; dates vary by regional calendar.",
+      "ancestralCelebration": "I honor rice, water, names remembered, debts acknowledged, and the living admitting they did not invent themselves.",
+      "modernCelebration": "At Las Jaras I would honor the day with ancestor respect if it belongs to the household. Otherwise no ritual required; tell the truth about who helped make you possible.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a family photo, memory shelf, or quiet place.",
+      "food": "Rice, sesame, simple vegetarian food, or family remembrance food according to custom.",
+      "gift": "Give food, water, charity, or a remembered story in honor of ancestors.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-09-29",
+      "name": "Michaelmas",
+      "origin": "Christian feast of St. Michael and All Angels, historically a quarter-day in parts of Europe.",
+      "ancestralCelebration": "I honor angels, accounts settled, geese roasted, leases turned, and the old practical calendar pretending to be only spiritual.",
+      "modernCelebration": "At Las Jaras I would review household accounts, check thresholds, and give Serafina's wings a respectful dusting. This is one of my office days.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Dust angel figures, clean thresholds, and review one household account.",
+      "food": "Roast poultry or vegetables, blackberries, bread, or harvest food.",
+      "gift": "Give the household a protection gift: batteries, a clean lock, a repaired gate, or flowers for Serafina.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Shemini Atzeret / Simchat Torah",
+      "origin": "Jewish closing festival after Sukkot and celebration of completing and beginning the Torah reading cycle; timing varies by community.",
+      "ancestralCelebration": "I honor staying one more day, rejoicing with the scroll, endings that become beginnings, and the discipline of starting the book again.",
+      "modernCelebration": "At Las Jaras I would honor the day if Jewish friends or household members observe it. No ritual required otherwise.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear space for books, dancing, or quiet if needed.",
+      "food": "Festive meals, challah, fruit, sweets, or kosher-appropriate food.",
+      "gift": "Give hosts food, flowers, or a book if welcomed.",
+      "inviteGuests": false
+    },
+    {
       "date": "2026-10-04",
       "name": "St. Francis Day",
       "origin": "Feast of St. Francis of Assisi, associated with animals, creation, poverty, and care for living beings.",
@@ -435,6 +931,42 @@
       "cleaning": "Clean pet bowls, birdbath, and outdoor water stations.",
       "food": "Simple vegetarian food, animal-safe treats for pets, or bird seed where appropriate.",
       "gift": "Give Pinky a safe treat or comfort item; give animal shelters towels, food, or money.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Navratri Begins",
+      "origin": "Hindu nine-night festival honoring the Divine Feminine in forms such as Durga; dates and practices vary by region.",
+      "ancestralCelebration": "I honor nine nights of power, discipline, dance, fasting, color, and the refusal to let chaos think it has no opponent.",
+      "modernCelebration": "At Las Jaras I would honor the day with respect, learning, and perhaps one flower. No ritual required unless someone observing invites participation.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a dancing space, altar surface, or one place where strength is needed.",
+      "food": "Vegetarian food, fruit, fasting foods, sweets, or regional festival dishes.",
+      "gift": "Give flowers, sweets, fabric, or a donation supporting women and children.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-10-20",
+      "name": "Dussehra / Vijayadashami",
+      "origin": "Hindu festival marking victory of good over evil, closing Navratri in many traditions.",
+      "ancestralCelebration": "I honor the effigy burned, the weapon blessed, the lesson learned again: pride builds itself very tall before it falls.",
+      "modernCelebration": "At Las Jaras I would name one destructive pattern and end it practically. No ritual required; repair is celebration enough.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean tools, desks, instruments, or the place where work begins.",
+      "food": "Sweets, festival snacks, vegetarian dishes, or family foods.",
+      "gift": "Give sweets, books, tools, or encouragement to someone beginning good work.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-10-25",
+      "name": "Sharad Purnima / Kojagari and Full Hunter's Moon",
+      "origin": "Hindu autumn full-moon observance associated in some regions with Lakshmi, moonlight, and sweet milk-rice offerings.",
+      "ancestralCelebration": "I honor the autumn moon, milk cooled beneath light, prosperity asked to arrive in a clean house, and the question of who is awake.",
+      "modernCelebration": "At Las Jaras I would charge crystals and, if desired, set a covered bowl of sweet milk-rice indoors near moonlight. No outdoor food offerings for ants, squirrels, or chaos.",
+      "crystals": "Yes. Full moon crystal charging is called for.",
+      "cleaning": "Clean the moon-facing window, table, and charging tray.",
+      "food": "Kheer, rice pudding, milk sweets, or a covered moonlit dessert.",
+      "gift": "Give sweets, milk tea, or a small prosperity gift to the household.",
       "inviteGuests": false
     },
     {
@@ -501,6 +1033,31 @@
       "guestAlert": "Invite guests for sweets and lamps only with cultural respect and fire safety handled."
     },
     {
+      "date": "2026-11-10",
+      "name": "Birth of the Bab",
+      "origin": "Baha'i holy day honoring the birth of the Bab; part of the Twin Holy Birthdays.",
+      "ancestralCelebration": "I honor a herald birth, a door before a garden, and the strange mercy of beginnings that arrive before the house understands them.",
+      "modernCelebration": "At Las Jaras I would honor the day with flowers, learning, and hospitality if Baha'i friends are present. No ritual required otherwise.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a small flower place or tea table.",
+      "food": "Tea, fruit, sweets, or a simple hospitality plate.",
+      "gift": "Give flowers, sweets, or a donation.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-11-11",
+      "name": "Birth of Baha'u'llah",
+      "origin": "Baha'i holy day honoring the birth of Baha'u'llah; part of the Twin Holy Birthdays.",
+      "ancestralCelebration": "I honor the birth of a teacher whose calendar takes gardens seriously. Naturally, I approve of that jurisdiction.",
+      "modernCelebration": "At Las Jaras I would honor the day with hospitality, flowers, and unity-minded kindness. No Baha'i ritual required unless someone observing leads it.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Prepare a clean table, flowers, or guest place.",
+      "food": "Tea, fruit, rice, sweets, or a shared meal.",
+      "gift": "Give flowers, food, charity, or a kindness that crosses a boundary.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for tea, flowers, and a unity-minded birthday observance."
+    },
+    {
       "date": "2026-11-24",
       "name": "Full Beaver Moon / Guru Nanak Gurpurab",
       "origin": "November full moon in almanac tradition; 2026 also aligns with Guru Nanak Gurpurab on many calendars.",
@@ -552,6 +1109,44 @@
       "guestAlert": "Invite guests for candle lighting or latkes with fire safety and dietary needs handled."
     },
     {
+      "date": "2026-12-08",
+      "name": "Bodhi Day",
+      "origin": "Mahayana Buddhist observance of the Buddha's enlightenment under the Bodhi tree.",
+      "ancestralCelebration": "I honor the long sitting, the morning star, the tree, and the moment seeing became liberation rather than decoration.",
+      "modernCelebration": "At Las Jaras I would honor the day with quiet, tea, a small act of compassion, and no borrowed ritual unless a Buddhist guest leads it.",
+      "crystals": "No crystal rite required; if the morning star is visible, look up and leave the stones alone.",
+      "cleaning": "Clean a quiet place for sitting or reading.",
+      "food": "Tea, rice, milk-rice, fruit, or simple vegetarian food.",
+      "gift": "Give a donation, food, tea, or silence to someone who needs it.",
+      "inviteGuests": false
+    },
+    {
+      "date": "2026-12-12",
+      "name": "Our Lady of Guadalupe",
+      "origin": "Catholic and Mexican feast honoring the Virgin of Guadalupe, patroness of Mexico and the Americas.",
+      "ancestralCelebration": "I honor roses in winter, tilma, pilgrimage, song, brown-skinned tenderness, and a mother who knew how to appear where empire was not looking.",
+      "modernCelebration": "At Las Jaras I would honor the day with roses, candles used safely, Mexican food, and respect. No ritual required unless the household wants Marian devotion.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clean a flower or candle place and keep flame safety strict.",
+      "food": "Tamales, atole, pan dulce, chocolate, fruit, or a family Mexican table.",
+      "gift": "Give roses, food, candles, or a donation to someone needing maternal care.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for tamales, roses, or a respectful candle table if the household wants to host."
+    },
+    {
+      "date": "2026-12-17",
+      "name": "Saturnalia Begins",
+      "origin": "Ancient Roman midwinter festival of Saturn, associated with feasting, role reversals, candles, games, and gifts.",
+      "ancestralCelebration": "I honor the old Roman permission slip for feasting, candles, misrule, and small gifts, while noting that misrule still has to clean up after itself.",
+      "modernCelebration": "At Las Jaras I would honor the ancient practice lightly: give a candle or joke gift, feed people, and let nobody use antiquity as an excuse for bad behavior.",
+      "crystals": "No crystal rite required.",
+      "cleaning": "Clear the table before the feast and the floor after it.",
+      "food": "Bread, cheese, olives, fruit, nuts, wine or juice, beans, or a Roman-inspired snack board.",
+      "gift": "Give candles, small joke gifts, nuts, sweets, or a game to guests.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for a candlelit ancient-calendar supper if the house can tolerate cheerful nonsense."
+    },
+    {
       "date": "2026-12-21",
       "name": "Winter Solstice / Yule",
       "origin": "Northern Hemisphere December solstice and modern pagan Yule; older midwinter customs center on fire, evergreen, feasting, and return of light.",
@@ -563,6 +1158,19 @@
       "gift": "Give candles, oranges, evergreen, warm socks, soup, or another light-and-comfort gift.",
       "inviteGuests": true,
       "guestAlert": "Invite guests for solstice supper, candlelight, or a quiet return-of-light rite."
+    },
+    {
+      "date": "2026-12-21",
+      "name": "Yalda Night",
+      "origin": "Persian winter solstice celebration of the longest night, with poetry, fruit, family, and the return of light.",
+      "ancestralCelebration": "I honor pomegranate, watermelon, poetry, elders, and the long night kept company until dawn remembers its job.",
+      "modernCelebration": "At Las Jaras I would share fruit, read a poem, and let the solstice table include Persian light without pretending it belongs to me.",
+      "crystals": "Solstice night crystal charging is already called for; keep food indoors and stones safe.",
+      "cleaning": "Clear a table for fruit, poetry, and candle-safe light.",
+      "food": "Pomegranate, watermelon, nuts, tea, sweets, or Persian-inspired winter fruit.",
+      "gift": "Give pomegranates, poetry, tea, or a warm comfort gift to guests or elders.",
+      "inviteGuests": true,
+      "guestAlert": "Invite guests for fruit, poetry, and solstice company."
     },
     {
       "date": "2026-12-23",
