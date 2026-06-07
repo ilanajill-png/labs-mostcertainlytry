@@ -181,6 +181,14 @@
       padding-left: 20px;
     }
 
+    .tarot-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -368,9 +376,14 @@
         </article>
         <article class="card">
           <h3>Six-Card Spread</h3>
-          <p><strong>Need:</strong> The High Priestess. I observe the quiet pattern; the garden has not finished speaking. <strong>Weather:</strong> The Empress. I tend growth, water, shade, and the beings who depend on them.</p>
-          <p><strong>Garden:</strong> The Emperor. I set boundaries: pots, gates, squirrels, time, and heat. <strong>Household:</strong> The Hierophant. I honor the old practice, then make it useful.</p>
-          <p><strong>Warning:</strong> The Lovers. I choose what I am actually willing to care for. <strong>Blessing:</strong> The Chariot. I move with purpose, but I secure the cargo.</p>
+          <ul class="tarot-list">
+            <li><strong>Need:</strong> The High Priestess. I observe the quiet pattern; the garden has not finished speaking.</li>
+            <li><strong>Weather:</strong> The Empress. I tend growth, water, shade, and the beings who depend on them.</li>
+            <li><strong>Garden:</strong> The Emperor. I set boundaries: pots, gates, squirrels, time, and heat.</li>
+            <li><strong>Household:</strong> The Hierophant. I honor the old practice, then make it useful.</li>
+            <li><strong>Warning:</strong> The Lovers. I choose what I am actually willing to care for.</li>
+            <li><strong>Blessing:</strong> The Chariot. I move with purpose, but I secure the cargo.</li>
+          </ul>
           <p><strong>House message:</strong> Listen before rushing. Tend the living things. Choose what you are actually willing to care for, then move with purpose and secure the cargo.</p>
         </article>
         <article class="card">
@@ -674,7 +687,7 @@
     }
 
     function tarotSummary(spread) {
-      return spread.map((item) => `<strong>${item.position}:</strong> ${item.card}. ${item.reading}`).join(" ");
+      return `<ul class="tarot-list">${spread.map((item) => `<li><strong>${item.position}:</strong> ${item.card}. ${item.reading}</li>`).join("")}</ul>`;
     }
 
     function tarotHouseMessage(spread) {
@@ -795,7 +808,7 @@
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
             ${entry.civicNote ? `<p><strong>Civic note:</strong> ${entry.civicNote}</p>` : ""}
-            <p><strong>Six-card spread:</strong> ${tarotSummary(spread)}</p>
+            <div><strong>Six-card spread:</strong> ${tarotSummary(spread)}</div>
             <p><strong>House message:</strong> ${entry.tarotMessage || tarotHouseMessage(spread)}</p>
             <p>${entry.note || ""}</p>
             <div class="meta">
