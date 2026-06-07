@@ -429,6 +429,41 @@
       color: #7b2f34;
     }
 
+    .solution-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .solution-item {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .78);
+    }
+
+    .solution-item.complete {
+      opacity: .55;
+      background: rgba(214, 208, 192, .36);
+      text-decoration: line-through;
+    }
+
+    .solution-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .solution-actions button {
+      min-height: 36px;
+      padding: 7px 9px;
+      font-size: .82rem;
+    }
+
     .flow {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -946,6 +981,7 @@
       };
       issue.severity = assessSeverity(issue);
       issue.sheriffFirstRead = suggestionFor(issue);
+      issue.solutionStatus = {};
       issue.investigationPrompt = buildInvestigationPrompt(issue);
       return issue;
     }
@@ -969,6 +1005,7 @@
       };
       issue.severity = data.severity || assessSeverity(issue);
       issue.sheriffFirstRead = Array.isArray(data.sheriffFirstRead) ? data.sheriffFirstRead : suggestionFor(issue);
+      issue.solutionStatus = data.solutionStatus || {};
       issue.investigationPrompt = data.investigationPrompt || buildInvestigationPrompt(issue);
       return issue;
     }
@@ -1038,10 +1075,37 @@
         <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
         <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
         <p><strong>Severity log:</strong> ${escapeHtml(severity.level)} — ${escapeHtml(severity.target)}</p>
-        <ul>${firstRead.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ul>
+        ${renderSolutionChecklist(issue, firstRead)}
       `;
       handoffPrompt.textContent = issue.investigationPrompt || "No investigation prompt was saved for this older case.";
       handoff.hidden = !issue.investigationPrompt;
+    }
+
+    function solutionState(issue, index) {
+      return issue.solutionStatus?.[index] || "open";
+    }
+
+    function renderSolutionChecklist(issue, steps) {
+      return `
+        <ul class="solution-list" aria-label="Sheriff solution checklist">
+          ${steps.map((step, index) => {
+            const state = solutionState(issue, index);
+            const complete = state !== "open";
+            const label = state === "done" ? "Done" : state === "not-needed" ? "Not needed" : "Open";
+            return `
+              <li class="solution-item ${complete ? "complete" : ""}">
+                <span>${escapeHtml(step)}</span>
+                <span class="hint">Status: ${escapeHtml(label)}</span>
+                <div class="solution-actions" aria-label="Update solution item ${index + 1}">
+                  <button type="button" data-solution="${escapeHtml(issue.id)}" data-solution-index="${index}" data-solution-state="done">Done</button>
+                  <button type="button" data-solution="${escapeHtml(issue.id)}" data-solution-index="${index}" data-solution-state="not-needed">Not Needed</button>
+                  ${complete ? `<button type="button" data-solution="${escapeHtml(issue.id)}" data-solution-index="${index}" data-solution-state="open">Reopen</button>` : ""}
+                </div>
+              </li>
+            `;
+          }).join("")}
+        </ul>
+      `;
     }
 
     function renderLatestCurrentRead(cases) {
@@ -1063,6 +1127,7 @@
       caseList.innerHTML = cases.map((issue) => {
         const media = issue.mediaAttachments.length ? issue.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ") : "none";
         const severity = issue.severity || { level: "Unlogged", target: "Review needed", rationale: "This case was saved before severity logging existed." };
+        const steps = issue.sheriffFirstRead || ["Open investigation."];
         return `
           <article class="case-card ${issue.status === "Closed" ? "closed" : ""}">
             <h3>${escapeHtml(issue.caseTitle)}</h3>
@@ -1076,7 +1141,7 @@
             <p>${escapeHtml(issue.description)}</p>
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
-            <p><strong>First read:</strong> ${escapeHtml(issue.sheriffFirstRead?.[0] || "Open investigation.")}</p>
+            ${renderSolutionChecklist(issue, steps)}
             <div class="actions">
               <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
               <button type="button" data-copy="${escapeHtml(issue.id)}">Copy Prompt</button>
@@ -1085,6 +1150,21 @@
           </article>
         `;
       }).join("");
+    }
+
+    function updateSolutionStatus(caseId, index, status) {
+      const cases = loadCases();
+      const issue = cases.find((item) => item.id === caseId);
+      if (!issue) return;
+      issue.solutionStatus = issue.solutionStatus || {};
+      if (status === "open") {
+        delete issue.solutionStatus[index];
+      } else {
+        issue.solutionStatus[index] = status;
+      }
+      saveCases(cases);
+      renderCases(cases);
+      renderSheriffRead(issue);
     }
 
     async function applySerafinaHandoff() {
@@ -1133,11 +1213,29 @@
       }, 1800);
     });
 
+    function solutionClickData(event) {
+      const solutionId = event.target?.dataset?.solution;
+      const solutionIndex = event.target?.dataset?.solutionIndex;
+      const solutionStatus = event.target?.dataset?.solutionState;
+      if (!solutionId || solutionIndex === undefined || !solutionStatus) return null;
+      return { solutionId, solutionIndex, solutionStatus };
+    }
+
+    sheriffNote.addEventListener("click", (event) => {
+      const solution = solutionClickData(event);
+      if (solution) updateSolutionStatus(solution.solutionId, solution.solutionIndex, solution.solutionStatus);
+    });
+
     caseList.addEventListener("click", async (event) => {
+      const solution = solutionClickData(event);
       const readId = event.target?.dataset?.read;
       const copyId = event.target?.dataset?.copy;
       const closeId = event.target?.dataset?.close;
       const cases = loadCases();
+      if (solution) {
+        updateSolutionStatus(solution.solutionId, solution.solutionIndex, solution.solutionStatus);
+        return;
+      }
       if (readId) {
         const issue = cases.find((item) => item.id === readId);
         if (issue) renderSheriffRead(issue);
