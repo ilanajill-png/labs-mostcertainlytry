@@ -282,6 +282,23 @@
     .chip.guest { background: rgba(180, 135, 47, .13); color: var(--gold); }
     .chip.clean { background: rgba(0, 71, 171, .09); color: var(--cobalt); }
 
+    .entry-sources {
+      padding-top: 10px;
+      border-top: 1px solid rgba(215, 217, 208, .9);
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .entry-sources b {
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+
+    .entry-sources a {
+      color: var(--cobalt);
+      font-weight: 850;
+    }
+
     .notice {
       padding: 18px;
       border-left: 4px solid var(--gold);
@@ -459,6 +476,36 @@
       return chips.map(([kind, label]) => `<span class="chip ${kind}">${label}</span>`).join("");
     }
 
+    const sourceCatalog = [
+      { label: "timeanddate seasons", url: "https://www.timeanddate.com/calendar/seasons.html", test: /solstice|equinox|ostara|mabon|season|yalda/i },
+      { label: "timeanddate moon phases", url: "https://www.timeanddate.com/moon/phases/", test: /full moon|moon|purnima|crystal/i },
+      { label: "Space.com full moons", url: "https://www.space.com/16830-full-moon-calendar.html", test: /full moon|wolf moon|snow moon|worm moon|pink moon|flower moon|strawberry moon|buck moon|sturgeon moon|corn moon|hunter|beaver|cold moon/i },
+      { label: "Chabad Jewish holidays", url: "https://www.chabad.org/holidays/default_cdo/year/2026/jewish/holidays-2026.htm", test: /jewish|passover|purim|rosh|yom kippur|sukkot|shavuot|hanukkah|tisha|tu bishvat|simchat|shemini/i },
+      { label: "Hebcal 2026", url: "https://www.hebcal.com/holidays/2026", test: /jewish|passover|purim|rosh|yom kippur|sukkot|shavuot|hanukkah|tisha|tu bishvat|simchat|shemini/i },
+      { label: "Al-Habib Islamic calendar", url: "https://www.al-habib.info/islamic-calendar/global_pdf/global-islamic-calendar-year-2026-ce.pdf", test: /islam|ramadan|eid|ashura|muharram|mawlid|miraj|qadr|arafah/i },
+      { label: "timeanddate Mawlid", url: "https://www.timeanddate.com/holidays/us/prophet-birthday", test: /mawlid|prophet/i },
+      { label: "Hindu Calendar", url: "https://calendarhindu.com/", test: /hindu|holi|diwali|navratri|dussehra|krishna|ganesh|raksha|shivaratri|sankranti|pongal|ugadi|gudi|pitru|purnima/i },
+      { label: "CalendarLabs Hindu holidays", url: "https://www.calendarlabs.com/online-calendar/2026-calendar/hindu-holidays/", test: /hindu|holi|diwali|navratri|dussehra|krishna|ganesh|raksha|shivaratri|sankranti|pongal|ugadi|gudi|pitru|purnima/i },
+      { label: "Baha'i holy days", url: "https://bahaidailycalendar.com/bahai-holy-days/", test: /baha|ridvan|bab|baha'u'llah|ayyam/i },
+      { label: "Xavier multi-faith calendar", url: "https://www.xavier.edu/jesuitresource/online-resources/calendar-religious-holidays-and-observances/index", test: /buddhist|buddha|vesak|bodhi|magha|asalha|obon|jain|mahavir|sikh|vaisakhi|nanak|gobind|interfaith|religious/i },
+      { label: "Britannica church year", url: "https://www.britannica.com/topic/church-year", test: /christian|catholic|orthodox|easter|christmas|advent|lent|ash wednesday|good friday|palm|pentecost|ascension|annunciation|saint|epiphany|guadalupe|michaelmas|all souls|all saints/i },
+      { label: "Britannica Chihuahua", url: "https://www.britannica.com/animal/Chihuahua-dog", test: /pinky|techichi|chihuahua/i },
+      { label: "AKC Chihuahua history", url: "https://www.akc.org/expert-advice/dog-breeds/chihuahua-history/", test: /pinky|techichi|chihuahua/i },
+      { label: "Wheel of the Year", url: "https://en.wikipedia.org/wiki/Wheel_of_the_Year", test: /imbolc|beltane|lammas|lughnasadh|samhain|yule|ostara|mabon|wheel/i }
+    ];
+
+    const generalSources = [
+      { label: "Xavier multi-faith calendar", url: "https://www.xavier.edu/jesuitresource/online-resources/calendar-religious-holidays-and-observances/index" },
+      { label: "Britannica church year", url: "https://www.britannica.com/topic/church-year" }
+    ];
+
+    function sourcesFor(entry) {
+      const haystack = `${entry.name} ${entry.origin} ${entry.ancestralCelebration} ${entry.modernCelebration}`;
+      const matches = sourceCatalog.filter((source) => source.test.test(haystack)).slice(0, 4);
+      const sources = matches.length ? matches : generalSources;
+      return `<div class="entry-sources"><b>Learn more:</b> ${sources.map((source) => `<a href="${source.url}">${source.label}</a>`).join(" · ")}</div>`;
+    }
+
     function renderEntry(entry) {
       const id = entryId(entry.date);
       const todayClass = entry.date === centralToday ? " today" : "";
@@ -479,6 +526,7 @@
           </div>
           ${entry.inviteGuests ? `<p><strong>Guest alert:</strong> ${escapeHtml(entry.guestAlert || "I would send a two-week and seven-day reminder before inviting the household in.")}</p>` : ""}
           <div class="chips">${entryChips(entry)}</div>
+          ${sourcesFor(entry)}
         </article>
       `;
     }
