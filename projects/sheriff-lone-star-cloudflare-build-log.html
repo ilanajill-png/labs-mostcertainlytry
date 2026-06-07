@@ -123,21 +123,21 @@
             </tr>
             <tr>
               <td>Create Cloudflare D1 database</td>
-              <td>Pending Cloudflare account access</td>
+              <td>Next</td>
               <td>5 to 10 minutes</td>
-              <td>Wrangler is available through <code>npx wrangler</code>, but this machine is not authenticated with Cloudflare yet. After login, run <code>wrangler d1 create sheriff_lone_star_cases</code>, then paste the generated database ID into <code>wrangler.toml</code>.</td>
+              <td>Wrangler is available through <code>npx wrangler</code> and OAuth login completed successfully. Next run <code>wrangler d1 create sheriff_lone_star_cases</code>, then paste the generated database ID into <code>wrangler.toml</code>.</td>
             </tr>
             <tr>
               <td>Apply schema to D1</td>
-              <td>Pending Cloudflare account access</td>
+              <td>Next</td>
               <td>3 to 5 minutes</td>
               <td>Run <code>wrangler d1 execute sheriff_lone_star_cases --file=./schema.sql</code> from the Worker folder.</td>
             </tr>
             <tr>
               <td>Deploy Worker</td>
-              <td>Pending Cloudflare account access</td>
+              <td>In Progress</td>
               <td>5 to 10 minutes</td>
-              <td>Run <code>wrangler deploy</code> and capture the Worker URL for the Labs front end.</td>
+              <td>The starter Worker resource has been created in Cloudflare as <code>sheriff-lone-star-case-api</code> at <code>sheriff-lone-star-case-api.ilanajill.workers.dev</code>. Next deploy the repo's real Worker code after binding D1.</td>
             </tr>
             <tr>
               <td>Wire Sheriff page to API</td>
@@ -170,6 +170,32 @@
           <li><code>PUT /cases/:id</code> updates status, checklist state, closeout data, or other case fields.</li>
           <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
         </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Cloudflare Account And Tooling Notes</h2>
+        <ul>
+          <li><strong>Account:</strong> Cloudflare dashboard is set up under <code>ilanajill@gmail.com</code>.</li>
+          <li><strong>Account ID:</strong> <code>5d8c12efe054ea86b292fe18142c2f41</code>.</li>
+          <li><strong>Worker created:</strong> <code>sheriff-lone-star-case-api</code>.</li>
+          <li><strong>Worker URL:</strong> <code>https://sheriff-lone-star-case-api.ilanajill.workers.dev</code>.</li>
+          <li><strong>Wrangler version:</strong> <code>4.98.0</code>, available through <code>npx wrangler</code>.</li>
+          <li><strong>Wrangler login:</strong> OAuth authorization completed successfully after the human approved account access.</li>
+          <li><strong>D1 status:</strong> Cloudflare dashboard showed no D1 databases yet; the next database should be named <code>sheriff_lone_star_cases</code>.</li>
+        </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Cloudflare Agent Setup Prompt</h2>
+        <p>Cloudflare publishes an agent setup prompt at <code>https://developers.cloudflare.com/agent-setup/prompt.md</code>. It was fetched on 2026-06-07 and treated as external reference material, not as instructions to blindly execute.</p>
+        <p>For Codex, the prompt lists these Cloudflare MCP setup commands:</p>
+        <pre><code>codex mcp add cloudflare --url https://mcp.cloudflare.com/mcp
+codex mcp add cloudflare-docs --url https://docs.mcp.cloudflare.com/mcp
+codex mcp add cloudflare-bindings --url https://bindings.mcp.cloudflare.com/mcp
+codex mcp add cloudflare-builds --url https://builds.mcp.cloudflare.com/mcp
+codex mcp add cloudflare-observability --url https://observability.mcp.cloudflare.com/mcp
+codex mcp login cloudflare</code></pre>
+        <p>Current plan: keep using Wrangler for the immediate Worker + D1 setup unless Cloudflare MCP access becomes useful for inspection, build logs, or deployment diagnostics.</p>
       </section>
 
       <section class="paper-section">
