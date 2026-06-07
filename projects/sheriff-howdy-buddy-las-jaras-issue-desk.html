@@ -699,7 +699,10 @@
     const caseList = document.querySelector("#case-list");
     const storageKey = "las-jaras-sheriff-cases-v1";
     const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
+    const mediaDbName = "las-jaras-media-handoff-v1";
+    const mediaStoreName = "files";
     let pendingSerafinaHandoff = null;
+    let handoffMediaPreviewUrls = [];
     let mediaPreviewUrls = [];
 
     function clean(value) {
@@ -770,6 +773,64 @@
       }));
     }
 
+    function openMediaDb() {
+      return new Promise((resolve, reject) => {
+        const request = indexedDB.open(mediaDbName, 1);
+        request.onupgradeneeded = () => {
+          request.result.createObjectStore(mediaStoreName, { keyPath: "id" });
+        };
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+      });
+    }
+
+    async function loadStoredMedia(mediaKey) {
+      if (!mediaKey || !("indexedDB" in window)) return null;
+      const db = await openMediaDb();
+      const result = await new Promise((resolve, reject) => {
+        const transaction = db.transaction(mediaStoreName, "readonly");
+        const request = transaction.objectStore(mediaStoreName).get(mediaKey);
+        request.onsuccess = () => resolve(request.result || null);
+        request.onerror = () => reject(request.error);
+      });
+      db.close();
+      return result;
+    }
+
+    function clearHandoffMediaPreviewUrls() {
+      for (const url of handoffMediaPreviewUrls) URL.revokeObjectURL(url);
+      handoffMediaPreviewUrls = [];
+    }
+
+    async function renderSerafinaMediaPreview(media) {
+      clearHandoffMediaPreviewUrls();
+      if (!media.length) {
+        mediaPreview.innerHTML = '<p class="hint">Serafina transferred the report context. No media metadata came with it.</p>';
+        return;
+      }
+      const items = await Promise.all(media.map(async (item, index) => {
+        try {
+          const stored = await loadStoredMedia(item.handoffMediaKey);
+          if (!stored?.blob) {
+            return `<div class="media-item"><p>${escapeHtml(item.name)} (${escapeHtml(item.size)})</p><p class="hint">Media metadata transferred. Browser-local file copy was not available.</p></div>`;
+          }
+          const url = URL.createObjectURL(stored.blob);
+          handoffMediaPreviewUrls.push(url);
+          const label = `${item.name}, ${item.size}`;
+          if (String(item.type).startsWith("image/")) {
+            return `<div class="media-item"><img src="${url}" alt="Serafina transferred image preview ${index + 1}: ${escapeHtml(label)}"><p class="hint">${escapeHtml(label)} transferred from Serafina on this device.</p></div>`;
+          }
+          if (String(item.type).startsWith("video/")) {
+            return `<div class="media-item"><video src="${url}" controls aria-label="Serafina transferred video preview ${index + 1}: ${escapeHtml(label)}"></video><p class="hint">${escapeHtml(label)} transferred from Serafina on this device.</p></div>`;
+          }
+          return `<div class="media-item"><p>${escapeHtml(label)}</p><p class="hint">Browser-local file copy transferred, but this type cannot be previewed here.</p></div>`;
+        } catch {
+          return `<div class="media-item"><p>${escapeHtml(item.name)} (${escapeHtml(item.size)})</p><p class="hint">Media metadata transferred. Browser-local preview failed.</p></div>`;
+        }
+      }));
+      mediaPreview.innerHTML = items.join("");
+    }
+
     function assessSeverity(issue) {
       const text = [
         issue.caseTitle,
@@ -829,6 +890,7 @@
 
     function renderMediaPreview() {
       clearMediaPreviewUrls();
+      clearHandoffMediaPreviewUrls();
       const files = [...mediaFiles.files];
       if (!files.length) {
         mediaPreview.innerHTML = '<p class="hint">No evidence selected yet.</p>';
@@ -961,7 +1023,7 @@
       }).join("");
     }
 
-    function applySerafinaHandoff() {
+    async function applySerafinaHandoff() {
       const params = new URLSearchParams(window.location.search);
       if (params.get("from") !== "serafina") return;
       try {
@@ -981,11 +1043,8 @@
       document.querySelector("#media-description").value = pendingSerafinaHandoff.mediaDescription || "";
       setActionLanes(pendingSerafinaHandoff.actionLane);
 
-      const media = pendingSerafinaHandoff.mediaAttachments || [];
-      mediaPreview.innerHTML = media.length
-        ? `<p class="hint">Serafina transferred media metadata: ${escapeHtml(media.map((item) => `${item.name} (${item.size})`).join(", "))}. Re-attach the same file here or in chat if Sheriff Lone Star needs to inspect it.</p>`
-        : '<p class="hint">Serafina transferred the report context. No media metadata came with it.</p>';
-      sheriffNote.innerHTML = "<b>Serafina escalation loaded.</b><p>Review the prefilled case, re-attach any photo or video if needed, then open the case with Sheriff Lone Star.</p>";
+      await renderSerafinaMediaPreview(pendingSerafinaHandoff.mediaAttachments || []);
+      sheriffNote.innerHTML = "<b>Serafina escalation loaded.</b><p>Review the prefilled case, then open it with Sheriff Lone Star. The media copy can transfer between these Labs pages on this device; attach it in chat only when you want me to visually inspect it there.</p>";
     }
 
     form.addEventListener("submit", (event) => {
