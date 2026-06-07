@@ -424,6 +424,32 @@
       color: var(--cobalt);
     }
 
+    .severity {
+      background: rgba(156, 63, 67, .11);
+      color: #7b2f34;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .flow-step {
+      display: grid;
+      gap: 6px;
+      min-height: 128px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .68);
+    }
+
+    .flow-step strong {
+      display: block;
+      color: var(--ink);
+    }
+
     footer {
       display: flex;
       flex-wrap: wrap;
@@ -436,13 +462,15 @@
     @media (max-width: 940px) {
       .hero,
       .layout { grid-template-columns: 1fr; }
+      .flow { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .bar { align-items: flex-start; flex-direction: column; padding: 12px 0; }
       nav { justify-content: flex-start; }
     }
 
     @media (max-width: 620px) {
       .two,
-      .checks { grid-template-columns: 1fr; }
+      .checks,
+      .flow { grid-template-columns: 1fr; }
       .actions button { width: 100%; }
     }
   </style>
@@ -625,6 +653,31 @@
       </div>
       <div class="case-list" id="case-list" aria-live="polite"></div>
     </section>
+
+    <section class="panel" aria-labelledby="flow-title">
+      <div>
+        <p class="label">Best-practice playbook</p>
+        <h2 id="flow-title">Sheriff Lone Star Issue Resolution Flow</h2>
+      </div>
+      <div class="flow" aria-label="Issue resolution flow">
+        <div class="flow-step">
+          <strong>1. Intake</strong>
+          <span>Capture one clear case with location, reporter, category, urgency, desired outcome, photos or video, and what changed.</span>
+        </div>
+        <div class="flow-step">
+          <strong>2. Triage</strong>
+          <span>Assign severity, protect people and property first, identify missing details, and decide whether the next move is research, DIY, shopping, or pro help.</span>
+        </div>
+        <div class="flow-step">
+          <strong>3. Investigate</strong>
+          <span>Use evidence, household context, and practical research. Separate what is visible, what is inferred, what needs checking, and what action is safest.</span>
+        </div>
+        <div class="flow-step">
+          <strong>4. Resolve</strong>
+          <span>Track owner, next action, supplies or vendor path, follow-up questions, and close the case only when the human says Sheriff Case Closed.</span>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -693,6 +746,58 @@
       }));
     }
 
+    function assessSeverity(issue) {
+      const text = [
+        issue.caseTitle,
+        issue.caseType,
+        issue.urgency,
+        issue.description,
+        issue.mediaDescription
+      ].join(" ").toLowerCase();
+      const has = (words) => words.some((word) => text.includes(word));
+      const emergencyWords = [
+        "gas", "smoke", "fire", "sparking", "shock", "flood", "flooding", "burst",
+        "sewage", "blood", "injury", "injured", "unsafe", "break in", "break-in",
+        "carbon monoxide", "electrical hazard"
+      ];
+      const highWords = [
+        "leak", "leaking", "no hot water", "hot water broken", "no water", "no heat",
+        "no ac", "air conditioner", "toilet overflow", "backup", "backed up",
+        "broken lock", "pest", "mold", "outage"
+      ];
+      const standardWords = [
+        "running toilet", "slow drain", "dripping", "clog", "broken", "repair",
+        "replace", "missing", "ate", "plant", "popsicle", "shopping"
+      ];
+
+      if (issue.urgency === "urgent" || issue.caseType === "safety" || has(emergencyWords)) {
+        return {
+          level: "S1 Emergency",
+          target: "Stabilize now; investigate immediately",
+          rationale: "Possible life-safety, habitability, or property-damage risk."
+        };
+      }
+      if (issue.urgency === "today" || issue.caseType === "plumbing" || has(highWords)) {
+        return {
+          level: "S2 High",
+          target: "Act today or within 24 hours",
+          rationale: "Likely comfort, sanitation, water, access, or escalating damage concern."
+        };
+      }
+      if (has(standardWords) || issue.caseType === "maintenance" || issue.caseType === "interpersonal") {
+        return {
+          level: "S3 Standard",
+          target: "Research and schedule within 2 to 7 days",
+          rationale: "Important household issue, but no immediate danger is indicated yet."
+        };
+      }
+      return {
+        level: "S4 Watch",
+        target: "Monitor, batch, or revisit within 1 to 2 weeks",
+        rationale: "Low immediate risk; gather more evidence before spending money or summoning professionals."
+      };
+    }
+
     function clearMediaPreviewUrls() {
       for (const url of mediaPreviewUrls) URL.revokeObjectURL(url);
       mediaPreviewUrls = [];
@@ -721,7 +826,8 @@
 
     function suggestionFor(issue) {
       const steps = [];
-      if (issue.urgency === "urgent") steps.push("First order of business: stop damage or risk before research gets fancy.");
+      steps.push(`${issue.severity.level}: ${issue.severity.target}. ${issue.severity.rationale}`);
+      if (issue.severity.level === "S1 Emergency") steps.push("First order of business: stop damage or risk before research gets fancy.");
       if (issue.caseType === "plumbing") steps.push("Check shutoff valves, running water, visible leaks, recent changes, and whether this is DIY-safe or needs a plumber.");
       if (issue.caseType === "plant") steps.push("Use the photo, leaf pattern, pellets, timing, and plant species to separate insect, mammal, heat, water, and disease suspects.");
       if (issue.caseType === "food") steps.push("Confirm whether this is a shortage, preference, expiration, or shopping-list item; H-E-B list is fair game when relevant.");
@@ -752,6 +858,7 @@
         mediaAttachments: mediaMetadata(),
         actionLane: selectedValues("actionLane")
       };
+      issue.severity = assessSeverity(issue);
       issue.sheriffFirstRead = suggestionFor(issue);
       issue.investigationPrompt = buildInvestigationPrompt(issue);
       return issue;
@@ -766,6 +873,7 @@
         "",
         "Use any photo or video uploaded in this chat as evidence. Do not claim to see media unless it is attached in chat.",
         "Use the form context, known Las Jaras household context, and grounded research where useful.",
+        "Follow the Sheriff Lone Star flow: intake, triage, investigate, resolve. Keep a severity log and update it if new facts change the risk.",
         "Separate the answer into: visible evidence, inferred causes, research/checks performed, likely explanation, follow-up questions, solution options, and next action.",
         "If relevant, suggest DIY steps, hiring TaskRabbit/pro help, adding supplies to H-E-B, adding a maintenance task, or preparing a household conversation.",
         "Keep the case Open until the human says Sheriff Case Closed.",
@@ -775,6 +883,7 @@
         `Location: ${issue.location}`,
         `Case type: ${issue.caseType}`,
         `Urgency: ${issue.urgency}`,
+        `Sheriff severity log: ${issue.severity.level} — ${issue.severity.target}. Rationale: ${issue.severity.rationale}`,
         `Desired outcome: ${issue.desiredOutcome}`,
         `Action lanes: ${issue.actionLane.length ? issue.actionLane.join(", ") : "not specified"}`,
         `Media selected in form: ${media}`,
@@ -790,6 +899,7 @@
       sheriffNote.innerHTML = `
         <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
         <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
+        <p><strong>Severity log:</strong> ${escapeHtml(issue.severity.level)} — ${escapeHtml(issue.severity.target)}</p>
         <ul>${issue.sheriffFirstRead.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ul>
       `;
       handoffPrompt.textContent = issue.investigationPrompt;
@@ -803,16 +913,19 @@
       }
       caseList.innerHTML = cases.map((issue) => {
         const media = issue.mediaAttachments.length ? issue.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ") : "none";
+        const severity = issue.severity || { level: "Unlogged", target: "Review needed", rationale: "This case was saved before severity logging existed." };
         return `
           <article class="case-card ${issue.status === "Closed" ? "closed" : ""}">
             <h3>${escapeHtml(issue.caseTitle)}</h3>
             <div class="case-meta">
               <span class="chip">${escapeHtml(issue.status)}</span>
+              <span class="chip severity">${escapeHtml(severity.level)}</span>
               <span>${escapeHtml(issue.location)}</span>
               <span>${escapeHtml(issue.caseType)}</span>
               <span>${escapeHtml(issue.urgency)}</span>
             </div>
             <p>${escapeHtml(issue.description)}</p>
+            <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
             <p><strong>First read:</strong> ${escapeHtml(issue.sheriffFirstRead[0] || "Open investigation.")}</p>
             <div class="actions">
