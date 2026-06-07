@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las Jaras Full Kitchen Storage Diagram</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5f6b7f;
+      --line: #b8c2d6;
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --cobalt: #1143a8;
+      --pantry: #fff7dc;
+      --cold: #e0f2fe;
+      --counter: #e7f8ed;
+      --open: #ede9fe;
+      --cook: #fee2e2;
+      --wet: #dbeafe;
+      --pending: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 38px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 18px;
+      max-width: 920px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .diagram-frame {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      padding: 14px;
+      overflow-x: auto;
+    }
+
+    svg {
+      display: block;
+      min-width: 1040px;
+      width: 100%;
+      height: auto;
+      background: var(--panel);
+      border: 1px solid #d8dfec;
+    }
+
+    .zone {
+      fill: #ffffff;
+      stroke: #c8d2e4;
+      stroke-width: 2;
+    }
+
+    .boundary {
+      stroke: #9aa8be;
+      stroke-width: 2;
+      stroke-dasharray: 8 8;
+    }
+
+    .label {
+      fill: var(--ink);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .small {
+      fill: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .tiny {
+      fill: var(--muted);
+      font-size: 12px;
+    }
+
+    .title {
+      fill: var(--cobalt);
+      font-size: 28px;
+      font-weight: 900;
+    }
+
+    .subtitle {
+      fill: var(--muted);
+      font-size: 15px;
+    }
+
+    .pantry { fill: var(--pantry); stroke: #9a6a16; }
+    .cold { fill: var(--cold); stroke: #2563eb; }
+    .counter { fill: var(--counter); stroke: #15803d; }
+    .open { fill: var(--open); stroke: #6d28d9; }
+    .cook { fill: var(--cook); stroke: #b91c1c; }
+    .wet { fill: var(--wet); stroke: #1d4ed8; }
+    .pending { fill: var(--pending); stroke: #64748b; stroke-dasharray: 6 5; }
+
+    .box {
+      stroke-width: 2;
+      rx: 6;
+    }
+
+    .shelf-line {
+      stroke: #7c6b43;
+      stroke-width: 1.5;
+    }
+
+    .flow {
+      fill: none;
+      stroke: #64748b;
+      stroke-width: 2;
+      stroke-dasharray: 7 7;
+    }
+
+    .legend-box {
+      fill: #ffffff;
+      stroke: #c8d2e4;
+      stroke-width: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Las Jaras Full Kitchen Storage Diagram</h1>
+    <p>Schematic storage map from the current kitchen inventory. This is not a measured floor plan yet; it shows confirmed storage groups, working roles, and the names I should use when telling you where something goes.</p>
+
+    <div class="diagram-frame">
+      <svg viewBox="0 0 1120 780" role="img" aria-labelledby="title desc">
+        <title id="title">Las Jaras full kitchen storage diagram</title>
+        <desc id="desc">Two kitchen zones showing left cooking zone storage, right pantry and refrigerator wall, right counter and open shelf, and deep reserve overflow.</desc>
+
+        <defs>
+          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"></path>
+          </marker>
+        </defs>
+
+        <text x="40" y="52" class="title">Full Kitchen Storage Map</text>
+        <text x="40" y="78" class="subtitle">Human names first; stable inventory codes in smaller text.</text>
+
+        <rect x="40" y="110" width="500" height="585" rx="10" class="zone"></rect>
+        <text x="62" y="142" class="label">Left Cooking / Wet Zone</text>
+        <text x="62" y="165" class="small">KZ-1 - cooking, sink, dishwasher, coffee-side storage</text>
+
+        <rect x="580" y="110" width="500" height="585" rx="10" class="zone"></rect>
+        <text x="602" y="142" class="label">Right Pantry / Fridge Zone</text>
+        <text x="602" y="165" class="small">KZ-2 - pantry bank, fridge bank, intake counter, visible shelf</text>
+
+        <line x1="555" y1="115" x2="555" y2="690" class="boundary"></line>
+        <text x="512" y="405" class="tiny" transform="rotate(-90 512 405)">two doorway split / traffic boundary</text>
+
+        <!-- Right side: pantry and fridge bank -->
+        <rect x="620" y="205" width="86" height="390" class="box pantry"></rect>
+        <text x="634" y="232" class="label">Left</text>
+        <text x="634" y="254" class="label">Pantry</text>
+        <text x="636" y="275" class="small">KP-A</text>
+        <line x1="620" y1="302" x2="706" y2="302" class="shelf-line"></line>
+        <line x1="620" y1="390" x2="706" y2="390" class="shelf-line"></line>
+        <line x1="620" y1="478" x2="706" y2="478" class="shelf-line"></line>
+        <text x="632" y="324" class="tiny">Shelf 1</text>
+        <text x="632" y="412" class="tiny">Shelf 2</text>
+        <text x="632" y="500" class="tiny">Shelf 3</text>
+        <text x="632" y="570" class="tiny">Shelf 4</text>
+
+        <rect x="724" y="205" width="88" height="390" class="box cold"></rect>
+        <text x="742" y="244" class="label">Active</text>
+        <text x="742" y="266" class="label">Fridge</text>
+        <text x="746" y="288" class="small">KF-A</text>
+        <text x="742" y="526" class="tiny">freezer below</text>
+
+        <rect x="830" y="205" width="88" height="390" class="box cold"></rect>
+        <text x="846" y="244" class="label">Overflow</text>
+        <text x="846" y="266" class="label">Fridge</text>
+        <text x="852" y="288" class="small">KF-B</text>
+        <text x="848" y="526" class="tiny">freezer below</text>
+
+        <rect x="936" y="205" width="86" height="390" class="box pantry"></rect>
+        <text x="950" y="232" class="label">Right</text>
+        <text x="950" y="254" class="label">Pantry</text>
+        <text x="954" y="275" class="small">KP-B</text>
+        <line x1="936" y1="302" x2="1022" y2="302" class="shelf-line"></line>
+        <line x1="936" y1="390" x2="1022" y2="390" class="shelf-line"></line>
+        <line x1="936" y1="478" x2="1022" y2="478" class="shelf-line"></line>
+        <text x="948" y="324" class="tiny">Shelf 1</text>
+        <text x="948" y="412" class="tiny">Shelf 2</text>
+        <text x="948" y="500" class="tiny">Shelf 3</text>
+        <text x="948" y="570" class="tiny">Shelf 4</text>
+
+        <rect x="640" y="620" width="220" height="52" class="box counter"></rect>
+        <text x="658" y="643" class="label">Right Counter</text>
+        <text x="660" y="663" class="small">KT-A - intake / scan before storing</text>
+
+        <!-- Left side: cooking, wet, and open shelf/counter -->
+        <rect x="84" y="210" width="120" height="62" class="box pending"></rect>
+        <text x="104" y="236" class="label">Drawers</text>
+        <text x="108" y="256" class="small">KD-A</text>
+
+        <rect x="220" y="210" width="92" height="62" class="box pending"></rect>
+        <text x="238" y="236" class="label">Narrow</text>
+        <text x="248" y="256" class="small">KC-A</text>
+
+        <rect x="328" y="192" width="122" height="96" class="box cook"></rect>
+        <text x="360" y="226" class="label">Range</text>
+        <text x="370" y="248" class="small">KR-A</text>
+        <text x="352" y="270" class="tiny">cooking anchor</text>
+
+        <rect x="84" y="330" width="146" height="94" class="box wet"></rect>
+        <text x="114" y="362" class="label">Sink Base</text>
+        <text x="122" y="384" class="small">KS-A</text>
+        <text x="106" y="406" class="tiny">under-sink cleaning</text>
+
+        <rect x="246" y="330" width="124" height="94" class="box wet"></rect>
+        <text x="270" y="362" class="label">Dishwasher</text>
+        <text x="290" y="384" class="small">KW-A</text>
+        <text x="268" y="406" class="tiny">unload path anchor</text>
+
+        <rect x="386" y="320" width="94" height="116" class="box pantry"></rect>
+        <text x="410" y="350" class="label">Lazy</text>
+        <text x="406" y="372" class="label">Susan</text>
+        <text x="414" y="395" class="small">KL-A</text>
+        <text x="402" y="417" class="tiny">bulky/round</text>
+
+        <rect x="84" y="478" width="82" height="72" class="box open"></rect>
+        <text x="92" y="502" class="label">Baking Supplies</text>
+        <text x="108" y="523" class="small">KO-B</text>
+        <text x="100" y="541" class="tiny">3 shelves</text>
+
+        <rect x="174" y="478" width="82" height="72" class="box open"></rect>
+        <text x="182" y="502" class="label">Baking Supplies</text>
+        <text x="198" y="523" class="small">KO-C</text>
+        <text x="190" y="541" class="tiny">3 shelves</text>
+
+        <rect x="270" y="478" width="126" height="72" class="box open"></rect>
+        <text x="310" y="500" class="label">Glasses</text>
+        <text x="288" y="518" class="tiny">Top / Middle / Bottom</text>
+        <text x="308" y="536" class="small">KO-D</text>
+
+        <rect x="412" y="478" width="92" height="72" class="box pending"></rect>
+        <text x="430" y="506" class="label">Narrow</text>
+        <text x="438" y="528" class="small">KC-B</text>
+
+        <rect x="84" y="585" width="200" height="56" class="box counter"></rect>
+        <text x="112" y="608" class="label">Coffee Counter</text>
+        <text x="120" y="628" class="small">KT-B - powered 93 in x 15 in</text>
+
+        <rect x="302" y="585" width="284" height="56" class="box open"></rect>
+        <text x="328" y="604" class="label">Counter Shelves</text>
+        <text x="318" y="622" class="tiny">1st / 2nd / 3rd Counter: Top, Middle, Bottom</text>
+        <text x="402" y="638" class="small">KO-E / KO-F / KO-G</text>
+
+        <rect x="84" y="650" width="372" height="44" class="box counter"></rect>
+        <text x="112" y="672" class="label">Cooking Zone Counter</text>
+        <text x="310" y="672" class="small">KT-C - 93 in x 24 in</text>
+
+        <rect x="306" y="108" width="156" height="58" class="box wet"></rect>
+        <text x="330" y="132" class="label">Microwave Cabinet</text>
+        <text x="352" y="153" class="small">KU-A above KM-A</text>
+
+        <!-- Flow arrows -->
+        <path d="M 750 620 C 750 575, 690 590, 665 595" class="flow" marker-end="url(#arrow)"></path>
+        <path d="M 750 620 C 780 560, 940 590, 978 595" class="flow" marker-end="url(#arrow)"></path>
+        <text x="722" y="608" class="tiny">put away after scan</text>
+
+        <path d="M 708 238 C 690 178, 952 178, 935 238" class="flow" marker-end="url(#arrow)"></path>
+        <text x="754" y="188" class="tiny">Left Pantry active stock refills from Right Pantry backstock</text>
+
+        <rect x="40" y="710" width="1040" height="44" class="legend-box"></rect>
+        <rect x="62" y="724" width="18" height="18" class="pantry"></rect>
+        <text x="88" y="738" class="tiny">Pantry / cabinet</text>
+        <rect x="190" y="724" width="18" height="18" class="cold"></rect>
+        <text x="216" y="738" class="tiny">Cold storage</text>
+        <rect x="316" y="724" width="18" height="18" class="counter"></rect>
+        <text x="342" y="738" class="tiny">Counter / staging</text>
+        <rect x="468" y="724" width="18" height="18" class="open"></rect>
+        <text x="494" y="738" class="tiny">Open shelf</text>
+        <rect x="590" y="724" width="18" height="18" class="wet"></rect>
+        <text x="616" y="738" class="tiny">Wet / dish workflow</text>
+        <rect x="760" y="724" width="18" height="18" class="pending"></rect>
+        <text x="786" y="738" class="tiny">Confirmed item, exact position pending</text>
+      </svg>
+    </div>
+  </main>
+</body>
+</html>

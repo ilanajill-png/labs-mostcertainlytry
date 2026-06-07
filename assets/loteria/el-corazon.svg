@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" role="img" aria-labelledby="title desc">
+  <title id="title">El Corazon Loteria card</title>
+  <desc id="desc">A stylized heart card for the Las Jaras Red Room.</desc>
+  <rect width="160" height="220" rx="10" fill="#fff8e7"/>
+  <rect x="10" y="10" width="140" height="200" rx="6" fill="#fdfcf7" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="31" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#00327a">EL CORAZON</text>
+  <path d="M80 169C34 132 31 91 54 76c13-9 27-4 34 9 7-13 21-18 34-9 23 15 20 56-42 93z" fill="#dc2626" stroke="#18201d" stroke-width="4"/>
+  <path d="M50 113h20l8-16 14 37 11-21h17" fill="none" stroke="#fff8e7" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="80" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#5f6a65">RED ROOM</text>
+</svg>

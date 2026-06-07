@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project Log | Las Jaras Ops Command Center</title>
+  <meta name="description" content="Full project log for the Las Jaras Ops Command Center, a cobalt-blue Labs microsite for rating and maturing household AI workflows.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.classList.add("lj-locked");</script>
+  <link rel="stylesheet" href="../assets/las-jaras-gate.css">
+  <script src="../assets/las-jaras-gate.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182033;
+      --muted: #5e6675;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --line: #d8ddea;
+      --cobalt: #0047ab;
+      --cobalt-dark: #002f73;
+      --cobalt-soft: #edf4ff;
+      --sky: #dbe8ff;
+      --gold: #a9791f;
+      --coral: #b75a42;
+      --shadow: 0 18px 44px rgba(24, 32, 51, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 71, 171, .08), transparent 34%, transparent 66%, rgba(169, 121, 31, .08)),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    .page {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 26px 0 76px;
+    }
+
+    .top-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid rgba(0, 71, 171, .28);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--cobalt-dark);
+      font-size: .86rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .hero {
+      padding: 46px 0 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--cobalt);
+      font-size: .76rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+      color: var(--cobalt-dark);
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 930px;
+      font-size: clamp(3rem, 7vw, 6.2rem);
+      line-height: .92;
+    }
+
+    h2 {
+      margin-top: 42px;
+      font-size: clamp(1.8rem, 3.2vw, 3rem);
+      line-height: 1.05;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+      line-height: 1.2;
+    }
+
+    p { margin-top: 0; }
+
+    .dek {
+      max-width: 900px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.03rem, 1.5vw, 1.26rem);
+    }
+
+    .hero-actions,
+    .stats,
+    .callouts,
+    .artifact-grid,
+    .principle-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: inherit;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: var(--cobalt);
+      background: var(--cobalt);
+      color: #fff;
+    }
+
+    .stats {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 22px;
+    }
+
+    .stat,
+    .callout,
+    .summary-panel,
+    .artifact,
+    .version-card,
+    .decision-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .88);
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 16px;
+    }
+
+    .stat b {
+      display: block;
+      color: var(--cobalt);
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .summary-panel {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      margin-top: 24px;
+      padding: 20px;
+      background: #fff;
+    }
+
+    .summary-panel p { color: #2d3344; }
+    .summary-panel p:last-child { margin-bottom: 0; }
+
+    .house-card {
+      display: grid;
+      align-content: center;
+      min-height: 180px;
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--cobalt-dark);
+      color: #fff;
+    }
+
+    .house-card b {
+      display: block;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      line-height: 1;
+    }
+
+    .house-card span {
+      display: block;
+      margin-top: 8px;
+      color: rgba(255, 255, 255, .8);
+    }
+
+    .callouts,
+    .artifact-grid,
+    .principle-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .callout,
+    .artifact,
+    .decision-card {
+      padding: 16px 18px;
+      background: #fff;
+    }
+
+    .callout {
+      border-left: 5px solid var(--cobalt);
+    }
+
+    .callout strong,
+    .artifact strong,
+    .version-card strong,
+    .decision-card strong {
+      display: block;
+      color: var(--cobalt-dark);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .callout p,
+    .artifact p,
+    .decision-card p,
+    .version-card p {
+      margin: 7px 0 0;
+      color: #2d3344;
+    }
+
+    .artifact code {
+      color: var(--cobalt-dark);
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .version-card {
+      display: grid;
+      grid-template-columns: minmax(90px, .24fr) minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .version-meta {
+      color: var(--cobalt);
+      font-weight: 900;
+    }
+
+    .version-meta span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
+    .version-meta .compute-time {
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .principle-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .decision-card {
+      background:
+        linear-gradient(135deg, rgba(0, 71, 171, .09), rgba(255, 255, 255, 0) 48%),
+        #fff;
+    }
+
+    @media (max-width: 840px) {
+      .stats,
+      .summary-panel,
+      .callouts,
+      .artifact-grid,
+      .principle-grid,
+      .version-card {
+        grid-template-columns: 1fr;
+      }
+
+      .page {
+        width: min(100% - 32px, 1180px);
+        padding-bottom: 56px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <a class="top-link" href="household-ops-command-center.html">Back to Las Jaras Command Center</a>
+
+    <section class="hero" aria-labelledby="title">
+      <p class="eyebrow">Project Log · Las Jaras v2.0</p>
+      <h1 id="title">Las Jaras Ops Command Center Project Log</h1>
+      <p class="dek">A running record of how the household AI tracker is being shaped into a real operating layer for Las Jaras: what changed, why it matters, what facts anchor it, and what still needs measurement.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="household-ops-command-center.html">Open command center</a>
+        <a class="button" href="las-jaras-garden-site-plan.html">Open site plan</a>
+        <a class="button" href="las-jaras-garden-field-checklist.html">Open field checklist</a>
+        <a class="button" href="../docs/household-ops-command-center-build-log.md">Source notes</a>
+        <a class="button" href="../index.html">Labs index</a>
+      </div>
+
+      <div class="stats" aria-label="Project stats">
+        <div class="stat"><b>11</b><span>starter workflows in current build</span></div>
+        <div class="stat"><b>5</b><span>rating dimensions per workflow</span></div>
+        <div class="stat"><b>1,800</b><span>sqft living area represented</span></div>
+        <div class="stat"><b>10,275</b><span>sqft lot driving site planning</span></div>
+      </div>
+
+      <div class="summary-panel">
+        <div>
+          <p><strong>Current version:</strong> v2.3. The command center now has Las Jaras identity, cobalt-blue square/panel styling, house-profile facts, kitchen outline, Household Food nested under Kitchen, Lighting + Smart Home links, Schertz Birds management, a 14-day IoT setup sprint, recurring Sunday Cibolo and Tuesday Schertz food-planning tasks, two planning workflows, a standalone garden/site planning diagram, a phone-friendly field checklist form, shared private page gate, and a fuller audit trail of the actual tracker surface.</p>
+          <p><strong>Main benefit:</strong> household AI work now has a product-style scoring surface while still feeling specific to the actual house: a 1952 Schertz home with a gardenable lot, storage/deck structures, and missing interior-room geometry we need to measure ourselves.</p>
+          <p><strong>Next best work:</strong> capture a simple interior walkthrough, collect 10-15 key measurements, and use field-checklist exports to revise the schematic garden site plan into a measured version.</p>
+        </div>
+        <div class="house-card">
+          <b>Las Jaras</b>
+          <span>cobalt-blue household systems lab</span>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="method-title">
+      <h2 id="method-title">Build Method</h2>
+      <div class="callouts">
+        <article class="callout">
+          <strong>Operating Surface</strong>
+          <p>The page is not a brochure. It is a working tracker for deciding which household workflows deserve build time, which ones need caution, and which ones can wait.</p>
+        </article>
+        <article class="callout">
+          <strong>House-First Context</strong>
+          <p>Las Jaras is treated as a real old house with constraints: public records provide area and parcel facts, but room placement still needs direct measurement.</p>
+        </article>
+        <article class="callout">
+          <strong>Privacy Boundary</strong>
+          <p>The public-facing page keeps useful planning facts but avoids turning Labs into a direct address or parcel lookup page. Exact source links and identifiers stay in private workspace context.</p>
+        </article>
+        <article class="callout">
+          <strong>Scoring Model</strong>
+          <p>Each workflow gets impact, autonomy, effort, risk control, and delight scores. The priority score weights high-impact, high-autonomy, bounded-risk work first.</p>
+        </article>
+        <article class="callout">
+          <strong>Persistence Choice</strong>
+          <p>Browser localStorage keeps the command center portable and fast without a backend. That is enough for the first review habit; export/import can come next.</p>
+        </article>
+        <article class="callout">
+          <strong>Design Direction</strong>
+          <p>Cobalt is the house color. The prior green-tinted squares and bars were changed to cobalt-blue treatments with small warm accents for contrast.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="facts-title">
+      <h2 id="facts-title">House Facts Captured</h2>
+      <div class="principle-grid">
+        <article class="decision-card">
+          <strong>Structure</strong>
+          <p>Public records point to 1,800 sqft of living area: a 1,240 sqft main floor plus a 560 sqft addition. The house is a 1952 single-family home.</p>
+        </article>
+        <article class="decision-card">
+          <strong>Site</strong>
+          <p>The lot is about 10,275 sqft, roughly 75 ft by 137 ft, angled relative to true north. That is enough to use GIS as the exterior planning base now.</p>
+        </article>
+        <article class="decision-card">
+          <strong>Improvements</strong>
+          <p>The record includes attached unfinished storage, covered porch area, detached storage, an uncovered deck, and portable storage. Those pieces matter for site planning and workflow design.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="surface-title">
+      <h2 id="surface-title">Command Center Surface</h2>
+      <div class="callouts">
+        <article class="callout">
+          <strong>Navigation</strong>
+          <p>The hero links directly to the scoreboard, house profile, garden site plan, field checklist, workflow rating form, and this build log.</p>
+        </article>
+        <article class="callout">
+          <strong>Dashboard Metrics</strong>
+          <p>The top metrics show tracked workflows, average overall score, top priority score, and active/candidate workflow count.</p>
+        </article>
+        <article class="callout">
+          <strong>Workflow Portfolio</strong>
+          <p>Workflow cards are sorted by priority and show area/status metadata, notes, tags, overall score, priority score, and a visual rating bar.</p>
+        </article>
+        <article class="callout">
+          <strong>Scoreboard</strong>
+          <p>The table preserves workflow notes alongside area, status, overall score, priority score, and delete controls so the tracker can be reviewed quickly.</p>
+        </article>
+        <article class="callout">
+          <strong>Add And Update</strong>
+          <p>The form updates an existing workflow when the name matches, or adds a new workflow when the name is new. Starter data can be restored from the same panel.</p>
+        </article>
+        <article class="callout">
+          <strong>Starter Workflow Set</strong>
+          <p>The baseline records cover pantry pickup, expiration radar, garden heat, GIS site modeling, interior floor planning, morning briefs, lighting control, errand routing, and household memory.</p>
+        </article>
+        <article class="callout">
+          <strong>Kitchen Outline</strong>
+          <p>The command center now summarizes the two-zone kitchen model from the storage map: KZ-1 for cooking/wet/coffee-side storage, KZ-2 for pantry/fridge/intake storage, and the two-doorway traffic split between them.</p>
+        </article>
+        <article class="callout">
+          <strong>Household Food Under Kitchen</strong>
+          <p>Pantry inventory, pickup planning, expiration tracking, cookbook work, and long-term storage planning now sit inside the Kitchen section instead of floating only as generic household workflows.</p>
+        </article>
+        <article class="callout">
+          <strong>Recurring Pickup Planning</strong>
+          <p>Sunday Cibolo H-E-B pickup planning is now a recurring Household Food task, paired with Tuesday Schertz follow-up planning for missed items, fresh food, substitutions, and household goods.</p>
+        </article>
+        <article class="callout">
+          <strong>Lighting + Smart Home</strong>
+          <p>The command center now links directly to the Hue planning file, lighting intake, local Home Assistant, setup notes, and the local control wrapper.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="artifacts-title">
+      <h2 id="artifacts-title">Artifacts</h2>
+      <div class="artifact-grid">
+        <article class="artifact">
+          <strong>Garden field checklist</strong>
+          <p><code>projects/las-jaras-garden-field-checklist.html</code></p>
+          <p>Phone-friendly form with autosave, photo upload previews, measurements, hose-bib checks, shade observations, notes, copy summary, and JSON export.</p>
+        </article>
+        <article class="artifact">
+          <strong>Garden site plan</strong>
+          <p><code>projects/las-jaras-garden-site-plan.html</code></p>
+          <p>Standalone schematic SVG page showing parcel dimensions, the true-north reference, structures, storage, deck, sun zones, watering zones, and field-check assumptions.</p>
+        </article>
+        <article class="artifact">
+          <strong>Main microsite</strong>
+          <p><code>projects/household-ops-command-center.html</code></p>
+          <p>Interactive cobalt-blue tracker with profile cards, workflow cards, filters, scoring, and localStorage editing.</p>
+        </article>
+        <article class="artifact">
+          <strong>Project log page</strong>
+          <p><code>projects/household-ops-command-center-build-log.html</code></p>
+          <p>This full project log, expanded from the original short template entry.</p>
+        </article>
+        <article class="artifact">
+          <strong>Source notes</strong>
+          <p><code>docs/household-ops-command-center-build-log.md</code></p>
+          <p>Markdown build notes using the Labs template shape, now updated with the tracker controls, workflow set, artifacts, gate, and next work.</p>
+        </article>
+        <article class="artifact">
+          <strong>Shared private gate</strong>
+          <p><code>assets/las-jaras-gate.js</code> and <code>assets/las-jaras-gate.css</code></p>
+          <p>Lightweight local page gate used by private Las Jaras household-planning pages without putting an account system behind a static microsite.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="decisions-title">
+      <h2 id="decisions-title">Design Decisions</h2>
+      <div class="callouts">
+        <article class="callout">
+          <strong>Use GIS Outside, Measurements Inside</strong>
+          <p>The parcel geometry is good enough to start garden optimization. The interior is not. A phone walkthrough plus measurements will beat stale listing media.</p>
+        </article>
+        <article class="callout">
+          <strong>Make Las Jaras Feel Opinionated</strong>
+          <p>The site describes the house as cobalt, practical, garden-aware, and a little stubborn. That gives future automations a consistent voice and behavior standard.</p>
+        </article>
+        <article class="callout">
+          <strong>Keep Spending Human-Confirmed</strong>
+          <p>Workflow notes preserve the boundary: the AI can prepare, clip coupons, draft lists, and recommend. Buddy confirms before money moves.</p>
+        </article>
+        <article class="callout">
+          <strong>Avoid Public Overexposure</strong>
+          <p>The page can show house-operating facts without exposing exact public-record links or identifiers on a likely-public Labs surface.</p>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="timeline-title">
+      <h2 id="timeline-title">Version Log</h2>
+      <div class="timeline">
+        <article class="version-card">
+          <div class="version-meta">v1.0<span>10:06 CDT</span><span class="compute-time">Compute time: 9 min</span></div>
+          <div><strong>What changed</strong><p>Created the first Las Jaras Ops Command Center as a static Labs project page with starter workflow data and browser-local scoring.</p></div>
+          <div><strong>Project benefit</strong><p>Moved household AI ideas out of chat history and into a visible tracker where they can be compared and reviewed.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.1<span>10:12 CDT</span><span class="compute-time">Compute time: 6 min</span></div>
+          <div><strong>What changed</strong><p>Added a template-shaped Markdown build log, a companion HTML page, project index metadata, sitemap entry, and links from the command center.</p></div>
+          <div><strong>Project benefit</strong><p>Made the build discoverable in Labs and gave the project an audit trail, even though the first log was still too thin.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.2<span>10:24 CDT</span><span class="compute-time">Compute time: 12 min</span></div>
+          <div><strong>What changed</strong><p>Renamed the house context to Las Jaras and aligned the microsite around the cobalt-blue house identity.</p></div>
+          <div><strong>Project benefit</strong><p>Stopped the site from feeling generic and made it clear this is a household operating system for a specific place.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.3<span>10:30 CDT</span><span class="compute-time">Compute time: 6 min</span></div>
+          <div><strong>What changed</strong><p>Added house-profile cards, public-record-derived planning facts, a house personality section, cobalt square/panel styling, GIS site-model workflow, and interior floor-plan workflow.</p></div>
+          <div><strong>Project benefit</strong><p>Gives future AI workflows a physical model to grow from: site plan first, interior plan after direct measurement.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.4<span>10:32 CDT</span><span class="compute-time">Compute time: 2 min</span></div>
+          <div><strong>What changed</strong><p>Expanded the build log into this full project log modeled after the André Mack build notes page, with stats, method, facts, artifacts, decisions, and version history.</p></div>
+          <div><strong>Project benefit</strong><p>Creates a real running record for the Las Jaras system instead of a short launch note.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.5<span>10:55 CDT</span><span class="compute-time">Compute time: 23 min</span></div>
+          <div><strong>What changed</strong><p>Added a standalone Las Jaras Garden Site Plan with an inline SVG parcel diagram, approximate lot dimensions, true-north reference, structure placeholders, sun zones, watering zones, and measurement caveats.</p></div>
+          <div><strong>Project benefit</strong><p>Turns the exterior GIS idea into a planning artifact that can guide garden optimization now and improve as real measurements arrive.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.6<span>11:09 CDT</span><span class="compute-time">Compute time: 14 min</span></div>
+          <div><strong>What changed</strong><p>Added a phone-friendly Garden Field Checklist with measurements, photo upload previews, hose-bib checks, shade observations, garden asset capture, notes, autosave, copy summary, and JSON export.</p></div>
+          <div><strong>Project benefit</strong><p>Creates the field-capture workflow needed to update the site plan from schematic to measured and useful.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.7<span>20:44 CDT</span><span class="compute-time">Compute time: 9 min</span></div>
+          <div><strong>What changed</strong><p>Expanded the build log to capture the full command center surface: hero actions, metrics, workflow cards, filters, rubric, scoreboard, add/update/delete behavior, restore-starter-data control, starter workflow list, localStorage persistence, and shared private gate.</p></div>
+          <div><strong>Project benefit</strong><p>Makes the log match the actual product instead of only documenting the house-identity and garden-planning pieces.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.8<span>20:52 CDT</span><span class="compute-time">Compute time: 11 min</span></div>
+          <div><strong>What changed</strong><p>Added a Kitchen Outline section to the command center with KZ-1 and KZ-2 zone summaries, storage rules, the doorway traffic boundary, and links to the full kitchen diagram, editable diagram, and left-pantry diagram.</p></div>
+          <div><strong>Project benefit</strong><p>Brings the kitchen storage model into the household operating dashboard without overwhelming it with the full cabinet-by-cabinet map.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v1.9<span>20:58 CDT</span><span class="compute-time">Compute time: 8 min</span></div>
+          <div><strong>What changed</strong><p>Moved Household Food into the Kitchen area with cards for inventory source, pickup rhythm, and waste radar, plus direct links to inventory, current inventory view, food workflows, H-E-B list, pantry cookbook, and two-year storage plan.</p></div>
+          <div><strong>Project benefit</strong><p>Makes the command center hierarchy match the way the work actually runs: food is part of kitchen operations, while the workflow portfolio remains the scoring layer.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v2.0<span>21:07 CDT</span><span class="compute-time">Compute time: 14 min</span></div>
+          <div><strong>What changed</strong><p>Added recurring task cards for Sunday Cibolo H-E-B pickup planning and Tuesday Schertz follow-up planning, generated the first dated Cibolo pickup proposal, and added the Sunday pickup task to the starter workflow set.</p></div>
+          <div><strong>Project benefit</strong><p>Turns the household food section from reference links into an actual weekly operating loop.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v2.1<span>09:45 CDT</span><span class="compute-time">Compute time: 8 min</span></div>
+          <div><strong>What changed</strong><p>Added the missing Lighting + Smart Home section with direct links to the Las Jaras smart-home plan, lighting intake, local Home Assistant, setup notes, config folder, and wrapper script. Added Lighting Control Bridge to the starter workflow set.</p></div>
+          <div><strong>Project benefit</strong><p>Makes lighting visible as a first-class household operations system instead of burying it in workspace notes.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v2.2<span>09:56 CDT</span><span class="compute-time">Compute time: 15 min</span></div>
+          <div><strong>What changed</strong><p>Added VicoHome bird feeder camera management to the smart-home plan, Home Assistant helper entities, the command-center Smart Home section, and the starter workflow set.</p></div>
+          <div><strong>Project benefit</strong><p>Keeps the feeders visible in household operations while respecting VicoHome's app-only official integration limits and marking the unofficial Home Assistant bridge as opt-in.</p></div>
+        </article>
+
+        <article class="version-card">
+          <div class="version-meta">v2.3<span>10:49 CDT</span><span class="compute-time">Compute time: 10 min</span></div>
+          <div><strong>What changed</strong><p>Added a direct Schertz Birds nav and hero link, linked the VicoHome card to the Home Assistant integration page and 14-day IoT plan, and added the IoT 14-Day Setup Sprint workflow.</p></div>
+          <div><strong>Project benefit</strong><p>Turns the bird feeder, lighting, dashboard, alerting, and affiliate-prep work into a two-week execution schedule with clear approval boundaries for external signups.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="next-title">
+      <h2 id="next-title">Next Work</h2>
+      <div class="callouts">
+        <article class="callout">
+          <strong>Measured Site Plan</strong>
+          <p>Use field-checklist exports, photos, and real measurements to revise the schematic site plan into a measured garden-planning base.</p>
+        </article>
+        <article class="callout">
+          <strong>Interior Walkthrough</strong>
+          <p>Collect 10-15 room and opening measurements, then create a rough interior plan that is useful for maintenance, storage, lighting, and automation decisions.</p>
+        </article>
+        <article class="callout">
+          <strong>Data Portability</strong>
+          <p>Add export/import for localStorage so ratings can be backed up and restored across browsers.</p>
+        </article>
+        <article class="callout">
+          <strong>Review Habit</strong>
+          <p>Add a monthly Las Jaras workflow review: promote useful candidates, retire noisy systems, and update scores based on lived evidence.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

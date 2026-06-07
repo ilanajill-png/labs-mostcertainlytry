@@ -1,5 +1,26 @@
 [
   {
+    "id": "house-map-using-revit",
+    "title": "House Map Using Revit",
+    "category": "Experiment",
+    "type": "House BIM Capture",
+    "status": "In Progress",
+    "date": "2026-06-06",
+    "featured": true,
+    "tools": [
+      "Revit",
+      "pyRevit",
+      "Dynamo",
+      "OpenClaw",
+      "Codex",
+      "Las Jaras field capture"
+    ],
+    "summary": "A 30-day Las Jaras capture project for building a useful Revit model of the house, site, lighting, smart-home devices, safety notes, furniture anchors, and schedules.",
+    "outcome": "Created the Revit automation workspace, 30-day capture plan, weekend lighting sprint, site-plan readiness review, Red Room capability test, and timed build notes so the house map can start from structured field data instead of vague room guesses.",
+    "url": "projects/house-map-using-revit.html",
+    "source": "docs/house-map-using-revit.md"
+  },
+  {
     "id": "inference-codex-reading-protocol",
     "title": "Inference Codex Reading Protocol",
     "category": "Build Log",

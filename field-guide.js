@@ -98,6 +98,10 @@ function filterFieldNotes() {
 }
 
 fieldForm.addEventListener("input", renderGeneratedCard);
+fieldForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  renderGeneratedCard();
+});
 logTypeFilter.addEventListener("change", filterFieldNotes);
 fieldSearch.addEventListener("input", filterFieldNotes);
 loadFieldNotes();

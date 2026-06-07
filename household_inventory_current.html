@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Household Food Inventory</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2933;
+      --muted: #5b6776;
+      --line: #d8dee8;
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --accent: #0047ab;
+      --warn: #9f580a;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 20px 40px;
+    }
+    h1 {
+      margin: 0 0 4px;
+      font-size: 28px;
+      letter-spacing: 0;
+    }
+    .meta {
+      margin: 0 0 22px;
+      color: var(--muted);
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .tile, .table-wrap {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    }
+    .tile {
+      padding: 14px 16px;
+    }
+    .tile strong {
+      display: block;
+      font-size: 24px;
+      color: var(--accent);
+    }
+    .tile span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      min-width: 1060px;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #eef3fa;
+      color: #26384d;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    .flag {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    .product-img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      display: block;
+    }
+    .source {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Household Food Inventory</h1>
+    <p class="meta">Current pantry snapshot. Source files: HOUSEHOLD_INVENTORY.md and household_inventory.csv.</p>
+
+    <section class="summary" aria-label="Inventory summary">
+      <div class="tile"><strong>79</strong><span>Pantry units logged</span></div>
+      <div class="tile"><strong>12</strong><span>Pantry records</span></div>
+      <div class="tile"><strong>6</strong><span>Canned-good reminder dates set</span></div>
+      <div class="tile"><strong>0</strong><span>Dates needing confirmation</span></div>
+    </section>
+
+    <section class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Location</th>
+            <th>Expiration</th>
+            <th>Category</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/mw-polar-mixed-fruit-10oz.jpeg" alt="MW Polar Mixed Fruit jar"></td>
+            <td>MW Polar Mixed Fruit Slices in Light Syrup, 10 oz glass jars</td>
+            <td>12 jars</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2028-10-28</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-09-28. Move 1-2 jars to Left Pantry - Shelf 2 if wanted as active snacks or dessert toppings.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/polar-mandarin-oranges-10oz.jpeg" alt="Polar Mandarin Oranges jar"></td>
+            <td>MW Polar Mandarin Oranges in Light Syrup, 10 oz glass jars</td>
+            <td>12 jars</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2028-10-28</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-09-28. Move 1-2 jars to Left Pantry - Shelf 2 if wanted as active snacks or breakfast fruit.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/great-value-sliced-peaches-8-75oz.jpeg" alt="Great Value Sliced Peaches can"></td>
+            <td>Great Value Sliced Peaches in Heavy Syrup, 8.75 oz cans</td>
+            <td>12 cans</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2028-01-20</td>
+            <td>canned good</td>
+            <td>Reminder target: 2027-12-20. Move 1-2 cans to Left Pantry - Shelf 2 if wanted as active snacks or dessert fruit.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/tyson-white-chunk-chicken-5oz.jpeg" alt="Tyson White Chunk Chicken can"></td>
+            <td>Tyson White Premium Chunk Chicken Breast in Water, 5 oz cans</td>
+            <td>9 cans</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2029-01-21</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-12-21. Move 1-2 cans to Left Pantry - Shelf 2 if wanted as active lunch or protein stock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/great-value-diced-ham-5oz.jpeg" alt="Great Value Diced Ham can"></td>
+            <td>Great Value Diced Ham, 5 oz cans</td>
+            <td>9 cans</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2029-04-20</td>
+            <td>canned good</td>
+            <td>Reminder target: 2029-03-20. Refrigerate after opening.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/libbys-vienna-sausage-4-6oz.jpeg" alt="Libby's Vienna Sausage can"></td>
+            <td>Libby's Vienna Sausage in Chicken Broth, 4.6 oz cans</td>
+            <td>12 cans</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2028-06-02</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-05-02. Move 1-2 cans to Left Pantry - Shelf 2 if wanted as active snack or protein stock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-wild-caught-smoked-light-tuna-lemon-oregano-5-64oz.jpeg" alt="H-E-B Wild Caught Smoked Light Tuna can"></td>
+            <td>H-E-B Wild Caught Real Wood Smoked Light Tuna in Oil, Lemon &amp; Oregano, 5.64 oz cans</td>
+            <td>9 cans</td>
+            <td>Right Pantry - Shelf 2</td>
+            <td>2029-06-30</td>
+            <td>canned good</td>
+            <td>Reminder target: 2029-05-30. Keep with canned protein backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/starkist-selects-yellowfin-tuna-lemon-dill-olive-oil-4-5oz.jpeg" alt="StarKist Selects Yellowfin Tuna can"></td>
+            <td>StarKist Selects Solid Yellowfin Tuna with Lemon Dill &amp; Extra Virgin Olive Oil, 4.5 oz cans</td>
+            <td>10 cans</td>
+            <td>Right Pantry - Shelf 2</td>
+            <td>2028-11-16</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-10-16. Keep with canned protein backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/safe-catch-elite-solid-wild-tuna-steak-5oz.jpeg" alt="Safe Catch Elite Solid Wild Tuna Steak can"></td>
+            <td>Safe Catch Elite Solid Wild Tuna Steak, 5 oz can</td>
+            <td>1 can</td>
+            <td>Right Pantry - Shelf 2</td>
+            <td>2028-10</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-09. Keep with canned protein backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/goya-chick-peas-29oz.jpeg" alt="Goya Chick Peas can"></td>
+            <td>Goya Chick Peas, 29 oz cans</td>
+            <td>3 cans</td>
+            <td>Right Pantry - Shelf 2</td>
+            <td>2031-04-23</td>
+            <td>canned good</td>
+            <td>Reminder target: 2031-03-23. Keep with bean and protein backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/goya-coconut-milk-13-5oz.png" alt="Goya Coconut Milk can"></td>
+            <td>Goya Coconut Milk, 13.5 oz cans</td>
+            <td>3 cans</td>
+            <td>Right Pantry - Shelf 1</td>
+            <td>2029-11</td>
+            <td>canned good</td>
+            <td>Reminder target: 2029-10. Shop Goya listing: unsweetened coconut milk, 13.5 oz can.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-white-asparagus-12-5oz.jpeg" alt="H-E-B White Asparagus can"></td>
+            <td>H-E-B White Asparagus, 12.5 oz cans</td>
+            <td>6 cans</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td>2028-09</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-08. Keep with vegetable backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-green-asparagus-12-5oz.jpeg" alt="H-E-B Green Asparagus can"></td>
+            <td>H-E-B Green Asparagus, 12.5 oz cans</td>
+            <td>6 cans</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td>2028-10</td>
+            <td>canned good</td>
+            <td>Reminder target: 2028-09. Keep with vegetable backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-quartered-artichoke-hearts-14-65oz.jpeg" alt="H-E-B Quartered Artichoke Hearts can"></td>
+            <td>H-E-B Quartered Artichoke Hearts, 14.65 oz cans</td>
+            <td>5 cans</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td>2029-11-16</td>
+            <td>canned good</td>
+            <td>Reminder target: 2029-10-16. Keep with vegetable backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/aunt-nellies-whole-pickled-baby-beets-16oz.jpeg" alt="Aunt Nellie's Whole Pickled Baby Beets jar"></td>
+            <td>Aunt Nellie's Whole Pickled Baby Beets, 16 oz jars</td>
+            <td>2 jars</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td>2027-12-27</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 16 oz pickled baby beets. Refrigerate after opening.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-healthy-marinara-pasta-sauce-15-5oz.jpeg" alt="H-E-B Healthy Marinara Pasta Sauce jar"></td>
+            <td>H-E-B Healthy Marinara Pasta Sauce, 15.5 oz jar</td>
+            <td>1 jar</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td></td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: no high fructose corn syrup; refrigerate after opening. Expiration date not provided yet.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-healthy-roasted-garlic-pasta-sauce-15-5oz.jpeg" alt="H-E-B Healthy Roasted Garlic Pasta Sauce jar"></td>
+            <td>H-E-B Healthy Roasted Garlic Pasta Sauce, 15.5 oz jars</td>
+            <td>2 jars</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td></td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: no high fructose corn syrup; refrigerate after opening. Expiration date not provided yet.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-healthy-garden-combo-pasta-sauce-15-5oz.jpeg" alt="H-E-B Healthy Garden Combo Pasta Sauce jar"></td>
+            <td>H-E-B Healthy Garden Combo Pasta Sauce, 15.5 oz jars</td>
+            <td>2 jars</td>
+            <td>Right Pantry - Shelf 3</td>
+            <td></td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: shelf-stable jar sauce; refrigerate after opening. Expiration date not provided yet.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/thrive-market-organic-honey-bear.jpeg" alt="Thrive Market Organic Honey Bear bottle"></td>
+            <td>Thrive Market Organic Honey Bear, 12 oz</td>
+            <td>1 bottle</td>
+            <td>Left Pantry - Shelf 2</td>
+            <td>2028-03-06</td>
+            <td>pantry staple</td>
+            <td>Thrive Market listing: 12 oz organic honey bear. Keep with active daily staples.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/om-master-blend-plant-protein-creamy-chocolate-19-26oz.png" alt="Om Master Blend Plant Protein Creamy Chocolate pouch"></td>
+            <td>Om Master Blend Plant Protein Creamy Chocolate, 19.26 oz pouch</td>
+            <td>1 pouch</td>
+            <td>Left Pantry - Shelf 2</td>
+            <td></td>
+            <td>pantry supplement</td>
+            <td>Amazon link sent by buddy; official Om listing confirms 16 servings / 19.26 oz. Expiration date not provided yet.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/isopure-zero-carb-unflavored-whey-protein-isolate-1lb.jpeg" alt="Isopure Zero Carb Unflavored Whey Protein Isolate pouch"></td>
+            <td>Isopure Zero Carb Unflavored Whey Protein Isolate, 1 lb pouch</td>
+            <td>1 pouch</td>
+            <td>Left Pantry - Shelf 2</td>
+            <td>2028-02-02</td>
+            <td>pantry supplement</td>
+            <td>Amazon link sent by buddy; official Isopure listing confirms unflavored whey protein isolate, 25g protein, zero carbs.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/siete-maiz-taco-shells.jpeg" alt="Siete Maiz Corn Taco Shells box"></td>
+            <td>Siete Maiz Corn Taco Shells, 12 ct / 5.5 oz</td>
+            <td>4 boxes</td>
+            <td>Left Pantry - Shelf 2</td>
+            <td>2026-09-17</td>
+            <td>pantry staple</td>
+            <td>Thrive Market listing: Siete Maiz Corn Taco Shells. Retail listings confirm 12 shells / 5.5 oz.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/la-molisana-penne-ziti-rigate-20b-16oz.jpeg" alt="La Molisana Penne Ziti Rigate bag"></td>
+            <td>La Molisana Penne Ziti Rigate 20B, 16 oz</td>
+            <td>1 bag</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2028-07-30</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 16 oz pasta. Keep with active grains and pasta.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/la-molisana-fusilli-corti-bucati-108-16oz.jpeg" alt="La Molisana Fusilli Corti Bucati bag"></td>
+            <td>La Molisana Fusilli Corti Bucati 108 Pasta, 16 oz</td>
+            <td>2 bags</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2028-07-09</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 16 oz pasta. Keep with active grains and pasta.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/la-molisana-rigatoni-31b-16oz.jpeg" alt="La Molisana Rigatoni bag"></td>
+            <td>La Molisana Rigatoni 31B Pasta, 16 oz</td>
+            <td>2 bags</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2028-07-04</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 16 oz pasta. Keep with active grains and pasta.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/progresso-italian-style-bread-crumbs-15oz.jpeg" alt="Progresso Italian Style Bread Crumbs canister"></td>
+            <td>Progresso Italian Style Bread Crumbs, 15 oz canisters</td>
+            <td>2 canisters</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2027-08-14</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 15 oz bread crumbs. Keep with active grains and cooking staples.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-mi-tienda-masa-de-maiz-para-tamales-4-4lb.jpeg" alt="H-E-B Mi Tienda Masa de Maiz para Tamales bag"></td>
+            <td>H-E-B Mi Tienda Masa de Maiz para Tamales, 4.4 lb bags</td>
+            <td>4 bags</td>
+            <td>Right Pantry - Shelf 4</td>
+            <td>2026-12-27</td>
+            <td>pantry staple</td>
+            <td>Best by 12/27/2026. Keep with heavy bulk backstock.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-chicken-lemongrass-jalapeno-bone-broth-24oz.jpeg" alt="H-E-B Chicken with Lemongrass Jalapeno Bone Broth jar"></td>
+            <td>H-E-B Chicken with Lemongrass Jalapeno Bone Broth, 24 oz jars</td>
+            <td>2 jars</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2027-05-05</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 24 oz shelf-stable chicken bone broth with lemongrass and jalapeno flavors. Refrigerate after opening.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-beef-bone-broth-24oz.jpeg" alt="H-E-B Beef Bone Broth jar"></td>
+            <td>H-E-B Beef Bone Broth, 24 oz jars</td>
+            <td>2 jars</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2027-05-02</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 24 oz shelf-stable beef bone broth. Refrigerate after opening.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-rosemary-lemon-chicken-bone-broth-24oz.jpeg" alt="H-E-B Rosemary Lemon Chicken Bone Broth jar"></td>
+            <td>H-E-B Rosemary Lemon Chicken Bone Broth, 24 oz jars</td>
+            <td>2 jars</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2027-03-06</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 24 oz shelf-stable rosemary lemon chicken bone broth. Refrigerate after opening.</td>
+          </tr>
+          <tr>
+            <td><img class="product-img" src="inventory_photos/food/heb-chicken-turmeric-bone-broth-24oz.jpeg" alt="H-E-B Chicken with Turmeric Bone Broth jar"></td>
+            <td>H-E-B Chicken with Turmeric Bone Broth, 24 oz jars</td>
+            <td>2 jars</td>
+            <td>Left Pantry - Shelf 4</td>
+            <td>2027-05-01</td>
+            <td>pantry staple</td>
+            <td>H-E-B listing: 24 oz shelf-stable chicken bone broth with turmeric extract. Refrigerate after opening.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="source">Food quantities and expiration logic live in the Markdown/CSV files; this HTML page is a quick browser view.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>House Map Using Revit | Most Certainly Try Labs</title>
+  <meta name="description" content="A Las Jaras Labs project for building a 30-day Revit house map with site, rooms, lighting, smart-home devices, furniture anchors, and maintenance schedules.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.classList.add("lj-locked");</script>
+  <link rel="stylesheet" href="../assets/las-jaras-gate.css">
+  <script src="../assets/las-jaras-gate.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5e6675;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --line: #d8ddea;
+      --cobalt: #0047ab;
+      --cobalt-dark: #002f73;
+      --cobalt-soft: #edf4ff;
+      --amber: #b87922;
+      --green: #2f7557;
+      --brick: #aa4f3a;
+      --shadow: 0 18px 44px rgba(23, 32, 51, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 71, 171, .08), transparent 32%, transparent 68%, rgba(184, 121, 34, .08)),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px clamp(16px, 4vw, 52px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, .92);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand,
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand {
+      color: inherit;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    nav {
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a,
+    .button {
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: inherit;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: var(--cobalt);
+      background: var(--cobalt);
+      color: #fff;
+    }
+
+    .shell {
+      width: min(1220px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      gap: clamp(24px, 5vw, 64px);
+      align-items: end;
+      padding: 52px 0 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow,
+    .label,
+    footer {
+      color: var(--muted);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    li {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      color: var(--cobalt-dark);
+      font-size: clamp(2.7rem, 7vw, 6.2rem);
+      line-height: .94;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--cobalt-dark);
+      font-size: clamp(1.65rem, 3vw, 2.6rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    h3 { margin: 0 0 8px; }
+    p { margin-top: 0; }
+
+    .lede {
+      max-width: 820px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.55vw, 1.22rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .summary-card,
+    .panel,
+    .metric,
+    .timeline-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .summary-card strong {
+      color: var(--cobalt);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .section { padding: 34px 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .metric,
+    .panel,
+    .timeline-item {
+      padding: 16px;
+    }
+
+    .metric b {
+      display: block;
+      color: var(--cobalt);
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      line-height: 1;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .tag-row span {
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: var(--cobalt-soft);
+      color: var(--cobalt-dark);
+      font-size: .82rem;
+      font-weight: 900;
+    }
+
+    .callout {
+      border-left: 6px solid var(--cobalt);
+      background: var(--cobalt-soft);
+    }
+
+    .warning { border-left-color: var(--amber); }
+    .ready { border-left-color: var(--green); }
+
+    code {
+      padding: 1px 5px;
+      border-radius: 5px;
+      background: var(--cobalt-soft);
+      color: var(--cobalt-dark);
+      font-weight: 800;
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 34px 0 54px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 880px) {
+      .topbar,
+      .hero {
+        align-items: flex-start;
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        flex-direction: column;
+      }
+
+      .grid,
+      .metrics,
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(2.25rem, 13vw, 4.4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+      <img src="../assets/howdy-partner-logo.png" alt="">
+      <span>Most Certainly Try Labs</span>
+    </a>
+    <nav aria-label="Project navigation">
+      <a href="../index.html">All Projects</a>
+      <a href="household-ops-command-center.html">Command Center</a>
+      <a href="las-jaras-garden-site-plan.html">Site Plan</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Las Jaras BIM project | In progress</p>
+        <h1>House Map Using Revit</h1>
+        <p class="lede">A 30-day capture project to turn Las Jaras into a useful Revit model: site, rooms, lighting, smart-home devices, safety notes, furniture anchors, and schedules that can guide real household decisions.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#test-case">Red Room Test Case</a>
+          <a class="button primary" href="#weekend">Weekend Lighting Sprint</a>
+          <a class="button" href="../docs/house-map-using-revit-build-notes.md">Build Notes</a>
+          <a class="button" href="#site">Exterior Readiness</a>
+          <a class="button" href="../docs/house-map-using-revit.md">Source Notes</a>
+        </div>
+      </div>
+      <aside class="summary-card">
+        <span class="label">Current capture plan</span>
+        <strong>30 days</strong>
+        <p class="lede">Start with Revit standards, pull lighting forward into Day 2, reuse the schematic site plan cautiously, then replace placeholders with measured field data.</p>
+      </aside>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">Project facts</p>
+      <div class="metrics">
+        <div class="metric"><b>4</b><span>priority rooms for the weekend lighting pass</span></div>
+        <div class="metric"><b>75 x 137</b><span>working parcel dimensions in feet</span></div>
+        <div class="metric"><b>1,800</b><span>public-record living sqft target to reconcile</span></div>
+        <div class="metric"><b>3</b><span>capture levels: architecture, systems, inventory context</span></div>
+      </div>
+    </section>
+
+    <section class="section grid" id="purpose">
+      <article class="panel callout ready">
+        <p class="eyebrow">What Revit Gets</p>
+        <h2>Anything that changes decisions.</h2>
+        <ul class="list">
+          <li>Walls, doors, windows, ceiling heights, floors, closets, built-ins, cabinets, porches, deck, and storage structures.</li>
+          <li>Outlets, switches, fixtures, fans, vents, appliances, plumbing fixtures, TVs, smart bulbs, and smart-home devices.</li>
+          <li>Major furniture placeholders with IDs: Gramercy beds, Reese sectional, Elowen chairs, dining table, TVs, apothecary drawers, and storage anchors.</li>
+        </ul>
+      </article>
+      <article class="panel callout warning">
+        <p class="eyebrow">What Stays In Inventory</p>
+        <h2>Small objects do not need BIM drama.</h2>
+        <ul class="list">
+          <li>Dishware, pantry items, most tabletop decor, and small household goods stay in inventory records unless they affect placement, safety, provenance, insurance, or guest experience.</li>
+          <li>Furniture can be simple blocks with exact dimensions before anyone wastes time modeling curves, carvings, or upholstery texture.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section grid" id="test-case">
+      <article class="panel callout ready">
+        <p class="eyebrow">First Test Case</p>
+        <h2>Red Room Revit Capability Test.</h2>
+        <p>Before scaling to the whole house, this project will test Codex/Revit help on the Red Room because it already has measured dimensions, a wall map, door/window/closet notes, saved layout coordinates, object IDs, and furniture anchors.</p>
+        <ul class="list">
+          <li><strong>Known room:</strong> 136 in x 115 in, with Wall 1 as door/closet, Wall 2 as bed, Wall 3 as window, and Wall 4 as TV/apothecary drawers.</li>
+          <li><strong>Known objects:</strong> Gramercy bed, headboard, footboard, TV, apothecary drawers, vintage chair placeholder, side tables, side lamp, ceiling fan, and outlet markers.</li>
+          <li><strong>Test command:</strong> <code>Las Jaras &gt; Model &gt; Create Red Room Test</code></li>
+        </ul>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">What This Proves</p>
+        <h2>Advice is not enough. We need Revit output.</h2>
+        <ul class="list">
+          <li>Can Codex translate house notes into Revit-ready room data and a manual modeling checklist?</li>
+          <li>Can Codex generate a pyRevit command that attempts to create walls and named placeholder objects?</li>
+          <li>If the command fails, are the errors actionable?</li>
+          <li>If it succeeds, can the model export JSON for Codex to inspect and improve?</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <p class="eyebrow">Test Files</p>
+        <h2>Where the Red Room test lives.</h2>
+        <ul class="list">
+          <li><code>revit-automation/tests/red-room-field-capture-sheet.md</code></li>
+          <li><code>revit-automation/tests/red-room-revit-capability-test.md</code></li>
+          <li><code>revit-automation/tests/red-room-revit-test-data.json</code></li>
+          <li><code>revit-automation/pyrevit/LasJaras.extension/Las Jaras.tab/Model.panel/Create Red Room Test.pushbutton/script.py</code></li>
+          <li><code>revit-automation/pyrevit/LasJaras.extension/Las Jaras.tab/Model.panel/Export Room Data.pushbutton/script.py</code></li>
+        </ul>
+      </article>
+      <article class="panel callout warning">
+        <p class="eyebrow">Known Gaps</p>
+        <h2>The test is intentionally rough.</h2>
+        <p>Door/window/closet openings may start as notes or placeholders rather than fully cut Revit families. Ceiling height, closet depth, outlet heights, switch placement, bulb bases, fixture labels, TV mounting height, and curtain hardware dimensions still need field capture.</p>
+      </article>
+    </section>
+
+    <section class="section grid">
+      <article class="panel callout ready">
+        <p class="eyebrow">Tooling Decision</p>
+        <h2>Borrow Bibim's pattern, not the whole tool.</h2>
+        <p>Bibim is a useful reference because its Revit add-in plans, generates, validates, and executes code inside Revit. For Las Jaras, the better first move is a narrower helper that understands our rooms, source stack, capture checklists, and repeatable model tasks.</p>
+        <ul class="list">
+          <li><strong>Now:</strong> pyRevit commands plus structured JSON for Red Room, lighting, room capture, exports, and area reconciliation.</li>
+          <li><strong>Later:</strong> a small C# add-in only if we need live context, compiled validation, dry-run previews, undo support, or a persistent task library.</li>
+          <li><strong>Trigger:</strong> build the Las Jaras Revit Helper only after the Red Room test proves the bridge is worth scaling.</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Why Not Clone It</p>
+        <h2>The house needs a tool with opinions.</h2>
+        <p>A broad AI coding add-in would be impressive, and also a fine way to avoid measuring the hallway. The useful custom work is smaller: capture forms, model validators, scheduled exports, source reconciliation, and repeatable placement commands tied to Las Jaras.</p>
+      </article>
+    </section>
+
+    <section class="section" id="schedule">
+      <p class="eyebrow">Adjusted Schedule</p>
+      <h2>Lighting moves up. Exterior gets verified before it becomes geometry.</h2>
+      <div class="timeline">
+        <article class="timeline-item">
+          <h3>Day 1</h3>
+          <p>Set up Revit standards, room names, shared parameters, pyRevit export path, and the first empty structured model.</p>
+        </article>
+        <article class="timeline-item" id="weekend">
+          <h3>Day 2</h3>
+          <p>Weekend lighting/electrical/smart-home sprint for Kitchen, Living Room, Red Room, and Hallways.</p>
+        </article>
+        <article class="timeline-item" id="site">
+          <h3>Day 3</h3>
+          <p>Review the existing garden site plan as a Revit site reference and list what still needs field measurement.</p>
+        </article>
+        <article class="timeline-item">
+          <h3>Days 4-6</h3>
+          <p>Measure the exterior shell: wall lengths, setbacks, porches, deck, storage, openings, utilities, and roofline photos.</p>
+        </article>
+        <article class="timeline-item">
+          <h3>Days 7-19</h3>
+          <p>Build the interior architectural shell, kitchen/bath/laundry, bedrooms, closets, living/dining, garage, and storage zones.</p>
+        </article>
+        <article class="timeline-item">
+          <h3>Days 20-30</h3>
+          <p>Clean up remaining electrical rooms, add finishes, safety, sheets, schedules, QA corrections, exports, and next actions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <p class="eyebrow">Weekend Capture</p>
+        <h2>Kitchen, Living Room, Red Room, Hallways.</h2>
+        <ul class="list">
+          <li>Photograph every outlet, switch, ceiling fixture, lamp, TV, cord path, and smart-home device.</li>
+          <li>Record outlet type: 2-prong, 3-prong, GFCI, switched, power strip, or unknown.</li>
+          <li>Record what each switch controls and where guest path lighting feels weak.</li>
+          <li>Capture bulb bases, fixture labels, dimmers, fan controls, and compatibility risks.</li>
+        </ul>
+        <div class="tag-row">
+          <span>Lighting</span>
+          <span>Electrical</span>
+          <span>Hue</span>
+          <span>Smart Home</span>
+        </div>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Exterior Status</p>
+        <h2>The site plan is a base, not a survey.</h2>
+        <p>The Labs garden site plan gives a schematic parcel, sun zones, water assumptions, and public-record structure pieces. That is enough to create a marked-up Revit reference layer.</p>
+        <p>It is not enough for final house geometry. The house, addition, deck, porch, storage, setback, roof, door, and window locations still need measured field capture.</p>
+      </article>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <p class="eyebrow">Source Materials</p>
+        <h2>Current working docs.</h2>
+        <ul class="list">
+          <li><a href="las-jaras-garden-site-plan.html">Las Jaras Garden Site Plan</a></li>
+          <li><a href="las-jaras-garden-field-checklist.html">Garden Field Checklist</a></li>
+          <li><a href="las-jaras-lightbulb-intake.html">Lightbulb Intake</a></li>
+          <li><a href="las-jaras-hue-lighting-build-log.html">Hue Lighting Build Log</a></li>
+          <li><a href="las-jaras-room-maintenance-inventory.html">Room Maintenance Inventory</a></li>
+          <li><a href="../docs/house-map-using-revit-build-notes.md">House Map Using Revit Build Notes</a></li>
+        </ul>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Automation Path</p>
+        <h2>Revit stays local and controlled.</h2>
+        <p>The automation path starts with read-only model exports through pyRevit, then adds Dynamo or batch scripts only after the basic model and capture schedule are trustworthy.</p>
+        <p>First target: export levels, rooms, sheets, views, and schedules as JSON so Codex can inspect the model before suggesting changes.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <span>House Map Using Revit · Las Jaras BIM capture project</span>
+    <a href="../index.html">Back to Most Certainly Try Labs</a>
+  </footer>
+</body>
+</html>

@@ -462,8 +462,15 @@
       return Number(date.slice(5, 7)) - 1;
     }
 
-    function entryId(date) {
-      return `date-${date}`;
+    function slugify(value) {
+      return String(value ?? "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function entryId(entry) {
+      return `date-${entry.date}-${slugify(entry.name)}`;
     }
 
     function entryChips(entry) {
@@ -507,7 +514,7 @@
     }
 
     function renderEntry(entry) {
-      const id = entryId(entry.date);
+      const id = entryId(entry);
       const todayClass = entry.date === centralToday ? " today" : "";
       return `
         <article class="entry${todayClass}" id="${id}">
@@ -547,7 +554,7 @@
       document.getElementById("calendarNotice").textContent = data.dateNote;
       const nearest = entries.find((entry) => entry.date === centralToday) || nearestEntry(entries);
       document.getElementById("todaySummary").innerHTML = nearest
-        ? `I open nearest to <a href="#${entryId(nearest.date)}">${escapeHtml(nearest.name)}</a> on ${dateLabel(nearest.date)}.`
+        ? `I open nearest to <a href="#${entryId(nearest)}">${escapeHtml(nearest.name)}</a> on ${dateLabel(nearest.date)}.`
         : "I found no entries. This is suspicious and beneath my office.";
 
       const nav = document.getElementById("monthNav");
@@ -562,8 +569,8 @@
       `).join("");
 
       if (!location.hash && nearest) {
-        history.replaceState(null, "", `#${entryId(nearest.date)}`);
-        requestAnimationFrame(() => document.getElementById(entryId(nearest.date))?.scrollIntoView({ block: "start" }));
+        history.replaceState(null, "", `#${entryId(nearest)}`);
+        requestAnimationFrame(() => document.getElementById(entryId(nearest))?.scrollIntoView({ block: "start" }));
       }
     }
 

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" role="img" aria-labelledby="title desc">
+  <title id="title">El Mundo Loteria card</title>
+  <desc id="desc">A stylized globe card for the Las Jaras Blue Room.</desc>
+  <rect width="160" height="220" rx="10" fill="#fff8e7"/>
+  <rect x="10" y="10" width="140" height="200" rx="6" fill="#fdfcf7" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="31" text-anchor="middle" font-family="Georgia,serif" font-size="15" font-weight="700" fill="#00327a">EL MUNDO</text>
+  <circle cx="80" cy="106" r="48" fill="#93c5fd" stroke="#18201d" stroke-width="4"/>
+  <path d="M46 94c18-10 25 8 43 0 14-6 16-20 35-10M54 128c13-4 22 7 34 1 12-5 17 4 25 9" fill="none" stroke="#22c55e" stroke-width="9" stroke-linecap="round"/>
+  <path d="M80 58c-15 21-15 75 0 96M80 58c15 21 15 75 0 96M34 106h92" fill="none" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#5f6a65">BLUE ROOM</text>
+</svg>

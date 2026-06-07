@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las Jaras Garden Field Checklist | Most Certainly Try Labs</title>
+  <meta name="description" content="Phone-friendly Las Jaras garden field checklist for measurements, photo angles, hose bibs, shade observations, uploads, and notes.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.classList.add("lj-locked");</script>
+  <link rel="stylesheet" href="../assets/las-jaras-gate.css">
+  <script src="../assets/las-jaras-gate.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5e6675;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --line: #d8ddea;
+      --cobalt: #0047ab;
+      --cobalt-dark: #002f73;
+      --cobalt-soft: #edf4ff;
+      --sky: #dbe8ff;
+      --gold: #a9791f;
+      --heat: #c4513e;
+      --shadow: 0 14px 34px rgba(23, 32, 51, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 71, 171, .08), transparent 36%, transparent 64%, rgba(169, 121, 31, .08)),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px clamp(14px, 4vw, 42px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, .94);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand,
+    nav,
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: inherit;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    nav { justify-content: flex-end; }
+
+    nav a,
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: inherit;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.primary {
+      border-color: var(--cobalt);
+      background: var(--cobalt);
+      color: #fff;
+    }
+
+    .button.danger {
+      border-color: rgba(196, 81, 62, .35);
+      color: var(--heat);
+    }
+
+    .shell {
+      width: min(980px, calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 38px 0 20px;
+    }
+
+    .eyebrow,
+    .label,
+    .micro,
+    footer {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-size: clamp(2.35rem, 10vw, 5.6rem);
+      line-height: .94;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 5vw, 2.55rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+    }
+
+    p { margin-top: 0; }
+
+    .lede {
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .status-strip,
+    .form-section,
+    .task-card,
+    .upload-card,
+    .note-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: var(--shadow);
+    }
+
+    .status-strip {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      margin: 18px 0 24px;
+    }
+
+    .meter {
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--sky);
+    }
+
+    .meter span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cobalt-dark), var(--cobalt), var(--gold));
+      transition: width .2s ease;
+    }
+
+    .form-stack {
+      display: grid;
+      gap: 16px;
+      padding-bottom: 40px;
+    }
+
+    .form-section {
+      padding: 18px;
+      scroll-margin-top: 90px;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #bdc7d8;
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    input[type="checkbox"] {
+      width: auto;
+      min-width: 20px;
+      height: 20px;
+      accent-color: var(--cobalt);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .task-grid,
+    .upload-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .task-card,
+    .upload-card,
+    .note-card {
+      padding: 14px;
+    }
+
+    .check-row {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .check-row span {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .upload-card {
+      display: grid;
+      gap: 10px;
+      background: linear-gradient(135deg, rgba(0, 71, 171, .08), rgba(255, 255, 255, 0) 48%), #fff;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(74px, 1fr));
+      gap: 8px;
+    }
+
+    .preview-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .sticky-actions {
+      position: sticky;
+      bottom: 0;
+      z-index: 15;
+      padding: 10px 0 12px;
+      background: linear-gradient(180deg, rgba(247, 245, 239, 0), var(--paper) 28%);
+    }
+
+    .sticky-actions .actions {
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 28px 0 42px;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 760px) {
+      .topbar,
+      .status-strip,
+      .section-head,
+      .field-grid,
+      .task-grid,
+      .upload-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .button {
+        flex: 1 1 auto;
+      }
+
+      .form-section {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+      <img src="../assets/howdy-partner-logo.png" alt="">
+      <span>Las Jaras Field Checklist</span>
+    </a>
+    <nav aria-label="Page navigation">
+      <a href="las-jaras-garden-site-plan.html">Site Plan</a>
+      <a href="las-jaras-garden-field-checklist-lite.html">Lite Form</a>
+      <a href="household-ops-command-center.html">Command Center</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Phone field pass | schematic to useful</p>
+      <h1>Measure the yard once. Make the garden plan smarter every time.</h1>
+      <p class="lede">Use this on a phone while walking Las Jaras. It autosaves in this browser, previews uploaded photos locally, and exports a field packet I can use to update the garden site plan.</p>
+      <p><a class="button" href="las-jaras-garden-field-checklist-lite.html">Open the simpler phone form</a></p>
+      <div class="status-strip">
+        <div>
+          <p class="micro" id="save-status">Autosave ready</p>
+          <div class="meter" aria-label="Checklist completion"><span id="progress-bar"></span></div>
+        </div>
+        <strong id="progress-label">0% complete</strong>
+      </div>
+    </section>
+
+    <form class="form-stack" id="field-form">
+      <section class="form-section" id="measurements">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">1. Measurements</p>
+            <h2>Fence, house, deck, storage.</h2>
+          </div>
+          <p class="lede">Feet are fine. Rough but real beats elegant guessing.</p>
+        </div>
+        <div class="field-grid">
+          <label>Front fence / frontage width<input name="front_width" inputmode="decimal" placeholder="75 ft expected"></label>
+          <label>Back fence width<input name="back_width" inputmode="decimal" placeholder="Measure if accessible"></label>
+          <label>Left side depth<input name="left_depth" inputmode="decimal" placeholder="137 ft expected"></label>
+          <label>Right side depth<input name="right_depth" inputmode="decimal" placeholder="Measure if accessible"></label>
+          <label>House to left fence<input name="house_left_fence" inputmode="decimal" placeholder="ft"></label>
+          <label>House to right fence<input name="house_right_fence" inputmode="decimal" placeholder="ft"></label>
+          <label>House to back fence<input name="house_back_fence" inputmode="decimal" placeholder="ft"></label>
+          <label>Deck size / location notes<input name="deck_measurements" placeholder="Width x depth, distance from house/fence"></label>
+          <label>Detached storage location<input name="detached_storage" placeholder="Distance from fence / deck / house"></label>
+          <label>Portable storage location<input name="portable_storage" placeholder="Distance from fence / deck / house"></label>
+        </div>
+      </section>
+
+      <section class="form-section" id="photos">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">2. Photo Angles</p>
+            <h2>Capture what the diagram cannot know.</h2>
+          </div>
+          <p class="lede">Upload buttons preview images locally. Export includes filenames, not the image data.</p>
+        </div>
+        <div class="upload-grid">
+          <article class="upload-card">
+            <h3>Front / street edge</h3>
+            <input name="photo_front" type="file" accept="image/*" capture="environment" multiple aria-label="Upload front or street edge photos">
+            <div class="preview-grid" data-preview="photo_front"></div>
+          </article>
+          <article class="upload-card">
+            <h3>Back yard wide</h3>
+            <input name="photo_back" type="file" accept="image/*" capture="environment" multiple aria-label="Upload wide back yard photos">
+            <div class="preview-grid" data-preview="photo_back"></div>
+          </article>
+          <article class="upload-card">
+            <h3>Left side yard</h3>
+            <input name="photo_left" type="file" accept="image/*" capture="environment" multiple aria-label="Upload left side yard photos">
+            <div class="preview-grid" data-preview="photo_left"></div>
+          </article>
+          <article class="upload-card">
+            <h3>Right side yard</h3>
+            <input name="photo_right" type="file" accept="image/*" capture="environment" multiple aria-label="Upload right side yard photos">
+            <div class="preview-grid" data-preview="photo_right"></div>
+          </article>
+          <article class="upload-card">
+            <h3>Deck / storage cluster</h3>
+            <input name="photo_deck_storage" type="file" accept="image/*" capture="environment" multiple aria-label="Upload deck and storage cluster photos">
+            <div class="preview-grid" data-preview="photo_deck_storage"></div>
+          </article>
+          <article class="upload-card">
+            <h3>Problem areas</h3>
+            <input name="photo_problem_areas" type="file" accept="image/*" capture="environment" multiple aria-label="Upload problem area photos">
+            <div class="preview-grid" data-preview="photo_problem_areas"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="form-section" id="water">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">3. Hose Bibs + Water</p>
+            <h2>Where water actually reaches.</h2>
+          </div>
+        </div>
+        <div class="task-grid">
+          <label class="task-card check-row"><input type="checkbox" name="bib_front_found"><div>Front hose bib found<br><span>Note reach, pressure, and obstacles below.</span></div></label>
+          <label class="task-card check-row"><input type="checkbox" name="bib_back_found"><div>Back hose bib found<br><span>Most important for garden planning.</span></div></label>
+          <label class="task-card check-row"><input type="checkbox" name="bib_side_found"><div>Side hose bib found<br><span>Useful for containers and narrow beds.</span></div></label>
+          <label class="task-card check-row"><input type="checkbox" name="power_found"><div>Outdoor power located<br><span>Needed for timers, pumps, or lighting.</span></div></label>
+        </div>
+        <div class="field-grid" style="margin-top:12px">
+          <label>Front hose reach<input name="front_hose_reach" placeholder="ft or description"></label>
+          <label>Back hose reach<input name="back_hose_reach" placeholder="ft or description"></label>
+          <label>Easy drip candidates<input name="drip_candidates" placeholder="Beds, fence lines, containers"></label>
+          <label>Hand-water only areas<input name="hand_water_areas" placeholder="Why hard to automate?"></label>
+          <label style="grid-column: 1 / -1">Water notes<textarea name="water_notes" placeholder="Pressure, leaks, broken fittings, timers needed, hose storage, shutoff quirks."></textarea></label>
+        </div>
+      </section>
+
+      <section class="form-section" id="shade">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">4. Shade + Heat</p>
+            <h2>Morning, noon, late afternoon.</h2>
+          </div>
+        </div>
+        <div class="field-grid">
+          <label>Morning shade observations<textarea name="morning_shade" placeholder="Where is gentle morning light? What stays shaded?"></textarea></label>
+          <label>Noon shade observations<textarea name="noon_shade" placeholder="What is fully exposed? What gets building/tree shade?"></textarea></label>
+          <label>Late afternoon heat observations<textarea name="late_heat" placeholder="Where does west/south heat hit hardest?"></textarea></label>
+          <label>Protected nursery spots<textarea name="nursery_spots" placeholder="Where could stressed plants recover?"></textarea></label>
+        </div>
+      </section>
+
+      <section class="form-section" id="assets">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">5. Current Garden Assets</p>
+            <h2>What already exists.</h2>
+          </div>
+        </div>
+        <div class="task-grid">
+          <label class="task-card check-row"><input type="checkbox" name="has_beds"><div>Raised beds or in-ground beds</div></label>
+          <label class="task-card check-row"><input type="checkbox" name="has_containers"><div>Containers / pots</div></label>
+          <label class="task-card check-row"><input type="checkbox" name="has_trellis"><div>Trellises / stakes / cages</div></label>
+          <label class="task-card check-row"><input type="checkbox" name="has_mulch"><div>Mulch / compost / soil bags</div></label>
+        </div>
+        <label style="margin-top:12px">Asset inventory notes<textarea name="asset_notes" placeholder="Beds, pots, tools, soil, mulch, trellises, plant supports, plant inventory updates."></textarea></label>
+      </section>
+
+      <section class="form-section" id="notes">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">6. Notes</p>
+            <h2>Anything weird, useful, or annoying.</h2>
+          </div>
+        </div>
+        <div class="field-grid">
+          <label>Access / gates / paths<textarea name="access_notes" placeholder="Gate widths, wheelbarrow paths, trip hazards, where staging is easy."></textarea></label>
+          <label>Constraints<textarea name="constraints" placeholder="Pets, neighbors, drainage, slope, utilities, trash bins, privacy, ugly views."></textarea></label>
+          <label style="grid-column: 1 / -1">General notes<textarea name="general_notes" placeholder="Observations for the next site-plan update."></textarea></label>
+        </div>
+      </section>
+
+      <section class="sticky-actions" aria-label="Form actions">
+        <div class="actions">
+          <button class="button primary" type="button" id="export-button">Export Field Packet</button>
+          <button class="button" type="button" id="copy-button">Copy Summary</button>
+          <button class="button" type="submit">Update Checklist</button>
+          <button class="button danger" type="button" id="clear-button">Clear</button>
+        </div>
+      </section>
+    </form>
+  </main>
+
+  <footer class="shell">
+    <span>Autosaves locally in this browser.</span>
+    <a href="las-jaras-garden-site-plan.html">Back to Site Plan</a>
+  </footer>
+
+  <script>
+    const storageKey = "las-jaras-garden-field-checklist-v1";
+    const fileState = {};
+    const form = document.querySelector("#field-form");
+    const status = document.querySelector("#save-status");
+    const progressBar = document.querySelector("#progress-bar");
+    const progressLabel = document.querySelector("#progress-label");
+    const $all = (selector) => [...document.querySelectorAll(selector)];
+
+    function getFields() {
+      const data = {};
+      $all("input, textarea, select").forEach((field) => {
+        if (!field.name || field.type === "file") return;
+        data[field.name] = field.type === "checkbox" ? field.checked : field.value;
+      });
+      data.photos = fileState;
+      data.updated_at = new Date().toISOString();
+      return data;
+    }
+
+    function setFields(data) {
+      if (!data) return;
+      $all("input, textarea, select").forEach((field) => {
+        if (!field.name || field.type === "file") return;
+        if (!(field.name in data)) return;
+        if (field.type === "checkbox") {
+          field.checked = Boolean(data[field.name]);
+        } else {
+          field.value = data[field.name] || "";
+        }
+      });
+    }
+
+    function save() {
+      localStorage.setItem(storageKey, JSON.stringify(getFields()));
+      status.textContent = "Autosaved " + new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      updateProgress();
+    }
+
+    function load() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+        setFields(saved);
+      } catch {
+        localStorage.removeItem(storageKey);
+      }
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const scorable = $all("input, textarea, select").filter((field) => field.name && field.type !== "file");
+      const filled = scorable.filter((field) => field.type === "checkbox" ? field.checked : field.value.trim()).length;
+      const percent = scorable.length ? Math.round((filled / scorable.length) * 100) : 0;
+      progressBar.style.width = percent + "%";
+      progressLabel.textContent = percent + "% complete";
+    }
+
+    function handleFiles(input) {
+      const files = [...input.files];
+      fileState[input.name] = files.map((file) => ({
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        lastModified: file.lastModified
+      }));
+      const preview = document.querySelector(`[data-preview="${input.name}"]`);
+      preview.innerHTML = "";
+      files.slice(0, 8).forEach((file) => {
+        const img = document.createElement("img");
+        img.alt = file.name;
+        img.src = URL.createObjectURL(file);
+        img.onload = () => URL.revokeObjectURL(img.src);
+        preview.appendChild(img);
+      });
+      save();
+    }
+
+    function downloadJson() {
+      const packet = getFields();
+      packet.packet_name = "Las Jaras Garden Field Checklist";
+      packet.note = "Photo uploads are browser-local; exported packet includes filenames and form data, not image binary data.";
+      const blob = new Blob([JSON.stringify(packet, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const stamp = new Date().toISOString().slice(0, 10);
+      link.href = url;
+      link.download = `las-jaras-garden-field-checklist-${stamp}.json`;
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function makeSummary() {
+      const data = getFields();
+      const lines = [
+        "Las Jaras Garden Field Checklist",
+        `Updated: ${data.updated_at}`,
+        "",
+        "Measurements:",
+        `- Front width: ${data.front_width || "not captured"}`,
+        `- Left depth: ${data.left_depth || "not captured"}`,
+        `- Right depth: ${data.right_depth || "not captured"}`,
+        `- House to back fence: ${data.house_back_fence || "not captured"}`,
+        "",
+        "Water:",
+        `- Front hose reach: ${data.front_hose_reach || "not captured"}`,
+        `- Back hose reach: ${data.back_hose_reach || "not captured"}`,
+        `- Drip candidates: ${data.drip_candidates || "not captured"}`,
+        "",
+        "Shade:",
+        `- Morning: ${data.morning_shade || "not captured"}`,
+        `- Noon: ${data.noon_shade || "not captured"}`,
+        `- Late heat: ${data.late_heat || "not captured"}`,
+        "",
+        "Notes:",
+        data.general_notes || "not captured"
+      ];
+      return lines.join("\\n");
+    }
+
+    form.addEventListener("input", save);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      save();
+    });
+    form.addEventListener("change", (event) => {
+      if (event.target.type === "file") {
+        handleFiles(event.target);
+      } else {
+        save();
+      }
+    });
+
+    document.querySelector("#export-button").addEventListener("click", downloadJson);
+    document.querySelector("#copy-button").addEventListener("click", async () => {
+      const summary = makeSummary();
+      try {
+        await navigator.clipboard.writeText(summary);
+        status.textContent = "Summary copied";
+      } catch {
+        status.textContent = "Copy unavailable; use export instead";
+      }
+    });
+    document.querySelector("#clear-button").addEventListener("click", () => {
+      if (!confirm("Clear this browser's saved Las Jaras field checklist?")) return;
+      localStorage.removeItem(storageKey);
+      form.reset();
+      Object.keys(fileState).forEach((key) => delete fileState[key]);
+      $all(".preview-grid").forEach((preview) => preview.innerHTML = "");
+      status.textContent = "Checklist cleared";
+      updateProgress();
+    });
+
+    load();
+  </script>
+</body>
+</html>

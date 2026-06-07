@@ -1,0 +1,2523 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Las Jaras Ops Command Center | Most Certainly Try Labs</title>
+    <meta name="description" content="A living tracker for Las Jaras household AI workflows, optimization experiments, and practical home-management ratings.">
+    <meta name="robots" content="noindex, nofollow">
+    <script>document.documentElement.classList.add("lj-locked");</script>
+    <link rel="stylesheet" href="../assets/las-jaras-gate.css">
+    <script src="../assets/las-jaras-gate.js" defer></script>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #18201d;
+        --muted: #5f6a65;
+        --paper: #f7f5ef;
+        --panel: #ffffff;
+        --line: #d9ded6;
+        --cobalt: #0047ab;
+        --cobalt-dark: #00327a;
+        --sky: #dbe8ff;
+        --blue-soft: #edf4ff;
+        --blue: #0047ab;
+        --coral: #b75a42;
+        --gold: #a9791f;
+        --field: #eef4ff;
+        --shadow: 0 18px 48px rgba(24, 32, 29, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+        text-underline-offset: 4px;
+      }
+
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px clamp(16px, 4vw, 52px);
+        border-bottom: 1px solid rgba(24, 32, 29, 0.12);
+        background: rgba(247, 245, 239, 0.92);
+        backdrop-filter: blur(14px);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .brand span {
+        display: grid;
+        min-width: 0;
+      }
+
+      .brand strong,
+      .brand small {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .brand small,
+      .eyebrow,
+      .meta,
+      .label,
+      .micro,
+      footer {
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      nav a,
+      .button,
+      .icon-button {
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        color: inherit;
+        font-weight: 800;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      nav a,
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 9px 12px;
+      }
+
+      .button.primary {
+        border-color: var(--cobalt);
+        background: var(--cobalt);
+        color: #fff;
+      }
+
+      .button.ghost {
+        background: transparent;
+      }
+
+      .icon-button {
+        width: 42px;
+        padding: 0;
+      }
+
+      .shell {
+        width: min(1220px, calc(100% - 34px));
+        margin: 0 auto;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 390px);
+        gap: clamp(22px, 5vw, 62px);
+        align-items: end;
+        padding: 46px 0 28px;
+      }
+
+      .hero h1 {
+        max-width: 900px;
+        margin: 0;
+        font-size: clamp(2.9rem, 7vw, 6.4rem);
+        line-height: 0.94;
+        letter-spacing: 0;
+      }
+
+      .hero p {
+        max-width: 760px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        overflow-wrap: anywhere;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.8rem, 3vw, 3rem);
+        line-height: 1;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 1.08rem;
+        line-height: 1.18;
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+      .lede {
+        color: var(--muted);
+        font-size: clamp(1rem, 1.6vw, 1.24rem);
+      }
+
+      .hero-actions,
+      .chip-row,
+      .score-row,
+      .card-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .status-panel,
+      .workflow-card,
+      .metric-tile,
+      .rubric-item,
+      .form-panel,
+      .table-wrap,
+      .profile-card,
+      .fact-panel,
+      .fact-card,
+      .timeline-card,
+      .research-card,
+      .kitchen-card,
+      .kitchen-zone,
+      .personality-panel,
+      .room-personality-card,
+      .room-data-card,
+      .room-schema-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .status-panel {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .house-visual {
+        position: relative;
+        min-height: 210px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background:
+          linear-gradient(180deg, rgba(0, 71, 171, 0.22), rgba(0, 71, 171, 0.08)),
+          var(--field);
+      }
+
+      .roof {
+        position: absolute;
+        left: 50%;
+        top: 28px;
+        width: min(245px, 70%);
+        height: 110px;
+        transform: translateX(-50%) rotate(45deg);
+        border-radius: 8px 8px 2px 8px;
+        background: #cf7658;
+      }
+
+      .house {
+        position: absolute;
+        left: 50%;
+        bottom: 24px;
+        width: min(270px, 78%);
+        height: 112px;
+        transform: translateX(-50%);
+        border: 1px solid rgba(24, 32, 29, 0.12);
+        border-radius: 8px;
+        background: #fff9ed;
+      }
+
+      .door,
+      .window {
+        position: absolute;
+        bottom: 0;
+        border-radius: 8px 8px 0 0;
+        background: var(--cobalt);
+      }
+
+      .door {
+        left: 50%;
+        width: 48px;
+        height: 70px;
+        transform: translateX(-50%);
+      }
+
+      .window {
+        bottom: 42px;
+        width: 42px;
+        height: 36px;
+        background: #f0c45f;
+      }
+
+      .window.left {
+        left: 36px;
+      }
+
+      .window.right {
+        right: 36px;
+      }
+
+      .signal {
+        position: absolute;
+        right: 18px;
+        top: 18px;
+        width: 58px;
+        height: 58px;
+        border: 2px solid rgba(0, 71, 171, 0.58);
+        border-left-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 50%;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0 34px;
+      }
+
+      .metric-tile {
+        display: grid;
+        gap: 4px;
+        min-height: 112px;
+        padding: 18px;
+      }
+
+      .metric-tile strong {
+        color: var(--cobalt);
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1;
+      }
+
+      .section {
+        padding: 38px 0;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 18px;
+      }
+
+      .section-heading p {
+        max-width: 620px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .profile-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .profile-card {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .profile-card strong {
+        color: var(--cobalt);
+        font-size: clamp(1.8rem, 3vw, 2.8rem);
+        line-height: 1;
+      }
+
+      .profile-card ul,
+      .personality-panel ul {
+        display: grid;
+        gap: 8px;
+        padding-left: 18px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .personality-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        gap: 18px;
+        padding: 20px;
+        margin-top: 16px;
+        background:
+          linear-gradient(135deg, rgba(0, 71, 171, 0.1), rgba(255, 255, 255, 0) 46%),
+          var(--panel);
+      }
+
+      .fact-panel {
+        display: grid;
+        gap: 18px;
+        padding: 20px;
+        margin-bottom: 16px;
+        background:
+          linear-gradient(135deg, rgba(0, 71, 171, 0.1), rgba(255, 255, 255, 0) 52%),
+          var(--panel);
+      }
+
+      .fact-grid,
+      .timeline-grid,
+      .research-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      .fact-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .timeline-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .research-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .fact-card,
+      .timeline-card,
+      .research-card {
+        display: grid;
+        gap: 9px;
+        padding: 18px;
+        background: var(--panel);
+      }
+
+      .fact-card strong {
+        color: var(--cobalt);
+        font-size: clamp(1.55rem, 3vw, 2.55rem);
+        line-height: 1;
+      }
+
+      .timeline-card time,
+      .research-card strong {
+        color: var(--cobalt-dark);
+        font-size: 1.18rem;
+        font-weight: 900;
+      }
+
+      .source-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .source-list a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 32px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 5px 9px;
+        background: var(--blue-soft);
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .kitchen-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+        gap: 16px;
+        align-items: stretch;
+      }
+
+      .kitchen-outline {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        min-height: 420px;
+      }
+
+      .kitchen-zone {
+        display: grid;
+        gap: 12px;
+        align-content: start;
+        padding: 18px;
+        background: #fbfcff;
+      }
+
+      .kitchen-zone h3 {
+        color: var(--cobalt-dark);
+      }
+
+      .kitchen-boundary {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        border: 1px dashed #9aa8be;
+        border-radius: 8px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .kitchen-strip {
+        display: grid;
+        gap: 8px;
+      }
+
+      .kitchen-piece {
+        display: grid;
+        gap: 3px;
+        min-height: 58px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .kitchen-piece strong {
+        color: var(--ink);
+        font-size: 0.92rem;
+        line-height: 1.1;
+      }
+
+      .kitchen-piece span {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .kitchen-piece.pantry { background: #fff7dc; }
+      .kitchen-piece.cold { background: #e0f2fe; }
+      .kitchen-piece.cook { background: #fee2e2; }
+      .kitchen-piece.wet { background: #dbeafe; }
+      .kitchen-piece.open { background: #ede9fe; }
+      .kitchen-piece.counter { background: #e7f8ed; }
+
+      .kitchen-card {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .kitchen-card ul {
+        display: grid;
+        gap: 8px;
+        padding-left: 18px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .room-data-layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 0.8fr) minmax(0, 1.2fr);
+        gap: 16px;
+        align-items: start;
+      }
+
+      .room-personality-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .room-personality-card {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+        overflow: hidden;
+      }
+
+      .room-personality-card .room-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .room-title-lockup {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .loteria-thumb {
+        width: 46px;
+        height: 62px;
+        flex: 0 0 auto;
+        border: 1px solid rgba(24, 32, 29, .18);
+        border-radius: 6px;
+        background: #fff8e7;
+        box-shadow: 0 8px 18px rgba(24, 32, 29, 0.12);
+        object-fit: cover;
+      }
+
+      .room-personality-card strong {
+        color: var(--cobalt-dark);
+        font-size: 1.25rem;
+        line-height: 1.1;
+      }
+
+      .room-personality-card ul {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .swatch {
+        width: 34px;
+        height: 34px;
+        flex: 0 0 auto;
+        border: 1px solid rgba(24, 32, 29, .18);
+        border-radius: 50%;
+        background: var(--swatch, var(--cobalt));
+      }
+
+      .room-schema-panel {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+        background:
+          linear-gradient(135deg, rgba(0, 71, 171, 0.09), rgba(255, 255, 255, 0) 52%),
+          var(--panel);
+      }
+
+      .room-schema-panel ul,
+      .room-data-card ul {
+        display: grid;
+        gap: 8px;
+        padding-left: 18px;
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .room-data-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .room-data-card {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+      }
+
+      .room-data-card strong {
+        color: var(--cobalt-dark);
+        font-size: 1.24rem;
+        line-height: 1.08;
+      }
+
+      .room-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .room-stat {
+        display: grid;
+        gap: 2px;
+        min-height: 62px;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--blue-soft);
+      }
+
+      .room-stat span {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .room-stat b {
+        font-size: 0.92rem;
+        line-height: 1.15;
+      }
+
+      .room-plan-preview {
+        display: grid;
+        gap: 8px;
+        margin: 4px 0;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.72);
+      }
+
+      .room-plan-preview img {
+        display: block;
+        width: 100%;
+        border: 1px solid rgba(24, 32, 29, 0.14);
+        border-radius: 6px;
+        background: #fff;
+      }
+
+      .room-plan-preview figcaption {
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      .food-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .nested-heading {
+        margin-top: 28px;
+      }
+
+      .food-card {
+        display: grid;
+        gap: 10px;
+        min-height: 190px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .food-card strong {
+        color: var(--cobalt);
+        font-size: clamp(1.45rem, 2.6vw, 2.35rem);
+        line-height: 1;
+      }
+
+      .food-card p {
+        color: var(--muted);
+      }
+
+      .task-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .task-card {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--blue-soft);
+        box-shadow: var(--shadow);
+      }
+
+      .task-card strong {
+        color: var(--cobalt-dark);
+        font-size: clamp(1.35rem, 2.4vw, 2.2rem);
+        line-height: 1;
+      }
+
+      .task-card p {
+        color: var(--muted);
+      }
+
+      .toolbar {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(170px, 220px) minmax(170px, 220px);
+        gap: 12px;
+        padding: 16px;
+        margin-bottom: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--blue-soft);
+      }
+
+      label {
+        display: grid;
+        gap: 6px;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        border: 1px solid #bcc7bf;
+        border-radius: 8px;
+        padding: 11px 12px;
+        background: #fff;
+        color: var(--ink);
+      }
+
+      textarea {
+        min-height: 96px;
+        resize: vertical;
+      }
+
+      .workflow-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
+        gap: 16px;
+      }
+
+      .workflow-card {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .workflow-card p {
+        color: var(--muted);
+      }
+
+      .chip,
+      .score-chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 9px;
+        background: var(--blue-soft);
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .score-chip {
+        border-radius: 8px;
+        color: var(--ink);
+      }
+
+      .rating-bar {
+        position: relative;
+        height: 11px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--sky);
+      }
+
+      .rating-bar span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--cobalt-dark), var(--cobalt), var(--gold));
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .form-panel {
+        display: grid;
+        gap: 13px;
+        padding: 18px;
+      }
+
+      .rubric-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .rubric-item {
+        padding: 16px;
+      }
+
+      .rubric-item p {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 760px;
+      }
+
+      th,
+      td {
+        padding: 13px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      tr:last-child td {
+        border-bottom: 0;
+      }
+
+      .priority {
+        color: var(--cobalt);
+        font-weight: 900;
+      }
+
+      .delete {
+        border-color: rgba(183, 90, 66, 0.3);
+        color: var(--coral);
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 34px 0 46px;
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 860px) {
+        .topbar,
+        .hero,
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar {
+          align-items: start;
+        }
+
+        nav {
+          justify-content: flex-start;
+        }
+
+        .metric-grid,
+        .profile-grid,
+        .personality-panel,
+        .fact-grid,
+        .timeline-grid,
+        .research-grid,
+        .kitchen-layout,
+        .kitchen-outline,
+        .room-personality-grid,
+        .room-data-layout,
+        .room-data-grid,
+        .room-stat-grid,
+        .food-grid,
+        .task-grid,
+        .rubric-grid,
+        .toolbar {
+          grid-template-columns: 1fr;
+        }
+
+        .section-heading {
+          display: grid;
+          align-items: start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="">
+        <span>
+          <strong>Las Jaras Ops Command Center</strong>
+          <small>Most Certainly Try Labs</small>
+        </span>
+      </a>
+      <nav aria-label="Page navigation">
+        <a href="../index.html">Labs</a>
+        <a href="#house-facts">House Facts</a>
+        <a href="#kitchen-outline">Kitchen</a>
+        <a href="#room-data">Rooms</a>
+        <a href="#room-personalities">Personalities</a>
+        <a href="las-jaras-room-guide.html">Room Guide</a>
+        <a href="#household-food">Household Food</a>
+        <a href="#lighting-smart-home">Smart Home</a>
+        <a href="#art-mode">ART MODE</a>
+        <a href="#schertz-birds">Schertz Birds</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#scoreboard">Scoreboard</a>
+        <a href="#add">Add Test</a>
+        <a href="household-ops-command-center-build-log.html">Build Log</a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="hero" aria-label="Household operations dashboard">
+        <div>
+          <p class="eyebrow">Las Jaras house AI lab | cobalt blue system</p>
+          <h1>Track every Las Jaras optimization like a real operating system.</h1>
+          <p class="lede">A living microsite for Las Jaras: the 1952 Schertz house, its gardenable quarter-acre lot, workflow ideas, ratings, experiments, decision gates, and a record of what actually makes life easier.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#scoreboard">Open Scoreboard</a>
+            <a class="button" href="#house-profile">House Profile</a>
+            <a class="button" href="#house-facts">House Facts</a>
+            <a class="button" href="#kitchen-outline">Kitchen</a>
+            <a class="button" href="#room-data">Rooms</a>
+            <a class="button" href="#room-personalities">Room Personalities</a>
+            <a class="button" href="las-jaras-room-guide.html">Room Guide</a>
+            <a class="button" href="../../LAS_JARAS_SKETCHUP_WORKFLOW.md">SketchUp Workflow</a>
+            <a class="button" href="#household-food">Household Food</a>
+            <a class="button" href="#lighting-smart-home">Lighting Links</a>
+            <a class="button" href="#art-mode">ART MODE</a>
+            <a class="button" href="#schertz-birds">Schertz Birds</a>
+            <a class="button" href="las-jaras-garden-site-plan.html">Garden Site Plan</a>
+            <a class="button" href="las-jaras-garden-field-checklist.html">Field Checklist</a>
+            <a class="button" href="#add">Rate a Workflow</a>
+            <a class="button ghost" href="household-ops-command-center-build-log.html">Read Build Log</a>
+          </div>
+        </div>
+
+        <aside class="status-panel" aria-label="Current house AI status">
+          <div class="house-visual" aria-hidden="true">
+            <div class="roof"></div>
+            <div class="house">
+              <div class="window left"></div>
+              <div class="door"></div>
+              <div class="window right"></div>
+            </div>
+            <div class="signal"></div>
+          </div>
+          <div>
+            <p class="meta">Current focus</p>
+            <h2>Give the house a brain, then a map.</h2>
+            <p class="lede">Use the parcel record for garden and site planning now. Build the interior model from a phone walkthrough and 10-15 key measurements.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="fact-panel" aria-label="Room personality update">
+        <div>
+          <p class="eyebrow">New today: room personality layer</p>
+          <h2>Every room now has a mood system to turn into workflows.</h2>
+        </div>
+        <p class="lede">Kitchen, Living Room, Garage, Laundry Room, Hallway 1, Hallway 2, Hallway 3, Red Room, Yellow Room, Blue Room, Green Room, Green Bathroom, and Green Bathroom Closet now have personality cards with Loteria assignments, scent direction, playlist/Hue mood notes, and workflow seeds. Jump straight to the cards or the seeded workflow candidates below.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#room-personalities">Open Room Personalities</a>
+          <a class="button" href="#workflows">Open Workflow Seeds</a>
+          <a class="button" href="../../RED_ROOM_YOUTUBE_PLAYLISTS.md">Red Playlists</a>
+          <a class="button" href="../../GREEN_ROOM_YOUTUBE_PLAYLISTS.md">Green Playlists</a>
+          <a class="button" href="../../YELLOW_ROOM_MOOD.md">Yellow Mood</a>
+          <a class="button" href="../../GREEN_BATHROOM_MOOD.md">Bathroom Mood</a>
+        </div>
+      </section>
+
+      <section class="metric-grid" aria-label="Tracker metrics">
+        <div class="metric-tile">
+          <span class="label">Tracked</span>
+          <strong id="metric-count">0</strong>
+          <span>workflows</span>
+        </div>
+        <div class="metric-tile">
+          <span class="label">Room moods</span>
+          <strong>13</strong>
+          <span>personality cards</span>
+        </div>
+        <div class="metric-tile">
+          <span class="label">Average</span>
+          <strong id="metric-average">0.0</strong>
+          <span>overall score</span>
+        </div>
+        <div class="metric-tile">
+          <span class="label">Next</span>
+          <strong id="metric-next">0</strong>
+          <span>priority score</span>
+        </div>
+        <div class="metric-tile">
+          <span class="label">Active</span>
+          <strong id="metric-active">0</strong>
+          <span>build candidates</span>
+        </div>
+      </section>
+
+      <section class="section" id="house-facts">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Facts about this house</p>
+            <h2>The record-backed Las Jaras dossier.</h2>
+          </div>
+          <p>Confirmed facts, story leads, and open questions for the Schertz house. This keeps public-record details separate from the everyday ops dashboard.</p>
+        </div>
+
+        <div class="fact-panel">
+          <div>
+            <p class="eyebrow">Origin story snapshot</p>
+            <h2>A 1952 Aviation Heights house with a lot more story to pull forward.</h2>
+          </div>
+          <p class="lede">Las Jaras sits in Aviation Heights, a subdivision tied to Schertz's mid-century growth and the housing pressure around Randolph Air Force Base. The useful next question is not just when the house was built, but when the addition, porches, storage, deck, and garden character arrived.</p>
+          <ul class="source-list" aria-label="House research source files">
+            <li><a href="../../LAS_JARAS_ORIGIN_STORY_RESEARCH.md">Origin Research</a></li>
+            <li><a href="las-jaras-garden-site-plan.html">Garden Site Plan</a></li>
+            <li><a href="las-jaras-room-maintenance-inventory.html">Room Maintenance</a></li>
+          </ul>
+        </div>
+
+        <div class="fact-grid" aria-label="Confirmed house facts">
+          <article class="fact-card">
+            <span class="label">Year built</span>
+            <strong>1952</strong>
+            <p>Confirmed by public real-estate summaries. Exact build date is still unknown.</p>
+          </article>
+          <article class="fact-card">
+            <span class="label">Living area</span>
+            <strong>1,800 sqft</strong>
+            <p>County appraisal breaks this into 1,240 sqft main residential plus a 560 sqft addition/comparable residential area.</p>
+          </article>
+          <article class="fact-card">
+            <span class="label">Lot</span>
+            <strong>0.2359 ac</strong>
+            <p>Guadalupe CAD and Schertz GIS support a roughly 10,275 sqft site, useful as the exterior planning base.</p>
+          </article>
+          <article class="fact-card">
+            <span class="label">Zoning</span>
+            <strong>R-2</strong>
+            <p>City parcel GIS lists the property in Aviation Heights with residential zoning class R-2.</p>
+          </article>
+        </div>
+
+        <div class="timeline-grid nested-heading" aria-label="House timeline facts">
+          <article class="timeline-card">
+            <span class="label">Neighborhood root</span>
+            <time>1928</time>
+            <p>Walter J. Schertz started Aviation Heights to help meet housing needs connected to Randolph Air Force Base. The project later resumed when water and financing barriers were solved.</p>
+          </article>
+          <article class="timeline-card">
+            <span class="label">House era</span>
+            <time>1950s</time>
+            <p>Public histories say Aviation Heights building began in the 1950s and continued into the early 1960s. Las Jaras fits that wave.</p>
+          </article>
+          <article class="timeline-card">
+            <span class="label">City context</span>
+            <time>1958</time>
+            <p>Schertz incorporated as a city a few years after the house's listed construction year.</p>
+          </article>
+          <article class="timeline-card">
+            <span class="label">CAD lead</span>
+            <time>1992-09-22</time>
+            <p>Guadalupe CAD shows an older deed-history lead tied to Volume 1008, Page 531. This is a title-chain research lead, not a complete story yet.</p>
+          </article>
+          <article class="timeline-card">
+            <span class="label">MLS sequence</span>
+            <time>2022-06 to 2022-07</time>
+            <p>Zillow records a 2022 listing, pending period, and sale sequence. Older listing photos may help reconstruct pre-current-owner conditions.</p>
+          </article>
+          <article class="timeline-card">
+            <span class="label">Current record</span>
+            <time>2026</time>
+            <p>CAD and GIS records identify Aviation Heights, Block 29, Lots 10-12, parcel/property ID 15433, and the current appraisal improvement pieces.</p>
+          </article>
+        </div>
+
+        <div class="research-grid nested-heading" aria-label="Open research questions">
+          <article class="research-card">
+            <span class="label">Open question</span>
+            <strong>When did the 560 sqft addition happen?</strong>
+            <p>The county record confirms the area split, but not the addition date. Best next evidence: city permits, older CAD sketches, deed records, roofline/attic clues, and recovered MLS photos.</p>
+          </article>
+          <article class="research-card">
+            <span class="label">Open question</span>
+            <strong>What is the full owner and occupancy chain?</strong>
+            <p>CAD gives deed-history leads, but ownership does not equal residency. A proper history needs county clerk records, directories, obituaries, and neighbor/oral-history notes.</p>
+          </article>
+          <article class="research-card">
+            <span class="label">Open question</span>
+            <strong>How old is the front magnolia?</strong>
+            <p>The tree is part of the house personality, but its planting date is not confirmed. Measure trunk circumference at 4.5 feet, height, crown spread, condition, and compare against older photos.</p>
+          </article>
+          <article class="research-card">
+            <span class="label">Next practical move</span>
+            <strong>Build the interior map from real measurements.</strong>
+            <p>Public records give area pieces, not room placement. A phone walkthrough plus 10-15 key measurements is the better path for a useful floor plan.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="house-profile">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">House profile</p>
+            <h2>Las Jaras, grounded in real records.</h2>
+          </div>
+          <p>The house personality starts with facts: age, lot shape, outbuildings, garden potential, and the gaps we need to fill ourselves.</p>
+        </div>
+        <div class="profile-grid">
+          <article class="profile-card">
+            <span class="label">Living area</span>
+            <strong>1,800 sqft</strong>
+            <p>Zillow and Guadalupe CAD agree on the total living area: 1,240 sqft main floor plus a 560 sqft comparable residential addition.</p>
+          </article>
+          <article class="profile-card">
+            <span class="label">Built</span>
+            <strong>1952</strong>
+            <p>Single-family Schertz house with mid-century bones and enough utility space to deserve a real operating model.</p>
+          </article>
+          <article class="profile-card">
+            <span class="label">Lot</span>
+            <strong>10,275 sqft</strong>
+            <p>About 0.2359 acres, roughly a 75 ft x 137 ft parcel, angled relative to true north and strong enough for garden optimization.</p>
+          </article>
+          <article class="profile-card">
+            <span class="label">Site pieces</span>
+            <ul>
+              <li>72 sqft attached unfinished storage</li>
+              <li>140 sqft detached storage</li>
+              <li>238 sqft detached uncovered deck</li>
+              <li>80 sqft portable storage</li>
+            </ul>
+          </article>
+          <article class="profile-card">
+            <span class="label">Records</span>
+            <ul>
+              <li>Zillow, county CAD, and city GIS records captured privately</li>
+              <li>Aviation Heights, Block 29, Lots 10-12</li>
+              <li>City zoning: R-2</li>
+              <li>Parcel base is ready for site-plan work</li>
+            </ul>
+          </article>
+          <article class="profile-card">
+            <span class="label">Planning stance</span>
+            <p>GIS parcel first for garden and exterior systems. Interior plan second, built from a walkthrough sketch, old photos if useful, and measured room dimensions.</p>
+          </article>
+        </div>
+        <div class="personality-panel">
+          <div>
+            <p class="eyebrow">House personality</p>
+            <h2>Cobalt, practical, a little stubborn.</h2>
+          </div>
+          <div>
+            <p>Las Jaras should act like a calm household operator: observant, thrifty, garden-aware, and careful about anything that spends money or speaks for buddy.</p>
+            <ul>
+              <li>Prefer useful nudges over noisy dashboards.</li>
+              <li>Respect the old-house reality: measure before assuming.</li>
+              <li>Treat the yard as a working site, not leftover space.</li>
+              <li>Make house history visible without getting precious about it.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="kitchen-outline">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Kitchen outline</p>
+            <h2>Two zones, one storage brain.</h2>
+          </div>
+          <p>Current schematic from the kitchen storage map. It captures confirmed permanent storage, but exact cabinet-by-cabinet placement still needs the walkthrough pass.</p>
+        </div>
+        <div class="kitchen-layout">
+          <div class="kitchen-outline" aria-label="Las Jaras kitchen storage outline">
+            <article class="kitchen-zone">
+              <div>
+                <span class="label">KZ-1</span>
+                <h3>Left cooking / wet zone</h3>
+              </div>
+              <div class="kitchen-strip">
+                <div class="kitchen-piece cook"><strong>Range</strong><span>KR-A cooking anchor</span></div>
+                <div class="kitchen-piece wet"><strong>Sink + dishwasher</strong><span>KS-A / KW-A cleanup and unload path</span></div>
+                <div class="kitchen-piece pantry"><strong>Base storage</strong><span>KD-A, KC-A, KC-B, KL-A lazy Susan</span></div>
+                <div class="kitchen-piece open"><strong>Open shelves</strong><span>KO-B to KO-G cooking, dishwasher, and counter shelves</span></div>
+                <div class="kitchen-piece counter"><strong>Coffee counter</strong><span>KT-B, 93 in x 15 in with outlet</span></div>
+                <div class="kitchen-piece wet"><strong>Microwave cabinet</strong><span>KU-A above KM-A</span></div>
+              </div>
+            </article>
+
+            <article class="kitchen-zone">
+              <div>
+                <span class="label">KZ-2</span>
+                <h3>Right pantry / fridge zone</h3>
+              </div>
+              <div class="kitchen-strip">
+                <div class="kitchen-piece pantry"><strong>Left Pantry</strong><span>KP-A active pantry, easiest daily reach</span></div>
+                <div class="kitchen-piece cold"><strong>Active fridge</strong><span>KF-A everyday cold storage</span></div>
+                <div class="kitchen-piece cold"><strong>Overflow fridge</strong><span>KF-B backup drinks, prep, and freezer backstock</span></div>
+                <div class="kitchen-piece pantry"><strong>Right Pantry</strong><span>KP-B backstock and household support</span></div>
+                <div class="kitchen-piece counter"><strong>Right counter</strong><span>KT-A intake / scan before storing</span></div>
+                <div class="kitchen-piece open"><strong>Right open shelf</strong><span>KO-A visible overflow with outlet access</span></div>
+              </div>
+            </article>
+
+            <div class="kitchen-boundary">Two doorway split / traffic boundary</div>
+          </div>
+
+          <aside class="kitchen-card">
+            <div>
+              <p class="eyebrow">Storage rules</p>
+              <h3>What the outline is for.</h3>
+            </div>
+            <ul>
+              <li>Keep daily-use items on the side where they are used.</li>
+              <li>Put heavy appliances low, not on upper open shelves.</li>
+              <li>Use Left Pantry for active food and Right Pantry for backstock.</li>
+              <li>Keep expiring food visible, labeled, or tracked in inventory.</li>
+              <li>Use front/back shelf logic only when the back row has a job.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="../../full-kitchen-storage-diagram.html">Full Diagram</a>
+              <a class="button" href="../../full-kitchen-storage-diagram-editable.html">Editable Diagram</a>
+              <a class="button" href="../../left-pantry-4-zone-diagram.html">Left Pantry</a>
+            </div>
+          </aside>
+        </div>
+
+        <div class="section-heading nested-heading" id="room-data">
+          <div>
+            <p class="eyebrow">Room data</p>
+            <h2>Every room gets the same operating record.</h2>
+          </div>
+          <p>Modeled after the Kitchen outline: each room gets dimensions, openings, systems, storage role, scent, lighting, music, furniture, maintenance, safety, and photo needs.</p>
+        </div>
+        <div class="room-data-layout">
+          <aside class="room-schema-panel">
+            <div>
+              <p class="eyebrow">Standard fields</p>
+              <h3>Room record model.</h3>
+            </div>
+            <ul>
+              <li>Name, room type, status, priority, and dimensions.</li>
+              <li>Wall-by-wall openings: doors, windows, closets, switches, outlets, vents.</li>
+              <li>Lighting and IoT: fixtures, lamps, bulb count, plug type, smart-home state.</li>
+              <li>Large furniture, valuable objects, textiles, decor, and storage zones.</li>
+              <li>Room use, storage role, shelf map, recommended stored categories, and do-not-store list.</li>
+              <li>Room mood, custom scent, custom Hue scene set, and music/playlist direction.</li>
+              <li>Maintenance, safety checks, cleaning cadence, photos, and measurements needed.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-maintenance-inventory.html">Room Tracker</a>
+              <a class="button" href="../../LAS_JARAS_ROOM_MAINTENANCE_INVENTORY.md">Source Notes</a>
+            </div>
+          </aside>
+
+          <div class="room-data-grid" aria-label="Las Jaras standard room records">
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Verified starter</span><span class="chip">High priority</span></div>
+              <strong>Red Room</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Dimensions</span><b>136 in x 115 in; about 108.6 sqft</b></div>
+                <div class="room-stat"><span>Openings</span><b>Wall 1 door + closet; Wall 3 window</b></div>
+                <div class="room-stat"><span>Storage</span><b>6 apothecary drawers; closet shelves: 60, 40, 20, 20 in</b></div>
+                <div class="room-stat"><span>Lighting / IoT</span><b>3 fan bulbs, 1 side-lamp bulb, 1 onn TV</b></div>
+              </div>
+              <figure class="room-plan-preview">
+                <img src="las-jaras-red-room-top.png" alt="Top-down Blender placement preview for the Las Jaras Red Room showing the bed, window, closet, door, TV, apothecary drawers, side tables, chair, fan, and light markers.">
+                <figcaption>Blender placement sample generated from the saved Red Room layout. Use this as the current room-footprint reference while measurements are still being refined.</figcaption>
+              </figure>
+              <div class="card-actions">
+                <a class="button primary" href="las-jaras-red-room-sample.blend">Blender Model</a>
+                <a class="button" href="las-jaras-red-room-sample.glb">GLB Export</a>
+                <a class="button" href="las-jaras-red-room-top.png">Top Plan Image</a>
+              </div>
+              <p>Design: pink walls, Red Chakra mood, Gramercy Park Hotel bed and curtains, vintage TV stand/chair, two tables, Japanese flower vase, candle holders, plant, large prayer beads.</p>
+              <ul>
+                <li><strong>Storage role:</strong> guest-room comfort, grounding/rest supplies, and a small curated spiritual hospitality zone.</li>
+                <li><strong>Store here:</strong> guest linens, extra blanket, towels, sleep kit, spare charger, remote batteries, sealed scent supplies, meditation/rest kit, and Red Room hardware/bulb notes.</li>
+                <li><strong>Do not store:</strong> pantry goods, tools, paperwork, cleaning chemicals, unlabeled bins, private documents, or heavy items on the high shelf.</li>
+                <li><strong>Custom scent:</strong> Jara Roja - cedarwood, rose, amber, cardamom, and a tiny clove note, with a fragrance-free guest option.
+                  <div class="card-actions" aria-label="Red Room retail scent links">
+                    <a class="button" href="https://www.bathandbodyworks.com/p/nocturnal-rose-concentrated-room-spray-028027525">Nocturnal Rose</a>
+                    <a class="button" href="https://www.target.com/p/-/A-91271792">Vetiver + Cedarwood</a>
+                  </div>
+                </li>
+                <li><strong>Hue scenes:</strong> Guest Arrival, Ruby Grounding, Rose Reading, Ember Wind-Down, Night Path, and Cleaning.</li>
+                <li><strong>Playlist:</strong> Red Room Grounding - warm soul, desert psych, ambient jazz, and soft devotional textures.</li>
+              </ul>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Known story</span><span class="chip">High priority</span></div>
+              <strong>Green Room</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Dimensions</span><b>Needs walkthrough measurement</b></div>
+                <div class="room-stat"><span>Anchor</span><b>Exact green Gramercy Park Hotel bed</b></div>
+                <div class="room-stat"><span>Lighting</span><b>5 bulb candidates: 3 fan, 1 floor lamp, 1 black lamp</b></div>
+                <div class="room-stat"><span>Capture</span><b>Bed, closet, windows, outlets, fixture, decor</b></div>
+              </div>
+              <p>Heart Chakra room anchored by the exact green Gramercy Park Hotel bed: open-hearted, garden-at-dusk, restorative, leafy, calm, and quietly abundant.</p>
+              <ul>
+                <li><strong>Custom scent:</strong> Jara Verde - fig leaf, basil, neroli, soft cedar, green tea, and tiny vetiver.
+                  <div class="card-actions" aria-label="Green Room retail scent links">
+                    <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                    <a class="button" href="https://www.target.com/p/-/A-91271792">Vetiver + Cedarwood</a>
+                    <a class="button" href="https://www.walmart.com/ip/7337520649">Bergamot + Sage</a>
+                  </div>
+                </li>
+                <li><strong>Hue scenes:</strong> Heart Welcome, Garden Morning, Heart Rest, Bathing In Green, Reading, Night Path, and Cleaning.</li>
+                <li><strong>Playlist:</strong> Green Room Heart Ease with five private YouTube playlist moods created.</li>
+              </ul>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Template</span><span class="chip">Medium priority</span></div>
+              <strong>Blue Room</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Dimensions</span><b>Unknown</b></div>
+                <div class="room-stat"><span>Design</span><b>Blue / throat-chakra scene opportunity</b></div>
+                <div class="room-stat"><span>Lighting</span><b>Working estimate: 2 bulbs</b></div>
+                <div class="room-stat"><span>Capture</span><b>Walls, closet, windows, outlets, furniture</b></div>
+              </div>
+              <p>Needs the full standard record before layout or bulb purchases: room size, door swing, window size, outlet map, fixture type, storage, and decor inventory.</p>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Template</span><span class="chip">Medium priority</span></div>
+              <strong>Yellow Room</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Dimensions</span><b>Unknown</b></div>
+                <div class="room-stat"><span>Design</span><b>Yellow / solar-plexus scene opportunity</b></div>
+                <div class="room-stat"><span>Lighting</span><b>Working estimate: 2 bulbs</b></div>
+                <div class="room-stat"><span>Capture</span><b>Walls, closet, windows, outlets, furniture</b></div>
+              </div>
+              <p>Solar Plexus room for golden-hour confidence: warm, self-possessed, clear, optimistic, personal, and restful enough for a master bedroom.</p>
+              <ul>
+                <li><strong>Custom scent:</strong> Jara Dorada - bergamot, saffron, honeyed chamomile, sandalwood, lemon verbena, and tiny ginger.
+                  <div class="card-actions" aria-label="Yellow Room retail scent links">
+                    <a class="button" href="https://www.target.com/s/everspring%20lavender%20bergamot%20room%20spray">Lavender + Bergamot</a>
+                    <a class="button" href="https://www.walmart.com/ip/7337520649">Bergamot + Sage</a>
+                  </div>
+                </li>
+                <li><strong>Hue scenes:</strong> Golden Welcome, Solar Morning, Confidence Glow, Golden Focus, Wind Down, Night Path, and Cleaning.</li>
+                <li><strong>Playlist direction:</strong> sunlit soul, mellow funk, bright acoustic, warm jazz, soft Brazilian, and gentle disco.</li>
+              </ul>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Common space</span><span class="chip">High priority</span></div>
+              <strong>Living Room</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Dimensions</span><b>Unknown</b></div>
+                <div class="room-stat"><span>Lighting</span><b>3 fixture candidates: floor lamp, flamingo lamp, table chandelier/light; TV accent optional later</b></div>
+                <div class="room-stat"><span>Media</span><b>Samsung Smart TV, model pending</b></div>
+                <div class="room-stat"><span>Maintenance</span><b>Dust lamps/TV, check cords, outlets, remote</b></div>
+              </div>
+              <p>Needs seating layout, rug/furniture footprint, traffic paths, outlet map, Samsung TV model/integration details, and bulb-base checks before smart-bulb checkout.</p>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Utility</span><span class="chip">High priority</span></div>
+              <strong>Bathrooms + Laundry</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Bathroom data</span><b>Fixtures, fan, storage, grout, caulk</b></div>
+                <div class="room-stat"><span>Bathroom lighting</span><b>Bulb count and damp rating needed</b></div>
+                <div class="room-stat"><span>Laundry data</span><b>Washer/dryer, hookups, lint path</b></div>
+                <div class="room-stat"><span>Maintenance</span><b>Drains, leaks, hoses, filters, supplies</b></div>
+              </div>
+              <p>Green Bathroom is The Papaya: a green tribal bath-house ritual room. Laundry is Laundry Lanai: a tiny hidden tiki utility bar. Both stay practical around water, lint, ventilation, supplies, and outlet safety.</p>
+              <ul>
+                <li><strong>Bathroom:</strong> Jara Papaya scent, bossa/tropicalia/water ambience, Papaya Welcome and bath/steam Hue concepts pending fixture audit.
+                  <div class="card-actions" aria-label="Green Bathroom retail scent links">
+                    <a class="button" href="https://www.walmart.com/ip/19898010830">Orchid + Neroli</a>
+                    <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                    <a class="button" href="https://www.bathandbodyworks.com/p/sea-salt-and-driftwood-wallflowers-fragrance-refill-028026913.html">Sea Salt + Driftwood</a>
+                  </div>
+                </li>
+                <li><strong>Laundry:</strong> Jara Lanai scent, tiki lounge/folding music, Lanai Welcome and bright utility scenes pending bulb audit.
+                  <div class="card-actions" aria-label="Laundry retail scent links">
+                    <a class="button" href="https://www.bathandbodyworks.com/p/sea-salt-and-driftwood-wallflowers-fragrance-refill-028026913.html">Sea Salt + Driftwood</a>
+                    <a class="button" href="https://www.walmart.com/ip/17767163371">Fresh Cotton</a>
+                    <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                  </div>
+                </li>
+              </ul>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Flexible area</span><span class="chip">High priority</span></div>
+              <strong>Finished Garage</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Use case</span><b>Game room, work lounge, or second living area</b></div>
+                <div class="room-stat"><span>Dimensions</span><b>Needs measurement</b></div>
+                <div class="room-stat"><span>Systems</span><b>Outlets, lighting, HVAC comfort, storage</b></div>
+                <div class="room-stat"><span>Capture</span><b>Doors, floor, walls, seating, work zones</b></div>
+              </div>
+              <p>This is a major guest/stay differentiator, so the record should separate storage clutter, lounge furniture, media, work surface, and safety/egress notes.</p>
+            </article>
+
+            <article class="room-data-card">
+              <div class="chip-row"><span class="chip">Support zones</span><span class="chip">Medium priority</span></div>
+              <strong>Hallways, Closets, Porches, Deck, Storage</strong>
+              <div class="room-stat-grid">
+                <div class="room-stat"><span>Interior support</span><b>Hall widths, closet contents, lights, doors</b></div>
+                <div class="room-stat"><span>Exterior support</span><b>Porches, deck, storage, outlets, locks</b></div>
+                <div class="room-stat"><span>Risk checks</span><b>Pests, moisture, trip hazards, fasteners</b></div>
+                <div class="room-stat"><span>Inventory</span><b>Tools, bins, seasonal goods, outdoor items</b></div>
+              </div>
+              <p>Hallways are the Orange Chakra transition zone: amber passage, guest circulation, art glow, creative movement, and safe night routing. Support zones keep the house usable with labels, access paths, moisture checks, lighting, locks, and backup supplies.</p>
+              <ul>
+                <li><strong>Custom scent:</strong> Jara Naranja - bitter orange peel, neroli, saffron, cinnamon leaf, sandalwood, marigold, and tiny black pepper.
+                  <div class="card-actions" aria-label="Hallway retail scent links">
+                    <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                    <a class="button" href="https://beta.walmart.com/ip/BHG-Luxury-Fragrance-Wax-Melts-The-One/17363152782">Amber + Saffron</a>
+                  </div>
+                </li>
+                <li><strong>Hue scenes:</strong> Amber Passage, Guest Path, Creative Flow, Gallery Glow, Night Path, and Cleaning.</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="section-heading nested-heading" id="room-personalities">
+          <div>
+            <p class="eyebrow">Room personalities</p>
+            <h2>Personality drives playlists, Hue moods, and workflows.</h2>
+          </div>
+          <p>These cards pull today's room mood work into the command center. Each card now links to a fuller room page for future visitor-facing notes, playlist links, Hue scenes, inventory, and workflow details.</p>
+        </div>
+        <div class="hero-actions" style="margin-bottom: 16px;">
+          <a class="button primary" href="las-jaras-room-guide.html">Open Full Room Guide</a>
+          <a class="button" href="las-jaras-room-guide.html#red-room">Playlist Rooms</a>
+        </div>
+        <div class="room-personality-grid" aria-label="Las Jaras room personalities and workflow seeds">
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/el-cazo.svg" alt="El Cazo Loteria card for the Kitchen"><strong>Kitchen</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #0047ab, #fef3c7, #dc2626);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">El Cazo</span><span class="chip">Cobalt working room</span><span class="chip">Playlist plan</span><span class="chip">House ops hub</span></div>
+            <p>Warm working light, clean counters, coffee, prep, hosting, groceries, and ordinary household reset without nightclub chaos.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> El Cazo - the cooking pot, chosen for prep, simmering, groceries, and household abundance.</li>
+              <li><strong>Sound:</strong> Doing Dishes, Cooking For Guests, Breakfast, Pantry Reset, Sunday Prep.</li>
+              <li><strong>Hue:</strong> bright task scenes with cobalt accent, warm white, soft lemon, candle amber, and hosting glow.</li>
+              <li><strong>Workflow seed:</strong> kitchen reset that checks pantry intake, expiring food, dishes, counters, pickup lists, and task lighting.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#kitchen">Room Page</a>
+              <a class="button primary" href="../../KITCHEN_YOUTUBE_PLAYLISTS.md">Playlist Plan</a>
+              <a class="button" href="http://127.0.0.1:3155/">Food Inventory Editor</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/el-sol.svg" alt="El Sol Loteria card for the Living Room"><strong>Living Room</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #0f172a, #f97316, #fef3c7);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">El Sol</span><span class="chip">Reese sectional</span><span class="chip">Elowen dining chairs</span><span class="chip">3 fixture candidates</span></div>
+            <p>The house's main social room: movie nights, guest arrival, conversation, dining, TV/audio, and warm character lighting. The Room & Board Reese curved sectional is the seating anchor; the table with four Elowen Dining Chairs creates the dining anchor; base lighting is three fixtures, and TV/media glow is a separate optional upgrade.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> El Sol - the warm center of the house for gathering, welcome, TV, dining, and conversation.</li>
+              <li><strong>Furniture anchor:</strong> Room & Board Reese 115x115&quot; three-piece curved sectional in Orla Ivory; 32&quot; high, 87&quot; inside width/depth, 19&quot; seat height, 22&quot; seat depth.</li>
+              <li><strong>Dining anchor:</strong> table with 4 Anthropologie Elowen Dining Chairs in plush cotton velvet with mixed wildlife/botanical print, hammered iron legs, and back brass handles; each chair is 24&quot;w x 24.25&quot;d x 34.25&quot;h, seat height 19.75&quot;.</li>
+              <li><strong>Known lighting:</strong> floor lamp as first ambient test; flamingo lamp as character accent; table chandelier/light on hold until fixture type is confirmed.</li>
+              <li><strong>Media:</strong> Samsung Smart TV; optional Hue Play/gradient media accent after TV model, power, and cable routing are confirmed.</li>
+              <li><strong>Scenes:</strong> Guest Arrival, Movie Night, Conversation, Morning Open House, and Cleaning / Reset.</li>
+              <li><strong>Workflow seed:</strong> movie/hosting mode with TV readiness, lamp scenes, seating reset, cords, remote, and guest lighting.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#living-room">Room Page</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/el-valiente.svg" alt="El Valiente Loteria card for the Garage"><strong>Garage</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #334155, #22c55e, #f59e0b);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">El Valiente</span><span class="chip">Finished garage</span><span class="chip">Utility + lounge</span><span class="chip">Needs use-case identity</span></div>
+            <p>A flexible room that needs its final identity: game room, work lounge, second living area, storage boundary, or utility zone.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> El Valiente - the brave/flexible workhorse room for projects, storage boundaries, and second-lounge energy.</li>
+              <li><strong>Known lighting:</strong> fan with 3 bulbs plus chandelier with 6 chandelier bulbs.</li>
+              <li><strong>Audit hold:</strong> heat, dust, bulb bases, chandelier type, and whether Hue is worth it here.</li>
+              <li><strong>Workflow seed:</strong> garage reset with bright utility light, storage boundaries, safety/egress check, and lounge/work mode.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#garage">Room Page</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-mano.svg" alt="La Mano Loteria card for the Laundry Room"><strong>Laundry Room</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #0047ab, #f59e0b, #22c55e);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Mano</span><span class="chip">Laundry Lanai</span><span class="chip">Tiki utility</span><span class="chip">Mood drafted</span></div>
+            <p>A tiny hidden tiki bar that happens to handle chores: practical first, charming second.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Mano - the hands-on care room where the house gets cleaned, folded, stocked, and reset.</li>
+              <li><strong>Scent:</strong> Jara Lanai - lime leaf, ginger, vetiver, green tea, neroli, cedar, clean cotton.
+                <div class="card-actions" aria-label="Laundry Room retail scent links">
+                  <a class="button" href="https://www.bathandbodyworks.com/p/sea-salt-and-driftwood-wallflowers-fragrance-refill-028026913.html">Sea Salt + Driftwood</a>
+                  <a class="button" href="https://www.walmart.com/ip/17767163371">Fresh Cotton</a>
+                  <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                </div>
+              </li>
+              <li><strong>Sound:</strong> vintage exotica in small doses, bossa nova, soft surf guitar, tropicalia, folding music.</li>
+              <li><strong>Hue:</strong> Lanai Welcome, Sorting Light, Folding Bar Glow, Stain Check, Night Utility, Cleaning.</li>
+              <li><strong>Workflow seed:</strong> laundry reset with lint reminder, detergent inventory, towel/linen routing, and bright utility mode.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#laundry-room">Room Page</a>
+              <a class="button primary" href="../../LAUNDRY_ROOM_MOOD.md">Mood File</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-campana.svg" alt="La Campana Loteria card for Hallway 1"><strong>Hallway 1</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #ea580c, #fbbf24, #7c2d12);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Campana</span><span class="chip">Orange Chakra</span><span class="chip">Transition</span><span class="chip">Map needed</span></div>
+            <p>First hallway personality record. Keep it warm, safe, navigable, and connected to the Orange Chakra transition story.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Campana - the arrival bell and threshold signal for the first guest path through the house.</li>
+              <li><strong>Scent:</strong> Jara Naranja, used lightly because hallways are pass-through spaces.
+                <div class="card-actions" aria-label="Hallway 1 retail scent links">
+                  <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                  <a class="button" href="https://beta.walmart.com/ip/BHG-Luxury-Fragrance-Wax-Melts-The-One/17363152782">Amber + Saffron</a>
+                </div>
+              </li>
+              <li><strong>Hue:</strong> Amber Passage, Guest Path, Gallery Glow, Night Path, Cleaning.</li>
+              <li><strong>Workflow seed:</strong> route-safe arrival path with art/object glow and no trip hazards.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#hallway-1">Room Page</a>
+              <a class="button primary" href="../../HALLWAYS_MOOD.md">Mood File</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/el-camino.svg" alt="El Camino Loteria card for Hallway 2"><strong>Hallway 2</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #92400e, #fb923c, #fef3c7);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">El Camino</span><span class="chip">No power noted</span><span class="chip">Electrical hold</span><span class="chip">Planning first</span></div>
+            <p>The second hallway has no current light or power in the field notes, so this is a planning card before any smart-light purchase.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> El Camino - the practical route card, chosen because this hallway is about navigation, safety, and finding the right path.</li>
+              <li><strong>Do first:</strong> decide whether this needs hardwired lighting, plug-in lighting, or a different route.</li>
+              <li><strong>Personality:</strong> still Orange Chakra, but practical safety comes before mood.</li>
+              <li><strong>Workflow seed:</strong> electrical planning checklist and safe night-path fallback.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#hallway-2">Room Page</a>
+              <a class="button primary" href="../../HALLWAYS_MOOD.md">Mood File</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-escalera.svg" alt="La Escalera Loteria card for Hallway 3"><strong>Hallway 3</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #c2410c, #facc15, #fed7aa);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Escalera</span><span class="chip">Decorative fixture</span><span class="chip">7 bulbs</span><span class="chip">Orange showcase</span></div>
+            <p>The third hallway is the main Orange Chakra showcase: decorative fixture, amber passage, guest circulation, and gallery glow.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Escalera - the movement and transition card for the most decorative route through the house.</li>
+              <li><strong>Known lighting:</strong> decorative fixture with 7 bulbs; likely specialty/candelabra risk.</li>
+              <li><strong>Hue:</strong> Amber Passage, Guest Path, Creative Flow, Gallery Glow, Night Path, Cleaning.</li>
+              <li><strong>Workflow seed:</strong> hallway showcase mode after base/heat/clearance audit.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#hallway-3">Room Page</a>
+              <a class="button primary" href="../../HALLWAYS_MOOD.md">Mood File</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/el-corazon.svg" alt="El Corazon Loteria card for the Red Room"><strong>Red Room</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #7f1d1d, #f6a6b2, #f59e0b);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">El Corazon</span><span class="chip">Red Chakra</span><span class="chip">Guest grounding</span><span class="chip">Playlists created</span></div>
+            <p>Grounded, protective, sensual-but-guest-appropriate, hotel-inflected, richly textured, and collected.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> El Corazon - bold, romantic, grounded, and exactly right for the red Gramercy room.</li>
+              <li><strong>Scent:</strong> Jara Roja - cedarwood, rose, amber, cardamom, tiny clove.
+                <div class="card-actions" aria-label="Red Room retail scent links">
+                  <a class="button" href="https://www.bathandbodyworks.com/p/nocturnal-rose-concentrated-room-spray-028027525">Nocturnal Rose</a>
+                  <a class="button" href="https://www.target.com/p/-/A-91271792">Vetiver + Cedarwood</a>
+                </div>
+              </li>
+              <li><strong>YouTube:</strong> Guest Welcome, Morning Ritual, Ritual, Wind Down, Intention Setting.</li>
+              <li><strong>Hue:</strong> rose gold arrival, sunrise grounding, low ruby ritual, ember wind-down, dim red night path.</li>
+              <li><strong>Workflow seed:</strong> guest arrival reset with room lights, grounding playlist, TV state, charger check, towels, and sleep kit.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#red-room">Room Page</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIWTom_LjZLMVG5MqgoYoE_">Guest Welcome</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbKFbCU5RBfnNvwNsjfVgAyp">Wind Down</a>
+              <a class="button primary" href="../../RED_ROOM_YOUTUBE_PLAYLISTS.md">Playlist Plan</a>
+              <a class="button" href="../../RED_ROOM_GROUNDING_PLAYLIST.md">Grounding Spec</a>
+              <a class="button" href="../../sketchup/red-room-sketchup-starter.md">SketchUp Starter</a>
+              <a class="button" href="las-jaras-red-room-top.png">Blender Plan</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-luna.svg" alt="La Luna Loteria card for the Yellow Room"><strong>Yellow Room</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #facc15, #f97316, #fff7ed);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Luna</span><span class="chip">Solar Plexus</span><span class="chip">Master bedroom</span><span class="chip">Mood drafted</span></div>
+            <p>Golden-hour confidence: warm, self-possessed, clear, optimistic, personal, and restful.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Luna - the primary bedroom's restful counterweight to its golden confidence: private, calm, and nocturnal.</li>
+              <li><strong>Scent:</strong> Jara Dorada - bergamot, saffron, honeyed chamomile, sandalwood, lemon verbena, tiny ginger.
+                <div class="card-actions" aria-label="Yellow Room retail scent links">
+                  <a class="button" href="https://www.target.com/s/everspring%20lavender%20bergamot%20room%20spray">Lavender + Bergamot</a>
+                  <a class="button" href="https://www.walmart.com/ip/7337520649">Bergamot + Sage</a>
+                </div>
+              </li>
+              <li><strong>Sound:</strong> sunlit soul, mellow funk, bright acoustic, warm jazz, soft Brazilian, gentle disco.</li>
+              <li><strong>Hue:</strong> Golden Welcome, Solar Morning, Confidence Glow, Golden Focus, Wind Down, Night Path.</li>
+              <li><strong>Workflow seed:</strong> getting-ready mode with flattering warm light, upbeat low-drama playlist, TV/media check, and clothes/jewelry reset.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#yellow-room">Room Page</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbI0VKtkXVPq5c6gvZqkK8yF">Guest Welcome</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbK72Z30LzwiN-HVruhWKJEz">Morning Ritual</a>
+              <a class="button primary" href="../../YELLOW_ROOM_MOOD.md">Mood File</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/el-mundo.svg" alt="El Mundo Loteria card for the Blue Room"><strong>Blue Room</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #1d4ed8, #93c5fd, #f8fafc);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">El Mundo</span><span class="chip">Throat Chakra</span><span class="chip">Needs mood pass</span><span class="chip">2 bulb candidates</span></div>
+            <p>The likely communication / calm-expression room. It still needs its full personality pass, playlist, scent, and Hue scene set.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> El Mundo - the thinking, planning, writing, calling, and big-picture room.</li>
+              <li><strong>Known lighting:</strong> fan with 1 light and lamp with 1 light.</li>
+              <li><strong>Workflow seed:</strong> quiet writing / call-ready mode with calm blue-white light, charger check, and clean surface reset.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#blue-room">Room Page</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbLLuHC6L589N1l0DFf8p3es">Guest Welcome</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbJGOylkvOogH-5JbH_WWMxy">Morning Ritual</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-estrella.svg" alt="La Estrella Loteria card for the Green Room"><strong>Green Room</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #14532d, #86efac, #fef3c7);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Estrella</span><span class="chip">Heart Chakra</span><span class="chip">Gramercy bed</span><span class="chip">Playlists created</span></div>
+            <p>Garden-at-dusk hospitality: open-hearted, restorative, leafy, calm, and quietly abundant.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Estrella - dreamy, restorative, quietly magical, and suited to the green Gramercy bed.</li>
+              <li><strong>Scent:</strong> Jara Verde - fig leaf, basil, neroli, soft cedar, green tea, tiny vetiver.
+                <div class="card-actions" aria-label="Green Room retail scent links">
+                  <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                  <a class="button" href="https://www.target.com/p/-/A-91271792">Vetiver + Cedarwood</a>
+                  <a class="button" href="https://www.walmart.com/ip/7337520649">Bergamot + Sage</a>
+                </div>
+              </li>
+              <li><strong>YouTube:</strong> Guest Welcome, Morning Ritual, Ritual, Wind Down, Intention Setting.</li>
+              <li><strong>Hue:</strong> green-gold welcome, leaf/peach morning, emerald ritual, sage wind-down, moss night path.</li>
+              <li><strong>Workflow seed:</strong> heart-ease guest reset with breathable linens, gentle playlist, low fragrance option, and warm green scene.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#green-room">Room Page</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIHh5PBZp7FKjyOs4m6g2xB">Guest Welcome</a>
+              <a class="button" href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIth-ouDdO0649Me5hoKC5X">Wind Down</a>
+              <a class="button primary" href="../../GREEN_ROOM_MOOD.md">Mood File</a>
+              <a class="button" href="../../GREEN_ROOM_YOUTUBE_PLAYLISTS.md">Playlist Plan</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-sirena.svg" alt="La Sirena Loteria card for the Green Bathroom"><strong>Green Bathroom</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #166534, #fb923c, #fde68a);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Sirena</span><span class="chip">The Papaya</span><span class="chip">Bath ritual</span><span class="chip">Safety hold</span></div>
+            <p>A green tribal bath-house mood: warm, social, generous, cleansing, rhythmic, playful, and grown-up.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Sirena - water, mirror, bathing, vanity, and a little theatrical bathroom magic.</li>
+              <li><strong>Scent:</strong> Jara Papaya - lime leaf, neroli, basil, ginger flower, green tea, vetiver, soft cedar.
+                <div class="card-actions" aria-label="Green Bathroom retail scent links">
+                  <a class="button" href="https://www.walmart.com/ip/19898010830">Orchid + Neroli</a>
+                  <a class="button" href="https://www.target.com/p/-/A-75663196">Citrus + Basil</a>
+                  <a class="button" href="https://www.bathandbodyworks.com/p/sea-salt-and-driftwood-wallflowers-fragrance-refill-028026913.html">Sea Salt + Driftwood</a>
+                </div>
+              </li>
+              <li><strong>Sound:</strong> bossa nova, tropicalia, gentle Afro-Latin rhythm, hand percussion, water ambience.</li>
+              <li><strong>Hue:</strong> Papaya Welcome, Tribal Bath, Morning Rinse, Getting Ready, Steam Down, Night Path.</li>
+              <li><strong>Workflow seed:</strong> bath ritual mode after fixture audit: bathroom-safe warm light, low playlist, fan/steam check, towel restock.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#green-bathroom">Room Page</a>
+              <a class="button primary" href="../../GREEN_BATHROOM_MOOD.md">Mood File</a>
+            </div>
+          </article>
+
+          <article class="room-personality-card">
+            <div class="room-title">
+              <div class="room-title-lockup"><img class="loteria-thumb" src="../assets/loteria/la-rosa.svg" alt="La Rosa Loteria card for the Green Bathroom Closet"><strong>Green Bathroom Closet</strong></div>
+              <span class="swatch" style="--swatch: linear-gradient(135deg, #064e3b, #a7f3d0, #fdf2f8);"></span>
+            </div>
+            <div class="chip-row"><span class="chip">La Rosa</span><span class="chip">Bathroom support</span><span class="chip">Closet inventory</span><span class="chip">Needs audit</span></div>
+            <p>The support closet for The Papaya bathroom: towels, bath goods, cleaning boundaries, humidity checks, and guest-ready restock.</p>
+            <ul>
+              <li><strong>Loteria card:</strong> La Rosa - soft, pretty, guest-facing bath support without making the closet too loud.</li>
+              <li><strong>Personality:</strong> quiet spa support, leafy clean, organized, dry, and easy to reset.</li>
+              <li><strong>Inventory seed:</strong> towels, bath tissue, guest toiletries, cleaning supplies, fragrance-free options, and backstock limits.</li>
+              <li><strong>Workflow seed:</strong> bathroom closet restock with humidity/pest check and do-not-store rules.</li>
+            </ul>
+            <div class="hero-actions">
+              <a class="button primary" href="las-jaras-room-guide.html#green-bathroom-closet">Room Page</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="section-heading nested-heading" id="household-food">
+          <div>
+            <p class="eyebrow">Household food</p>
+            <h2>Food lives under Kitchen.</h2>
+          </div>
+          <p>Pantry inventory, grocery planning, expiration tracking, and pickup rhythm are treated as kitchen operations first, then workflow experiments second.</p>
+        </div>
+        <div class="food-grid">
+          <article class="food-card">
+            <span class="label">Inventory source</span>
+            <strong>Pantry + cold storage</strong>
+            <p><code>HOUSEHOLD_INVENTORY.md</code> tracks what is on hand, what is low, expiration dates, and the location names that match the kitchen outline. The editor page updates the CSV and Markdown inventory together when the local server is running.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="http://127.0.0.1:3155/">Inventory Editor</a>
+              <a class="button" href="../../household_inventory_current.html">Current View</a>
+              <a class="button" href="../../HOUSEHOLD_INVENTORY.md">Markdown Source</a>
+            </div>
+          </article>
+          <article class="food-card">
+            <span class="label">Pickup rhythm</span>
+            <strong>Tue Schertz / Sun Cibolo</strong>
+            <p>The grocery loop prepares lists and coupons around the standing H-E-B cadence, but buddy confirms before checkout or spending.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../HOUSE_AI_WORKFLOWS.md">Food Workflows</a>
+              <a class="button" href="../../HEB_PANTRY_COOKBOOK_SHOPPING_LIST.md">H-E-B List</a>
+              <a class="button" href="../../HEB_CIBOLO_PICKUP_LIST_2026-05-31.md">Sunday Cibolo List</a>
+            </div>
+          </article>
+          <article class="food-card">
+            <span class="label">Waste radar</span>
+            <strong>30-day canned goods warning</strong>
+            <p>Expiring food should turn into a meal idea, pickup adjustment, or clear warning before it becomes invisible pantry archaeology.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../PANTRY_COOKBOOK.md">Pantry Cookbook</a>
+              <a class="button" href="../../PANTRY_2_YEAR_STORAGE_PLAN.md">Storage Plan</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="section-heading nested-heading">
+          <div>
+            <p class="eyebrow">Recurring tasks</p>
+            <h2>Pickup planning has a weekly rhythm.</h2>
+          </div>
+          <p>These are planning tasks, not automatic purchases. The agent can prepare lists and clip coupons, but buddy confirms checkout.</p>
+        </div>
+        <div class="task-grid">
+          <article class="task-card">
+            <span class="label">Sunday</span>
+            <strong>Cibolo H-E-B pickup planning</strong>
+            <p>Generate the Sunday pantry and household-food list for H-E-B Cibolo, check inventory gaps, flag expiring food, and prepare a cart checklist.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../HEB_CIBOLO_PICKUP_LIST_2026-05-31.md">Open Today's List</a>
+              <a class="button" href="http://127.0.0.1:3155/">Check Inventory</a>
+            </div>
+          </article>
+          <article class="task-card">
+            <span class="label">Tuesday</span>
+            <strong>Schertz H-E-B follow-up</strong>
+            <p>Use Tuesday for missed items, fresh food, substitutions, and household goods after the Sunday Cibolo run is reviewed.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../HOUSE_AI_WORKFLOWS.md">Runbook</a>
+              <a class="button" href="../../HEB_PANTRY_COOKBOOK_SHOPPING_LIST.md">Pantry Base</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="lighting-smart-home">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Lighting + smart home</p>
+            <h2>The smart-home bridge lives here now.</h2>
+          </div>
+          <p>Lighting, feeder cameras, media devices, and house-mode automations live together here so each device has a clear owner, integration path, and fallback.</p>
+        </div>
+        <div class="food-grid">
+          <article class="food-card">
+            <span class="label">Planning source</span>
+            <strong>Hue + room lighting plan</strong>
+            <p><code>LAS_JARAS_SMART_HOME.md</code> tracks the bulb survey, room priorities, Hue bridge plan, open questions, and control-route decisions.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../LAS_JARAS_SMART_HOME.md">Smart Home Plan</a>
+              <a class="button" href="../../las-jaras-smart-home-intake.html">Lighting Intake</a>
+              <a class="button" href="../../LAS_JARAS_SKETCHUP_WORKFLOW.md">SketchUp Workflow</a>
+            </div>
+          </article>
+          <article class="food-card">
+            <span class="label">Local control</span>
+            <strong>Home Assistant bridge</strong>
+            <p>Home Assistant is running locally as the preferred durable bridge for lights, switches, sensors, and future house-mode automations.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="http://localhost:8123">Open Home Assistant</a>
+              <a class="button" href="../../home-assistant/README.md">Setup Notes</a>
+            </div>
+          </article>
+          <article class="food-card">
+            <span class="label">Current status</span>
+            <strong>Devices still need adding</strong>
+            <p>The API is set up, but controllable lights have not been discovered yet. Next step is adding device integrations, then naming rooms and scenes.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../tools/home-assistant">Tool Wrapper</a>
+              <a class="button" href="../../home-assistant/config/">HA Config Folder</a>
+            </div>
+          </article>
+          <article class="food-card" id="art-mode">
+            <span class="label">Samsung Frame</span>
+            <strong>Las Jaras Art Mode</strong>
+            <p>The current guest board is saved as a static Frame-ready artwork. It is the reliable TV path today; interactive zoom requires a true browser or display session, not Frame Art Mode.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../art-mode/las-jaras-art-mode.png">Open Baseline</a>
+              <a class="button" href="../../LAS_JARAS_ART_MODE_PROMPTS.md">Prompt Guide</a>
+              <a class="button" href="../../tools/samsung-frame-show-brief-art">Render Tool</a>
+            </div>
+          </article>
+          <article class="food-card" id="schertz-birds">
+            <span class="label">VicoHome</span>
+            <strong>Schertz Birds</strong>
+            <p>Schertz Birdz is connected through Home Assistant's unofficial VicoHome cloud bridge for event snapshots, battery, signal, IP, firmware, and motion/event sensors. Live viewing stays in VicoHome.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="../../LAS_JARAS_SMART_HOME.md">Feeder Plan</a>
+              <a class="button" href="../../LAS_JARAS_IOT_14_DAY_PROJECT_PLAN.md">IoT 14-Day Plan</a>
+              <a class="button" href="http://localhost:8123/config/integrations/integration/vicohome">HA VicoHome</a>
+              <a class="button" href="https://www.vicohome.io/download/">VicoHome App</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="workflows">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Workflow portfolio</p>
+            <h2>Las Jaras systems to test.</h2>
+          </div>
+          <p>Each workflow is scored for real-life usefulness, autonomy, effort, risk control, and delight. The point is to build what actually earns its keep.</p>
+        </div>
+        <div class="toolbar" aria-label="Workflow filters">
+          <label>
+            Search
+            <input id="search" type="search" placeholder="Try groceries, garden, morning">
+          </label>
+          <label>
+            Area
+            <select id="area-filter">
+              <option value="all">All areas</option>
+            </select>
+          </label>
+          <label>
+            Status
+            <select id="status-filter">
+              <option value="all">All statuses</option>
+              <option value="Active">Active</option>
+              <option value="Candidate">Candidate</option>
+              <option value="Backlog">Backlog</option>
+            </select>
+          </label>
+        </div>
+        <div class="workflow-grid" id="workflow-grid"></div>
+      </section>
+
+      <section class="section" aria-label="Rating rubric">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Scoring model</p>
+            <h2>How household wins get rated.</h2>
+          </div>
+          <p>Ten-point scores stay blunt on purpose. A workflow can be clever and still lose if it is noisy, fragile, risky, or too much work to maintain.</p>
+        </div>
+        <div class="rubric-grid">
+          <article class="rubric-item">
+            <h3>Impact</h3>
+            <p>Does it save time, prevent waste, lower stress, or make the house run better?</p>
+          </article>
+          <article class="rubric-item">
+            <h3>Autonomy</h3>
+            <p>Can AI do meaningful work before asking buddy for a decision?</p>
+          </article>
+          <article class="rubric-item">
+            <h3>Effort</h3>
+            <p>Is the setup and upkeep reasonable? Higher means easier to maintain.</p>
+          </article>
+          <article class="rubric-item">
+            <h3>Risk Control</h3>
+            <p>Are privacy, spending, and external-action boundaries crisp?</p>
+          </article>
+          <article class="rubric-item">
+            <h3>Delight</h3>
+            <p>Does it feel like a household superpower instead of admin homework?</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section layout" id="scoreboard">
+        <aside class="form-panel" id="add">
+          <p class="eyebrow">Add or update</p>
+          <h2>Rate a workflow.</h2>
+          <label>
+            Workflow name
+            <input id="name-input" type="text" placeholder="Laundry reset radar">
+          </label>
+          <label>
+            Area
+            <select id="area-input">
+              <option>Food</option>
+              <option>Garden</option>
+              <option>House Ops</option>
+              <option>Art Mode</option>
+              <option>Smart Home</option>
+              <option>Room Personality</option>
+              <option>Site Plan</option>
+              <option>Errands</option>
+              <option>Memory</option>
+              <option>Maintenance</option>
+            </select>
+          </label>
+          <label>
+            Status
+            <select id="status-input">
+              <option>Candidate</option>
+              <option>Active</option>
+              <option>Backlog</option>
+            </select>
+          </label>
+          <label>
+            Notes
+            <textarea id="notes-input" placeholder="What it watches, what it decides, and what it asks buddy to confirm."></textarea>
+          </label>
+          <div class="score-row">
+            <label>
+              Impact
+              <input id="impact-input" type="number" min="1" max="10" value="7">
+            </label>
+            <label>
+              Autonomy
+              <input id="autonomy-input" type="number" min="1" max="10" value="6">
+            </label>
+            <label>
+              Effort
+              <input id="effort-input" type="number" min="1" max="10" value="6">
+            </label>
+            <label>
+              Risk
+              <input id="risk-input" type="number" min="1" max="10" value="8">
+            </label>
+            <label>
+              Delight
+              <input id="delight-input" type="number" min="1" max="10" value="7">
+            </label>
+          </div>
+          <button class="button primary" id="save-button" type="button">Save Rating</button>
+          <button class="button ghost" id="reset-button" type="button">Restore Starter Data</button>
+        </aside>
+
+        <div>
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Scoreboard</p>
+              <h2>What deserves build time.</h2>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Workflow</th>
+                  <th scope="col">Area</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Overall</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="score-rows"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell">
+      <span>Static microsite with local browser scoring.</span>
+      <a href="household-ops-command-center-build-log.html">Build Log</a>
+      <a href="../index.html">Back to Labs</a>
+    </footer>
+
+    <script>
+      const starterWorkflows = [
+        {
+          name: "Pantry-To-Pickup Autopilot",
+          area: "Food",
+          status: "Active",
+          notes: "Scans inventory, pickup rhythm, pantry recipes, and H-E-B list files. Proposes Sunday Cibolo and Tuesday Schertz pickup plans without checking out.",
+          impact: 9,
+          autonomy: 8,
+          effort: 7,
+          risk: 9,
+          delight: 8,
+          tags: ["H-E-B", "inventory", "coupons"]
+        },
+        {
+          name: "Sunday Cibolo H-E-B Pickup Planning",
+          area: "Food",
+          status: "Active",
+          notes: "Recurring Sunday task for H-E-B Cibolo: generate the pickup proposal, check pantry gaps, flag expiring food, and prepare a cart checklist without checking out.",
+          impact: 9,
+          autonomy: 8,
+          effort: 8,
+          risk: 10,
+          delight: 8,
+          tags: ["recurring", "Cibolo", "H-E-B"]
+        },
+        {
+          name: "Expiration And Waste Radar",
+          area: "Food",
+          status: "Active",
+          notes: "Finds canned goods expiring within 30 days, expired items, low stock, and needed-soon goods. Turns warnings into meals or grocery actions.",
+          impact: 8,
+          autonomy: 8,
+          effort: 8,
+          risk: 10,
+          delight: 7,
+          tags: ["waste", "pantry", "heartbeat"]
+        },
+        {
+          name: "Garden Heat Manager",
+          area: "Garden",
+          status: "Candidate",
+          notes: "Combines Schertz weather, plant inventory, container status, and transplant age into watering guidance that only pings when useful.",
+          impact: 8,
+          autonomy: 7,
+          effort: 6,
+          risk: 8,
+          delight: 8,
+          tags: ["weather", "plants", "South Texas"]
+        },
+        {
+          name: "GIS Garden Site Model",
+          area: "Site Plan",
+          status: "Active",
+          notes: "Uses the city GIS parcel base, the roughly 75 ft x 137 ft angled lot, structures, deck, storage, true-north orientation, sun zones, and watering assumptions as the garden planning base. See the Garden Site Plan page.",
+          impact: 8,
+          autonomy: 6,
+          effort: 6,
+          risk: 9,
+          delight: 8,
+          tags: ["GIS", "parcel", "garden"]
+        },
+        {
+          name: "Interior Floor Plan Sprint",
+          area: "House Ops",
+          status: "Candidate",
+          notes: "Creates the practical Las Jaras room model in SketchUp Free from scratch using a phone walkthrough, typed room measurements, openings, outlet/switch/fixture positions, furniture footprints, and CAD area pieces. Public records give square footage, not room placement.",
+          impact: 9,
+          autonomy: 5,
+          effort: 5,
+          risk: 9,
+          delight: 8,
+          tags: ["SketchUp Free", "floor plan", "measurements", "1952"]
+        },
+        {
+          name: "Morning House Brief",
+          area: "House Ops",
+          status: "Candidate",
+          notes: "One concise morning dashboard for weather, errands, garden, groceries, urgent email, calendar timing, and decisions needed from buddy.",
+          impact: 9,
+          autonomy: 7,
+          effort: 6,
+          risk: 8,
+          delight: 9,
+          tags: ["briefing", "heartbeat", "decisions"]
+        },
+        {
+          name: "Las Jaras Art Mode",
+          area: "Art Mode",
+          status: "Active",
+          notes: "Static Samsung Frame artwork version of the Guest Brief, saved as a restoreable baseline. Useful for beautiful passive display; not interactive until the TV is in a live browser or external display mode.",
+          impact: 7,
+          autonomy: 7,
+          effort: 8,
+          risk: 9,
+          delight: 9,
+          tags: ["Samsung Frame", "Guest Brief", "static artwork", "browser needed"]
+        },
+        {
+          name: "Lighting Control Bridge",
+          area: "Smart Home",
+          status: "Active",
+          notes: "Uses Home Assistant as the durable bridge for Hue, switches, sensors, and room scenes. Current setup has API access; next work is adding controllable lights and naming rooms.",
+          impact: 8,
+          autonomy: 6,
+          effort: 6,
+          risk: 8,
+          delight: 9,
+          tags: ["lighting", "Home Assistant", "Hue"]
+        },
+        {
+          name: "VicoHome Bird Feeder Management",
+          area: "Smart Home",
+          status: "Active",
+          notes: "Schertz Birdz is connected through the unofficial VicoHome Home Assistant bridge for cloud-polled event snapshots, battery, signal, IP, firmware, online state, and motion/event sensors. Next work is the Schertz Birds dashboard, feeder-care alerts, and security-adjacent night activity logging.",
+          impact: 7,
+          autonomy: 4,
+          effort: 5,
+          risk: 7,
+          delight: 9,
+          tags: ["VicoHome", "bird feeders", "Home Assistant"]
+        },
+        {
+          name: "IoT 14-Day Setup Sprint",
+          area: "Smart Home",
+          status: "Active",
+          notes: "Two-week schedule for Schertz Birds, feeder-care alerts, security-adjacent rules, lighting inventory, Home Assistant dashboards, and affiliate application prep. External affiliate submissions require buddy approval before account creation or terms acceptance.",
+          impact: 8,
+          autonomy: 5,
+          effort: 7,
+          risk: 8,
+          delight: 8,
+          tags: ["IoT", "schedule", "affiliate prep", "lighting", "bird feeders"]
+        },
+        {
+          name: "Red Room Guest Arrival Mode",
+          area: "Room Personality",
+          status: "Candidate",
+          notes: "Turns the Red Room personality into a guest-ready automation: rose-gold Hue arrival, Red Room Guest Welcome playlist, TV/media state, charger check, towels, sleep kit, scent option, and bulb/safety confirmation.",
+          impact: 8,
+          autonomy: 6,
+          effort: 6,
+          risk: 8,
+          delight: 10,
+          tags: ["Red Room", "Hue", "YouTube", "guest"]
+        },
+        {
+          name: "Green Room Heart Ease Reset",
+          area: "Room Personality",
+          status: "Candidate",
+          notes: "Builds a restorative guest workflow for the Green Room: green-gold welcome scene, Heart Ease playlist, fragrance-light room check, linens, chargers, journaling/rest supplies, and warm-not-neon color rules.",
+          impact: 8,
+          autonomy: 6,
+          effort: 6,
+          risk: 8,
+          delight: 10,
+          tags: ["Green Room", "heart chakra", "Hue", "guest"]
+        },
+        {
+          name: "Yellow Room Golden Hour Routine",
+          area: "Room Personality",
+          status: "Candidate",
+          notes: "Creates owner-focused morning and getting-ready modes for the Yellow Room: Golden Welcome, Solar Morning, Confidence Glow, warm playlist seeds, clothing/jewelry reset, and ONN TV/media check.",
+          impact: 7,
+          autonomy: 5,
+          effort: 6,
+          risk: 8,
+          delight: 9,
+          tags: ["Yellow Room", "solar plexus", "morning", "getting ready"]
+        },
+        {
+          name: "Hallway Amber Passage",
+          area: "Room Personality",
+          status: "Candidate",
+          notes: "Turns the hallways into safe, warm transition paths: Amber Passage, Guest Path, Gallery Glow, Night Path, scent-light rules, and a separate hold list for the no-power hallway and fluorescent retrofit.",
+          impact: 8,
+          autonomy: 5,
+          effort: 5,
+          risk: 9,
+          delight: 8,
+          tags: ["hallways", "orange chakra", "night path", "safety"]
+        },
+        {
+          name: "Green Bathroom Papaya Bath Ritual",
+          area: "Room Personality",
+          status: "Backlog",
+          notes: "After bathroom fixture and damp-rating audit, build The Papaya bath workflow: safe warm light, low bathhouse playlist, fan/steam check, towel restock, and fragrance-free fallback.",
+          impact: 7,
+          autonomy: 4,
+          effort: 4,
+          risk: 10,
+          delight: 10,
+          tags: ["bathroom", "The Papaya", "damp rating", "ritual"]
+        },
+        {
+          name: "Laundry Lanai Reset",
+          area: "Room Personality",
+          status: "Candidate",
+          notes: "Turns the laundry room into a useful tiki-utility workflow: bright sorting/stain light, folding playlist, lint and hose checks, detergent inventory, towel routing, and clean-cotton scent rules.",
+          impact: 8,
+          autonomy: 7,
+          effort: 7,
+          risk: 9,
+          delight: 8,
+          tags: ["laundry", "Laundry Lanai", "inventory", "maintenance"]
+        },
+        {
+          name: "Errand Route And Timing Planner",
+          area: "Errands",
+          status: "Backlog",
+          notes: "Batches H-E-B, nursery, household goods, and other errands around weather, pickup windows, and location.",
+          impact: 7,
+          autonomy: 6,
+          effort: 6,
+          risk: 8,
+          delight: 7,
+          tags: ["routes", "pickup", "weather"]
+        },
+        {
+          name: "Home Ops Memory Loop",
+          area: "Memory",
+          status: "Candidate",
+          notes: "Turns buddy updates like bought, planted, out of, or remember this into file updates, daily memory, and durable preferences.",
+          impact: 8,
+          autonomy: 8,
+          effort: 7,
+          risk: 8,
+          delight: 8,
+          tags: ["memory", "files", "preferences"]
+        }
+      ];
+
+      const storageKey = "mct-household-ops-workflows-v2";
+
+      const $ = (selector) => document.querySelector(selector);
+      const clampScore = (value) => Math.min(10, Math.max(1, Number(value) || 1));
+      const escapeHtml = (value) => String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+      function loadWorkflows() {
+        const saved = localStorage.getItem(storageKey);
+        if (!saved) return starterWorkflows;
+        try {
+          const parsed = JSON.parse(saved);
+          if (!Array.isArray(parsed)) return starterWorkflows;
+          const savedNames = new Set(parsed.map((workflow) => workflow.name));
+          const missingStarters = starterWorkflows.filter((workflow) => !savedNames.has(workflow.name));
+          return [...parsed, ...missingStarters];
+        } catch {
+          return starterWorkflows;
+        }
+      }
+
+      function saveWorkflows(workflows) {
+        localStorage.setItem(storageKey, JSON.stringify(workflows));
+      }
+
+      function overall(workflow) {
+        const scores = [workflow.impact, workflow.autonomy, workflow.effort, workflow.risk, workflow.delight].map(clampScore);
+        return scores.reduce((sum, score) => sum + score, 0) / scores.length;
+      }
+
+      function priority(workflow) {
+        return ((clampScore(workflow.impact) * 1.35) + (clampScore(workflow.autonomy) * 1.1) + clampScore(workflow.risk) + clampScore(workflow.delight) + (clampScore(workflow.effort) * 0.85)) / 5.3;
+      }
+
+      function getFiltered(workflows) {
+        const search = $("#search").value.trim().toLowerCase();
+        const area = $("#area-filter").value;
+        const status = $("#status-filter").value;
+        return workflows.filter((workflow) => {
+          const text = [workflow.name, workflow.area, workflow.status, workflow.notes, ...(workflow.tags || [])].join(" ").toLowerCase();
+          return (!search || text.includes(search)) &&
+            (area === "all" || workflow.area === area) &&
+            (status === "all" || workflow.status === status);
+        });
+      }
+
+      function renderFilters(workflows) {
+        const current = $("#area-filter").value;
+        const areas = [...new Set(workflows.map((workflow) => workflow.area))].sort();
+        $("#area-filter").innerHTML = '<option value="all">All areas</option>' + areas.map((area) => `<option>${area}</option>`).join("");
+        $("#area-filter").value = areas.includes(current) ? current : "all";
+      }
+
+      function renderMetrics(workflows) {
+        const average = workflows.length ? workflows.reduce((sum, workflow) => sum + overall(workflow), 0) / workflows.length : 0;
+        const next = workflows.length ? Math.max(...workflows.map(priority)) : 0;
+        const active = workflows.filter((workflow) => workflow.status === "Active" || workflow.status === "Candidate").length;
+        $("#metric-count").textContent = workflows.length;
+        $("#metric-average").textContent = average.toFixed(1);
+        $("#metric-next").textContent = next.toFixed(1);
+        $("#metric-active").textContent = active;
+      }
+
+      function renderCards(workflows) {
+        const filtered = getFiltered(workflows).sort((a, b) => priority(b) - priority(a));
+        $("#workflow-grid").innerHTML = filtered.map((workflow) => {
+          const score = overall(workflow);
+          const tags = (workflow.tags || []).map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join("");
+          return `
+            <article class="workflow-card">
+              <div class="meta">${escapeHtml(workflow.area)} / ${escapeHtml(workflow.status)}</div>
+              <div>
+                <h3>${escapeHtml(workflow.name)}</h3>
+                <p>${escapeHtml(workflow.notes)}</p>
+              </div>
+              <div class="chip-row">${tags}</div>
+              <div>
+                <div class="score-row">
+                  <span class="score-chip">Overall ${score.toFixed(1)}</span>
+                  <span class="score-chip">Priority ${priority(workflow).toFixed(1)}</span>
+                </div>
+                <div class="rating-bar" aria-label="Overall score ${score.toFixed(1)} out of 10">
+                  <span style="width: ${score * 10}%"></span>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function renderRows(workflows) {
+        const rows = [...workflows].sort((a, b) => priority(b) - priority(a));
+        $("#score-rows").innerHTML = rows.map((workflow, index) => `
+          <tr>
+            <td>
+              <strong>${escapeHtml(workflow.name)}</strong><br>
+              <span class="micro">${escapeHtml(workflow.notes)}</span>
+            </td>
+            <td>${escapeHtml(workflow.area)}</td>
+            <td>${escapeHtml(workflow.status)}</td>
+            <td>${overall(workflow).toFixed(1)}</td>
+            <td class="priority">${priority(workflow).toFixed(1)}</td>
+            <td><button class="icon-button delete" type="button" data-delete="${index}" aria-label="Delete ${escapeHtml(workflow.name)}">X</button></td>
+          </tr>
+        `).join("");
+      }
+
+      function render() {
+        const workflows = loadWorkflows();
+        renderFilters(workflows);
+        renderMetrics(workflows);
+        renderCards(workflows);
+        renderRows(workflows);
+      }
+
+      function readForm() {
+        const tags = $("#notes-input").value
+          .split(/[,.;]/)
+          .map((part) => part.trim())
+          .filter(Boolean)
+          .slice(0, 3);
+
+        return {
+          name: $("#name-input").value.trim(),
+          area: $("#area-input").value,
+          status: $("#status-input").value,
+          notes: $("#notes-input").value.trim(),
+          impact: clampScore($("#impact-input").value),
+          autonomy: clampScore($("#autonomy-input").value),
+          effort: clampScore($("#effort-input").value),
+          risk: clampScore($("#risk-input").value),
+          delight: clampScore($("#delight-input").value),
+          tags
+        };
+      }
+
+      $("#save-button").addEventListener("click", () => {
+        const workflow = readForm();
+        if (!workflow.name || !workflow.notes) return;
+        const workflows = loadWorkflows();
+        const existing = workflows.findIndex((item) => item.name.toLowerCase() === workflow.name.toLowerCase());
+        if (existing >= 0) {
+          workflows[existing] = workflow;
+        } else {
+          workflows.push(workflow);
+        }
+        saveWorkflows(workflows);
+        $("#name-input").value = "";
+        $("#notes-input").value = "";
+        render();
+      });
+
+      $("#reset-button").addEventListener("click", () => {
+        saveWorkflows(starterWorkflows);
+        render();
+      });
+
+      $("#score-rows").addEventListener("click", (event) => {
+        const button = event.target.closest("[data-delete]");
+        if (!button) return;
+        const workflows = loadWorkflows().sort((a, b) => priority(b) - priority(a));
+        workflows.splice(Number(button.dataset.delete), 1);
+        saveWorkflows(workflows);
+        render();
+      });
+
+      $("#search").addEventListener("input", render);
+      $("#area-filter").addEventListener("change", render);
+      $("#status-filter").addEventListener("change", render);
+
+      render();
+    </script>
+  </body>
+</html>

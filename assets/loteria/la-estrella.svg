@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" role="img" aria-labelledby="title desc">
+  <title id="title">La Estrella Loteria card</title>
+  <desc id="desc">A stylized star card for the Las Jaras Green Room.</desc>
+  <rect width="160" height="220" rx="10" fill="#fff8e7"/>
+  <rect x="10" y="10" width="140" height="200" rx="6" fill="#fdfcf7" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="31" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#00327a">LA ESTRELLA</text>
+  <path d="M80 50l14 39 42 1-33 25 12 40-35-23-35 23 12-40-33-25 42-1z" fill="#facc15" stroke="#18201d" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="80" cy="113" r="13" fill="#14532d" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#5f6a65">GREEN ROOM</text>
+</svg>

@@ -1,0 +1,514 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las Jaras Red Room Layout Editor</title>
+  <style>
+    :root {
+      --bg: #fbf6f0;
+      --ink: #2e2524;
+      --muted: #746866;
+      --line: #d8c8bc;
+      --room: #fffaf5;
+      --accent: #9f2d39;
+      --teal: #24767b;
+      --green: #3f735d;
+      --gold: #b77c1d;
+      --scale: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      background: #fffaf6;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    button {
+      border: 1px solid #b99f90;
+      background: #ffffff;
+      color: var(--ink);
+      border-radius: 7px;
+      min-height: 36px;
+      padding: 0 12px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .stage-wrap {
+      overflow: auto;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .stage {
+      position: relative;
+      width: calc(136 * var(--scale));
+      height: calc(115 * var(--scale));
+      min-width: calc(136 * var(--scale));
+      min-height: calc(115 * var(--scale));
+      background:
+        linear-gradient(to right, rgba(216, 200, 188, .42) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(216, 200, 188, .42) 1px, transparent 1px),
+        var(--room);
+      background-size: calc(12 * var(--scale)) calc(12 * var(--scale));
+      border: 7px solid #372525;
+      box-shadow: 0 8px 20px rgba(55, 37, 37, .08);
+    }
+
+    .wall-label {
+      position: absolute;
+      color: #3a2e2d;
+      font-weight: 800;
+      font-size: 14px;
+      pointer-events: none;
+      background: rgba(255, 250, 246, .9);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(216, 200, 188, .8);
+      white-space: nowrap;
+    }
+
+    .wall-1 { left: 50%; bottom: -34px; transform: translateX(-50%); }
+    .wall-2 { right: -84px; top: 50%; transform: rotate(90deg) translateX(-50%); transform-origin: left center; }
+    .wall-3 { left: 50%; top: -34px; transform: translateX(-50%); }
+    .wall-4 { left: -88px; top: 50%; transform: rotate(-90deg) translateX(50%); transform-origin: left center; }
+
+    .thing {
+      position: absolute;
+      left: calc(var(--x) * var(--scale));
+      top: calc(var(--y) * var(--scale));
+      width: calc(var(--w) * var(--scale));
+      height: calc(var(--h) * var(--scale));
+      border: 2px solid #6f4b35;
+      background: rgba(120, 79, 51, .2);
+      color: #2e2524;
+      border-radius: 6px;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.1;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .thing:active {
+      cursor: grabbing;
+    }
+
+    .thing.selected {
+      outline: 3px solid #0b73aa;
+      outline-offset: 2px;
+      z-index: 8;
+    }
+
+    .fixed {
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .door, .window {
+      background: rgba(36, 118, 123, .16);
+      border-color: var(--teal);
+      color: #12474b;
+    }
+
+    .closet {
+      background: rgba(63, 115, 93, .16);
+      border-color: var(--green);
+      color: #254c3d;
+    }
+
+    .bed {
+      background: rgba(135, 24, 45, .22);
+      border-color: #87182d;
+    }
+
+    .light {
+      border-radius: 50%;
+      background: rgba(255, 209, 119, .6);
+      border-color: var(--gold);
+    }
+
+    .outlet {
+      background: #fff3aa;
+      border-color: #b48900;
+      font-size: 10px;
+    }
+
+    .side-table {
+      border-radius: 50%;
+    }
+
+    aside {
+      border: 1px solid var(--line);
+      background: #fffaf6;
+      border-radius: 8px;
+      padding: 14px;
+      align-self: start;
+      position: sticky;
+      top: 88px;
+    }
+
+    aside h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .panel {
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .selected-data {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .legend {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .legend li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 2px solid #6f4b35;
+      background: rgba(120, 79, 51, .2);
+      flex: 0 0 auto;
+    }
+
+    .swatch.red { background: rgba(135, 24, 45, .22); border-color: #87182d; }
+    .swatch.teal { background: rgba(36, 118, 123, .16); border-color: var(--teal); }
+    .swatch.green { background: rgba(63, 115, 93, .16); border-color: var(--green); }
+    .swatch.gold { background: rgba(255, 209, 119, .6); border-color: var(--gold); }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 10px;
+      font: 12px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      color: #332927;
+      background: #fff;
+    }
+
+    @media (max-width: 980px) {
+      header {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Red Room Layout Editor</h1>
+      <div class="subtitle">Drag furniture and objects into place. Shell items are locked. Scale: 6 px = 1 inch.</div>
+    </div>
+    <div class="actions">
+      <button id="reset">Reset</button>
+      <button id="copy">Copy JSON</button>
+      <button id="download">Download JSON</button>
+      <button id="save" class="primary">Save</button>
+    </div>
+  </header>
+
+  <main>
+    <div class="stage-wrap" aria-label="Editable Red Room layout">
+      <div id="stage" class="stage">
+        <div class="wall-label wall-1">Wall 1: door + closet, 136"</div>
+        <div class="wall-label wall-2">Wall 2: bed wall, 115"</div>
+        <div class="wall-label wall-3">Wall 3: window, 136"</div>
+        <div class="wall-label wall-4">Wall 4: TV + apothecary, 115"</div>
+      </div>
+    </div>
+
+    <aside>
+      <div class="panel">
+        <h2>Selected</h2>
+        <div id="selectedData" class="selected-data">Click an object to see its position.</div>
+        <button id="rotate">Rotate Selected</button>
+        <ul class="legend">
+          <li><span class="swatch red"></span>Bed pieces</li>
+          <li><span class="swatch"></span>Furniture / storage</li>
+          <li><span class="swatch teal"></span>Door / window</li>
+          <li><span class="swatch green"></span>Closet</li>
+          <li><span class="swatch gold"></span>Lighting</li>
+        </ul>
+        <div>
+          <strong>Room:</strong> 136" x 115"<br>
+          <strong>Known:</strong> Wall 1 door + closet, Wall 2 bed, Wall 3 window, Wall 4 TV + apothecary.
+        </div>
+        <textarea id="exportBox" readonly aria-label="Layout JSON export"></textarea>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const STORAGE_KEY = 'las-jaras-red-room-layout-v6';
+    const ROOM = { w: 136, h: 115 };
+    const defaultItems = [
+      { id: 'door', label: 'Door 32x80', x: 3, y: 109, w: 32, h: 6, kind: 'door fixed', locked: true, note: 'Wall 1, starts 3 in from wall start, swings inward' },
+      { id: 'closet', label: 'Closet doors 48"', x: 72, y: 106, w: 48, h: 9, kind: 'closet fixed', locked: true, note: 'Wall 1, starts 72 in along wall; two 24 in doors; shelves: one 60 in high, one 40 in, two 20 in; depth TBD' },
+      { id: 'window', label: 'Window 74x74', x: 40, y: 0, w: 74, h: 6, kind: 'window fixed', locked: true, note: 'Wall 3, sill 8 in off floor' },
+      { id: 'bed', label: 'Bed / mattress 76x70', x: 60, y: 22.5, w: 70, h: 76, kind: 'bed', note: 'Saved placement from buddy; mattress 76 x 70 x 24h' },
+      { id: 'headboard', label: 'Headboard 74x3', x: 129, y: 23, w: 3, h: 74, kind: 'bed', note: 'Red velvet, 58 in high' },
+      { id: 'footboard', label: 'Footboard 75x12', x: 49, y: 23, w: 12, h: 75, kind: 'bed', note: 'Red velvet, 22.5 in high' },
+      { id: 'tv', label: 'TV only', x: 0, y: 35.389322916666664, w: 28, h: 17, kind: 'furniture', note: 'Wall 4; actual TV dimensions 28 in W x 17 in H x 2 inches deep, not 2 ft; no separate TV stand' },
+      { id: 'apothecary', label: 'Apothecary drawers', x: 0, y: 38.068359375, w: 16, h: 34, kind: 'furniture', note: '34 in L x 16 in W x 29 in H; 6 drawers; saved placement from buddy' },
+      { id: 'chair', label: 'Chair', x: 8.699869791666671, y: 0.8756510416666714, w: 18, h: 18, kind: 'furniture', note: 'Saved placement from buddy; footprint still approximate' },
+      { id: 'table1', label: 'Round side table 1', x: 120.36263020833334, y: 8.10091145833333, w: 12, h: 12, kind: 'furniture side-table', note: '12 in diameter x 28 in H; Grats Decor Artisan Square Peg accent table' },
+      { id: 'table2', label: 'Round side table 2', x: 120.75455729166666, y: 99.63671875, w: 12, h: 12, kind: 'furniture side-table', note: '12 in diameter x 28 in H; Grats Decor Artisan Square Peg accent table' },
+      { id: 'lamp', label: 'Side lamp', x: 124.75260416666666, y: 9.880208333333337, w: 8, h: 8, kind: 'light', note: 'Socket/base TBD; saved placement from buddy' },
+      { id: 'fan', label: 'Ceiling fan', x: 64, y: 51, w: 12, h: 12, kind: 'light', note: '3 bulbs, location TBD' },
+      { id: 'outlet1', label: '2-prong', x: 48, y: 110, w: 5, h: 5, kind: 'outlet', note: 'Wall 1 offset TBD' },
+      { id: 'outlet3', label: '2-prong', x: 129.00716145833331, y: 56.59895833333333, w: 5, h: 5, kind: 'outlet', note: 'Saved outlet marker; wall label needs confirmation' },
+      { id: 'outlet4', label: '3-prong', x: 1.1139322916666714, y: 10.7109375, w: 5, h: 5, kind: 'outlet', note: 'Saved outlet marker; wall label needs confirmation' }
+    ];
+
+    const stage = document.getElementById('stage');
+    const selectedData = document.getElementById('selectedData');
+    const exportBox = document.getElementById('exportBox');
+    const scale = () => Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--scale'));
+    let items = loadItems();
+    let selectedId = null;
+    let drag = null;
+
+    function loadItems() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : structuredClone(defaultItems);
+      } catch {
+        return structuredClone(defaultItems);
+      }
+    }
+
+    function saveItems() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(items, null, 2));
+      renderExport();
+    }
+
+    function clamp(item) {
+      item.x = Math.max(0, Math.min(ROOM.w - item.w, item.x));
+      item.y = Math.max(0, Math.min(ROOM.h - item.h, item.y));
+    }
+
+    function render() {
+      stage.querySelectorAll('.thing').forEach(el => el.remove());
+      for (const item of items) {
+        clamp(item);
+        const el = document.createElement('div');
+        el.className = `thing ${item.kind || ''} ${item.locked ? 'fixed' : ''}`;
+        if (item.id === selectedId) el.classList.add('selected');
+        el.dataset.id = item.id;
+        el.style.setProperty('--x', item.x);
+        el.style.setProperty('--y', item.y);
+        el.style.setProperty('--w', item.w);
+        el.style.setProperty('--h', item.h);
+        el.textContent = item.label;
+        if (!item.locked) {
+          el.addEventListener('pointerdown', startDrag);
+        }
+        el.addEventListener('click', () => select(item.id));
+        stage.appendChild(el);
+      }
+      updateSelected();
+      renderExport();
+    }
+
+    function select(id) {
+      selectedId = id;
+      render();
+    }
+
+    function updateSelected() {
+      const item = items.find(entry => entry.id === selectedId);
+      if (!item) {
+        selectedData.textContent = 'Click an object to see its position.';
+        return;
+      }
+      selectedData.innerHTML = `<strong>${item.label}</strong><br>` +
+        `x: ${round(item.x)}", y: ${round(item.y)}"<br>` +
+        `size: ${round(item.w)}" x ${round(item.h)}"<br>` +
+        `${item.note || ''}`;
+    }
+
+    function renderExport() {
+      exportBox.value = JSON.stringify({
+        room: 'Las Jaras Red Room',
+        room_inches: ROOM,
+        updated: new Date().toISOString(),
+        items
+      }, null, 2);
+    }
+
+    function startDrag(event) {
+      const id = event.currentTarget.dataset.id;
+      const item = items.find(entry => entry.id === id);
+      if (!item || item.locked) return;
+      selectedId = id;
+      const rect = stage.getBoundingClientRect();
+      drag = {
+        id,
+        dx: (event.clientX - rect.left) / scale() - item.x,
+        dy: (event.clientY - rect.top) / scale() - item.y
+      };
+      event.currentTarget.setPointerCapture(event.pointerId);
+      render();
+    }
+
+    stage.addEventListener('pointermove', event => {
+      if (!drag) return;
+      const item = items.find(entry => entry.id === drag.id);
+      const rect = stage.getBoundingClientRect();
+      item.x = (event.clientX - rect.left) / scale() - drag.dx;
+      item.y = (event.clientY - rect.top) / scale() - drag.dy;
+      clamp(item);
+      const el = stage.querySelector(`[data-id="${item.id}"]`);
+      el.style.setProperty('--x', item.x);
+      el.style.setProperty('--y', item.y);
+      updateSelected();
+      renderExport();
+    });
+
+    stage.addEventListener('pointerup', () => {
+      if (!drag) return;
+      drag = null;
+      saveItems();
+    });
+
+    document.getElementById('save').addEventListener('click', saveItems);
+
+    document.getElementById('reset').addEventListener('click', () => {
+      if (!confirm('Reset the Red Room layout editor to its starter positions?')) return;
+      items = structuredClone(defaultItems);
+      selectedId = null;
+      saveItems();
+      render();
+    });
+
+    document.getElementById('rotate').addEventListener('click', () => {
+      const item = items.find(entry => entry.id === selectedId);
+      if (!item || item.locked) return;
+      const centerX = item.x + item.w / 2;
+      const centerY = item.y + item.h / 2;
+      [item.w, item.h] = [item.h, item.w];
+      item.x = centerX - item.w / 2;
+      item.y = centerY - item.h / 2;
+      clamp(item);
+      saveItems();
+      render();
+    });
+
+    document.getElementById('copy').addEventListener('click', async () => {
+      renderExport();
+      await navigator.clipboard.writeText(exportBox.value);
+    });
+
+    document.getElementById('download').addEventListener('click', () => {
+      renderExport();
+      const blob = new Blob([exportBox.value], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'red-room-layout.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    function round(value) {
+      return Math.round(value * 10) / 10;
+    }
+
+    render();
+  </script>
+</body>
+</html>

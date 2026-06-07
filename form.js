@@ -53,4 +53,8 @@ function renderPreview() {
 }
 
 form.addEventListener("input", renderPreview);
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  renderPreview();
+});
 renderPreview();

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" role="img" aria-labelledby="title desc">
+  <title id="title">La Escalera Loteria card</title>
+  <desc id="desc">A stylized ladder card for Las Jaras Hallway 3.</desc>
+  <rect width="160" height="220" rx="10" fill="#fff8e7"/>
+  <rect x="10" y="10" width="140" height="200" rx="6" fill="#fdfcf7" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="31" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#00327a">LA ESCALERA</text>
+  <path d="M56 174L89 51M103 174L70 51" stroke="#92400e" stroke-width="8" stroke-linecap="round"/>
+  <g stroke="#18201d" stroke-width="5" stroke-linecap="round">
+    <path d="M73 76h18M67 100h30M61 124h42M55 148h54"/>
+  </g>
+  <circle cx="111" cy="68" r="10" fill="#facc15" stroke="#18201d" stroke-width="4"/>
+  <text x="80" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#5f6a65">HALLWAY 3</text>
+</svg>

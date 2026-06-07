@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Can Hue and HOWDY Fix Las Jaras Lighting? | Most Certainly Try Labs</title>
+  <meta name="description" content="A Las Jaras build log testing whether Hue smart bulbs, the Hue Sync TV app, and personal agent HOWDY PARTNER can improve lighting in a 1952 house without rewiring everything.">
+  <meta name="robots" content="noindex, nofollow">
+  <script>document.documentElement.classList.add("lj-locked");</script>
+  <link rel="stylesheet" href="../assets/las-jaras-gate.css">
+  <script src="../assets/las-jaras-gate.js" defer></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5d6676;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --line: #d8ddea;
+      --cobalt: #0047ab;
+      --cobalt-dark: #002f73;
+      --cobalt-soft: #edf4ff;
+      --amber: #b87922;
+      --coral: #b75a42;
+      --green: #2f7557;
+      --shadow: 0 18px 44px rgba(23, 32, 51, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(0, 71, 171, .08), transparent 34%, transparent 66%, rgba(184, 121, 34, .09)),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-underline-offset: 4px; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px clamp(16px, 4vw, 52px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, .92);
+      backdrop-filter: blur(12px);
+    }
+    .brand, nav { display: flex; align-items: center; gap: 10px; }
+    .brand { color: inherit; font-weight: 900; text-decoration: none; }
+    .brand img { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 8px; }
+    nav { flex-wrap: wrap; justify-content: flex-end; }
+    nav a, .button {
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: inherit;
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+    .shell { width: min(1220px, calc(100% - 34px)); margin: 0 auto; }
+    .hero { padding: 54px 0 34px; border-bottom: 1px solid var(--line); }
+    .eyebrow, .label, footer { color: var(--muted); font-size: .82rem; font-weight: 900; letter-spacing: 0; text-transform: uppercase; }
+    h1, h2, h3, p, td, th { overflow-wrap: anywhere; }
+    h1 { max-width: 980px; margin: 0; font-size: clamp(2.65rem, 6.5vw, 6rem); line-height: .94; letter-spacing: 0; color: var(--cobalt-dark); }
+    h2 { margin: 0; font-size: clamp(1.65rem, 3vw, 2.7rem); line-height: 1.05; letter-spacing: 0; color: var(--cobalt-dark); }
+    h3 { margin: 0 0 8px; }
+    p { margin-top: 0; }
+    .lede { max-width: 820px; margin: 18px 0 0; color: var(--muted); font-size: clamp(1.03rem, 1.6vw, 1.24rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 24px 0 0; }
+    .stat, .panel, .note, .table-card { border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, .9); box-shadow: var(--shadow); }
+    .stat { padding: 16px; }
+    .stat b { display: block; color: var(--cobalt); font-size: clamp(1.45rem, 3vw, 2.4rem); line-height: 1; }
+    .stat span { display: block; margin-top: 7px; color: var(--muted); font-size: .86rem; }
+    .section { padding: 34px 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .panel, .note { padding: 18px; }
+    .panel p:last-child, .note p:last-child { margin-bottom: 0; }
+    .note-list { display: grid; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .note-list li { padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .quote { margin: 0; padding: 18px; border-left: 6px solid var(--cobalt); background: var(--cobalt-soft); font-size: 1.12rem; font-weight: 800; }
+    .table-card { overflow: hidden; margin-top: 18px; background: #fff; }
+    .table-intro { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 18px; border-bottom: 1px solid var(--line); }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 1180px; border-collapse: collapse; font-size: .86rem; }
+    th, td { padding: 10px 9px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+    th { position: sticky; top: 69px; z-index: 5; background: var(--cobalt-dark); color: #fff; font-size: .74rem; text-transform: uppercase; letter-spacing: 0; }
+    tr:nth-child(even) td { background: #fbfcff; }
+    .num { color: var(--cobalt); font-weight: 900; text-align: right; }
+    code { padding: 1px 5px; border-radius: 5px; background: var(--cobalt-soft); color: var(--cobalt-dark); font-weight: 800; }
+    .status-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .prep-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 16px; align-items: start; }
+    .mood-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+    .mood-card { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+    .mood-card ul { margin: 10px 0 0; padding-left: 18px; }
+    .mood-card li + li { margin-top: 6px; }
+    footer { padding: 34px 0 54px; border-top: 1px solid var(--line); }
+    @media (max-width: 860px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .stats, .grid, .status-strip, .table-intro, .prep-grid, .mood-grid { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.3rem, 13vw, 4.4rem); }
+      th { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><img src="../assets/howdy-partner-logo.png" alt="" aria-hidden="true"> Most Certainly Try Labs</a>
+    <nav aria-label="Project navigation">
+      <a href="../index.html">All projects</a>
+      <a href="household-ops-command-center.html">Ops Command Center</a>
+      <a href="#build-plan">Build plan</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Las Jaras Build Log · Hue Lighting Experiment</p>
+      <h1>Can Hue and HOWDY fix our lighting without rewiring everything?</h1>
+      <p class="lede">Las Jaras was built in 1952, which means charming old-house texture and lighting problems that feel very 1952: questionable switches, ceiling fans with pull strings instead of remotes, and a real dependence on floor and table lamps.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#build-plan">Read the 80-step build plan</a>
+        <a class="button" href="../docs/las-jaras-hue-lighting-build-log.md">Source notes</a>
+      </div>
+      <div class="stats" aria-label="Project facts">
+        <div class="stat"><b>1952</b><span>Las Jaras build year</span></div>
+        <div class="stat"><b>16</b><span>Hue bulbs in the first order</span></div>
+        <div class="stat"><b>55 in</b><span>Hue Play gradient strip for the Samsung Frame TV</span></div>
+        <div class="stat"><b>5-6.5 hr</b><span>Original AI estimate to test against reality</span></div>
+      </div>
+    </section>
+
+    <section class="section grid" id="premise">
+      <article class="panel">
+        <p class="eyebrow">Premise</p>
+        <h2>Can smart bulbs beat old-house lighting chaos?</h2>
+        <p>Can we use Hue and our personal agent HOWDY PARTNER to fix the house without an electrician rewiring everything? The bet is not that smart bulbs solve every electrical problem. The bet is that a careful first phase can make daily lighting much better while we learn which fixtures actually need professional work.</p>
+        <p>HOWDY's role is to keep the project sequenced, name every device cleanly, build usable scenes, document skipped fixtures, and time the real install against the estimate.</p>
+      </article>
+      <aside class="note">
+        <p class="eyebrow">First Pass</p>
+        <ul class="note-list">
+          <li><strong>Install order:</strong> Living Room, Red Room, Blue Bathroom, Kitchen.</li>
+          <li><strong>Do not touch:</strong> the 3 kitchen chandelier lights in this starting pass.</li>
+          <li><strong>Sync path:</strong> Hue Sync TV app on Samsung at the planned $2.99/month subscription.</li>
+          <li><strong>Reality check:</strong> start the timer and record actual duration for every task.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section prep-grid" id="prep-work">
+      <article class="panel">
+        <p class="eyebrow">Prep Work Before Starting</p>
+        <h2>The install was designed before the bulbs came out.</h2>
+        <ul class="note-list">
+          <li><strong>Mapped all lights in the house:</strong> room by room, including lamps, ceiling fans, fixture candidates, specialty-risk lights, and places where old switches or fixture uncertainty could make Hue a bad first move.</li>
+          <li><strong>Created a mood/personality for each room:</strong> each room got a role, a Loteria/personality direction where available, and preselected Hue settings for arrival, daily use, task light, winding down, night paths, and room-specific rituals.</li>
+        </ul>
+      </article>
+      <aside class="note">
+        <p class="eyebrow">Why This Matters</p>
+        <p>We are not just replacing bulbs. We are testing whether an old house can feel more intentional by matching smart-light placement to how each room is supposed to behave.</p>
+        <p>The first install batch uses the already-mapped room order: Living Room, Red Room, Blue Bathroom, Kitchen, with the kitchen chandelier lights excluded until a separate fixture review.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="mood-lighting">
+      <p class="eyebrow">Mood / Personality Lighting</p>
+      <h2>Preselected Hue direction for the rooms we are installing</h2>
+      <div class="mood-grid" aria-label="Mood and personality lighting for first Hue install rooms">
+        <article class="mood-card">
+          <h3>Living Room · El Sol</h3>
+          <p>The warm center of the house: guest arrival, movie nights, conversation, dining, TV/audio, and character lighting around the Reese sectional and dining area.</p>
+          <ul>
+            <li><strong>Guest Arrival:</strong> warm welcome light that makes the room feel open, social, and flattering.</li>
+            <li><strong>Movie Night:</strong> low warm lamps plus the Hue Play gradient as TV/media glow, with glare kept off the screen.</li>
+            <li><strong>Conversation:</strong> soft amber and cream light for sitting, talking, and lingering without overhead harshness.</li>
+            <li><strong>Dining / Lingering Dinner:</strong> warm table-adjacent glow, not a full-room blast.</li>
+            <li><strong>Cleaning / Reset:</strong> bright warm white so the room can actually be cleaned and reset.</li>
+          </ul>
+        </article>
+        <article class="mood-card">
+          <h3>Red Room · El Corazon</h3>
+          <p>Grounded, protective, sensual-but-guest-appropriate, hotel-inflected, richly textured, and collected.</p>
+          <ul>
+            <li><strong>Guest Arrival:</strong> rose gold, warm blush, candle amber, and a very soft root-red accent.</li>
+            <li><strong>Ruby Grounding:</strong> deeper ruby and clay-amber tones for a rooted, calm guest room mood.</li>
+            <li><strong>Rose Reading:</strong> soft rose and warm amber bright enough to read without turning the room white.</li>
+            <li><strong>Ember Wind Down:</strong> ember red, smoked amber, dim rose, and near-candle orange.</li>
+            <li><strong>Night Path:</strong> dim red or amber low enough for sleep but safe enough to move through the room.</li>
+            <li><strong>Cleaning:</strong> practical warm white at high brightness.</li>
+          </ul>
+        </article>
+        <article class="mood-card">
+          <h3>Blue Bathroom · Cool Spa Reset</h3>
+          <p>A cool, clean bathroom mood: blue-white clarity for getting ready, soft spa tones for decompression, and very low night light where the fixture is safe.</p>
+          <ul>
+            <li><strong>Blue Bathroom Bright:</strong> clean warm-white/soft daylight balance for getting ready without going harsh.</li>
+            <li><strong>Blue Bathroom Spa:</strong> soft aqua, warm white, and a little muted blue for a calm reset.</li>
+            <li><strong>Morning Rinse:</strong> pale sky blue, clean white, and a small warm note so it still feels human.</li>
+            <li><strong>Getting Ready:</strong> flattering warm white with a tiny cool-blue edge for clarity.</li>
+            <li><strong>Steam Down:</strong> dim aqua, muted blue, and warm cream for evening decompression.</li>
+            <li><strong>Night Path:</strong> very low blue or warm-white, around 5-8% where safe.</li>
+            <li><strong>Cleaning:</strong> warm white at full practical brightness.</li>
+          </ul>
+        </article>
+        <article class="mood-card">
+          <h3>Kitchen · El Cazo</h3>
+          <p>The cobalt working room: coffee, prep, hosting, groceries, ordinary household reset, and bright practical light without turning the kitchen into chaos.</p>
+          <ul>
+            <li><strong>Kitchen Prep:</strong> bright warm task light with clean counters and enough visibility for cooking.</li>
+            <li><strong>Warm Daily Use:</strong> warm white with soft lemon and cobalt-friendly accents for everyday movement.</li>
+            <li><strong>Hosting Glow:</strong> candle amber and warm highlights for drinks, food, and people lingering nearby.</li>
+            <li><strong>Kitchen Night:</strong> very low amber/warm light for passing through without waking up the whole house.</li>
+            <li><strong>Cleaning / Reset:</strong> bright warm white for dishes, counters, pantry intake, and end-of-day reset.</li>
+            <li><strong>First-pass rule:</strong> exclude the 3 chandelier lights until their fixture type, heat, and bulb compatibility are reviewed.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <blockquote class="quote">Our AI thinks the first phase will take 5-6.5 hours. Let's see how long it really takes.</blockquote>
+      <div class="status-strip">
+        <div class="note"><p class="eyebrow">Gear</p><p>Hue Bridge Pro, 16 bulbs, and a Hue Play 55-inch gradient lightstrip.</p></div>
+        <div class="note"><p class="eyebrow">Human Help</p><p>Physical install, ladders, passwords, payment approval, bridge button presses, and visual scene judgment.</p></div>
+        <div class="note"><p class="eyebrow">HOWDY Help</p><p>Sequencing, naming, room assignment, scene design, Home Assistant handoff, skip notes, and timing log.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="build-plan">
+      <p class="eyebrow">Embedded Build Plan</p>
+      <h2>80-step install chart</h2>
+      <p class="lede">This is the working plan for the first lighting pass. The actual-time column is intentionally blank so the install can become a real build log instead of a tidy after-the-fact story.</p>
+      <div class="table-card">
+        <div class="table-intro">
+          <div>
+            <h3>Las Jaras Hue Build Plan</h3>
+            <p>Starting order: Living Room, Red Room, Blue Bathroom, Kitchen. Kitchen chandelier lights are excluded.</p>
+          </div>
+          <a class="button" href="../docs/las-jaras-hue-lighting-build-log.md">Open source note</a>
+        </div>
+        <div class="table-scroll" role="region" aria-label="Hue build plan table" tabindex="0">
+          <table class="build-table"><thead><tr><th>#</th><th>Phase</th><th>Task</th><th>Owner</th><th>Estimate</th><th>Actual</th><th>Dependencies</th><th>Done When</th><th>Notes</th></tr></thead><tbody>
+<tr><td class="num">1</td><td>Prep</td><td>Clear a staging surface near the router and place all Hue boxes there.</td><td>Human</td><td>5 min</td><td>TBD</td><td>Hue order present</td><td>All boxes are visible in one place.</td><td>Keep packaging until install is complete.</td></tr>
+<tr><td class="num">2</td><td>Prep</td><td>Photograph box fronts, model labels, QR codes, serial labels, and included accessories.</td><td>Human + HOWDY</td><td>8 min</td><td>TBD</td><td>Step 1</td><td>Photos are available for reference.</td><td>Do not post passwords/account info.</td></tr>
+<tr><td class="num">3</td><td>Prep</td><td>Confirm exact inventory: Bridge Pro, 16 bulbs, 55-inch gradient strip, power supplies, brackets, controller, accessories.</td><td>HOWDY</td><td>5 min</td><td>TBD</td><td>Step 2</td><td>Inventory list is confirmed.</td><td>If bulb type is not E26/A19, pause bulb allocation.</td></tr>
+<tr><td class="num">4</td><td>Prep</td><td>Label a holding area for removed old bulbs.</td><td>Human</td><td>3 min</td><td>TBD</td><td>Step 1</td><td>Box/bag says <code>Old bulbs - room TBD</code>.</td><td>Separate working old bulbs from dead bulbs.</td></tr>
+<tr><td class="num">5</td><td>Prep</td><td>Confirm starting install order: Living Room, Red Room, Blue Bathroom, Kitchen.</td><td>HOWDY + Human</td><td>3 min</td><td>TBD</td><td>Step 3</td><td>Room order is confirmed.</td><td>This plan intentionally starts outside Red Room.</td></tr>
+<tr><td class="num">6</td><td>Prep</td><td>Mark the 3 kitchen chandelier lights as excluded.</td><td>HOWDY</td><td>2 min</td><td>TBD</td><td>Step 5</td><td>Skip note is written before install starts.</td><td>No chandelier bulb work in first pass.</td></tr>
+<tr><td class="num">7</td><td>Network</td><td>Choose Bridge Pro location near router with airflow and stable power.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 3</td><td>Bridge location chosen.</td><td>Prefer router/Ethernet area over hidden cabinet.</td></tr>
+<tr><td class="num">8</td><td>Network</td><td>Plug Bridge Pro into router via Ethernet.</td><td>Human</td><td>3 min</td><td>TBD</td><td>Step 7</td><td>Ethernet connected.</td><td>Use open LAN port.</td></tr>
+<tr><td class="num">9</td><td>Network</td><td>Plug Bridge Pro into power.</td><td>Human</td><td>2 min</td><td>TBD</td><td>Step 8</td><td>Bridge powers on.</td><td>Wait for status lights.</td></tr>
+<tr><td class="num">10</td><td>Network</td><td>Wait for Bridge Pro status lights and check it is discoverable.</td><td>HOWDY</td><td>5 min</td><td>TBD</td><td>Step 9</td><td>Hue app can find bridge or app is ready to search.</td><td>If not found, check Ethernet/router.</td></tr>
+<tr><td class="num">11</td><td>Hue app</td><td>Open Philips Hue app.</td><td>Human + HOWDY</td><td>2 min</td><td>TBD</td><td>Step 10</td><td>Hue app is open.</td><td>Human unlocks phone if needed.</td></tr>
+<tr><td class="num">12</td><td>Hue app</td><td>Add/select home <code>Las Jaras</code>.</td><td>HOWDY</td><td>3 min</td><td>TBD</td><td>Step 11</td><td>Hue home exists.</td><td>Use consistent house name.</td></tr>
+<tr><td class="num">13</td><td>Hue app</td><td>Add Bridge Pro to Hue app.</td><td>HOWDY + Human</td><td>8 min</td><td>TBD</td><td>Step 12</td><td>Bridge appears in app.</td><td>Human presses bridge button if prompted.</td></tr>
+<tr><td class="num">14</td><td>Hue app</td><td>Sign in or create Hue account if required.</td><td>Human</td><td>5-10 min</td><td>TBD</td><td>Step 13</td><td>App is past account screen.</td><td>Do not share password in chat.</td></tr>
+<tr><td class="num">15</td><td>Living Room TV</td><td>Confirm Samsung TV identity and position.</td><td>HOWDY + Human</td><td>3 min</td><td>TBD</td><td>Step 14</td><td>TV is confirmed as Living Room 55-inch Frame.</td><td>House record model: <code>QN55LS03DAFXZA</code>.</td></tr>
+<tr><td class="num">16</td><td>Living Room TV</td><td>Power off TV and make the back accessible.</td><td>Human</td><td>5 min</td><td>TBD</td><td>Step 15</td><td>Back of TV is reachable.</td><td>Do not strain mount/cables.</td></tr>
+<tr><td class="num">17</td><td>Living Room TV</td><td>Unbox Hue Play gradient strip, brackets, controller, and power supply.</td><td>Human</td><td>5 min</td><td>TBD</td><td>Step 16</td><td>Parts are visible and counted.</td><td>Keep adhesive backing on for dry fit.</td></tr>
+<tr><td class="num">18</td><td>Living Room TV</td><td>Dry-fit 55-inch strip on back of TV.</td><td>Human + HOWDY</td><td>8 min</td><td>TBD</td><td>Step 17</td><td>Orientation and cable path are clear.</td><td>Usually top and sides, not bottom.</td></tr>
+<tr><td class="num">19</td><td>Living Room TV</td><td>Clean mounting path and let dry.</td><td>Human</td><td>5 min</td><td>TBD</td><td>Step 18</td><td>Surface is clean/dry.</td><td>Use electronics-safe method only.</td></tr>
+<tr><td class="num">20</td><td>Living Room TV</td><td>Attach included brackets/clips.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 19</td><td>Brackets are mounted evenly.</td><td>Measure twice, stick once.</td></tr>
+<tr><td class="num">21</td><td>Living Room TV</td><td>Mount gradient strip into brackets.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 20</td><td>Strip is secure and not twisted.</td><td>Avoid tight bends.</td></tr>
+<tr><td class="num">22</td><td>Living Room TV</td><td>Route cable, connect controller and power supply.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 21</td><td>Cable is safe and power connected.</td><td>No pinching, heat, or visible strain.</td></tr>
+<tr><td class="num">23</td><td>Living Room TV</td><td>Add gradient strip in Hue app.</td><td>HOWDY</td><td>5 min</td><td>TBD</td><td>Step 22</td><td>Strip appears in Hue app.</td><td>Use Add devices / QR or search.</td></tr>
+<tr><td class="num">24</td><td>Living Room TV</td><td>Name strip <code>Living Room TV Gradient</code>.</td><td>HOWDY</td><td>2 min</td><td>TBD</td><td>Step 23</td><td>Name is saved.</td><td>Use exact naming.</td></tr>
+<tr><td class="num">25</td><td>Living Room TV</td><td>Create/select Hue room <code>Living Room</code> and assign gradient strip.</td><td>HOWDY</td><td>3 min</td><td>TBD</td><td>Step 24</td><td>Strip is in Living Room.</td><td>Living Room bulbs join this room.</td></tr>
+<tr><td class="num">26</td><td>Living Room TV</td><td>Create ambient scene <code>Movie Warm Backlight</code>.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Step 25</td><td>Scene saved.</td><td>Warm amber/cream, 10-25%.</td></tr>
+<tr><td class="num">27</td><td>Living Room TV</td><td>Create ambient scene <code>TV Art Glow</code>.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Step 25</td><td>Scene saved.</td><td>Soft warm white/amber, 15-30%.</td></tr>
+<tr><td class="num">28</td><td>Sync app</td><td>Open Samsung TV app store and search Philips Hue Sync TV app.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 27</td><td>App listing is found or confirmed unavailable.</td><td>Use TV remote; app store decides final compatibility.</td></tr>
+<tr><td class="num">29</td><td>Sync app</td><td>Install/open Hue Sync TV app.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 28</td><td>App opens on TV.</td><td>Human handles Samsung account prompts if any.</td></tr>
+<tr><td class="num">30</td><td>Sync app</td><td>Choose monthly subscription path.</td><td>HOWDY + Human</td><td>3 min</td><td>TBD</td><td>Step 29</td><td>$2.99/month option is selected.</td><td>Do not choose one-time purchase.</td></tr>
+<tr><td class="num">31</td><td>Sync app</td><td>Stop at payment confirmation.</td><td>HOWDY</td><td>1 min</td><td>TBD</td><td>Step 30</td><td>No purchase made yet.</td><td>Required spending checkpoint.</td></tr>
+<tr><td class="num">32</td><td>Sync app</td><td>Approve $2.99/month subscription.</td><td>Human</td><td>2 min</td><td>TBD</td><td>Step 31</td><td>Subscription is approved.</td><td>Human-only because recurring charge.</td></tr>
+<tr><td class="num">33</td><td>Sync app</td><td>Connect Hue Sync TV app to Bridge Pro.</td><td>HOWDY + Human</td><td>8 min</td><td>TBD</td><td>Step 32</td><td>TV app sees Hue system.</td><td>Human presses bridge button if requested.</td></tr>
+<tr><td class="num">34</td><td>Entertainment</td><td>Create Samsung TV Entertainment area in Hue app.</td><td>HOWDY</td><td>6 min</td><td>TBD</td><td>Step 33</td><td>Entertainment area exists.</td><td>Name: <code>Living Room Samsung TV</code>.</td></tr>
+<tr><td class="num">35</td><td>Entertainment</td><td>Add <code>Living Room TV Gradient</code> to Entertainment area.</td><td>HOWDY</td><td>3 min</td><td>TBD</td><td>Step 34</td><td>Strip is assigned to TV area.</td><td>Add bulbs only if they help the TV area.</td></tr>
+<tr><td class="num">36</td><td>Entertainment</td><td>Calibrate light position/orientation.</td><td>HOWDY + Human</td><td>8 min</td><td>TBD</td><td>Step 35</td><td>App position matches actual TV.</td><td>Human checks wall effect.</td></tr>
+<tr><td class="num">37</td><td>Entertainment</td><td>Test sync with normal non-strobing video.</td><td>Human + HOWDY</td><td>8 min</td><td>TBD</td><td>Step 36</td><td>Sync looks aligned and comfortable.</td><td>Adjust intensity/brightness.</td></tr>
+<tr><td class="num">38</td><td>Living Room bulbs</td><td>Inspect Living Room floor lamp socket, shade, cord, and switch.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 37</td><td>Floor lamp safe or skipped.</td><td>Best first Living Room bulb.</td></tr>
+<tr><td class="num">39</td><td>Living Room bulbs</td><td>Add/install/name <code>Living Room Floor Lamp</code>.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 38</td><td>Bulb responds in Hue app.</td><td>Add to Living Room.</td></tr>
+<tr><td class="num">40</td><td>Living Room bulbs</td><td>Inspect flamingo lamp socket and heat/clearance.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 39</td><td>Safe or skipped.</td><td>Accent only; do not force it.</td></tr>
+<tr><td class="num">41</td><td>Living Room bulbs</td><td>Add/install/name <code>Living Room Flamingo Lamp</code> if safe.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 40</td><td>Bulb responds or fixture skipped.</td><td>Use low coral/pink accent later.</td></tr>
+<tr><td class="num">42</td><td>Living Room bulbs</td><td>Inspect one additional non-chandelier Living Room lamp/socket if available.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 41</td><td>Safe target identified or skipped.</td><td>No hardwired chandelier work here.</td></tr>
+<tr><td class="num">43</td><td>Living Room bulbs</td><td>Add/install/name extra safe Living Room bulb if approved.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 42</td><td>Bulb responds or is skipped.</td><td>Name from actual fixture.</td></tr>
+<tr><td class="num">44</td><td>Living Room bulbs</td><td>Create Living Room scene <code>TV Resting Glow</code>.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Steps 25, 39-43</td><td>Scene saved.</td><td>Gradient plus safe lamps, soft warm.</td></tr>
+<tr><td class="num">45</td><td>Living Room bulbs</td><td>Create Living Room scene <code>Living Room Cleaning</code>.</td><td>HOWDY</td><td>3 min</td><td>TBD</td><td>Steps 25, 39-43</td><td>Scene saved.</td><td>Warm white, high brightness.</td></tr>
+<tr><td class="num">46</td><td>Living Room QA</td><td>Run Living Room scenes and TV sync once.</td><td>Human + HOWDY</td><td>8 min</td><td>TBD</td><td>Steps 37, 44-45</td><td>Living Room setup feels usable.</td><td>Human gives visual judgment.</td></tr>
+<tr><td class="num">47</td><td>Red Room</td><td>Inspect side lamp socket, cord, shade clearance, switch, and dimmer status.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 46</td><td>Side lamp is safe or skipped.</td><td>Start with lamp before ladder work.</td></tr>
+<tr><td class="num">48</td><td>Red Room</td><td>Scan/add one Hue bulb for side lamp in Hue app.</td><td>HOWDY</td><td>3 min</td><td>TBD</td><td>Step 47</td><td>Bulb is added or ready for discovery.</td><td>Keep QR reachable.</td></tr>
+<tr><td class="num">49</td><td>Red Room</td><td>Install side lamp Hue bulb.</td><td>Human</td><td>3 min</td><td>TBD</td><td>Step 48</td><td>Bulb is screwed in and lamp switch is on.</td><td>Leave physical switch on.</td></tr>
+<tr><td class="num">50</td><td>Red Room</td><td>Test and name side lamp <code>Red Room Side Lamp</code>.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Step 49</td><td>Bulb responds and name is saved.</td><td>If it fails, troubleshoot before fan bulbs.</td></tr>
+<tr><td class="num">51</td><td>Red Room</td><td>Inspect ceiling fan: 3 sockets, base type, max wattage label, shade clearance, dimmer status.</td><td>Human + HOWDY</td><td>8 min</td><td>TBD</td><td>Step 50</td><td>Fan fixture is safe or skipped.</td><td>Ladder required. Stop if dimmer or tight enclosure.</td></tr>
+<tr><td class="num">52</td><td>Red Room</td><td>Turn Red Room wall switch off.</td><td>Human</td><td>1 min</td><td>TBD</td><td>Step 51</td><td>Fixture power is off.</td><td>Physical safety step.</td></tr>
+<tr><td class="num">53</td><td>Red Room</td><td>Replace first fan bulb.</td><td>Human</td><td>4 min</td><td>TBD</td><td>Step 52</td><td>First Hue bulb installed.</td><td>Ladder work.</td></tr>
+<tr><td class="num">54</td><td>Red Room</td><td>Turn wall switch on and leave it on.</td><td>Human</td><td>1 min</td><td>TBD</td><td>Step 53</td><td>Bulb has power.</td><td>Hue bulbs need power.</td></tr>
+<tr><td class="num">55</td><td>Red Room</td><td>Add/test/name first fan bulb <code>Red Room Fan 1</code>.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Step 54</td><td>Fan 1 responds in app.</td><td>Number clockwise from door unless changed.</td></tr>
+<tr><td class="num">56</td><td>Red Room</td><td>Replace, add/test/name second fan bulb <code>Red Room Fan 2</code>.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 55</td><td>Fan 2 responds in app.</td><td>Repeat careful power handling.</td></tr>
+<tr><td class="num">57</td><td>Red Room</td><td>Replace, add/test/name third fan bulb <code>Red Room Fan 3</code>.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 56</td><td>Fan 3 responds in app.</td><td>Keep wall switch on after.</td></tr>
+<tr><td class="num">58</td><td>Red Room</td><td>Create/select room <code>Red Room</code> and verify all Red Room lights are assigned.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Step 57</td><td>Room contains side lamp and safe fan bulbs.</td><td>Fix names before scenes.</td></tr>
+<tr><td class="num">59</td><td>Red Room</td><td>Create Red Room scenes: <code>Guest Arrival</code>, <code>Ruby Grounding</code>, <code>Rose Reading</code>, <code>Ember Wind Down</code>, <code>Night Path</code>, <code>Cleaning</code>.</td><td>HOWDY</td><td>22 min</td><td>TBD</td><td>Step 58</td><td>Six scenes are saved.</td><td>Use the prior Red Room mood notes.</td></tr>
+<tr><td class="num">60</td><td>Red Room QA</td><td>Run each Red Room scene and tune brightness/colors.</td><td>Human + HOWDY</td><td>10 min</td><td>TBD</td><td>Step 59</td><td>Scenes feel usable in the room.</td><td>Human gives visual judgment.</td></tr>
+<tr><td class="num">61</td><td>Blue Bathroom</td><td>Confirm the Blue Bathroom is the first-pass bathroom target and whether its fixture is dry-rated safe.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 60</td><td>Blue Bathroom target is confirmed or skipped.</td><td>Avoid wet/shower-rated uncertainty.</td></tr>
+<tr><td class="num">62</td><td>Blue Bathroom</td><td>Inspect Blue Bathroom socket/base type, globe clearance, ventilation, and dimmer status.</td><td>Human + HOWDY</td><td>8 min</td><td>TBD</td><td>Step 61</td><td>Fixture is safe or skipped.</td><td>Stop if enclosed/tight/hot/damp concern.</td></tr>
+<tr><td class="num">63</td><td>Blue Bathroom</td><td>Turn Blue Bathroom fixture switch off.</td><td>Human</td><td>1 min</td><td>TBD</td><td>Step 62</td><td>Fixture power is off.</td><td>Physical safety step.</td></tr>
+<tr><td class="num">64</td><td>Blue Bathroom</td><td>Replace first safe Blue Bathroom bulb.</td><td>Human</td><td>4 min</td><td>TBD</td><td>Step 63</td><td>First Blue Bathroom Hue bulb installed.</td><td>Ladder/step stool only if stable.</td></tr>
+<tr><td class="num">65</td><td>Blue Bathroom</td><td>Turn switch on and add/test/name Blue Bathroom bulb.</td><td>Human + HOWDY</td><td>5 min</td><td>TBD</td><td>Step 64</td><td>Bulb responds in Hue app.</td><td>Name from actual location, e.g. <code>Blue Bathroom Vanity 1</code>.</td></tr>
+<tr><td class="num">66</td><td>Blue Bathroom</td><td>Replace/add/name any second safe Blue Bathroom bulb.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 65</td><td>Second bulb responds or is skipped.</td><td>Only if same fixture is safe.</td></tr>
+<tr><td class="num">67</td><td>Blue Bathroom</td><td>Create/select Hue room <code>Blue Bathroom</code> and assign installed bulbs.</td><td>HOWDY</td><td>3 min</td><td>TBD</td><td>Steps 65-66</td><td>Blue Bathroom room is cleanly assigned.</td><td>Use exact room name: <code>Blue Bathroom</code>.</td></tr>
+<tr><td class="num">68</td><td>Blue Bathroom</td><td>Create scenes <code>Blue Bathroom Bright</code>, <code>Blue Bathroom Spa</code>, and <code>Blue Bathroom Night</code>.</td><td>HOWDY</td><td>9 min</td><td>TBD</td><td>Step 67</td><td>Blue Bathroom scenes saved.</td><td>Keep night scene very low/warm.</td></tr>
+<tr><td class="num">69</td><td>Blue Bathroom QA</td><td>Test Blue Bathroom scenes and physical switch behavior.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 68</td><td>Blue Bathroom responds predictably.</td><td>Leave switch on after.</td></tr>
+<tr><td class="num">70</td><td>Kitchen</td><td>Identify safe kitchen targets excluding the 3 chandelier lights.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 69</td><td>Non-chandelier targets are listed.</td><td>Chandelier remains skipped.</td></tr>
+<tr><td class="num">71</td><td>Kitchen</td><td>Inspect first non-chandelier kitchen socket, clearance, heat, and dimmer status.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 70</td><td>First kitchen target safe or skipped.</td><td>Do not use enclosed or hot fixture.</td></tr>
+<tr><td class="num">72</td><td>Kitchen</td><td>Add/install/name first non-chandelier kitchen bulb.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 71</td><td>Bulb responds in Hue app.</td><td>Name from actual fixture.</td></tr>
+<tr><td class="num">73</td><td>Kitchen</td><td>Inspect second non-chandelier kitchen socket if available.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 72</td><td>Second target safe or skipped.</td><td>Skip if only chandelier remains.</td></tr>
+<tr><td class="num">74</td><td>Kitchen</td><td>Add/install/name second non-chandelier kitchen bulb if safe.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 73</td><td>Bulb responds or is skipped.</td><td>Name from actual fixture.</td></tr>
+<tr><td class="num">75</td><td>Kitchen</td><td>Create/select Hue room <code>Kitchen</code> and assign only non-chandelier installed bulbs.</td><td>HOWDY</td><td>4 min</td><td>TBD</td><td>Steps 72-74</td><td>Kitchen room contains safe non-chandelier bulbs only.</td><td>Chandelier lights not assigned because not installed.</td></tr>
+<tr><td class="num">76</td><td>Kitchen</td><td>Create scenes <code>Kitchen Prep</code>, <code>Kitchen Warm</code>, and <code>Kitchen Night</code>.</td><td>HOWDY</td><td>9 min</td><td>TBD</td><td>Step 75</td><td>Kitchen scenes saved.</td><td>Prep can be bright; night should be low.</td></tr>
+<tr><td class="num">77</td><td>Kitchen QA</td><td>Test Kitchen scenes and confirm chandelier lights were not changed.</td><td>Human + HOWDY</td><td>6 min</td><td>TBD</td><td>Step 76</td><td>Kitchen installed bulbs respond; chandelier untouched.</td><td>This is the explicit skip verification.</td></tr>
+<tr><td class="num">78</td><td>Home Assistant</td><td>Add Hue integration to Home Assistant after Hue app setup is stable.</td><td>HOWDY + Human</td><td>10 min</td><td>TBD</td><td>Steps 46, 60, 69, 77</td><td>Hue devices visible in HA.</td><td>Human presses bridge if prompted.</td></tr>
+<tr><td class="num">79</td><td>QA</td><td>Verify names/rooms/scenes, document skipped fixtures, and store old bulbs.</td><td>HOWDY + Human</td><td>15 min</td><td>TBD</td><td>Step 78</td><td>Build documentation is clean.</td><td>Include chandelier skip and unsafe/skipped reasons.</td></tr>
+<tr><td class="num">80</td><td>QA</td><td>Record actual durations, final device list, subscription status, remaining bulbs, and next steps.</td><td>HOWDY</td><td>10 min</td><td>TBD</td><td>Step 79</td><td>Build log complete.</td><td>This is the reality timing record.</td></tr>
+</tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <p class="eyebrow">What Counts as Success</p>
+        <h2>Better lighting before bigger electrical work.</h2>
+        <p>Success means the house gets more usable lighting control, the TV gradient setup works, scenes are named and understandable, physical switches remain sane, and skipped fixtures are documented honestly.</p>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">What Still Needs a Human</p>
+        <h2>Safety stays boring.</h2>
+        <p>Any questionable switch, tight fixture, damp location, chandelier, dimmer conflict, or ladder-heavy surprise gets paused. Smart bulbs are allowed to be useful; they are not allowed to pretend bad wiring is fine.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="shell">Draft started 2026-06-03 · Most Certainly Try Labs · Las Jaras lighting build log</footer>
+</body>
+</html>

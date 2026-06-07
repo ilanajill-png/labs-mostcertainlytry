@@ -26,7 +26,7 @@ button { background: var(--ink); color: white; cursor: pointer; border-color: va
 main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 34px 0 64px; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
 h2 { margin: 0; font-size: 22px; letter-spacing: 0; }
-.result-count { color: var(--muted); font-size: 14px; }
+.result-count { color: #4f5b68; font-size: 14px; }
 .timeline { display: grid; gap: 18px; }
 .entry { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 22px; padding: 22px 0; border-top: 1px solid var(--line); }
 .entry:first-child { border-top: 0; }
@@ -81,9 +81,10 @@ footer div { width: min(1120px, calc(100% - 32px)); margin: 0 auto; font-size: 1
   </header>
   <div class="controls-wrap">
     <form class="controls" onsubmit="return false" aria-label="Archive filters">
-      <input id="search" type="search" placeholder="Search names, places, dates, memories" autocomplete="off">
+      <input id="search" type="search" aria-label="Search names, places, dates, and memories" placeholder="Search names, places, dates, memories" autocomplete="off">
       <select id="category" aria-label="Filter by category"><option value="all">All categories</option></select>
       <select id="location" aria-label="Filter by location"><option value="all">All locations</option></select>
+      <button type="submit">Apply</button>
       <button id="clear" type="button">Clear</button>
     </form>
   </div>
@@ -100,7 +101,7 @@ footer div { width: min(1120px, calc(100% - 32px)); margin: 0 auto; font-size: 1
         <div class="form-grid">
           <div class="field">
             <label for="contributorName">Your name</label>
-            <input id="contributorName" name="contributorName" autocomplete="name" required>
+            <input id="contributorName" name="contributorName" type="text" autocomplete="name" required>
           </div>
           <div class="field">
             <label for="contributorContact">Email or phone</label>

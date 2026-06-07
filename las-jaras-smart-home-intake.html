@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las Jaras Smart Home Intake</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #0647b8;
+      --blue-dark: #032f7a;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d7dce5;
+      --paper: #ffffff;
+      --wash: #f4f6fa;
+      --good: #177245;
+      --warn: #a05a00;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--wash);
+      line-height: 1.45;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 16px 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .subhead {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      width: min(860px, 100%);
+      margin: 0 auto;
+      padding: 14px;
+    }
+
+    section {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin: 0 0 14px;
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 15px;
+      font-weight: 700;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--blue);
+      flex: 0 0 auto;
+    }
+
+    details[open] summary::after {
+      content: "-";
+    }
+
+    .content {
+      border-top: 1px solid var(--line);
+      padding: 15px;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      margin-top: 6px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 16px;
+      padding: 11px 12px;
+    }
+
+    textarea {
+      min-height: 88px;
+      resize: vertical;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0 12px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin: -4px 0 12px;
+    }
+
+    .row {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      margin: 0 0 12px;
+      background: #fbfcff;
+    }
+
+    .row-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .pill {
+      color: var(--blue-dark);
+      background: #eaf1ff;
+      border: 1px solid #cddcff;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin: 8px 0 12px;
+    }
+
+    .check {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      padding: 8px 10px;
+      font-size: 14px;
+      font-weight: 500;
+      background: #fff;
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      flex: 0 0 auto;
+    }
+
+    .actions {
+      position: sticky;
+      bottom: 0;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 12px;
+      margin: 20px -14px -14px;
+      background: rgba(244, 246, 250, 0.96);
+      border-top: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    button {
+      border: 0;
+      border-radius: 7px;
+      min-height: 46px;
+      padding: 10px 12px;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 750;
+      font-size: 15px;
+    }
+
+    button.secondary {
+      color: var(--blue-dark);
+      background: #eaf1ff;
+      border: 1px solid #cddcff;
+    }
+
+    button.danger {
+      color: #8f1d1d;
+      background: #fff0f0;
+      border: 1px solid #f0c8c8;
+    }
+
+    .status {
+      margin: 10px 0 0;
+      color: var(--good);
+      font-size: 13px;
+      min-height: 18px;
+    }
+
+    .output {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 160px;
+    }
+
+    @media (min-width: 720px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .checks {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .actions {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Las Jaras Smart Home Intake</h1>
+    <p class="subhead">Room-by-room lighting and audio survey for a Home Assistant setup.</p>
+  </header>
+
+  <main>
+    <form id="intake">
+      <section>
+        <details open>
+          <summary>House Basics</summary>
+          <div class="content grid">
+            <label>Survey date
+              <input name="survey_date" type="date">
+            </label>
+            <label>Person walking the house
+              <input name="surveyor" placeholder="Name">
+            </label>
+            <label>Internet provider and router
+              <input name="network_router" placeholder="Provider, router model, mesh system">
+            </label>
+            <label>Voice assistants already used
+              <input name="voice_assistants" placeholder="Alexa, Siri, Google, none">
+            </label>
+            <label>Existing hubs
+              <input name="existing_hubs" placeholder="Hue Bridge, Echo, SmartThings, Apple TV, HomePod">
+            </label>
+            <label>Preferred control style
+              <select name="control_style">
+                <option value="">Choose one</option>
+                <option>Mostly automatic, minimal apps</option>
+                <option>Wall switches first, app second</option>
+                <option>Voice-first</option>
+                <option>App-heavy is fine</option>
+              </select>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <details open>
+          <summary>Room Profile</summary>
+          <div class="content">
+            <div class="grid">
+              <label>Room name
+                <input name="room_name" placeholder="Red Room, Bathroom, Kitchen">
+              </label>
+              <label>Room purpose
+                <input name="room_purpose" placeholder="Bedroom, bath, lounge, guest room">
+              </label>
+              <label>Priority
+                <select name="room_priority">
+                  <option value="">Choose one</option>
+                  <option>High: daily use</option>
+                  <option>Medium: frequent use</option>
+                  <option>Low: occasional use</option>
+                </select>
+              </label>
+              <label>Natural light
+                <select name="natural_light">
+                  <option value="">Choose one</option>
+                  <option>Bright</option>
+                  <option>Medium</option>
+                  <option>Dim</option>
+                  <option>No windows</option>
+                </select>
+              </label>
+            </div>
+
+            <p class="hint">Check every behavior that should exist in this room.</p>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="room_modes" value="Morning"> Morning scene</label>
+              <label class="check"><input type="checkbox" name="room_modes" value="Evening"> Evening scene</label>
+              <label class="check"><input type="checkbox" name="room_modes" value="Night"> Night mode</label>
+              <label class="check"><input type="checkbox" name="room_modes" value="Cleaning"> Bright cleaning mode</label>
+              <label class="check"><input type="checkbox" name="room_modes" value="Guest"> Guest-friendly controls</label>
+              <label class="check"><input type="checkbox" name="room_modes" value="Motion"> Motion/occupancy automation</label>
+            </div>
+
+            <label>Room notes
+              <textarea name="room_notes" placeholder="Anything odd: bad switch placement, no outlet, ceiling fan, shared switch, renter-friendly needs"></textarea>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <details open>
+          <summary>Lighting Fixtures</summary>
+          <div class="content">
+            <p class="hint">Fill one row per fixture or lamp. Add more in Notes if needed.</p>
+            <div class="row">
+              <div class="row-title">Fixture 1 <span class="pill">main</span></div>
+              <div class="grid">
+                <label>Location/name
+                  <input name="light_1_name" placeholder="Ceiling fan, vanity, side table">
+                </label>
+                <label>Bulb count
+                  <input name="light_1_count" type="number" min="0" inputmode="numeric">
+                </label>
+                <label>Bulb base/shape
+                  <input name="light_1_base" placeholder="E26 A19, E12 candle, G25 globe, BR30">
+                </label>
+                <label>Switch/control
+                  <input name="light_1_switch" placeholder="Wall switch, pull chain, lamp switch, dimmer">
+                </label>
+                <label>Dimming needed
+                  <select name="light_1_dimming">
+                    <option value="">Choose one</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Nice but optional</option>
+                  </select>
+                </label>
+                <label>Color needed
+                  <select name="light_1_color">
+                    <option value="">Choose one</option>
+                    <option>White only</option>
+                    <option>Tunable white</option>
+                    <option>Full color</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="row-title">Fixture 2 <span class="pill">optional</span></div>
+              <div class="grid">
+                <label>Location/name
+                  <input name="light_2_name">
+                </label>
+                <label>Bulb count
+                  <input name="light_2_count" type="number" min="0" inputmode="numeric">
+                </label>
+                <label>Bulb base/shape
+                  <input name="light_2_base">
+                </label>
+                <label>Switch/control
+                  <input name="light_2_switch">
+                </label>
+                <label>Dimming needed
+                  <select name="light_2_dimming">
+                    <option value="">Choose one</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Nice but optional</option>
+                  </select>
+                </label>
+                <label>Color needed
+                  <select name="light_2_color">
+                    <option value="">Choose one</option>
+                    <option>White only</option>
+                    <option>Tunable white</option>
+                    <option>Full color</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="row-title">Fixture 3 <span class="pill">optional</span></div>
+              <div class="grid">
+                <label>Location/name
+                  <input name="light_3_name">
+                </label>
+                <label>Bulb count
+                  <input name="light_3_count" type="number" min="0" inputmode="numeric">
+                </label>
+                <label>Bulb base/shape
+                  <input name="light_3_base">
+                </label>
+                <label>Switch/control
+                  <input name="light_3_switch">
+                </label>
+                <label>Dimming needed
+                  <select name="light_3_dimming">
+                    <option value="">Choose one</option>
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Nice but optional</option>
+                  </select>
+                </label>
+                <label>Color needed
+                  <select name="light_3_color">
+                    <option value="">Choose one</option>
+                    <option>White only</option>
+                    <option>Tunable white</option>
+                    <option>Full color</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <label>Additional lighting notes
+              <textarea name="lighting_notes" placeholder="More fixtures, odd bulbs, switch plates, fan remotes, lights controlled by multiple switches"></textarea>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <details>
+          <summary>Audio</summary>
+          <div class="content">
+            <div class="grid">
+              <label>Audio goal
+                <select name="audio_goal">
+                  <option value="">Choose one</option>
+                  <option>Background music</option>
+                  <option>TV/movie sound</option>
+                  <option>Voice assistant</option>
+                  <option>Whole-home synced audio</option>
+                  <option>Outdoor/patio audio</option>
+                </select>
+              </label>
+              <label>Audio quality priority
+                <select name="audio_quality">
+                  <option value="">Choose one</option>
+                  <option>Best sound possible</option>
+                  <option>Good sound, reasonable cost</option>
+                  <option>Small and discreet</option>
+                  <option>Mostly voice/utility</option>
+                </select>
+              </label>
+              <label>Speaker location
+                <input name="speaker_location" placeholder="Shelf, nightstand, wall, ceiling, TV console">
+              </label>
+              <label>Power nearby
+                <select name="speaker_power">
+                  <option value="">Choose one</option>
+                  <option>Outlet available</option>
+                  <option>No easy outlet</option>
+                  <option>Battery preferred</option>
+                </select>
+              </label>
+              <label>Existing speakers
+                <input name="existing_speakers" placeholder="Sonos, Echo, HomePod, Bluetooth speaker">
+              </label>
+              <label>Music services
+                <input name="music_services" placeholder="Spotify, Apple Music, Amazon Music, YouTube Music">
+              </label>
+            </div>
+
+            <label>Audio notes
+              <textarea name="audio_notes" placeholder="Volume limits, guest use, privacy concerns, TV integration, stereo pair, hidden speaker preferences"></textarea>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <details>
+          <summary>Sensors & Automations</summary>
+          <div class="content">
+            <p class="hint">These help decide whether bulbs, switches, occupancy sensors, or speakers should drive the room.</p>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="sensors" value="Motion sensor"> Motion sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Presence sensor"> Presence sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Door sensor"> Door sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Window sensor"> Window sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Humidity sensor"> Humidity sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Leak sensor"> Leak sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Temperature sensor"> Temperature sensor</label>
+              <label class="check"><input type="checkbox" name="sensors" value="Button or remote"> Button or remote</label>
+            </div>
+            <label>Automation notes
+              <textarea name="automation_notes" placeholder="Examples: turn bathroom fan on after showers, dim red room at bedtime, music starts when cleaning"></textarea>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <details>
+          <summary>Photos & Buying Notes</summary>
+          <div class="content">
+            <label>Photos to take
+              <textarea name="photos_needed" placeholder="Fixture, bulb label, switch plate, room corners, outlet near speaker, existing hub/router"></textarea>
+            </label>
+            <label>Style constraints
+              <textarea name="style_constraints" placeholder="Visible speakers okay? White/black/brass? Hidden gear? No bright LEDs?"></textarea>
+            </label>
+            <label>Budget notes
+              <textarea name="budget_notes" placeholder="Best regardless of cost, good/better/best tiers, room-by-room budget, avoid subscriptions"></textarea>
+            </label>
+            <label>Purchase authorization notes
+              <textarea name="purchase_notes" placeholder="I can recommend and prepare a cart. Final order should still be confirmed before checkout."></textarea>
+            </label>
+          </div>
+        </details>
+      </section>
+
+      <section>
+        <details open>
+          <summary>Export</summary>
+          <div class="content">
+            <p class="hint">Use Export after each room. The form auto-saves on this device.</p>
+            <label>Room export
+              <textarea id="exportOutput" class="output" readonly></textarea>
+            </label>
+            <div class="status" id="status"></div>
+          </div>
+        </details>
+      </section>
+
+      <div class="actions">
+        <button type="button" id="exportBtn">Export Room</button>
+        <button type="button" class="secondary" id="copyBtn">Copy Export</button>
+        <button type="submit" class="secondary">Save Progress</button>
+        <button type="button" class="danger" id="clearBtn">Clear Form</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const form = document.querySelector("#intake");
+    const output = document.querySelector("#exportOutput");
+    const status = document.querySelector("#status");
+    const storageKey = "las-jaras-smart-home-intake";
+
+    function getData() {
+      const data = {};
+      const fields = new FormData(form);
+
+      for (const [key, value] of fields.entries()) {
+        if (data[key]) {
+          data[key] = Array.isArray(data[key]) ? [...data[key], value] : [data[key], value];
+        } else {
+          data[key] = value;
+        }
+      }
+
+      form.querySelectorAll("input[type='checkbox']").forEach((checkbox) => {
+        if (!data[checkbox.name]) data[checkbox.name] = [];
+      });
+
+      return data;
+    }
+
+    function setData(data) {
+      Object.entries(data).forEach(([key, value]) => {
+        const fields = form.querySelectorAll(`[name="${CSS.escape(key)}"]`);
+        fields.forEach((field) => {
+          if (field.type === "checkbox") {
+            field.checked = Array.isArray(value) && value.includes(field.value);
+          } else if (!Array.isArray(value)) {
+            field.value = value;
+          }
+        });
+      });
+    }
+
+    function save() {
+      localStorage.setItem(storageKey, JSON.stringify(getData()));
+      status.textContent = "Saved on this device.";
+    }
+
+    function formatExport(data) {
+      const lines = [];
+      const add = (label, value) => {
+        const normalized = Array.isArray(value) ? value.filter(Boolean).join(", ") : value;
+        if (normalized) lines.push(`${label}: ${normalized}`);
+      };
+
+      lines.push(`# Las Jaras Smart Home Intake`);
+      add("Room", data.room_name);
+      add("Purpose", data.room_purpose);
+      add("Priority", data.room_priority);
+      add("Natural light", data.natural_light);
+      add("Modes", data.room_modes);
+      add("Room notes", data.room_notes);
+      lines.push("");
+      lines.push("## Lighting");
+
+      [1, 2, 3].forEach((index) => {
+        const name = data[`light_${index}_name`];
+        const count = data[`light_${index}_count`];
+        const base = data[`light_${index}_base`];
+        const switchControl = data[`light_${index}_switch`];
+        const dimming = data[`light_${index}_dimming`];
+        const color = data[`light_${index}_color`];
+        if (name || count || base || switchControl || dimming || color) {
+          lines.push(`- Fixture ${index}: ${name || "Unnamed"}`);
+          if (count) lines.push(`  - Bulb count: ${count}`);
+          if (base) lines.push(`  - Base/shape: ${base}`);
+          if (switchControl) lines.push(`  - Switch/control: ${switchControl}`);
+          if (dimming) lines.push(`  - Dimming: ${dimming}`);
+          if (color) lines.push(`  - Color: ${color}`);
+        }
+      });
+
+      add("Lighting notes", data.lighting_notes);
+      lines.push("");
+      lines.push("## Audio");
+      add("Audio goal", data.audio_goal);
+      add("Audio quality", data.audio_quality);
+      add("Speaker location", data.speaker_location);
+      add("Power", data.speaker_power);
+      add("Existing speakers", data.existing_speakers);
+      add("Music services", data.music_services);
+      add("Audio notes", data.audio_notes);
+      lines.push("");
+      lines.push("## Sensors & Automations");
+      add("Sensors", data.sensors);
+      add("Automation notes", data.automation_notes);
+      lines.push("");
+      lines.push("## House Context");
+      add("Survey date", data.survey_date);
+      add("Surveyor", data.surveyor);
+      add("Network/router", data.network_router);
+      add("Voice assistants", data.voice_assistants);
+      add("Existing hubs", data.existing_hubs);
+      add("Control style", data.control_style);
+      lines.push("");
+      lines.push("## Buying Notes");
+      add("Photos needed", data.photos_needed);
+      add("Style constraints", data.style_constraints);
+      add("Budget notes", data.budget_notes);
+      add("Purchase authorization notes", data.purchase_notes);
+
+      return lines.join("\n");
+    }
+
+    document.querySelector("#exportBtn").addEventListener("click", () => {
+      output.value = formatExport(getData());
+      save();
+      status.textContent = "Export generated.";
+    });
+
+    document.querySelector("#copyBtn").addEventListener("click", async () => {
+      if (!output.value) output.value = formatExport(getData());
+      await navigator.clipboard.writeText(output.value);
+      status.textContent = "Copied export.";
+    });
+
+    document.querySelector("#clearBtn").addEventListener("click", () => {
+      if (!confirm("Clear this saved form on this device?")) return;
+      form.reset();
+      output.value = "";
+      localStorage.removeItem(storageKey);
+      status.textContent = "Cleared.";
+    });
+
+    form.addEventListener("input", save);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      output.value = formatExport(getData());
+      save();
+      status.textContent = "Progress saved.";
+    });
+
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      setData(JSON.parse(saved));
+      status.textContent = "Loaded saved intake.";
+    } else {
+      const dateInput = form.querySelector('[name="survey_date"]');
+      dateInput.value = new Date().toISOString().slice(0, 10);
+    }
+  </script>
+</body>
+</html>

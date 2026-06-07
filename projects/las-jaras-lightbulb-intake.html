@@ -390,7 +390,7 @@
             <legend>Request details</legend>
             <div class="field-pair">
               <label>Requester
-                <input name="requester" autocomplete="name" placeholder="Name">
+                <input name="requester" type="text" autocomplete="name" placeholder="Name">
               </label>
               <label>Needed by
                 <input name="neededBy" type="date">
@@ -486,6 +486,7 @@
             </label>
             <p class="helper-text">Saved requests stay in this browser and can be exported as CSV or JSON. No server or shared database is connected yet.</p>
           </fieldset>
+          <button class="button primary" type="submit">Update summary</button>
         </form>
 
         <aside class="intake-preview" aria-label="Generated intake summary">
@@ -677,6 +678,10 @@
 
       form.addEventListener("input", renderSummary);
       form.addEventListener("change", renderSummary);
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        renderSummary();
+      });
       renderSummary();
       renderSaved();
     </script>

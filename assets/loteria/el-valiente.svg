@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" role="img" aria-labelledby="title desc">
+  <title id="title">El Valiente Loteria card</title>
+  <desc id="desc">A stylized shield card for the Las Jaras Garage.</desc>
+  <rect width="160" height="220" rx="10" fill="#fff8e7"/>
+  <rect x="10" y="10" width="140" height="200" rx="6" fill="#fdfcf7" stroke="#18201d" stroke-width="3"/>
+  <text x="80" y="31" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#00327a">EL VALIENTE</text>
+  <path d="M80 54l48 18v36c0 32-22 55-48 70-26-15-48-38-48-70V72z" fill="#22c55e" stroke="#18201d" stroke-width="4"/>
+  <path d="M80 60v108" stroke="#18201d" stroke-width="3"/>
+  <path d="M55 111h50M80 86l17 25-17 25-17-25z" fill="#f59e0b" stroke="#18201d" stroke-width="4"/>
+  <text x="80" y="194" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="700" fill="#5f6a65">GARAGE</text>
+</svg>

@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editable Las Jaras Kitchen Storage Diagram</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5f6b7f;
+      --line: #c8d2e4;
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --cobalt: #1143a8;
+      --pantry: #fff7dc;
+      --cold: #e0f2fe;
+      --counter: #e7f8ed;
+      --open: #ede9fe;
+      --ikea: #f3e3c4;
+      --cook: #fee2e2;
+      --wet: #dbeafe;
+      --pending: #f1f5f9;
+      --appliance: #e0f7f4;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 16px 34px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.45rem, 3vw, 2.35rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 920px;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin: 16px 0;
+    }
+
+    button {
+      border: 1px solid #9fb0ca;
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: var(--cobalt);
+      border-color: var(--cobalt);
+      color: #fff;
+    }
+
+    button:focus-visible,
+    .item:focus-visible {
+      outline: 3px solid rgba(17, 67, 168, .32);
+      outline-offset: 2px;
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .board-wrap {
+      border: 1px solid var(--line);
+      background: var(--bg);
+      overflow: auto;
+      padding: 14px;
+    }
+
+    .board {
+      position: relative;
+      width: 1120px;
+      height: 780px;
+      background:
+        linear-gradient(to right, rgba(151, 163, 184, .22) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(151, 163, 184, .22) 1px, transparent 1px),
+        var(--panel);
+      background-size: 48px 48px;
+      border: 1px solid #d8dfec;
+      user-select: none;
+      touch-action: none;
+    }
+
+    .zone {
+      position: absolute;
+      border: 2px solid #9aa8be;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .58);
+      color: var(--muted);
+      padding: 16px 18px;
+      font-weight: 800;
+      pointer-events: none;
+    }
+
+    .zone span {
+      display: block;
+      margin-top: 5px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .divider {
+      position: absolute;
+      left: 555px;
+      top: 115px;
+      height: 575px;
+      border-left: 2px dashed #9aa8be;
+      pointer-events: none;
+    }
+
+    .item {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      width: var(--w);
+      height: var(--h);
+      border: 2px solid;
+      border-radius: 6px;
+      padding: 7px 6px 18px;
+      text-align: center;
+      cursor: grab;
+      box-shadow: 0 6px 16px rgba(15, 23, 42, .10);
+      overflow: hidden;
+    }
+
+    .item::after {
+      content: attr(data-dimensions);
+      position: absolute;
+      left: 5px;
+      right: 5px;
+      bottom: 4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.05;
+      pointer-events: none;
+    }
+
+    .item:active { cursor: grabbing; }
+    .item.selected { box-shadow: 0 0 0 4px rgba(17, 67, 168, .24), 0 6px 16px rgba(15, 23, 42, .10); }
+    .item.dragging { opacity: .88; z-index: 20; }
+    .item:hover,
+    .item:focus-visible {
+      overflow: visible;
+      z-index: 30;
+    }
+
+    .item:hover > span,
+    .item:focus-visible > span {
+      background: rgba(255, 255, 255, .94);
+      border: 1px solid rgba(100, 116, 139, .35);
+      border-radius: 5px;
+      padding: 5px;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, .16);
+    }
+
+    .label {
+      display: block;
+      max-width: 100%;
+      font-size: 17px;
+      line-height: 1.1;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .product {
+      display: block;
+      margin-top: 4px;
+      color: #334155;
+      font-size: 11px;
+      line-height: 1.1;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .code {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.15;
+    }
+
+    .subzones {
+      display: block;
+      margin-top: 5px;
+      color: #1f2937;
+      font-size: 9px;
+      line-height: 1.15;
+      font-weight: 800;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    .scale-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .scale-bar {
+      display: inline-grid;
+      place-items: center;
+      width: 96px;
+      height: 18px;
+      margin: 0 8px;
+      border-left: 2px solid var(--ink);
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      color: var(--ink);
+      font-size: 11px;
+      font-weight: 800;
+      vertical-align: middle;
+    }
+
+    .pantry { background: var(--pantry); border-color: #9a6a16; }
+    .cold { background: var(--cold); border-color: #2563eb; }
+    .counter { background: var(--counter); border-color: #15803d; }
+    .open { background: var(--open); border-color: #6d28d9; }
+    .ikea { background: var(--ikea); border-color: #8b5e16; color: #1f2937; }
+    .cook { background: var(--cook); border-color: #b91c1c; }
+    .wet { background: var(--wet); border-color: #1d4ed8; }
+    .pending { background: var(--pending); border-color: #64748b; border-style: dashed; }
+    .appliance { background: var(--appliance); border-color: #0f766e; }
+
+    .shelf-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .shelf-lines i {
+      position: absolute;
+      left: 0;
+      right: 0;
+      border-top: 1.5px solid rgba(124, 107, 67, .78);
+    }
+
+    .shelf-lines i:nth-child(1) { top: 25%; }
+    .shelf-lines i:nth-child(2) { top: 50%; }
+    .shelf-lines i:nth-child(3) { top: 75%; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .legend span {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 16px;
+      height: 16px;
+      border: 2px solid;
+      border-radius: 4px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      margin-top: 14px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Editable Full Kitchen Storage Diagram</h1>
+    <p>Drag the storage pieces until the kitchen layout feels right. Each piece shows the friendly storage name, product/listing name, and scaled width/depth footprint. Tall pantry and fridge heights are noted in the storage map, but not drawn as floor-plan depth.</p>
+
+    <div class="toolbar">
+      <button class="primary" id="save">Save Layout</button>
+      <button id="rotate">Rotate Selected</button>
+      <button id="export">Export Positions</button>
+      <button id="copy">Copy Export</button>
+      <button id="reset">Reset to Starting Layout</button>
+      <span class="status" id="status" aria-live="polite"></span>
+    </div>
+    <div class="scale-note">Scale: 1 inch = 4 pixels. Grid squares are 12 in. <span class="scale-bar">24 in</span> Use Rotate Selected when a cabinet/shelf needs to run the other direction.</div>
+
+    <div class="board-wrap">
+      <div class="board" id="board" aria-label="Editable kitchen storage diagram">
+        <div class="zone" style="left:40px;top:110px;width:500px;height:585px;">Left Cooking / Wet Zone<span>KZ-1</span></div>
+        <div class="zone" style="left:580px;top:110px;width:500px;height:585px;">Right Pantry / Fridge Zone<span>KZ-2</span></div>
+        <div class="divider" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch pantry"></i>Pantry / cabinet</span>
+      <span><i class="swatch cold"></i>Cold storage</span>
+      <span><i class="swatch counter"></i>Counter / staging</span>
+      <span><i class="swatch open"></i>Open shelf</span>
+      <span><i class="swatch ikea"></i>IKEA KUNGSFORS shelf</span>
+      <span><i class="swatch cook"></i>Cooking appliance</span>
+      <span><i class="swatch wet"></i>Wet / dish workflow</span>
+      <span><i class="swatch appliance"></i>Counter appliance to place</span>
+      <span><i class="swatch pending"></i>Confirmed item, exact position pending</span>
+    </div>
+
+    <textarea id="output" spellcheck="false" aria-label="Exported kitchen diagram positions"></textarea>
+  </main>
+
+  <script>
+    const storageKey = "las-jaras-editable-kitchen-diagram-v2";
+    const scale = 4;
+    const board = document.querySelector("#board");
+    const output = document.querySelector("#output");
+    const status = document.querySelector("#status");
+
+    const startingItems = [
+      item("KP-A", "Left Pantry", "Oak Brook pantry cabinet", "KP-A", "Shelf 1-4", "pantry", 620, 205, 18, 23.75, true),
+      item("KF-A", "Active Fridge", "Samsung Bespoke bottom-freezer fridge", "KF-A", "Freezer below", "cold", 724, 205, 23.375, 26.375),
+      item("KF-B", "Overflow Fridge", "Samsung Bespoke bottom-freezer fridge", "KF-B", "Freezer below", "cold", 830, 205, 23.375, 26.375),
+      item("KP-B", "Right Pantry", "Oak Brook pantry cabinet", "KP-B", "Shelf 1-4", "pantry", 985, 130, 18, 23.75, true),
+      item("KT-A", "Right Counter", "Measured counter surface", "KT-A", "Intake / scan", "counter", 665, 610, 83, 20),
+      item("KD-A", "Three-Drawer Base", "Oak Brook drawer base cabinet", "KD-A", "", "pending", 210, 495, 18, 23.75),
+      item("KC-A", "First Narrow Cabinet", "Oak Brook door-and-drawer base", "KC-A", "", "pending", 410, 485, 12, 23.75),
+      item("KR-A", "Range", "Samsung Bespoke slide-in gas range", "KR-A", "Cooking anchor", "cook", 285, 485, 29.9375, 28.375),
+      item("KS-A", "Sink Base", "Oak Brook 36 in sink base", "KS-A", "Under-sink cleaning", "wet", 90, 380, 36, 23.75),
+      item("KW-A", "Dishwasher", "Samsung 24 in smart dishwasher", "KW-A", "Unload path anchor", "wet", 95, 270, 23.875, 24.9),
+      item("KL-A", "Cooking Corner Lazy Susan", "Oak Brook lazy Susan base", "KL-A", "Bulky / round", "pantry", 90, 485, 30.75, 23.75),
+      item("KO-B", "Baking Supplies Shelf Set 1", "IKEA KUNGSFORS shelves", "KO-B", "3 approx 24 in shelves", "open ikea", 40, 445, 23.625, 12.625, false, [
+        "Baking Supplies 1 Top",
+        "Baking Supplies 1 Middle",
+        "Baking Supplies 1 Bottom"
+      ]),
+      item("KO-C", "Baking Supplies Shelf Set 2", "IKEA KUNGSFORS shelves", "KO-C", "3 approx 24 in shelves", "open ikea", 45, 545, 23.625, 12.625, false, [
+        "Baking Supplies 2 Top",
+        "Baking Supplies 2 Middle",
+        "Baking Supplies 2 Bottom"
+      ]),
+      item("KO-D", "Glasses", "IKEA KUNGSFORS shelf", "KO-D", "", "open ikea", 40, 190, 23.625, 12.625, false, [
+        "Glasses Top",
+        "Glasses Middle",
+        "Glasses Bottom"
+      ]),
+      item("KC-B", "Second Narrow Cabinet", "Oak Brook door-and-drawer base", "KC-B", "", "pending", 95, 220, 12, 23.75),
+      item("KT-B", "Coffee Counter", "Measured freestanding counter", "KT-B", "93 in x 15 in", "counter", 95, 195, 93, 15),
+      item("KT-C", "Cooking Zone Counter", "Measured cooking-zone counter", "KT-C", "93 in x 24 in", "counter", 85, 505, 93, 24),
+      item("KO-E-F", "Coffee / Glassware / Plates Shelves", "IKEA KUNGSFORS shelves x3", "KO-E / KO-F / KO-G", "", "open ikea", 40, 140, 70.875, 12.625, false, [
+        "KO-E Coffee Shelves Top",
+        "KO-E Coffee Shelves Middle",
+        "KO-E Coffee Shelves Bottom",
+        "KO-F Glassware Top",
+        "KO-F Glassware Middle",
+        "KO-F Glassware Bottom",
+        "KO-G Plates/Bowls Top",
+        "KO-G Plates/Bowls Middle",
+        "KO-G Plates/Bowls Bottom"
+      ]),
+      item("KU-A", "Microwave Cabinet", "Oak Brook wall cabinet + Samsung microwave", "KU-A / KM-A", "Above microwave", "wet", 325, 140, 36, 12),
+      item("KOBJ-APPL-001", "KitchenAid Mixer", "Cobalt Blue KitchenAid Artisan 5 qt", "KOBJ-APPL-001", "Heavy - low/counter storage", "appliance", 605, 710, 8.75, 14.1),
+      item("KOBJ-APPL-002", "Bread Maker", "OSIPOTO 2 lb 17-in-1 bread maker", "KOBJ-APPL-002", "Counter/base storage", "appliance", 670, 708, 11.42, 13.78),
+      item("KOBJ-APPL-003", "Ninja SLUSHi", "Ninja SLUSHi frozen drink maker", "KOBJ-APPL-003", "Heavy - low/counter storage", "appliance", 742, 700, 16.28, 16.28),
+      item("KOBJ-APPL-004", "Electric Kettle", "Electric tea kettle", "KOBJ-APPL-004", "Approx footprint pending exact model", "appliance", 824, 710, 9, 8),
+      item("KOBJ-APPL-005", "Coffee Maker", "Coffee maker, exact model pending", "KOBJ-APPL-005", "Daily beverage appliance", "appliance", 872, 710, 8, 12),
+      item("KOBJ-APPL-006", "Instant Pot", "Instant Pot, exact model pending", "KOBJ-APPL-006", "Heavy - low storage", "appliance", 920, 704, 13, 12.5),
+      item("KOBJ-APPL-007", "Dehydrator", "Food dehydrator, exact model pending", "KOBJ-APPL-007", "Occasional-use appliance", "appliance", 986, 704, 13, 13),
+      item("KOBJ-APPL-008", "Ice Maker", "Countertop ice maker, exact model pending", "KOBJ-APPL-008", "Water + outlet needed", "appliance", 1048, 696, 10, 15),
+      item("KOBJ-APPL-009", "Mini Fridge", "Mini fridge, exact model pending", "KOBJ-APPL-009", "Outlet + ventilation needed", "cold", 980, 520, 18, 20),
+      item("KOBJ-UTIL-001", "Trash Barrel", "Kitchen trash barrel, exact size pending", "KOBJ-UTIL-001", "Workflow clearance", "pending", 650, 170, 13, 16),
+      item("KOBJ-WATER-001", "Big Berkey", "Big Berkey stainless stand bundle", "KOBJ-WATER-001", "8.25 in dia / 24.25 in tall on stand", "appliance", 874, 664, 8.25, 8.25)
+    ].map(applyStartingRotation);
+
+    let items = loadItems();
+    let active = null;
+    let selected = null;
+
+    function loadItems() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(storageKey));
+        if (Array.isArray(saved) && saved.length) return mergeSavedItems(saved);
+      } catch (_) {}
+      return structuredClone(startingItems);
+    }
+
+    function item(id, label, product, code, hint, type, x, y, widthIn, depthIn, shelves = false, subzones = []) {
+      return {
+        id,
+        label,
+        product,
+        code,
+        hint,
+        type,
+        x,
+        y,
+        widthIn,
+        depthIn,
+        w: Math.round(widthIn * scale),
+        h: Math.round(depthIn * scale),
+        shelves,
+        subzones,
+        rotated: false
+      };
+    }
+
+    function applyStartingRotation(item) {
+      const rotatedItems = new Set(["KO-B", "KO-D", "KC-B"]);
+      if (!rotatedItems.has(item.id)) return item;
+      return {
+        ...item,
+        w: item.h,
+        h: item.w,
+        rotated: true
+      };
+    }
+
+    function mergeSavedItems(saved) {
+      return startingItems.map((base) => {
+        const stored = saved.find((entry) => entry.id === base.id) || {};
+        const rotated = Boolean(stored.rotated);
+        const dimensions = rotated ? { w: base.h, h: base.w } : { w: base.w, h: base.h };
+        return {
+          ...base,
+          x: Number.isFinite(stored.x) ? stored.x : base.x,
+          y: Number.isFinite(stored.y) ? stored.y : base.y,
+          rotated,
+          ...dimensions
+        };
+      });
+    }
+
+    function render() {
+      board.querySelectorAll(".item").forEach((node) => node.remove());
+      items.forEach((item) => {
+        const node = document.createElement("div");
+        node.className = `item ${item.type}`;
+        node.dataset.id = item.id;
+        node.dataset.dimensions = dimensionLabel(item);
+        node.title = `${item.label} - ${item.product} - ${item.code} - ${dimensionLabel(item)}`;
+        node.tabIndex = 0;
+        node.style.left = `${item.x}px`;
+        node.style.top = `${item.y}px`;
+        node.style.setProperty("--w", `${item.w}px`);
+        node.style.setProperty("--h", `${item.h}px`);
+        node.innerHTML = `
+          ${item.shelves ? '<span class="shelf-lines" aria-hidden="true"><i></i><i></i><i></i></span>' : ""}
+          <span>
+            <span class="label">${escapeHtml(item.label)}</span>
+            <span class="product">${escapeHtml(item.product)}</span>
+            <span class="code">${escapeHtml(item.code)}</span>
+            ${item.hint ? `<span class="hint">${escapeHtml(item.hint)}</span>` : ""}
+            ${item.subzones?.length ? `<span class="subzones">${item.subzones.map(escapeHtml).join("<br>")}</span>` : ""}
+          </span>
+        `;
+        node.addEventListener("pointerdown", onPointerDown);
+        node.addEventListener("keydown", onKeyDown);
+        board.appendChild(node);
+      });
+    }
+
+    function onPointerDown(event) {
+      const node = event.currentTarget;
+      const item = items.find((entry) => entry.id === node.dataset.id);
+      select(node);
+      active = {
+        node,
+        item,
+        pointerId: event.pointerId,
+        startX: event.clientX,
+        startY: event.clientY,
+        itemX: item.x,
+        itemY: item.y
+      };
+      node.classList.add("dragging");
+      node.setPointerCapture(event.pointerId);
+      node.addEventListener("pointermove", onPointerMove);
+      node.addEventListener("pointerup", onPointerUp, { once: true });
+      node.addEventListener("pointercancel", onPointerUp, { once: true });
+    }
+
+    function onPointerMove(event) {
+      if (!active) return;
+      const dx = event.clientX - active.startX;
+      const dy = event.clientY - active.startY;
+      active.item.x = clamp(Math.round((active.itemX + dx) / 5) * 5, 0, 1120 - active.item.w);
+      active.item.y = clamp(Math.round((active.itemY + dy) / 5) * 5, 0, 780 - active.item.h);
+      active.node.style.left = `${active.item.x}px`;
+      active.node.style.top = `${active.item.y}px`;
+    }
+
+    function onPointerUp() {
+      if (!active) return;
+      active.node.classList.remove("dragging");
+      active.node.removeEventListener("pointermove", onPointerMove);
+      save("Saved locally");
+      active = null;
+    }
+
+    function onKeyDown(event) {
+      const item = items.find((entry) => entry.id === event.currentTarget.dataset.id);
+      const step = event.shiftKey ? 20 : 5;
+      if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
+      event.preventDefault();
+      if (event.key === "ArrowLeft") item.x = clamp(item.x - step, 0, 1120 - item.w);
+      if (event.key === "ArrowRight") item.x = clamp(item.x + step, 0, 1120 - item.w);
+      if (event.key === "ArrowUp") item.y = clamp(item.y - step, 0, 780 - item.h);
+      if (event.key === "ArrowDown") item.y = clamp(item.y + step, 0, 780 - item.h);
+      event.currentTarget.style.left = `${item.x}px`;
+      event.currentTarget.style.top = `${item.y}px`;
+      save("Saved locally");
+    }
+
+    function select(node) {
+      if (selected) selected.classList.remove("selected");
+      selected = node;
+      selected.classList.add("selected");
+      selected.focus({ preventScroll: true });
+    }
+
+    function rotateSelected() {
+      if (!selected) {
+        status.textContent = "Select a piece first";
+        return;
+      }
+      const item = items.find((entry) => entry.id === selected.dataset.id);
+      item.rotated = !item.rotated;
+      [item.w, item.h] = [item.h, item.w];
+      item.x = clamp(item.x, 0, 1120 - item.w);
+      item.y = clamp(item.y, 0, 780 - item.h);
+      selected.style.left = `${item.x}px`;
+      selected.style.top = `${item.y}px`;
+      selected.style.setProperty("--w", `${item.w}px`);
+      selected.style.setProperty("--h", `${item.h}px`);
+      selected.dataset.dimensions = dimensionLabel(item);
+      save("Rotated and saved");
+    }
+
+    function exportPositions(show = true) {
+      const payload = {
+        updatedAt: new Date().toISOString(),
+        scale: "1 inch = 4 pixels",
+        board: { width: 1120, height: 780, grid: "12 in" },
+        items: items.map(({ id, label, product, code, subzones, x, y, w, h, widthIn, depthIn, rotated }) => ({ id, label, product, code, subzones, x, y, w, h, widthIn, depthIn, rotated }))
+      };
+      output.value = JSON.stringify(payload, null, 2);
+      output.style.display = show ? "block" : "none";
+      return output.value;
+    }
+
+    function save(message = "Saved") {
+      localStorage.setItem(storageKey, JSON.stringify(items));
+      exportPositions(false);
+      status.textContent = `${message} at ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+    }
+
+    function reset() {
+      items = structuredClone(startingItems);
+      localStorage.removeItem(storageKey);
+      render();
+      save("Reset");
+    }
+
+    function dimensionLabel(item) {
+      const width = formatInches(item.widthIn);
+      const depth = formatInches(item.depthIn);
+      return item.rotated ? `${depth}D x ${width}W rotated` : `${width}W x ${depth}D`;
+    }
+
+    function formatInches(value) {
+      return Number.isInteger(value) ? `${value} in` : `${Number(value).toFixed(3).replace(/0+$/, "").replace(/\.$/, "")} in`;
+    }
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    document.querySelector("#save").addEventListener("click", () => save("Saved locally"));
+    document.querySelector("#rotate").addEventListener("click", rotateSelected);
+    document.querySelector("#export").addEventListener("click", () => {
+      exportPositions(true);
+      status.textContent = "Export shown below";
+    });
+    document.querySelector("#copy").addEventListener("click", async () => {
+      const text = exportPositions(true);
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = "Export copied";
+      } catch (_) {
+        output.select();
+        status.textContent = "Export shown below; copy from the text box";
+      }
+    });
+    document.querySelector("#reset").addEventListener("click", reset);
+
+    render();
+    exportPositions(false);
+  </script>
+</body>
+</html>

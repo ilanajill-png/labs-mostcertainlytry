@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Left Pantry 4-Zone Diagram</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5c667a;
+      --line: #b8c2d6;
+      --panel: #f8fafc;
+      --pantry: #fff8ea;
+      --active: #dbeafe;
+      --stock: #dcfce7;
+      --heavy: #fde68a;
+      --cobalt: #1143a8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #ffffff;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 18px 36px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 14px;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #fff;
+      border: 1px solid #d8dfec;
+    }
+
+    .cabinet {
+      fill: var(--pantry);
+      stroke: var(--ink);
+      stroke-width: 2;
+    }
+
+    .shelf {
+      stroke: var(--ink);
+      stroke-width: 2;
+    }
+
+    .zone-one {
+      fill: #eef6ff;
+    }
+
+    .zone-two {
+      fill: #f1f8e9;
+    }
+
+    .zone-three {
+      fill: #fff7ed;
+    }
+
+    .zone-four {
+      fill: #fef3c7;
+    }
+
+    .label {
+      fill: var(--ink);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .code {
+      fill: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .note {
+      fill: var(--muted);
+      font-size: 15px;
+    }
+
+    .title {
+      fill: var(--cobalt);
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .legend-title {
+      fill: var(--ink);
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .legend-text {
+      fill: var(--muted);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Left Pantry 4-Zone Diagram</h1>
+    <p>Human-facing shelf names for the active pantry. Inventory codes remain in parentheses for tracking.</p>
+
+    <div class="wrap">
+      <svg viewBox="0 0 860 760" role="img" aria-labelledby="title desc">
+        <title id="title">Left Pantry four shelf zone diagram</title>
+        <desc id="desc">A tall pantry cabinet divided into four shelves named Left Pantry Shelf 1 through Shelf 4 from top to bottom.</desc>
+
+        <text x="48" y="56" class="title">Left Pantry</text>
+        <text x="48" y="82" class="note">Active pantry cabinet; use Shelf 1 through Shelf 4 from top to bottom.</text>
+
+        <rect x="80" y="120" width="360" height="560" rx="4" class="cabinet"></rect>
+
+        <rect x="92" y="132" width="336" height="128" class="zone-one"></rect>
+        <rect x="92" y="264" width="336" height="128" class="zone-two"></rect>
+        <rect x="92" y="396" width="336" height="128" class="zone-three"></rect>
+        <rect x="92" y="528" width="336" height="140" class="zone-four"></rect>
+
+        <line x1="80" y1="262" x2="440" y2="262" class="shelf"></line>
+        <line x1="80" y1="394" x2="440" y2="394" class="shelf"></line>
+        <line x1="80" y1="526" x2="440" y2="526" class="shelf"></line>
+
+        <text x="122" y="180" class="label">Left Pantry - Shelf 1</text>
+        <text x="122" y="207" class="code">KP-A-S1</text>
+        <text x="122" y="232" class="note">Breakfast + baking active</text>
+
+        <text x="122" y="312" class="label">Left Pantry - Shelf 2</text>
+        <text x="122" y="339" class="code">KP-A-S2</text>
+        <text x="122" y="364" class="note">Daily staples + snacks</text>
+
+        <text x="122" y="444" class="label">Left Pantry - Shelf 3</text>
+        <text x="122" y="471" class="code">KP-A-S3</text>
+        <text x="122" y="496" class="note">Active cans + jars</text>
+
+        <text x="122" y="584" class="label">Left Pantry - Shelf 4</text>
+        <text x="122" y="611" class="code">KP-A-S4</text>
+        <text x="122" y="636" class="note">Active grains + liquids</text>
+
+        <rect x="510" y="150" width="280" height="260" rx="4" fill="#ffffff" stroke="#c8d2e4"></rect>
+        <text x="535" y="188" class="legend-title">Use these names</text>
+        <text x="535" y="224" class="legend-text">Left Pantry - Shelf 1</text>
+        <text x="535" y="254" class="legend-text">Left Pantry - Shelf 2</text>
+        <text x="535" y="284" class="legend-text">Left Pantry - Shelf 3</text>
+        <text x="535" y="314" class="legend-text">Left Pantry - Shelf 4</text>
+        <text x="535" y="360" class="legend-title">Keep codes in records</text>
+        <text x="535" y="392" class="legend-text">KP-A-S1 through KP-A-S4</text>
+
+        <rect x="510" y="450" width="280" height="148" rx="4" fill="#ffffff" stroke="#c8d2e4"></rect>
+        <text x="535" y="488" class="legend-title">Rotation rule</text>
+        <text x="535" y="524" class="legend-text">Soonest expiration in front.</text>
+        <text x="535" y="554" class="legend-text">Unopened duplicates behind.</text>
+      </svg>
+    </div>
+  </main>
+</body>
+</html>
