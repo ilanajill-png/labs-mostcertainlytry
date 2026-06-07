@@ -26,10 +26,38 @@
         "moonPhase": "Waning Gibbous",
         "moonIllumination": "74%"
       },
-      "tarot": {
-        "card": "The High Priestess",
-        "reading": "I observe the quiet pattern; the garden has not finished speaking."
-      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The High Priestess",
+          "reading": "I observe the quiet pattern; the garden has not finished speaking."
+        },
+        {
+          "position": "Weather",
+          "card": "The Empress",
+          "reading": "I tend growth, water, shade, and the beings who depend on them."
+        },
+        {
+          "position": "Garden",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Household",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Warning",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        }
+      ],
       "note": "I begin this archive by listening before I command. The heat has opinions, the garden has unfinished speech, and I will let evidence outrank drama."
     }
   },
