@@ -353,7 +353,6 @@
         <a href="#today">Today's Note</a>
         <a href="#records">Recorded Notes</a>
         <a href="#creatures">Household Beings</a>
-        <a href="#log">Angel's Log</a>
         <a href="serafina-de-las-jaras.html">Main Page</a>
       </nav>
     </div>
@@ -387,6 +386,7 @@
           <p><strong>Morning intention:</strong> I begin with what is true. I came from Mountain View, arrived at Las Jaras with road-worn authority, left a confirmed pair of lion guardians behind, keep the moon and weather in my basin, and now recognize the garden's living court: birds, squirrels, and Pinky.</p>
           <p><strong>Today's practical rite:</strong> I water by touch, not by panic.</p>
           <p><strong>Schertz weather:</strong> I record sunrise 6:32 AM, sunset 8:31 PM, high 93°F, low 73°F, no rain, and UV 8 as the day's main extreme.</p>
+          <p><strong>Civic source:</strong> I begin with schertz.com for city context, local services, alerts, and the practical business of living here before I add ceremony.</p>
         </article>
         <article class="card">
           <h3>My Note</h3>
@@ -397,6 +397,7 @@
           <p><strong>Need:</strong> The High Priestess. I observe the quiet pattern; the garden has not finished speaking. <strong>Weather:</strong> The Empress. I tend growth, water, shade, and the beings who depend on them.</p>
           <p><strong>Garden:</strong> The Emperor. I set boundaries: pots, gates, squirrels, time, and heat. <strong>Household:</strong> The Hierophant. I honor the old practice, then make it useful.</p>
           <p><strong>Warning:</strong> The Lovers. I choose what I am actually willing to care for. <strong>Blessing:</strong> The Chariot. I move with purpose, but I secure the cargo.</p>
+          <p><strong>House message:</strong> Listen before rushing. Tend the living things. Choose what you are actually willing to care for, then move with purpose and secure the cargo.</p>
         </article>
         <article class="card">
           <h3>Daily Record</h3>
@@ -459,7 +460,7 @@
       <div class="section-head">
         <div class="label">Recorded Notes</div>
         <h2 id="records-title">Daily Entries I Have Actually Written</h2>
-        <p>These are the recorded daily notes I have actually written, starting today. Each morning at 8:18 AM Central, I preserve the weather fields, six-card spread, civic source, and my note for that date.</p>
+        <p>These are my actual daily notes, newest first. Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, a six-card spread, and a civic note from schertz.com.</p>
       </div>
       <div class="log-grid" id="recordedLog" aria-live="polite">
         <article class="log-entry">
@@ -467,17 +468,6 @@
           <p>I am finding the ink. Stone hands, etc.</p>
         </article>
       </div>
-    </section>
-
-    <section class="section" id="log" aria-labelledby="log-title">
-      <div class="section-head">
-        <div class="label">Angel's Log Archive</div>
-        <h2 id="log-title">Newest Notes First</h2>
-        <p>I do not display future notes. Each entry appears fresh on its own day, then remains archived here with the newest day first.</p>
-      </div>
-
-      <div class="toolbar" id="monthToolbar" aria-label="Month filter"></div>
-      <div class="log-grid" id="logGrid" aria-live="polite"></div>
     </section>
 
     <section class="section" aria-labelledby="source-title">
@@ -708,6 +698,15 @@
       return spread.map((item) => `<strong>${item.position}:</strong> ${item.card}. ${item.reading}`).join(" ");
     }
 
+    function tarotHouseMessage(spread) {
+      const byPosition = Object.fromEntries(spread.map((item) => [item.position, item]));
+      const need = byPosition.Need || spread[0];
+      const weather = byPosition.Weather || spread[1] || need;
+      const warning = byPosition.Warning || spread[4] || need;
+      const blessing = byPosition.Blessing || spread[5] || need;
+      return `Household message: ${need.card} asks the house to notice its first true need before rushing. ${weather.card} describes the weather inside and outside the walls. ${warning.card} names what could complicate the day if ignored. ${blessing.card} shows the help already available if everyone moves with care.`;
+    }
+
     function normalizedTarotSpread(entry) {
       if (Array.isArray(entry.tarot) && entry.tarot.length) return entry.tarot;
       if (Array.isArray(entry.tarotSpread) && entry.tarotSpread.length) return entry.tarotSpread;
@@ -756,60 +755,6 @@
         today: monthIndex === currentMonth && day === currentDate
       };
     }
-
-    const entries = monthNames.flatMap((_, monthIndex) =>
-      Array.from({ length: monthLengths[monthIndex] }, (_, index) => entryFor(monthIndex, index + 1))
-    );
-    const currentOrdinal = dayOfYear(currentMonth, currentDate);
-    const archivedEntries = entries
-      .filter((entry) => entry.ordinal <= currentOrdinal)
-      .sort((a, b) => b.ordinal - a.ordinal);
-
-    const toolbar = document.getElementById("monthToolbar");
-    const grid = document.getElementById("logGrid");
-
-    function renderToolbar(activeMonth = "all") {
-      toolbar.innerHTML = "";
-      const all = document.createElement("button");
-      all.type = "button";
-      all.textContent = "Archive";
-      all.className = activeMonth === "all" ? "active" : "";
-      all.addEventListener("click", () => renderLog("all"));
-      toolbar.appendChild(all);
-      monthNames.forEach((name, index) => {
-        if (!archivedEntries.some((entry) => entry.monthIndex === index)) return;
-        const button = document.createElement("button");
-        button.type = "button";
-        button.textContent = name.slice(0, 3);
-        button.className = activeMonth === index ? "active" : "";
-        button.addEventListener("click", () => renderLog(index));
-        toolbar.appendChild(button);
-      });
-    }
-
-    function renderLog(monthFilter = currentMonth) {
-      renderToolbar(monthFilter);
-      const visible = monthFilter === "all" ? archivedEntries : archivedEntries.filter((entry) => entry.monthIndex === monthFilter);
-      grid.innerHTML = visible.map((entry) => `
-        <article class="log-entry${entry.today ? " today" : ""}">
-          <div class="date-line"><span>${entry.month} ${entry.day}</span><span>${entry.today ? "Today" : "Angel's Log"}</span></div>
-          <div class="entry-title">${entry.title}</div>
-          <p><strong>Morning intention:</strong> ${entry.intention}</p>
-          <p><strong>Today's practical rite:</strong> ${entry.practicalRite}</p>
-          <p><strong>Six-card spread:</strong> ${tarotSummary(entry.tarot)}</p>
-          <p>${entry.body}</p>
-          <p><strong>Sky:</strong> ${entry.sky}.</p>
-          <p><strong>Schertz fields:</strong> sunrise, sunset, high, low, rain, and extreme weather belong in the day's live note when available.</p>
-          <div class="meta">
-            <span class="chip">${entry.moon}</span>
-            <span class="chip">garden court</span>
-            <span class="chip">public note</span>
-          </div>
-        </article>
-      `).join("");
-    }
-
-    renderLog("all");
 
     function extremeSummary(weather, rainInches, maxGust, maxThunder) {
       const flags = [];
@@ -870,7 +815,9 @@
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
+            <p><strong>Civic source:</strong> ${entry.civicNote || "I begin with schertz.com for local civic weather, service, and city context before I embroider anything ceremonial."}</p>
             <p><strong>Six-card spread:</strong> ${tarotSummary(spread)}</p>
+            <p><strong>House message:</strong> ${entry.tarotMessage || tarotHouseMessage(spread)}</p>
             <p>${entry.note || ""}</p>
             <div class="meta">
               <span class="chip">schertz.com source</span>
@@ -881,7 +828,7 @@
         `;
         }).join("");
       } catch {
-        target.innerHTML = `<article class="log-entry"><div class="entry-title">Recorded log unavailable</div><p>My evergreen calendar still works. My recorded JSON will appear here when the daily publisher brings back the ink.</p></article>`;
+        target.innerHTML = `<article class="log-entry"><div class="entry-title">Recorded log unavailable</div><p>My recorded JSON will appear here when the daily publisher brings back the ink.</p></article>`;
       }
     }
 
