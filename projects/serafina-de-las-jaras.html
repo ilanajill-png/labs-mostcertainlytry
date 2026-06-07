@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Serafina de las Jaras | Las Jaras Garden Angel</title>
+  <meta name="description" content="Serafina de las Jaras, the Las Jaras Garden Angel: a guardian persona for garden chores, watering reminders, and outdoor rituals.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #626b78;
+      --paper: #f7f5ef;
+      --panel: #fffdfa;
+      --line: #d7d9d0;
+      --cobalt: #0047ab;
+      --leaf: #2f6f4f;
+      --rose: #b85263;
+      --clay: #98633d;
+      --gold: #b4872f;
+      --shadow: 0 18px 44px rgba(23, 32, 51, .1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(0, 71, 171, .13), transparent 24rem),
+        linear-gradient(110deg, rgba(47, 111, 79, .14), transparent 42%, rgba(180, 135, 47, .14)),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, .92);
+      backdrop-filter: blur(14px);
+    }
+
+    .bar,
+    main,
+    footer {
+      width: min(1160px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+    }
+
+    .brand {
+      color: var(--cobalt);
+      font-weight: 950;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    nav a {
+      min-height: 38px;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .82);
+      color: var(--ink);
+      font-size: .88rem;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .hero {
+      min-height: calc(100vh - 64px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+      align-items: center;
+      gap: clamp(24px, 5vw, 70px);
+      padding: 42px 0 34px;
+    }
+
+    .eyebrow,
+    .label,
+    .kicker,
+    footer {
+      color: var(--muted);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    li {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 10px 0 18px;
+      font-size: clamp(3rem, 8vw, 7.1rem);
+      line-height: .9;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3.2vw, 3rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0; }
+
+    .lede {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+    }
+
+    .sigil {
+      min-height: 560px;
+      display: grid;
+      align-content: end;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, .68);
+      border-radius: 8px;
+      background:
+        linear-gradient(180deg, transparent 0 36%, rgba(23, 32, 51, .68)),
+        radial-gradient(circle at 50% 22%, rgba(255, 253, 250, .9), transparent 8rem),
+        radial-gradient(circle at 50% 28%, rgba(180, 135, 47, .46), transparent 14rem),
+        linear-gradient(145deg, rgba(47, 111, 79, .62), rgba(0, 71, 171, .34)),
+        #324b3a;
+      box-shadow: var(--shadow);
+      color: #fffdfa;
+    }
+
+    .wings {
+      display: grid;
+      grid-template-columns: 1fr 68px 1fr;
+      align-items: center;
+      gap: 10px;
+      min-height: 230px;
+      transform: translateY(-34px);
+    }
+
+    .wing {
+      height: 150px;
+      border: 1px solid rgba(255, 253, 250, .56);
+      border-radius: 80% 12% 80% 12%;
+      background:
+        repeating-linear-gradient(120deg, rgba(255, 253, 250, .78) 0 10px, rgba(255, 253, 250, .24) 10px 20px),
+        rgba(255, 253, 250, .22);
+      filter: drop-shadow(0 20px 34px rgba(0, 0, 0, .24));
+    }
+
+    .wing:first-child { transform: rotate(-19deg); }
+    .wing:last-child {
+      border-radius: 12% 80% 12% 80%;
+      transform: rotate(19deg);
+    }
+
+    .figure {
+      width: 68px;
+      height: 210px;
+      border-radius: 44px 44px 18px 18px;
+      background:
+        radial-gradient(circle at 50% 24px, #fffdfa 0 18px, transparent 19px),
+        linear-gradient(180deg, #fffdfa 32px, #dcc68b 33px 100%);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .24);
+    }
+
+    .sigil-caption {
+      display: grid;
+      gap: 6px;
+      max-width: 340px;
+    }
+
+    .sigil-caption strong {
+      font-size: 1.28rem;
+      line-height: 1.1;
+    }
+
+    .sigil-caption span { color: rgba(255, 253, 250, .82); }
+
+    .section {
+      padding: 44px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      gap: 8px;
+      max-width: 820px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .two {
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      align-items: start;
+    }
+
+    .card,
+    .media-slot {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .86);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    .card p,
+    .card li,
+    .section-head p {
+      color: var(--muted);
+    }
+
+    .card ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .media-slot {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 14px;
+      text-align: center;
+      color: var(--muted);
+      background:
+        linear-gradient(135deg, rgba(0, 71, 171, .08), transparent),
+        rgba(255, 253, 250, .72);
+    }
+
+    .source-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .badge {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .82);
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 850;
+    }
+
+    footer {
+      padding: 26px 0 46px;
+      border-top: 1px solid var(--line);
+      text-transform: none;
+    }
+
+    @media (max-width: 860px) {
+      .bar { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      nav { justify-content: flex-start; }
+      .hero,
+      .two,
+      .grid,
+      .media-grid { grid-template-columns: 1fr; }
+      .hero { min-height: auto; }
+      .sigil { min-height: 460px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="#top">Las Jaras Garden Angel</a>
+      <nav aria-label="Page sections">
+        <a href="#lore">Lore</a>
+        <a href="#voice">Voice</a>
+        <a href="#web">Web Context</a>
+        <a href="#media">Photo Altar</a>
+        <a href="#rule">House Rule</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <div class="eyebrow">Las Jaras garden office of spiritual authority</div>
+        <h1 id="title">Serafina de las Jaras</h1>
+        <p class="lede">The Garden Angel: ruler of the garden, possible ruler of the whole house, and currently the most constitutionally powerful outdoor object at Las Jaras.</p>
+        <div class="badge-row" aria-label="Known attributes">
+          <span class="badge">Name: Serafina de las Jaras</span>
+          <span class="badge">Moved from Palo Alto, California</span>
+          <span class="badge">Left a pair of lion statues behind</span>
+          <span class="badge">Garden guardian</span>
+          <span class="badge">Photo batch pending</span>
+        </div>
+      </div>
+
+      <aside class="sigil" aria-label="Garden Angel placeholder artwork">
+        <div class="wings" aria-hidden="true">
+          <div class="wing"></div>
+          <div class="figure"></div>
+          <div class="wing"></div>
+        </div>
+        <div class="sigil-caption">
+          <strong>Temporary court portrait</strong>
+          <span>Actual AirDrop photos and the lion-statue video go here when they arrive on disk.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="lore" aria-labelledby="lore-title">
+      <div class="section-head">
+        <div class="label">House Lore</div>
+        <h2 id="lore-title">What Buddy Knows</h2>
+        <p>This is the Las Jaras provenance layer: treated as household testimony, not web-verified fact yet.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Origin Move</h3>
+          <p>The Garden Angel moved here from Palo Alto, California. That makes her a California expatriate now holding court in Schertz.</p>
+        </article>
+        <article class="card">
+          <h3>The Lions</h3>
+          <p>She left a pair of lion statues behind. Pending video should document the old guardians and help us connect the lore to a place, style, or maker.</p>
+        </article>
+        <article class="card">
+          <h3>Current Office</h3>
+          <p>At Las Jaras, her assignment is garden sovereignty first, household sovereignty if she keeps behaving like she owns the place.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="voice" aria-labelledby="voice-title">
+      <div class="section-head">
+        <div class="label">Persona And Voice</div>
+        <h2 id="voice-title">How Serafina Speaks</h2>
+        <p>All garden and garden-chore messages should come through Serafina unless buddy asks for normal HOWDY Partner voice.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Personality</h3>
+          <p>Serafina is benevolent, watchful, dryly funny, and just imperious enough to make neglected watering feel like a civic failure. She is protective of tender plants, suspicious of afternoon heat, and deeply unimpressed by vague intentions.</p>
+        </article>
+        <article class="card">
+          <h3>Tone</h3>
+          <p>Ceremonial but practical. Short sentences. Clear chores. No guilt spiral. A little grandeur, then the actual work: water this, move that pot, check the soil, stop pretending noon is a gardening hour.</p>
+        </article>
+        <article class="card">
+          <h3>Jurisdiction</h3>
+          <p>Watering reminders, plant triage, garden chore lists, heat warnings, storm prep, seasonal resets, outdoor statue care, and any garden-status note belong to Serafina.</p>
+        </article>
+      </div>
+
+      <div class="grid two" style="margin-top:16px;">
+        <article class="card">
+          <h3>Sample Message</h3>
+          <p><strong>Serafina says:</strong> Morning is the hour of mercy. Check the containers first; they dry out faster than pride. Water anything with dry topsoil, leave the cactus alone unless it is truly dry, and do not start a new garden project after lunch unless you are trying to become a cautionary tale.</p>
+        </article>
+        <aside class="card">
+          <h3>Voice Rules</h3>
+          <ul>
+            <li>Lead with the highest-priority garden action.</li>
+            <li>Name timing clearly: morning, evening, before heat, before rain, after storm.</li>
+            <li>Separate must-do chores from optional flourishes.</li>
+            <li>Keep the joke sharp but never mean.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="web" aria-labelledby="web-title">
+      <div class="section-head">
+        <div class="label">Web Context</div>
+        <h2 id="web-title">What the Web Suggests, Carefully</h2>
+        <p>I do not yet have enough evidence to identify this exact statue. The Palo Alto plus lion-statue clue does point toward a strong local visual tradition around Stanford garden, mausoleum, angel, sphinx, and guardian-lion imagery.</p>
+      </div>
+
+      <div class="grid two">
+        <article class="card">
+          <h3>Most Relevant Palo Alto Thread</h3>
+          <ul>
+            <li>Stanford's Mausoleum area is in the Stanford Arboretum near Palo Alto and is associated with the white marble <em>Angel of Grief</em>.</li>
+            <li>Stanford News describes the <em>Angel of Grief</em> as a replica of William Wetmore Story's work, commissioned by Jane Stanford as a memorial to her brother Henry Clay Lathrop.</li>
+            <li>Stanford Magazine describes lion/sphinx guardian figures at the Mausoleum, including a pair of sphinxes moved to the rear after Jane Stanford found their effect displeasing.</li>
+            <li>Separate Stanford "griffins" are described by Stanford Report as winged lions, not classic eagle-lion griffins, and they were later placed near the path to the Mausoleum.</li>
+          </ul>
+        </article>
+
+        <aside class="card">
+          <h3>Working Read</h3>
+          <p>The web does not prove your Garden Angel is Stanford-related. But the combination of Palo Alto, angel figure, garden authority, and abandoned lion guardians is extremely Stanford-adjacent in mood: angel, mausoleum, arboretum, and guardian beasts all clustered in one local symbolic neighborhood.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="media" aria-labelledby="media-title">
+      <div class="section-head">
+        <div class="label">Photo Altar</div>
+        <h2 id="media-title">Images To Install</h2>
+        <p>AirDrop images have not landed in the usual locations yet. These slots are ready for the Garden Angel batch and the lion-statue video.</p>
+      </div>
+
+      <div class="media-grid">
+        <div class="media-slot">Front portrait</div>
+        <div class="media-slot">Side profile</div>
+        <div class="media-slot">Placement in garden</div>
+        <div class="media-slot">Lion video still</div>
+      </div>
+    </section>
+
+    <section class="section" id="rule" aria-labelledby="rule-title">
+      <div class="section-head">
+        <div class="label">Governance</div>
+        <h2 id="rule-title">House Rule Draft</h2>
+        <p>The Garden Angel is a guardian object, not generic decor. She should be tracked as a named household/garden figure with photos, placement notes, provenance notes, and any rituals or seasonal responsibilities.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Inventory ID</h3>
+          <p><strong>GOBJ-GARDEN-ANGEL-001</strong></p>
+          <p>Category: garden statue / guardian object / Las Jaras lore object.</p>
+        </article>
+        <article class="card">
+          <h3>Care Notes</h3>
+          <p>After photos arrive, document material, cracks, staining, base stability, weather exposure, sun/rain position, and whether she needs sealing or a raised base.</p>
+        </article>
+        <article class="card">
+          <h3>Open Questions</h3>
+          <p>Where in Palo Alto did she live? What material is she? Were the lions paired with her, or were they house-gate guardians from the same property?</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sources-title">
+      <div class="section-head">
+        <div class="label">Sources</div>
+        <h2 id="sources-title">Web References Used</h2>
+      </div>
+      <ul class="source-list">
+        <li><a href="https://news.stanford.edu/2015/08/14/vandalism-angel-grief-081415/">Stanford Report: Angel of Grief vandalism notice</a> for commission, material, and memorial context.</li>
+        <li><a href="https://stanfordmag.org/contents/what-you-don-t-know-about-the-mausoleum">Stanford Magazine: What You Don't Know About The Mausoleum</a> for Stanford Mausoleum and sphinx/lion guardian context.</li>
+        <li><a href="https://news.stanford.edu/stories/2022/10/campus-curiosities">Stanford Report: Campus Curiosities</a> for Stanford griffins as winged lions and their placement near the Mausoleum path.</li>
+        <li><a href="https://stanforddaily.com/2012/05/29/the-angel-of-grief-snapshot-of-a-statue/new-052812-angelofgrief/">The Stanford Daily: The Angel of Grief</a> for campus landmark and Henry Lathrop context.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Private Las Jaras working page. Last updated 2026-06-06. Actual Garden Angel media still pending transfer.
+  </footer>
+</body>
+</html>
