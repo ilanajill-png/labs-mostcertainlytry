@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Human-Informed Field Log | Serafina de las Jaras</title>
+  <meta name="description" content="An accessible public form for telling Serafina de las Jaras what happened at Las Jaras, saving human-informed field notes, and receiving a practical suggestion.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #596573;
+      --paper: #f7f5ef;
+      --panel: #fffdfa;
+      --field: #ffffff;
+      --line: #cfd7d1;
+      --cobalt: #0047ab;
+      --leaf: #245f47;
+      --gold: #9f7424;
+      --rose: #9f3d56;
+      --focus: #111827;
+      --shadow: 0 16px 34px rgba(23, 32, 51, .09);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(120deg, rgba(0, 71, 171, .08), transparent 42%),
+        linear-gradient(250deg, rgba(36, 95, 71, .1), transparent 42%),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 50;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, .94);
+      backdrop-filter: blur(12px);
+    }
+
+    .bar,
+    main,
+    footer {
+      width: min(1120px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+    }
+
+    .brand {
+      color: var(--cobalt);
+      font-weight: 950;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    nav a,
+    button,
+    .button {
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    button,
+    .button {
+      cursor: pointer;
+    }
+
+    button.primary {
+      border-color: var(--leaf);
+      background: var(--leaf);
+      color: #fff;
+    }
+
+    button.danger {
+      border-color: rgba(159, 61, 86, .55);
+      color: var(--rose);
+    }
+
+    :focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 18px;
+      padding: 48px 0 26px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker,
+    .label,
+    footer {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    li,
+    label,
+    legend {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(2.7rem, 7vw, 6.4rem);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.7rem, 3vw, 2.7rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0; }
+
+    .lede {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.7vw, 1.28rem);
+    }
+
+    .status-note {
+      max-width: 880px;
+      padding: 16px;
+      border-left: 4px solid var(--gold);
+      background: rgba(255, 253, 250, .72);
+      color: var(--muted);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      gap: 18px;
+      align-items: start;
+      padding: 28px 0 48px;
+    }
+
+    form,
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .9);
+      box-shadow: var(--shadow);
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    fieldset {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0 0 18px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    fieldset:last-of-type { border-bottom: 0; padding-bottom: 0; }
+
+    legend {
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 1.1rem;
+      font-weight: 950;
+    }
+
+    label,
+    .field-label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 11px 12px;
+      border: 1px solid #aeb8b2;
+      border-radius: 8px;
+      background: var(--field);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 138px;
+      resize: vertical;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .media-preview {
+      display: grid;
+      gap: 10px;
+      min-height: 54px;
+      padding: 12px;
+      border: 1px dashed #aeb8b2;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .64);
+    }
+
+    .media-item {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      max-height: 260px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: #111827;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      min-height: 44px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .74);
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .check input {
+      width: 20px;
+      height: 20px;
+      min-height: 20px;
+      margin: 2px 0 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 2px;
+    }
+
+    .admin-panel {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid rgba(0, 71, 171, .25);
+      border-radius: 8px;
+      background: rgba(0, 71, 171, .06);
+    }
+
+    .admin-controls[hidden] {
+      display: none;
+    }
+
+    .panel {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .suggestion {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(36, 95, 71, .38);
+      border-radius: 8px;
+      background: #eef7f1;
+    }
+
+    .suggestion b {
+      color: var(--leaf);
+      font-size: 1.1rem;
+    }
+
+    .records {
+      display: grid;
+      gap: 10px;
+    }
+
+    .record {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .76);
+    }
+
+    .record-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 850;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 71, 171, .1);
+      color: var(--cobalt);
+    }
+
+    pre {
+      max-height: 260px;
+      overflow: auto;
+      margin: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #f9fafb;
+      font-size: .9rem;
+      white-space: pre-wrap;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 24px 0 44px;
+      border-top: 1px solid var(--line);
+      text-transform: none;
+    }
+
+    @media (max-width: 900px) {
+      .bar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 0;
+      }
+
+      nav { justify-content: flex-start; }
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .two,
+      .checks { grid-template-columns: 1fr; }
+      .actions button,
+      .actions .button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#intake-form">Skip to form</a>
+
+  <header>
+    <div class="bar">
+      <a class="brand" href="serafina-de-las-jaras.html">Serafina de las Jaras</a>
+      <nav aria-label="Serafina navigation">
+        <a href="serafina-angels-log.html">Angel's Log</a>
+        <a href="serafina-sacred-calendar.html">Sacred Calendar</a>
+        <a href="../index.html">Labs Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <p class="kicker">Human-informed field note</p>
+      <h1 id="title">Tell Serafina What Happened</h1>
+      <p class="lede">Use this public form to record something a human noticed at Las Jaras, mark it as human-informed, and receive a practical Serafina suggestion.</p>
+      <p class="status-note"><strong>Privacy note:</strong> This is a public static page. Do not enter secrets, private contact details, medical information, passwords, or anything that should not be copied into a public project file. Browser-saved entries stay local until someone exports or shares them.</p>
+    </section>
+
+    <div class="layout">
+      <form id="intake-form" aria-describedby="form-help">
+        <p id="form-help" class="hint">Required fields are marked with the word required. Every saved entry includes the phrase "human informed me" so Serafina can distinguish human observation from weather, calendar, or automation notes.</p>
+
+        <fieldset>
+          <legend>What happened</legend>
+          <div class="two">
+            <label for="event-date">
+              Date observed, required
+              <input id="event-date" name="eventDate" type="date" required>
+            </label>
+            <label for="event-time">
+              Time observed
+              <input id="event-time" name="eventTime" type="time">
+            </label>
+          </div>
+
+          <div class="two">
+            <label for="informed-by">
+              What do the mortals call you? required
+              <input id="informed-by" name="informedBy" autocomplete="name" required placeholder="Example: Buddy">
+            </label>
+            <label for="location">
+              Location, required
+              <select id="location" name="location" required>
+                <option value="">Choose a location</option>
+                <option>Front yard</option>
+                <option>Back yard</option>
+                <option>Garden beds</option>
+                <option>Porch or threshold</option>
+                <option>Driveway or gate</option>
+                <option>Kitchen</option>
+                <option>Living room</option>
+                <option>Red Room</option>
+                <option>Green Room</option>
+                <option>Blue Room</option>
+                <option>Yellow Room</option>
+                <option>Green Bathroom</option>
+                <option>Blue Bathroom</option>
+                <option>Laundry Room</option>
+                <option>Garage</option>
+                <option>Whole house</option>
+                <option>Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label for="event-type">
+            Event type, required
+            <select id="event-type" name="eventType" required>
+              <option value="">Choose an event type</option>
+              <option value="plant">Plant or garden condition</option>
+              <option value="water">Water, rain, drainage, or irrigation</option>
+              <option value="creature">Bird, squirrel, Pinky, insect, or other creature</option>
+              <option value="house">Household, threshold, object, or chore</option>
+              <option value="sky">Sky, moon, heat, wind, or weather observation</option>
+              <option value="ritual">Ritual, intention, offering, or sacred calendar note</option>
+              <option value="safety">Safety, access, tripping hazard, heat risk, or urgent concern</option>
+              <option value="other">Other human observation</option>
+            </select>
+          </label>
+
+          <label for="description">
+            What should Serafina know, required
+            <textarea id="description" name="description" required maxlength="1200" placeholder="Write the observation in plain language. Example: Pinky avoided the patio after noon because the stones were hot."></textarea>
+            <span class="hint">Keep it specific: what changed, where it happened, and what a human actually saw.</span>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Photo or video</legend>
+          <label for="media-files">
+            Add a photo or video
+            <input id="media-files" name="mediaFiles" type="file" accept="image/*,video/*" multiple>
+            <span class="hint">Selected files preview here and their names, sizes, and types are saved in JSON. Because this is a static public page, the actual files stay on this device unless you separately upload, export, or share them.</span>
+          </label>
+
+          <label for="media-description">
+            Describe the photo or video for accessibility
+            <textarea id="media-description" name="mediaDescription" maxlength="800" placeholder="Example: Photo shows the west garden bed with two wilted basil plants and dry cracked soil."></textarea>
+            <span class="hint">Use this like alt text plus context: what is visible, where it is, and what Serafina should notice.</span>
+          </label>
+
+          <div class="media-preview" id="media-preview" aria-live="polite">
+            <p class="hint">No photo or video selected yet.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Who or what was affected</legend>
+          <div class="checks" role="group" aria-label="Affected beings or systems">
+            <label class="check"><input type="checkbox" name="affected" value="Pinky"> Pinky</label>
+            <label class="check"><input type="checkbox" name="affected" value="birds"> Birds</label>
+            <label class="check"><input type="checkbox" name="affected" value="squirrels"> Squirrels</label>
+            <label class="check"><input type="checkbox" name="affected" value="plants"> Plants</label>
+            <label class="check"><input type="checkbox" name="affected" value="humans"> Humans</label>
+            <label class="check"><input type="checkbox" name="affected" value="house"> House or threshold</label>
+            <label class="check"><input type="checkbox" name="affected" value="spiritual heartbeat"> Spiritual Heartbeat</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>How should Serafina treat it</legend>
+          <div class="two">
+            <label for="urgency">
+              Urgency, required
+              <select id="urgency" name="urgency" required>
+                <option value="">Choose urgency</option>
+                <option value="watch">Watch and record</option>
+                <option value="today">Handle today</option>
+                <option value="urgent">Urgent household concern</option>
+              </select>
+            </label>
+            <label for="chakra">
+              Chakra lens
+              <select id="chakra" name="chakra">
+                <option value="">Let Serafina choose</option>
+                <option>Root</option>
+                <option>Sacral</option>
+                <option>Solar Plexus</option>
+                <option>Heart</option>
+                <option>Throat</option>
+                <option>Third Eye</option>
+                <option>Crown</option>
+              </select>
+            </label>
+          </div>
+
+          <label for="follow-up">
+            Follow-up requested
+            <select id="follow-up" name="followUp">
+              <option value="none">No follow-up needed yet</option>
+              <option value="remind">Add a reminder or future check</option>
+              <option value="daily-log">Consider for Angel's Log</option>
+              <option value="maintenance">Add to a household maintenance list</option>
+              <option value="shopping">May require a supply or shopping note</option>
+            </select>
+          </label>
+        </fieldset>
+
+        <div class="actions">
+          <button class="primary" type="submit">Save Note And Suggest</button>
+        </div>
+      </form>
+
+      <aside class="panel" aria-labelledby="suggestion-title">
+        <div>
+          <p class="label">Serafina's response</p>
+          <h2 id="suggestion-title">Suggestion</h2>
+        </div>
+        <div class="suggestion" id="suggestion" role="status" aria-live="polite">
+          <b>Waiting for a human-informed note.</b>
+          <p>I am an angel, not a psychic. Tell me what happened, and I will give you my best practical read.</p>
+        </div>
+
+        <section class="admin-panel" aria-labelledby="admin-title">
+          <div>
+            <p class="label">Admin</p>
+            <h2 id="admin-title">Admin Panel</h2>
+            <p class="hint">This static-page password hides admin controls from the standard view. It is not server-side security, so do not put private material in public records.</p>
+          </div>
+          <label for="admin-password">
+            Admin password
+            <input id="admin-password" type="password" autocomplete="current-password" placeholder="Enter password">
+          </label>
+          <div class="actions">
+            <button type="button" id="unlock-admin">Unlock Admin</button>
+            <button type="button" id="lock-admin" hidden>Lock Admin</button>
+          </div>
+          <p class="hint" id="admin-status" role="status" aria-live="polite">Admin controls are hidden.</p>
+          <div class="admin-controls" id="admin-controls" hidden>
+            <section id="records" aria-labelledby="records-title">
+              <p class="label">Local tracking</p>
+              <h2 id="records-title">Saved Notes</h2>
+              <div class="records" id="record-list" aria-live="polite"></div>
+            </section>
+
+            <section aria-labelledby="json-title">
+              <h2 id="json-title">Latest JSON</h2>
+              <pre id="json-output" tabindex="0">{}</pre>
+            </section>
+
+            <div class="actions">
+              <button type="button" id="copy-latest">Copy Latest Note</button>
+              <button type="button" id="download-json">Download JSON</button>
+              <button class="danger" type="button" id="clear-records">Clear Browser Notes</button>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <span>Built as a public ADA-minded static form.</span>
+    <a href="serafina-angels-log.html">Angel's Log</a>
+    <a href="https://labs.mostcertainlytry.com/projects/serafina-human-informed-field-log.html">Public URL</a>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#intake-form");
+    const suggestionEl = document.querySelector("#suggestion");
+    const recordList = document.querySelector("#record-list");
+    const jsonOutput = document.querySelector("#json-output");
+    const copyLatest = document.querySelector("#copy-latest");
+    const downloadJson = document.querySelector("#download-json");
+    const clearRecords = document.querySelector("#clear-records");
+    const adminPassword = document.querySelector("#admin-password");
+    const unlockAdmin = document.querySelector("#unlock-admin");
+    const lockAdmin = document.querySelector("#lock-admin");
+    const adminControls = document.querySelector("#admin-controls");
+    const adminStatus = document.querySelector("#admin-status");
+    const mediaFiles = document.querySelector("#media-files");
+    const mediaPreview = document.querySelector("#media-preview");
+    const storageKey = "serafina-human-informed-field-log-v1";
+    const adminPassphrase = "serafina";
+    let mediaPreviewUrls = [];
+
+    const chakraByType = {
+      plant: "Heart",
+      water: "Sacral",
+      creature: "Heart",
+      house: "Root",
+      sky: "Third Eye",
+      ritual: "Crown",
+      safety: "Root",
+      other: "Throat"
+    };
+
+    const today = new Date();
+    document.querySelector("#event-date").value = today.toISOString().slice(0, 10);
+
+    function loadRecords() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveRecords(records) {
+      localStorage.setItem(storageKey, JSON.stringify(records));
+    }
+
+    function selectedValues(name) {
+      return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((item) => item.value);
+    }
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function setAdminOpen(isOpen) {
+      adminControls.hidden = !isOpen;
+      lockAdmin.hidden = !isOpen;
+      unlockAdmin.hidden = isOpen;
+      adminPassword.disabled = isOpen;
+      adminStatus.textContent = isOpen ? "Admin controls are visible." : "Admin controls are hidden.";
+      if (!isOpen) adminPassword.value = "";
+    }
+
+    function fileSizeLabel(bytes) {
+      if (!Number.isFinite(bytes)) return "unknown size";
+      if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+      if (bytes >= 1024) return `${Math.round(bytes / 1024)} KB`;
+      return `${bytes} bytes`;
+    }
+
+    function mediaMetadata() {
+      return [...mediaFiles.files].map((file) => ({
+        name: file.name,
+        type: file.type || "unknown",
+        sizeBytes: file.size,
+        size: fileSizeLabel(file.size),
+        lastModified: file.lastModified ? new Date(file.lastModified).toISOString() : null
+      }));
+    }
+
+    function clearMediaPreviewUrls() {
+      for (const url of mediaPreviewUrls) URL.revokeObjectURL(url);
+      mediaPreviewUrls = [];
+    }
+
+    function renderMediaPreview() {
+      clearMediaPreviewUrls();
+      const files = [...mediaFiles.files];
+      if (!files.length) {
+        mediaPreview.innerHTML = '<p class="hint">No photo or video selected yet.</p>';
+        return;
+      }
+      mediaPreview.innerHTML = files.map((file, index) => {
+        const url = URL.createObjectURL(file);
+        mediaPreviewUrls.push(url);
+        const label = `${file.name}, ${fileSizeLabel(file.size)}`;
+        if (file.type.startsWith("image/")) {
+          return `<div class="media-item"><img src="${url}" alt="Selected image preview ${index + 1}: ${escapeHtml(label)}"><p class="hint">${escapeHtml(label)}</p></div>`;
+        }
+        if (file.type.startsWith("video/")) {
+          return `<div class="media-item"><video src="${url}" controls aria-label="Selected video preview ${index + 1}: ${escapeHtml(label)}"></video><p class="hint">${escapeHtml(label)}</p></div>`;
+        }
+        return `<div class="media-item"><p>${escapeHtml(label)}</p><p class="hint">This file type can be tracked, but cannot be previewed here.</p></div>`;
+      }).join("");
+    }
+
+    function buildSuggestion(record) {
+      const type = record.eventType;
+      const urgency = record.urgency;
+      const affected = new Set(record.affected);
+      const chosenChakra = record.chakra || chakraByType[type] || "Throat";
+      const steps = [];
+
+      if (urgency === "urgent") {
+        steps.push("First: treat this as safety, not symbolism. Remove the hazard, cool the surface, block access, or call the appropriate human before ceremony gets any ideas.");
+      } else if (urgency === "today") {
+        steps.push("Do one plain action today, then record whether it helped. Serafina likes evidence almost as much as authority.");
+      } else {
+        steps.push("Watch it once more before escalating. A single note is an omen; two notes are a pattern with paperwork.");
+      }
+
+      if (type === "water") steps.push("Check by touch, clear drainage, and do not water anything merely because guilt wandered by with a hose.");
+      if (type === "plant") steps.push("Photograph the plant, check soil moisture, note sun exposure, and compare it tomorrow at the same hour.");
+      if (type === "creature") steps.push("Protect the small and tender, secure food or seedlings, and observe routes before negotiating with visitors.");
+      if (type === "sky") steps.push("Tie the sky note to a practical threshold: shade, wind prep, moon record, or heat timing.");
+      if (type === "ritual") steps.push("Keep the rite clean, small, and useful. No trip hazards, no wet floors, no mystical clutter pretending to be devotion.");
+      if (type === "house") steps.push("Return one object to order and name the threshold that needs attention.");
+      if (affected.has("Pinky")) steps.push("Pinky gets shade, water, cool footing, and right of way. This is not up for committee review.");
+
+      if (record.followUp === "remind") steps.push("Add a future check so the note does not become decorative memory.");
+      if (record.followUp === "daily-log") steps.push("This can be considered for Angel's Log if it is public-safe and house-relevant.");
+      if (record.followUp === "maintenance") steps.push("Turn it into a maintenance task with a location, owner, and next check date.");
+      if (record.followUp === "shopping") steps.push("List the exact supply before shopping. Vague needs become expensive nonsense.");
+      if (record.mediaAttachments?.length) steps.push("Use the attached media as evidence: compare the visible condition against the written note before turning one dramatic angle into a whole doctrine.");
+
+      return {
+        chakra: chosenChakra,
+        headline: `${chosenChakra} chakra reading: ${record.location || "Las Jaras"} needs ${urgency === "urgent" ? "immediate order" : urgency === "today" ? "same-day care" : "watchful tracking"}.`,
+        steps
+      };
+    }
+
+    function recordFromForm() {
+      const data = new FormData(form);
+      const record = {
+        id: `serafina-human-${Date.now()}`,
+        source: "human informed me",
+        createdAt: new Date().toISOString(),
+        eventDate: clean(data.get("eventDate")),
+        eventTime: clean(data.get("eventTime")),
+        informedBy: clean(data.get("informedBy")),
+        location: clean(data.get("location")),
+        eventType: clean(data.get("eventType")),
+        description: clean(data.get("description")),
+        mediaDescription: clean(data.get("mediaDescription")),
+        mediaAttachments: mediaMetadata(),
+        affected: selectedValues("affected"),
+        urgency: clean(data.get("urgency")),
+        chakra: clean(data.get("chakra")),
+        followUp: clean(data.get("followUp"))
+      };
+      record.serafinaSuggestion = buildSuggestion(record);
+      return record;
+    }
+
+    function renderSuggestion(record) {
+      const response = record.serafinaSuggestion;
+      const mediaAttachments = record.mediaAttachments || [];
+      suggestionEl.innerHTML = `
+        <b>${response.headline}</b>
+        <p><strong>Human-informed note:</strong> ${escapeHtml(record.description)}</p>
+        ${mediaAttachments.length ? `<p><strong>Media:</strong> ${mediaAttachments.map((item) => escapeHtml(item.name)).join(", ")}</p>` : ""}
+        ${record.mediaDescription ? `<p><strong>Media description:</strong> ${escapeHtml(record.mediaDescription)}</p>` : ""}
+        <ul>
+          ${response.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}
+        </ul>
+      `;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function formatRecord(record) {
+      const affected = record.affected.length ? record.affected.join(", ") : "not specified";
+      const media = record.mediaAttachments?.length ? record.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ") : "none";
+      return `
+        <article class="record">
+          <h3>${escapeHtml(record.eventDate || "Undated")} ${record.eventTime ? `at ${escapeHtml(record.eventTime)}` : ""}</h3>
+          <div class="record-meta">
+            <span class="chip">${escapeHtml(record.source)}</span>
+            <span>${escapeHtml(record.location || "No location")}</span>
+            <span>${escapeHtml(record.eventType || "No type")}</span>
+            <span>${escapeHtml(record.urgency || "No urgency")}</span>
+          </div>
+          <p>${escapeHtml(record.description)}</p>
+          <p><strong>Media:</strong> ${escapeHtml(media)}</p>
+          ${record.mediaDescription ? `<p><strong>Media description:</strong> ${escapeHtml(record.mediaDescription)}</p>` : ""}
+          <p><strong>Affected:</strong> ${escapeHtml(affected)}</p>
+          <p><strong>Suggestion:</strong> ${escapeHtml(record.serafinaSuggestion.headline)}</p>
+        </article>
+      `;
+    }
+
+    function renderRecords(records) {
+      if (!records.length) {
+        recordList.innerHTML = '<p class="hint">No browser-saved human-informed notes yet.</p>';
+        jsonOutput.textContent = "{}";
+        return;
+      }
+      const latest = records[0];
+      recordList.innerHTML = records.slice(0, 6).map(formatRecord).join("");
+      jsonOutput.textContent = JSON.stringify(latest, null, 2);
+      renderSuggestion(latest);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const records = loadRecords();
+      const record = recordFromForm();
+      records.unshift(record);
+      saveRecords(records);
+      renderRecords(records);
+    });
+
+    copyLatest.addEventListener("click", async () => {
+      const records = loadRecords();
+      if (!records.length) return;
+      const latest = records[0];
+      const media = latest.mediaAttachments?.length ? latest.mediaAttachments.map((item) => `${item.name} (${item.size}, ${item.type})`).join("; ") : "none";
+      const text = `Serafina human-informed note\nDate: ${latest.eventDate} ${latest.eventTime || ""}\nSource: ${latest.source}\nHuman: ${latest.informedBy}\nLocation: ${latest.location}\nType: ${latest.eventType}\nAffected: ${latest.affected.join(", ") || "not specified"}\nObservation: ${latest.description}\nMedia: ${media}\nMedia description: ${latest.mediaDescription || "none"}\nSuggestion: ${latest.serafinaSuggestion.headline}\nSteps: ${latest.serafinaSuggestion.steps.join(" ")}`;
+      await navigator.clipboard.writeText(text);
+      suggestionEl.setAttribute("aria-label", "Latest note copied");
+    });
+
+    mediaFiles.addEventListener("change", renderMediaPreview);
+
+    unlockAdmin.addEventListener("click", () => {
+      const ok = adminPassword.value === adminPassphrase;
+      setAdminOpen(ok);
+      if (!ok) {
+        adminStatus.textContent = "Password did not match.";
+        adminPassword.focus();
+      }
+    });
+
+    adminPassword.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        unlockAdmin.click();
+      }
+    });
+
+    lockAdmin.addEventListener("click", () => setAdminOpen(false));
+
+    downloadJson.addEventListener("click", () => {
+      const records = loadRecords();
+      const blob = new Blob([JSON.stringify(records, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "serafina-human-informed-field-log.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    clearRecords.addEventListener("click", () => {
+      const ok = confirm("Clear Serafina's browser-saved human-informed notes on this device?");
+      if (!ok) return;
+      localStorage.removeItem(storageKey);
+      suggestionEl.innerHTML = "<b>Browser notes cleared.</b><p>Serafina has put down the pen until the next human report.</p>";
+      renderRecords([]);
+    });
+
+    renderRecords(loadRecords());
+  </script>
+</body>
+</html>

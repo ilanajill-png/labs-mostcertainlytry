@@ -1,5 +1,26 @@
 [
   {
+    "id": "serafina-human-informed-field-log",
+    "title": "Serafina Human-Informed Field Log",
+    "category": "Tool",
+    "type": "Accessible Public Intake Form",
+    "status": "Published",
+    "date": "2026-06-07",
+    "featured": true,
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Accessibility",
+      "Local Storage",
+      "Static Site"
+    ],
+    "summary": "A public ADA-minded form for telling Serafina what a human observed at Las Jaras, marking the record as human-informed, saving browser-local notes, and generating a practical suggestion.",
+    "outcome": "Added a static accessible intake page with required labels, fieldsets, keyboard-friendly controls, visible focus, aria-live suggestion output, browser-local tracking, copy support, and JSON export.",
+    "url": "projects/serafina-human-informed-field-log.html",
+    "source": "projects/serafina-human-informed-field-log.html"
+  },
+  {
     "id": "house-map-using-revit",
     "title": "House Map Using Revit",
     "category": "Experiment",
