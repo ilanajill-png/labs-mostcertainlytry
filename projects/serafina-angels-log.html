@@ -548,7 +548,9 @@
       "1-1": ["Candle Threshold", "Imbolc and Candlemas stand nearby: clean a little, light a little, and do not confuse hope with overwatering."],
       "2-20": ["Spring Gate", "Equinox office opens. Balance sounds elegant until weeds discover it."],
       "4-1": ["May Court", "Beltane arrives with flowers, heat, and opinions. The garden may flirt; the gardener must still check soil."],
-      "5-8": ["Rain Witness", "St. Medard's weather folklore is near. Serafina records clouds, gutters, and any drama from the sky."],
+      "5-6": ["Medard Watch Begins", "St. Medard's rain folklore is two days away. This is the practical part: clear gutters, notice mosquito water, make sure pots can drain, and write down whether the sky is merely theatrical or actually wet."],
+      "5-7": ["Eagle Weather Eve", "On the eve of St. Medard, Serafina watches for the old sign: rain that lingers, clouds that stall, and humidity that acts like it owns the porch. Prepare shade, drainage, and patience."],
+      "5-8": ["Rain Witness", "St. Medard was a sixth-century French bishop whose feast day gathered weather folklore around rain, farmers, vineyards, brewers, and bad-weather protection. The old saying claims rain on June 8 may echo for forty days, sometimes checked again at St. Barnabas on June 11. Serafina treats this as observation, not prophecy: record rain, clear drains, watch fungus pressure, delay foolish noon work, and prepare for mosquitoes if water stands."],
       "5-13": ["Lost Tool Amnesty", "St. Anthony may help with lost things. Start with the obvious places before blaming spirits."],
       "5-20": ["Sun Throne", "Summer solstice opens the high court of heat. Water early. Be humble by noon."],
       "5-24": ["Midsummer Basin", "Midsummer and St. John's old rites favor water, herbs, fire, and thresholds kept with sanity."],
@@ -578,6 +580,47 @@
       "Respect the sun early, the moon late, and the basin always.",
       "Do one practical mercy before one decorative flourish.",
       "Notice the living court: wing, paw, leaf, stone, cloud."
+    ];
+
+    const dailyObservations = [
+      "check the soil line before trusting the sky",
+      "listen for birds before the first human opinion arrives",
+      "look under leaves for heat stress, pests, and gossip",
+      "notice which pot dries first and accuse it privately",
+      "inspect paths for burrs, thorns, slick places, and Pinky hazards",
+      "look for standing water before mosquitoes file paperwork",
+      "shade the tender things before the sun starts negotiating loudly",
+      "record one flower, one weed, and one strange little victory",
+      "make sure the threshold looks intentional, not abandoned",
+      "watch the squirrels without granting them policy authority",
+      "check whether the wind has moved anything that pretends it did not",
+      "give the hose, basin, and watering can their ordinary respect"
+    ];
+
+    const dailyRites = [
+      "water by touch, not by panic",
+      "sweep a path and call it ceremony",
+      "move one vulnerable thing out of punishment sun",
+      "deadhead only what is truly finished",
+      "leave one seed head for the birds if it has earned the honor",
+      "rinse the basin and keep the crystal business tidy",
+      "tighten one loose boundary before a squirrel finds it",
+      "make a shade plan before lunch becomes a dare",
+      "notice the moon's work and then return to the actual chore",
+      "thank the living court without feeding chaos",
+      "record rain honestly, even if it ruins the mood",
+      "put tools back before St. Anthony has to get involved"
+    ];
+
+    const dailyFeelings = [
+      "sternly affectionate",
+      "watchful and slightly amused",
+      "protective of small beings",
+      "unmoved by decorative excuses",
+      "soft toward shade and ruthless toward neglect",
+      "ceremonial, but only after the hose is coiled",
+      "pleased by evidence",
+      "suspicious of easy optimism"
     ];
 
     const tarotDeck = [
@@ -634,6 +677,14 @@
       return { card: card[0], reading: card[1] };
     }
 
+    function bodyFor({ monthIndex, day, season, ordinal, chore, creature }) {
+      const observation = dailyObservations[(ordinal + monthIndex) % dailyObservations.length];
+      const rite = dailyRites[(ordinal + day) % dailyRites.length];
+      const feeling = dailyFeelings[(ordinal + monthIndex + day) % dailyFeelings.length];
+      const monthName = monthNames[monthIndex];
+      return `${monthName} ${day}: Serafina is ${feeling}. Under the ${season.title.toLowerCase()}, she asks the household to ${observation}; today's practical rite is to ${rite}. The garden charge is simple: ${chore}. ${creature}`;
+    }
+
     function entryFor(monthIndex, day) {
       const key = monthIndex + "-" + day;
       const fixed = fixedDays[key];
@@ -645,7 +696,7 @@
       const intention = intentionSeeds[ordinal % intentionSeeds.length];
       const tarot = tarotFor(calendarOrdinal);
       const title = fixed ? fixed[0] : season.title;
-      const body = fixed ? fixed[1] : `Serafina records ${season.tone}. Today's charge: ${chore}. ${creature}`;
+      const body = fixed ? fixed[1] : bodyFor({ monthIndex, day, season, ordinal, chore, creature });
       return {
         month: monthNames[monthIndex],
         monthIndex,
