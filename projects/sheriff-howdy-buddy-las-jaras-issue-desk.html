@@ -643,6 +643,27 @@
         </fieldset>
 
         <fieldset>
+          <legend>Case updates</legend>
+          <label class="check"><input id="receive-updates" type="checkbox" name="receiveUpdates" value="yes"> Send me updates about this Sheriff case</label>
+          <div class="two">
+            <label for="update-channel">
+              Update method
+              <select id="update-channel" name="updateChannel">
+                <option value="">Choose if requesting updates</option>
+                <option value="email">Email</option>
+                <option value="sms">SMS text</option>
+              </select>
+            </label>
+            <label for="update-contact">
+              Email or SMS number
+              <input id="update-contact" name="updateContact" autocomplete="email" placeholder="Example: name@example.com or 210-555-1234">
+            </label>
+          </div>
+          <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes"> I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
+          <p class="hint">Optional. Contact details are for case updates only and should be redacted from public case views once the shared Worker backend is live.</p>
+        </fieldset>
+
+        <fieldset>
           <legend>Would you like to suggest a Most Common Action mortal?</legend>
           <div class="checks" role="group" aria-label="Potential case actions">
             <label class="check"><input type="checkbox" name="actionLane" value="research"> Research what happened</label>
@@ -734,6 +755,10 @@
     const clearCases = document.querySelector("#clear-cases");
     const caseList = document.querySelector("#case-list");
     const sharedStatus = document.querySelector("#shared-status");
+    const receiveUpdates = document.querySelector("#receive-updates");
+    const updateChannel = document.querySelector("#update-channel");
+    const updateContact = document.querySelector("#update-contact");
+    const updateConsent = document.querySelector("#update-consent");
     const storageKey = "las-jaras-sheriff-cases-v1";
     const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
     const mediaDbName = "las-jaras-media-handoff-v1";
@@ -779,6 +804,44 @@
       return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((item) => item.value);
     }
 
+    function updateConsentText() {
+      return "I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.";
+    }
+
+    function buildNotificationConsent(data) {
+      const optedIn = data.get("receiveUpdates") === "yes";
+      return {
+        optedIn,
+        channel: optedIn ? clean(data.get("updateChannel")) : "",
+        contact: optedIn ? clean(data.get("updateContact")) : "",
+        consentText: optedIn && data.get("updateConsent") === "yes" ? updateConsentText() : "",
+        consentedAt: optedIn && data.get("updateConsent") === "yes" ? new Date().toISOString() : null
+      };
+    }
+
+    function validateNotificationConsent() {
+      updateChannel.setCustomValidity("");
+      updateContact.setCustomValidity("");
+      updateConsent.setCustomValidity("");
+      if (!receiveUpdates.checked) return true;
+      if (!updateChannel.value) {
+        updateChannel.setCustomValidity("Choose email or SMS for case updates.");
+        updateChannel.reportValidity();
+        return false;
+      }
+      if (!clean(updateContact.value)) {
+        updateContact.setCustomValidity("Enter an email address or SMS number for case updates.");
+        updateContact.reportValidity();
+        return false;
+      }
+      if (!updateConsent.checked) {
+        updateConsent.setCustomValidity("Consent is required before Sheriff Lone Star can send updates.");
+        updateConsent.reportValidity();
+        return false;
+      }
+      return true;
+    }
+
     function setSelectValue(id, value) {
       const field = document.querySelector(`#${id}`);
       if (!field || !value) return;
@@ -791,6 +854,14 @@
       for (const box of form.querySelectorAll('input[name="actionLane"]')) {
         box.checked = wanted.has(box.value);
       }
+    }
+
+    function setNotificationConsent(value = {}) {
+      const optedIn = Boolean(value.optedIn);
+      receiveUpdates.checked = optedIn;
+      updateChannel.value = optedIn ? clean(value.channel) : "";
+      updateContact.value = optedIn && value.contact !== "[redacted]" ? clean(value.contact) : "";
+      updateConsent.checked = optedIn;
     }
 
     function fileSizeLabel(bytes) {
@@ -987,7 +1058,8 @@
         description: clean(data.get("description")),
         mediaDescription: clean(data.get("mediaDescription")),
         mediaAttachments: [...mediaMetadata(), ...handoffMediaMetadata()],
-        actionLane: selectedValues("actionLane")
+        actionLane: selectedValues("actionLane"),
+        notificationConsent: buildNotificationConsent(data)
       };
       issue.severity = assessSeverity(issue);
       issue.sheriffFirstRead = suggestionFor(issue);
@@ -1010,6 +1082,11 @@
       payload.append("severity_target", issue.severity.target);
       payload.append("severity_rationale", issue.severity.rationale);
       payload.append("media_file_names", issue.mediaAttachments.map((item) => item.name).join("; "));
+      payload.append("updates_requested", issue.notificationConsent.optedIn ? "yes" : "no");
+      payload.append("update_channel", issue.notificationConsent.channel);
+      payload.append("update_contact", issue.notificationConsent.contact);
+      payload.append("update_consent", issue.notificationConsent.consentText);
+      payload.append("update_consented_at", issue.notificationConsent.consentedAt || "");
       payload.append("sheriff_first_read", issue.sheriffFirstRead.join("\n- "));
       payload.append("investigation_prompt", issue.investigationPrompt);
       payload.append("case_json", JSON.stringify(issue, null, 2));
@@ -1055,7 +1132,14 @@
         description: clean(data.description),
         mediaDescription: clean(data.mediaDescription),
         mediaAttachments: Array.isArray(data.mediaAttachments) ? data.mediaAttachments : [],
-        actionLane: Array.isArray(data.actionLane) ? data.actionLane : []
+        actionLane: Array.isArray(data.actionLane) ? data.actionLane : [],
+        notificationConsent: data.notificationConsent || {
+          optedIn: false,
+          channel: "",
+          contact: "",
+          consentText: "",
+          consentedAt: null
+        }
       };
       issue.severity = data.severity || assessSeverity(issue);
       issue.sheriffFirstRead = Array.isArray(data.sheriffFirstRead) ? data.sheriffFirstRead : suggestionFor(issue);
@@ -1144,6 +1228,7 @@
         `Sheriff severity log: ${issue.severity.level} — ${issue.severity.target}. Rationale: ${issue.severity.rationale}`,
         `Desired outcome: ${issue.desiredOutcome}`,
         `Action lanes: ${issue.actionLane.length ? issue.actionLane.join(", ") : "not specified"}`,
+        `Update notifications requested: ${issue.notificationConsent?.optedIn ? `yes, by ${issue.notificationConsent.channel}` : "no"}`,
         `Media selected in form: ${media}`,
         `Evidence description: ${issue.mediaDescription || "none given"}`,
         "",
@@ -1161,10 +1246,14 @@
         : issue.sharedSubmission?.status === "failed"
           ? "<p><strong>Shared intake:</strong> not confirmed. Keep the local copy and copy the prompt if needed.</p>"
           : "";
+      const updates = issue.notificationConsent?.optedIn
+        ? `<p><strong>Updates:</strong> requested by ${escapeHtml(issue.notificationConsent.channel)}. Contact is not shown on the public board.</p>`
+        : "";
       sheriffNote.innerHTML = `
         <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
         <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
         <p><strong>Severity log:</strong> ${escapeHtml(severity.level)} — ${escapeHtml(severity.target)}</p>
+        ${updates}
         ${shared}
         ${renderSolutionChecklist(issue, firstRead)}
       `;
@@ -1220,6 +1309,7 @@
         const severity = issue.severity || { level: "Unlogged", target: "Review needed", rationale: "This case was saved before severity logging existed." };
         const steps = issue.sheriffFirstRead || ["Open investigation."];
         const sharedLabel = issue.sharedSubmission?.status === "sent" ? "Shared intake sent" : issue.sharedSubmission?.status === "failed" ? "Shared intake not confirmed" : "Local board copy";
+        const updateLabel = issue.notificationConsent?.optedIn ? `Requested by ${issue.notificationConsent.channel}` : "Not requested";
         return `
           <article class="case-card ${issue.status === "Closed" ? "closed" : ""}">
             <h3>${escapeHtml(issue.caseTitle)}</h3>
@@ -1234,6 +1324,7 @@
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
             <p><strong>Shared status:</strong> ${escapeHtml(sharedLabel)}</p>
+            <p><strong>Updates:</strong> ${escapeHtml(updateLabel)}</p>
             ${renderSolutionChecklist(issue, steps)}
             <div class="actions">
               <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
@@ -1280,6 +1371,7 @@
       document.querySelector("#description").value = pendingSerafinaHandoff.description || "";
       document.querySelector("#media-description").value = pendingSerafinaHandoff.mediaDescription || "";
       setActionLanes(pendingSerafinaHandoff.actionLane);
+      setNotificationConsent(pendingSerafinaHandoff.notificationConsent);
 
       await renderSerafinaMediaPreview(pendingSerafinaHandoff.mediaAttachments || []);
       sheriffNote.innerHTML = "<b>Serafina escalation loaded.</b><p>Review the prefilled case, then open it with Sheriff Lone Star. The media copy can transfer between these Labs pages on this device; attach it in chat only when you want me to visually inspect it there.</p>";
@@ -1287,6 +1379,7 @@
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (!validateNotificationConsent()) return;
       if (!form.reportValidity()) return;
       const issue = buildCase();
       sharedStatus.textContent = "Opening case locally and sending to shared intake...";

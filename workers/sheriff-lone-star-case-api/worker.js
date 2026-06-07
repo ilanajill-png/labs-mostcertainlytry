@@ -39,6 +39,21 @@ function closingCase(current, patch) {
   return clean(current.status) !== "Closed" && clean(patch.status) === "Closed";
 }
 
+function normalizeNotificationConsent(input = {}) {
+  const optedIn = Boolean(input.optedIn);
+  const channel = clean(input.channel).toLowerCase();
+  const contact = clean(input.contact);
+  const consentText = clean(input.consentText);
+  const consentedAt = clean(input.consentedAt);
+  return {
+    optedIn: optedIn && Boolean(channel && contact && consentText),
+    channel: ["email", "sms"].includes(channel) ? channel : "",
+    contact,
+    consentText,
+    consentedAt: consentedAt || null
+  };
+}
+
 function normalizeCase(input) {
   const now = new Date().toISOString();
   const id = clean(input.id) || `sheriff-case-${Date.now()}`;
@@ -59,22 +74,102 @@ function normalizeCase(input) {
     mediaDescription: clean(input.mediaDescription),
     mediaAttachments: Array.isArray(input.mediaAttachments) ? input.mediaAttachments : [],
     actionLane: Array.isArray(input.actionLane) ? input.actionLane : [],
-    solutionStatus: input.solutionStatus && typeof input.solutionStatus === "object" ? input.solutionStatus : {}
+    solutionStatus: input.solutionStatus && typeof input.solutionStatus === "object" ? input.solutionStatus : {},
+    notificationConsent: normalizeNotificationConsent(input.notificationConsent),
+    notificationLog: Array.isArray(input.notificationLog) ? input.notificationLog : []
   };
+}
+
+function redactCase(issue, request, env) {
+  if (hasAdminToken(request, env)) return issue;
+  const notificationConsent = issue.notificationConsent
+    ? {
+        ...issue.notificationConsent,
+        contact: issue.notificationConsent.contact ? "[redacted]" : "",
+        redacted: Boolean(issue.notificationConsent.contact)
+      }
+    : normalizeNotificationConsent();
+  return { ...issue, notificationConsent };
+}
+
+function providerStatus(env) {
+  return {
+    email: Boolean(env.RESEND_API_KEY && env.FROM_EMAIL),
+    sms: Boolean(env.TWILIO_ACCOUNT_SID && env.TWILIO_AUTH_TOKEN && env.TWILIO_FROM_NUMBER)
+  };
+}
+
+async function sendEmail(env, issue, message) {
+  if (!providerStatus(env).email) return { sent: false, reason: "email provider not configured" };
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: env.FROM_EMAIL,
+      to: issue.notificationConsent.contact,
+      subject: `Sheriff Lone Star update: ${issue.caseTitle}`,
+      text: message,
+      headers: {
+        "X-Entity-Ref-ID": issue.id
+      }
+    })
+  });
+  return {
+    sent: response.ok,
+    status: response.status,
+    reason: response.ok ? "sent" : await response.text()
+  };
+}
+
+async function sendSms(env, issue, message) {
+  if (!providerStatus(env).sms) return { sent: false, reason: "sms provider not configured" };
+  const body = new URLSearchParams({
+    To: issue.notificationConsent.contact,
+    From: env.TWILIO_FROM_NUMBER,
+    Body: message
+  });
+  const token = btoa(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`);
+  const response = await fetch(
+    `https://api.twilio.com/2010-04-01/Accounts/${env.TWILIO_ACCOUNT_SID}/Messages.json`,
+    {
+      method: "POST",
+      headers: {
+        "Authorization": `Basic ${token}`,
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body
+    }
+  );
+  return {
+    sent: response.ok,
+    status: response.status,
+    reason: response.ok ? "sent" : await response.text()
+  };
+}
+
+async function sendCaseNotification(env, issue, message) {
+  const consent = issue.notificationConsent || {};
+  if (!consent.optedIn) return { sent: false, reason: "no notification consent" };
+  if (consent.channel === "email") return sendEmail(env, issue, message);
+  if (consent.channel === "sms") return sendSms(env, issue, message);
+  return { sent: false, reason: "unsupported notification channel" };
 }
 
 async function listCases(env, request) {
   const result = await env.DB.prepare(
     "SELECT id, status, updated_at, data FROM cases ORDER BY datetime(updated_at) DESC LIMIT 200"
   ).all();
-  const cases = (result.results || []).map((row) => JSON.parse(row.data));
+  const cases = (result.results || []).map((row) => redactCase(JSON.parse(row.data), request, env));
   return jsonResponse(request, { cases });
 }
 
 async function getCase(env, request, id) {
   const row = await env.DB.prepare("SELECT data FROM cases WHERE id = ?").bind(id).first();
   if (!row) return jsonResponse(request, { error: "Case not found" }, 404);
-  return jsonResponse(request, { case: JSON.parse(row.data) });
+  return jsonResponse(request, { case: redactCase(JSON.parse(row.data), request, env) });
 }
 
 async function upsertCase(env, request) {
@@ -86,7 +181,7 @@ async function upsertCase(env, request) {
   )
     .bind(issue.id, issue.status, issue.openedAt, issue.updatedAt, JSON.stringify(issue))
     .run();
-  return jsonResponse(request, { case: issue }, 201);
+  return jsonResponse(request, { case: redactCase(issue, request, env) }, 201);
 }
 
 async function updateCase(env, request, id) {
@@ -103,7 +198,37 @@ async function updateCase(env, request, id) {
   )
     .bind(issue.status, issue.updatedAt, JSON.stringify(issue), id)
     .run();
-  return jsonResponse(request, { case: issue });
+  return jsonResponse(request, { case: redactCase(issue, request, env) });
+}
+
+async function createCaseUpdate(env, request, id) {
+  if (!hasAdminToken(request, env)) {
+    return jsonResponse(request, { error: "Case updates require Sheriff admin token" }, 403);
+  }
+  const existing = await env.DB.prepare("SELECT data FROM cases WHERE id = ?").bind(id).first();
+  if (!existing) return jsonResponse(request, { error: "Case not found" }, 404);
+  const body = await request.json();
+  const current = JSON.parse(existing.data);
+  const message = clean(body.message);
+  if (!message) return jsonResponse(request, { error: "Update message is required" }, 400);
+  const notification = await sendCaseNotification(env, current, message);
+  const entry = {
+    id: `case-update-${Date.now()}`,
+    createdAt: new Date().toISOString(),
+    message,
+    publicNote: clean(body.publicNote),
+    notification
+  };
+  const issue = normalizeCase({
+    ...current,
+    notificationLog: [...(current.notificationLog || []), entry]
+  });
+  await env.DB.prepare(
+    "UPDATE cases SET status = ?, updated_at = ?, data = ? WHERE id = ?"
+  )
+    .bind(issue.status, issue.updatedAt, JSON.stringify(issue), id)
+    .run();
+  return jsonResponse(request, { case: issue, update: entry, providers: providerStatus(env) });
 }
 
 export default {
@@ -118,6 +243,7 @@ export default {
       if (request.method === "GET" && path === "/cases") return listCases(env, request);
       if (request.method === "GET" && parts[0] === "cases" && parts[1]) return getCase(env, request, parts[1]);
       if (request.method === "POST" && path === "/cases") return upsertCase(env, request);
+      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "updates") return createCaseUpdate(env, request, parts[1]);
       if (request.method === "PUT" && parts[0] === "cases" && parts[1]) return updateCase(env, request, parts[1]);
       return jsonResponse(request, { error: "Not found" }, 404);
     } catch (error) {

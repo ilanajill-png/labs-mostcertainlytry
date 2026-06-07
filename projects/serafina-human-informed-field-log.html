@@ -485,7 +485,7 @@
       <p class="kicker">Human-informed field note</p>
       <h1 id="title">Tell Serafina What Happened</h1>
       <p class="lede">Use this public form to record something a human noticed at Las Jaras, mark it as human-informed, and receive a practical Serafina suggestion.</p>
-      <p class="status-note"><strong>Privacy note:</strong> This is a public static page. Do not enter secrets, private contact details, medical information, passwords, or anything that should not be copied into a public project file. Browser-saved entries stay local until someone exports or shares them.</p>
+      <p class="status-note"><strong>Privacy note:</strong> This is a public static page. Do not enter secrets, medical information, passwords, or anything that should not be copied into a public project file. Optional case-update contact details are only for Sheriff escalation updates and should be redacted from public case views once the shared Worker backend is live.</p>
     </section>
 
     <div class="layout">
@@ -628,6 +628,27 @@
           </label>
         </fieldset>
 
+        <fieldset>
+          <legend>Receive Sheriff updates if escalated</legend>
+          <label class="check"><input id="receive-updates" type="checkbox" name="receiveUpdates" value="yes"> Send me updates if Serafina escalates this to Sheriff Lone Star</label>
+          <div class="two">
+            <label for="update-channel">
+              Update method
+              <select id="update-channel" name="updateChannel">
+                <option value="">Choose if requesting updates</option>
+                <option value="email">Email</option>
+                <option value="sms">SMS text</option>
+              </select>
+            </label>
+            <label for="update-contact">
+              Email or SMS number
+              <input id="update-contact" name="updateContact" autocomplete="email" placeholder="Example: name@example.com or 210-555-1234">
+            </label>
+          </div>
+          <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes"> I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
+          <p class="hint">Optional. Serafina will pass this preference to Sheriff Lone Star only if you escalate the note.</p>
+        </fieldset>
+
         <div class="actions">
           <button class="primary" type="submit">Save Note And Suggest</button>
         </div>
@@ -720,6 +741,10 @@
     const adminStatus = document.querySelector("#admin-status");
     const mediaFiles = document.querySelector("#media-files");
     const mediaPreview = document.querySelector("#media-preview");
+    const receiveUpdates = document.querySelector("#receive-updates");
+    const updateChannel = document.querySelector("#update-channel");
+    const updateContact = document.querySelector("#update-contact");
+    const updateConsent = document.querySelector("#update-consent");
     const storageKey = "serafina-human-informed-field-log-v1";
     const sheriffHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
     const mediaDbName = "las-jaras-media-handoff-v1";
@@ -757,8 +782,46 @@
       return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((item) => item.value);
     }
 
+    function updateConsentText() {
+      return "I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.";
+    }
+
     function clean(value) {
       return String(value || "").trim();
+    }
+
+    function buildNotificationConsent(data) {
+      const optedIn = data.get("receiveUpdates") === "yes";
+      return {
+        optedIn,
+        channel: optedIn ? clean(data.get("updateChannel")) : "",
+        contact: optedIn ? clean(data.get("updateContact")) : "",
+        consentText: optedIn && data.get("updateConsent") === "yes" ? updateConsentText() : "",
+        consentedAt: optedIn && data.get("updateConsent") === "yes" ? new Date().toISOString() : null
+      };
+    }
+
+    function validateNotificationConsent() {
+      updateChannel.setCustomValidity("");
+      updateContact.setCustomValidity("");
+      updateConsent.setCustomValidity("");
+      if (!receiveUpdates.checked) return true;
+      if (!updateChannel.value) {
+        updateChannel.setCustomValidity("Choose email or SMS for Sheriff updates.");
+        updateChannel.reportValidity();
+        return false;
+      }
+      if (!clean(updateContact.value)) {
+        updateContact.setCustomValidity("Enter an email address or SMS number for Sheriff updates.");
+        updateContact.reportValidity();
+        return false;
+      }
+      if (!updateConsent.checked) {
+        updateConsent.setCustomValidity("Consent is required before Sheriff Lone Star can send updates.");
+        updateConsent.reportValidity();
+        return false;
+      }
+      return true;
     }
 
     function setAdminOpen(isOpen) {
@@ -968,6 +1031,7 @@
         ].join("\n"),
         mediaDescription: record.mediaDescription,
         mediaAttachments: media,
+        notificationConsent: record.notificationConsent,
         actionLane: sheriffActionLane(record)
       };
     }
@@ -989,7 +1053,8 @@
         affected: selectedValues("affected"),
         urgency: clean(data.get("urgency")),
         chakra: clean(data.get("chakra")),
-        followUp: clean(data.get("followUp"))
+        followUp: clean(data.get("followUp")),
+        notificationConsent: buildNotificationConsent(data)
       };
       record.serafinaSuggestion = buildSuggestion(record);
       return record;
@@ -1055,6 +1120,7 @@
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
+      if (!validateNotificationConsent()) return;
       if (!form.reportValidity()) return;
       const records = loadRecords();
       const record = recordFromForm();
@@ -1092,6 +1158,7 @@
       if (!records.length) return;
       const latest = records[0];
       localStorage.setItem(sheriffHandoffKey, JSON.stringify(buildSheriffHandoff(latest)));
+      suggestionEl.innerHTML += '<p><strong>Sheriff escalation:</strong> I&apos;ve escalated this to Sheriff Lone Star with a link to view the case.</p>';
       window.location.href = "sheriff-howdy-buddy-las-jaras-issue-desk.html?from=serafina#case-form";
     });
 
