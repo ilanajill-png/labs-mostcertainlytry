@@ -197,6 +197,14 @@
       color: var(--muted);
     }
 
+    .suggestion-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -407,6 +415,18 @@
             <li><strong>Blessing:</strong> The Chariot. I move with purpose, but I secure the cargo.</li>
           </ul>
           <p><strong>House message:</strong> Listen before rushing. Tend the living things. Choose what you are actually willing to care for, then move with purpose and secure the cargo.</p>
+        </article>
+        <article class="card">
+          <h3>Mere Suggestions</h3>
+          <ul class="suggestion-list">
+            <li><strong>Color to wear:</strong> cobalt blue, because authority should look hydrated.</li>
+            <li><strong>What to eat for Breakfast:</strong> oatmeal with cinnamon and fruit.</li>
+            <li><strong>What to eat for Lunch:</strong> beans, rice, greens, and lime.</li>
+            <li><strong>What to eat for Dinner:</strong> roast chicken or mushrooms with potatoes and a green thing.</li>
+            <li><strong>Lucky object to leave the house with:</strong> a clean key.</li>
+            <li><strong>A person to call to make them smile:</strong> someone who laughs before explaining themselves.</li>
+            <li><strong>A simple task they can do to brighten a stranger's day:</strong> leave the good parking place for someone carrying more than you are.</li>
+          </ul>
         </article>
         <article class="card">
           <h3>Daily Record</h3>
@@ -646,6 +666,83 @@
       "suspicious of easy optimism"
     ];
 
+    const abundantColors = [
+      "cobalt blue, because authority should look hydrated",
+      "sunlit white, for clean thresholds and honest errands",
+      "leaf green, so growth knows it has permission",
+      "marigold, for courage that does not need to shout",
+      "soft black, for listening before speaking",
+      "rose, because tenderness is also a tool",
+      "silver gray, for moon office and measured decisions",
+      "terracotta, so the body remembers clay, food, and home"
+    ];
+
+    const abundantBreakfasts = [
+      "oatmeal with cinnamon and fruit",
+      "eggs with salsa and something green",
+      "toast with butter, honey, and a pinch of salt",
+      "yogurt with berries, nuts, and patience",
+      "beans on toast with lime",
+      "rice with egg and scallions",
+      "peanut butter toast with banana",
+      "leftover potatoes warmed until they forgive yesterday"
+    ];
+
+    const abundantLunches = [
+      "beans, rice, greens, and lime",
+      "a bright salad with protein and crunch",
+      "soup with bread and one useful herb",
+      "tuna or chickpea salad on toast",
+      "a quesadilla with avocado and restraint",
+      "leftovers made respectable with hot sauce",
+      "a bowl of grains, vegetables, and something pickled",
+      "noodles with vegetables and a clear glass of water"
+    ];
+
+    const abundantDinners = [
+      "roast chicken or mushrooms with potatoes and a green thing",
+      "beans simmered with tomatoes, onion, and cumin",
+      "fish or tofu with rice and citrus",
+      "pasta with garlic, olive oil, and greens",
+      "tacos with beans, cabbage, salsa, and generosity",
+      "soup that uses what the house already has",
+      "rice, lentils, and roasted carrots",
+      "breakfast-for-dinner, if the day has become theatrical"
+    ];
+
+    const luckyObjects = [
+      "a clean key",
+      "a smooth stone",
+      "a coin turned heads-up",
+      "a folded grocery list",
+      "a blue thread or ribbon",
+      "a pen that actually works",
+      "a mint or lemon candy",
+      "a tiny scrap of paper with one honest intention"
+    ];
+
+    const smileCalls = [
+      "someone who laughs before explaining themselves",
+      "the person who last checked on you without asking for credit",
+      "someone who needs a five-minute kindness, not a full meeting",
+      "the friend who likes weather reports and small gossip",
+      "someone older who would enjoy being remembered",
+      "someone younger who deserves encouragement without advice",
+      "the person whose joke you still repeat",
+      "someone who loves the house even from far away"
+    ];
+
+    const strangerKindness = [
+      "leave the good parking place for someone carrying more than you are",
+      "return a cart that is not yours",
+      "hold the door without making a performance of it",
+      "let someone merge and release the need to narrate it",
+      "leave a cold bottle of water for a delivery worker",
+      "compliment the useful thing: the haircut, the shoes, the patience",
+      "pick up one piece of litter before it becomes scenery",
+      "send a kind review to a small business that earned it"
+    ];
+
     const tarotSpreadPositions = [
       "Need",
       "Weather",
@@ -713,6 +810,43 @@
 
     function tarotSummary(spread) {
       return `<ul class="tarot-list">${spread.map((item) => `<li><strong>${item.position}:</strong> ${item.card}. ${item.reading}</li>`).join("")}</ul>`;
+    }
+
+    function dateOrdinalFromIso(dateString) {
+      const match = String(dateString || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return calendarDayIndex(currentMonth, currentDate);
+      const date = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]));
+      const yearStart = new Date(Number(match[1]), 0, 0);
+      return Math.floor((date - yearStart) / 86400000);
+    }
+
+    function mereSuggestionsFor(ordinal) {
+      return {
+        colorToWear: abundantColors[ordinal % abundantColors.length],
+        breakfast: abundantBreakfasts[(ordinal + 2) % abundantBreakfasts.length],
+        lunch: abundantLunches[(ordinal + 4) % abundantLunches.length],
+        dinner: abundantDinners[(ordinal + 6) % abundantDinners.length],
+        luckyObject: luckyObjects[(ordinal + 1) % luckyObjects.length],
+        personToCall: smileCalls[(ordinal + 3) % smileCalls.length],
+        strangerKindness: strangerKindness[(ordinal + 5) % strangerKindness.length]
+      };
+    }
+
+    function normalizedMereSuggestions(entry) {
+      return entry.mereSuggestions || mereSuggestionsFor(dateOrdinalFromIso(entry.date));
+    }
+
+    function mereSuggestionsSummary(suggestions) {
+      if (!suggestions) return "";
+      return `<div><strong>Mere Suggestions:</strong><ul class="suggestion-list">
+        <li><strong>Color to wear:</strong> ${suggestions.colorToWear || "cobalt blue"}</li>
+        <li><strong>What to eat for Breakfast:</strong> ${suggestions.breakfast || "something warm and honest"}</li>
+        <li><strong>What to eat for Lunch:</strong> ${suggestions.lunch || "something green, salty, and sustaining"}</li>
+        <li><strong>What to eat for Dinner:</strong> ${suggestions.dinner || "whatever feeds the house without drama"}</li>
+        <li><strong>Lucky object to leave the house with:</strong> ${suggestions.luckyObject || "a clean key"}</li>
+        <li><strong>A person to call to make them smile:</strong> ${suggestions.personToCall || "someone who loves being remembered"}</li>
+        <li><strong>A simple task they can do to brighten a stranger's day:</strong> ${suggestions.strangerKindness || "return a cart that is not yours"}</li>
+      </ul></div>`;
     }
 
     function grandOrrerySummary(orrery) {
@@ -789,6 +923,7 @@
       const intention = intentionSeeds[ordinal % intentionSeeds.length];
       const practicalRite = practicalRiteFor(ordinal, day);
       const tarot = tarotSpreadFor(calendarOrdinal);
+      const mereSuggestions = mereSuggestionsFor(calendarOrdinal);
       const title = fixed ? fixed[0] : season.title;
       const body = fixed ? fixed[1] : bodyFor({ monthIndex, day, season, ordinal, chore, creature });
       return {
@@ -800,6 +935,7 @@
         body,
         intention,
         practicalRite,
+        mereSuggestions,
         tarot,
         sky: season.sky,
         moon: moonHint(ordinal),
@@ -859,12 +995,14 @@
         if (!entries.length) throw new Error("no entries yet");
         target.innerHTML = entries.map((entry) => {
           const spread = normalizedTarotSpread(entry);
+          const suggestions = normalizedMereSuggestions(entry);
           return `
           <article class="log-entry">
             <div class="date-line"><span>${entry.date}</span><span>${entry.weekday || "Angel's Log"}</span></div>
             <div class="entry-title">Six-Card Spread</div>
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
+            ${mereSuggestionsSummary(suggestions)}
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
             ${sacredCalendarSummary(entry.sacredCalendar)}
             ${grandOrrerySummary(entry.grandOrrery)}
