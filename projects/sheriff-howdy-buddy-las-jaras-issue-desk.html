@@ -1037,6 +1037,29 @@
       }
     }
 
+    async function importCaseFileFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const fileName = params.get("importCaseFile");
+      if (!fileName) return false;
+      try {
+        const safeName = fileName.replace(/[^a-z0-9-]/gi, "");
+        const response = await fetch(`../data/sheriff-cases/${safeName}.json`, { cache: "no-store" });
+        if (!response.ok) throw new Error("Case file unavailable");
+        const issue = normalizeImportedCase(await response.json());
+        const cases = loadCases();
+        const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
+        withoutDuplicate.unshift(issue);
+        saveCases(withoutDuplicate);
+        renderSheriffRead(issue);
+        sheriffNote.innerHTML += "<p><strong>Imported from Labs file:</strong> This case has been added to the browser-saved Sheriff board.</p>";
+        history.replaceState(null, "", `${window.location.pathname}#cases`);
+        return true;
+      } catch {
+        sheriffNote.innerHTML = "<b>Import failed.</b><p>The case file could not be loaded. The sheriff dislikes missing paperwork.</p>";
+        return false;
+      }
+    }
+
     function buildInvestigationPrompt(issue) {
       const media = issue.mediaAttachments.length
         ? issue.mediaAttachments.map((item) => `${item.name} (${item.type}, ${item.size})`).join("; ")
@@ -1276,11 +1299,13 @@
       renderCases([]);
     });
 
-    const importedFromUrl = importCaseFromUrl();
-    applySerafinaHandoff();
-    const savedCases = loadCases();
-    renderCases(savedCases);
-    if (!pendingSerafinaHandoff && !importedFromUrl) renderLatestCurrentRead(savedCases);
+    (async () => {
+      const importedFromUrl = importCaseFromUrl() || await importCaseFileFromUrl();
+      await applySerafinaHandoff();
+      const savedCases = loadCases();
+      renderCases(savedCases);
+      if (!pendingSerafinaHandoff && !importedFromUrl) renderLatestCurrentRead(savedCases);
+    })();
   </script>
 </body>
 </html>

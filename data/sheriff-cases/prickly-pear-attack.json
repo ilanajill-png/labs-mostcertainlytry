@@ -1,0 +1,39 @@
+{
+  "id": "sheriff-case-prickly-pear-attack-2026-06-07",
+  "status": "Open",
+  "openedAt": "2026-06-07T19:02:00.000Z",
+  "closedAt": null,
+  "caseTitle": "Serafina escalation: creature at Porch or threshold",
+  "reportedBy": "Lans",
+  "location": "Porch or threshold",
+  "caseType": "plant",
+  "urgency": "today",
+  "desiredOutcome": "understand",
+  "actionLane": ["research", "DIY fix"],
+  "mediaAttachments": [
+    {
+      "name": "IMG_7278.jpeg",
+      "type": "image/jpeg",
+      "size": "7.9 MB"
+    },
+    {
+      "name": "IMG_7277.jpeg",
+      "type": "image/jpeg",
+      "size": "4.5 MB"
+    }
+  ],
+  "mediaDescription": "Video evidence of the prickly pear attack and consumption.",
+  "description": "Something attacked the prickly pear cactus on the back porch! Leaving one big piece on the back deck and a whole bunch of chewed pieces in the planter.\n\nSerafina note: Heart chakra reading: Porch or threshold needs same-day care.\nAffected: plants\nOriginal Serafina event type: creature\nFollow-up requested: daily-log",
+  "severity": {
+    "level": "S2 High",
+    "target": "Act today or within 24 hours",
+    "rationale": "Same-day plant damage at a household threshold, unknown creature, possible repeat visitor."
+  },
+  "sheriffFirstRead": [
+    "S2 High: Act today or within 24 hours. Same-day plant damage at a household threshold, unknown creature, possible repeat visitor.",
+    "Most likely: a hungry or curious mammal chewed the prickly pear pads for moisture or food, then dropped pieces while handling the cactus.",
+    "Tonight: secure the cactus, preserve healthy broken pads for re-rooting, and check for tracks or repeat damage tomorrow morning."
+  ],
+  "solutionStatus": {},
+  "investigationPrompt": "Sheriff Lone Star, continue the Las Jaras sheriff investigation for this household case.\n\nCase title: Serafina escalation: creature at Porch or threshold\nReported by: Lans\nLocation: Porch or threshold\nCase type: plant\nUrgency: today\nSheriff severity log: S2 High — Act today or within 24 hours. Rationale: Same-day plant damage at a household threshold, unknown creature, possible repeat visitor.\nDesired outcome: understand\nAction lanes: research, DIY fix\nMedia selected in form: IMG_7278.jpeg (image/jpeg, 7.9 MB); IMG_7277.jpeg (image/jpeg, 4.5 MB)\nEvidence description: Video evidence of the prickly pear attack and consumption.\n\nIssue description: Something attacked the prickly pear cactus on the back porch! Leaving one big piece on the back deck and a whole bunch of chewed pieces in the planter.\n\nSerafina note: Heart chakra reading: Porch or threshold needs same-day care.\nAffected: plants\nOriginal Serafina event type: creature\nFollow-up requested: daily-log\n\nCurrent working theory: likely rodent/squirrel, rabbit/deer, or less likely javelina/insect damage. Verify through bite pattern, tracks, pellets, disturbed soil, and overnight camera or flour/sand track check.\nKeep the case Open until the human says Sheriff Case Closed.\nTone: Sheriff Lone Star. Practical, fair, neighborly, lightly snarky, careful with uncertainty, and more interested in closing the case than sounding mystical. Use they/them for Sheriff Lone Star."
+}
