@@ -1,5 +1,26 @@
 [
   {
+    "id": "las-jaras-household-beings-directory",
+    "title": "Las Jaras Household Beings Directory",
+    "category": "Tool",
+    "type": "Household Operating Chart",
+    "status": "Published",
+    "date": "2026-06-07",
+    "featured": true,
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Workflow Design",
+      "Accessibility",
+      "Household Operations"
+    ],
+    "summary": "A profile directory and interaction chart for the beings, agents, lights, and role-personas running Las Jaras household workflows.",
+    "outcome": "Created a household role hierarchy with 20 profile pages, jurisdiction links, one-paragraph role explanations, persona names, and a cross-functional interaction map.",
+    "url": "projects/household-beings.html",
+    "source": "tools/build-household-beings.mjs"
+  },
+  {
     "id": "sheriff-lone-star-cloudflare-build-log",
     "title": "Sheriff Lone Star Cloudflare Backend Build Log",
     "category": "Build Log",
