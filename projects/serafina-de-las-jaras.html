@@ -900,9 +900,11 @@
     const serafinaOpeners = [
       "Yes.",
       "No.",
+      "Maybe.",
       "Ask again after watering something real.",
       "The basin says yes, but with supervision.",
       "The basin says no, and it is not taking questions.",
+      "The basin says maybe, which is rude but useful.",
       "Proceed, but sweep the threshold first.",
       "Wait until the light changes.",
       "Only if the house is quiet enough to hear itself.",
@@ -967,6 +969,27 @@
       "The basin has no patience for needless drama.",
       "A smaller spell is still a spell.",
       "Return the tool when finished."
+    ];
+
+    const serafinaLoteriaSigns = [
+      "La Luna is face-up in the basin.",
+      "El Sol has stamped the petition and asked why everyone is outside at noon.",
+      "La Estrella is visible, but only after the noisy plan gets quieter.",
+      "El Arbol says roots before spectacle.",
+      "La Maceta reminds the household that containers dry faster than theories.",
+      "La Mano points to the work already within reach.",
+      "El Mundo is too large for this tiny panic.",
+      "El Cantarito asks for water, manners, and one practical refill.",
+      "La Rosa approves beauty only when the thorns have been respected.",
+      "La Sirena is singing, which is not the same as giving reliable advice.",
+      "El Cotorro has repeated the warning twice, so stop pretending not to hear it.",
+      "El Corazon wants tenderness, not a performance review.",
+      "La Escalera says take the next step, not the whole staircase.",
+      "El Paraguas advises shade before ambition.",
+      "La Campana has rung once for clarity and once for common sense.",
+      "La Calavera says the old version of the plan may rest now.",
+      "El Nopal approves resilience and objects to needless touching.",
+      "La Corona grants authority only after the chore is done."
     ];
 
     const serafinaLuckTips = [
@@ -1104,19 +1127,35 @@
       }
     ];
 
+    function asOracleClause(text) {
+      return text.replace(/[.!?]+$/, "");
+    }
+
     function buildSerafinaOracleResponses() {
       const responses = [];
-      for (const opener of serafinaOpeners) {
-        for (const verdict of serafinaVerdicts) {
-          for (const action of serafinaActions) {
-            for (const seal of serafinaSeals) {
-              responses.push(`${opener} ${verdict} ${action} ${seal}`);
-              if (responses.length === 1001) return responses;
+      for (let openerIndex = 0; openerIndex < serafinaOpeners.length; openerIndex += 1) {
+        const opener = serafinaOpeners[openerIndex];
+        for (let verdictIndex = 0; verdictIndex < serafinaVerdicts.length; verdictIndex += 1) {
+          const verdict = serafinaVerdicts[(verdictIndex + openerIndex) % serafinaVerdicts.length];
+          for (let actionIndex = 0; actionIndex < serafinaActions.length; actionIndex += 1) {
+            const action = serafinaActions[(actionIndex + verdictIndex + openerIndex) % serafinaActions.length];
+            for (let sealIndex = 0; sealIndex < serafinaSeals.length; sealIndex += 1) {
+              const seal = serafinaSeals[(sealIndex + actionIndex + openerIndex) % serafinaSeals.length];
+              const loteria = serafinaLoteriaSigns[(openerIndex + verdictIndex + actionIndex + sealIndex) % serafinaLoteriaSigns.length];
+              responses.push(`${asOracleClause(opener)}; ${asOracleClause(loteria)}; ${asOracleClause(verdict)}; ${asOracleClause(action)}; ${asOracleClause(seal)}.`);
             }
           }
         }
       }
-      return responses;
+
+      const mixed = [];
+      const stride = 137;
+      for (let offset = 0; mixed.length < 1001 && offset < stride; offset += 1) {
+        for (let index = offset; index < responses.length && mixed.length < 1001; index += stride) {
+          mixed.push(responses[index]);
+        }
+      }
+      return mixed;
     }
 
     const serafinaOracleResponses = buildSerafinaOracleResponses();
