@@ -385,6 +385,7 @@
         <article class="card">
           <h3>June 6, 2026</h3>
           <p><strong>Morning intention:</strong> I begin with what is true. I came from Mountain View, arrived at Las Jaras with road-worn authority, left a confirmed pair of lion guardians behind, keep the moon and weather in my basin, and now recognize the garden's living court: birds, squirrels, and Pinky.</p>
+          <p><strong>Today's practical rite:</strong> I water by touch, not by panic.</p>
           <p><strong>Schertz weather:</strong> I record sunrise 6:32 AM, sunset 8:31 PM, high 93°F, low 73°F, no rain, and UV 8 as the day's main extreme.</p>
         </article>
         <article class="card">
@@ -707,12 +708,15 @@
       return spread.map((item) => `<strong>${item.position}:</strong> ${item.card}. ${item.reading}`).join(" ");
     }
 
+    function practicalRiteFor(ordinal, day) {
+      return `I ${dailyRites[(ordinal + 10) % dailyRites.length]}.`;
+    }
+
     function bodyFor({ monthIndex, day, season, ordinal, chore, creature }) {
       const observation = dailyObservations[(ordinal + monthIndex) % dailyObservations.length];
-      const rite = dailyRites[(ordinal + day) % dailyRites.length];
       const feeling = dailyFeelings[(ordinal + monthIndex + day) % dailyFeelings.length];
       const monthName = monthNames[monthIndex];
-      return `${monthName} ${day}: I am ${feeling}. Under the ${season.title.toLowerCase()}, I ask the household to ${observation}; today's practical rite is to ${rite}. My garden charge is simple: ${chore}. ${creature}`;
+      return `${monthName} ${day}: I am ${feeling}. Under the ${season.title.toLowerCase()}, I ask the household to ${observation}. My garden charge is simple: ${chore}. ${creature}`;
     }
 
     function entryFor(monthIndex, day) {
@@ -724,6 +728,7 @@
       const creature = creatures[ordinal % creatures.length];
       const chore = season.chores[ordinal % season.chores.length];
       const intention = intentionSeeds[ordinal % intentionSeeds.length];
+      const practicalRite = practicalRiteFor(ordinal, day);
       const tarot = tarotSpreadFor(calendarOrdinal);
       const title = fixed ? fixed[0] : season.title;
       const body = fixed ? fixed[1] : bodyFor({ monthIndex, day, season, ordinal, chore, creature });
@@ -735,6 +740,7 @@
         title,
         body,
         intention,
+        practicalRite,
         tarot,
         sky: season.sky,
         moon: moonHint(ordinal),
@@ -780,6 +786,7 @@
           <div class="date-line"><span>${entry.month} ${entry.day}</span><span>${entry.today ? "Today" : "Angel's Log"}</span></div>
           <div class="entry-title">${entry.title}</div>
           <p><strong>Morning intention:</strong> ${entry.intention}</p>
+          <p><strong>Today's practical rite:</strong> ${entry.practicalRite}</p>
           <p><strong>Six-card spread:</strong> ${tarotSummary(entry.tarot)}</p>
           <p>${entry.body}</p>
           <p><strong>Sky:</strong> ${entry.sky}.</p>
@@ -850,6 +857,7 @@
             <div class="date-line"><span>${entry.date}</span><span>${entry.weekday || "Angel's Log"}</span></div>
             <div class="entry-title">${entry.tarot?.[0]?.card || entry.tarot?.card || "Daily Note"}</div>
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
+            <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
             <p><strong>Six-card spread:</strong> ${Array.isArray(entry.tarot) ? tarotSummary(entry.tarot) : `${entry.tarot?.card || "n/a"}. ${entry.tarot?.reading || ""}`}</p>
             <p>${entry.note || ""}</p>
