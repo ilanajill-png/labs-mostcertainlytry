@@ -289,6 +289,31 @@
       color: var(--muted);
     }
 
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .source-list li {
+      min-height: 86px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .78);
+      color: var(--muted);
+    }
+
+    .source-list a {
+      display: inline-block;
+      margin-bottom: 4px;
+      color: var(--cobalt);
+      font-weight: 900;
+    }
+
     footer {
       padding: 26px 0 46px;
       border-top: 1px solid var(--line);
@@ -297,7 +322,8 @@
 
     @media (max-width: 900px) {
       .calendar-list,
-      .entry-grid {
+      .entry-grid,
+      .source-list {
         grid-template-columns: 1fr;
       }
     }
@@ -321,6 +347,7 @@
       <nav aria-label="Page sections">
         <a href="#today">Today</a>
         <a href="#year">Whole Year</a>
+        <a href="#learn">Learn More</a>
         <a href="serafina-angels-log.html">Angel's Log</a>
         <a href="serafina-de-las-jaras.html">Main Page</a>
       </nav>
@@ -351,6 +378,31 @@
       </div>
       <div class="toolbar" id="monthNav" aria-label="Month jump links"></div>
       <div id="calendarMount" aria-live="polite"></div>
+    </section>
+
+    <section class="section" id="learn" aria-labelledby="learn-title">
+      <div class="section-head">
+        <div class="label">Sources For Mere Mortals</div>
+        <h2 id="learn-title">Learn More</h2>
+        <p>I used these as public orientation points for dates, moon timing, religion-specific context, and the Techichi note. They are not a substitute for asking an actual community how it observes its own holy days.</p>
+      </div>
+      <ul class="source-list">
+        <li><a href="https://www.timeanddate.com/calendar/seasons.html">timeanddate: Seasons</a><br>Equinox and solstice timing used for the seasonal thresholds.</li>
+        <li><a href="https://www.timeanddate.com/moon/phases/">timeanddate: Moon Phases</a><br>Moon-phase cross-checking for full moons and charge nights.</li>
+        <li><a href="https://www.space.com/16830-full-moon-calendar.html">Space.com: 2026 Full Moon Calendar</a><br>NASA-linked full moon dates and common moon names.</li>
+        <li><a href="https://www.chabad.org/holidays/default_cdo/year/2026/jewish/holidays-2026.htm">Chabad: Jewish Holidays 2026</a><br>Jewish holiday dates and observance context.</li>
+        <li><a href="https://www.hebcal.com/holidays/2026">Hebcal: Jewish Holidays 2026</a><br>Additional Jewish calendar cross-checking.</li>
+        <li><a href="https://www.timeanddate.com/holidays/us/prophet-birthday">timeanddate: Mawlid / Prophet's Birthday</a><br>Islamic date note with moon-sighting caveat.</li>
+        <li><a href="https://www.al-habib.info/islamic-calendar/global_pdf/global-islamic-calendar-year-2026-ce.pdf">Al-Habib: Global Islamic Calendar 2026</a><br>Islamic New Year, Ashura, Mawlid, and related Hijri timing.</li>
+        <li><a href="https://calendarhindu.com/">Hindu Calendar 2026</a><br>Major Hindu festival date references.</li>
+        <li><a href="https://www.calendarlabs.com/online-calendar/2026-calendar/hindu-holidays/">CalendarLabs: Hindu Holidays 2026</a><br>Hindu festival cross-checking.</li>
+        <li><a href="https://www.xavier.edu/jesuitresource/online-resources/calendar-religious-holidays-and-observances/index">Xavier University: Multi-Faith Calendar</a><br>Broad interfaith calendar orientation.</li>
+        <li><a href="https://bahaidailycalendar.com/bahai-holy-days/">Baha'i Daily Calendar: Holy Days</a><br>Baha'i holy day names and dates.</li>
+        <li><a href="https://www.britannica.com/animal/Chihuahua-dog">Britannica: Chihuahua Dog</a><br>Techichi and Chihuahua origin context for Pinky's birthday rite.</li>
+        <li><a href="https://www.akc.org/expert-advice/dog-breeds/chihuahua-history/">AKC: Chihuahua History</a><br>Additional Techichi and Chihuahua history context.</li>
+        <li><a href="https://en.wikipedia.org/wiki/Wheel_of_the_Year">Wheel of the Year overview</a><br>Modern pagan seasonal framework used as orientation, with local practice kept practical.</li>
+        <li><a href="https://www.britannica.com/topic/church-year">Britannica: Church Year</a><br>Christian feast-year background.</li>
+      </ul>
     </section>
   </main>
 
