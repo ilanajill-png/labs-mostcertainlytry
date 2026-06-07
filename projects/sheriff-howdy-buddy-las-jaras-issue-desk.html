@@ -982,14 +982,27 @@
     }
 
     function renderSheriffRead(issue) {
+      const severity = issue.severity || { level: "Unlogged", target: "Review needed" };
+      const firstRead = issue.sheriffFirstRead || ["Open investigation."];
       sheriffNote.innerHTML = `
         <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
         <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
-        <p><strong>Severity log:</strong> ${escapeHtml(issue.severity.level)} — ${escapeHtml(issue.severity.target)}</p>
-        <ul>${issue.sheriffFirstRead.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ul>
+        <p><strong>Severity log:</strong> ${escapeHtml(severity.level)} — ${escapeHtml(severity.target)}</p>
+        <ul>${firstRead.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ul>
       `;
-      handoffPrompt.textContent = issue.investigationPrompt;
-      handoff.hidden = false;
+      handoffPrompt.textContent = issue.investigationPrompt || "No investigation prompt was saved for this older case.";
+      handoff.hidden = !issue.investigationPrompt;
+    }
+
+    function renderLatestCurrentRead(cases) {
+      const latestOpen = cases.find((issue) => issue.status === "Open") || cases[0];
+      if (latestOpen) {
+        renderSheriffRead(latestOpen);
+        return;
+      }
+      sheriffNote.innerHTML = "<b>No case open yet.</b><p>Bring me the evidence, the room, and the mortal complaint. I will not arrest the toilet, but I will make it explain itself.</p>";
+      handoff.hidden = true;
+      handoffPrompt.textContent = "";
     }
 
     function renderCases(cases) {
@@ -1013,8 +1026,9 @@
             <p>${escapeHtml(issue.description)}</p>
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
-            <p><strong>First read:</strong> ${escapeHtml(issue.sheriffFirstRead[0] || "Open investigation.")}</p>
+            <p><strong>First read:</strong> ${escapeHtml(issue.sheriffFirstRead?.[0] || "Open investigation.")}</p>
             <div class="actions">
+              <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
               <button type="button" data-copy="${escapeHtml(issue.id)}">Copy Prompt</button>
               ${issue.status === "Open" ? `<button type="button" data-close="${escapeHtml(issue.id)}">Case Closed By Sheriff</button>` : ""}
             </div>
@@ -1070,9 +1084,14 @@
     });
 
     caseList.addEventListener("click", async (event) => {
+      const readId = event.target?.dataset?.read;
       const copyId = event.target?.dataset?.copy;
       const closeId = event.target?.dataset?.close;
       const cases = loadCases();
+      if (readId) {
+        const issue = cases.find((item) => item.id === readId);
+        if (issue) renderSheriffRead(issue);
+      }
       if (copyId) {
         const issue = cases.find((item) => item.id === copyId);
         if (issue) await navigator.clipboard.writeText(issue.investigationPrompt);
@@ -1084,6 +1103,7 @@
           issue.closedAt = new Date().toISOString();
           saveCases(cases);
           renderCases(cases);
+          renderLatestCurrentRead(cases);
         }
       }
     });
@@ -1109,7 +1129,9 @@
     });
 
     applySerafinaHandoff();
-    renderCases(loadCases());
+    const savedCases = loadCases();
+    renderCases(savedCases);
+    if (!pendingSerafinaHandoff) renderLatestCurrentRead(savedCases);
   </script>
 </body>
 </html>
