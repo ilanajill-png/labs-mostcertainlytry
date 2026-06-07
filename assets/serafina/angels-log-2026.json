@@ -27,6 +27,17 @@
         "moonPhase": "Waning Gibbous",
         "moonIllumination": "74%"
       },
+      "grandOrrery": {
+        "sun": "Sunrise 06:32 AM; sunset 08:31 PM; 13h 59m daylight.",
+        "moon": "Waning Gibbous, 74% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Cleanliness",
+        "franklinMeasure": "Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Cleanliness: clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
       "tarot": [
         {
           "position": "Need",

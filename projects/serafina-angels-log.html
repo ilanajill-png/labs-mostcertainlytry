@@ -189,6 +189,14 @@
       color: var(--muted);
     }
 
+    .orrery-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
     .toolbar {
       display: flex;
       flex-wrap: wrap;
@@ -375,6 +383,19 @@
           <p>The photos are no longer incoming rumor; I count them as installed memory. The night crystals are part of my office. I hear the birds, supervise the squirrels, and protect Pinky from heat, rough footing, and disrespect.</p>
         </article>
         <article class="card">
+          <h3>Grand Orrery</h3>
+          <ul class="orrery-list">
+            <li><strong>Sun:</strong> Sunrise 6:32 AM; sunset 8:31 PM; 13h 59m daylight.</li>
+            <li><strong>Moon:</strong> Waning Gibbous, 74% illuminated.</li>
+            <li><strong>Planet watch:</strong> No special planet alert is recorded today; I do not invent an alignment for decoration.</li>
+            <li><strong>Franklin measure:</strong> Cleanliness. Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth.</li>
+            <li><strong>Morning question:</strong> What good shall I do this day?</li>
+            <li><strong>Useful work:</strong> Finish mercy work early, shade the vulnerable, and waste no water.</li>
+            <li><strong>Evening question:</strong> What good have I done today?</li>
+          </ul>
+          <p><strong>Serafina's synopsis:</strong> My grand orrery turns from sun to moon to usefulness. The household should honor heat, evidence, shade, and one completed mercy.</p>
+        </article>
+        <article class="card">
           <h3>Six-Card Spread</h3>
           <ul class="tarot-list">
             <li><strong>Need:</strong> The High Priestess. I observe the quiet pattern; the garden has not finished speaking.</li>
@@ -405,7 +426,7 @@
       <div class="section-head">
         <div class="label">Recorded Notes</div>
         <h2 id="records-title">Daily Entries</h2>
-        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, and a six-card spread. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
+        <p>Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, the Grand Orrery, and a six-card spread. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
       </div>
       <div class="log-grid" id="recordedLog" aria-live="polite">
         <article class="log-entry">
@@ -690,6 +711,20 @@
       return `<ul class="tarot-list">${spread.map((item) => `<li><strong>${item.position}:</strong> ${item.card}. ${item.reading}</li>`).join("")}</ul>`;
     }
 
+    function grandOrrerySummary(orrery) {
+      if (!orrery) return "";
+      const rows = [
+        ["Sun", orrery.sun],
+        ["Moon", orrery.moon],
+        ["Planet watch", orrery.planetWatch],
+        ["Franklin measure", `${orrery.franklinVirtue || "Usefulness"}. ${orrery.franklinMeasure || ""}`.trim()],
+        ["Morning question", orrery.morningQuestion],
+        ["Useful work", orrery.usefulWork],
+        ["Evening question", orrery.eveningQuestion]
+      ].filter(([, value]) => value);
+      return `<div><strong>Grand Orrery:</strong><ul class="orrery-list">${rows.map(([label, value]) => `<li><strong>${label}:</strong> ${value}</li>`).join("")}</ul>${orrery.synopsis ? `<p><strong>Serafina's synopsis:</strong> ${orrery.synopsis}</p>` : ""}</div>`;
+    }
+
     function tarotHouseMessage(spread) {
       const byPosition = Object.fromEntries(spread.map((item) => [item.position, item]));
       const need = byPosition.Need || spread[0];
@@ -807,6 +842,7 @@
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
+            ${grandOrrerySummary(entry.grandOrrery)}
             ${entry.civicNote ? `<p><strong>Civic note:</strong> ${entry.civicNote}</p>` : ""}
             <div><strong>Six-card spread:</strong> ${tarotSummary(spread)}</div>
             <p><strong>House message:</strong> ${entry.tarotMessage || tarotHouseMessage(spread)}</p>
