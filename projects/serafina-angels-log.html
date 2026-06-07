@@ -708,6 +708,15 @@
       return spread.map((item) => `<strong>${item.position}:</strong> ${item.card}. ${item.reading}`).join(" ");
     }
 
+    function normalizedTarotSpread(entry) {
+      if (Array.isArray(entry.tarot) && entry.tarot.length) return entry.tarot;
+      if (Array.isArray(entry.tarotSpread) && entry.tarotSpread.length) return entry.tarotSpread;
+      if (entry.tarot?.card) {
+        return [{ position: "Need", card: entry.tarot.card, reading: entry.tarot.reading || "I listen before I command." }];
+      }
+      return tarotSpreadFor(calendarDayIndex(currentMonth, currentDate));
+    }
+
     function practicalRiteFor(ordinal, day) {
       return `I ${dailyRites[(ordinal + 10) % dailyRites.length]}.`;
     }
@@ -852,14 +861,16 @@
         const data = await response.json();
         const entries = Object.values(data.entries || {}).sort((a, b) => b.date.localeCompare(a.date));
         if (!entries.length) throw new Error("no entries yet");
-        target.innerHTML = entries.map((entry) => `
+        target.innerHTML = entries.map((entry) => {
+          const spread = normalizedTarotSpread(entry);
+          return `
           <article class="log-entry">
             <div class="date-line"><span>${entry.date}</span><span>${entry.weekday || "Angel's Log"}</span></div>
-            <div class="entry-title">${entry.tarot?.[0]?.card || entry.tarot?.card || "Daily Note"}</div>
+            <div class="entry-title">Six-Card Spread</div>
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
-            <p><strong>Six-card spread:</strong> ${Array.isArray(entry.tarot) ? tarotSummary(entry.tarot) : `${entry.tarot?.card || "n/a"}. ${entry.tarot?.reading || ""}`}</p>
+            <p><strong>Six-card spread:</strong> ${tarotSummary(spread)}</p>
             <p>${entry.note || ""}</p>
             <div class="meta">
               <span class="chip">schertz.com source</span>
@@ -867,7 +878,8 @@
               <span class="chip">six cards pulled</span>
             </div>
           </article>
-        `).join("");
+        `;
+        }).join("");
       } catch {
         target.innerHTML = `<article class="log-entry"><div class="entry-title">Recorded log unavailable</div><p>My evergreen calendar still works. My recorded JSON will appear here when the daily publisher brings back the ink.</p></article>`;
       }
