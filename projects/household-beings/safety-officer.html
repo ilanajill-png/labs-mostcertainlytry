@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -274,6 +293,28 @@
           <a href="sheriff.html">Sheriff</a>
           <a href="groundskeeper.html">Groundskeeper</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="safety-officer-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="safety-officer-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Scan for urgent hazards, battery needs, locks, trip risks, and heat/cold risks.</li><li>Escalate S1/S2 issues to Sheriff or the human.</li><li>Keep emergency-prep checks from becoming folklore.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>home safety checklists</li><li>fire/CO safety basics</li><li>habitability triage</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>Sheriff Issue Desk</li><li>Room Maintenance Inventory</li><li>active chat</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>sensor dashboard</li><li>battery/expiration tracker</li><li>emergency kit inventory</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>

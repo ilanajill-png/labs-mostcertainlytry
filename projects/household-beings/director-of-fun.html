@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -273,6 +292,28 @@
           <a href="dj.html">DJ</a>
           <a href="concierge.html">Concierge</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="director-of-fun-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="director-of-fun-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Scan upcoming local events and save promising options.</li><li>Match outings to energy level, weather, guests, and budget.</li><li>Prepare sign-up or ticket reminders before deadlines pass.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>event planning checklists</li><li>guest experience design</li><li>local arts and culture calendars</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>Whimsy pages</li><li>web research</li><li>calendar reminders</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>event aggregator account</li><li>ticket-price tracker</li><li>shared household fun calendar</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>

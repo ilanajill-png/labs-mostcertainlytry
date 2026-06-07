@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -272,6 +291,28 @@
         <p class="label">Same tier</p><div class="chart-roles"><a href="guru.html">Guru</a>
           <a href="coach.html">Coach</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="nanny-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="nanny-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Check guest comfort basics: water, sleep, shade, towels, and clear paths.</li><li>Draft gentle wellness reminders.</li><li>Flag issues that require medical or professional attention.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>hospitality care basics</li><li>non-medical wellness boundaries</li><li>guest comfort checklists</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>Household Ops Command Center</li><li>room guide</li><li>active chat</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>guest-prep checklist app</li><li>first-aid inventory tracker</li><li>quiet-hours reminder system</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>

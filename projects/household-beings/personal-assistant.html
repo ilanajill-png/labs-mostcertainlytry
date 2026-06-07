@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -274,6 +293,28 @@
           <a href="librarian.html">Librarian</a>
           <a href="treasurer.html">Treasurer</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="personal-assistant-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="personal-assistant-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Review upcoming calendar windows and time-sensitive reminders.</li><li>Batch alerts into useful daily briefings.</li><li>Escalate urgent scheduling conflicts to the human.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>time-blocking basics</li><li>quiet-hours etiquette</li><li>calendar triage best practices</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>calendar context when available</li><li>OpenClaw reminders/cron</li><li>active chat check-ins</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>shared family calendar dashboard</li><li>SMS/email reminder provider</li><li>voice briefing speaker integration</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>

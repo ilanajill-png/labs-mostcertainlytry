@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -272,6 +291,28 @@
         <p class="label">Same tier</p><div class="chart-roles"><a href="pr.html">PR</a>
           <a href="stylist.html">Stylist</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="social-media-manager-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="social-media-manager-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Draft public-safe post ideas from finished projects.</li><li>Maintain a content queue by platform and timing.</li><li>Prepare captions for human review, never auto-post.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>platform caption conventions</li><li>content calendar planning</li><li>privacy-first publishing rules</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>Labs project catalog</li><li>AI Product Video Creator assets</li><li>active chat drafts</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>social scheduler</li><li>link-in-bio manager</li><li>post analytics dashboard</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>

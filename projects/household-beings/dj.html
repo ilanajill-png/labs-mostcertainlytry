@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -273,6 +292,28 @@
           <a href="theatre.html">Theatre</a>
           <a href="concierge.html">Concierge</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="dj-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="dj-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Prepare playlists for cooking, work, cleaning, hosting, and wind-down.</li><li>Track room mood and transition points.</li><li>Refresh playlists when they get stale.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>playlist sequencing</li><li>room energy reading</li><li>hosting music etiquette</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>playlist notes</li><li>active chat</li><li>room mood context</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>music-service integration</li><li>speaker/room automation</li><li>playlist analytics</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>

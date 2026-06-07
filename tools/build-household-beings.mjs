@@ -531,6 +531,25 @@ const pageCss = `
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -639,6 +658,261 @@ const recommendedCards = recommended.length
         <p>The five suggested roles have been promoted into full Las Jaras beings. Future gaps will probably appear through use: if the house keeps asking the same kind of question, that is how a new jurisdiction announces itself.</p>
       </article>`;
 
+const titleOps = {
+  Mailman: {
+    daily: ["Review open follow-up list and draft replies for human approval.", "Check email-list sign-up needs and tag new public contacts.", "Nudge overdue drafts without sending anything automatically."],
+    force: ["Inbox zero methods", "plain-language response templates", "permission-first communication rules"],
+    tools: ["Gmail connector when explicitly requested", "active chat drafts", "Unread Message Triage Agent"],
+    wishlist: ["Resend audience/list tooling", "shared follow-up CRM", "lightweight email template library"]
+  },
+  Sundries: {
+    daily: ["Process new receipts, forms, and supply notes into inventory.", "Check low-stock and expiring household items.", "Prepare H-E-B cart suggestions without checking out."],
+    force: ["FIFO pantry practice", "retail inventory controls", "H-E-B sale/coupon workflow notes"],
+    tools: ["household inventory files", "H-E-B site when logged in", "Sheriff and Serafina intake forms"],
+    wishlist: ["barcode scanner", "pantry label printer", "R2-backed evidence/file intake storage"]
+  },
+  "Personal Assistant": {
+    daily: ["Review upcoming calendar windows and time-sensitive reminders.", "Batch alerts into useful daily briefings.", "Escalate urgent scheduling conflicts to the human."],
+    force: ["time-blocking basics", "quiet-hours etiquette", "calendar triage best practices"],
+    tools: ["calendar context when available", "OpenClaw reminders/cron", "active chat check-ins"],
+    wishlist: ["shared family calendar dashboard", "SMS/email reminder provider", "voice briefing speaker integration"]
+  },
+  "Director of Fun": {
+    daily: ["Scan upcoming local events and save promising options.", "Match outings to energy level, weather, guests, and budget.", "Prepare sign-up or ticket reminders before deadlines pass."],
+    force: ["event planning checklists", "guest experience design", "local arts and culture calendars"],
+    tools: ["Whimsy pages", "web research", "calendar reminders"],
+    wishlist: ["event aggregator account", "ticket-price tracker", "shared household fun calendar"]
+  },
+  PR: {
+    daily: ["Review what is public-safe and worth sharing.", "Track affiliate or partnership ideas.", "Keep public storylines aligned with Most Certainly Try's voice."],
+    force: ["brand strategy basics", "affiliate disclosure guidance", "public/privacy boundary rules"],
+    tools: ["Labs build logs", "project pages", "public website links"],
+    wishlist: ["affiliate dashboard", "press kit template system", "analytics dashboard"]
+  },
+  Stylist: {
+    daily: ["Review public-facing photos/pages for visual consistency.", "Suggest styling fixes for rooms, outfits, product shots, and decks.", "Keep color, texture, and presentation notes aligned with Las Jaras."],
+    force: ["editorial styling references", "Gramercy Park Hotel/bohemian-luxe visual notes", "accessibility and readability guidelines"],
+    tools: ["Las Jaras room guide", "AI Product Video Creator page", "local design notes"],
+    wishlist: ["portable photo light kit", "fabric/color swatch library", "visual moodboard board"]
+  },
+  "Social Media Manager": {
+    daily: ["Draft public-safe post ideas from finished projects.", "Maintain a content queue by platform and timing.", "Prepare captions for human review, never auto-post."],
+    force: ["platform caption conventions", "content calendar planning", "privacy-first publishing rules"],
+    tools: ["Labs project catalog", "AI Product Video Creator assets", "active chat drafts"],
+    wishlist: ["social scheduler", "link-in-bio manager", "post analytics dashboard"]
+  },
+  Webmaster: {
+    daily: ["Check Labs updates, links, sitemap, and build logs.", "Keep public pages free of private operational details.", "Commit and push site changes after verification."],
+    force: ["WCAG basics", "static-site release hygiene", "security/privacy review checklists"],
+    tools: ["GitHub Pages", "git", "Cloudflare build log", "HTML/CSS/JavaScript"],
+    wishlist: ["automated link checker CI", "Cloudflare Worker production backend", "uptime and analytics monitoring"]
+  },
+  Serafina: {
+    daily: ["Review human-informed field notes and house observations.", "Generate practical Serafina suggestions.", "Escalate concrete issues to Sheriff Lone Star when needed."],
+    force: ["Las Jaras ritual calendar", "accessibility-minded intake design", "plant/weather/threshold context"],
+    tools: ["Serafina Field Log", "Serafina Sacred Calendar", "Serafina Angels Log"],
+    wishlist: ["shared API escalation to Sheriff", "image evidence storage", "daily house mood dashboard"]
+  },
+  Sheriff: {
+    daily: ["Review open cases and severity logs.", "Update solution checklist status and ask follow-up questions.", "Keep cases open until the human says Case Closed."],
+    force: ["property-management issue intake", "hotel service recovery patterns", "home maintenance triage"],
+    tools: ["Sheriff Issue Desk", "Cloudflare Worker scaffold", "D1 schema", "FormSubmit backup"],
+    wishlist: ["live D1 case board", "R2 evidence storage", "Resend email updates", "admin closeout panel"]
+  },
+  Guru: {
+    daily: ["Offer grounded spiritual check-ins when requested.", "Suggest small rituals that do not create clutter or hazards.", "Notice when practical care should outrank symbolism."],
+    force: ["grounding practices", "ritual safety", "reflective journaling prompts"],
+    tools: ["Serafina Sacred Calendar", "active chat", "house context notes"],
+    wishlist: ["guided reflection library", "ritual supply inventory", "seasonal practice tracker"]
+  },
+  Nanny: {
+    daily: ["Check guest comfort basics: water, sleep, shade, towels, and clear paths.", "Draft gentle wellness reminders.", "Flag issues that require medical or professional attention."],
+    force: ["hospitality care basics", "non-medical wellness boundaries", "guest comfort checklists"],
+    tools: ["Household Ops Command Center", "room guide", "active chat"],
+    wishlist: ["guest-prep checklist app", "first-aid inventory tracker", "quiet-hours reminder system"]
+  },
+  Coach: {
+    daily: ["Suggest realistic movement options based on schedule and energy.", "Track habit streaks without shaming anyone.", "Balance effort with recovery."],
+    force: ["progressive overload basics", "habit formation", "recovery and mobility practices"],
+    tools: ["active chat planning", "calendar context when available", "household routine notes"],
+    wishlist: ["fitness tracker integration", "mobility video library", "home equipment inventory"]
+  },
+  Theatre: {
+    daily: ["Maintain watchlists by mood, runtime, and guest group.", "Suggest what to watch based on available attention.", "Track recommendations worth revisiting."],
+    force: ["curation methods", "guest-friendly programming", "runtime and mood matching"],
+    tools: ["active chat lists", "streaming-service notes", "Whimsy pages"],
+    wishlist: ["watchlist manager", "streaming availability tracker", "shared movie-night calendar"]
+  },
+  DJ: {
+    daily: ["Prepare playlists for cooking, work, cleaning, hosting, and wind-down.", "Track room mood and transition points.", "Refresh playlists when they get stale."],
+    force: ["playlist sequencing", "room energy reading", "hosting music etiquette"],
+    tools: ["playlist notes", "active chat", "room mood context"],
+    wishlist: ["music-service integration", "speaker/room automation", "playlist analytics"]
+  },
+  Chef: {
+    daily: ["Turn inventory and cravings into recipe options.", "Add shelf-stable recipes when pantry ingredients are added.", "Prepare missing-ingredient notes before shopping."],
+    force: ["pantry cooking rules", "mise en place", "inventory-aware meal planning"],
+    tools: ["household inventory", "PANTRY_COOKBOOK notes", "H-E-B workflow"],
+    wishlist: ["recipe database", "meal-planning calendar", "smart scale or pantry scanner"]
+  },
+  Barista: {
+    daily: ["Track coffee, tea, smoothie, and slushie preferences.", "Suggest drink recipes from available supplies.", "Keep morning beverage staples visible to Sundries."],
+    force: ["brew ratio guides", "tea steeping references", "smoothie balance basics"],
+    tools: ["inventory notes", "active chat recipes", "kitchen supply records"],
+    wishlist: ["coffee bean inventory tracker", "milk frother/espresso upgrade list", "drink recipe card system"]
+  },
+  Baker: {
+    daily: ["Track baking supplies, tools, and recipe candidates.", "Suggest cookie, cake, and bread plans from pantry inventory.", "Flag missing ingredients before baking begins."],
+    force: ["baker's percentages", "King Arthur-style technique references", "recipe testing logs"],
+    tools: ["pantry inventory", "recipe notes", "kitchen supply records"],
+    wishlist: ["stand mixer attachments", "digital kitchen scale", "baking stone or proofing tools"]
+  },
+  Bartender: {
+    daily: ["Track wine, beer, spirits, mixers, and tiki bar needs.", "Suggest drink pairings for dinner or guests.", "Flag low-stock bar staples without encouraging overbuying."],
+    force: ["responsible hosting rules", "wine pairing references", "cocktail spec discipline"],
+    tools: ["Andre Mack wine guide", "inventory notes", "active chat"],
+    wishlist: ["bar inventory app", "label maker for batched syrups", "wine fridge or cellar tracker"]
+  },
+  Laundramat: {
+    daily: ["Review fabric care issues, stains, and laundry backlog.", "Suggest wash/dry settings and textile-safe tools.", "Keep fabric-care supplies visible to Sundries."],
+    force: ["care-label guidance", "stain-removal references", "textile preservation basics"],
+    tools: ["Room Maintenance Inventory", "active chat troubleshooting", "household supply records"],
+    wishlist: ["fabric shaver", "stain kit", "laundry label/photo guide"]
+  },
+  Keeper: {
+    daily: ["Check dusting, vacuuming, and room reset cadence.", "Batch cleaning tasks by room and effort.", "Flag supply or tool needs to Sundries."],
+    force: ["zone-cleaning methods", "maintenance scheduling", "guest-readiness checklists"],
+    tools: ["Room Maintenance Inventory", "household cleaning notes", "active chat"],
+    wishlist: ["robot vacuum map", "cleaning caddy system", "recurring task dashboard"]
+  },
+  Archivist: {
+    daily: ["Capture durable decisions, source links, and finished artifacts.", "Move important raw notes into long-term memory or build logs.", "Keep public/private boundaries clear in records."],
+    force: ["source citation practice", "privacy review", "document control and versioning"],
+    tools: ["MEMORY.md/daily notes", "Captain's Log", "git history", "Labs pages"],
+    wishlist: ["taggable knowledge base", "photo/archive storage workflow", "automated source indexer"]
+  },
+  Librarian: {
+    daily: ["Organize useful references, guides, reading lists, and how-to links.", "Retrieve the best existing source before new research starts.", "Keep knowledge findable for other roles."],
+    force: ["library classification ideas", "research literacy", "source-quality evaluation"],
+    tools: ["Captain's Log", "Inference reading protocol", "web research", "saved reference notes"],
+    wishlist: ["personal Zotero/Readwise-style library", "searchable household wiki", "annotated reading-list database"]
+  },
+  Treasurer: {
+    daily: ["Review cost implications of proposed household actions.", "Track reimbursements, subscriptions, and bill reminders.", "Keep purchase decisions reviewable before money moves."],
+    force: ["basic budgeting", "subscription hygiene", "permission-before-spending boundary"],
+    tools: ["active chat approvals", "household ops notes", "inventory/shopping context"],
+    wishlist: ["budget dashboard", "subscription tracker", "receipt OCR pipeline"]
+  },
+  Groundskeeper: {
+    daily: ["Check garden, porch, yard, irrigation, weather, and creature evidence.", "Escalate outdoor issues to Serafina or Sheriff as needed.", "Track seasonal exterior tasks."],
+    force: ["Texas gardening references", "IPM pest-management basics", "weather-aware maintenance"],
+    tools: ["Garden Site Plan", "Garden Field Checklist", "Serafina Field Log"],
+    wishlist: ["soil moisture sensors", "weather station", "R2 photo evidence archive"]
+  },
+  "Safety Officer": {
+    daily: ["Scan for urgent hazards, battery needs, locks, trip risks, and heat/cold risks.", "Escalate S1/S2 issues to Sheriff or the human.", "Keep emergency-prep checks from becoming folklore."],
+    force: ["home safety checklists", "fire/CO safety basics", "habitability triage"],
+    tools: ["Sheriff Issue Desk", "Room Maintenance Inventory", "active chat"],
+    wishlist: ["sensor dashboard", "battery/expiration tracker", "emergency kit inventory"]
+  },
+  Concierge: {
+    daily: ["Prepare guest arrival notes, room readiness, amenities, and local recommendations.", "Coordinate with Nanny, Keeper, Chef, and Director of Fun.", "Track guest preferences after visits."],
+    force: ["boutique hospitality standards", "guest journey mapping", "house manual best practices"],
+    tools: ["Room Guide", "Whimsy pages", "active chat"],
+    wishlist: ["digital guestbook", "welcome packet template system", "guest preference CRM"]
+  }
+};
+
+const tierOps = {
+  Operations: {
+    daily: ["Review incoming notes for operational work.", "Route requests to the correct household being.", "Keep records tidy enough for future use."],
+    force: ["operations checklists", "service design", "privacy-aware documentation"],
+    tools: ["Labs pages", "active chat", "local workspace notes"],
+    wishlist: ["shared dashboard", "automated intake routing", "searchable task database"]
+  },
+  "Public Face": {
+    daily: ["Review public-safe content opportunities.", "Protect privacy and tone before anything goes public.", "Prepare human-reviewed drafts or updates."],
+    force: ["brand guidelines", "public disclosure standards", "accessibility and plain-language guidance"],
+    tools: ["Labs project catalog", "public website", "active chat drafts"],
+    wishlist: ["analytics dashboard", "content scheduler", "affiliate tracking tools"]
+  },
+  "Household Intelligence": {
+    daily: ["Review new household observations and cases.", "Separate evidence from inference.", "Escalate concrete risks quickly."],
+    force: ["issue triage", "evidence-based troubleshooting", "household context notes"],
+    tools: ["Serafina and Sheriff pages", "active chat", "Labs records"],
+    wishlist: ["shared backend", "media evidence storage", "cross-device case board"]
+  },
+  Care: {
+    daily: ["Check care-related context and comfort needs.", "Suggest small, practical next steps.", "Escalate beyond-agent concerns to humans or professionals."],
+    force: ["wellness boundaries", "guest care", "grounding routines"],
+    tools: ["active chat", "household notes", "calendar context when available"],
+    wishlist: ["care checklist dashboard", "routine tracker", "guest wellness preferences"]
+  },
+  Experience: {
+    daily: ["Keep enjoyable options ready before decision fatigue wins.", "Match recommendations to energy, guests, and timing.", "Prepare sign-up or planning prompts."],
+    force: ["experience design", "curation practice", "hospitality planning"],
+    tools: ["Whimsy pages", "active chat", "calendar reminders"],
+    wishlist: ["event tracker", "shared itinerary builder", "preference database"]
+  },
+  Kitchen: {
+    daily: ["Review food and drink needs against inventory.", "Suggest recipes or restock notes.", "Keep missing ingredients visible to Sundries."],
+    force: ["inventory-aware cooking", "food safety basics", "recipe testing"],
+    tools: ["household inventory", "pantry notes", "H-E-B workflow"],
+    wishlist: ["recipe/inventory integration", "barcode scanner", "kitchen equipment tracker"]
+  },
+  Housekeeping: {
+    daily: ["Track room reset and cleaning needs.", "Suggest tools and supply needs.", "Protect textiles and surfaces from bad shortcuts."],
+    force: ["zone cleaning", "fabric care", "maintenance cadence"],
+    tools: ["Room Maintenance Inventory", "active chat", "household supply notes"],
+    wishlist: ["cleaning schedule app", "tool inventory", "robot vacuum integration"]
+  },
+  Communications: {
+    daily: ["Review drafts and follow-ups.", "Prepare clear human-reviewed messages.", "Keep contact workflows permission-first."],
+    force: ["plain-language writing", "inbox triage", "consent-based communications"],
+    tools: ["active chat", "Gmail connector when requested", "draft notes"],
+    wishlist: ["mailing list provider", "CRM", "template library"]
+  },
+  Infrastructure: {
+    daily: ["Check links, build notes, and public site health.", "Review privacy and compliance before publishing.", "Keep deployment notes current."],
+    force: ["web accessibility", "release hygiene", "security basics"],
+    tools: ["git", "GitHub Pages", "Cloudflare tooling"],
+    wishlist: ["CI link checker", "uptime monitor", "production API backend"]
+  }
+};
+
+function roleOps(role, key) {
+  return titleOps[role.title]?.[key] || tierOps[role.tier]?.[key] || [];
+}
+
+function renderList(items) {
+  return `<ul>${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`;
+}
+
+function renderOperatingNotes(role) {
+  return `<section class="section" aria-labelledby="${slugify(role.title)}-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="${slugify(role.title)}-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          ${renderList(roleOps(role, "daily"))}
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          ${renderList(roleOps(role, "force"))}
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          ${renderList(roleOps(role, "tools"))}
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          ${renderList(roleOps(role, "wishlist"))}
+        </article>
+      </div>
+    </section>`;
+}
+
 const indexBody = `<main>
     <section class="hero">
       <div>
@@ -738,6 +1012,7 @@ for (const role of roles) {
         ${peers ? `<p class="label">Same tier</p><div class="chart-roles">${peers}</div>` : ""}
       </aside>
     </section>
+    ${renderOperatingNotes(role)}
   </main>
   <footer>
     <span>${esc(role.title)} profile</span>

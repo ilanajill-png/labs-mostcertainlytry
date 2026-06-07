@@ -193,6 +193,25 @@
     .profile-card p { color: var(--muted); }
     .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
     .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -273,6 +292,28 @@
         <p class="label">Same tier</p><div class="chart-roles"><a href="pr.html">PR</a>
           <a href="social-media-manager.html">Social Media Manager</a></div>
       </aside>
+    </section>
+    <section class="section" aria-labelledby="stylist-ops-title">
+      <p class="label">Operating notes</p>
+      <h2 id="stylist-ops-title">Workflows, References, Tools, And Wishes</h2>
+      <div class="ops-grid">
+        <article class="ops-card">
+          <h3>Daily Tasks</h3>
+          <ul><li>Review public-facing photos/pages for visual consistency.</li><li>Suggest styling fixes for rooms, outfits, product shots, and decks.</li><li>Keep color, texture, and presentation notes aligned with Las Jaras.</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Guiding Force</h3>
+          <ul><li>editorial styling references</li><li>Gramercy Park Hotel/bohemian-luxe visual notes</li><li>accessibility and readability guidelines</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Current Tools</h3>
+          <ul><li>Las Jaras room guide</li><li>AI Product Video Creator page</li><li>local design notes</li></ul>
+        </article>
+        <article class="ops-card">
+          <h3>Wishlist</h3>
+          <ul><li>portable photo light kit</li><li>fabric/color swatch library</li><li>visual moodboard board</li></ul>
+        </article>
+      </div>
     </section>
   </main>
   <footer>
