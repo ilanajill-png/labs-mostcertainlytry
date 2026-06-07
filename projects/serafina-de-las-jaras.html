@@ -396,6 +396,22 @@
       font-size: .92rem;
     }
 
+    .luck-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .luck-list li {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .72);
+    }
+
     footer {
       padding: 26px 0 46px;
       border-top: 1px solid var(--line);
@@ -408,6 +424,7 @@
       .hero,
       .two,
       .grid,
+      .luck-list,
       .media-grid { grid-template-columns: 1fr; }
       .hero { min-height: auto; }
       .sigil { min-height: 460px; }
@@ -423,6 +440,7 @@
         <a href="#voice">Voice</a>
         <a href="#sky">Sky Office</a>
         <a href="#oracle">Oracle</a>
+        <a href="#luck">Luck</a>
         <a href="#beings">Beings</a>
         <a href="serafina-angels-log.html">Angel's Log</a>
         <a href="serafina-sacred-calendar.html">Sacred Calendar</a>
@@ -628,6 +646,37 @@
         <div class="oracle-actions">
           <button id="serafinaOracleButton" type="button" aria-controls="oracleMessage oracleMeta">Ask Serafina for a message</button>
           <p id="oracleMeta" class="oracle-meta">1,001 possible responses. Current vibe pending.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="luck" aria-labelledby="luck-title">
+      <div class="section-head">
+        <div class="label">Luck Office</div>
+        <h2 id="luck-title">Ways To Increase Your Luck</h2>
+        <p>These are tiny luck practices drawn from the same religious-calendar, moon, seasonal, saint-day, and household-threshold references Serafina already watches. They are tradition, symbolism, and house lore; no one is promising the universe has a customer-service department.</p>
+      </div>
+
+      <ul class="luck-list">
+        <li><strong>Moon phases:</strong> begin something small on a waxing-moon day; release one stale thing on a waning-moon day.</li>
+        <li><strong>Full moon:</strong> set out a glass of water or a crystal for a short evening blessing, then put everything away in the morning like a person with sense.</li>
+        <li><strong>New moon:</strong> write one clean intention and hide it somewhere ordinary: under a bowl, inside a book, beside the grocery list.</li>
+        <li><strong>Solstice or equinox:</strong> mark the threshold with one sweep, one candle, one bowl of water, or one repaired thing.</li>
+        <li><strong>Jewish calendar lane:</strong> borrow the spirit of Shabbat preparation: finish one task early, clear one surface, and let rest become part of the blessing.</li>
+        <li><strong>Islamic calendar lane:</strong> practice a small act of sadaqah: give, forgive, feed, or make someone else's path easier without performing about it.</li>
+        <li><strong>Hindu festival lane:</strong> use the Diwali/Holi logic of light and color: brighten one dark corner or bring color to one neglected place.</li>
+        <li><strong>Baha'i Ayyam-i-Ha lane:</strong> treat hospitality as luck: offer a sweet, a note, a call, or a little gift before anyone has to ask.</li>
+        <li><strong>Christian feast-year lane:</strong> choose one saint-day style virtue: patience, courage, mercy, cleanliness, hospitality, or repair.</li>
+        <li><strong>Wheel-of-the-year lane:</strong> match the season: plant in spring, shade in summer, account in autumn, mend in winter.</li>
+        <li><strong>Threshold custom:</strong> keep keys, shoes, and the entry path orderly so luck does not trip while entering.</li>
+        <li><strong>Serafina's basin rule:</strong> water the living thing first. Luck likes maintenance better than speeches.</li>
+      </ul>
+
+      <article class="card oracle-card" style="margin-top:16px;">
+        <p id="luckTip" class="oracle-output" aria-live="polite">Press the button and Serafina will issue a luck instruction.</p>
+        <div class="oracle-actions">
+          <button id="luckyButton" type="button" aria-controls="luckTip luckMeta">Feeling Lucky?</button>
+          <p id="luckMeta" class="oracle-meta">Luck office ready. Tip pending.</p>
         </div>
       </article>
     </section>
@@ -920,6 +969,141 @@
       "Return the tool when finished."
     ];
 
+    const serafinaLuckTips = [
+      {
+        source: "Moon phase",
+        tip: "Begin one small thing while the moon is waxing: a seed, a note, a repair, a promise you can actually keep."
+      },
+      {
+        source: "Moon phase",
+        tip: "On a waning-moon day, remove one stale object from the path. Luck prefers a clear lane."
+      },
+      {
+        source: "Full moon",
+        tip: "Put a glass of water or one crystal near moonlight for the evening, then retrieve it in the morning with manners."
+      },
+      {
+        source: "New moon",
+        tip: "Write one intention in plain language. Hide it somewhere ordinary and let the house carry it quietly."
+      },
+      {
+        source: "Solstice/equinox",
+        tip: "Sweep the threshold on a seasonal turning day. The old trick is simple: make the entrance look like luck is expected."
+      },
+      {
+        source: "Wheel of the Year",
+        tip: "Match the season: plant in spring, shade in summer, count in autumn, mend in winter."
+      },
+      {
+        source: "Shabbat preparation",
+        tip: "Finish one chore before rest begins. Luck often arrives disguised as a clean surface."
+      },
+      {
+        source: "Jewish festival lane",
+        tip: "Choose sweetness on purpose: honey, fruit, a kind word, or a softened reply before the day hardens."
+      },
+      {
+        source: "Islamic sadaqah lane",
+        tip: "Give one useful kindness without needing credit. A quiet good deed is an old door-opener."
+      },
+      {
+        source: "Ramadan/Eid lane",
+        tip: "Share food, water, or patience. Generosity has better timing than panic."
+      },
+      {
+        source: "Diwali lane",
+        tip: "Light one dark corner, literally or socially. Luck likes being able to see where it is going."
+      },
+      {
+        source: "Holi lane",
+        tip: "Add color somewhere dull: flowers, fabric, fruit, or a bright note left where someone will find it."
+      },
+      {
+        source: "Navratri lane",
+        tip: "Give your energy a direction for nine breaths. Serafina says scattered effort leaks luck."
+      },
+      {
+        source: "Baha'i Ayyam-i-Ha lane",
+        tip: "Offer a small gift, sweet, call, or favor before anyone asks. Hospitality is luck with shoes on."
+      },
+      {
+        source: "Christian feast-year lane",
+        tip: "Pick one virtue for the day: mercy, courage, patience, hospitality, cleanliness, or repair."
+      },
+      {
+        source: "Saint-day lane",
+        tip: "Ask St. Anthony style: look in the obvious places first. Found things count as luck only after common sense reports for duty."
+      },
+      {
+        source: "St. Fiacre lane",
+        tip: "Weed one small patch properly. Garden luck is frequently hiding under preventable neglect."
+      },
+      {
+        source: "St. Francis lane",
+        tip: "Bless luck through creature care: refill water, notice birds, protect paws from heat, and supervise the squirrel border."
+      },
+      {
+        source: "All Souls/ancestor lane",
+        tip: "Remember someone kindly and do one practical thing they would recognize as care."
+      },
+      {
+        source: "Threshold custom",
+        tip: "Put keys, shoes, bags, and mail into order. Luck should not have to climb over evidence of yesterday."
+      },
+      {
+        source: "House blessing",
+        tip: "Open a window for three minutes, then close it with intention. Let the stale air leave without a speech."
+      },
+      {
+        source: "Kitchen luck",
+        tip: "Feed the house from what it already has. Pantry competence is a very respectable spell."
+      },
+      {
+        source: "Water rite",
+        tip: "Water the living thing first: plant, pet, person, then plan. The order matters."
+      },
+      {
+        source: "Candle custom",
+        tip: "Light one candle while naming one thing you will actually finish. Extinguish it safely; luck dislikes house fires."
+      },
+      {
+        source: "Salt custom",
+        tip: "Use salt as attention, not superstition: season food properly, clean one sticky place, and stop inviting blandness."
+      },
+      {
+        source: "Coin custom",
+        tip: "Turn one coin heads-up for the next person. Tiny anonymous blessings are still blessings."
+      },
+      {
+        source: "Garden omen",
+        tip: "Listen for birds before checking your phone. Let the first message come from the actual morning."
+      },
+      {
+        source: "Serafina's basin",
+        tip: "Rinse a bowl, basin, or cup and leave it clean. Receptive things should not be crusty."
+      },
+      {
+        source: "Lion guardian lane",
+        tip: "Stand at the threshold and decide what is allowed in today: clarity, repair, kindness, paid invoices. Be specific."
+      },
+      {
+        source: "Franklin virtue lane",
+        tip: "Choose cleanliness for luck today: clear standing water, old leaves, or one pocket of disorder."
+      },
+      {
+        source: "Guest-reminder lane",
+        tip: "Prepare before the guest appears. Luck often looks like extra towels, cold water, and a working pen."
+      },
+      {
+        source: "Morning mercy",
+        tip: "Do the merciful task before noon. After noon, everyone becomes more theatrical."
+      },
+      {
+        source: "Dusk treaty",
+        tip: "At dusk, stop one argument with the day. Write down what remains and let the evening hold it."
+      }
+    ];
+
     function buildSerafinaOracleResponses() {
       const responses = [];
       for (const opener of serafinaOpeners) {
@@ -1011,7 +1195,27 @@
       });
     }
 
+    function initLuckButton() {
+      const button = document.getElementById("luckyButton");
+      const tip = document.getElementById("luckTip");
+      const meta = document.getElementById("luckMeta");
+      if (!button || !tip || !meta) return;
+
+      let askCount = 0;
+      meta.textContent = `${serafinaLuckTips.length} luck practices loaded from Serafina's calendar lanes.`;
+
+      button.addEventListener("click", () => {
+        askCount += 1;
+        const vibe = currentSerafinaVibe();
+        const index = (vibe.seed + randomInt(serafinaLuckTips.length) + (askCount * 11)) % serafinaLuckTips.length;
+        const selected = serafinaLuckTips[index];
+        tip.textContent = `${selected.tip}`;
+        meta.textContent = `${selected.source}. Tip ${index + 1} of ${serafinaLuckTips.length}. Current vibe: ${vibe.label}.`;
+      });
+    }
+
     initSerafinaOracle();
+    initLuckButton();
   </script>
 </body>
 </html>
