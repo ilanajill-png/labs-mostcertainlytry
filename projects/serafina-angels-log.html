@@ -361,7 +361,6 @@
           <p><strong>Morning intention:</strong> I begin with what is true. I came from Mountain View, arrived at Las Jaras with road-worn authority, left a confirmed pair of lion guardians behind, keep the moon and weather in my basin, and now recognize the garden's living court: birds, squirrels, and Pinky.</p>
           <p><strong>Today's practical rite:</strong> I water by touch, not by panic.</p>
           <p><strong>Schertz weather:</strong> I record sunrise 6:32 AM, sunset 8:31 PM, high 93°F, low 73°F, no rain, and UV 8 as the day's main extreme.</p>
-          <p><strong>Civic source:</strong> I begin with schertz.com for city context, local services, alerts, and the practical business of living here before I add ceremony.</p>
         </article>
         <article class="card">
           <h3>My Note</h3>
@@ -393,7 +392,7 @@
       <div class="section-head">
         <div class="label">Recorded Notes</div>
         <h2 id="records-title">Daily Entries I Have Actually Written</h2>
-        <p>These are my actual daily notes, newest first. Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, a six-card spread, and a civic note from schertz.com.</p>
+        <p>These are my actual daily notes, newest first. Each day carries my morning intention, practical rite, Schertz sunrise and sunset, high and low, rain, extreme-weather flags, and a six-card spread. I add a civic note from schertz.com only when the city has something timely and important for the household.</p>
       </div>
       <div class="log-grid" id="recordedLog" aria-live="polite">
         <article class="log-entry">
@@ -795,12 +794,12 @@
             <p><strong>My morning intention:</strong> ${entry.morningIntention || "I begin with what is true."}</p>
             <p><strong>Today's practical rite:</strong> ${entry.practicalRite || "I water by touch, not by panic."}</p>
             <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
-            <p><strong>Civic source:</strong> ${entry.civicNote || "I begin with schertz.com for local civic weather, service, and city context before I embroider anything ceremonial."}</p>
+            ${entry.civicNote ? `<p><strong>Civic note:</strong> ${entry.civicNote}</p>` : ""}
             <p><strong>Six-card spread:</strong> ${tarotSummary(spread)}</p>
             <p><strong>House message:</strong> ${entry.tarotMessage || tarotHouseMessage(spread)}</p>
             <p>${entry.note || ""}</p>
             <div class="meta">
-              <span class="chip">schertz.com source</span>
+              ${entry.civicNote ? `<span class="chip">schertz.com note</span>` : ""}
               <span class="chip">weather recorded</span>
               <span class="chip">six cards pulled</span>
             </div>
