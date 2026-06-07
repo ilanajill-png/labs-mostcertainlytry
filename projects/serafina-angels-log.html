@@ -316,6 +316,7 @@
     <div class="bar">
       <a class="brand" href="serafina-de-las-jaras.html">Serafina de las Jaras</a>
       <nav aria-label="Page sections">
+        <a href="#today">Today's Note</a>
         <a href="#creatures">Household Beings</a>
         <a href="#log">Angel's Log</a>
         <a href="serafina-de-las-jaras.html">Main Page</a>
@@ -333,6 +334,29 @@
         <span class="badge">Public-readable</span>
         <span class="badge">Exact former address private</span>
         <span class="badge">Birds, squirrels, and Pinky included</span>
+      </div>
+    </section>
+
+    <section class="section" id="today" aria-labelledby="today-title">
+      <div class="section-head">
+        <div class="label">Starting Note</div>
+        <h2 id="today-title">Today's Angel Note</h2>
+        <p>This is the first dated Angel's Log note, seeded from what Serafina knows to be true right now.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>June 6, 2026</h3>
+          <p><strong>Morning intention:</strong> Begin with what is true. Serafina came from Mountain View, arrived at Las Jaras with road-worn authority, left a confirmed pair of lion guardians behind, keeps the moon and weather in her basin, and now recognizes the garden's living court: birds, squirrels, and Pinky.</p>
+        </article>
+        <article class="card">
+          <h3>Her Note</h3>
+          <p>The photos are no longer incoming rumor; they are installed memory. The night crystals are part of her office. The birds are to be heard, the squirrels supervised, and Pinky protected from heat, rough footing, and disrespect.</p>
+        </article>
+        <article class="card">
+          <h3>Today's Charge</h3>
+          <p>Keep the exact former address private. Use only Mountain View in public lore. Check water by touch, respect the heat, and let tomorrow's morning alert turn this office into a daily practice.</p>
+        </article>
       </div>
     </section>
 
@@ -382,7 +406,7 @@
       <div class="section-head">
         <div class="label">Angel's Log</div>
         <h2 id="log-title">Each Day Of The Year</h2>
-        <p>These entries are evergreen calendar notes. The daily Samsung Frame alert carries the live weather and moon values; this public log gives each date its Serafina-style meaning.</p>
+        <p>These entries are evergreen calendar notes. Each day also gets a morning intention: a small true thing to carry into the garden before chores begin. The daily Samsung Frame alert carries the live weather and moon values; this public log gives each date its Serafina-style meaning.</p>
       </div>
 
       <div class="toolbar" id="monthToolbar" aria-label="Month filter"></div>
@@ -485,6 +509,17 @@
       "Wildlife office: no panic, no cruelty, no leaving easy chaos behind."
     ];
 
+    const intentionSeeds = [
+      "Begin with what is true, then water only what is dry.",
+      "Let the birds report first; the garden often speaks before the gardener does.",
+      "Protect Pinky's shade and footing before pretending the day is organized.",
+      "Admire the squirrel's nerve, then secure what the squirrel should not have.",
+      "Keep the old address private, the Mountain View origin public, and the threshold swept.",
+      "Respect the sun early, the moon late, and the basin always.",
+      "Do one practical mercy before one decorative flourish.",
+      "Notice the living court: wing, paw, leaf, stone, cloud."
+    ];
+
     function seasonFor(monthIndex, day) {
       return seasons.find((season) => season.test(monthIndex, day));
     }
@@ -510,6 +545,7 @@
       const ordinal = dayOfYear(monthIndex, day);
       const creature = creatures[ordinal % creatures.length];
       const chore = season.chores[ordinal % season.chores.length];
+      const intention = intentionSeeds[ordinal % intentionSeeds.length];
       const title = fixed ? fixed[0] : season.title;
       const body = fixed ? fixed[1] : `Serafina records ${season.tone}. Today's charge: ${chore}. ${creature}`;
       return {
@@ -518,6 +554,7 @@
         day,
         title,
         body,
+        intention,
         sky: season.sky,
         moon: moonHint(ordinal),
         today: monthIndex === currentMonth && day === currentDate
@@ -556,6 +593,7 @@
         <article class="log-entry${entry.today ? " today" : ""}">
           <div class="date-line"><span>${entry.month} ${entry.day}</span><span>${entry.today ? "Today" : "Angel's Log"}</span></div>
           <div class="entry-title">${entry.title}</div>
+          <p><strong>Morning intention:</strong> ${entry.intention}</p>
           <p>${entry.body}</p>
           <p><strong>Sky:</strong> ${entry.sky}.</p>
           <div class="meta">
