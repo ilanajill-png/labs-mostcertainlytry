@@ -9,7 +9,7 @@
         "weather": "https://wttr.in/Schertz,TX?format=j1",
         "civic": "https://www.schertz.com/"
       },
-      "morningIntention": "Honor the Mountain View origin, the lion pair, and the threshold swept clean.",
+      "morningIntention": "I honor the Mountain View origin, the lion pair, and the threshold swept clean.",
       "weather": {
         "sunrise": "06:32 AM",
         "sunset": "08:31 PM",
@@ -28,9 +28,9 @@
       },
       "tarot": {
         "card": "The High Priestess",
-        "reading": "Observe the quiet pattern; the garden has not finished speaking."
+        "reading": "I observe the quiet pattern; the garden has not finished speaking."
       },
-      "note": "Serafina records 06:32 AM sunrise, 08:31 PM sunset, high 93 F, low 73 F, rain none recorded, and high UV. Tarot: The High Priestess. Observe the quiet pattern; the garden has not finished speaking."
+      "note": "I record 06:32 AM sunrise, 08:31 PM sunset, high 93 F, low 73 F, rain none recorded, and high UV. Tarot: The High Priestess. I observe the quiet pattern; the garden has not finished speaking."
     }
   },
   "updatedAt": "2026-06-07T03:32:58.361Z"
