@@ -88,7 +88,101 @@
       ],
       "tarotMessage": "Household message: The High Priestess asks everyone at Las Jaras to listen before rushing. The Empress says the weather will reward care, shade, and attention to living things. The Lovers warns that the day will reveal what everyone is actually willing to tend. The Chariot brings the blessing of steady movement, secured cargo, and no dramatic shortcuts.",
       "note": "I begin this archive by listening before I command. The heat has opinions, the garden has unfinished speech, and I will let evidence outrank drama."
+    },
+    "2026-06-07": {
+      "date": "2026-06-07",
+      "weekday": "Sunday",
+      "generatedAt": "2026-06-07T13:18:00.638Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Solar Plexus chakra (confidence, willpower, and self-trust): I act before the sun gets bossy, choosing one necessary mercy and finishing it with authority.",
+      "morningIntentionChakra": {
+        "chakra": "Solar Plexus",
+        "focus": "confidence, willpower, and self-trust",
+        "intention": "I act before the sun gets bossy, choosing one necessary mercy and finishing it with authority."
+      },
+      "practicalRite": "I put tools back before St. Anthony has to get involved.",
+      "weather": {
+        "sunrise": "06:32 AM",
+        "sunset": "08:31 PM",
+        "highF": "90",
+        "lowF": "76",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "none flagged"
+        ],
+        "uvIndex": "7",
+        "maxGustMph": 22,
+        "maxThunderChance": 37,
+        "moonPhase": "Waning Gibbous",
+        "moonIllumination": "64%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-06-08",
+          "name": "St. Medard's Weather Watch"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "rose for sweetness with boundaries",
+        "breakfast": "a breakfast taco with something green tucked inside",
+        "lunch": "noodle soup or ramen upgraded with vegetables and an egg",
+        "dinner": "beans, greens, and cornbread for old-fashioned staying power",
+        "luckyObject": "a clean handkerchief",
+        "personToCall": "an elder who would like to be remembered before an emergency",
+        "strangerKindness": "compliment a worker to their manager or in writing"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:32 AM; sunset 08:31 PM; 13h 59m daylight.",
+        "moon": "Waning Gibbous, 64% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Cleanliness",
+        "franklinMeasure": "Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "complete one useful household mercy before any decorative ambition",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Cleanliness: Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth. Therefore the household should complete one useful household mercy before any decorative ambition."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Empress",
+          "reading": "I tend growth, water, shade, and the beings who depend on them."
+        },
+        {
+          "position": "Weather",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Garden",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Household",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Warning",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Blessing",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        }
+      ],
+      "tarotMessage": "Household message: The Empress asks everyone at Las Jaras to notice the first true need before rushing. The Emperor describes the weather inside and outside the walls. The Chariot names what could complicate the day if ignored. Strength shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water. The Empress tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-07T03:32:58.361Z"
+  "updatedAt": "2026-06-07T13:18:00.638Z"
 }
