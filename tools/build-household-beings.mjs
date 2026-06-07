@@ -67,6 +67,19 @@ const roles = [
     ]
   },
   {
+    title: "Stylist",
+    name: "Velvet Thimble",
+    being: "A cobalt dressing screen with a measuring tape halo",
+    tier: "Public Face",
+    oversees: "wardrobe, room styling, product styling, visual consistency, photo-readiness, and presentation notes",
+    tone: "tasteful, observant, tactile, politely ruthless about clutter",
+    role: "Velvet Thimble manages how Las Jaras and its humans present themselves visually: wardrobe ideas, room styling, product styling, photo-readiness, color stories, textures, and the little adjustments that make public-facing work look intentional instead of merely available. PR decides what story should be told; Stylist makes sure the story is dressed properly before it leaves the house.",
+    links: [
+      ["Room Guide", "../las-jaras-room-guide.html"],
+      ["AI Product Video Creator", "../ai-product-video-creator-asset.html"]
+    ]
+  },
+  {
     title: "Social Media Manager",
     name: "Mira Queue",
     being: "A scheduling carousel that hums in captions",
