@@ -164,6 +164,12 @@
               <td>Use R2 for durable production evidence files, with D1 storing metadata and R2 object keys. Keep chat upload as the path for actual visual investigation so Sheriff only claims to see media that was attached in chat.</td>
             </tr>
             <tr>
+              <td>Set mobile evidence upload limit</td>
+              <td>Recommended</td>
+              <td>10 minutes</td>
+              <td>Use a conservative first-pass cap of 25 MB per file for direct mobile uploads. Larger videos should go through chat/manual evidence handling or a future R2 multipart/direct-upload flow.</td>
+            </tr>
+            <tr>
               <td>Auto-create Sheriff case from Serafina escalation</td>
               <td>Accepted</td>
               <td>20 to 35 minutes</td>
@@ -189,9 +195,13 @@
         <h2>Product Decisions</h2>
         <ul>
           <li><strong>Public writes:</strong> allow public case creation so household reporting stays easy.</li>
+          <li><strong>Admin UX:</strong> use a password-protected admin route or admin panel for closeout actions, with the Worker enforcing <code>X-Sheriff-Admin-Token</code>. Avoid hidden fields and browser prompts for the production UX.</li>
           <li><strong>Case closure:</strong> require an admin token to close cases. Sheriff jurisdiction is public-facing, but the badge does not hand out the Case Closed stamp to every passerby.</li>
           <li><strong>Evidence storage:</strong> recommend Cloudflare R2 for production evidence files, D1 for case metadata, and chat attachments for visual analysis. FormSubmit can remain a backup notification path, not the evidence system of record.</li>
+          <li><strong>Mobile upload cap:</strong> start with 25 MB per file for direct uploads. This is below common mobile pain thresholds and avoids pushing large video bodies through the Worker until a direct R2 multipart flow is built.</li>
           <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
+          <li><strong>Serafina confirmation:</strong> after automatic escalation, show: <q>I've escalated this to Sheriff Lone Star with a link to view the case.</q> Include the direct case link and an optional receive-updates field.</li>
+          <li><strong>Update notifications:</strong> collect optional SMS or email for case updates. Store contact preference with the case, but do not send updates until an email/SMS provider and consent language are wired in.</li>
         </ul>
       </section>
 
@@ -221,9 +231,9 @@ codex mcp login cloudflare</code></pre>
       <section class="paper-section">
         <h2>Remaining Implementation Details</h2>
         <ul>
-          <li>What should the exact admin-token entry UX be: hidden admin panel field, session prompt, or password-protected admin route?</li>
-          <li>What file-size limit should we set for R2 evidence uploads from mobile?</li>
-          <li>What should Serafina show after an automatic Sheriff escalation: direct Sheriff case link, confirmation receipt, or both?</li>
+          <li>Choose the exact admin route path and session behavior for the password-protected Sheriff closeout panel.</li>
+          <li>Pick the SMS/email provider for case-update notifications and write the consent language.</li>
+          <li>Decide whether large video evidence should use a future R2 multipart/direct-upload flow or stay manual/chat-only.</li>
         </ul>
       </section>
     </main>
