@@ -10,7 +10,7 @@ function corsHeaders(request) {
   return {
     "Access-Control-Allow-Origin": allowedOrigin,
     "Access-Control-Allow-Methods": "GET, POST, PUT, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, X-Sheriff-Admin-Token",
     "Access-Control-Max-Age": "86400"
   };
 }
@@ -27,6 +27,16 @@ function jsonResponse(request, body, status = 200) {
 
 function clean(value) {
   return String(value || "").trim();
+}
+
+function hasAdminToken(request, env) {
+  const expected = clean(env.ADMIN_TOKEN);
+  const provided = clean(request.headers.get("X-Sheriff-Admin-Token"));
+  return Boolean(expected && provided && provided === expected);
+}
+
+function closingCase(current, patch) {
+  return clean(current.status) !== "Closed" && clean(patch.status) === "Closed";
 }
 
 function normalizeCase(input) {
@@ -84,6 +94,9 @@ async function updateCase(env, request, id) {
   if (!existing) return jsonResponse(request, { error: "Case not found" }, 404);
   const patch = await request.json();
   const current = JSON.parse(existing.data);
+  if (closingCase(current, patch) && !hasAdminToken(request, env)) {
+    return jsonResponse(request, { error: "Closing a case requires Sheriff admin token" }, 403);
+  }
   const issue = normalizeCase({ ...current, ...patch, id });
   await env.DB.prepare(
     "UPDATE cases SET status = ?, updated_at = ?, data = ? WHERE id = ?"

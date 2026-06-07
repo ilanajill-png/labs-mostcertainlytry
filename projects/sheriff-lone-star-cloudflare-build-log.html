@@ -122,6 +122,12 @@
               <td>Created a compact <code>cases</code> table storing case JSON plus indexed status and updated timestamps.</td>
             </tr>
             <tr>
+              <td>Add admin close token</td>
+              <td>Complete in scaffold</td>
+              <td>10 minutes</td>
+              <td>Public case creation can remain open, but closing a case now requires <code>X-Sheriff-Admin-Token</code> matching the Worker secret <code>ADMIN_TOKEN</code>. Configure with <code>wrangler secret put ADMIN_TOKEN</code>.</td>
+            </tr>
+            <tr>
               <td>Create Cloudflare D1 database</td>
               <td>Next</td>
               <td>5 to 10 minutes</td>
@@ -153,9 +159,15 @@
             </tr>
             <tr>
               <td>Media handling decision</td>
-              <td>Open</td>
+              <td>Recommended</td>
               <td>20 to 40 minutes</td>
-              <td>D1 should store media metadata, not large photos/videos. For durable media files, add R2 or keep email/chat upload as the evidence path.</td>
+              <td>Use R2 for durable production evidence files, with D1 storing metadata and R2 object keys. Keep chat upload as the path for actual visual investigation so Sheriff only claims to see media that was attached in chat.</td>
+            </tr>
+            <tr>
+              <td>Auto-create Sheriff case from Serafina escalation</td>
+              <td>Accepted</td>
+              <td>20 to 35 minutes</td>
+              <td>When Serafina marks an event as escalation-worthy, the Serafina form should create the Sheriff case through the same API instead of only handing off browser-local context.</td>
             </tr>
           </tbody>
         </table>
@@ -168,7 +180,18 @@
           <li><code>POST /cases</code> creates or replaces a case.</li>
           <li><code>GET /cases/:id</code> reads one case.</li>
           <li><code>PUT /cases/:id</code> updates status, checklist state, closeout data, or other case fields.</li>
+          <li>Changing a case from open to closed requires <code>X-Sheriff-Admin-Token</code> and the Worker secret <code>ADMIN_TOKEN</code>.</li>
           <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
+        </ul>
+      </section>
+
+      <section class="paper-section">
+        <h2>Product Decisions</h2>
+        <ul>
+          <li><strong>Public writes:</strong> allow public case creation so household reporting stays easy.</li>
+          <li><strong>Case closure:</strong> require an admin token to close cases. Sheriff jurisdiction is public-facing, but the badge does not hand out the Case Closed stamp to every passerby.</li>
+          <li><strong>Evidence storage:</strong> recommend Cloudflare R2 for production evidence files, D1 for case metadata, and chat attachments for visual analysis. FormSubmit can remain a backup notification path, not the evidence system of record.</li>
+          <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
         </ul>
       </section>
 
@@ -201,9 +224,9 @@ codex mcp login cloudflare</code></pre>
       <section class="paper-section">
         <h2>Open Questions</h2>
         <ul>
-          <li>Should the public form allow anonymous writes forever, or should admin-only actions like closing cases require a token?</li>
-          <li>Should evidence files live in Cloudflare R2, stay in FormSubmit email, or be attached only in chat for Sheriff investigation?</li>
-          <li>Should the Serafina form automatically create a Sheriff case through the same API when escalation is selected?</li>
+          <li>What should the exact admin-token entry UX be: hidden admin panel field, session prompt, or password-protected admin route?</li>
+          <li>What file-size limit should we set for R2 evidence uploads from mobile?</li>
+          <li>Should Serafina auto-create all escalations immediately, or ask the human to confirm before sending a Sheriff case?</li>
         </ul>
       </section>
     </main>
