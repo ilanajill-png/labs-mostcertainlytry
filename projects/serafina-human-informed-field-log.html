@@ -362,6 +362,19 @@
       font-size: 1.1rem;
     }
 
+    .chat-handoff {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(159, 116, 36, .42);
+      border-radius: 8px;
+      background: #fff8e8;
+    }
+
+    .chat-handoff[hidden] {
+      display: none;
+    }
+
     .records {
       display: grid;
       gap: 10px;
@@ -629,6 +642,18 @@
           <p>I am an angel, not a psychic. Tell me what happened, and I will give you my best practical read.</p>
         </div>
 
+        <section class="chat-handoff" id="chat-handoff" aria-labelledby="chat-handoff-title" hidden>
+          <div>
+            <p class="label">Chat handoff</p>
+            <h2 id="chat-handoff-title">Photo-Aware Serafina Reply</h2>
+            <p class="hint">For the best answer, upload the same photo or video into chat, then paste this prompt. Serafina will use the actual media plus your question before answering.</p>
+          </div>
+          <pre id="chat-prompt" tabindex="0"></pre>
+          <div class="actions">
+            <button type="button" id="copy-chat-prompt">Copy Chat Prompt</button>
+          </div>
+        </section>
+
         <section class="admin-panel" aria-labelledby="admin-title">
           <div>
             <p class="label">Admin</p>
@@ -676,6 +701,9 @@
   <script>
     const form = document.querySelector("#intake-form");
     const suggestionEl = document.querySelector("#suggestion");
+    const chatHandoff = document.querySelector("#chat-handoff");
+    const chatPrompt = document.querySelector("#chat-prompt");
+    const copyChatPrompt = document.querySelector("#copy-chat-prompt");
     const recordList = document.querySelector("#record-list");
     const jsonOutput = document.querySelector("#json-output");
     const copyLatest = document.querySelector("#copy-latest");
@@ -814,6 +842,33 @@
       };
     }
 
+    function buildChatPrompt(record) {
+      const media = record.mediaAttachments?.length
+        ? record.mediaAttachments.map((item) => `${item.name} (${item.type}, ${item.size})`).join("; ")
+        : "No media attached in the form.";
+      return [
+        "Serafina, answer this human-informed field note in your Las Jaras garden-angel tone.",
+        "",
+        "Use the photo or video uploaded in this chat as evidence. Do not pretend to see media if no media is attached in chat.",
+        "Use the human's question and form context together before giving the best practical answer.",
+        "",
+        `Human name: ${record.informedBy || "not given"}`,
+        `Date observed: ${record.eventDate || "not given"} ${record.eventTime || ""}`.trim(),
+        `Location: ${record.location || "not given"}`,
+        `Event type: ${record.eventType || "not given"}`,
+        `Affected: ${record.affected.length ? record.affected.join(", ") : "not specified"}`,
+        `Urgency: ${record.urgency || "not given"}`,
+        `Chakra lens: ${record.chakra || record.serafinaSuggestion.chakra || "Serafina may choose"}`,
+        `Follow-up requested: ${record.followUp || "none"}`,
+        `Form media selected: ${media}`,
+        `Media description: ${record.mediaDescription || "none given"}`,
+        "",
+        `Human question or observation: ${record.description}`,
+        "",
+        "Deliver the answer as Serafina: practical, watchful, a little imperious, warm toward the household, and clear about the next best action."
+      ].join("\n");
+    }
+
     function recordFromForm() {
       const data = new FormData(form);
       const record = {
@@ -849,6 +904,8 @@
           ${response.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}
         </ul>
       `;
+      chatPrompt.textContent = buildChatPrompt(record);
+      chatHandoff.hidden = false;
     }
 
     function escapeHtml(value) {
@@ -911,6 +968,15 @@
       const text = `Serafina human-informed note\nDate: ${latest.eventDate} ${latest.eventTime || ""}\nSource: ${latest.source}\nHuman: ${latest.informedBy}\nLocation: ${latest.location}\nType: ${latest.eventType}\nAffected: ${latest.affected.join(", ") || "not specified"}\nObservation: ${latest.description}\nMedia: ${media}\nMedia description: ${latest.mediaDescription || "none"}\nSuggestion: ${latest.serafinaSuggestion.headline}\nSteps: ${latest.serafinaSuggestion.steps.join(" ")}`;
       await navigator.clipboard.writeText(text);
       suggestionEl.setAttribute("aria-label", "Latest note copied");
+    });
+
+    copyChatPrompt.addEventListener("click", async () => {
+      if (!chatPrompt.textContent.trim()) return;
+      await navigator.clipboard.writeText(chatPrompt.textContent);
+      copyChatPrompt.textContent = "Chat Prompt Copied";
+      setTimeout(() => {
+        copyChatPrompt.textContent = "Copy Chat Prompt";
+      }, 1800);
     });
 
     mediaFiles.addEventListener("change", renderMediaPreview);
