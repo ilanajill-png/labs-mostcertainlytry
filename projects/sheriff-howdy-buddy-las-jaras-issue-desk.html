@@ -1,0 +1,867 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sheriff Howdy Buddy | Las Jaras Issue Desk</title>
+  <meta name="description" content="Sheriff Howdy Buddy tracks Las Jaras household issues, researches likely causes, asks follow-up questions, and keeps cases open until closed.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #5a6370;
+      --paper: #f8f5ed;
+      --panel: #fffdfa;
+      --field: #ffffff;
+      --line: #d6d0c0;
+      --cobalt: #0047ab;
+      --badge: #a9711f;
+      --green: #275e46;
+      --red: #9c3f43;
+      --focus: #111827;
+      --shadow: 0 16px 36px rgba(23, 32, 51, .1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(120deg, rgba(0, 71, 171, .08), transparent 42%),
+        linear-gradient(250deg, rgba(169, 113, 31, .13), transparent 44%),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 50;
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(248, 245, 237, .94);
+      backdrop-filter: blur(12px);
+    }
+
+    .bar,
+    main,
+    footer {
+      width: min(1180px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+
+    .bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 64px;
+    }
+
+    .brand {
+      color: var(--cobalt);
+      font-weight: 950;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    nav a,
+    button,
+    .button {
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    button { cursor: pointer; }
+    button.primary { border-color: var(--green); background: var(--green); color: #fff; }
+    button.danger { border-color: rgba(156, 63, 67, .55); color: var(--red); }
+
+    :focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+      gap: clamp(22px, 5vw, 54px);
+      align-items: center;
+      padding: 48px 0 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .kicker,
+    .label,
+    footer {
+      color: var(--muted);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    li,
+    label,
+    legend {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(2.6rem, 7vw, 6.2rem);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2.8vw, 2.5rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0; }
+
+    .lede {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.65vw, 1.25rem);
+    }
+
+    .badge-card,
+    .panel,
+    form,
+    .case-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .92);
+      box-shadow: var(--shadow);
+    }
+
+    .badge-card {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .badge-mark {
+      display: grid;
+      place-items: center;
+      width: 112px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 3px solid rgba(169, 113, 31, .58);
+      background: radial-gradient(circle at center, #fff8dc, #d9a547);
+      color: #4f3211;
+      font-size: 2.5rem;
+      font-weight: 950;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 18px;
+      align-items: start;
+      padding: 28px 0 48px;
+    }
+
+    form,
+    .panel {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    fieldset {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0 0 18px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    fieldset:last-of-type { border-bottom: 0; padding-bottom: 0; }
+
+    legend {
+      margin-bottom: 2px;
+      color: var(--ink);
+      font-size: 1.1rem;
+      font-weight: 950;
+    }
+
+    label,
+    .field-label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 44px;
+      padding: 11px 12px;
+      border: 1px solid #aeb8b2;
+      border-radius: 8px;
+      background: var(--field);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 132px;
+      resize: vertical;
+    }
+
+    .two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+      min-height: 44px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .74);
+      color: var(--ink);
+      font-weight: 760;
+    }
+
+    .check input {
+      width: 20px;
+      height: 20px;
+      min-height: 20px;
+      margin: 2px 0 0;
+    }
+
+    .media-preview {
+      display: grid;
+      gap: 10px;
+      min-height: 54px;
+      padding: 12px;
+      border: 1px dashed #aeb8b2;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .64);
+    }
+
+    .media-item {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      max-height: 260px;
+      border-radius: 8px;
+      object-fit: contain;
+      background: #111827;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .sheriff-note {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(39, 94, 70, .38);
+      border-radius: 8px;
+      background: #eef7f1;
+    }
+
+    .handoff {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(169, 113, 31, .42);
+      border-radius: 8px;
+      background: #fff8e8;
+    }
+
+    .handoff[hidden] { display: none; }
+
+    pre {
+      max-height: 260px;
+      overflow: auto;
+      margin: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #f9fafb;
+      font-size: .9rem;
+      white-space: pre-wrap;
+    }
+
+    .case-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .case-card {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .case-card.closed {
+      opacity: .7;
+      background: rgba(255, 253, 250, .68);
+    }
+
+    .case-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 850;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(0, 71, 171, .1);
+      color: var(--cobalt);
+    }
+
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 24px 0 44px;
+      border-top: 1px solid var(--line);
+      text-transform: none;
+    }
+
+    @media (max-width: 940px) {
+      .hero,
+      .layout { grid-template-columns: 1fr; }
+      .bar { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      nav { justify-content: flex-start; }
+    }
+
+    @media (max-width: 620px) {
+      .two,
+      .checks { grid-template-columns: 1fr; }
+      .actions button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#case-form">Skip to case form</a>
+
+  <header>
+    <div class="bar">
+      <a class="brand" href="../index.html">Most Certainly Try Labs</a>
+      <nav aria-label="Sheriff navigation">
+        <a href="#case-form">Open Case</a>
+        <a href="#cases">Case Board</a>
+        <a href="serafina-human-informed-field-log.html">Serafina Field Log</a>
+        <a href="household-ops-command-center.html">Household Ops</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="title">
+      <div>
+        <p class="kicker">Las Jaras Sheriff</p>
+        <h1 id="title">Sheriff Howdy Buddy</h1>
+        <p class="lede">Sheriff Howdy Buddy is the Las Jaras issue desk: household mysteries, broken things, interpersonal friction, creature incidents, grocery shortages, and maintenance problems become open cases until the sheriff marks them closed.</p>
+      </div>
+      <aside class="badge-card" aria-label="Sheriff identity">
+        <div class="badge-mark">HB</div>
+        <h2>What Kind Of Being?</h2>
+        <p>A household tutelary sheriff: not exactly human, not a robot, not a decorative object. Think porch-light guardian, clerk of evidence, and practical Texas house spirit with a badge.</p>
+        <p><strong>Tone:</strong> calm, neighborly, exacting, lightly snarky, fair-minded, and allergic to vague panic.</p>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <form id="case-form" aria-describedby="case-help">
+        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through.</p>
+
+        <fieldset>
+          <legend>Open a Las Jaras case</legend>
+          <div class="two">
+            <label for="case-title">
+              Case title, required
+              <input id="case-title" name="caseTitle" required placeholder="Example: Something ate the basil">
+            </label>
+            <label for="reported-by">
+              Reporting mortal, required
+              <input id="reported-by" name="reportedBy" autocomplete="name" required placeholder="Example: Buddy">
+            </label>
+          </div>
+
+          <div class="two">
+            <label for="location">
+              Location, required
+              <select id="location" name="location" required>
+                <option value="">Choose a location</option>
+                <option>Front yard</option>
+                <option>Back yard</option>
+                <option>Garden beds</option>
+                <option>Porch or threshold</option>
+                <option>Driveway or gate</option>
+                <option>Kitchen</option>
+                <option>Living room</option>
+                <option>Red Room</option>
+                <option>Green Room</option>
+                <option>Blue Room</option>
+                <option>Yellow Room</option>
+                <option>Green Bathroom</option>
+                <option>Blue Bathroom</option>
+                <option>Laundry Room</option>
+                <option>Garage</option>
+                <option>Whole house</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label for="case-type">
+              Case type, required
+              <select id="case-type" name="caseType" required>
+                <option value="">Choose a type</option>
+                <option value="maintenance">Physical repair or maintenance</option>
+                <option value="plant">Plant, garden, pest, or creature mystery</option>
+                <option value="plumbing">Plumbing, toilet, sink, hot water, leak</option>
+                <option value="food">Food, pantry, H-E-B, popsicles, household supply</option>
+                <option value="safety">Safety, access, heat, trip, electrical concern</option>
+                <option value="interpersonal">Interpersonal household issue</option>
+                <option value="spiritual">Spiritual heartbeat, ritual, mood, omen</option>
+                <option value="other">Other household case</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="two">
+            <label for="urgency">
+              Urgency, required
+              <select id="urgency" name="urgency" required>
+                <option value="">Choose urgency</option>
+                <option value="watch">Watch and investigate</option>
+                <option value="today">Needs action today</option>
+                <option value="urgent">Urgent safety or damage concern</option>
+              </select>
+            </label>
+            <label for="desired-outcome">
+              Desired outcome
+              <select id="desired-outcome" name="desiredOutcome">
+                <option value="understand">Understand what happened</option>
+                <option value="fix">Fix it ourselves</option>
+                <option value="hire">Find out whether to hire help</option>
+                <option value="shop">Add supplies to a shopping list</option>
+                <option value="talk">Prepare a household conversation</option>
+              </select>
+            </label>
+          </div>
+
+          <label for="description">
+            What happened, required
+            <textarea id="description" name="description" required maxlength="1400" placeholder="Describe what you saw, heard, smelled, noticed, broke, ran out of, or need solved."></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Evidence</legend>
+          <label for="media-files">
+            Add photo or video evidence
+            <input id="media-files" name="mediaFiles" type="file" accept="image/*,video/*" multiple>
+            <span class="hint">The file previews here and its metadata is saved in this browser. Upload the same media into chat when you ask Howdy Buddy to investigate.</span>
+          </label>
+          <label for="media-description">
+            Evidence description
+            <textarea id="media-description" name="mediaDescription" maxlength="900" placeholder="Example: Close-up of bitten leaves on basil, with small dark pellets on soil."></textarea>
+          </label>
+          <div class="media-preview" id="media-preview" aria-live="polite">
+            <p class="hint">No evidence selected yet.</p>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Possible actions</legend>
+          <div class="checks" role="group" aria-label="Potential case actions">
+            <label class="check"><input type="checkbox" name="actionLane" value="research"> Research what happened</label>
+            <label class="check"><input type="checkbox" name="actionLane" value="ask follow-up"> Ask follow-up questions</label>
+            <label class="check"><input type="checkbox" name="actionLane" value="DIY fix"> Suggest DIY fix</label>
+            <label class="check"><input type="checkbox" name="actionLane" value="hire help"> Hire TaskRabbit or pro help</label>
+            <label class="check"><input type="checkbox" name="actionLane" value="HEB list"> Add to H-E-B shopping list</label>
+            <label class="check"><input type="checkbox" name="actionLane" value="maintenance log"> Add to maintenance log</label>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button class="primary" type="submit">Open Case With Sheriff</button>
+          <button type="button" id="copy-handoff">Copy Investigation Prompt</button>
+          <button type="button" id="download-cases">Download Cases</button>
+          <button class="danger" type="button" id="clear-cases">Clear Browser Cases</button>
+        </div>
+      </form>
+
+      <aside class="panel" aria-labelledby="desk-title">
+        <div>
+          <p class="label">Sheriff desk</p>
+          <h2 id="desk-title">Current Read</h2>
+        </div>
+        <div class="sheriff-note" id="sheriff-note" role="status" aria-live="polite">
+          <b>No case open yet.</b>
+          <p>Bring me the evidence, the room, and the mortal complaint. I will not arrest the toilet, but I will make it explain itself.</p>
+        </div>
+        <section class="handoff" id="handoff" hidden aria-labelledby="handoff-title">
+          <div>
+            <p class="label">Chat investigation handoff</p>
+            <h2 id="handoff-title">Ask Howdy Buddy To Investigate</h2>
+            <p class="hint">Upload the same photo or video into chat, paste this prompt, and I will investigate the issue with the evidence visible.</p>
+          </div>
+          <pre id="handoff-prompt" tabindex="0"></pre>
+        </section>
+      </aside>
+    </div>
+
+    <section class="panel" id="cases" aria-labelledby="cases-title">
+      <div>
+        <p class="label">Case board</p>
+        <h2 id="cases-title">Open Las Jaras Issues</h2>
+      </div>
+      <div class="case-list" id="case-list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Built as a public static issue desk.</span>
+    <a href="https://labs.mostcertainlytry.com/projects/sheriff-howdy-buddy-las-jaras-issue-desk.html">Public URL</a>
+    <a href="serafina-human-informed-field-log.html">Serafina Field Log</a>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#case-form");
+    const mediaFiles = document.querySelector("#media-files");
+    const mediaPreview = document.querySelector("#media-preview");
+    const sheriffNote = document.querySelector("#sheriff-note");
+    const handoff = document.querySelector("#handoff");
+    const handoffPrompt = document.querySelector("#handoff-prompt");
+    const copyHandoff = document.querySelector("#copy-handoff");
+    const downloadCases = document.querySelector("#download-cases");
+    const clearCases = document.querySelector("#clear-cases");
+    const caseList = document.querySelector("#case-list");
+    const storageKey = "las-jaras-sheriff-cases-v1";
+    let mediaPreviewUrls = [];
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function loadCases() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCases(cases) {
+      localStorage.setItem(storageKey, JSON.stringify(cases));
+    }
+
+    function selectedValues(name) {
+      return [...form.querySelectorAll(`input[name="${name}"]:checked`)].map((item) => item.value);
+    }
+
+    function fileSizeLabel(bytes) {
+      if (!Number.isFinite(bytes)) return "unknown size";
+      if (bytes >= 1024 * 1024) return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+      if (bytes >= 1024) return `${Math.round(bytes / 1024)} KB`;
+      return `${bytes} bytes`;
+    }
+
+    function mediaMetadata() {
+      return [...mediaFiles.files].map((file) => ({
+        name: file.name,
+        type: file.type || "unknown",
+        sizeBytes: file.size,
+        size: fileSizeLabel(file.size),
+        lastModified: file.lastModified ? new Date(file.lastModified).toISOString() : null
+      }));
+    }
+
+    function clearMediaPreviewUrls() {
+      for (const url of mediaPreviewUrls) URL.revokeObjectURL(url);
+      mediaPreviewUrls = [];
+    }
+
+    function renderMediaPreview() {
+      clearMediaPreviewUrls();
+      const files = [...mediaFiles.files];
+      if (!files.length) {
+        mediaPreview.innerHTML = '<p class="hint">No evidence selected yet.</p>';
+        return;
+      }
+      mediaPreview.innerHTML = files.map((file, index) => {
+        const url = URL.createObjectURL(file);
+        mediaPreviewUrls.push(url);
+        const label = `${file.name}, ${fileSizeLabel(file.size)}`;
+        if (file.type.startsWith("image/")) {
+          return `<div class="media-item"><img src="${url}" alt="Evidence image preview ${index + 1}: ${escapeHtml(label)}"><p class="hint">${escapeHtml(label)}</p></div>`;
+        }
+        if (file.type.startsWith("video/")) {
+          return `<div class="media-item"><video src="${url}" controls aria-label="Evidence video preview ${index + 1}: ${escapeHtml(label)}"></video><p class="hint">${escapeHtml(label)}</p></div>`;
+        }
+        return `<div class="media-item"><p>${escapeHtml(label)}</p><p class="hint">This file can be tracked, but cannot be previewed here.</p></div>`;
+      }).join("");
+    }
+
+    function suggestionFor(issue) {
+      const steps = [];
+      if (issue.urgency === "urgent") steps.push("First order of business: stop damage or risk before research gets fancy.");
+      if (issue.caseType === "plumbing") steps.push("Check shutoff valves, running water, visible leaks, recent changes, and whether this is DIY-safe or needs a plumber.");
+      if (issue.caseType === "plant") steps.push("Use the photo, leaf pattern, pellets, timing, and plant species to separate insect, mammal, heat, water, and disease suspects.");
+      if (issue.caseType === "food") steps.push("Confirm whether this is a shortage, preference, expiration, or shopping-list item; H-E-B list is fair game when relevant.");
+      if (issue.caseType === "interpersonal") steps.push("Separate facts, feelings, who needs to speak, and what boundary or repair would help.");
+      if (issue.caseType === "maintenance") steps.push("Identify whether this is inspect, repair, replace, hire, or monitor.");
+      if (issue.caseType === "spiritual") steps.push("Treat mood and ritual as house context, then still ask what practical condition changed.");
+      if (issue.actionLane.includes("hire help")) steps.push("Consider TaskRabbit, plumber, electrician, handyman, cleaner, or specialist only after scope is clear.");
+      if (issue.actionLane.includes("HEB list")) steps.push("If supplies are needed, name exact items before they wander into the cart as vibes.");
+      if (!steps.length) steps.push("Start with evidence, location, timing, and the simplest physical explanation.");
+      return steps;
+    }
+
+    function buildCase() {
+      const data = new FormData(form);
+      const issue = {
+        id: `sheriff-case-${Date.now()}`,
+        status: "Open",
+        openedAt: new Date().toISOString(),
+        closedAt: null,
+        caseTitle: clean(data.get("caseTitle")),
+        reportedBy: clean(data.get("reportedBy")),
+        location: clean(data.get("location")),
+        caseType: clean(data.get("caseType")),
+        urgency: clean(data.get("urgency")),
+        desiredOutcome: clean(data.get("desiredOutcome")),
+        description: clean(data.get("description")),
+        mediaDescription: clean(data.get("mediaDescription")),
+        mediaAttachments: mediaMetadata(),
+        actionLane: selectedValues("actionLane")
+      };
+      issue.sheriffFirstRead = suggestionFor(issue);
+      issue.investigationPrompt = buildInvestigationPrompt(issue);
+      return issue;
+    }
+
+    function buildInvestigationPrompt(issue) {
+      const media = issue.mediaAttachments.length
+        ? issue.mediaAttachments.map((item) => `${item.name} (${item.type}, ${item.size})`).join("; ")
+        : "No media selected in the form.";
+      return [
+        "Howdy Buddy, open a Las Jaras sheriff investigation for this household case.",
+        "",
+        "Use any photo or video uploaded in this chat as evidence. Do not claim to see media unless it is attached in chat.",
+        "Use the form context, known Las Jaras household context, and grounded research where useful.",
+        "Separate the answer into: visible evidence, inferred causes, research/checks performed, likely explanation, follow-up questions, solution options, and next action.",
+        "If relevant, suggest DIY steps, hiring TaskRabbit/pro help, adding supplies to H-E-B, adding a maintenance task, or preparing a household conversation.",
+        "Keep the case Open until the human says Sheriff Case Closed.",
+        "",
+        `Case title: ${issue.caseTitle}`,
+        `Reported by: ${issue.reportedBy}`,
+        `Location: ${issue.location}`,
+        `Case type: ${issue.caseType}`,
+        `Urgency: ${issue.urgency}`,
+        `Desired outcome: ${issue.desiredOutcome}`,
+        `Action lanes: ${issue.actionLane.length ? issue.actionLane.join(", ") : "not specified"}`,
+        `Media selected in form: ${media}`,
+        `Evidence description: ${issue.mediaDescription || "none given"}`,
+        "",
+        `Issue description: ${issue.description}`,
+        "",
+        "Tone: Sheriff Howdy Buddy. Practical, fair, neighborly, lightly snarky, careful with uncertainty, and more interested in closing the case than sounding mystical."
+      ].join("\n");
+    }
+
+    function renderSheriffRead(issue) {
+      sheriffNote.innerHTML = `
+        <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
+        <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
+        <ul>${issue.sheriffFirstRead.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}</ul>
+      `;
+      handoffPrompt.textContent = issue.investigationPrompt;
+      handoff.hidden = false;
+    }
+
+    function renderCases(cases) {
+      if (!cases.length) {
+        caseList.innerHTML = '<p class="hint">No Las Jaras sheriff cases yet.</p>';
+        return;
+      }
+      caseList.innerHTML = cases.map((issue) => {
+        const media = issue.mediaAttachments.length ? issue.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ") : "none";
+        return `
+          <article class="case-card ${issue.status === "Closed" ? "closed" : ""}">
+            <h3>${escapeHtml(issue.caseTitle)}</h3>
+            <div class="case-meta">
+              <span class="chip">${escapeHtml(issue.status)}</span>
+              <span>${escapeHtml(issue.location)}</span>
+              <span>${escapeHtml(issue.caseType)}</span>
+              <span>${escapeHtml(issue.urgency)}</span>
+            </div>
+            <p>${escapeHtml(issue.description)}</p>
+            <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
+            <p><strong>First read:</strong> ${escapeHtml(issue.sheriffFirstRead[0] || "Open investigation.")}</p>
+            <div class="actions">
+              <button type="button" data-copy="${escapeHtml(issue.id)}">Copy Prompt</button>
+              ${issue.status === "Open" ? `<button type="button" data-close="${escapeHtml(issue.id)}">Case Closed By Sheriff</button>` : ""}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const cases = loadCases();
+      const issue = buildCase();
+      cases.unshift(issue);
+      saveCases(cases);
+      renderSheriffRead(issue);
+      renderCases(cases);
+    });
+
+    mediaFiles.addEventListener("change", renderMediaPreview);
+
+    copyHandoff.addEventListener("click", async () => {
+      if (!handoffPrompt.textContent.trim()) return;
+      await navigator.clipboard.writeText(handoffPrompt.textContent);
+      copyHandoff.textContent = "Investigation Prompt Copied";
+      setTimeout(() => {
+        copyHandoff.textContent = "Copy Investigation Prompt";
+      }, 1800);
+    });
+
+    caseList.addEventListener("click", async (event) => {
+      const copyId = event.target?.dataset?.copy;
+      const closeId = event.target?.dataset?.close;
+      const cases = loadCases();
+      if (copyId) {
+        const issue = cases.find((item) => item.id === copyId);
+        if (issue) await navigator.clipboard.writeText(issue.investigationPrompt);
+      }
+      if (closeId) {
+        const issue = cases.find((item) => item.id === closeId);
+        if (issue) {
+          issue.status = "Closed";
+          issue.closedAt = new Date().toISOString();
+          saveCases(cases);
+          renderCases(cases);
+        }
+      }
+    });
+
+    downloadCases.addEventListener("click", () => {
+      const cases = loadCases();
+      const blob = new Blob([JSON.stringify(cases, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "las-jaras-sheriff-cases.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    clearCases.addEventListener("click", () => {
+      const ok = confirm("Clear Sheriff Howdy Buddy's browser-saved cases on this device?");
+      if (!ok) return;
+      localStorage.removeItem(storageKey);
+      sheriffNote.innerHTML = "<b>Case board cleared.</b><p>The sheriff has swept the desk. This does not mean the toilet is innocent.</p>";
+      handoff.hidden = true;
+      renderCases([]);
+    });
+
+    renderCases(loadCases());
+  </script>
+</body>
+</html>

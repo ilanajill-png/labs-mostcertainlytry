@@ -1,5 +1,26 @@
 [
   {
+    "id": "sheriff-howdy-buddy-las-jaras-issue-desk",
+    "title": "Sheriff Howdy Buddy Las Jaras Issue Desk",
+    "category": "Tool",
+    "type": "Household Issue Tracker",
+    "status": "Published",
+    "date": "2026-06-07",
+    "featured": true,
+    "tools": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Accessibility",
+      "Local Storage",
+      "Static Site"
+    ],
+    "summary": "A public static issue desk for opening, tracking, researching, and closing Las Jaras household cases with Sheriff Howdy Buddy.",
+    "outcome": "Added a case intake form, photo/video evidence metadata, open-case board, research handoff prompt, first-read solution lanes, JSON export, and Case Closed by Sheriff workflow.",
+    "url": "projects/sheriff-howdy-buddy-las-jaras-issue-desk.html",
+    "source": "projects/sheriff-howdy-buddy-las-jaras-issue-desk.html"
+  },
+  {
     "id": "serafina-human-informed-field-log",
     "title": "Serafina Human-Informed Field Log",
     "category": "Tool",
