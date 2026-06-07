@@ -950,6 +950,56 @@
       return issue;
     }
 
+    function normalizeImportedCase(data) {
+      const issue = {
+        id: clean(data.id) || `sheriff-case-import-${Date.now()}`,
+        status: clean(data.status) || "Open",
+        openedAt: clean(data.openedAt) || new Date().toISOString(),
+        closedAt: data.closedAt || null,
+        caseTitle: clean(data.caseTitle),
+        reportedBy: clean(data.reportedBy),
+        location: clean(data.location),
+        caseType: clean(data.caseType),
+        urgency: clean(data.urgency),
+        desiredOutcome: clean(data.desiredOutcome || "understand"),
+        description: clean(data.description),
+        mediaDescription: clean(data.mediaDescription),
+        mediaAttachments: Array.isArray(data.mediaAttachments) ? data.mediaAttachments : [],
+        actionLane: Array.isArray(data.actionLane) ? data.actionLane : []
+      };
+      issue.severity = data.severity || assessSeverity(issue);
+      issue.sheriffFirstRead = Array.isArray(data.sheriffFirstRead) ? data.sheriffFirstRead : suggestionFor(issue);
+      issue.investigationPrompt = data.investigationPrompt || buildInvestigationPrompt(issue);
+      return issue;
+    }
+
+    function decodeImportPayload(value) {
+      const base64 = value.replace(/-/g, "+").replace(/_/g, "/");
+      const padded = base64.padEnd(Math.ceil(base64.length / 4) * 4, "=");
+      const bytes = Uint8Array.from(atob(padded), (char) => char.charCodeAt(0));
+      return JSON.parse(new TextDecoder().decode(bytes));
+    }
+
+    function importCaseFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const encoded = params.get("importCase");
+      if (!encoded) return false;
+      try {
+        const issue = normalizeImportedCase(decodeImportPayload(encoded));
+        const cases = loadCases();
+        const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
+        withoutDuplicate.unshift(issue);
+        saveCases(withoutDuplicate);
+        renderSheriffRead(issue);
+        sheriffNote.innerHTML += "<p><strong>Imported from chat:</strong> This case has been added to the browser-saved Sheriff board.</p>";
+        history.replaceState(null, "", `${window.location.pathname}#cases`);
+        return true;
+      } catch {
+        sheriffNote.innerHTML = "<b>Import failed.</b><p>The case link could not be read. The sheriff suspects URL damage.</p>";
+        return false;
+      }
+    }
+
     function buildInvestigationPrompt(issue) {
       const media = issue.mediaAttachments.length
         ? issue.mediaAttachments.map((item) => `${item.name} (${item.type}, ${item.size})`).join("; ")
@@ -1128,10 +1178,11 @@
       renderCases([]);
     });
 
+    const importedFromUrl = importCaseFromUrl();
     applySerafinaHandoff();
     const savedCases = loadCases();
     renderCases(savedCases);
-    if (!pendingSerafinaHandoff) renderLatestCurrentRead(savedCases);
+    if (!pendingSerafinaHandoff && !importedFromUrl) renderLatestCurrentRead(savedCases);
   </script>
 </body>
 </html>
