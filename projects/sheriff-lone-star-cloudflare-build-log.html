@@ -201,10 +201,10 @@
           <li><strong>Mobile upload cap:</strong> start with 25 MB per file for direct uploads. This is below common mobile pain thresholds and avoids pushing large video bodies through the Worker until a direct R2 multipart flow is built.</li>
           <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
           <li><strong>Serafina confirmation:</strong> after automatic escalation, show: <q>I've escalated this to Sheriff Lone Star with a link to view the case.</q> Include the direct case link and an optional receive-updates field.</li>
-          <li><strong>Update notifications:</strong> collect optional SMS or email for case updates. Store contact preference with the case, redact contact details from public case reads, and send only from admin-triggered case updates.</li>
-          <li><strong>Email provider:</strong> use Resend for first-pass transactional case emails because its HTTP API is simple to call from a Worker and keeps secrets server-side.</li>
-          <li><strong>SMS provider:</strong> use Twilio Programmable Messaging for first-pass SMS because it is a standard programmable SMS/MMS API. SMS sending remains off until a paid/approved sender number and Worker secrets are configured.</li>
-          <li><strong>Consent language:</strong> use this exact opt-in copy: <q>I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.</q></li>
+          <li><strong>Update notifications:</strong> collect optional email for case updates. Store the email preference with the case, redact contact details from public case reads, and send only from admin-triggered case updates.</li>
+          <li><strong>Email provider:</strong> use Resend for first-pass transactional case emails because its HTTP API is simple to call from a Worker and keeps secrets server-side. Resend currently lists a free transactional tier of 3,000 emails per month with a 100-email daily limit, which is plenty for Sheriff case updates.</li>
+          <li><strong>SMS provider:</strong> remove SMS from the first production version. SMS adds paid sender setup, compliance surface, and phone-number privacy before the household has proven it needs text alerts.</li>
+          <li><strong>Consent language:</strong> use this exact opt-in copy: <q>I agree to receive email updates about this Las Jaras case at the email address I provide. I can ask to stop updates at any time. This is not monitored for emergencies.</q></li>
         </ul>
       </section>
 
@@ -235,8 +235,8 @@ codex mcp login cloudflare</code></pre>
         <h2>Remaining Implementation Details</h2>
         <ul>
           <li>Choose the exact admin route path and session behavior for the password-protected Sheriff closeout panel.</li>
-          <li>Add provider secrets after account setup: <code>RESEND_API_KEY</code>, <code>FROM_EMAIL</code>, <code>TWILIO_ACCOUNT_SID</code>, <code>TWILIO_AUTH_TOKEN</code>, and <code>TWILIO_FROM_NUMBER</code>.</li>
-          <li>Run one email and one SMS test from an admin case-update route before announcing notifications as live.</li>
+          <li>Add email provider secrets after account setup: <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code>.</li>
+          <li>Run one email test from an admin case-update route before announcing notifications as live.</li>
           <li>Decide whether large video evidence should use a future R2 multipart/direct-upload flow or stay manual/chat-only.</li>
         </ul>
       </section>

@@ -41,13 +41,12 @@ function closingCase(current, patch) {
 
 function normalizeNotificationConsent(input = {}) {
   const optedIn = Boolean(input.optedIn);
-  const channel = clean(input.channel).toLowerCase();
   const contact = clean(input.contact);
   const consentText = clean(input.consentText);
   const consentedAt = clean(input.consentedAt);
   return {
-    optedIn: optedIn && Boolean(channel && contact && consentText),
-    channel: ["email", "sms"].includes(channel) ? channel : "",
+    optedIn: optedIn && Boolean(contact && consentText),
+    channel: optedIn ? "email" : "",
     contact,
     consentText,
     consentedAt: consentedAt || null
@@ -94,8 +93,7 @@ function redactCase(issue, request, env) {
 
 function providerStatus(env) {
   return {
-    email: Boolean(env.RESEND_API_KEY && env.FROM_EMAIL),
-    sms: Boolean(env.TWILIO_ACCOUNT_SID && env.TWILIO_AUTH_TOKEN && env.TWILIO_FROM_NUMBER)
+    email: Boolean(env.RESEND_API_KEY && env.FROM_EMAIL)
   };
 }
 
@@ -124,37 +122,10 @@ async function sendEmail(env, issue, message) {
   };
 }
 
-async function sendSms(env, issue, message) {
-  if (!providerStatus(env).sms) return { sent: false, reason: "sms provider not configured" };
-  const body = new URLSearchParams({
-    To: issue.notificationConsent.contact,
-    From: env.TWILIO_FROM_NUMBER,
-    Body: message
-  });
-  const token = btoa(`${env.TWILIO_ACCOUNT_SID}:${env.TWILIO_AUTH_TOKEN}`);
-  const response = await fetch(
-    `https://api.twilio.com/2010-04-01/Accounts/${env.TWILIO_ACCOUNT_SID}/Messages.json`,
-    {
-      method: "POST",
-      headers: {
-        "Authorization": `Basic ${token}`,
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body
-    }
-  );
-  return {
-    sent: response.ok,
-    status: response.status,
-    reason: response.ok ? "sent" : await response.text()
-  };
-}
-
 async function sendCaseNotification(env, issue, message) {
   const consent = issue.notificationConsent || {};
   if (!consent.optedIn) return { sent: false, reason: "no notification consent" };
   if (consent.channel === "email") return sendEmail(env, issue, message);
-  if (consent.channel === "sms") return sendSms(env, issue, message);
   return { sent: false, reason: "unsupported notification channel" };
 }
 

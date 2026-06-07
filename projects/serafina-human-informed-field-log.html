@@ -631,21 +631,11 @@
         <fieldset>
           <legend>Receive Sheriff updates if escalated</legend>
           <label class="check"><input id="receive-updates" type="checkbox" name="receiveUpdates" value="yes"> Send me updates if Serafina escalates this to Sheriff Lone Star</label>
-          <div class="two">
-            <label for="update-channel">
-              Update method
-              <select id="update-channel" name="updateChannel">
-                <option value="">Choose if requesting updates</option>
-                <option value="email">Email</option>
-                <option value="sms">SMS text</option>
-              </select>
-            </label>
-            <label for="update-contact">
-              Email or SMS number
-              <input id="update-contact" name="updateContact" autocomplete="email" placeholder="Example: name@example.com or 210-555-1234">
-            </label>
-          </div>
-          <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes"> I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
+          <label for="update-contact">
+            Email address
+            <input id="update-contact" name="updateContact" type="email" autocomplete="email" placeholder="Example: name@example.com">
+          </label>
+          <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes"> I agree to receive email updates about this Las Jaras case at the email address I provide. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
           <p class="hint">Optional. Serafina will pass this preference to Sheriff Lone Star only if you escalate the note.</p>
         </fieldset>
 
@@ -742,7 +732,6 @@
     const mediaFiles = document.querySelector("#media-files");
     const mediaPreview = document.querySelector("#media-preview");
     const receiveUpdates = document.querySelector("#receive-updates");
-    const updateChannel = document.querySelector("#update-channel");
     const updateContact = document.querySelector("#update-contact");
     const updateConsent = document.querySelector("#update-consent");
     const storageKey = "serafina-human-informed-field-log-v1";
@@ -783,7 +772,7 @@
     }
 
     function updateConsentText() {
-      return "I agree to receive updates about this Las Jaras case at the email or phone number I provide. Message and data rates may apply for SMS. I can ask to stop updates at any time. This is not monitored for emergencies.";
+      return "I agree to receive email updates about this Las Jaras case at the email address I provide. I can ask to stop updates at any time. This is not monitored for emergencies.";
     }
 
     function clean(value) {
@@ -794,7 +783,7 @@
       const optedIn = data.get("receiveUpdates") === "yes";
       return {
         optedIn,
-        channel: optedIn ? clean(data.get("updateChannel")) : "",
+        channel: optedIn ? "email" : "",
         contact: optedIn ? clean(data.get("updateContact")) : "",
         consentText: optedIn && data.get("updateConsent") === "yes" ? updateConsentText() : "",
         consentedAt: optedIn && data.get("updateConsent") === "yes" ? new Date().toISOString() : null
@@ -802,17 +791,11 @@
     }
 
     function validateNotificationConsent() {
-      updateChannel.setCustomValidity("");
       updateContact.setCustomValidity("");
       updateConsent.setCustomValidity("");
       if (!receiveUpdates.checked) return true;
-      if (!updateChannel.value) {
-        updateChannel.setCustomValidity("Choose email or SMS for Sheriff updates.");
-        updateChannel.reportValidity();
-        return false;
-      }
       if (!clean(updateContact.value)) {
-        updateContact.setCustomValidity("Enter an email address or SMS number for Sheriff updates.");
+        updateContact.setCustomValidity("Enter an email address for Sheriff updates.");
         updateContact.reportValidity();
         return false;
       }
