@@ -365,7 +365,7 @@
       <h1 id="title">Angel's Log</h1>
       <p class="lede">I am Serafina de las Jaras. I record garden weather, sky office, household rites, birds, squirrels, and Pinky the chihuahua. This is part almanac, part field note, part tiny court bulletin.</p>
       <div class="badge-row">
-        <span class="badge">366 calendar entries</span>
+        <span class="badge">Fresh daily archive</span>
         <span class="badge">Public-readable</span>
         <span class="badge">Mountain View origin</span>
         <span class="badge">Birds, squirrels, and Pinky included</span>
@@ -468,9 +468,9 @@
 
     <section class="section" id="log" aria-labelledby="log-title">
       <div class="section-head">
-        <div class="label">Angel's Log</div>
-        <h2 id="log-title">Each Day Of The Year</h2>
-        <p>These are my evergreen calendar notes. Each day also gets my morning intention, Schertz sunrise/sunset and high/low/rain/extreme-weather fields when live weather is available, a daily tarot pull, and a note from schertz.com as my civic source.</p>
+        <div class="label">Angel's Log Archive</div>
+        <h2 id="log-title">Newest Notes First</h2>
+        <p>I do not display future notes. Each entry appears fresh on its own day, then remains archived here with the newest day first.</p>
       </div>
 
       <div class="toolbar" id="monthToolbar" aria-label="Month filter"></div>
@@ -499,8 +499,17 @@
     ];
     const monthLengths = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentDate = today.getDate();
+    const centralParts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "America/Chicago",
+      year: "numeric",
+      month: "numeric",
+      day: "numeric"
+    }).formatToParts(today).reduce((parts, part) => {
+      if (part.type !== "literal") parts[part.type] = Number(part.value);
+      return parts;
+    }, {});
+    const currentMonth = centralParts.month - 1;
+    const currentDate = centralParts.day;
 
     const seasons = [
       {
@@ -705,6 +714,7 @@
         month: monthNames[monthIndex],
         monthIndex,
         day,
+        ordinal,
         title,
         body,
         intention,
@@ -718,6 +728,10 @@
     const entries = monthNames.flatMap((_, monthIndex) =>
       Array.from({ length: monthLengths[monthIndex] }, (_, index) => entryFor(monthIndex, index + 1))
     );
+    const currentOrdinal = dayOfYear(currentMonth, currentDate);
+    const archivedEntries = entries
+      .filter((entry) => entry.ordinal <= currentOrdinal)
+      .sort((a, b) => b.ordinal - a.ordinal);
 
     const toolbar = document.getElementById("monthToolbar");
     const grid = document.getElementById("logGrid");
@@ -726,11 +740,12 @@
       toolbar.innerHTML = "";
       const all = document.createElement("button");
       all.type = "button";
-      all.textContent = "All";
+      all.textContent = "Archive";
       all.className = activeMonth === "all" ? "active" : "";
       all.addEventListener("click", () => renderLog("all"));
       toolbar.appendChild(all);
       monthNames.forEach((name, index) => {
+        if (!archivedEntries.some((entry) => entry.monthIndex === index)) return;
         const button = document.createElement("button");
         button.type = "button";
         button.textContent = name.slice(0, 3);
@@ -742,7 +757,7 @@
 
     function renderLog(monthFilter = currentMonth) {
       renderToolbar(monthFilter);
-      const visible = monthFilter === "all" ? entries : entries.filter((entry) => entry.monthIndex === monthFilter);
+      const visible = monthFilter === "all" ? archivedEntries : archivedEntries.filter((entry) => entry.monthIndex === monthFilter);
       grid.innerHTML = visible.map((entry) => `
         <article class="log-entry${entry.today ? " today" : ""}">
           <div class="date-line"><span>${entry.month} ${entry.day}</span><span>${entry.today ? "Today" : "Angel's Log"}</span></div>
@@ -761,7 +776,7 @@
       `).join("");
     }
 
-    renderLog(currentMonth);
+    renderLog("all");
 
     function extremeSummary(weather, rainInches, maxGust, maxThunder) {
       const flags = [];
