@@ -291,6 +291,38 @@
       color: var(--muted);
     }
 
+    .weather-panel {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .weather-cell {
+      min-height: 106px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .88);
+      box-shadow: var(--shadow);
+    }
+
+    .weather-cell b {
+      display: block;
+      color: var(--ink);
+      font-size: 1.18rem;
+      line-height: 1.05;
+    }
+
+    .weather-cell span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: .76rem;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
     footer {
       padding: 26px 0 46px;
       border-top: 1px solid var(--line);
@@ -300,6 +332,7 @@
     @media (max-width: 980px) {
       .grid,
       .log-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .weather-panel { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
     @media (max-width: 720px) {
@@ -307,6 +340,7 @@
       nav { justify-content: flex-start; }
       .grid,
       .log-grid { grid-template-columns: 1fr; }
+      .weather-panel { grid-template-columns: 1fr; }
       .hero { min-height: auto; }
     }
   </style>
@@ -317,6 +351,7 @@
       <a class="brand" href="serafina-de-las-jaras.html">Serafina de las Jaras</a>
       <nav aria-label="Page sections">
         <a href="#today">Today's Note</a>
+        <a href="#records">Recorded Notes</a>
         <a href="#creatures">Household Beings</a>
         <a href="#log">Angel's Log</a>
         <a href="serafina-de-las-jaras.html">Main Page</a>
@@ -334,6 +369,8 @@
         <span class="badge">Public-readable</span>
         <span class="badge">Exact former address private</span>
         <span class="badge">Birds, squirrels, and Pinky included</span>
+        <span class="badge">Schertz weather and civic source</span>
+        <span class="badge">Daily tarot pull</span>
       </div>
     </section>
 
@@ -348,15 +385,24 @@
         <article class="card">
           <h3>June 6, 2026</h3>
           <p><strong>Morning intention:</strong> Begin with what is true. Serafina came from Mountain View, arrived at Las Jaras with road-worn authority, left a confirmed pair of lion guardians behind, keeps the moon and weather in her basin, and now recognizes the garden's living court: birds, squirrels, and Pinky.</p>
+          <p><strong>Schertz weather:</strong> sunrise 6:32 AM, sunset 8:31 PM, high 93°F, low 73°F, no rain recorded, UV 8 flagged as the day's main extreme.</p>
         </article>
         <article class="card">
           <h3>Her Note</h3>
           <p>The photos are no longer incoming rumor; they are installed memory. The night crystals are part of her office. The birds are to be heard, the squirrels supervised, and Pinky protected from heat, rough footing, and disrespect.</p>
         </article>
         <article class="card">
-          <h3>Today's Charge</h3>
-          <p>Keep the exact former address private. Use only Mountain View in public lore. Check water by touch, respect the heat, and let tomorrow's morning alert turn this office into a daily practice.</p>
+          <h3>Tarot Pull</h3>
+          <p><strong>The High Priestess:</strong> Observe the quiet pattern; the garden has not finished speaking. For Serafina, that means listen to birds, watch the heat, and let evidence outrank drama.</p>
         </article>
+      </div>
+      <div class="weather-panel" id="liveWeather" aria-live="polite">
+        <div class="weather-cell"><b>Loading</b><span>sunrise</span></div>
+        <div class="weather-cell"><b>Loading</b><span>sunset</span></div>
+        <div class="weather-cell"><b>Loading</b><span>high</span></div>
+        <div class="weather-cell"><b>Loading</b><span>low</span></div>
+        <div class="weather-cell"><b>Loading</b><span>rain</span></div>
+        <div class="weather-cell"><b>Loading</b><span>extreme weather</span></div>
       </div>
     </section>
 
@@ -402,11 +448,25 @@
       </div>
     </section>
 
+    <section class="section" id="records" aria-labelledby="records-title">
+      <div class="section-head">
+        <div class="label">Recorded Notes</div>
+        <h2 id="records-title">Daily Entries She Has Actually Written</h2>
+        <p>These are the recorded daily notes, starting today. They preserve the weather fields, tarot card, civic source, and Serafina's note for that date.</p>
+      </div>
+      <div class="log-grid" id="recordedLog" aria-live="polite">
+        <article class="log-entry">
+          <div class="entry-title">Loading recorded notes</div>
+          <p>Serafina is finding the ink. Stone hands, etc.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="log" aria-labelledby="log-title">
       <div class="section-head">
         <div class="label">Angel's Log</div>
         <h2 id="log-title">Each Day Of The Year</h2>
-        <p>These entries are evergreen calendar notes. Each day also gets a morning intention: a small true thing to carry into the garden before chores begin. The daily Samsung Frame alert carries the live weather and moon values; this public log gives each date its Serafina-style meaning.</p>
+        <p>These entries are evergreen calendar notes. Each day also gets a morning intention, Schertz sunrise/sunset and high/low/rain/extreme-weather fields when live weather is available, a daily tarot pull, and a note from schertz.com as Serafina's official civic source.</p>
       </div>
 
       <div class="toolbar" id="monthToolbar" aria-label="Month filter"></div>
@@ -419,7 +479,7 @@
         <h2 id="source-title">What This Log Is</h2>
       </div>
       <div class="note">
-        The Angel's Log is public house lore and garden almanac writing, not a private address record and not a veterinary or wildlife-care authority. It names Las Jaras, Serafina, Pinky, and ordinary garden visitors; it does not publish Serafina's exact former street address.
+        The Angel's Log is public house lore and garden almanac writing, not a private address record and not a veterinary or wildlife-care authority. It names Las Jaras, Serafina, Pinky, and ordinary garden visitors; it does not publish Serafina's exact former street address. Schertz civic context should start from the official city website, <a href="https://www.schertz.com/">schertz.com</a>.
       </div>
     </section>
   </main>
@@ -520,6 +580,31 @@
       "Notice the living court: wing, paw, leaf, stone, cloud."
     ];
 
+    const tarotDeck = [
+      ["The Fool", "Begin, but look where the path actually is."],
+      ["The Magician", "Use the tools already on the table before asking for a miracle."],
+      ["The High Priestess", "Observe the quiet pattern; the garden has not finished speaking."],
+      ["The Empress", "Tend growth, water, shade, and the beings who depend on them."],
+      ["The Emperor", "Set boundaries: pots, gates, squirrels, time, and heat."],
+      ["The Hierophant", "Honor the old practice, then make it useful."],
+      ["The Lovers", "Choose what you are actually willing to care for."],
+      ["The Chariot", "Move with purpose, but secure the cargo."],
+      ["Strength", "Soft handling is still power."],
+      ["The Hermit", "Step outside alone long enough to notice one true thing."],
+      ["Wheel of Fortune", "Weather turns; do the part that is yours."],
+      ["Justice", "What was neglected will present a bill."],
+      ["The Hanged One", "Pause before forcing the issue."],
+      ["Death", "Clear what is finished so life has room."],
+      ["Temperance", "Measure water, heat, effort, and drama."],
+      ["The Devil", "Do not let convenience become a leash."],
+      ["The Tower", "Check what wind, heat, or pride could knock over."],
+      ["The Star", "Hope is a maintenance practice."],
+      ["The Moon", "Trust intuition, then verify the footing."],
+      ["The Sun", "Use the light; do not challenge it."],
+      ["Judgement", "Answer what has been calling for attention."],
+      ["The World", "Close the loop: water, record, return the tool."]
+    ];
+
     function seasonFor(monthIndex, day) {
       return seasons.find((season) => season.test(monthIndex, day));
     }
@@ -538,14 +623,27 @@
       return monthLengths.slice(0, monthIndex).reduce((sum, length) => sum + length, 0) + day;
     }
 
+    function calendarDayIndex(monthIndex, day) {
+      const date = new Date(today.getFullYear(), monthIndex, day);
+      const yearStart = new Date(today.getFullYear(), 0, 0);
+      return Math.floor((date - yearStart) / 86400000);
+    }
+
+    function tarotFor(ordinal) {
+      const card = tarotDeck[ordinal % tarotDeck.length];
+      return { card: card[0], reading: card[1] };
+    }
+
     function entryFor(monthIndex, day) {
       const key = monthIndex + "-" + day;
       const fixed = fixedDays[key];
       const season = seasonFor(monthIndex, day);
       const ordinal = dayOfYear(monthIndex, day);
+      const calendarOrdinal = calendarDayIndex(monthIndex, day);
       const creature = creatures[ordinal % creatures.length];
       const chore = season.chores[ordinal % season.chores.length];
       const intention = intentionSeeds[ordinal % intentionSeeds.length];
+      const tarot = tarotFor(calendarOrdinal);
       const title = fixed ? fixed[0] : season.title;
       const body = fixed ? fixed[1] : `Serafina records ${season.tone}. Today's charge: ${chore}. ${creature}`;
       return {
@@ -555,6 +653,7 @@
         title,
         body,
         intention,
+        tarot,
         sky: season.sky,
         moon: moonHint(ordinal),
         today: monthIndex === currentMonth && day === currentDate
@@ -594,8 +693,10 @@
           <div class="date-line"><span>${entry.month} ${entry.day}</span><span>${entry.today ? "Today" : "Angel's Log"}</span></div>
           <div class="entry-title">${entry.title}</div>
           <p><strong>Morning intention:</strong> ${entry.intention}</p>
+          <p><strong>Tarot:</strong> ${entry.tarot.card}. ${entry.tarot.reading}</p>
           <p>${entry.body}</p>
           <p><strong>Sky:</strong> ${entry.sky}.</p>
+          <p><strong>Schertz fields:</strong> sunrise, sunset, high, low, rain, and extreme weather belong in the day's live note when available.</p>
           <div class="meta">
             <span class="chip">${entry.moon}</span>
             <span class="chip">garden court</span>
@@ -606,6 +707,78 @@
     }
 
     renderLog(currentMonth);
+
+    function extremeSummary(weather, rainInches, maxGust, maxThunder) {
+      const flags = [];
+      const high = Number.parseInt(weather.maxtempF || "0", 10);
+      const uv = Number.parseInt(weather.uvIndex || "0", 10);
+      if (high >= 95) flags.push("heat");
+      if (uv >= 8) flags.push("high UV");
+      if (rainInches >= 1) flags.push("heavy rain");
+      if (maxGust >= 35) flags.push("strong gusts");
+      if (maxThunder >= 40) flags.push("thunder risk");
+      return flags.length ? flags.join(", ") : "none flagged";
+    }
+
+    async function loadLiveWeather() {
+      const panel = document.getElementById("liveWeather");
+      try {
+        const response = await fetch("https://wttr.in/Schertz,TX?format=j1", { cache: "no-store" });
+        if (!response.ok) throw new Error("weather unavailable");
+        const data = await response.json();
+        const weather = data.weather?.[0] || {};
+        const astronomy = weather.astronomy?.[0] || {};
+        const hourly = weather.hourly || [];
+        const rainInches = hourly.reduce((sum, hour) => sum + Number.parseFloat(hour.precipInches || "0"), 0);
+        const maxGust = hourly.reduce((max, hour) => Math.max(max, Number.parseInt(hour.WindGustMiles || "0", 10)), 0);
+        const maxThunder = hourly.reduce((max, hour) => Math.max(max, Number.parseInt(hour.chanceofthunder || "0", 10)), 0);
+        const cells = [
+          [astronomy.sunrise || "n/a", "sunrise in Schertz"],
+          [astronomy.sunset || "n/a", "sunset in Schertz"],
+          [`${weather.maxtempF || "n/a"}°F`, "temperature high"],
+          [`${weather.mintempF || "n/a"}°F`, "temperature low"],
+          [rainInches > 0 ? `${rainInches.toFixed(2)} in` : "No", "rain recorded"],
+          [extremeSummary(weather, rainInches, maxGust, maxThunder), "extreme weather"]
+        ];
+        panel.innerHTML = cells.map(([value, label]) => `<div class="weather-cell"><b>${value}</b><span>${label}</span></div>`).join("");
+      } catch {
+        panel.innerHTML = `<div class="weather-cell"><b>Unavailable</b><span>live Schertz weather</span></div>
+          <div class="weather-cell"><b>Use Frame alert</b><span>fallback daily source</span></div>
+          <div class="weather-cell"><b>schertz.com</b><span>official civic source</span></div>`;
+      }
+    }
+
+    loadLiveWeather();
+
+    async function loadRecordedLog() {
+      const target = document.getElementById("recordedLog");
+      try {
+        const response = await fetch("../assets/serafina/angels-log-2026.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("recorded log unavailable");
+        const data = await response.json();
+        const entries = Object.values(data.entries || {}).sort((a, b) => b.date.localeCompare(a.date));
+        if (!entries.length) throw new Error("no entries yet");
+        target.innerHTML = entries.map((entry) => `
+          <article class="log-entry">
+            <div class="date-line"><span>${entry.date}</span><span>${entry.weekday || "Angel's Log"}</span></div>
+            <div class="entry-title">${entry.tarot?.card || "Daily Note"}</div>
+            <p><strong>Morning intention:</strong> ${entry.morningIntention || "Begin with what is true."}</p>
+            <p><strong>Weather:</strong> sunrise ${entry.weather?.sunrise || "n/a"}, sunset ${entry.weather?.sunset || "n/a"}, high ${entry.weather?.highF || "n/a"}°F, low ${entry.weather?.lowF || "n/a"}°F, rain ${entry.weather?.rained ? `${entry.weather?.rainInches || "some"} in` : "none recorded"}, extremes ${(entry.weather?.extremeWeather || ["none flagged"]).join(", ")}.</p>
+            <p><strong>Tarot:</strong> ${entry.tarot?.card || "n/a"}. ${entry.tarot?.reading || ""}</p>
+            <p>${entry.note || ""}</p>
+            <div class="meta">
+              <span class="chip">schertz.com source</span>
+              <span class="chip">weather recorded</span>
+              <span class="chip">tarot pulled</span>
+            </div>
+          </article>
+        `).join("");
+      } catch {
+        target.innerHTML = `<article class="log-entry"><div class="entry-title">Recorded log unavailable</div><p>The evergreen calendar still works. The recorded JSON will appear here after the daily publisher writes its first public note.</p></article>`;
+      }
+    }
+
+    loadRecordedLog();
   </script>
 </body>
 </html>
