@@ -210,6 +210,16 @@
 
     .sigil-caption span { color: rgba(255, 253, 250, .82); }
 
+    .sigil img {
+      width: 100%;
+      min-height: 420px;
+      max-height: 620px;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center;
+      box-shadow: 0 18px 44px rgba(0, 0, 0, .22);
+    }
+
     .section {
       padding: 44px 0;
       border-top: 1px solid var(--line);
@@ -278,6 +288,29 @@
         rgba(255, 253, 250, .72);
     }
 
+    .media-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 250, .86);
+      box-shadow: var(--shadow);
+    }
+
+    .media-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .media-card p {
+      margin: 0;
+      padding: 12px 14px 14px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
     .source-list {
       display: grid;
       gap: 10px;
@@ -340,7 +373,7 @@
       <div>
         <div class="eyebrow">Las Jaras garden office of spiritual authority</div>
         <h1 id="title">Serafina de las Jaras</h1>
-        <p class="lede">The Garden Angel: ruler of the garden, possible ruler of the whole house, and currently the most constitutionally powerful outdoor object at Las Jaras.</p>
+        <p class="lede">The Garden Angel: a gray, basin-bearing desert guardian, ruler of the garden, possible ruler of the whole house, and currently the most constitutionally powerful outdoor object at Las Jaras.</p>
         <div class="badge-row" aria-label="Known attributes">
           <span class="badge">Name: Serafina de las Jaras</span>
           <span class="badge">Moved from Palo Alto, California</span>
@@ -351,15 +384,11 @@
         </div>
       </div>
 
-      <aside class="sigil" aria-label="Garden Angel placeholder artwork">
-        <div class="wings" aria-hidden="true">
-          <div class="wing"></div>
-          <div class="figure"></div>
-          <div class="wing"></div>
-        </div>
+      <aside class="sigil" aria-label="Serafina de las Jaras road trip portrait">
+        <img src="../assets/serafina/serafina-desert-yucca.jpg" alt="Serafina de las Jaras, a gray winged garden angel holding a basin, posed among desert yucca and dry brush.">
         <div class="sigil-caption">
-          <strong>Temporary court portrait</strong>
-          <span>Actual AirDrop photos and the lion-statue video go here when they arrive on disk.</span>
+          <strong>Road-trip court portrait</strong>
+          <span>Serafina among desert yucca, looking entirely unsurprised to be in charge.</span>
         </div>
       </aside>
     </section>
@@ -379,6 +408,10 @@
         <article class="card">
           <h3>Road Trip</h3>
           <p>The incoming photo batch is said to document her road trip. Her last brief owner felt she enjoyed the journey, which is frankly the least surprising thing about a statue with this much authority.</p>
+        </article>
+        <article class="card">
+          <h3>Actual Look</h3>
+          <p>She is a gray winged garden angel holding a shell-like bowl or basin. Her page now treats her as a water-and-offering figure as much as a decorative statue: desert-tested, weather-marked, and weirdly composed in every roadside stop.</p>
         </article>
         <article class="card">
           <h3>The Lions</h3>
@@ -401,7 +434,7 @@
       <div class="grid">
         <article class="card">
           <h3>Personality</h3>
-          <p>Serafina is benevolent, watchful, dryly funny, and just imperious enough to make neglected watering feel like a civic failure. She is protective of tender plants, suspicious of afternoon heat, and deeply unimpressed by vague intentions.</p>
+          <p>Serafina is benevolent, watchful, dryly funny, and just imperious enough to make neglected watering feel like a civic failure. Because she carries a basin, she is especially protective of water, tender plants, and anyone foolish enough to confuse intention with irrigation.</p>
         </article>
         <article class="card">
           <h3>Tone</h3>
@@ -459,14 +492,20 @@
       <div class="section-head">
         <div class="label">Photo Altar</div>
         <h2 id="media-title">Images To Install</h2>
-        <p>AirDrop images have not landed in the usual locations yet. These slots are ready for the Garden Angel batch and the lion-statue video.</p>
+        <p>The first public photos are installed. Child-containing photos stay private unless buddy explicitly approves them for publication.</p>
       </div>
 
       <div class="media-grid">
-        <div class="media-slot">Front portrait</div>
-        <div class="media-slot">Side profile</div>
-        <div class="media-slot">Placement in garden</div>
-        <div class="media-slot">Lion video still</div>
+        <figure class="media-card">
+          <img src="../assets/serafina/serafina-desert-yucca.jpg" alt="Serafina posed in desert yucca and dry brush under a cloudy sky.">
+          <p>Desert yucca: Serafina as drought-literate garden authority.</p>
+        </figure>
+        <figure class="media-card">
+          <img src="../assets/serafina/serafina-popsicle-roadside.jpg" alt="Serafina posed in front of giant colorful roadside popsicle sculptures.">
+          <p>Roadside popsicles: proof she can hold office in both solemn and absurd landscapes.</p>
+        </figure>
+        <div class="media-slot">Lion video still pending</div>
+        <div class="media-slot">Final Las Jaras garden placement pending</div>
       </div>
     </section>
 
@@ -485,7 +524,7 @@
         </article>
         <article class="card">
           <h3>Care Notes</h3>
-          <p>After photos arrive, document material, cracks, staining, base stability, weather exposure, sun/rain position, and whether she needs sealing or a raised base.</p>
+          <p>Photos show a gray, weathered finish, detailed wings, a shell-like basin, and a pedestal base. Still document material, cracks, staining, base stability, weather exposure, sun/rain position, and whether she needs sealing or a raised base.</p>
         </article>
         <article class="card">
           <h3>Open Questions</h3>
