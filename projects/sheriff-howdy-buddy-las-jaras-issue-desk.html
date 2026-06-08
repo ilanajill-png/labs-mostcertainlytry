@@ -494,6 +494,29 @@
       font-size: .82rem;
     }
 
+    .follow-up-box {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid rgba(169, 113, 31, .35);
+      border-radius: 8px;
+      background: #fff8e8;
+    }
+
+    .follow-up-list {
+      display: grid;
+      gap: 6px;
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .follow-up-form {
+      display: grid;
+      gap: 10px;
+    }
+
     .flow {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1071,8 +1094,8 @@
       return `${bytes} bytes`;
     }
 
-    function mediaMetadata() {
-      return [...mediaFiles.files].map((file) => ({
+    function mediaMetadata(files = mediaFiles.files) {
+      return [...files].map((file) => ({
         name: file.name,
         type: file.type || "unknown",
         sizeBytes: file.size,
@@ -1259,6 +1282,7 @@
         mediaDescription: clean(data.get("mediaDescription")),
         mediaAttachments: [...mediaMetadata(), ...handoffMediaMetadata()],
         actionLane: selectedValues("actionLane"),
+        followUpResponses: [],
         notificationConsent: buildNotificationConsent(data)
       };
       issue.severity = assessSeverity(issue);
@@ -1417,6 +1441,7 @@
       issue.severity = data.severity || assessSeverity(issue);
       issue.sheriffFirstRead = Array.isArray(data.sheriffFirstRead) ? data.sheriffFirstRead : suggestionFor(issue);
       issue.solutionStatus = data.solutionStatus || {};
+      issue.followUpResponses = Array.isArray(data.followUpResponses) ? data.followUpResponses : [];
       issue.sharedSubmission = data.sharedSubmission || null;
       issue.investigationPrompt = data.investigationPrompt || buildInvestigationPrompt(issue);
       issue.investigationWorkflow = data.investigationWorkflow || buildInvestigationWorkflow(issue);
@@ -1531,6 +1556,7 @@
         ${updates}
         ${shared}
         ${renderSolutionChecklist(issue, firstRead)}
+        ${issue.status === "Open" ? renderFollowUpBox(issue, "current") : ""}
       `;
       handoffPrompt.textContent = issue.investigationPrompt || "No investigation prompt was saved for this older case.";
       handoff.hidden = !issue.investigationPrompt;
@@ -1560,6 +1586,53 @@
             `;
           }).join("")}
         </ul>
+      `;
+    }
+
+    function followUpRequestText(issue) {
+      if (issue.investigationWorkflow?.blocker) return issue.investigationWorkflow.blocker;
+      if (issue.investigationWorkflow?.status === "needs_evidence") return "Sheriff needs more evidence before they can move this case forward.";
+      return issue.investigationWorkflow?.nextAction || "Add a note or photo if this case has new information.";
+    }
+
+    function renderFollowUpResponses(issue) {
+      const responses = Array.isArray(issue.followUpResponses) ? issue.followUpResponses : [];
+      if (!responses.length) return "";
+      return `
+        <ul class="follow-up-list" aria-label="Human follow-up responses">
+          ${responses.slice(-3).map((response) => {
+            const files = Array.isArray(response.mediaAttachments) && response.mediaAttachments.length
+              ? ` Files: ${response.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ")}.`
+              : "";
+            return `<li>${escapeHtml(response.text || "Photo-only follow-up.")}${escapeHtml(files)}</li>`;
+          }).join("")}
+        </ul>
+      `;
+    }
+
+    function renderFollowUpBox(issue, context) {
+      return `
+        <section class="follow-up-box" aria-label="Answer Sheriff follow-up request">
+          <div>
+            <p class="label">Sheriff needs more info</p>
+            <p>${escapeHtml(followUpRequestText(issue))}</p>
+          </div>
+          ${renderFollowUpResponses(issue)}
+          <form class="follow-up-form" data-followup-case="${escapeHtml(issue.id)}" data-followup-context="${escapeHtml(context)}">
+            <label>
+              Add answer or update
+              <textarea name="followUpText" maxlength="1000" placeholder="Example: Tank model is ST743E; water is running into the overflow tube."></textarea>
+            </label>
+            <label>
+              Add follow-up photo or video
+              <input name="followUpFiles" type="file" accept="image/*,video/*" multiple>
+              <span class="hint">Until evidence storage is enabled, selected files are recorded as metadata. Upload the same file in chat when Sheriff needs to see it.</span>
+            </label>
+            <div class="actions">
+              <button type="submit">Send Follow-Up To Sheriff</button>
+            </div>
+          </form>
+        </section>
       `;
     }
 
@@ -1609,6 +1682,7 @@
             <p><strong>Shared status:</strong> ${escapeHtml(sharedLabel)}</p>
             <p><strong>Updates:</strong> ${escapeHtml(updateLabel)}</p>
             ${renderSolutionChecklist(issue, steps)}
+            ${issue.status === "Open" ? renderFollowUpBox(issue, "card") : ""}
             <div class="actions">
               <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
               <button type="button" data-copy="${escapeHtml(issue.id)}">Copy Prompt</button>
@@ -1674,6 +1748,51 @@
       const result = await saveCaseUpdate(issue);
       renderCases(result.cases);
       renderSheriffRead(result.issue);
+    }
+
+    async function submitFollowUp(formElement) {
+      const caseId = formElement.dataset.followupCase;
+      const cases = loadCases();
+      const issue = cases.find((item) => item.id === caseId);
+      if (!issue) return;
+      const data = new FormData(formElement);
+      const text = clean(data.get("followUpText"));
+      const input = formElement.querySelector('input[name="followUpFiles"]');
+      const files = input ? mediaMetadata(input.files).map((item) => ({
+        ...item,
+        evidenceSource: "Sheriff follow-up",
+        storageStatus: operationalStatus.evidence?.r2Bound ? "metadata recorded; storage upload not wired for follow-ups yet" : "metadata only; evidence storage inactive"
+      })) : [];
+      if (!text && !files.length) {
+        sharedStatus.textContent = "Add a note or select a file before sending Sheriff a follow-up.";
+        return;
+      }
+      const now = new Date().toISOString();
+      const response = {
+        id: `follow-up-${Date.now()}`,
+        createdAt: now,
+        text,
+        mediaAttachments: files
+      };
+      issue.followUpResponses = [...(issue.followUpResponses || []), response];
+      issue.mediaAttachments = [...(issue.mediaAttachments || []), ...files];
+      issue.investigationWorkflow = {
+        ...(issue.investigationWorkflow || buildInvestigationWorkflow(issue)),
+        status: "queued",
+        updatedAt: now,
+        nextAction: "Review the latest human follow-up response and update the Sheriff read.",
+        blocker: "",
+        runLog: [
+          ...((issue.investigationWorkflow && issue.investigationWorkflow.runLog) || []),
+          { at: now, event: "Human follow-up response submitted from the Sheriff board." }
+        ]
+      };
+      issue.updatedAt = now;
+      const result = await saveCaseUpdate(issue);
+      renderCases(result.cases);
+      renderSheriffRead(result.issue);
+      sharedStatus.textContent = "Follow-up sent to Sheriff and queued for review.";
+      formElement.reset();
     }
 
     async function closeCase(caseId) {
@@ -1798,6 +1917,12 @@
       if (solution) updateSolutionStatus(solution.solutionId, solution.solutionIndex, solution.solutionStatus);
     });
 
+    sheriffNote.addEventListener("submit", async (event) => {
+      if (!event.target?.matches(".follow-up-form")) return;
+      event.preventDefault();
+      await submitFollowUp(event.target);
+    });
+
     caseList.addEventListener("click", async (event) => {
       const solution = solutionClickData(event);
       const readId = event.target?.dataset?.read;
@@ -1824,6 +1949,12 @@
       if (closeId) {
         await closeCase(closeId);
       }
+    });
+
+    caseList.addEventListener("submit", async (event) => {
+      if (!event.target?.matches(".follow-up-form")) return;
+      event.preventDefault();
+      await submitFollowUp(event.target);
     });
 
     downloadCases.addEventListener("click", () => {

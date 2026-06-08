@@ -194,6 +194,12 @@
               <td>New cases now carry a durable Sheriff workflow record in D1: queued, in progress, needs evidence, ready for review, or resolved. The mobile receipt and case board show the workflow state and next action.</td>
             </tr>
             <tr>
+              <td>Add human follow-up capture</td>
+              <td>Complete</td>
+              <td>20 minutes</td>
+              <td>Open cases now show a follow-up text box and photo/video picker where the human can answer Sheriff questions. Text and file metadata save back to D1, then the case re-enters the investigation queue.</td>
+            </tr>
+            <tr>
               <td>Auto-create Sheriff case from Serafina escalation</td>
               <td>Accepted</td>
               <td>20 to 35 minutes</td>
@@ -223,6 +229,7 @@
           <li>Changing a case from open to closed requires <code>X-Sheriff-Admin-Token</code> and the Worker secret <code>ADMIN_TOKEN</code>.</li>
           <li>When a case is marked closed, the Worker deletes any stored R2 evidence listed on that case and clears attachment metadata from the D1 record.</li>
           <li>Every case carries an <code>investigationWorkflow</code> record so automated Sheriff runs can pick up queued cases and write back their state.</li>
+          <li>Every case can carry <code>followUpResponses</code> so humans can answer Sheriff requests from the board and queue the case for another automated pass.</li>
           <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
         </ul>
       </section>
@@ -237,6 +244,7 @@
           <li><strong>Mobile upload cap:</strong> start with 25 MB per file for direct uploads. This is below common mobile pain thresholds and avoids pushing large video bodies through the Worker until a direct R2 multipart flow is built.</li>
           <li><strong>Evidence lifecycle:</strong> evidence should be temporary by default. When an admin marks a case closed, the Worker deletes stored evidence files and clears attachment records so the board does not become a long-term evidence warehouse by accident.</li>
           <li><strong>Automation model:</strong> new cases should automatically enter a Sheriff investigation queue. The web page displays the queue state; OpenClaw or another scheduled runner can poll D1 and advance cases from queued to working, needs evidence, ready for review, or resolved.</li>
+          <li><strong>Follow-up capture:</strong> when Sheriff needs more information, the case board should accept human text answers and photo/video metadata directly on the case. Actual media inspection still requires chat attachment or future evidence storage.</li>
           <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
           <li><strong>Serafina confirmation:</strong> after automatic escalation, show: <q>I've escalated this to Sheriff Lone Star with a link to view the case.</q> Include the direct case link and an optional receive-updates field.</li>
           <li><strong>Update notifications:</strong> collect optional email for case updates. Store the email preference with the case, redact contact details from public case reads, and send only from admin-triggered case updates.</li>
