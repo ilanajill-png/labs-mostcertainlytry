@@ -1436,11 +1436,11 @@
       for (const file of fileList) payload.append("attachment", file, file.name);
 
       try {
-        const response = await fetch(formSubmitEndpoint, {
+        const response = await fetchWithTimeout(formSubmitEndpoint, {
           method: "POST",
           body: payload,
           headers: { "Accept": "application/json" }
-        });
+        }, 6000);
         if (!response.ok) throw new Error(`FormSubmit returned ${response.status}`);
         return {
           ok: true,
@@ -1449,6 +1449,19 @@
         };
       } catch (error) {
         return submitEvidenceEmailFormFallback(issue, fileList, context, error);
+      }
+    }
+
+    async function fetchWithTimeout(url, options = {}, timeoutMs = 8000) {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        return await fetch(url, { ...options, signal: controller.signal });
+      } catch (error) {
+        if (error.name === "AbortError") throw new Error("email handoff timed out");
+        throw error;
+      } finally {
+        window.clearTimeout(timeout);
       }
     }
 
@@ -1486,6 +1499,11 @@
         form.target = iframeName;
         form.hidden = true;
 
+        const originalInput = context.fileInput || null;
+        const originalParent = originalInput?.parentNode || null;
+        const originalNext = originalInput?.nextSibling || null;
+        const originalName = originalInput?.name || "attachment";
+        const placeholder = document.createComment("sheriff-evidence-file-input");
         const fields = evidenceEmailFields(issue, files, context);
         for (const [key, value] of Object.entries(fields)) {
           const input = document.createElement("input");
@@ -1496,22 +1514,34 @@
         }
 
         let attached = 0;
-        for (const file of files) {
-          try {
-            const transfer = new DataTransfer();
-            transfer.items.add(file);
-            const input = document.createElement("input");
-            input.type = "file";
-            input.name = "attachment";
-            input.files = transfer.files;
-            form.append(input);
-            attached += 1;
-          } catch (_error) {
-            // Some browsers do not allow assigning FileList programmatically.
+        if (originalInput?.files?.length) {
+          originalInput.after(placeholder);
+          originalInput.name = "attachment";
+          form.append(originalInput);
+          attached = originalInput.files.length;
+        } else {
+          for (const file of files) {
+            try {
+              const transfer = new DataTransfer();
+              transfer.items.add(file);
+              const input = document.createElement("input");
+              input.type = "file";
+              input.name = "attachment";
+              input.files = transfer.files;
+              form.append(input);
+              attached += 1;
+            } catch (_error) {
+              // Some browsers do not allow assigning FileList programmatically.
+            }
           }
         }
 
         const cleanup = () => {
+          if (originalInput && originalParent) {
+            originalInput.name = originalName;
+            originalParent.insertBefore(originalInput, placeholder.parentNode ? placeholder : originalNext);
+            placeholder.remove();
+          }
           form.remove();
           iframe.remove();
         };
@@ -1976,7 +2006,8 @@
         const emailResult = await sendEvidenceEmailCopy(result.issue, input?.files || [], {
           stage: "Sheriff follow-up",
           followUpId: response.id,
-          note: text || "Photo/video follow-up submitted from Sheriff board."
+          note: text || "Photo/video follow-up submitted from Sheriff board.",
+          fileInput: input
         });
         const loggedIssue = appendEvidenceEmailLog(result.issue, emailResult, {
           stage: "Sheriff follow-up",
@@ -2083,7 +2114,8 @@
       }
       const emailEvidenceResult = await sendEvidenceEmailCopy(savedIssue, mediaFiles.files, {
         stage: "Initial Sheriff case evidence",
-        note: savedIssue.mediaDescription || "Initial evidence submitted with Sheriff case."
+        note: savedIssue.mediaDescription || "Initial evidence submitted with Sheriff case.",
+        fileInput: mediaFiles
       });
       if (emailEvidenceResult.count || !emailEvidenceResult.ok) {
         savedIssue = appendEvidenceEmailLog(savedIssue, emailEvidenceResult, {
