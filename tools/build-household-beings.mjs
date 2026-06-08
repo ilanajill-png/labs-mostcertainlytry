@@ -1370,9 +1370,9 @@ const blockedWorkflows = [
     role: "Serafina",
     priority: "P1",
     workflow: "Automatic Sheriff escalation from Serafina form",
-    blockedBy: "One live Serafina-to-Sheriff smoke test after publishing",
-    currentFallback: "Serafina now calls the Worker API directly; browser-local handoff remains only if the Worker fails.",
-    reviewQuestion: "Does a Serafina escalation create a Sheriff case, upload selected evidence, and show on the Sheriff board?"
+    blockedBy: "No current blocker after published smoke test",
+    currentFallback: "Serafina calls the Worker API directly; browser-local handoff remains only if the Worker fails.",
+    reviewQuestion: "Monitor the next real escalation for user-facing clarity and media-upload behavior."
   },
   {
     role: "Sheriff",

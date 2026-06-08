@@ -215,7 +215,7 @@
               <td>Auto-create Sheriff case from Serafina escalation</td>
               <td>Complete</td>
               <td>20 to 35 minutes</td>
-              <td>Serafina now creates Sheriff cases through the Worker API and uploads selected media to the same private evidence route. The old browser-local prefill remains as a fallback if the Worker is unavailable.</td>
+              <td>Serafina now creates Sheriff cases through the Worker API and uploads selected media to the same private evidence route. Live smoke test passed on the published page: Serafina created a temporary Sheriff case, the API returned it open, and the temporary D1 row was later cleaned up.</td>
             </tr>
             <tr>
               <td>Email update provider</td>
@@ -227,7 +227,7 @@
               <td>Add Sheriff admin panel</td>
               <td>Complete</td>
               <td>25 minutes</td>
-              <td>The case board now has an on-page admin console. The admin token is entered once per session, then closeout and case-update controls appear on each case while the Worker continues enforcing <code>X-Sheriff-Admin-Token</code>.</td>
+              <td>The case board now has an on-page admin console. Live smoke test passed on the published page: token unlock worked, an admin update was recorded, closeout succeeded through the UI, and the API showed the case as <code>Closed</code>.</td>
             </tr>
           </tbody>
         </table>
@@ -285,7 +285,8 @@
           <li><strong>Admin closeout:</strong> the route exists, rejects close attempts without the admin token, and now includes lifecycle cleanup for case evidence.</li>
           <li><strong>R2 status:</strong> bucket <code>sheriff-lone-star-evidence</code> exists and the deployed Worker has active binding <code>env.EVIDENCE</code>. Local notes are in <code>workers/sheriff-lone-star-case-api/R2_EVIDENCE_SETUP.md</code>.</li>
           <li><strong>R2 smoke test:</strong> created a disposable case, uploaded one image to <code>private/cases/{caseId}/evidence/...</code>, closed the case with the admin token, confirmed closeout deleted 1 R2 object and cleared 1 attachment record, then deleted the temporary D1 row.</li>
-          <li><strong>Serafina status:</strong> escalation now posts directly to the Worker and uploads selected evidence to the Sheriff evidence route. Browser-local prefill is retained only as a fallback.</li>
+          <li><strong>Serafina status:</strong> escalation now posts directly to the Worker and uploads selected evidence to the Sheriff evidence route. Browser-local prefill is retained only as a fallback. Published-page smoke test passed with temporary case <code>sheriff-case-1780947928100</code>, which was removed from D1 after verification.</li>
+          <li><strong>Admin panel smoke test:</strong> the published Sheriff page accepted the admin token, recorded an admin update, showed email not sent because there was no notification consent, closed the case, and the API confirmed status <code>Closed</code>.</li>
           <li><strong>Email status:</strong> active Worker secrets do not yet include <code>RESEND_API_KEY</code> or <code>FROM_EMAIL</code>. Email updates need those secrets before they can be activated.</li>
         </ul>
       </section>
