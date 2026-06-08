@@ -1041,6 +1041,7 @@ function dailyNotesPage(role) {
         <div class="toolbar">
           <a class="button primary" href="../${slug}.html">Back to ${esc(role.title)}</a>
           <a class="button" href="../../household-beings.html">Directory</a>
+          <a class="button" href="../../household-beings-blocked-workflows.html">Blocked workflows</a>
         </div>
       </div>
       <aside class="panel">
@@ -1280,6 +1281,7 @@ const indexBody = `<main>
         <div class="toolbar">
           <a class="button primary" href="#directory">Open directory</a>
           <a class="button" href="#chart">View chart</a>
+          <a class="button" href="household-beings-blocked-workflows.html">Blocked workflows</a>
           <a class="button" href="#missing">Missing roles</a>
         </div>
       </div>
@@ -1321,10 +1323,300 @@ const indexBody = `<main>
     <a href="../index.html">Most Certainly Try Labs</a>
   </footer>`;
 
+const blockedWorkflows = [
+  {
+    role: "Sheriff",
+    priority: "P1",
+    workflow: "Cross-device case board and Case Closed admin flow",
+    blockedBy: "Cloudflare D1 binding, deployed Worker API, and admin closeout route",
+    currentFallback: "Browser-local Sheriff board plus FormSubmit backup.",
+    reviewQuestion: "Do we finish D1 first, or keep testing with local/browser notes a little longer?"
+  },
+  {
+    role: "Sheriff",
+    priority: "P1",
+    workflow: "Evidence archive for case photos and videos",
+    blockedBy: "Cloudflare R2 bucket, upload path, size rules, and private/public media policy",
+    currentFallback: "Media metadata in forms; actual visual inspection only when media is attached in chat.",
+    reviewQuestion: "Should R2 evidence upload be next after D1, or should evidence stay chat-only for the first production pass?"
+  },
+  {
+    role: "Serafina",
+    priority: "P1",
+    workflow: "Automatic Sheriff escalation from Serafina form",
+    blockedBy: "Shared Sheriff API endpoint and D1 case creation being live",
+    currentFallback: "Serafina browser-local handoff pre-fills the Sheriff form on the same device.",
+    reviewQuestion: "Should Serafina auto-create cases as soon as D1 is live?"
+  },
+  {
+    role: "Sheriff",
+    priority: "P2",
+    workflow: "Email updates on case progress",
+    blockedBy: "Resend account setup, verified sender, Worker secrets, and one test send",
+    currentFallback: "Optional email consent is captured; no outgoing updates are sent yet.",
+    reviewQuestion: "Do we set up Resend now, or wait until the shared case board is live?"
+  },
+  {
+    role: "All Staff",
+    priority: "P2",
+    workflow: "Daily notes that sync across devices",
+    blockedBy: "Shared backend for daily notes",
+    currentFallback: "Each staff daily-note page saves notes in the current browser only.",
+    reviewQuestion: "Should daily notes share the Sheriff D1 database, or get their own D1 table?"
+  },
+  {
+    role: "Mailman",
+    priority: "P2",
+    workflow: "Email-list sign-up and follow-up CRM",
+    blockedBy: "Mailing-list provider, consent storage, contact tagging, and unsubscribe path",
+    currentFallback: "Draft follow-ups in chat; Gmail only when explicitly requested.",
+    reviewQuestion: "Should Mailman use Resend audiences, a simple D1 contacts table, or a full CRM?"
+  },
+  {
+    role: "Personal Assistant",
+    priority: "P2",
+    workflow: "Shared calendar dashboard and timed alerts",
+    blockedBy: "Calendar integration, alert rules, and preferred notification channel",
+    currentFallback: "Manual chat reminders and OpenClaw cron/reminder notes when requested.",
+    reviewQuestion: "Which calendar source should be authoritative?"
+  },
+  {
+    role: "Sundries",
+    priority: "P2",
+    workflow: "Inventory intake with photos, receipts, and H-E-B ordering support",
+    blockedBy: "Shared inventory API, receipt OCR, product-photo storage, and authenticated H-E-B browser access",
+    currentFallback: "Local inventory files and manual H-E-B checks when logged in.",
+    reviewQuestion: "Do we prioritize receipt import, pantry scanning, or H-E-B cart support first?"
+  },
+  {
+    role: "Webmaster",
+    priority: "P2",
+    workflow: "Automated site compliance, link checks, and build-log freshness",
+    blockedBy: "CI link checker, scheduled audit job, and published-report format",
+    currentFallback: "Manual link checks before commits.",
+    reviewQuestion: "Should GitHub Actions run link checks on every push?"
+  },
+  {
+    role: "Archivist",
+    priority: "P2",
+    workflow: "Searchable durable household archive",
+    blockedBy: "Knowledge base/search layer and photo/archive storage policy",
+    currentFallback: "Workspace memory files, Labs pages, and git history.",
+    reviewQuestion: "Should the archive live in files, Notion, D1, or another searchable system?"
+  },
+  {
+    role: "Librarian",
+    priority: "P2",
+    workflow: "Reference library and annotated reading lists",
+    blockedBy: "Library database, saved-article workflow, tags, and source-quality rubric",
+    currentFallback: "Links in Labs pages and ad hoc web research.",
+    reviewQuestion: "Should Librarian use a simple HTML index first, or a dedicated library tool?"
+  },
+  {
+    role: "Treasurer",
+    priority: "P2",
+    workflow: "Budget, subscription, and receipt tracking",
+    blockedBy: "Budget data source, subscription list, receipt OCR, and spending-permission boundary",
+    currentFallback: "No spending without explicit human confirmation; costs are discussed in chat.",
+    reviewQuestion: "Should Treasurer start with subscriptions, receipts, or project budgets?"
+  },
+  {
+    role: "Groundskeeper",
+    priority: "P3",
+    workflow: "Outdoor condition monitoring",
+    blockedBy: "Weather station, soil sensors, garden photo archive, and routine field checks",
+    currentFallback: "Garden checklist pages and Serafina/Sheriff reports.",
+    reviewQuestion: "Are sensors worth it, or should we start with scheduled photo checks?"
+  },
+  {
+    role: "Safety Officer",
+    priority: "P3",
+    workflow: "Home safety and emergency-prep dashboard",
+    blockedBy: "Battery/expiration tracker, sensor dashboard, emergency-kit inventory",
+    currentFallback: "Manual Sheriff/Safety notes and room maintenance inventory.",
+    reviewQuestion: "Should the first Safety workflow be batteries, locks, emergency kit, or trip hazards?"
+  },
+  {
+    role: "Concierge",
+    priority: "P3",
+    workflow: "Guestbook, welcome packets, and guest preferences",
+    blockedBy: "Guest preference store, reusable welcome packet, and room-readiness checklist",
+    currentFallback: "Room guide and chat-prepared guest notes.",
+    reviewQuestion: "Should Concierge start with a guest intake form?"
+  },
+  {
+    role: "PR",
+    priority: "P3",
+    workflow: "Affiliate and public persona tracking",
+    blockedBy: "Affiliate dashboard, disclosure templates, public metrics, and campaign tracker",
+    currentFallback: "Labs build logs and manual public-safe messaging review.",
+    reviewQuestion: "Which affiliate area should PR track first?"
+  },
+  {
+    role: "Social Media Manager",
+    priority: "P3",
+    workflow: "Scheduled social posts",
+    blockedBy: "Social scheduler, platform connections, approval workflow, and analytics",
+    currentFallback: "Draft captions in chat for human review.",
+    reviewQuestion: "Which platform should be first: Instagram, TikTok, LinkedIn, or something else?"
+  },
+  {
+    role: "Stylist",
+    priority: "P3",
+    workflow: "Visual moodboard and styling library",
+    blockedBy: "Moodboard tool, swatch/photo library, and photo-lighting kit",
+    currentFallback: "Room guide, local design notes, and chat suggestions.",
+    reviewQuestion: "Should Stylist begin with room styling, wardrobe, or public project visuals?"
+  },
+  {
+    role: "Director of Fun",
+    priority: "P3",
+    workflow: "Event discovery and ticket deadline tracker",
+    blockedBy: "Event aggregator, ticket-price tracker, and shared fun calendar",
+    currentFallback: "Manual web research and calendar reminders.",
+    reviewQuestion: "Which event sources should be watched first?"
+  },
+  {
+    role: "Theatre",
+    priority: "P3",
+    workflow: "Streaming availability and watchlist manager",
+    blockedBy: "Watchlist database and streaming availability source",
+    currentFallback: "Manual watchlist notes in chat.",
+    reviewQuestion: "Should Theatre track household watchlists by mood, platform, or guest group first?"
+  },
+  {
+    role: "DJ",
+    priority: "P3",
+    workflow: "Playlist and speaker-room automation",
+    blockedBy: "Music-service integration and speaker/room automation permissions",
+    currentFallback: "Manual playlist notes and recommendations.",
+    reviewQuestion: "Which music service and rooms should DJ support first?"
+  },
+  {
+    role: "Coach",
+    priority: "P3",
+    workflow: "Fitness tracker and routine history",
+    blockedBy: "Fitness tracker integration, routine database, and recovery tracking",
+    currentFallback: "Manual movement planning in chat.",
+    reviewQuestion: "Should Coach start with daily movement, stretching, or strength tracking?"
+  },
+  {
+    role: "Nanny",
+    priority: "P3",
+    workflow: "Guest wellness and comfort preferences",
+    blockedBy: "Guest preference store, quiet-hours reminder, and first-aid inventory tracker",
+    currentFallback: "Manual guest comfort checklists.",
+    reviewQuestion: "Should Nanny start with guest comfort or household wellness reminders?"
+  },
+  {
+    role: "Guru",
+    priority: "P3",
+    workflow: "Spiritual check-in rhythm and ritual supply tracking",
+    blockedBy: "Reflection library, seasonal tracker, and ritual supply inventory",
+    currentFallback: "Serafina Sacred Calendar and chat prompts.",
+    reviewQuestion: "Should Guru start with a weekly check-in form?"
+  },
+  {
+    role: "Chef",
+    priority: "P3",
+    workflow: "Recipe database tied to inventory",
+    blockedBy: "Recipe database, pantry integration, and meal-planning calendar",
+    currentFallback: "Pantry cookbook notes and active inventory files.",
+    reviewQuestion: "Should Chef start with shelf-stable recipes or weekly meal planning?"
+  },
+  {
+    role: "Barista",
+    priority: "P3",
+    workflow: "Drink recipe and staple tracker",
+    blockedBy: "Coffee/tea inventory tracker and drink recipe card system",
+    currentFallback: "Manual recipes and inventory notes.",
+    reviewQuestion: "Should Barista start with coffee, tea, smoothies, or slushies?"
+  },
+  {
+    role: "Baker",
+    priority: "P3",
+    workflow: "Baking tool and ingredient readiness",
+    blockedBy: "Baking inventory tracker, recipe testing log, and equipment list",
+    currentFallback: "Pantry notes and recipe drafts.",
+    reviewQuestion: "Should Baker start with bread, cookies, cakes, or tools?"
+  },
+  {
+    role: "Bartender",
+    priority: "P3",
+    workflow: "Bar inventory and cocktail spec tracker",
+    blockedBy: "Bar inventory app, wine/cellar tracker, and batched-syrup labels",
+    currentFallback: "Andre Mack guide and manual inventory notes.",
+    reviewQuestion: "Should Bartender start with wine, spirits, beer, or tiki supplies?"
+  },
+  {
+    role: "Laundramat",
+    priority: "P3",
+    workflow: "Fabric-care guide and stain kit tracking",
+    blockedBy: "Laundry label/photo guide and fabric-care supply tracker",
+    currentFallback: "Room maintenance inventory and chat troubleshooting.",
+    reviewQuestion: "Should Laundramat start with stain guide or fabric care labels?"
+  },
+  {
+    role: "Keeper",
+    priority: "P3",
+    workflow: "Recurring cleaning dashboard",
+    blockedBy: "Cleaning schedule app, robot vacuum map, and tool inventory",
+    currentFallback: "Room maintenance inventory and manual cleaning notes.",
+    reviewQuestion: "Should Keeper start with dusting/vacuuming cadence or room reset checklists?"
+  }
+];
+
+const blockedCards = blockedWorkflows.map((item, index) => `<article class="role-card">
+        <div>
+          <p class="label">${esc(item.priority)} review ${index + 1}</p>
+          <h3>${esc(item.role)}: ${esc(item.workflow)}</h3>
+        </div>
+        <p><strong>Blocked by:</strong> ${esc(item.blockedBy)}</p>
+        <p><strong>Current fallback:</strong> ${esc(item.currentFallback)}</p>
+        <p><strong>Review question:</strong> ${esc(item.reviewQuestion)}</p>
+      </article>`).join("\n");
+
+const blockedWorkflowBody = `<main>
+    <section class="hero">
+      <div>
+        <p class="kicker">Workflow review queue</p>
+        <h1>Blocked Household Staff Workflows</h1>
+        <p class="lede">These are workflows that can be drafted, logged, or partially handled now, but need a missing backend, provider, hardware, permission, or data source before they can run repeatably.</p>
+        <div class="toolbar">
+          <a class="button primary" href="household-beings.html">Back to directory</a>
+          <a class="button" href="#queue">Review queue</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="label">Review rule</p>
+        <p>Handle these one at a time. For each blocker, decide: build now, buy/setup later, keep manual, or delete the workflow.</p>
+      </aside>
+    </section>
+    <section class="section panel">
+      <h2>Priority Buckets</h2>
+      <p><strong>P1</strong> unlocks the core Sheriff/Serafina production workflow. <strong>P2</strong> unlocks shared operations and communication infrastructure. <strong>P3</strong> improves specialist roles once the core operating system works.</p>
+    </section>
+    <section class="section" id="queue" aria-labelledby="queue-title">
+      <h2 id="queue-title">One-By-One Review Queue</h2>
+      <div class="role-grid">${blockedCards}</div>
+    </section>
+  </main>
+  <footer>
+    <span>Built as a blocker review list for Las Jaras staff workflows.</span>
+    <a href="household-beings.html">Household beings directory</a>
+  </footer>`;
+
 writeFileSync(join(process.cwd(), "projects", "household-beings.html"), layout({
   title: "Las Jaras Household Beings Directory",
   description: "Profile pages and an operating chart for every being running the Las Jaras household.",
   body: indexBody,
+  prefix: ""
+}));
+
+writeFileSync(join(process.cwd(), "projects", "household-beings-blocked-workflows.html"), layout({
+  title: "Blocked Household Staff Workflows",
+  description: "A one-by-one review queue for Las Jaras household staff workflows blocked by missing tools, integrations, permissions, or data.",
+  body: blockedWorkflowBody,
   prefix: ""
 }));
 
