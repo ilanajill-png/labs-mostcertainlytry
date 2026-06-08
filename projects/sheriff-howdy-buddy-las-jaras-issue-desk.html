@@ -1804,11 +1804,23 @@
 
     function evidenceEmailLabel(issue) {
       const log = Array.isArray(issue.evidenceEmailLog) ? issue.evidenceEmailLog : [];
-      if (!log.length) return "No evidence email copy sent yet.";
+      if (!log.length) return "No admin evidence handoff recorded yet.";
       const latest = log[log.length - 1];
       return latest.ok
-        ? `Latest evidence email handoff attempted (${latest.count} file${latest.count === 1 ? "" : "s"}); check Gmail to verify delivery.`
-        : `Latest evidence email copy failed: ${latest.message}`;
+        ? latest.message
+        : `Latest admin evidence handoff needs attention: ${latest.message}`;
+    }
+
+    function adminEvidenceHandoffResult(files, context = {}) {
+      const fileList = [...(files || [])];
+      if (!fileList.length) return { ok: true, count: 0, message: "No admin evidence handoff needed." };
+      const stage = context.stage || "case evidence";
+      const names = fileList.map((file) => file.name).join(", ");
+      return {
+        ok: true,
+        count: fileList.length,
+        message: `${fileList.length} ${stage.toLowerCase()} file${fileList.length === 1 ? "" : "s"} recorded as metadata (${names}). Actual image review now uses the direct Gmail/chat admin workflow.`
+      };
     }
 
     function renderFollowUpBox(issue, context) {
@@ -1880,7 +1892,7 @@
             <p>${escapeHtml(issue.description)}</p>
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
-            <p><strong>Evidence email:</strong> ${escapeHtml(evidenceEmailLabel(issue))}</p>
+            <p><strong>Admin evidence:</strong> ${escapeHtml(evidenceEmailLabel(issue))}</p>
             <p><strong>Workflow next action:</strong> ${escapeHtml(issue.investigationWorkflow?.nextAction || "Start active investigation from the stored case prompt.")}</p>
             <p><strong>Shared status:</strong> ${escapeHtml(sharedLabel)}</p>
             <p><strong>Updates:</strong> ${escapeHtml(updateLabel)}</p>
@@ -2004,13 +2016,9 @@
         issue.updatedAt = now;
         const result = await saveCaseUpdate(issue);
         const savedMessage = `Follow-up saved to Sheriff board. ID: ${response.id}. ${files.length} file${files.length === 1 ? "" : "s"} recorded.`;
-        sharedStatus.textContent = `${savedMessage} Starting evidence email handoff...`;
-        if (status) status.textContent = `${savedMessage} Starting evidence email handoff...`;
-        const emailResult = await sendEvidenceEmailCopy(result.issue, input?.files || [], {
+        const emailResult = adminEvidenceHandoffResult(input?.files || [], {
           stage: "Sheriff follow-up",
-          followUpId: response.id,
-          note: text || "Photo/video follow-up submitted from Sheriff board.",
-          fileInput: input
+          followUpId: response.id
         });
         const loggedIssue = appendEvidenceEmailLog(result.issue, emailResult, {
           stage: "Sheriff follow-up",
@@ -2117,10 +2125,8 @@
         evidenceResult = await uploadEvidenceForCase(savedIssue);
         if (evidenceResult.issue) savedIssue = evidenceResult.issue;
       }
-      const emailEvidenceResult = await sendEvidenceEmailCopy(savedIssue, mediaFiles.files, {
-        stage: "Initial Sheriff case evidence",
-        note: savedIssue.mediaDescription || "Initial evidence submitted with Sheriff case.",
-        fileInput: mediaFiles
+      const emailEvidenceResult = adminEvidenceHandoffResult(mediaFiles.files, {
+        stage: "Initial Sheriff case evidence"
       });
       if (emailEvidenceResult.count || !emailEvidenceResult.ok) {
         savedIssue = appendEvidenceEmailLog(savedIssue, emailEvidenceResult, {
