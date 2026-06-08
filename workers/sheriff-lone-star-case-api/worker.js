@@ -98,6 +98,7 @@ function normalizeCase(input) {
     solutionStatus: input.solutionStatus && typeof input.solutionStatus === "object" ? input.solutionStatus : {},
     investigationWorkflow: normalizeInvestigationWorkflow(input.investigationWorkflow, status),
     followUpResponses: Array.isArray(input.followUpResponses) ? input.followUpResponses : [],
+    evidenceEmailLog: Array.isArray(input.evidenceEmailLog) ? input.evidenceEmailLog : [],
     notificationConsent: normalizeNotificationConsent(input.notificationConsent),
     notificationLog: Array.isArray(input.notificationLog) ? input.notificationLog : []
   };

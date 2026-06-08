@@ -1413,6 +1413,53 @@
       }
     }
 
+    async function sendEvidenceEmailCopy(issue, files, context = {}) {
+      const fileList = [...(files || [])];
+      if (!fileList.length) return { ok: true, count: 0, message: "No evidence email needed." };
+      if (!formSubmitEndpoint) {
+        return {
+          ok: false,
+          count: 0,
+          message: "Evidence files were recorded on the case, but no email evidence endpoint is configured."
+        };
+      }
+
+      const payload = new FormData();
+      payload.append("_subject", `Las Jaras Sheriff Evidence: ${issue.caseTitle}`);
+      payload.append("_template", "table");
+      payload.append("_captcha", "false");
+      payload.append("case_id", issue.id);
+      payload.append("case_title", issue.caseTitle);
+      payload.append("case_status", issue.status);
+      payload.append("evidence_stage", context.stage || "case evidence");
+      payload.append("follow_up_id", context.followUpId || "");
+      payload.append("submitted_at", new Date().toISOString());
+      payload.append("evidence_note", context.note || issue.mediaDescription || "");
+      payload.append("evidence_files", fileList.map((file) => `${file.name} (${file.type || "unknown"}, ${fileSizeLabel(file.size)})`).join("; "));
+      payload.append("case_json", JSON.stringify(issue, null, 2));
+      for (const file of fileList) payload.append("attachment", file, file.name);
+
+      try {
+        const response = await fetch(formSubmitEndpoint, {
+          method: "POST",
+          body: payload,
+          headers: { "Accept": "application/json" }
+        });
+        if (!response.ok) throw new Error(`FormSubmit returned ${response.status}`);
+        return {
+          ok: true,
+          count: fileList.length,
+          message: `${fileList.length} evidence file${fileList.length === 1 ? "" : "s"} sent by email copy.`
+        };
+      } catch (error) {
+        return {
+          ok: false,
+          count: 0,
+          message: `Evidence email copy failed; metadata remains on the case. ${error.message}`
+        };
+      }
+    }
+
     function normalizeImportedCase(data) {
       const issue = {
         id: clean(data.id) || `sheriff-case-import-${Date.now()}`,
@@ -1442,10 +1489,29 @@
       issue.sheriffFirstRead = Array.isArray(data.sheriffFirstRead) ? data.sheriffFirstRead : suggestionFor(issue);
       issue.solutionStatus = data.solutionStatus || {};
       issue.followUpResponses = Array.isArray(data.followUpResponses) ? data.followUpResponses : [];
+      issue.evidenceEmailLog = Array.isArray(data.evidenceEmailLog) ? data.evidenceEmailLog : [];
       issue.sharedSubmission = data.sharedSubmission || null;
       issue.investigationPrompt = data.investigationPrompt || buildInvestigationPrompt(issue);
       issue.investigationWorkflow = data.investigationWorkflow || buildInvestigationWorkflow(issue);
       return issue;
+    }
+
+    function appendEvidenceEmailLog(issue, result, context = {}) {
+      return {
+        ...issue,
+        evidenceEmailLog: [
+          ...(issue.evidenceEmailLog || []),
+          {
+            id: `evidence-email-${Date.now()}`,
+            createdAt: new Date().toISOString(),
+            ok: Boolean(result.ok),
+            count: result.count || 0,
+            message: result.message,
+            stage: context.stage || "case evidence",
+            followUpId: context.followUpId || ""
+          }
+        ]
+      };
     }
 
     function decodeImportPayload(value) {
@@ -1610,6 +1676,15 @@
       `;
     }
 
+    function evidenceEmailLabel(issue) {
+      const log = Array.isArray(issue.evidenceEmailLog) ? issue.evidenceEmailLog : [];
+      if (!log.length) return "No evidence email copy sent yet.";
+      const latest = log[log.length - 1];
+      return latest.ok
+        ? `Latest evidence email copy sent (${latest.count} file${latest.count === 1 ? "" : "s"}).`
+        : `Latest evidence email copy failed: ${latest.message}`;
+    }
+
     function renderFollowUpBox(issue, context) {
       return `
         <section class="follow-up-box" aria-label="Answer Sheriff follow-up request">
@@ -1678,6 +1753,7 @@
             <p>${escapeHtml(issue.description)}</p>
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
+            <p><strong>Evidence email:</strong> ${escapeHtml(evidenceEmailLabel(issue))}</p>
             <p><strong>Workflow next action:</strong> ${escapeHtml(issue.investigationWorkflow?.nextAction || "Start active investigation from the stored case prompt.")}</p>
             <p><strong>Shared status:</strong> ${escapeHtml(sharedLabel)}</p>
             <p><strong>Updates:</strong> ${escapeHtml(updateLabel)}</p>
@@ -1789,9 +1865,19 @@
       };
       issue.updatedAt = now;
       const result = await saveCaseUpdate(issue);
-      renderCases(result.cases);
-      renderSheriffRead(result.issue);
-      sharedStatus.textContent = "Follow-up sent to Sheriff and queued for review.";
+      const emailResult = await sendEvidenceEmailCopy(result.issue, input?.files || [], {
+        stage: "Sheriff follow-up",
+        followUpId: response.id,
+        note: text || "Photo/video follow-up submitted from Sheriff board."
+      });
+      const loggedIssue = appendEvidenceEmailLog(result.issue, emailResult, {
+        stage: "Sheriff follow-up",
+        followUpId: response.id
+      });
+      const loggedResult = await saveCaseUpdate(loggedIssue);
+      renderCases(loggedResult.cases);
+      renderSheriffRead(loggedResult.issue);
+      sharedStatus.textContent = `Follow-up sent to Sheriff and queued for review. ${emailResult.message}`;
       formElement.reset();
     }
 
@@ -1876,8 +1962,19 @@
         evidenceResult = await uploadEvidenceForCase(savedIssue);
         if (evidenceResult.issue) savedIssue = evidenceResult.issue;
       }
+      const emailEvidenceResult = await sendEvidenceEmailCopy(savedIssue, mediaFiles.files, {
+        stage: "Initial Sheriff case evidence",
+        note: savedIssue.mediaDescription || "Initial evidence submitted with Sheriff case."
+      });
+      if (emailEvidenceResult.count || !emailEvidenceResult.ok) {
+        savedIssue = appendEvidenceEmailLog(savedIssue, emailEvidenceResult, {
+          stage: "Initial Sheriff case evidence"
+        });
+        const loggedResult = await saveCaseUpdate(savedIssue);
+        savedIssue = loggedResult.issue;
+      }
       cases = localMergeCase(savedIssue);
-      sharedStatus.textContent = `${sharedResult.message}${evidenceResult?.message ? ` ${evidenceResult.message}` : ""}`;
+      sharedStatus.textContent = `${sharedResult.message}${evidenceResult?.message ? ` ${evidenceResult.message}` : ""} ${emailEvidenceResult.message}`;
       renderSheriffRead(savedIssue);
       renderCases(cases);
       if (sharedResult.ok) await loadSharedCaseBoard({ quiet: true });
