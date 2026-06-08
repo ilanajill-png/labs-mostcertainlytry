@@ -182,7 +182,112 @@
       ],
       "tarotMessage": "Household message: The Empress asks everyone at Las Jaras to notice the first true need before rushing. The Emperor describes the weather inside and outside the walls. The Chariot names what could complicate the day if ignored. Strength shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water. The Empress tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-08": {
+      "date": "2026-06-08",
+      "weekday": "Monday",
+      "generatedAt": "2026-06-08T13:26:34.294Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Heart chakra (love, compassion, and repair): I protect the living court with a soft hand: plant, bird, Pinky, human, stone, and even the ridiculous squirrel perimeter.",
+      "morningIntentionChakra": {
+        "chakra": "Heart",
+        "focus": "love, compassion, and repair",
+        "intention": "I protect the living court with a soft hand: plant, bird, Pinky, human, stone, and even the ridiculous squirrel perimeter."
+      },
+      "practicalRite": "I water by touch, not by panic.",
+      "weather": {
+        "sunrise": "06:32 AM",
+        "sunset": "08:32 PM",
+        "highF": "89",
+        "lowF": "75",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "high UV"
+        ],
+        "uvIndex": "8",
+        "maxGustMph": 19,
+        "maxThunderChance": 38,
+        "moonPhase": "Last Quarter",
+        "moonIllumination": "54%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-06-08",
+            "name": "St. Medard's Weather Watch",
+            "origin": "Feast of St. Medard, a sixth-century French bishop linked in European folk weather lore with rain patterns.",
+            "crystals": "No crystal rite required; keep crystals indoors if rain is threatening.",
+            "cleaning": "Drainage cleaning day: gutters, saucers, low spots, and outdoor clutter.",
+            "food": "Rainy-day soup, bread, or beer if the household wants a nod to old brewing folklore.",
+            "gift": "Give the garden a practical gift: mosquito dunks, clean saucers, or better drainage.",
+            "modernCelebration": "I would clear gutters, empty standing water, inspect pots for fungus pressure, note mosquitoes, and write down whether rain actually falls."
+          }
+        ],
+        "alerts": [],
+        "next": {
+          "date": "2026-06-08",
+          "name": "St. Medard's Weather Watch"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "black for quiet power",
+        "breakfast": "leftover rice with egg or vegetables, because the pantry also deserves respect",
+        "lunch": "a bowl with beans, rice, greens, and something sharp",
+        "dinner": "roasted vegetables with rice or potatoes and a good sauce",
+        "luckyObject": "a key you actually need",
+        "personToCall": "a sibling or cousin who knows an old version of you",
+        "strangerKindness": "carry small cash for a tip jar"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:32 AM; sunset 08:32 PM; 14h 00m daylight.",
+        "moon": "Last Quarter, 54% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Cleanliness",
+        "franklinMeasure": "Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Cleanliness: Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Weather",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Garden",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Household",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Warning",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Hermit",
+          "reading": "I step outside alone long enough to notice one true thing."
+        }
+      ],
+      "tarotMessage": "Household message: The Emperor asks everyone at Las Jaras to notice the first true need before rushing. The Hierophant describes the weather inside and outside the walls. Strength names what could complicate the day if ignored. The Hermit shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Emperor tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-07T13:18:00.638Z"
+  "updatedAt": "2026-06-08T13:26:34.294Z"
 }
