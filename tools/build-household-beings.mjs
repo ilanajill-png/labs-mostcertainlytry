@@ -1354,9 +1354,9 @@ const blockedWorkflows = [
     role: "Sheriff",
     priority: "P1",
     workflow: "Cross-device case board and Case Closed admin flow",
-    blockedBy: "Cloudflare D1 binding, deployed Worker API, and admin closeout route",
-    currentFallback: "Browser-local Sheriff board plus FormSubmit backup.",
-    reviewQuestion: "Do we finish D1 first, or keep testing with local/browser notes a little longer?"
+    blockedBy: "Final mobile cross-device verification and production admin-password polish",
+    currentFallback: "Worker + D1 case board is live; admin token console handles closeout and updates.",
+    reviewQuestion: "Does one mobile-created case appear on desktop, accept an admin update, and close cleanly?"
   },
   {
     role: "Sheriff",
@@ -1370,17 +1370,17 @@ const blockedWorkflows = [
     role: "Serafina",
     priority: "P1",
     workflow: "Automatic Sheriff escalation from Serafina form",
-    blockedBy: "Shared Sheriff API endpoint and D1 case creation being live",
-    currentFallback: "Serafina browser-local handoff pre-fills the Sheriff form on the same device.",
-    reviewQuestion: "Should Serafina auto-create cases as soon as D1 is live?"
+    blockedBy: "One live Serafina-to-Sheriff smoke test after publishing",
+    currentFallback: "Serafina now calls the Worker API directly; browser-local handoff remains only if the Worker fails.",
+    reviewQuestion: "Does a Serafina escalation create a Sheriff case, upload selected evidence, and show on the Sheriff board?"
   },
   {
     role: "Sheriff",
     priority: "P2",
     workflow: "Email updates on case progress",
-    blockedBy: "Resend account setup, verified sender, Worker secrets, and one test send",
-    currentFallback: "Optional email consent is captured; no outgoing updates are sent yet.",
-    reviewQuestion: "Do we set up Resend now, or wait until the shared case board is live?"
+    blockedBy: "Resend API key, verified sender/from email, Worker secrets, and one test send",
+    currentFallback: "Worker update route and admin UI are ready; optional email consent remains disabled until secrets exist.",
+    reviewQuestion: "Which verified sender should be used for Sheriff case-update emails?"
   },
   {
     role: "All Staff",

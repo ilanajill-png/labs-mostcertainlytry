@@ -489,7 +489,7 @@
     </section>
 
     <div class="layout">
-      <form id="intake-form" aria-describedby="form-help">
+      <form id="intake-form" aria-describedby="form-help" data-api-endpoint="https://sheriff-lone-star-case-api.ilanajill.workers.dev">
         <p id="form-help" class="hint">Required fields are marked with the word required. Every saved entry includes the phrase "human informed me" so Serafina can distinguish human observation from weather, calendar, or automation notes.</p>
 
         <fieldset>
@@ -562,7 +562,7 @@
           <label for="media-files">
             Add a photo or video
             <input id="media-files" name="mediaFiles" type="file" accept="image/*,video/*" multiple>
-            <span class="hint">Selected files preview here and their names, sizes, and types are saved in JSON. Because this is a static public page, the actual files stay on this device unless you separately upload, export, or share them.</span>
+            <span class="hint">Selected files preview here and their names, sizes, and types are saved in JSON. If you escalate to Sheriff, selected images/videos upload to private Sheriff evidence storage when R2 is active.</span>
           </label>
 
           <label for="media-description">
@@ -636,7 +636,7 @@
             <input id="update-contact" name="updateContact" type="email" autocomplete="email" placeholder="Example: name@example.com">
           </label>
           <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes"> I agree to receive email updates about this Las Jaras case at the email address I provide. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
-          <p class="hint">Optional. Serafina will pass this preference to Sheriff Lone Star only if you escalate the note.</p>
+          <p class="hint">Optional. Serafina will pass this preference to Sheriff Lone Star only if you escalate the note. Email sending unlocks after the Sheriff Worker has Resend configured.</p>
         </fieldset>
 
         <div class="actions">
@@ -739,7 +739,12 @@
     const mediaDbName = "las-jaras-media-handoff-v1";
     const mediaStoreName = "files";
     const adminPassphrase = "serafina";
+    const apiEndpoint = form.dataset.apiEndpoint;
     let mediaPreviewUrls = [];
+    let operationalStatus = {
+      providers: { email: false },
+      evidence: { r2Bound: false, googleDriveConfigured: false }
+    };
 
     const chakraByType = {
       plant: "Heart",
@@ -805,6 +810,49 @@
         return false;
       }
       return true;
+    }
+
+    async function apiJson(path, options = {}) {
+      if (!apiEndpoint) throw new Error("Sheriff Worker API is not configured.");
+      const response = await fetch(`${apiEndpoint}${path}`, {
+        ...options,
+        headers: {
+          "Accept": "application/json",
+          ...(options.body ? { "Content-Type": "application/json" } : {}),
+          ...(options.headers || {})
+        }
+      });
+      const text = await response.text();
+      const payload = text ? JSON.parse(text) : {};
+      if (!response.ok) throw new Error(payload.error || `Sheriff API returned ${response.status}`);
+      return payload;
+    }
+
+    async function loadOperationalStatus() {
+      try {
+        operationalStatus = await apiJson("/health", { method: "GET" });
+      } catch {
+        operationalStatus = {
+          providers: { email: false },
+          evidence: { r2Bound: false, googleDriveConfigured: false }
+        };
+      }
+      syncUpdateControls();
+      return operationalStatus;
+    }
+
+    function syncUpdateControls() {
+      const emailReady = Boolean(operationalStatus.providers?.email);
+      receiveUpdates.disabled = !emailReady;
+      updateContact.disabled = !emailReady;
+      updateConsent.disabled = !emailReady;
+      if (!emailReady) {
+        receiveUpdates.checked = false;
+        updateContact.value = "";
+        updateConsent.checked = false;
+        updateContact.setCustomValidity("");
+        updateConsent.setCustomValidity("");
+      }
     }
 
     function setAdminOpen(isOpen) {
@@ -1019,6 +1067,52 @@
       };
     }
 
+    async function uploadSheriffEvidence(caseId, files = mediaFiles.files) {
+      const selected = [...(files || [])];
+      if (!selected.length) return { ok: true, message: "No evidence selected for Sheriff upload.", count: 0 };
+      const payload = new FormData();
+      for (const file of selected) payload.append("mediaFiles", file);
+      const response = await fetch(`${apiEndpoint}/cases/${encodeURIComponent(caseId)}/evidence`, {
+        method: "POST",
+        body: payload,
+        headers: { "Accept": "application/json" }
+      });
+      const text = await response.text();
+      const body = text ? JSON.parse(text) : {};
+      if (!response.ok) throw new Error(body.error || `Evidence upload returned ${response.status}`);
+      return {
+        ok: true,
+        count: body.evidence?.length || selected.length,
+        message: `${body.evidence?.length || selected.length} evidence file${(body.evidence?.length || selected.length) === 1 ? "" : "s"} uploaded to ${body.evidence?.[0]?.storedIn || "storage"}.`,
+        case: body.case
+      };
+    }
+
+    async function createSheriffCaseFromSerafina(record) {
+      const handoff = buildSheriffHandoff(record);
+      const response = await apiJson("/cases", {
+        method: "POST",
+        body: JSON.stringify(handoff)
+      });
+      const savedCase = response.case || handoff;
+      let evidenceResult = { ok: true, count: 0, message: "No evidence selected for Sheriff upload." };
+      if (mediaFiles.files.length) {
+        try {
+          evidenceResult = await uploadSheriffEvidence(savedCase.id, mediaFiles.files);
+        } catch (error) {
+          evidenceResult = {
+            ok: false,
+            count: 0,
+            message: `Evidence upload failed; file metadata is still on the case. ${error.message}`
+          };
+        }
+      }
+      return {
+        case: evidenceResult.case || savedCase,
+        evidenceResult
+      };
+    }
+
     function recordFromForm() {
       const data = new FormData(form);
       const record = {
@@ -1136,13 +1230,23 @@
       }, 1800);
     });
 
-    escalateSheriff.addEventListener("click", () => {
+    escalateSheriff.addEventListener("click", async () => {
       const records = loadRecords();
       if (!records.length) return;
       const latest = records[0];
-      localStorage.setItem(sheriffHandoffKey, JSON.stringify(buildSheriffHandoff(latest)));
-      suggestionEl.innerHTML += '<p><strong>Sheriff escalation:</strong> I&apos;ve escalated this to Sheriff Lone Star with a link to view the case.</p>';
-      window.location.href = "sheriff-howdy-buddy-las-jaras-issue-desk.html?from=serafina#case-form";
+      escalateSheriff.disabled = true;
+      escalateSheriff.textContent = "Escalating...";
+      try {
+        const result = await createSheriffCaseFromSerafina(latest);
+        const caseUrl = `sheriff-howdy-buddy-las-jaras-issue-desk.html#cases`;
+        suggestionEl.innerHTML += `<p><strong>Sheriff escalation:</strong> I&apos;ve escalated this to Sheriff Lone Star. Case ID: <code>${escapeHtml(result.case.id)}</code>. ${escapeHtml(result.evidenceResult.message)} <a href="${caseUrl}">View the case board.</a></p>`;
+      } catch (error) {
+        localStorage.setItem(sheriffHandoffKey, JSON.stringify(buildSheriffHandoff(latest)));
+        suggestionEl.innerHTML += `<p><strong>Sheriff escalation fallback:</strong> Shared case creation failed, so I saved a browser-local handoff. <a href="sheriff-howdy-buddy-las-jaras-issue-desk.html?from=serafina#case-form">Open Sheriff with prefilled details.</a> ${escapeHtml(error.message)}</p>`;
+      } finally {
+        escalateSheriff.disabled = false;
+        escalateSheriff.textContent = "Start Sheriff Lone Star Case";
+      }
     });
 
     mediaFiles.addEventListener("change", renderMediaPreview);
@@ -1184,7 +1288,10 @@
       renderRecords([]);
     });
 
-    renderRecords(loadRecords());
+    (async () => {
+      await loadOperationalStatus();
+      renderRecords(loadRecords());
+    })();
   </script>
 </body>
 </html>

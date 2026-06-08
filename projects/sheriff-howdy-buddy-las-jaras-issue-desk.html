@@ -523,6 +523,27 @@
       font-weight: 850;
     }
 
+    .admin-console,
+    .admin-case-controls,
+    .admin-update-form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .admin-console {
+      border-color: rgba(23, 32, 51, .18);
+      background: rgba(238, 245, 255, .9);
+    }
+
+    .admin-case-controls {
+      padding: 12px;
+      border: 1px solid rgba(0, 71, 171, .24);
+      border-radius: 8px;
+      background: #eef5ff;
+    }
+
+    .admin-case-controls[hidden] { display: none; }
+
     .flow {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -777,6 +798,24 @@
         <p class="label">Case board</p>
         <h2 id="cases-title">Open Las Jaras Issues</h2>
       </div>
+      <section class="panel admin-console" aria-labelledby="admin-title">
+        <div>
+          <p class="label">Sheriff admin</p>
+          <h2 id="admin-title">Case Closeout And Updates</h2>
+          <p class="hint">Enter the Sheriff admin token once per browser session. The Worker still enforces the token on closeout and update routes.</p>
+        </div>
+        <div class="two">
+          <label for="admin-token">
+            Admin token
+            <input id="admin-token" type="password" autocomplete="current-password" placeholder="Paste Sheriff admin token">
+          </label>
+          <div class="actions">
+            <button type="button" id="unlock-admin">Unlock Admin</button>
+            <button type="button" id="lock-admin" hidden>Lock Admin</button>
+          </div>
+        </div>
+        <p class="hint" id="admin-status" role="status" aria-live="polite">Admin controls are locked.</p>
+      </section>
       <div class="case-list" id="case-list" aria-live="polite"></div>
     </section>
 
@@ -835,6 +874,10 @@
     const caseReceiptEvidence = document.querySelector("#case-receipt-evidence");
     const caseReceiptUpdates = document.querySelector("#case-receipt-updates");
     const copyReceiptLink = document.querySelector("#copy-receipt-link");
+    const adminToken = document.querySelector("#admin-token");
+    const unlockAdmin = document.querySelector("#unlock-admin");
+    const lockAdmin = document.querySelector("#lock-admin");
+    const adminStatus = document.querySelector("#admin-status");
     const storageKey = "las-jaras-sheriff-cases-v1";
     const adminTokenSessionKey = "las-jaras-sheriff-admin-token-v1";
     const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
@@ -846,6 +889,7 @@
     let handoffMediaPreviewUrls = [];
     let mediaPreviewUrls = [];
     let latestReceiptCase = null;
+    let adminUnlocked = Boolean(storedAdminToken());
     let operationalStatus = {
       providers: { email: false },
       evidence: { r2Bound: false, googleDriveConfigured: false }
@@ -936,13 +980,25 @@
       }
     }
 
-    function requestAdminToken() {
-      const existing = storedAdminToken();
-      const token = prompt("Sheriff admin token required to close this case.", existing);
-      if (!token) return "";
-      const cleanToken = clean(token);
-      saveAdminToken(cleanToken);
-      return cleanToken;
+    function currentAdminToken() {
+      return adminUnlocked ? storedAdminToken() : "";
+    }
+
+    function setAdminOpen(isOpen, message = "") {
+      adminUnlocked = isOpen;
+      if (!isOpen) clearAdminToken();
+      if (adminToken) {
+        adminToken.disabled = isOpen;
+        if (!isOpen) adminToken.value = "";
+      }
+      if (unlockAdmin) unlockAdmin.hidden = isOpen;
+      if (lockAdmin) lockAdmin.hidden = !isOpen;
+      if (adminStatus) {
+        adminStatus.textContent = message || (isOpen
+          ? "Admin controls unlocked for this browser session."
+          : "Admin controls are locked.");
+      }
+      renderCases(loadCases());
     }
 
     async function loadOperationalStatus() {
@@ -1828,6 +1884,34 @@
       };
     }
 
+    function renderAdminCaseControls(issue) {
+      if (!adminUnlocked) return "";
+      const emailReady = Boolean(operationalStatus.providers?.email);
+      const updateHint = emailReady
+        ? "Records an admin update and emails the reporter only if they opted in."
+        : "Records an admin update. Email sending is disabled until Resend secrets are configured.";
+      return `
+        <section class="admin-case-controls" aria-label="Admin controls for ${escapeHtml(issue.caseTitle)}">
+          <p class="label">Admin controls</p>
+          <form class="admin-update-form" data-admin-update="${escapeHtml(issue.id)}">
+            <label>
+              Case update message
+              <textarea name="message" maxlength="1000" required placeholder="Example: Sheriff reviewed the evidence and recommends checking the west valve before calling a plumber."></textarea>
+            </label>
+            <label>
+              Public note
+              <input name="publicNote" maxlength="240" placeholder="Optional short note for the case record">
+            </label>
+            <div class="actions">
+              <button type="submit">Record Admin Update</button>
+              ${issue.status === "Open" ? `<button class="danger" type="button" data-close="${escapeHtml(issue.id)}">Case Closed By Sheriff</button>` : ""}
+            </div>
+            <p class="hint">${escapeHtml(updateHint)}</p>
+          </form>
+        </section>
+      `;
+    }
+
     function renderFollowUpBox(issue, context) {
       return `
         <section class="follow-up-box" aria-label="Answer Sheriff follow-up request">
@@ -1907,8 +1991,8 @@
               <button type="button" data-read="${escapeHtml(issue.id)}">View Current Read</button>
               <button type="button" data-copy="${escapeHtml(issue.id)}">Copy Prompt</button>
               <button type="button" data-share="${escapeHtml(issue.id)}">Copy Import Link</button>
-              ${issue.status === "Open" ? `<button type="button" data-close="${escapeHtml(issue.id)}">Case Closed By Sheriff</button>` : ""}
             </div>
+            ${renderAdminCaseControls(issue)}
           </article>
         `;
       }).join("");
@@ -2059,9 +2143,9 @@
       const cases = loadCases();
       const issue = cases.find((item) => item.id === caseId);
       if (!issue) return;
-      const token = requestAdminToken();
+      const token = currentAdminToken();
       if (!token) {
-        sharedStatus.textContent = "Case close cancelled. Sheriff keeps the stamp in their pocket.";
+        sharedStatus.textContent = "Unlock Sheriff admin controls before closing a case.";
         return;
       }
       try {
@@ -2085,8 +2169,56 @@
           : "";
         sharedStatus.textContent = `Case closed on the shared Worker board.${cleanupText}`;
       } catch (error) {
-        if (String(error.message).includes("token") || String(error.message).includes("403")) clearAdminToken();
+        if (String(error.message).includes("token") || String(error.message).includes("403")) setAdminOpen(false, "Admin token was rejected. Controls locked.");
         sharedStatus.textContent = `Case close failed. ${error.message}`;
+      }
+    }
+
+    async function sendAdminCaseUpdate(formElement) {
+      const caseId = formElement.dataset.adminUpdate;
+      const token = currentAdminToken();
+      if (!token) {
+        sharedStatus.textContent = "Unlock Sheriff admin controls before recording an update.";
+        return;
+      }
+      const data = new FormData(formElement);
+      const message = clean(data.get("message"));
+      const publicNote = clean(data.get("publicNote"));
+      if (!message) return;
+      const button = formElement.querySelector('button[type="submit"]');
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Recording...";
+      }
+      try {
+        const response = await apiJson(`/cases/${encodeURIComponent(caseId)}/updates`, {
+          method: "POST",
+          headers: { "X-Sheriff-Admin-Token": token },
+          body: JSON.stringify({ message, publicNote })
+        });
+        const updatedIssue = normalizeImportedCase(response.case);
+        updatedIssue.sharedSubmission = {
+          status: "sent",
+          sentAt: new Date().toISOString(),
+          endpoint: "Cloudflare Worker + D1"
+        };
+        const merged = localMergeCase(updatedIssue);
+        renderCases(merged);
+        renderSheriffRead(updatedIssue);
+        const notification = response.update?.notification;
+        const emailText = notification?.sent
+          ? " Email notification sent."
+          : ` Email not sent: ${notification?.reason || "provider or consent unavailable"}.`;
+        sharedStatus.textContent = `Admin update recorded.${emailText}`;
+        formElement.reset();
+      } catch (error) {
+        if (String(error.message).includes("token") || String(error.message).includes("403")) setAdminOpen(false, "Admin token was rejected. Controls locked.");
+        sharedStatus.textContent = `Admin update failed. ${error.message}`;
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.textContent = "Record Admin Update";
+        }
       }
     }
 
@@ -2222,7 +2354,25 @@
       }
     });
 
+    unlockAdmin.addEventListener("click", () => {
+      const token = clean(adminToken.value);
+      if (!token) {
+        adminStatus.textContent = "Paste the Sheriff admin token first.";
+        adminToken.focus();
+        return;
+      }
+      saveAdminToken(token);
+      setAdminOpen(true);
+    });
+
+    lockAdmin.addEventListener("click", () => setAdminOpen(false));
+
     caseList.addEventListener("submit", async (event) => {
+      if (event.target?.matches(".admin-update-form")) {
+        event.preventDefault();
+        await sendAdminCaseUpdate(event.target);
+        return;
+      }
       if (!event.target?.matches(".follow-up-form")) return;
       event.preventDefault();
       await submitFollowUp(event.target);
@@ -2250,6 +2400,7 @@
 
     (async () => {
       await loadOperationalStatus();
+      setAdminOpen(adminUnlocked, adminUnlocked ? "Admin controls unlocked for this browser session." : "Admin controls are locked.");
       const importedFromUrl = importCaseFromUrl() || await importCaseFileFromUrl();
       await applySerafinaHandoff();
       if (!pendingSerafinaHandoff && !importedFromUrl) {
