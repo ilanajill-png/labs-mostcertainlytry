@@ -123,27 +123,33 @@
             </tr>
             <tr>
               <td>Add admin close token</td>
-              <td>Complete in scaffold</td>
+              <td>Complete</td>
               <td>10 minutes</td>
-              <td>Public case creation can remain open, but closing a case now requires <code>X-Sheriff-Admin-Token</code> matching the Worker secret <code>ADMIN_TOKEN</code>. Configure with <code>wrangler secret put ADMIN_TOKEN</code>.</td>
+              <td>Public case creation can remain open, but closing a case now requires <code>X-Sheriff-Admin-Token</code> matching the Worker secret <code>ADMIN_TOKEN</code>. The token is stored as a Cloudflare Worker secret and is not committed to the repo.</td>
             </tr>
             <tr>
               <td>Create Cloudflare D1 database</td>
-              <td>Next</td>
+              <td>Complete</td>
               <td>5 to 10 minutes</td>
-              <td>Wrangler is available through <code>npx wrangler</code> and OAuth login completed successfully. Next run <code>wrangler d1 create sheriff_lone_star_cases</code>, then paste the generated database ID into <code>wrangler.toml</code>.</td>
+              <td>Created <code>sheriff_lone_star_cases</code> in Cloudflare D1 and bound it to the Worker as <code>env.DB</code>. The generated database ID is kept in deploy config, not repeated in this public note.</td>
             </tr>
             <tr>
               <td>Apply schema to D1</td>
-              <td>Next</td>
+              <td>Complete</td>
               <td>3 to 5 minutes</td>
-              <td>Run <code>wrangler d1 execute sheriff_lone_star_cases --file=./schema.sql</code> from the Worker folder.</td>
+              <td>Applied <code>schema.sql</code> remotely with <code>npx wrangler d1 execute sheriff_lone_star_cases --remote --file=schema.sql</code>.</td>
             </tr>
             <tr>
               <td>Deploy Worker</td>
-              <td>In Progress</td>
+              <td>Complete</td>
               <td>5 to 10 minutes</td>
-              <td>The starter Worker resource has been created in Cloudflare. Next deploy the repo's real Worker code after binding D1 and publish the API URL only after the endpoint is secured.</td>
+              <td>Deployed the D1-bound Worker to <code>https://sheriff-lone-star-case-api.ilanajill.workers.dev</code>.</td>
+            </tr>
+            <tr>
+              <td>Smoke-test Worker API</td>
+              <td>Complete</td>
+              <td>8 minutes</td>
+              <td>Verified <code>/health</code>, case create, case list, unauthenticated close rejection, authenticated <code>POST /cases/:id/close</code>, and cleanup of the temporary test row.</td>
             </tr>
             <tr>
               <td>Wire Sheriff page to API</td>
@@ -182,10 +188,13 @@
       <section class="paper-section">
         <h2>Current Scaffold</h2>
         <ul>
+          <li><code>GET /health</code> reports Worker, D1 binding, and provider status.</li>
           <li><code>GET /cases</code> lists recent cases.</li>
           <li><code>POST /cases</code> creates or replaces a case.</li>
           <li><code>GET /cases/:id</code> reads one case.</li>
           <li><code>PUT /cases/:id</code> updates status, checklist state, closeout data, or other case fields.</li>
+          <li><code>POST /cases/:id/close</code> closes one case and requires <code>X-Sheriff-Admin-Token</code>.</li>
+          <li><code>POST /cases/:id/updates</code> records an admin case update and can send an email once provider secrets are configured.</li>
           <li>Changing a case from open to closed requires <code>X-Sheriff-Admin-Token</code> and the Worker secret <code>ADMIN_TOKEN</code>.</li>
           <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
         </ul>
@@ -212,9 +221,10 @@
         <h2>Cloudflare Account And Tooling Notes</h2>
         <ul>
           <li><strong>Account setup:</strong> Cloudflare account access was configured for the production backend work. Account identifiers are intentionally omitted from this public build log.</li>
-          <li><strong>Worker created:</strong> a Sheriff API Worker has been created in Cloudflare. The public API URL will be listed after the endpoint is secured and wired to the Labs front end.</li>
+          <li><strong>Worker deployed:</strong> <code>https://sheriff-lone-star-case-api.ilanajill.workers.dev</code>.</li>
           <li><strong>Wrangler:</strong> Cloudflare Wrangler is available for local deployment and database setup. OAuth details are private operational metadata.</li>
-          <li><strong>D1 status:</strong> the next backend step is creating the Sheriff cases D1 database and applying the schema.</li>
+          <li><strong>D1 status:</strong> <code>sheriff_lone_star_cases</code> exists, schema is applied, and the Worker has an active <code>env.DB</code> binding.</li>
+          <li><strong>Admin closeout:</strong> the route exists and rejects close attempts without the admin token.</li>
         </ul>
       </section>
 
@@ -234,7 +244,8 @@ codex mcp login cloudflare</code></pre>
       <section class="paper-section">
         <h2>Remaining Implementation Details</h2>
         <ul>
-          <li>Choose the exact admin route path and session behavior for the password-protected Sheriff closeout panel.</li>
+          <li>Wire the public Sheriff page to load, create, update, and close cases through the Worker API while keeping browser-local fallback.</li>
+          <li>Build the password-protected Sheriff admin panel that collects the token once per session and calls <code>POST /cases/:id/close</code>.</li>
           <li>Add email provider secrets after account setup: <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code>.</li>
           <li>Run one email test from an admin case-update route before announcing notifications as live.</li>
           <li>Decide whether large video evidence should use a future R2 multipart/direct-upload flow or stay manual/chat-only.</li>

@@ -56,13 +56,14 @@ function normalizeNotificationConsent(input = {}) {
 function normalizeCase(input) {
   const now = new Date().toISOString();
   const id = clean(input.id) || `sheriff-case-${Date.now()}`;
+  const status = clean(input.status) || "Open";
   return {
     ...input,
     id,
-    status: clean(input.status) || "Open",
+    status,
     openedAt: clean(input.openedAt) || now,
     updatedAt: now,
-    closedAt: input.closedAt || null,
+    closedAt: status === "Closed" ? clean(input.closedAt) || now : null,
     caseTitle: clean(input.caseTitle),
     reportedBy: clean(input.reportedBy),
     location: clean(input.location),
@@ -94,6 +95,12 @@ function redactCase(issue, request, env) {
 function providerStatus(env) {
   return {
     email: Boolean(env.RESEND_API_KEY && env.FROM_EMAIL)
+  };
+}
+
+function databaseStatus(env) {
+  return {
+    d1Bound: Boolean(env.DB)
   };
 }
 
@@ -137,6 +144,15 @@ async function listCases(env, request) {
   return jsonResponse(request, { cases });
 }
 
+async function healthCheck(env, request) {
+  return jsonResponse(request, {
+    ok: true,
+    service: "sheriff-lone-star-case-api",
+    database: databaseStatus(env),
+    providers: providerStatus(env)
+  });
+}
+
 async function getCase(env, request, id) {
   const row = await env.DB.prepare("SELECT data FROM cases WHERE id = ?").bind(id).first();
   if (!row) return jsonResponse(request, { error: "Case not found" }, 404);
@@ -170,6 +186,29 @@ async function updateCase(env, request, id) {
     .bind(issue.status, issue.updatedAt, JSON.stringify(issue), id)
     .run();
   return jsonResponse(request, { case: redactCase(issue, request, env) });
+}
+
+async function closeCase(env, request, id) {
+  if (!hasAdminToken(request, env)) {
+    return jsonResponse(request, { error: "Closing a case requires Sheriff admin token" }, 403);
+  }
+  const existing = await env.DB.prepare("SELECT data FROM cases WHERE id = ?").bind(id).first();
+  if (!existing) return jsonResponse(request, { error: "Case not found" }, 404);
+  const body = request.headers.get("Content-Length") === "0" ? {} : await request.json().catch(() => ({}));
+  const current = JSON.parse(existing.data);
+  const issue = normalizeCase({
+    ...current,
+    ...body,
+    id,
+    status: "Closed",
+    closedAt: new Date().toISOString()
+  });
+  await env.DB.prepare(
+    "UPDATE cases SET status = ?, updated_at = ?, data = ? WHERE id = ?"
+  )
+    .bind(issue.status, issue.updatedAt, JSON.stringify(issue), id)
+    .run();
+  return jsonResponse(request, { case: issue });
 }
 
 async function createCaseUpdate(env, request, id) {
@@ -211,9 +250,11 @@ export default {
     const parts = path.split("/").filter(Boolean);
 
     try {
+      if (request.method === "GET" && (path === "/" || path === "/health")) return healthCheck(env, request);
       if (request.method === "GET" && path === "/cases") return listCases(env, request);
       if (request.method === "GET" && parts[0] === "cases" && parts[1]) return getCase(env, request, parts[1]);
       if (request.method === "POST" && path === "/cases") return upsertCase(env, request);
+      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "close") return closeCase(env, request, parts[1]);
       if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "updates") return createCaseUpdate(env, request, parts[1]);
       if (request.method === "PUT" && parts[0] === "cases" && parts[1]) return updateCase(env, request, parts[1]);
       return jsonResponse(request, { error: "Not found" }, 404);
