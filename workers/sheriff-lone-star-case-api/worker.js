@@ -130,7 +130,8 @@ function databaseStatus(env) {
 
 function evidenceStatus(env) {
   return {
-    r2Bound: Boolean(env.EVIDENCE)
+    r2Bound: Boolean(env.EVIDENCE),
+    googleDriveConfigured: Boolean(env.GOOGLE_CLIENT_EMAIL && env.GOOGLE_PRIVATE_KEY && env.GOOGLE_DRIVE_FOLDER_ID)
   };
 }
 
@@ -138,20 +139,151 @@ function safeFileName(name) {
   return clean(name).replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "evidence";
 }
 
+function base64UrlEncode(input) {
+  const bytes = input instanceof Uint8Array ? input : new TextEncoder().encode(input);
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function pemToArrayBuffer(pem) {
+  const normalized = clean(pem).replace(/\\n/g, "\n");
+  const base64 = normalized
+    .replace("-----BEGIN PRIVATE KEY-----", "")
+    .replace("-----END PRIVATE KEY-----", "")
+    .replace(/\s+/g, "");
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let index = 0; index < binary.length; index += 1) bytes[index] = binary.charCodeAt(index);
+  return bytes.buffer;
+}
+
+async function signJwt(env) {
+  const now = Math.floor(Date.now() / 1000);
+  const header = { alg: "RS256", typ: "JWT" };
+  const claim = {
+    iss: env.GOOGLE_CLIENT_EMAIL,
+    scope: "https://www.googleapis.com/auth/drive.file",
+    aud: "https://oauth2.googleapis.com/token",
+    exp: now + 3600,
+    iat: now
+  };
+  const signingInput = `${base64UrlEncode(JSON.stringify(header))}.${base64UrlEncode(JSON.stringify(claim))}`;
+  const key = await crypto.subtle.importKey(
+    "pkcs8",
+    pemToArrayBuffer(env.GOOGLE_PRIVATE_KEY),
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const signature = await crypto.subtle.sign(
+    "RSASSA-PKCS1-v1_5",
+    key,
+    new TextEncoder().encode(signingInput)
+  );
+  return `${signingInput}.${base64UrlEncode(new Uint8Array(signature))}`;
+}
+
+async function getGoogleAccessToken(env) {
+  const assertion = await signJwt(env);
+  const body = new URLSearchParams({
+    grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+    assertion
+  });
+  const response = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok || !result.access_token) {
+    throw new Error(`Google Drive auth failed: ${result.error_description || result.error || response.status}`);
+  }
+  return result.access_token;
+}
+
+async function uploadFileToDrive(env, id, file) {
+  const token = await getGoogleAccessToken(env);
+  const boundary = `sheriff_drive_${crypto.randomUUID()}`;
+  const name = `${id}-${Date.now()}-${safeFileName(file.name)}`;
+  const metadata = {
+    name,
+    parents: [env.GOOGLE_DRIVE_FOLDER_ID],
+    description: `Las Jaras Sheriff evidence for case ${id}; original file ${clean(file.name)}.`
+  };
+  const mediaType = file.type || "application/octet-stream";
+  const head = [
+    `--${boundary}`,
+    "Content-Type: application/json; charset=UTF-8",
+    "",
+    JSON.stringify(metadata),
+    `--${boundary}`,
+    `Content-Type: ${mediaType}`,
+    "",
+  ].join("\r\n");
+  const tail = `\r\n--${boundary}--`;
+  const body = new Blob([head, await file.arrayBuffer(), tail], {
+    type: `multipart/related; boundary=${boundary}`
+  });
+  const response = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,mimeType,size,webViewLink,parents", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": `multipart/related; boundary=${boundary}`
+    },
+    body
+  });
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(`Google Drive upload failed: ${result.error?.message || response.status}`);
+  }
+  return {
+    name: clean(file.name),
+    type: mediaType,
+    sizeBytes: file.size,
+    size: `${Math.round(file.size / 1024)} KB`,
+    driveFileId: result.id,
+    driveName: result.name,
+    driveWebViewLink: result.webViewLink || "",
+    storedIn: "Google Drive",
+    uploadedAt: new Date().toISOString()
+  };
+}
+
+async function deleteDriveFile(env, fileId) {
+  const token = await getGoogleAccessToken(env);
+  const response = await fetch(`https://www.googleapis.com/drive/v3/files/${encodeURIComponent(fileId)}`, {
+    method: "DELETE",
+    headers: { "Authorization": `Bearer ${token}` }
+  });
+  if (!response.ok && response.status !== 404) {
+    const body = await response.text();
+    throw new Error(`Google Drive cleanup failed: ${body || response.status}`);
+  }
+}
+
 async function cleanupCaseEvidence(env, current) {
   const attachments = Array.isArray(current.mediaAttachments) ? current.mediaAttachments : [];
   const r2Attachments = attachments.filter((item) => clean(item.r2Key));
+  const driveAttachments = attachments.filter((item) => clean(item.driveFileId));
   if (r2Attachments.length && !env.EVIDENCE) {
     throw new Error("R2 evidence cleanup requires the EVIDENCE binding");
+  }
+  if (driveAttachments.length && !evidenceStatus(env).googleDriveConfigured) {
+    throw new Error("Google Drive evidence cleanup requires Drive credentials");
   }
 
   if (env.EVIDENCE) {
     await Promise.all(r2Attachments.map((item) => env.EVIDENCE.delete(item.r2Key)));
   }
+  if (evidenceStatus(env).googleDriveConfigured) {
+    await Promise.all(driveAttachments.map((item) => deleteDriveFile(env, item.driveFileId)));
+  }
 
   return {
     deletedAt: new Date().toISOString(),
     deletedR2Objects: r2Attachments.length,
+    deletedDriveFiles: evidenceStatus(env).googleDriveConfigured ? driveAttachments.length : 0,
     clearedAttachmentRecords: attachments.length,
     retainedEvidence: false,
     policy: "Evidence files and attachment records are removed when a case is marked closed."
@@ -306,8 +438,12 @@ async function createCaseUpdate(env, request, id) {
 }
 
 async function uploadCaseEvidence(env, request, id) {
-  if (!env.EVIDENCE) {
-    return jsonResponse(request, { error: "R2 evidence storage is not configured" }, 503);
+  const status = evidenceStatus(env);
+  if (!env.EVIDENCE && !status.googleDriveConfigured) {
+    return jsonResponse(request, {
+      error: "Evidence storage is not configured",
+      required: "Configure R2 or set GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, and GOOGLE_DRIVE_FOLDER_ID Worker secrets/vars."
+    }, 503);
   }
   const existing = await env.DB.prepare("SELECT data FROM cases WHERE id = ?").bind(id).first();
   if (!existing) return jsonResponse(request, { error: "Case not found" }, 404);
@@ -323,24 +459,28 @@ async function uploadCaseEvidence(env, request, id) {
     if (file.size > maxBytes) {
       return jsonResponse(request, { error: `${file.name} is over the 25 MB mobile upload limit` }, 413);
     }
-    const key = `cases/${id}/evidence/${Date.now()}-${safeFileName(file.name)}`;
-    await env.EVIDENCE.put(key, await file.arrayBuffer(), {
-      httpMetadata: { contentType: file.type || "application/octet-stream" },
-      customMetadata: {
-        caseId: id,
-        originalName: clean(file.name),
+    if (env.EVIDENCE) {
+      const key = `cases/${id}/evidence/${Date.now()}-${safeFileName(file.name)}`;
+      await env.EVIDENCE.put(key, await file.arrayBuffer(), {
+        httpMetadata: { contentType: file.type || "application/octet-stream" },
+        customMetadata: {
+          caseId: id,
+          originalName: clean(file.name),
+          uploadedAt: new Date().toISOString()
+        }
+      });
+      uploaded.push({
+        name: clean(file.name),
+        type: file.type || "application/octet-stream",
+        sizeBytes: file.size,
+        size: `${Math.round(file.size / 1024)} KB`,
+        r2Key: key,
+        storedIn: "Cloudflare R2",
         uploadedAt: new Date().toISOString()
-      }
-    });
-    uploaded.push({
-      name: clean(file.name),
-      type: file.type || "application/octet-stream",
-      sizeBytes: file.size,
-      size: `${Math.round(file.size / 1024)} KB`,
-      r2Key: key,
-      storedIn: "Cloudflare R2",
-      uploadedAt: new Date().toISOString()
-    });
+      });
+    } else {
+      uploaded.push(await uploadFileToDrive(env, id, file));
+    }
   }
 
   const existingAttachments = Array.isArray(current.mediaAttachments) ? current.mediaAttachments : [];

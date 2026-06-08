@@ -848,7 +848,7 @@
     let latestReceiptCase = null;
     let operationalStatus = {
       providers: { email: false },
-      evidence: { r2Bound: false }
+      evidence: { r2Bound: false, googleDriveConfigured: false }
     };
 
     function clean(value) {
@@ -951,7 +951,7 @@
       } catch {
         operationalStatus = {
           providers: { email: false },
-          evidence: { r2Bound: false }
+          evidence: { r2Bound: false, googleDriveConfigured: false }
         };
       }
       syncOptionalFeatureControls();
@@ -1383,14 +1383,18 @@
       }
     }
 
-    async function uploadEvidenceForCase(issue) {
-      const files = [...mediaFiles.files];
+    function evidenceStorageReady() {
+      return Boolean(operationalStatus.evidence?.r2Bound || operationalStatus.evidence?.googleDriveConfigured);
+    }
+
+    async function uploadEvidenceForCase(issue, selectedFiles = mediaFiles.files) {
+      const files = [...(selectedFiles || [])];
       if (!files.length) return { ok: true, count: 0, message: "No evidence files selected." };
-      if (!operationalStatus.evidence?.r2Bound) {
+      if (!evidenceStorageReady()) {
         return {
           ok: false,
           count: 0,
-          message: "R2 evidence storage is not enabled yet; file names and sizes were recorded with the case."
+          message: "Evidence storage is not enabled yet; file names and sizes were recorded with the case."
         };
       }
       const payload = new FormData();
@@ -1408,7 +1412,7 @@
           ok: true,
           count: body.evidence?.length || files.length,
           issue: body.case ? normalizeImportedCase(body.case) : issue,
-          message: "Evidence uploaded to R2."
+          message: `Evidence uploaded to ${body.evidence?.[0]?.storedIn || "storage"}.`
         };
       } catch (error) {
         return {
@@ -1979,7 +1983,9 @@
       const files = input ? mediaMetadata(input.files).map((item) => ({
         ...item,
         evidenceSource: "Sheriff follow-up",
-        storageStatus: operationalStatus.evidence?.r2Bound ? "metadata recorded; storage upload not wired for follow-ups yet" : "metadata only; evidence storage inactive"
+        storageStatus: evidenceStorageReady()
+          ? "metadata recorded; storage upload attempted after save"
+          : "metadata only; evidence storage inactive"
       })) : [];
       if (!text && !files.length) {
         sharedStatus.textContent = "Add a note or select a file before sending Sheriff a follow-up.";
@@ -2001,7 +2007,9 @@
           mediaAttachments: files
         };
         issue.followUpResponses = [...(issue.followUpResponses || []), response];
-        issue.mediaAttachments = [...(issue.mediaAttachments || []), ...files];
+        issue.mediaAttachments = evidenceStorageReady()
+          ? [...(issue.mediaAttachments || [])]
+          : [...(issue.mediaAttachments || []), ...files];
         issue.investigationWorkflow = {
           ...(issue.investigationWorkflow || buildInvestigationWorkflow(issue)),
           status: "queued",
@@ -2016,16 +2024,17 @@
         issue.updatedAt = now;
         const result = await saveCaseUpdate(issue);
         const savedMessage = `Follow-up saved to Sheriff board. ID: ${response.id}. ${files.length} file${files.length === 1 ? "" : "s"} recorded.`;
+        const evidenceResult = await uploadEvidenceForCase(result.issue, input?.files || []);
         const emailResult = adminEvidenceHandoffResult(input?.files || [], {
           stage: "Sheriff follow-up",
           followUpId: response.id
         });
-        const loggedIssue = appendEvidenceEmailLog(result.issue, emailResult, {
+        const loggedIssue = appendEvidenceEmailLog(evidenceResult.issue || result.issue, emailResult, {
           stage: "Sheriff follow-up",
           followUpId: response.id
         });
         const loggedResult = await saveCaseUpdate(loggedIssue);
-        const confirmation = `${savedMessage} ${emailResult.message}`;
+        const confirmation = `${savedMessage} ${evidenceResult.message} ${emailResult.message}`;
         sharedStatus.textContent = confirmation;
         if (status) status.textContent = confirmation;
         renderCases(loggedResult.cases);
