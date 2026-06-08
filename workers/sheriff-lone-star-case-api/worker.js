@@ -131,7 +131,10 @@ function databaseStatus(env) {
 function evidenceStatus(env) {
   return {
     r2Bound: Boolean(env.EVIDENCE),
-    googleDriveConfigured: Boolean(env.GOOGLE_CLIENT_EMAIL && env.GOOGLE_PRIVATE_KEY && env.GOOGLE_DRIVE_FOLDER_ID)
+    googleDriveConfigured: Boolean(env.GOOGLE_DRIVE_FOLDER_ID && (
+      (env.GOOGLE_CLIENT_EMAIL && env.GOOGLE_PRIVATE_KEY) ||
+      (env.GOOGLE_OAUTH_CLIENT_ID && env.GOOGLE_OAUTH_CLIENT_SECRET && env.GOOGLE_OAUTH_REFRESH_TOKEN)
+    ))
   };
 }
 
@@ -185,6 +188,24 @@ async function signJwt(env) {
 }
 
 async function getGoogleAccessToken(env) {
+  if (env.GOOGLE_OAUTH_CLIENT_ID && env.GOOGLE_OAUTH_CLIENT_SECRET && env.GOOGLE_OAUTH_REFRESH_TOKEN) {
+    const response = await fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        client_id: env.GOOGLE_OAUTH_CLIENT_ID,
+        client_secret: env.GOOGLE_OAUTH_CLIENT_SECRET,
+        refresh_token: env.GOOGLE_OAUTH_REFRESH_TOKEN,
+        grant_type: "refresh_token"
+      })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result.access_token) {
+      throw new Error(`Google OAuth refresh failed: ${result.error_description || result.error || response.status}`);
+    }
+    return result.access_token;
+  }
+
   const assertion = await signJwt(env);
   const body = new URLSearchParams({
     grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
@@ -204,7 +225,7 @@ async function getGoogleAccessToken(env) {
 
 async function uploadFileToDrive(env, id, file) {
   const token = await getGoogleAccessToken(env);
-  const boundary = `sheriff_drive_${crypto.randomUUID()}`;
+  const quotaProject = clean(env.GOOGLE_QUOTA_PROJECT || "personal-agent-1-496921");
   const name = `${id}-${Date.now()}-${safeFileName(file.name)}`;
   const metadata = {
     name,
@@ -212,30 +233,37 @@ async function uploadFileToDrive(env, id, file) {
     description: `Las Jaras Sheriff evidence for case ${id}; original file ${clean(file.name)}.`
   };
   const mediaType = file.type || "application/octet-stream";
-  const head = [
-    `--${boundary}`,
-    "Content-Type: application/json; charset=UTF-8",
-    "",
-    JSON.stringify(metadata),
-    `--${boundary}`,
-    `Content-Type: ${mediaType}`,
-    "",
-  ].join("\r\n");
-  const tail = `\r\n--${boundary}--`;
-  const body = new Blob([head, await file.arrayBuffer(), tail], {
-    type: `multipart/related; boundary=${boundary}`
-  });
-  const response = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,mimeType,size,webViewLink,parents", {
+  const session = await fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable&fields=id,name,mimeType,size,webViewLink,parents", {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${token}`,
-      "Content-Type": `multipart/related; boundary=${boundary}`
+      "Content-Type": "application/json; charset=UTF-8",
+      "X-Goog-User-Project": quotaProject,
+      "X-Upload-Content-Type": mediaType,
+      "X-Upload-Content-Length": String(file.size)
     },
-    body
+    body: JSON.stringify(metadata)
+  });
+  if (!session.ok) {
+    const body = await session.text();
+    throw new Error(`Google Drive upload session failed: ${body || session.status}`);
+  }
+  const location = session.headers.get("Location");
+  if (!location) throw new Error("Google Drive upload session did not return an upload URL");
+
+  const response = await fetch(location, {
+    method: "PUT",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": mediaType,
+      "X-Goog-User-Project": quotaProject,
+      "Content-Length": String(file.size)
+    },
+    body: await file.arrayBuffer()
   });
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(`Google Drive upload failed: ${result.error?.message || response.status}`);
+    throw new Error(`Google Drive upload failed: ${result.error?.message || JSON.stringify(result) || response.status}`);
   }
   return {
     name: clean(file.name),
@@ -252,9 +280,13 @@ async function uploadFileToDrive(env, id, file) {
 
 async function deleteDriveFile(env, fileId) {
   const token = await getGoogleAccessToken(env);
+  const quotaProject = clean(env.GOOGLE_QUOTA_PROJECT || "personal-agent-1-496921");
   const response = await fetch(`https://www.googleapis.com/drive/v3/files/${encodeURIComponent(fileId)}`, {
     method: "DELETE",
-    headers: { "Authorization": `Bearer ${token}` }
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "X-Goog-User-Project": quotaProject
+    }
   });
   if (!response.ok && response.status !== 404) {
     const body = await response.text();
@@ -506,14 +538,14 @@ export default {
     const parts = path.split("/").filter(Boolean);
 
     try {
-      if (request.method === "GET" && (path === "/" || path === "/health")) return healthCheck(env, request);
-      if (request.method === "GET" && path === "/cases") return listCases(env, request);
-      if (request.method === "GET" && parts[0] === "cases" && parts[1]) return getCase(env, request, parts[1]);
-      if (request.method === "POST" && path === "/cases") return upsertCase(env, request);
-      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "close") return closeCase(env, request, parts[1]);
-      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "updates") return createCaseUpdate(env, request, parts[1]);
-      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "evidence") return uploadCaseEvidence(env, request, parts[1]);
-      if (request.method === "PUT" && parts[0] === "cases" && parts[1]) return updateCase(env, request, parts[1]);
+      if (request.method === "GET" && (path === "/" || path === "/health")) return await healthCheck(env, request);
+      if (request.method === "GET" && path === "/cases") return await listCases(env, request);
+      if (request.method === "GET" && parts[0] === "cases" && parts[1]) return await getCase(env, request, parts[1]);
+      if (request.method === "POST" && path === "/cases") return await upsertCase(env, request);
+      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "close") return await closeCase(env, request, parts[1]);
+      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "updates") return await createCaseUpdate(env, request, parts[1]);
+      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "evidence") return await uploadCaseEvidence(env, request, parts[1]);
+      if (request.method === "PUT" && parts[0] === "cases" && parts[1]) return await updateCase(env, request, parts[1]);
       return jsonResponse(request, { error: "Not found" }, 404);
     } catch (error) {
       return jsonResponse(request, { error: error.message || "Sheriff API error" }, 500);
