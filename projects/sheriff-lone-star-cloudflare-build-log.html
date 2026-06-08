@@ -171,15 +171,15 @@
             </tr>
             <tr>
               <td>Media handling decision</td>
-              <td>R2 implementation ready</td>
+              <td>Complete</td>
               <td>20 to 40 minutes</td>
-              <td>The Worker evidence route now has an R2 bucket binding, private object path, upload limits, and health-check policy output. The remaining account-side step is creating <code>sheriff-lone-star-evidence</code> and deploying the bound Worker.</td>
+              <td>The Worker evidence route now has an R2 bucket binding, private object path, upload limits, and health-check policy output. Bucket <code>sheriff-lone-star-evidence</code> was created and deployed as <code>env.EVIDENCE</code>.</td>
             </tr>
             <tr>
               <td>Set mobile evidence upload limit</td>
-              <td>Recommended</td>
+              <td>Complete</td>
               <td>10 minutes</td>
-              <td>Use a conservative first-pass cap of 25 MB per file for direct mobile uploads. Larger videos should go through chat/manual evidence handling or a future R2 multipart/direct-upload flow.</td>
+              <td>Direct uploads are capped at 25 MB per file and 6 files per request. Larger videos should go through chat/manual evidence handling or a future R2 multipart/direct-upload flow.</td>
             </tr>
             <tr>
               <td>Add evidence lifecycle cleanup on closeout</td>
@@ -276,7 +276,8 @@
           <li><strong>Wrangler:</strong> Cloudflare Wrangler is available for local deployment and database setup. OAuth details are private operational metadata.</li>
           <li><strong>D1 status:</strong> <code>sheriff_lone_star_cases</code> exists, schema is applied, and the Worker has an active <code>env.DB</code> binding.</li>
           <li><strong>Admin closeout:</strong> the route exists, rejects close attempts without the admin token, and now includes lifecycle cleanup for case evidence.</li>
-          <li><strong>R2 status:</strong> the Worker is configured for bucket <code>sheriff-lone-star-evidence</code> with binding <code>EVIDENCE</code>. Local notes are in <code>workers/sheriff-lone-star-case-api/R2_EVIDENCE_SETUP.md</code>.</li>
+          <li><strong>R2 status:</strong> bucket <code>sheriff-lone-star-evidence</code> exists and the deployed Worker has active binding <code>env.EVIDENCE</code>. Local notes are in <code>workers/sheriff-lone-star-case-api/R2_EVIDENCE_SETUP.md</code>.</li>
+          <li><strong>R2 smoke test:</strong> created a disposable case, uploaded one image to <code>private/cases/{caseId}/evidence/...</code>, closed the case with the admin token, confirmed closeout deleted 1 R2 object and cleared 1 attachment record, then deleted the temporary D1 row.</li>
           <li><strong>Email status:</strong> <code>ADMIN_TOKEN</code> is the only Worker secret currently configured. Email updates need <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code> before they can be activated.</li>
         </ul>
       </section>
@@ -298,7 +299,6 @@ codex mcp login cloudflare</code></pre>
         <h2>Remaining Implementation Details</h2>
         <ul>
           <li>Build the password-protected Sheriff admin panel that collects the token once per session and calls <code>POST /cases/:id/close</code>.</li>
-          <li>Create the R2 bucket if it does not already exist, deploy the Worker with the <code>EVIDENCE</code> binding, and rerun the evidence upload smoke test.</li>
           <li>Add email provider secrets after account setup: <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code>.</li>
           <li>Run one email test from an admin case-update route before announcing notifications as live.</li>
           <li>Decide whether large video evidence should use a future R2 multipart/direct-upload flow or stay manual/chat-only.</li>
