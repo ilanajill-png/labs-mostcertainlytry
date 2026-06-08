@@ -153,9 +153,15 @@
             </tr>
             <tr>
               <td>Wire Sheriff page to API</td>
-              <td>Next</td>
+              <td>Complete</td>
               <td>25 to 45 minutes</td>
-              <td>Replace local-only load/save with API-first load, create, update, and close calls, keeping local fallback for offline failure.</td>
+              <td>The public Sheriff page now loads, creates, updates checklist state, and closes cases through the Worker API, with browser storage as fallback.</td>
+            </tr>
+            <tr>
+              <td>Add case confirmation receipt</td>
+              <td>Complete</td>
+              <td>15 minutes</td>
+              <td>Added a visible post-submit receipt with case ID, status, evidence state, update state, and a case-board link so mobile users can tell when a case actually filed.</td>
             </tr>
             <tr>
               <td>Test cross-device flow</td>
@@ -165,9 +171,9 @@
             </tr>
             <tr>
               <td>Media handling decision</td>
-              <td>Recommended</td>
+              <td>Endpoint prepared; account setup blocked</td>
               <td>20 to 40 minutes</td>
-              <td>Use R2 for durable production evidence files, with D1 storing metadata and R2 object keys. Keep chat upload as the path for actual visual investigation so Sheriff only claims to see media that was attached in chat.</td>
+              <td>The Worker now has an evidence upload route and health check for R2 status, but Wrangler reports that R2 must be enabled in the Cloudflare dashboard before a bucket can be created. Until then, the form records file metadata and the receipt says R2 is not active.</td>
             </tr>
             <tr>
               <td>Set mobile evidence upload limit</td>
@@ -180,6 +186,12 @@
               <td>Accepted</td>
               <td>20 to 35 minutes</td>
               <td>When Serafina marks an event as escalation-worthy, the Serafina form should create the Sheriff case through the same API instead of only handing off browser-local context.</td>
+            </tr>
+            <tr>
+              <td>Email update provider</td>
+              <td>Blocked by provider secrets</td>
+              <td>15 to 30 minutes after provider setup</td>
+              <td>The Worker update route can send email through Resend, but the only active Worker secret is <code>ADMIN_TOKEN</code>. Email updates remain disabled in the public form until <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code> are configured.</td>
             </tr>
           </tbody>
         </table>
@@ -195,6 +207,7 @@
           <li><code>PUT /cases/:id</code> updates status, checklist state, closeout data, or other case fields.</li>
           <li><code>POST /cases/:id/close</code> closes one case and requires <code>X-Sheriff-Admin-Token</code>.</li>
           <li><code>POST /cases/:id/updates</code> records an admin case update and can send an email once provider secrets are configured.</li>
+          <li><code>POST /cases/:id/evidence</code> is prepared for R2 evidence uploads and returns a clear configuration error until R2 is enabled and bound.</li>
           <li>Changing a case from open to closed requires <code>X-Sheriff-Admin-Token</code> and the Worker secret <code>ADMIN_TOKEN</code>.</li>
           <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
         </ul>
@@ -225,6 +238,8 @@
           <li><strong>Wrangler:</strong> Cloudflare Wrangler is available for local deployment and database setup. OAuth details are private operational metadata.</li>
           <li><strong>D1 status:</strong> <code>sheriff_lone_star_cases</code> exists, schema is applied, and the Worker has an active <code>env.DB</code> binding.</li>
           <li><strong>Admin closeout:</strong> the route exists and rejects close attempts without the admin token.</li>
+          <li><strong>R2 status:</strong> Wrangler returned Cloudflare API code <code>10042</code>: R2 must be enabled through the Cloudflare dashboard before buckets can be listed or created.</li>
+          <li><strong>Email status:</strong> <code>ADMIN_TOKEN</code> is the only Worker secret currently configured. Email updates need <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code> before they can be activated.</li>
         </ul>
       </section>
 
@@ -244,8 +259,8 @@ codex mcp login cloudflare</code></pre>
       <section class="paper-section">
         <h2>Remaining Implementation Details</h2>
         <ul>
-          <li>Wire the public Sheriff page to load, create, update, and close cases through the Worker API while keeping browser-local fallback.</li>
           <li>Build the password-protected Sheriff admin panel that collects the token once per session and calls <code>POST /cases/:id/close</code>.</li>
+          <li>Enable R2 in the Cloudflare dashboard, create the Sheriff evidence bucket, add the R2 binding, and rerun the evidence upload smoke test.</li>
           <li>Add email provider secrets after account setup: <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code>.</li>
           <li>Run one email test from an admin case-update route before announcing notifications as live.</li>
           <li>Decide whether large video evidence should use a future R2 multipart/direct-upload flow or stay manual/chat-only.</li>

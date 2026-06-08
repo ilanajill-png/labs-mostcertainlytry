@@ -104,6 +104,16 @@ function databaseStatus(env) {
   };
 }
 
+function evidenceStatus(env) {
+  return {
+    r2Bound: Boolean(env.EVIDENCE)
+  };
+}
+
+function safeFileName(name) {
+  return clean(name).replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "evidence";
+}
+
 async function sendEmail(env, issue, message) {
   if (!providerStatus(env).email) return { sent: false, reason: "email provider not configured" };
   const response = await fetch("https://api.resend.com/emails", {
@@ -149,6 +159,7 @@ async function healthCheck(env, request) {
     ok: true,
     service: "sheriff-lone-star-case-api",
     database: databaseStatus(env),
+    evidence: evidenceStatus(env),
     providers: providerStatus(env)
   });
 }
@@ -241,6 +252,58 @@ async function createCaseUpdate(env, request, id) {
   return jsonResponse(request, { case: issue, update: entry, providers: providerStatus(env) });
 }
 
+async function uploadCaseEvidence(env, request, id) {
+  if (!env.EVIDENCE) {
+    return jsonResponse(request, { error: "R2 evidence storage is not configured" }, 503);
+  }
+  const existing = await env.DB.prepare("SELECT data FROM cases WHERE id = ?").bind(id).first();
+  if (!existing) return jsonResponse(request, { error: "Case not found" }, 404);
+
+  const form = await request.formData();
+  const files = form.getAll("mediaFiles").filter((file) => file && typeof file === "object" && "arrayBuffer" in file);
+  if (!files.length) return jsonResponse(request, { error: "No evidence files were provided" }, 400);
+
+  const maxBytes = 25 * 1024 * 1024;
+  const current = JSON.parse(existing.data);
+  const uploaded = [];
+  for (const file of files) {
+    if (file.size > maxBytes) {
+      return jsonResponse(request, { error: `${file.name} is over the 25 MB mobile upload limit` }, 413);
+    }
+    const key = `cases/${id}/evidence/${Date.now()}-${safeFileName(file.name)}`;
+    await env.EVIDENCE.put(key, await file.arrayBuffer(), {
+      httpMetadata: { contentType: file.type || "application/octet-stream" },
+      customMetadata: {
+        caseId: id,
+        originalName: clean(file.name),
+        uploadedAt: new Date().toISOString()
+      }
+    });
+    uploaded.push({
+      name: clean(file.name),
+      type: file.type || "application/octet-stream",
+      sizeBytes: file.size,
+      size: `${Math.round(file.size / 1024)} KB`,
+      r2Key: key,
+      storedIn: "Cloudflare R2",
+      uploadedAt: new Date().toISOString()
+    });
+  }
+
+  const existingAttachments = Array.isArray(current.mediaAttachments) ? current.mediaAttachments : [];
+  const issue = normalizeCase({
+    ...current,
+    id,
+    mediaAttachments: [...existingAttachments, ...uploaded]
+  });
+  await env.DB.prepare(
+    "UPDATE cases SET status = ?, updated_at = ?, data = ? WHERE id = ?"
+  )
+    .bind(issue.status, issue.updatedAt, JSON.stringify(issue), id)
+    .run();
+  return jsonResponse(request, { case: redactCase(issue, request, env), evidence: uploaded });
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: corsHeaders(request) });
@@ -256,6 +319,7 @@ export default {
       if (request.method === "POST" && path === "/cases") return upsertCase(env, request);
       if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "close") return closeCase(env, request, parts[1]);
       if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "updates") return createCaseUpdate(env, request, parts[1]);
+      if (request.method === "POST" && parts[0] === "cases" && parts[1] && parts[2] === "evidence") return uploadCaseEvidence(env, request, parts[1]);
       if (request.method === "PUT" && parts[0] === "cases" && parts[1]) return updateCase(env, request, parts[1]);
       return jsonResponse(request, { error: "Not found" }, 404);
     } catch (error) {

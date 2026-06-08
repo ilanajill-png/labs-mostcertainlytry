@@ -365,6 +365,31 @@
       background: #eef7f1;
     }
 
+    .receipt {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(0, 71, 171, .35);
+      border-radius: 8px;
+      background: #eef5ff;
+    }
+
+    .receipt[hidden] { display: none; }
+
+    .receipt dl {
+      display: grid;
+      grid-template-columns: max-content minmax(0, 1fr);
+      gap: 8px 12px;
+      margin: 0;
+    }
+
+    .receipt dt {
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .receipt dd { margin: 0; }
+
     .handoff {
       display: grid;
       gap: 10px;
@@ -644,13 +669,13 @@
 
         <fieldset>
           <legend>Case updates</legend>
-          <label class="check"><input id="receive-updates" type="checkbox" name="receiveUpdates" value="yes"> Send me updates about this Sheriff case</label>
+          <label class="check"><input id="receive-updates" type="checkbox" name="receiveUpdates" value="yes" disabled> Send me updates about this Sheriff case</label>
           <label for="update-contact">
             Email address
-            <input id="update-contact" name="updateContact" type="email" autocomplete="email" placeholder="Example: name@example.com">
+            <input id="update-contact" name="updateContact" type="email" autocomplete="email" placeholder="Example: name@example.com" disabled>
           </label>
-          <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes"> I agree to receive email updates about this Las Jaras case at the email address I provide. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
-          <p class="hint">Optional. Contact details are for case updates only and should be redacted from public case views once the shared Worker backend is live.</p>
+          <label class="check"><input id="update-consent" type="checkbox" name="updateConsent" value="yes" disabled> I agree to receive email updates about this Las Jaras case at the email address I provide. I can ask to stop updates at any time. This is not monitored for emergencies.</label>
+          <p class="hint">Optional. Email updates unlock after the sending provider is configured. Until then, the case still files to the shared Sheriff board.</p>
         </fieldset>
 
         <fieldset>
@@ -671,6 +696,24 @@
           <button type="button" id="download-cases">Download Cases</button>
           <button class="danger" type="button" id="clear-cases">Clear Browser Cases</button>
         </div>
+        <section class="receipt" id="case-receipt" hidden aria-labelledby="case-receipt-title" tabindex="-1">
+          <h2 id="case-receipt-title">Case Filed With Sheriff Lone Star</h2>
+          <p id="case-receipt-message">The shared case board received this case.</p>
+          <dl>
+            <dt>Case ID</dt>
+            <dd id="case-receipt-id"></dd>
+            <dt>Status</dt>
+            <dd id="case-receipt-status"></dd>
+            <dt>Evidence</dt>
+            <dd id="case-receipt-evidence"></dd>
+            <dt>Updates</dt>
+            <dd id="case-receipt-updates"></dd>
+          </dl>
+          <div class="actions">
+            <a class="button primary" href="#cases">View Case Board</a>
+            <button type="button" id="copy-receipt-link">Copy Case Link</button>
+          </div>
+        </section>
       </form>
 
       <aside class="panel" aria-labelledby="desk-title">
@@ -748,6 +791,13 @@
     const receiveUpdates = document.querySelector("#receive-updates");
     const updateContact = document.querySelector("#update-contact");
     const updateConsent = document.querySelector("#update-consent");
+    const caseReceipt = document.querySelector("#case-receipt");
+    const caseReceiptMessage = document.querySelector("#case-receipt-message");
+    const caseReceiptId = document.querySelector("#case-receipt-id");
+    const caseReceiptStatus = document.querySelector("#case-receipt-status");
+    const caseReceiptEvidence = document.querySelector("#case-receipt-evidence");
+    const caseReceiptUpdates = document.querySelector("#case-receipt-updates");
+    const copyReceiptLink = document.querySelector("#copy-receipt-link");
     const storageKey = "las-jaras-sheriff-cases-v1";
     const adminTokenSessionKey = "las-jaras-sheriff-admin-token-v1";
     const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
@@ -758,6 +808,11 @@
     let pendingSerafinaHandoff = null;
     let handoffMediaPreviewUrls = [];
     let mediaPreviewUrls = [];
+    let latestReceiptCase = null;
+    let operationalStatus = {
+      providers: { email: false },
+      evidence: { r2Bound: false }
+    };
 
     function clean(value) {
       return String(value || "").trim();
@@ -851,6 +906,61 @@
       const cleanToken = clean(token);
       saveAdminToken(cleanToken);
       return cleanToken;
+    }
+
+    async function loadOperationalStatus() {
+      try {
+        operationalStatus = await apiJson("/health", { method: "GET" });
+      } catch {
+        operationalStatus = {
+          providers: { email: false },
+          evidence: { r2Bound: false }
+        };
+      }
+      syncOptionalFeatureControls();
+      return operationalStatus;
+    }
+
+    function syncOptionalFeatureControls() {
+      const emailReady = Boolean(operationalStatus.providers?.email);
+      receiveUpdates.disabled = !emailReady;
+      updateContact.disabled = !emailReady;
+      updateConsent.disabled = !emailReady;
+      if (!emailReady) {
+        receiveUpdates.checked = false;
+        updateContact.value = "";
+        updateConsent.checked = false;
+        updateContact.setCustomValidity("");
+        updateConsent.setCustomValidity("");
+        sharedStatus.textContent = "Shared Worker case board standing by. Email updates are not active yet, so that option is temporarily disabled.";
+      }
+    }
+
+    function receiptLinkFor(issue) {
+      const base = `${window.location.origin}${window.location.pathname}`;
+      return `${base}#case-${encodeURIComponent(issue.id)}`;
+    }
+
+    function showCaseReceipt(issue, result = {}, evidenceResult = null) {
+      latestReceiptCase = issue;
+      const evidenceCount = issue.mediaAttachments?.length || 0;
+      const evidenceText = evidenceResult?.ok
+        ? `${evidenceResult.count} file${evidenceResult.count === 1 ? "" : "s"} uploaded to evidence storage.`
+        : evidenceCount
+          ? `${evidenceCount} file${evidenceCount === 1 ? "" : "s"} recorded as metadata. ${evidenceResult?.message || "R2 evidence storage is not active yet."}`
+          : "No evidence files selected.";
+      const updateText = issue.notificationConsent?.optedIn
+        ? "Email updates requested."
+        : operationalStatus.providers?.email
+          ? "Email updates not requested."
+          : "Email updates are not active yet.";
+      caseReceipt.hidden = false;
+      caseReceiptMessage.textContent = result.message || "The shared case board received this case.";
+      caseReceiptId.textContent = issue.id;
+      caseReceiptStatus.textContent = issue.status || "Open";
+      caseReceiptEvidence.textContent = evidenceText;
+      caseReceiptUpdates.textContent = updateText;
+      caseReceipt.focus({ preventScroll: false });
     }
 
     function selectedValues(name) {
@@ -1198,6 +1308,42 @@
       }
     }
 
+    async function uploadEvidenceForCase(issue) {
+      const files = [...mediaFiles.files];
+      if (!files.length) return { ok: true, count: 0, message: "No evidence files selected." };
+      if (!operationalStatus.evidence?.r2Bound) {
+        return {
+          ok: false,
+          count: 0,
+          message: "R2 evidence storage is not enabled yet; file names and sizes were recorded with the case."
+        };
+      }
+      const payload = new FormData();
+      for (const file of files) payload.append("mediaFiles", file);
+      try {
+        const response = await fetch(`${apiEndpoint}/cases/${encodeURIComponent(issue.id)}/evidence`, {
+          method: "POST",
+          body: payload,
+          headers: { "Accept": "application/json" }
+        });
+        const text = await response.text();
+        const body = text ? JSON.parse(text) : {};
+        if (!response.ok) throw new Error(body.error || `Evidence upload returned ${response.status}`);
+        return {
+          ok: true,
+          count: body.evidence?.length || files.length,
+          issue: body.case ? normalizeImportedCase(body.case) : issue,
+          message: "Evidence uploaded to R2."
+        };
+      } catch (error) {
+        return {
+          ok: false,
+          count: 0,
+          message: `Evidence files were not uploaded; metadata remains on the case. ${error.message}`
+        };
+      }
+    }
+
     function normalizeImportedCase(data) {
       const issue = {
         id: clean(data.id) || `sheriff-case-import-${Date.now()}`,
@@ -1539,7 +1685,11 @@
 
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      if (!validateNotificationConsent()) return;
+      caseReceipt.hidden = true;
+      if (!validateNotificationConsent()) {
+        sharedStatus.textContent = "Finish the email update fields or uncheck updates before opening the case.";
+        return;
+      }
       if (!form.reportValidity()) return;
       const issue = buildCase();
       sharedStatus.textContent = "Opening case on the shared Worker board...";
@@ -1547,12 +1697,19 @@
       renderSheriffRead(issue);
       renderCases(cases);
       const sharedResult = await sendCaseToSharedIntake(issue);
-      const savedIssue = sharedResult.issue || issue;
+      let savedIssue = sharedResult.issue || issue;
+      let evidenceResult = null;
+      if (sharedResult.ok) {
+        sharedStatus.textContent = "Case filed. Checking evidence storage...";
+        evidenceResult = await uploadEvidenceForCase(savedIssue);
+        if (evidenceResult.issue) savedIssue = evidenceResult.issue;
+      }
       cases = localMergeCase(savedIssue);
-      sharedStatus.textContent = sharedResult.message;
+      sharedStatus.textContent = `${sharedResult.message}${evidenceResult?.message ? ` ${evidenceResult.message}` : ""}`;
       renderSheriffRead(savedIssue);
       renderCases(cases);
       if (sharedResult.ok) await loadSharedCaseBoard({ quiet: true });
+      showCaseReceipt(savedIssue, sharedResult, evidenceResult);
     });
 
     mediaFiles.addEventListener("change", renderMediaPreview);
@@ -1563,6 +1720,15 @@
       copyHandoff.textContent = "Investigation Prompt Copied";
       setTimeout(() => {
         copyHandoff.textContent = "Copy Investigation Prompt";
+      }, 1800);
+    });
+
+    copyReceiptLink.addEventListener("click", async () => {
+      if (!latestReceiptCase) return;
+      await navigator.clipboard.writeText(receiptLinkFor(latestReceiptCase));
+      copyReceiptLink.textContent = "Case Link Copied";
+      setTimeout(() => {
+        copyReceiptLink.textContent = "Copy Case Link";
       }, 1800);
     });
 
@@ -1628,6 +1794,7 @@
     });
 
     (async () => {
+      await loadOperationalStatus();
       const importedFromUrl = importCaseFromUrl() || await importCaseFileFromUrl();
       await applySerafinaHandoff();
       if (!pendingSerafinaHandoff && !importedFromUrl) {
