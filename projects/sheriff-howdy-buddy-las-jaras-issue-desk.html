@@ -1820,10 +1820,11 @@
       if (!fileList.length) return { ok: true, count: 0, message: "No admin evidence handoff needed." };
       const stage = context.stage || "case evidence";
       const names = fileList.map((file) => file.name).join(", ");
+      const storageMessage = context.evidenceResult?.message ? `${context.evidenceResult.message} ` : "";
       return {
-        ok: true,
+        ok: context.evidenceResult ? Boolean(context.evidenceResult.ok) : true,
         count: fileList.length,
-        message: `${fileList.length} ${stage.toLowerCase()} file${fileList.length === 1 ? "" : "s"} recorded as metadata (${names}). Actual image review now uses the direct Gmail/chat admin workflow.`
+        message: `${storageMessage}${fileList.length} ${stage.toLowerCase()} file${fileList.length === 1 ? "" : "s"} recorded (${names}).`
       };
     }
 
@@ -2027,7 +2028,8 @@
         const evidenceResult = await uploadEvidenceForCase(result.issue, input?.files || []);
         const emailResult = adminEvidenceHandoffResult(input?.files || [], {
           stage: "Sheriff follow-up",
-          followUpId: response.id
+          followUpId: response.id,
+          evidenceResult
         });
         const loggedIssue = appendEvidenceEmailLog(evidenceResult.issue || result.issue, emailResult, {
           stage: "Sheriff follow-up",
@@ -2135,7 +2137,8 @@
         if (evidenceResult.issue) savedIssue = evidenceResult.issue;
       }
       const emailEvidenceResult = adminEvidenceHandoffResult(mediaFiles.files, {
-        stage: "Initial Sheriff case evidence"
+        stage: "Initial Sheriff case evidence",
+        evidenceResult
       });
       if (emailEvidenceResult.count || !emailEvidenceResult.ok) {
         savedIssue = appendEvidenceEmailLog(savedIssue, emailEvidenceResult, {
