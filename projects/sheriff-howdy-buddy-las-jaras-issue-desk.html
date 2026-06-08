@@ -1558,7 +1558,7 @@
           finish({
             ok: true,
             count: attached,
-            message: `${attached} evidence file${attached === 1 ? "" : "s"} handed to email fallback. Check ilanajill@gmail.com for the attachment.`
+            message: `${attached} evidence file${attached === 1 ? "" : "s"} handed to email fallback; mailbox delivery is not verified yet.`
           });
         }, { once: true });
 
@@ -1579,7 +1579,7 @@
             ok: attached > 0,
             count: attached,
             message: attached > 0
-              ? `${attached} evidence file${attached === 1 ? "" : "s"} handed to email fallback. Check ilanajill@gmail.com for the attachment.`
+              ? `${attached} evidence file${attached === 1 ? "" : "s"} handed to email fallback; mailbox delivery is not verified yet.`
               : `Evidence email copy failed; metadata remains on the case. ${originalError?.message || "Browser could not attach the selected file."}`
           });
         }, 8000);
@@ -1807,7 +1807,7 @@
       if (!log.length) return "No evidence email copy sent yet.";
       const latest = log[log.length - 1];
       return latest.ok
-        ? `Latest evidence email copy sent (${latest.count} file${latest.count === 1 ? "" : "s"}).`
+        ? `Latest evidence email handoff attempted (${latest.count} file${latest.count === 1 ? "" : "s"}); check Gmail to verify delivery.`
         : `Latest evidence email copy failed: ${latest.message}`;
     }
 
@@ -2003,6 +2003,9 @@
         };
         issue.updatedAt = now;
         const result = await saveCaseUpdate(issue);
+        const savedMessage = `Follow-up saved to Sheriff board. ID: ${response.id}. ${files.length} file${files.length === 1 ? "" : "s"} recorded.`;
+        sharedStatus.textContent = `${savedMessage} Starting evidence email handoff...`;
+        if (status) status.textContent = `${savedMessage} Starting evidence email handoff...`;
         const emailResult = await sendEvidenceEmailCopy(result.issue, input?.files || [], {
           stage: "Sheriff follow-up",
           followUpId: response.id,
@@ -2014,9 +2017,11 @@
           followUpId: response.id
         });
         const loggedResult = await saveCaseUpdate(loggedIssue);
+        const confirmation = `${savedMessage} ${emailResult.message}`;
+        sharedStatus.textContent = confirmation;
+        if (status) status.textContent = confirmation;
         renderCases(loggedResult.cases);
         renderSheriffRead(loggedResult.issue);
-        const confirmation = `Follow-up received. ID: ${response.id}. ${files.length} file${files.length === 1 ? "" : "s"} recorded. ${emailResult.message}`;
         sharedStatus.textContent = confirmation;
         formElement.reset();
       } catch (error) {
