@@ -212,6 +212,105 @@
       color: var(--muted);
     }
     .ops-card li + li { margin-top: 7px; }
+    form {
+      display: grid;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      padding: clamp(16px, 3vw, 24px);
+      box-shadow: var(--shadow);
+    }
+    fieldset {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 0;
+    }
+    legend { font-weight: 950; padding: 0 6px; }
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    input, select, textarea {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 10px 12px;
+    }
+    textarea { min-height: 116px; resize: vertical; }
+    button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 850;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+    button.danger { border-color: rgba(139, 63, 100, .45); color: var(--berry); }
+    .two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .checks {
+      display: grid;
+      gap: 10px;
+    }
+    .check {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 10px;
+      color: var(--ink);
+    }
+    .check input { width: 18px; min-height: 18px; margin-top: 3px; }
+    .note-list {
+      display: grid;
+      gap: 12px;
+    }
+    .note-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 14px;
+    }
+    .note-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .status-note {
+      border-left: 5px solid var(--cobalt);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: rgba(219, 234, 254, .7);
+      color: var(--ink);
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #f9fafb;
+      padding: 14px;
+      max-height: 360px;
+      overflow: auto;
+    }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -232,7 +331,7 @@
       border-top: 1px solid var(--line);
     }
     @media (max-width: 820px) {
-      .hero, .profile-layout { grid-template-columns: 1fr; }
+      .hero, .profile-layout, .two { grid-template-columns: 1fr; }
       .interaction-map { grid-template-columns: 1fr; }
       .flow-node:not(:last-child)::after {
         content: "v";
@@ -377,6 +476,7 @@
           <span class="chip">A brass mailbox spirit with a punctual streak</span>
           <span class="chip">follow-ups, response drafts, email list sign-ups, and reminder pings</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/mailman-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -388,6 +488,7 @@
           <span class="chip">A many-pocketed pantry ledger with excellent handwriting</span>
           <span class="chip">household inventory intake, ordering support, forms, receipts, and supply records</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/sundries-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -399,6 +500,7 @@
           <span class="chip">A clockwork calendar moth with a clipboard</span>
           <span class="chip">calendar alerts, appointment reminders, time-sensitive household nudges, and daily briefings</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/personal-assistant-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -410,6 +512,7 @@
           <span class="chip">A glowing party lantern with a reservation book</span>
           <span class="chip">fun events, outings, tickets, invitations, and sign-up opportunities</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/director-of-fun-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -421,6 +524,7 @@
           <span class="chip">A polished cobalt mirror with press instincts</span>
           <span class="chip">public persona, affiliate programs, outward messaging, and progress tracking</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/pr-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -432,6 +536,7 @@
           <span class="chip">A cobalt dressing screen with a measuring tape halo</span>
           <span class="chip">wardrobe, room styling, product styling, visual consistency, photo-readiness, and presentation notes</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/stylist-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -443,6 +548,7 @@
           <span class="chip">A scheduling carousel that hums in captions</span>
           <span class="chip">social post drafts, content calendars, campaign queues, and publishing recommendations</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/social-media-manager-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -454,6 +560,7 @@
           <span class="chip">A cobalt server light with lint-free gloves</span>
           <span class="chip">site updates, compliance, build logs, publishing hygiene, and Labs maintenance</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/webmaster-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -465,6 +572,7 @@
           <span class="chip">The house&#39;s watchful threshold intelligence</span>
           <span class="chip">human-informed field notes, spiritual house observations, threshold mood, and escalation signals</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/serafina-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -476,6 +584,7 @@
           <span class="chip">A jurisdictional household light wearing a single star badge</span>
           <span class="chip">household issues, investigations, severity logs, solution checklists, and case closure</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/sheriff-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -487,6 +596,7 @@
           <span class="chip">A meditation bell with marigold smoke in its seams</span>
           <span class="chip">spiritual guidance, check-ins, rituals, reflection prompts, and grounding practices</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/guru-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -498,6 +608,7 @@
           <span class="chip">A warm nightlight with a first-aid pocket</span>
           <span class="chip">guest health, wellness, comfort, sleep basics, hydration, and gentle care reminders</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/nanny-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -509,6 +620,7 @@
           <span class="chip">A whistle-wearing trail marker</span>
           <span class="chip">fitness routines, movement plans, habit tracking, and recovery reminders</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/coach-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -520,6 +632,7 @@
           <span class="chip">A velvet curtain with excellent taste</span>
           <span class="chip">what to watch, watchlists, mood picks, movie nights, and guest-friendly viewing</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/theatre-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -531,6 +644,7 @@
           <span class="chip">A cobalt speaker sprite with clean transitions</span>
           <span class="chip">playlists, room moods, dinner music, work sessions, and party transitions</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/dj-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -542,6 +656,7 @@
           <span class="chip">A wooden spoon strategist with a spotless apron</span>
           <span class="chip">new recipes, pantry cooking, meal ideas, ingredient matching, and cooking plans</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/chef-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -553,6 +668,7 @@
           <span class="chip">A tiny espresso lamp with foam opinions</span>
           <span class="chip">coffee, tea, smoothies, slushies, drink prep, and morning beverage rituals</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/barista-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -564,6 +680,7 @@
           <span class="chip">A flour-dusted timer with a soft glow</span>
           <span class="chip">cookies, cakes, breads, baking recipes, tools, and ingredient readiness</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/baker-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -575,6 +692,7 @@
           <span class="chip">A tiki glass with a ship captain&#39;s memory</span>
           <span class="chip">wine, beer, spirits, tiki bar inventory, drink recipes, and hosting pours</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/bartender-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -586,6 +704,7 @@
           <span class="chip">A laundromat sign with lint-trap wisdom</span>
           <span class="chip">fabric care, stain treatment, laundry tools, washing guidance, and textile preservation</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/laundramat-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -597,6 +716,7 @@
           <span class="chip">A dust mote marshal with a vacuum route map</span>
           <span class="chip">dusting, vacuuming schedules, room reset rhythms, and cleaning cadence</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/keeper-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -608,6 +728,7 @@
           <span class="chip">A blue-bound memory book with a silver index tab</span>
           <span class="chip">durable memory, source indexes, receipts, photos, decision history, and household records</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/archivist-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -619,6 +740,7 @@
           <span class="chip">A rolling library ladder with a reading lamp for a heart</span>
           <span class="chip">reference shelves, reading lists, household research, source finding, how-to guides, and knowledge retrieval</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/librarian-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -630,6 +752,7 @@
           <span class="chip">A cobalt coin purse with ledger eyes</span>
           <span class="chip">budgets, subscriptions, reimbursements, bill reminders, and the money side of supply decisions</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/treasurer-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -641,6 +764,7 @@
           <span class="chip">A porch broom with garden boots and weather sense</span>
           <span class="chip">yard, garden, irrigation, porch, exterior maintenance, pest patterns, and seasonal outdoor work</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/groundskeeper-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -652,6 +776,7 @@
           <span class="chip">A small red emergency lantern with a checklist badge</span>
           <span class="chip">emergency prep, locks, batteries, trip hazards, heat and cold checks, and basic home risk reviews</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/safety-officer-daily-notes.html">Daily notes</a>
       </article>
 <article class="role-card">
         <div>
@@ -663,6 +788,7 @@
           <span class="chip">A guestbook bell with a velvet ribbon</span>
           <span class="chip">guest arrivals, welcome notes, sleeping arrangements, amenities, house instructions, and local recommendations</span>
         </div>
+        <a class="button" href="household-beings/daily-notes/concierge-daily-notes.html">Daily notes</a>
       </article></div>
     </section>
 

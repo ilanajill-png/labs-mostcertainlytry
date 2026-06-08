@@ -2,7 +2,9 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const outDir = join(process.cwd(), "projects", "household-beings");
+const notesDir = join(outDir, "daily-notes");
 mkdirSync(outDir, { recursive: true });
+mkdirSync(notesDir, { recursive: true });
 
 const roles = [
   {
@@ -550,6 +552,105 @@ const pageCss = `
       color: var(--muted);
     }
     .ops-card li + li { margin-top: 7px; }
+    form {
+      display: grid;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      padding: clamp(16px, 3vw, 24px);
+      box-shadow: var(--shadow);
+    }
+    fieldset {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 0;
+    }
+    legend { font-weight: 950; padding: 0 6px; }
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    input, select, textarea {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 10px 12px;
+    }
+    textarea { min-height: 116px; resize: vertical; }
+    button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 850;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+    button.danger { border-color: rgba(139, 63, 100, .45); color: var(--berry); }
+    .two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .checks {
+      display: grid;
+      gap: 10px;
+    }
+    .check {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 10px;
+      color: var(--ink);
+    }
+    .check input { width: 18px; min-height: 18px; margin-top: 3px; }
+    .note-list {
+      display: grid;
+      gap: 12px;
+    }
+    .note-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 14px;
+    }
+    .note-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .status-note {
+      border-left: 5px solid var(--cobalt);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: rgba(219, 234, 254, .7);
+      color: var(--ink);
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #f9fafb;
+      padding: 14px;
+      max-height: 360px;
+      overflow: auto;
+    }
     .recommended {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -570,7 +671,7 @@ const pageCss = `
       border-top: 1px solid var(--line);
     }
     @media (max-width: 820px) {
-      .hero, .profile-layout { grid-template-columns: 1fr; }
+      .hero, .profile-layout, .two { grid-template-columns: 1fr; }
       .interaction-map { grid-template-columns: 1fr; }
       .flow-node:not(:last-child)::after {
         content: "v";
@@ -633,6 +734,7 @@ const indexCards = roles.map((role) => {
           <span class="chip">${esc(role.being)}</span>
           <span class="chip">${esc(role.oversees)}</span>
         </div>
+        <a class="button" href="household-beings/${dailyNotesPath(role)}">Daily notes</a>
       </article>`;
 }).join("\n");
 
@@ -913,6 +1015,262 @@ function renderOperatingNotes(role) {
     </section>`;
 }
 
+function dailyNotesPath(role) {
+  return `daily-notes/${slugify(role.title)}-daily-notes.html`;
+}
+
+function dailyNotesPage(role) {
+  const slug = slugify(role.title);
+  const payload = {
+    title: role.title,
+    name: role.name,
+    tier: role.tier,
+    tasks: roleOps(role, "daily"),
+    force: roleOps(role, "force"),
+    tools: roleOps(role, "tools"),
+    wishlist: roleOps(role, "wishlist")
+  };
+  const taskOptions = payload.tasks.map((task, index) => `<option value="${index}">${esc(task)}</option>`).join("");
+  const taskChecks = payload.tasks.map((task, index) => `<label class="check"><input type="checkbox" name="taskDone" value="${index}"> ${esc(task)}</label>`).join("\n");
+  const body = `<main>
+    <section class="hero">
+      <div>
+        <p class="kicker">${esc(role.tier)} daily workflow</p>
+        <h1>${esc(role.title)} Daily Notes</h1>
+        <p class="lede">Record what ${esc(role.name)} actively did today, what result came out of it, and what should happen next. These notes save in this browser until the shared backend exists.</p>
+        <div class="toolbar">
+          <a class="button primary" href="../${slug}.html">Back to ${esc(role.title)}</a>
+          <a class="button" href="../../household-beings.html">Directory</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="label">Active-work rule</p>
+        <p>Daily tasks are actionable workflows. If a task cannot be completed yet, mark it blocked and record the missing tool, permission, or data.</p>
+      </aside>
+    </section>
+
+    <section class="section">
+      <form id="daily-note-form">
+        <p class="status-note" id="form-status" role="status" aria-live="polite">Ready to record a ${esc(role.title)} workflow note.</p>
+        <fieldset>
+          <legend>Workflow</legend>
+          <div class="two">
+            <label for="note-date">
+              Date
+              <input id="note-date" name="noteDate" type="date" required>
+            </label>
+            <label for="operator">
+              Who ran it?
+              <input id="operator" name="operator" autocomplete="name" placeholder="Example: Buddy, Howdy Partner, or ${esc(role.name)}">
+            </label>
+          </div>
+          <div class="two">
+            <label for="primary-task">
+              Primary task
+              <select id="primary-task" name="primaryTask" required>
+                <option value="">Choose a workflow</option>
+                ${taskOptions}
+              </select>
+            </label>
+            <label for="status">
+              Status
+              <select id="status" name="status" required>
+                <option value="done">Done</option>
+                <option value="drafted">Drafted for review</option>
+                <option value="blocked">Blocked</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="escalated">Escalated</option>
+                <option value="not-needed">Not needed today</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Task checklist</legend>
+          <div class="checks">${taskChecks}</div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Result</legend>
+          <label for="result">
+            What happened?
+            <textarea id="result" name="result" required maxlength="1600" placeholder="Record the active result: draft created, note reviewed, case escalated, supplies checked, recommendation prepared, or blocker found."></textarea>
+          </label>
+          <div class="two">
+            <label for="next-action">
+              Next action
+              <textarea id="next-action" name="nextAction" maxlength="800" placeholder="What should happen next?"></textarea>
+            </label>
+            <label for="blocker">
+              Missing tool, permission, or data
+              <textarea id="blocker" name="blocker" maxlength="800" placeholder="Use this if the workflow could not be finished."></textarea>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="toolbar">
+          <button class="primary" type="submit">Save Daily Note</button>
+          <button type="button" id="copy-latest">Copy Latest</button>
+          <button type="button" id="download-json">Download JSON</button>
+          <button class="danger" type="button" id="clear-notes">Clear Browser Notes</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="section" aria-labelledby="records-title">
+      <h2 id="records-title">Saved Notes</h2>
+      <div class="note-list" id="note-list" aria-live="polite"></div>
+      <h2>Latest JSON</h2>
+      <pre id="json-output">{}</pre>
+    </section>
+  </main>
+  <footer>
+    <span>${esc(role.title)} daily workflow notes</span>
+    <a href="../${slug}.html">${esc(role.title)} profile</a>
+  </footer>
+  <script>
+    const roleConfig = ${JSON.stringify(payload, null, 4)};
+    const storageKey = "las-jaras-daily-notes-" + ${JSON.stringify(slug)} + "-v1";
+    const form = document.querySelector("#daily-note-form");
+    const noteList = document.querySelector("#note-list");
+    const jsonOutput = document.querySelector("#json-output");
+    const formStatus = document.querySelector("#form-status");
+    const copyLatest = document.querySelector("#copy-latest");
+    const downloadJson = document.querySelector("#download-json");
+    const clearNotes = document.querySelector("#clear-notes");
+
+    document.querySelector("#note-date").value = new Date().toISOString().slice(0, 10);
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function loadNotes() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveNotes(notes) {
+      localStorage.setItem(storageKey, JSON.stringify(notes));
+    }
+
+    function checkedTaskIndexes() {
+      return [...form.querySelectorAll('input[name="taskDone"]:checked')].map((item) => Number(item.value));
+    }
+
+    function noteFromForm() {
+      const data = new FormData(form);
+      const primaryIndex = Number(data.get("primaryTask"));
+      const completedIndexes = checkedTaskIndexes();
+      return {
+        id: "daily-note-" + Date.now(),
+        createdAt: new Date().toISOString(),
+        role: roleConfig.title,
+        being: roleConfig.name,
+        tier: roleConfig.tier,
+        noteDate: clean(data.get("noteDate")),
+        operator: clean(data.get("operator")),
+        primaryTask: roleConfig.tasks[primaryIndex] || "",
+        completedTasks: completedIndexes.map((index) => roleConfig.tasks[index]).filter(Boolean),
+        status: clean(data.get("status")),
+        result: clean(data.get("result")),
+        nextAction: clean(data.get("nextAction")),
+        blocker: clean(data.get("blocker")),
+        guidingForce: roleConfig.force,
+        currentTools: roleConfig.tools,
+        wishlist: roleConfig.wishlist
+      };
+    }
+
+    function renderNote(note) {
+      return \`
+        <article class="note-card">
+          <h3>\${escapeHtml(note.noteDate)}: \${escapeHtml(note.primaryTask || "Workflow note")}</h3>
+          <div class="note-meta">
+            <span>\${escapeHtml(note.status)}</span>
+            <span>\${escapeHtml(note.operator || "operator not listed")}</span>
+            <span>\${escapeHtml(note.completedTasks.length)} checklist item(s)</span>
+          </div>
+          <p><strong>Result:</strong> \${escapeHtml(note.result)}</p>
+          \${note.nextAction ? \`<p><strong>Next action:</strong> \${escapeHtml(note.nextAction)}</p>\` : ""}
+          \${note.blocker ? \`<p><strong>Blocked by:</strong> \${escapeHtml(note.blocker)}</p>\` : ""}
+        </article>
+      \`;
+    }
+
+    function renderNotes() {
+      const notes = loadNotes();
+      if (!notes.length) {
+        noteList.innerHTML = '<p class="status-note">No browser-saved daily notes yet.</p>';
+        jsonOutput.textContent = "{}";
+        return;
+      }
+      noteList.innerHTML = notes.slice(0, 8).map(renderNote).join("");
+      jsonOutput.textContent = JSON.stringify(notes[0], null, 2);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const notes = loadNotes();
+      const note = noteFromForm();
+      notes.unshift(note);
+      saveNotes(notes);
+      form.reset();
+      document.querySelector("#note-date").value = new Date().toISOString().slice(0, 10);
+      formStatus.textContent = roleConfig.title + " daily note saved in this browser.";
+      renderNotes();
+    });
+
+    copyLatest.addEventListener("click", async () => {
+      const notes = loadNotes();
+      if (!notes.length) return;
+      await navigator.clipboard.writeText(JSON.stringify(notes[0], null, 2));
+      formStatus.textContent = "Latest daily note copied.";
+    });
+
+    downloadJson.addEventListener("click", () => {
+      const notes = loadNotes();
+      const blob = new Blob([JSON.stringify(notes, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = ${JSON.stringify(slug)} + "-daily-notes.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    clearNotes.addEventListener("click", () => {
+      if (!confirm("Clear browser-saved daily notes for " + roleConfig.title + "?")) return;
+      localStorage.removeItem(storageKey);
+      formStatus.textContent = "Browser-saved daily notes cleared.";
+      renderNotes();
+    });
+
+    renderNotes();
+  </script>`;
+
+  return layout({
+    title: `${role.title} Daily Notes | Las Jaras Household Beings`,
+    description: `Daily workflow notes for ${role.title} at Las Jaras.`,
+    body,
+    prefix: "../../"
+  });
+}
+
 const indexBody = `<main>
     <section class="hero">
       <div>
@@ -987,6 +1345,7 @@ for (const role of roles) {
         <div class="toolbar">
           <a class="button primary" href="../household-beings.html">Back to directory</a>
           <a class="button" href="#oversees">What they oversee</a>
+          <a class="button" href="${dailyNotesPath(role)}">Daily Notes</a>
         </div>
       </div>
       <aside class="panel">
@@ -1023,6 +1382,7 @@ for (const role of roles) {
     description: `${role.title} profile for the Las Jaras household beings directory.`,
     body
   }));
+  writeFileSync(join(notesDir, `${slugify(role.title)}-daily-notes.html`), dailyNotesPage(role));
 }
 
-console.log(`Generated ${roles.length + 1} household being pages.`);
+console.log(`Generated ${roles.length + 1} household being pages and ${roles.length} daily note pages.`);

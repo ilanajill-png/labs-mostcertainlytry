@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Director of Fun Daily Notes | Las Jaras Household Beings</title>
+  <meta name="description" content="Daily workflow notes for Director of Fun at Las Jaras.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #162033;
+      --muted: #56616f;
+      --paper: #f7f8f4;
+      --panel: #ffffff;
+      --line: #d4d9df;
+      --cobalt: #0047ab;
+      --leaf: #2f6f4f;
+      --berry: #8b3f64;
+      --gold: #b27723;
+      --sky: #dbeafe;
+      --shadow: 0 18px 38px rgba(22, 32, 51, .1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(0, 71, 171, .12), transparent 34%),
+        linear-gradient(230deg, rgba(47, 111, 79, .12), transparent 38%),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; text-underline-offset: 4px; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 248, 244, .94);
+      backdrop-filter: blur(12px);
+    }
+    .bar, main, footer {
+      width: min(1180px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+    .bar {
+      min-height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand { color: var(--cobalt); font-weight: 950; text-decoration: none; }
+    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+    nav a, .button {
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      font-weight: 850;
+      text-decoration: none;
+    }
+    .button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+    :focus-visible { outline: 4px solid #111827; outline-offset: 3px; }
+    .hero {
+      padding: 52px 0 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      gap: clamp(24px, 4vw, 48px);
+      align-items: end;
+    }
+    .kicker, .label {
+      margin: 0 0 8px;
+      color: var(--cobalt);
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(2.15rem, 5vw, 4.8rem);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    h2, h3 { letter-spacing: 0; line-height: 1.1; }
+    h2 { margin: 0 0 14px; font-size: clamp(1.45rem, 3vw, 2.25rem); }
+    h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .lede { max-width: 760px; color: var(--muted); font-size: 1.06rem; }
+    .panel, .role-card, .profile-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: var(--shadow);
+    }
+    .panel, .profile-card { padding: clamp(18px, 3vw, 28px); }
+    .quick-facts {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+    }
+    .quick-facts div { display: grid; gap: 2px; }
+    .quick-facts dt { color: var(--muted); font-size: .78rem; font-weight: 900; text-transform: uppercase; }
+    .quick-facts dd { margin: 0; font-weight: 800; }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 12px 0 24px;
+    }
+    .section { padding: 26px 0; }
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+    }
+    .role-card {
+      padding: 16px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .role-card p { margin: 0; color: var(--muted); }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 7px; }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--sky);
+      color: #173763;
+      font-size: .78rem;
+      font-weight: 850;
+    }
+    .chart {
+      display: grid;
+      gap: 16px;
+    }
+    .chart-tier {
+      border-left: 5px solid var(--cobalt);
+      padding: 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .78);
+      border-top: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .chart-tier:nth-child(2) { border-left-color: var(--leaf); }
+    .chart-tier:nth-child(3) { border-left-color: var(--berry); }
+    .chart-tier:nth-child(4) { border-left-color: var(--gold); }
+    .chart-roles { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chart-roles a {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: var(--panel);
+      font-weight: 850;
+      text-decoration: none;
+    }
+    .interaction-map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .flow-node {
+      min-height: 106px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      position: relative;
+    }
+    .flow-node:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      right: -10px;
+      top: 42%;
+      color: var(--cobalt);
+      font-weight: 950;
+    }
+    .profile-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: 18px;
+      padding: 24px 0 36px;
+    }
+    .profile-card p { color: var(--muted); }
+    .link-list { display: grid; gap: 8px; padding-left: 0; list-style: none; }
+    .link-list a { font-weight: 850; }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 14px;
+      padding-bottom: 30px;
+    }
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+    .ops-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+    .ops-card li + li { margin-top: 7px; }
+    form {
+      display: grid;
+      gap: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      padding: clamp(16px, 3vw, 24px);
+      box-shadow: var(--shadow);
+    }
+    fieldset {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 0;
+    }
+    legend { font-weight: 950; padding: 0 6px; }
+    label {
+      display: grid;
+      gap: 7px;
+      color: var(--muted);
+      font-weight: 800;
+    }
+    input, select, textarea {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 10px 12px;
+    }
+    textarea { min-height: 116px; resize: vertical; }
+    button {
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      color: var(--ink);
+      font: inherit;
+      font-weight: 850;
+      padding: 10px 12px;
+      cursor: pointer;
+    }
+    button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+    button.danger { border-color: rgba(139, 63, 100, .45); color: var(--berry); }
+    .two {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .checks {
+      display: grid;
+      gap: 10px;
+    }
+    .check {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: start;
+      gap: 10px;
+      color: var(--ink);
+    }
+    .check input { width: 18px; min-height: 18px; margin-top: 3px; }
+    .note-list {
+      display: grid;
+      gap: 12px;
+    }
+    .note-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      padding: 14px;
+    }
+    .note-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+      font-weight: 800;
+    }
+    .status-note {
+      border-left: 5px solid var(--cobalt);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: rgba(219, 234, 254, .7);
+      color: var(--ink);
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111827;
+      color: #f9fafb;
+      padding: 14px;
+      max-height: 360px;
+      overflow: auto;
+    }
+    .recommended {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+    }
+    .recommended article {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .85);
+      padding: 14px;
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 28px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 820px) {
+      .hero, .profile-layout, .two { grid-template-columns: 1fr; }
+      .interaction-map { grid-template-columns: 1fr; }
+      .flow-node:not(:last-child)::after {
+        content: "v";
+        right: 16px;
+        top: auto;
+        bottom: -13px;
+      }
+      .bar { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      nav { justify-content: flex-start; }
+    }
+</style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="../../household-beings.html">Las Jaras Beings</a>
+      <nav aria-label="Profile navigation">
+        <a href="../../household-beings.html">Directory</a>
+        <a href="../../serafina-human-informed-field-log.html">Serafina</a>
+        <a href="../../sheriff-howdy-buddy-las-jaras-issue-desk.html">Sheriff</a>
+        
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="kicker">Experience daily workflow</p>
+        <h1>Director of Fun Daily Notes</h1>
+        <p class="lede">Record what Jubilee RSVP actively did today, what result came out of it, and what should happen next. These notes save in this browser until the shared backend exists.</p>
+        <div class="toolbar">
+          <a class="button primary" href="../director-of-fun.html">Back to Director of Fun</a>
+          <a class="button" href="../../household-beings.html">Directory</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="label">Active-work rule</p>
+        <p>Daily tasks are actionable workflows. If a task cannot be completed yet, mark it blocked and record the missing tool, permission, or data.</p>
+      </aside>
+    </section>
+
+    <section class="section">
+      <form id="daily-note-form">
+        <p class="status-note" id="form-status" role="status" aria-live="polite">Ready to record a Director of Fun workflow note.</p>
+        <fieldset>
+          <legend>Workflow</legend>
+          <div class="two">
+            <label for="note-date">
+              Date
+              <input id="note-date" name="noteDate" type="date" required>
+            </label>
+            <label for="operator">
+              Who ran it?
+              <input id="operator" name="operator" autocomplete="name" placeholder="Example: Buddy, Howdy Partner, or Jubilee RSVP">
+            </label>
+          </div>
+          <div class="two">
+            <label for="primary-task">
+              Primary task
+              <select id="primary-task" name="primaryTask" required>
+                <option value="">Choose a workflow</option>
+                <option value="0">Scan upcoming local events and save promising options.</option><option value="1">Match outings to energy level, weather, guests, and budget.</option><option value="2">Prepare sign-up or ticket reminders before deadlines pass.</option>
+              </select>
+            </label>
+            <label for="status">
+              Status
+              <select id="status" name="status" required>
+                <option value="done">Done</option>
+                <option value="drafted">Drafted for review</option>
+                <option value="blocked">Blocked</option>
+                <option value="scheduled">Scheduled</option>
+                <option value="escalated">Escalated</option>
+                <option value="not-needed">Not needed today</option>
+              </select>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Task checklist</legend>
+          <div class="checks"><label class="check"><input type="checkbox" name="taskDone" value="0"> Scan upcoming local events and save promising options.</label>
+<label class="check"><input type="checkbox" name="taskDone" value="1"> Match outings to energy level, weather, guests, and budget.</label>
+<label class="check"><input type="checkbox" name="taskDone" value="2"> Prepare sign-up or ticket reminders before deadlines pass.</label></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Result</legend>
+          <label for="result">
+            What happened?
+            <textarea id="result" name="result" required maxlength="1600" placeholder="Record the active result: draft created, note reviewed, case escalated, supplies checked, recommendation prepared, or blocker found."></textarea>
+          </label>
+          <div class="two">
+            <label for="next-action">
+              Next action
+              <textarea id="next-action" name="nextAction" maxlength="800" placeholder="What should happen next?"></textarea>
+            </label>
+            <label for="blocker">
+              Missing tool, permission, or data
+              <textarea id="blocker" name="blocker" maxlength="800" placeholder="Use this if the workflow could not be finished."></textarea>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="toolbar">
+          <button class="primary" type="submit">Save Daily Note</button>
+          <button type="button" id="copy-latest">Copy Latest</button>
+          <button type="button" id="download-json">Download JSON</button>
+          <button class="danger" type="button" id="clear-notes">Clear Browser Notes</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="section" aria-labelledby="records-title">
+      <h2 id="records-title">Saved Notes</h2>
+      <div class="note-list" id="note-list" aria-live="polite"></div>
+      <h2>Latest JSON</h2>
+      <pre id="json-output">{}</pre>
+    </section>
+  </main>
+  <footer>
+    <span>Director of Fun daily workflow notes</span>
+    <a href="../director-of-fun.html">Director of Fun profile</a>
+  </footer>
+  <script>
+    const roleConfig = {
+    "title": "Director of Fun",
+    "name": "Jubilee RSVP",
+    "tier": "Experience",
+    "tasks": [
+        "Scan upcoming local events and save promising options.",
+        "Match outings to energy level, weather, guests, and budget.",
+        "Prepare sign-up or ticket reminders before deadlines pass."
+    ],
+    "force": [
+        "event planning checklists",
+        "guest experience design",
+        "local arts and culture calendars"
+    ],
+    "tools": [
+        "Whimsy pages",
+        "web research",
+        "calendar reminders"
+    ],
+    "wishlist": [
+        "event aggregator account",
+        "ticket-price tracker",
+        "shared household fun calendar"
+    ]
+};
+    const storageKey = "las-jaras-daily-notes-" + "director-of-fun" + "-v1";
+    const form = document.querySelector("#daily-note-form");
+    const noteList = document.querySelector("#note-list");
+    const jsonOutput = document.querySelector("#json-output");
+    const formStatus = document.querySelector("#form-status");
+    const copyLatest = document.querySelector("#copy-latest");
+    const downloadJson = document.querySelector("#download-json");
+    const clearNotes = document.querySelector("#clear-notes");
+
+    document.querySelector("#note-date").value = new Date().toISOString().slice(0, 10);
+
+    function clean(value) {
+      return String(value || "").trim();
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function loadNotes() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveNotes(notes) {
+      localStorage.setItem(storageKey, JSON.stringify(notes));
+    }
+
+    function checkedTaskIndexes() {
+      return [...form.querySelectorAll('input[name="taskDone"]:checked')].map((item) => Number(item.value));
+    }
+
+    function noteFromForm() {
+      const data = new FormData(form);
+      const primaryIndex = Number(data.get("primaryTask"));
+      const completedIndexes = checkedTaskIndexes();
+      return {
+        id: "daily-note-" + Date.now(),
+        createdAt: new Date().toISOString(),
+        role: roleConfig.title,
+        being: roleConfig.name,
+        tier: roleConfig.tier,
+        noteDate: clean(data.get("noteDate")),
+        operator: clean(data.get("operator")),
+        primaryTask: roleConfig.tasks[primaryIndex] || "",
+        completedTasks: completedIndexes.map((index) => roleConfig.tasks[index]).filter(Boolean),
+        status: clean(data.get("status")),
+        result: clean(data.get("result")),
+        nextAction: clean(data.get("nextAction")),
+        blocker: clean(data.get("blocker")),
+        guidingForce: roleConfig.force,
+        currentTools: roleConfig.tools,
+        wishlist: roleConfig.wishlist
+      };
+    }
+
+    function renderNote(note) {
+      return `
+        <article class="note-card">
+          <h3>${escapeHtml(note.noteDate)}: ${escapeHtml(note.primaryTask || "Workflow note")}</h3>
+          <div class="note-meta">
+            <span>${escapeHtml(note.status)}</span>
+            <span>${escapeHtml(note.operator || "operator not listed")}</span>
+            <span>${escapeHtml(note.completedTasks.length)} checklist item(s)</span>
+          </div>
+          <p><strong>Result:</strong> ${escapeHtml(note.result)}</p>
+          ${note.nextAction ? `<p><strong>Next action:</strong> ${escapeHtml(note.nextAction)}</p>` : ""}
+          ${note.blocker ? `<p><strong>Blocked by:</strong> ${escapeHtml(note.blocker)}</p>` : ""}
+        </article>
+      `;
+    }
+
+    function renderNotes() {
+      const notes = loadNotes();
+      if (!notes.length) {
+        noteList.innerHTML = '<p class="status-note">No browser-saved daily notes yet.</p>';
+        jsonOutput.textContent = "{}";
+        return;
+      }
+      noteList.innerHTML = notes.slice(0, 8).map(renderNote).join("");
+      jsonOutput.textContent = JSON.stringify(notes[0], null, 2);
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const notes = loadNotes();
+      const note = noteFromForm();
+      notes.unshift(note);
+      saveNotes(notes);
+      form.reset();
+      document.querySelector("#note-date").value = new Date().toISOString().slice(0, 10);
+      formStatus.textContent = roleConfig.title + " daily note saved in this browser.";
+      renderNotes();
+    });
+
+    copyLatest.addEventListener("click", async () => {
+      const notes = loadNotes();
+      if (!notes.length) return;
+      await navigator.clipboard.writeText(JSON.stringify(notes[0], null, 2));
+      formStatus.textContent = "Latest daily note copied.";
+    });
+
+    downloadJson.addEventListener("click", () => {
+      const notes = loadNotes();
+      const blob = new Blob([JSON.stringify(notes, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "director-of-fun" + "-daily-notes.json";
+      link.click();
+      URL.revokeObjectURL(url);
+    });
+
+    clearNotes.addEventListener("click", () => {
+      if (!confirm("Clear browser-saved daily notes for " + roleConfig.title + "?")) return;
+      localStorage.removeItem(storageKey);
+      formStatus.textContent = "Browser-saved daily notes cleared.";
+      renderNotes();
+    });
+
+    renderNotes();
+  </script>
+</body>
+</html>
