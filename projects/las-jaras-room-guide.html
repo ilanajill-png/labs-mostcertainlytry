@@ -360,6 +360,47 @@
         font-size: 0.96rem;
       }
 
+      .suite-systems {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        gap: 14px;
+        align-items: start;
+      }
+
+      .system-block {
+        display: grid;
+        gap: 10px;
+        min-width: 0;
+        border-top: 1px solid var(--line);
+        padding-top: 12px;
+      }
+
+      .playlist-buttons,
+      .hue-scenes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .playlist-buttons a,
+      .hue-scenes span {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        border: 1px solid color-mix(in srgb, var(--accent) 42%, var(--line) 58%);
+        border-radius: 8px;
+        padding: 6px 9px;
+        background: color-mix(in srgb, var(--accent) 8%, #fff 92%);
+        color: var(--ink);
+        font-size: 0.86rem;
+        font-weight: 800;
+        text-decoration: none;
+      }
+
+      .playlist-buttons a[href*="youtube.com"] {
+        color: var(--cobalt-dark);
+      }
+
       .suite-links a {
         display: inline-flex;
         align-items: center;
@@ -452,6 +493,7 @@
         }
 
         .suite-details,
+        .suite-systems,
         .include-list,
         .ops-links {
           grid-template-columns: 1fr;
@@ -566,6 +608,22 @@
               <div><p class="meta-label">Use</p><p>Cooking, grocery staging, pantry rotation, and weekly reset work.</p></div>
               <div><p class="meta-label">Next polish</p><p>Keep recipes, inventory, and shopping links in one flow.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=upbeat+kitchen+cleaning+funk+soul+playlist">Doing Dishes</a>
+                  <a href="https://www.youtube.com/results?search_query=cooking+for+guests+dinner+party+jazz+soul+playlist">Cooking Guests</a>
+                  <a href="https://www.youtube.com/results?search_query=breakfast+jazz+morning+bossa+nova+kitchen+playlist">Breakfast</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Cobalt Task</span><span>Cooking Glow</span><span>Breakfast Warmth</span><span>Grocery Reset</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../KITCHEN_YOUTUBE_PLAYLISTS.md">Kitchen playlists</a>
               <a href="../../HOUSEHOLD_INVENTORY.md">Household inventory</a>
@@ -585,6 +643,22 @@
               <div><p class="meta-label">Mood</p><p>Sunny, green, social, and grounded with cobalt accents.</p></div>
               <div><p class="meta-label">Use</p><p>Guests, meals, movies, daily landing zone, and house hosting.</p></div>
               <div><p class="meta-label">Next polish</p><p>Define evening lighting and the guest-ready reset checklist.</p></div>
+            </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=hosting+conversation+jazz+soul+playlist">Hosting</a>
+                  <a href="https://www.youtube.com/results?search_query=movie+night+pre+show+ambient+jazz+playlist">Movie Pre-Show</a>
+                  <a href="https://www.youtube.com/results?search_query=morning+open+house+bossa+nova+soul+playlist">Morning Open House</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Guest Arrival</span><span>Movie Night</span><span>Conversation</span><span>Morning Open House</span><span>Cleaning Reset</span>
+                </div>
+              </div>
             </div>
             <div class="suite-links">
               <a href="../../LAS_JARAS_SMART_HOME.md">Smart-home notes</a>
@@ -606,6 +680,22 @@
               <div><p class="meta-label">Use</p><p>Supplies, build tools, field gear, and future workshop storage.</p></div>
               <div><p class="meta-label">Next polish</p><p>Label zones and separate daily access from deep storage.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=garage+workshop+classic+rock+funk+playlist">Workshop</a>
+                  <a href="https://www.youtube.com/results?search_query=organizing+storage+upbeat+playlist">Storage Reset</a>
+                  <a href="https://www.youtube.com/results?search_query=second+lounge+desert+psych+soul+playlist">Second Lounge</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Bright Utility</span><span>Project Mode</span><span>Storage Boundary</span><span>Lounge Work</span><span>Cleaning</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../LAS_JARAS_ROOM_MAINTENANCE_INVENTORY.md">Maintenance inventory</a>
               <a href="../../LAS_JARAS_IOT_14_DAY_PROJECT_PLAN.md">IoT plan</a>
@@ -625,6 +715,22 @@
               <div><p class="meta-label">Mood</p><p>Fresh, bright, practical, and easy to reset.</p></div>
               <div><p class="meta-label">Use</p><p>Laundry cycles, cleaning staging, linen control, and spill response.</p></div>
               <div><p class="meta-label">Next polish</p><p>Finish the supply map and guest linen routine.</p></div>
+            </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=vintage+exotica+bossa+nova+folding+laundry+playlist">Folding</a>
+                  <a href="https://www.youtube.com/results?search_query=soft+surf+guitar+tropicalia+cleaning+playlist">Lanai Reset</a>
+                  <a href="https://www.youtube.com/results?search_query=upbeat+housework+linen+reset+playlist">Linen Reset</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Lanai Welcome</span><span>Tiki Fold</span><span>Lagoon Fresh</span><span>Amber Utility</span><span>Night Swap</span><span>Cleaning</span>
+                </div>
+              </div>
             </div>
             <div class="suite-links">
               <a href="../../LAUNDRY_ROOM_MOOD.md">Laundry mood</a>
@@ -646,6 +752,22 @@
               <div><p class="meta-label">Use</p><p>Movement, guest orientation, door transitions, and art moments.</p></div>
               <div><p class="meta-label">Next polish</p><p>Confirm wall art, switch labels, and sensor behavior.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=warm+arrival+instrumental+ambient+playlist">Arrival</a>
+                  <a href="https://www.youtube.com/results?search_query=gallery+walk+soft+jazz+ambient+playlist">Gallery Walk</a>
+                  <a href="https://www.youtube.com/results?search_query=orange+chakra+warm+ambient+playlist">Threshold</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Amber Passage</span><span>Guest Path</span><span>Gallery Glow</span><span>Night Path</span><span>Cleaning</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../HALLWAYS_MOOD.md">Hallway mood</a>
               <a href="../../LAS_JARAS_SMART_HOME.md">Lighting notes</a>
@@ -665,6 +787,22 @@
               <div><p class="meta-label">Mood</p><p>Directional, calm, and practical with enough detail to feel intentional.</p></div>
               <div><p class="meta-label">Use</p><p>Bedroom circulation, guest wayfinding, and lighting transitions.</p></div>
               <div><p class="meta-label">Next polish</p><p>Set the night path scene and keep clutter off the route.</p></div>
+            </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=quiet+wayfinding+ambient+playlist">Wayfinding</a>
+                  <a href="https://www.youtube.com/results?search_query=calm+hallway+instrumental+playlist">Calm Route</a>
+                  <a href="https://www.youtube.com/results?search_query=night+path+sleepy+ambient+playlist">Night Path</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Electrical Planning</span><span>Guest Path</span><span>Night Path</span><span>Safety First</span>
+                </div>
+              </div>
             </div>
             <div class="suite-links">
               <a href="../../HALLWAYS_MOOD.md">Hallway mood</a>
@@ -686,6 +824,22 @@
               <div><p class="meta-label">Use</p><p>Transition space, storage edge, and future sensor check zone.</p></div>
               <div><p class="meta-label">Next polish</p><p>Document measurements and decide if it gets art or stays clean.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=amber+gallery+glow+instrumental+playlist">Gallery Glow</a>
+                  <a href="https://www.youtube.com/results?search_query=creative+flow+orange+ambient+playlist">Creative Flow</a>
+                  <a href="https://www.youtube.com/results?search_query=warm+cleaning+reset+playlist">Cleaning Reset</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Amber Passage</span><span>Guest Path</span><span>Creative Flow</span><span>Gallery Glow</span><span>Night Path</span><span>Cleaning</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../HALLWAYS_MOOD.md">Hallway mood</a>
               <a href="../../LAS_JARAS_ROOM_MAINTENANCE_INVENTORY.md">Maintenance inventory</a>
@@ -705,6 +859,24 @@
               <div><p class="meta-label">Mood</p><p>Red, intimate, bohemian-luxe, and anchored by the bed.</p></div>
               <div><p class="meta-label">Use</p><p>Guest bedroom, retreat, playlist room, and layout prototype.</p></div>
               <div><p class="meta-label">Next polish</p><p>Keep the model, rendering, and guest checklist aligned.</p></div>
+            </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIWTom_LjZLMVG5MqgoYoE_">Guest Welcome</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbJAcTlzszxqExKv3OOZFKq6">Morning Ritual</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbJjEEwVsFwlywMl_ZjU7irq">Ritual</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbKFbCU5RBfnNvwNsjfVgAyp">Wind Down</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbJ-qqp3Og-CpM8MeCcesn2-">Intention Setting</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Rose Gold Arrival</span><span>Sunrise Grounding</span><span>Low Ruby Ritual</span><span>Ember Wind-Down</span><span>Night Path</span>
+                </div>
+              </div>
             </div>
             <div class="suite-links">
               <a href="../../RED_ROOM_YOUTUBE_PLAYLISTS.md">Red playlists</a>
@@ -727,6 +899,24 @@
               <div><p class="meta-label">Use</p><p>Bedroom, flexible guest retreat, and quiet work spillover.</p></div>
               <div><p class="meta-label">Next polish</p><p>Clarify textiles, lamps, and the guest-night routine.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbI0VKtkXVPq5c6gvZqkK8yF">Guest Welcome</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbK72Z30LzwiN-HVruhWKJEz">Morning Ritual</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbJBkieAzbxUpvflYTBdN8lH">Ritual</a>
+                  <a href="https://www.youtube.com/results?search_query=yellow+room+warm+wind+down+playlist">Wind Down Plan</a>
+                  <a href="https://www.youtube.com/results?search_query=golden+morning+intention+setting+playlist">Intention Plan</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Golden Welcome</span><span>Solar Morning</span><span>Confidence Glow</span><span>Golden Focus</span><span>Wind Down</span><span>Night Path</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../YELLOW_ROOM_MOOD.md">Yellow room mood</a>
               <a href="../../LAS_JARAS_ROOM_MAINTENANCE_INVENTORY.md">Room inventory</a>
@@ -746,6 +936,24 @@
               <div><p class="meta-label">Mood</p><p>Cobalt, worldly, focused, and collected.</p></div>
               <div><p class="meta-label">Use</p><p>Bedroom, office-adjacent planning, and flexible guest setup.</p></div>
               <div><p class="meta-label">Next polish</p><p>Define the room's primary function before adding more storage.</p></div>
+            </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbLLuHC6L589N1l0DFf8p3es">Guest Welcome</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbJGOylkvOogH-5JbH_WWMxy">Morning Ritual</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIuFY957k0vXu7ZjsGu15pq">Ritual</a>
+                  <a href="https://www.youtube.com/results?search_query=blue+room+wind+down+ambient+playlist">Wind Down Plan</a>
+                  <a href="https://www.youtube.com/results?search_query=quiet+writing+intention+setting+playlist">Intention Plan</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Blue Guest Welcome</span><span>Clear Morning</span><span>Quiet Writing</span><span>Calm Expression</span><span>Wind Down</span><span>Night Path</span>
+                </div>
+              </div>
             </div>
             <div class="suite-links">
               <a href="../../LAS_JARAS_SMART_HOME.md">Smart-home notes</a>
@@ -767,6 +975,24 @@
               <div><p class="meta-label">Use</p><p>Guest bedroom, signature room, design reference, and playlist room.</p></div>
               <div><p class="meta-label">Next polish</p><p>Pair bed provenance notes with practical guest setup.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIHh5PBZp7FKjyOs4m6g2xB">Guest Welcome</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbLrUw48lmiMRPQvXUifi7LR">Morning Ritual</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbKldTGtnQoDHBzuxcvILjOQ">Ritual</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbIth-ouDdO0649Me5hoKC5X">Wind Down</a>
+                  <a href="https://www.youtube.com/playlist?list=PLuYbYf2r1wbI9xAzF8uUDE_mB79hz5T9O">Intention Setting</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Green-Gold Welcome</span><span>Leaf Peach Morning</span><span>Emerald Ritual</span><span>Sage Wind-Down</span><span>Moss Night Path</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../GREEN_ROOM_MOOD.md">Green room mood</a>
               <a href="../../GREEN_ROOM_YOUTUBE_PLAYLISTS.md">Green playlists</a>
@@ -787,6 +1013,22 @@
               <div><p class="meta-label">Use</p><p>Bath, guest supplies, cleaning checks, and humidity monitoring.</p></div>
               <div><p class="meta-label">Next polish</p><p>Finish the supply list and decide the best scent direction.</p></div>
             </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=bossa+nova+tropicalia+bath+ritual+playlist">Bath Ritual</a>
+                  <a href="https://www.youtube.com/results?search_query=hand+percussion+water+ambience+playlist">Water Ambience</a>
+                  <a href="https://www.youtube.com/results?search_query=green+spa+morning+rinse+playlist">Morning Rinse</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Papaya Welcome</span><span>Tribal Bath</span><span>Morning Rinse</span><span>Getting Ready</span><span>Steam Down</span><span>Night Path</span>
+                </div>
+              </div>
+            </div>
             <div class="suite-links">
               <a href="../../GREEN_BATHROOM_MOOD.md">Green bath mood</a>
               <a href="../../LAS_JARAS_ROOM_MAINTENANCE_INVENTORY.md">Bath inventory</a>
@@ -806,6 +1048,22 @@
               <div><p class="meta-label">Mood</p><p>Orderly, pretty, fragrant, and unmistakably labeled.</p></div>
               <div><p class="meta-label">Use</p><p>Guest bath backups, cleaning overflow, and small-format storage.</p></div>
               <div><p class="meta-label">Next polish</p><p>Use visible bins and a restock threshold for each category.</p></div>
+            </div>
+            <div class="suite-systems">
+              <div class="system-block">
+                <p class="meta-label">YouTube</p>
+                <div class="playlist-buttons">
+                  <a href="https://www.youtube.com/results?search_query=bathroom+restock+calm+housekeeping+playlist">Restock</a>
+                  <a href="https://www.youtube.com/results?search_query=soft+spa+cleaning+ambient+playlist">Spa Clean</a>
+                  <a href="https://www.youtube.com/results?search_query=guest+bathroom+reset+playlist">Guest Reset</a>
+                </div>
+              </div>
+              <div class="system-block">
+                <p class="meta-label">Hue light settings</p>
+                <div class="hue-scenes">
+                  <span>Closet Restock</span><span>Guest Backup Check</span><span>Soft Spa Clean</span><span>Night Path</span>
+                </div>
+              </div>
             </div>
             <div class="suite-links">
               <a href="../../GREEN_BATHROOM_MOOD.md">Bath mood</a>
