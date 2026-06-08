@@ -541,9 +541,9 @@
     </section>
 
     <div class="layout">
-      <form id="case-form" aria-describedby="case-help" data-endpoint="https://formsubmit.co/ajax/mostcertainly@gmail.com" enctype="multipart/form-data">
-        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through. New cases are saved here and sent to the shared Sheriff intake queue when the public endpoint is available.</p>
-        <p class="hint" id="shared-status" role="status" aria-live="polite">Shared intake standing by.</p>
+      <form id="case-form" aria-describedby="case-help" data-api-endpoint="https://sheriff-lone-star-case-api.ilanajill.workers.dev" data-endpoint="https://formsubmit.co/ajax/mostcertainly@gmail.com" enctype="multipart/form-data">
+        <p id="case-help" class="hint">Open a case for anything physical, interpersonal, creature-related, food-related, maintenance-related, or spiritually suspicious enough to need practical follow-through. New cases are saved to the shared Sheriff Worker + D1 case board, with browser storage as backup.</p>
+        <p class="hint" id="shared-status" role="status" aria-live="polite">Shared Worker case board standing by.</p>
 
         <fieldset>
           <legend>Open a Las Jaras case</legend>
@@ -749,9 +749,12 @@
     const updateContact = document.querySelector("#update-contact");
     const updateConsent = document.querySelector("#update-consent");
     const storageKey = "las-jaras-sheriff-cases-v1";
+    const adminTokenSessionKey = "las-jaras-sheriff-admin-token-v1";
     const serafinaHandoffKey = "las-jaras-serafina-to-sheriff-handoff-v1";
     const mediaDbName = "las-jaras-media-handoff-v1";
     const mediaStoreName = "files";
+    const apiEndpoint = form.dataset.apiEndpoint;
+    const formSubmitEndpoint = form.dataset.endpoint;
     let pendingSerafinaHandoff = null;
     let handoffMediaPreviewUrls = [];
     let mediaPreviewUrls = [];
@@ -781,12 +784,73 @@
       localStorage.setItem(storageKey, JSON.stringify(cases));
     }
 
+    function sortCases(cases) {
+      return [...cases].sort((a, b) => {
+        const aTime = Date.parse(a.updatedAt || a.openedAt || 0);
+        const bTime = Date.parse(b.updatedAt || b.openedAt || 0);
+        return bTime - aTime;
+      });
+    }
+
+    function mergeCaseList(cases, issue) {
+      const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
+      return sortCases([issue, ...withoutDuplicate]);
+    }
+
     function localMergeCase(issue) {
       const cases = loadCases();
-      const withoutDuplicate = cases.filter((item) => item.id !== issue.id);
-      withoutDuplicate.unshift(issue);
-      saveCases(withoutDuplicate);
-      return withoutDuplicate;
+      const merged = mergeCaseList(cases, issue);
+      saveCases(merged);
+      return merged;
+    }
+
+    async function apiJson(path, options = {}) {
+      if (!apiEndpoint) throw new Error("Sheriff Worker API is not configured.");
+      const response = await fetch(`${apiEndpoint}${path}`, {
+        ...options,
+        headers: {
+          "Accept": "application/json",
+          ...(options.body ? { "Content-Type": "application/json" } : {}),
+          ...(options.headers || {})
+        }
+      });
+      const text = await response.text();
+      const payload = text ? JSON.parse(text) : {};
+      if (!response.ok) throw new Error(payload.error || `Sheriff API returned ${response.status}`);
+      return payload;
+    }
+
+    function storedAdminToken() {
+      try {
+        return sessionStorage.getItem(adminTokenSessionKey) || "";
+      } catch {
+        return "";
+      }
+    }
+
+    function saveAdminToken(token) {
+      try {
+        sessionStorage.setItem(adminTokenSessionKey, token);
+      } catch {
+        // Session storage can be blocked; the close request can still use the current token.
+      }
+    }
+
+    function clearAdminToken() {
+      try {
+        sessionStorage.removeItem(adminTokenSessionKey);
+      } catch {
+        // Nothing to clear.
+      }
+    }
+
+    function requestAdminToken() {
+      const existing = storedAdminToken();
+      const token = prompt("Sheriff admin token required to close this case.", existing);
+      if (!token) return "";
+      const cleanToken = clean(token);
+      saveAdminToken(cleanToken);
+      return cleanToken;
     }
 
     function selectedValues(name) {
@@ -1051,8 +1115,37 @@
     }
 
     async function sendCaseToSharedIntake(issue) {
-      const endpoint = form.dataset.endpoint;
-      if (!endpoint) return { ok: false, message: "No shared intake endpoint configured." };
+      try {
+        const response = await apiJson("/cases", {
+          method: "POST",
+          body: JSON.stringify(issue)
+        });
+        const savedIssue = normalizeImportedCase(response.case);
+        savedIssue.sharedSubmission = {
+          status: "sent",
+          sentAt: new Date().toISOString(),
+          endpoint: "Cloudflare Worker + D1"
+        };
+        return {
+          ok: true,
+          issue: savedIssue,
+          message: "Shared Worker case board received this case."
+        };
+      } catch (workerError) {
+        issue.sharedSubmission = {
+          status: "failed",
+          attemptedAt: new Date().toISOString(),
+          endpoint: "Cloudflare Worker + D1",
+          error: workerError.message
+        };
+      }
+
+      const endpoint = formSubmitEndpoint;
+      if (!endpoint) return {
+        ok: false,
+        issue,
+        message: "Saved locally, but the shared Worker case board did not confirm receipt."
+      };
       const payload = new FormData(form);
       payload.append("_subject", `Las Jaras Sheriff Case: ${issue.caseTitle}`);
       payload.append("_template", "table");
@@ -1081,19 +1174,25 @@
         });
         if (!response.ok) throw new Error(`Shared intake returned ${response.status}`);
         issue.sharedSubmission = {
-          status: "sent",
+          status: "backup-sent",
           sentAt: new Date().toISOString(),
-          endpoint: "FormSubmit"
+          endpoint: "FormSubmit backup"
         };
-        return { ok: true, message: "Shared intake received this case." };
+        return {
+          ok: false,
+          issue,
+          message: "Worker case board did not confirm receipt; FormSubmit backup received this case."
+        };
       } catch (error) {
         issue.sharedSubmission = {
           status: "failed",
           attemptedAt: new Date().toISOString(),
+          endpoint: "Cloudflare Worker + D1 and FormSubmit backup",
           error: error.message
         };
         return {
           ok: false,
+          issue,
           message: "Saved locally, but shared intake did not confirm receipt. Copy the prompt or download cases as backup."
         };
       }
@@ -1104,6 +1203,7 @@
         id: clean(data.id) || `sheriff-case-import-${Date.now()}`,
         status: clean(data.status) || "Open",
         openedAt: clean(data.openedAt) || new Date().toISOString(),
+        updatedAt: clean(data.updatedAt) || clean(data.openedAt) || new Date().toISOString(),
         closedAt: data.closedAt || null,
         caseTitle: clean(data.caseTitle),
         reportedBy: clean(data.reportedBy),
@@ -1290,7 +1390,13 @@
         const media = issue.mediaAttachments.length ? issue.mediaAttachments.map((item) => `${item.name} (${item.size})`).join(", ") : "none";
         const severity = issue.severity || { level: "Unlogged", target: "Review needed", rationale: "This case was saved before severity logging existed." };
         const steps = issue.sheriffFirstRead || ["Open investigation."];
-        const sharedLabel = issue.sharedSubmission?.status === "sent" ? "Shared intake sent" : issue.sharedSubmission?.status === "failed" ? "Shared intake not confirmed" : "Local board copy";
+        const sharedLabel = issue.sharedSubmission?.status === "sent"
+          ? "Worker board synced"
+          : issue.sharedSubmission?.status === "backup-sent"
+            ? "FormSubmit backup sent"
+            : issue.sharedSubmission?.status === "failed"
+              ? "Shared intake not confirmed"
+              : "Worker board / local backup";
         const updateLabel = issue.notificationConsent?.optedIn ? `Requested by ${issue.notificationConsent.channel}` : "Not requested";
         return `
           <article class="case-card ${issue.status === "Closed" ? "closed" : ""}">
@@ -1319,7 +1425,47 @@
       }).join("");
     }
 
-    function updateSolutionStatus(caseId, index, status) {
+    async function loadSharedCaseBoard({ quiet = false } = {}) {
+      try {
+        const response = await apiJson("/cases", { method: "GET" });
+        const cases = sortCases((response.cases || []).map(normalizeImportedCase));
+        saveCases(cases);
+        renderCases(cases);
+        renderLatestCurrentRead(cases);
+        if (!quiet) sharedStatus.textContent = "Loaded shared Worker case board.";
+        return cases;
+      } catch (error) {
+        const cases = loadCases();
+        renderCases(cases);
+        renderLatestCurrentRead(cases);
+        if (!quiet) sharedStatus.textContent = `Worker board unavailable; showing this browser's backup. ${error.message}`;
+        return cases;
+      }
+    }
+
+    async function saveCaseUpdate(issue) {
+      try {
+        const response = await apiJson(`/cases/${encodeURIComponent(issue.id)}`, {
+          method: "PUT",
+          body: JSON.stringify(issue)
+        });
+        const savedIssue = normalizeImportedCase(response.case);
+        savedIssue.sharedSubmission = {
+          status: "sent",
+          sentAt: new Date().toISOString(),
+          endpoint: "Cloudflare Worker + D1"
+        };
+        const cases = localMergeCase(savedIssue);
+        sharedStatus.textContent = "Worker case board updated.";
+        return { issue: savedIssue, cases };
+      } catch (error) {
+        const cases = localMergeCase(issue);
+        sharedStatus.textContent = `Saved in this browser only; Worker update failed. ${error.message}`;
+        return { issue, cases };
+      }
+    }
+
+    async function updateSolutionStatus(caseId, index, status) {
       const cases = loadCases();
       const issue = cases.find((item) => item.id === caseId);
       if (!issue) return;
@@ -1329,9 +1475,41 @@
       } else {
         issue.solutionStatus[index] = status;
       }
-      saveCases(cases);
-      renderCases(cases);
-      renderSheriffRead(issue);
+      issue.updatedAt = new Date().toISOString();
+      const result = await saveCaseUpdate(issue);
+      renderCases(result.cases);
+      renderSheriffRead(result.issue);
+    }
+
+    async function closeCase(caseId) {
+      const cases = loadCases();
+      const issue = cases.find((item) => item.id === caseId);
+      if (!issue) return;
+      const token = requestAdminToken();
+      if (!token) {
+        sharedStatus.textContent = "Case close cancelled. Sheriff keeps the stamp in their pocket.";
+        return;
+      }
+      try {
+        const response = await apiJson(`/cases/${encodeURIComponent(caseId)}/close`, {
+          method: "POST",
+          headers: { "X-Sheriff-Admin-Token": token },
+          body: JSON.stringify({ closeReason: "Closed from public Sheriff page admin action." })
+        });
+        const closedIssue = normalizeImportedCase(response.case);
+        closedIssue.sharedSubmission = {
+          status: "sent",
+          sentAt: new Date().toISOString(),
+          endpoint: "Cloudflare Worker + D1"
+        };
+        const merged = localMergeCase(closedIssue);
+        renderCases(merged);
+        renderLatestCurrentRead(merged);
+        sharedStatus.textContent = "Case closed on the shared Worker board.";
+      } catch (error) {
+        if (String(error.message).includes("token") || String(error.message).includes("403")) clearAdminToken();
+        sharedStatus.textContent = `Case close failed. ${error.message}`;
+      }
     }
 
     async function applySerafinaHandoff() {
@@ -1364,15 +1542,17 @@
       if (!validateNotificationConsent()) return;
       if (!form.reportValidity()) return;
       const issue = buildCase();
-      sharedStatus.textContent = "Opening case locally and sending to shared intake...";
+      sharedStatus.textContent = "Opening case on the shared Worker board...";
       let cases = localMergeCase(issue);
       renderSheriffRead(issue);
       renderCases(cases);
       const sharedResult = await sendCaseToSharedIntake(issue);
-      cases = localMergeCase(issue);
+      const savedIssue = sharedResult.issue || issue;
+      cases = localMergeCase(savedIssue);
       sharedStatus.textContent = sharedResult.message;
-      renderSheriffRead(issue);
+      renderSheriffRead(savedIssue);
       renderCases(cases);
+      if (sharedResult.ok) await loadSharedCaseBoard({ quiet: true });
     });
 
     mediaFiles.addEventListener("change", renderMediaPreview);
@@ -1407,7 +1587,7 @@
       const closeId = event.target?.dataset?.close;
       const cases = loadCases();
       if (solution) {
-        updateSolutionStatus(solution.solutionId, solution.solutionIndex, solution.solutionStatus);
+        await updateSolutionStatus(solution.solutionId, solution.solutionIndex, solution.solutionStatus);
         return;
       }
       if (readId) {
@@ -1423,14 +1603,7 @@
         if (issue) await navigator.clipboard.writeText(importUrlFor(issue));
       }
       if (closeId) {
-        const issue = cases.find((item) => item.id === closeId);
-        if (issue) {
-          issue.status = "Closed";
-          issue.closedAt = new Date().toISOString();
-          saveCases(cases);
-          renderCases(cases);
-          renderLatestCurrentRead(cases);
-        }
+        await closeCase(closeId);
       }
     });
 
@@ -1449,7 +1622,7 @@
       const ok = confirm("Clear Sheriff Lone Star's browser-saved cases on this device?");
       if (!ok) return;
       localStorage.removeItem(storageKey);
-      sheriffNote.innerHTML = "<b>Case board cleared.</b><p>The sheriff has swept the desk. This does not mean the toilet is innocent.</p>";
+      sheriffNote.innerHTML = "<b>Browser backup cleared.</b><p>The sheriff swept this browser's desk. Shared D1 cases remain on the Worker board.</p>";
       handoff.hidden = true;
       renderCases([]);
     });
@@ -1457,9 +1630,12 @@
     (async () => {
       const importedFromUrl = importCaseFromUrl() || await importCaseFileFromUrl();
       await applySerafinaHandoff();
-      const savedCases = loadCases();
-      renderCases(savedCases);
-      if (!pendingSerafinaHandoff && !importedFromUrl) renderLatestCurrentRead(savedCases);
+      if (!pendingSerafinaHandoff && !importedFromUrl) {
+        await loadSharedCaseBoard();
+      } else {
+        const savedCases = loadCases();
+        renderCases(savedCases);
+      }
     })();
   </script>
 </body>
