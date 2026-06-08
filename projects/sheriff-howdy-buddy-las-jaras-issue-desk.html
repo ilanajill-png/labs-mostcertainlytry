@@ -690,7 +690,7 @@
           <label for="media-files">
             Add photo or video evidence
             <input id="media-files" name="mediaFiles" type="file" accept="image/*,video/*" multiple>
-            <span class="hint">The file previews here. The form will try to send selected media to shared intake too; very large files may need to be sent in chat or uploaded separately.</span>
+            <span class="hint">The file previews here and uploads to private Sheriff evidence storage when R2 is active. Limit 25 MB per file, 6 files at a time; larger videos should be sent in chat or handled manually.</span>
           </label>
           <label for="media-description">
             Evidence description
@@ -1844,7 +1844,7 @@
             <label>
               Add follow-up photo or video
               <input name="followUpFiles" type="file" accept="image/*,video/*" multiple>
-              <span class="hint">Until evidence storage is enabled, selected files are recorded as metadata. Upload the same file in chat when Sheriff needs to see it.</span>
+              <span class="hint">Uploads go to private Sheriff evidence storage when R2 is active. Limit 25 MB per file, 6 files at a time; if upload fails, metadata stays on the case and Sheriff may ask for the media in chat.</span>
             </label>
             <div class="actions">
               <button type="submit">Send Follow-Up To Sheriff</button>

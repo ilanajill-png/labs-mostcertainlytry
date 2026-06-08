@@ -6,3 +6,7 @@ compatibility_date = "2026-06-07"
 binding = "DB"
 database_name = "sheriff_lone_star_cases"
 database_id = "e8554fa2-7509-4a14-81e2-4b753c803838"
+
+[[r2_buckets]]
+binding = "EVIDENCE"
+bucket_name = "sheriff-lone-star-evidence"

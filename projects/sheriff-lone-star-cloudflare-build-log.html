@@ -171,9 +171,9 @@
             </tr>
             <tr>
               <td>Media handling decision</td>
-              <td>Endpoint prepared; account setup blocked</td>
+              <td>R2 implementation ready</td>
               <td>20 to 40 minutes</td>
-              <td>The Worker now has an evidence upload route and health check for R2 status, but Wrangler reports that R2 must be enabled in the Cloudflare dashboard before a bucket can be created. Until then, the form records file metadata and the receipt says R2 is not active.</td>
+              <td>The Worker evidence route now has an R2 bucket binding, private object path, upload limits, and health-check policy output. The remaining account-side step is creating <code>sheriff-lone-star-evidence</code> and deploying the bound Worker.</td>
             </tr>
             <tr>
               <td>Set mobile evidence upload limit</td>
@@ -253,12 +253,12 @@
           <li><strong>Public writes:</strong> allow public case creation so household reporting stays easy.</li>
           <li><strong>Admin UX:</strong> use a password-protected admin route or admin panel for closeout actions, with the Worker enforcing <code>X-Sheriff-Admin-Token</code>. Avoid hidden fields and browser prompts for the production UX.</li>
           <li><strong>Case closure:</strong> require an admin token to close cases. Sheriff jurisdiction is public-facing, but the badge does not hand out the Case Closed stamp to every passerby.</li>
-          <li><strong>Evidence storage:</strong> recommend Cloudflare R2 for production evidence files once billing is fixed. Until then, use Google Drive as the evidence storage bridge, D1 for case metadata, and chat attachments/direct Gmail only as manual inspection fallbacks. FormSubmit is not reliable enough to be the evidence bridge.</li>
+          <li><strong>Evidence storage:</strong> use Cloudflare R2 for production evidence files. Store files privately under <code>private/cases/{caseId}/evidence/{timestamp}-{safeFilename}</code>, never expose public R2 URLs, keep D1 as the case metadata record, and retain chat attachment/manual inspection only as a fallback when uploads fail or files are too large.</li>
           <li><strong>Mobile upload cap:</strong> start with 25 MB per file for direct uploads. This is below common mobile pain thresholds and avoids pushing large video bodies through the Worker until a direct R2 multipart flow is built.</li>
           <li><strong>Evidence lifecycle:</strong> evidence should be temporary by default. When an admin marks a case closed, the Worker deletes stored evidence files and clears attachment records so the board does not become a long-term evidence warehouse by accident.</li>
           <li><strong>Automation model:</strong> new cases should automatically enter a Sheriff investigation queue. The web page displays the queue state; OpenClaw or another scheduled runner can poll D1 and advance cases from queued to working, needs evidence, ready for review, or resolved.</li>
-          <li><strong>Follow-up capture:</strong> when Sheriff needs more information, the case board should accept human text answers and photo/video metadata directly on the case. Actual media inspection still requires chat attachment or future evidence storage.</li>
-          <li><strong>No-R2 evidence bridge:</strong> while Cloudflare R2 is blocked, use a Google Drive folder shared with the Worker service account. Configure Worker secrets <code>GOOGLE_CLIENT_EMAIL</code> and <code>GOOGLE_PRIVATE_KEY</code>, and a folder id variable/secret <code>GOOGLE_DRIVE_FOLDER_ID</code>.</li>
+          <li><strong>Follow-up capture:</strong> when Sheriff needs more information, the case board should accept human text answers and photo/video uploads directly on the case. If R2 upload is unavailable, preserve file metadata and ask for the media in chat.</li>
+          <li><strong>Drive bridge:</strong> keep the Google Drive path as an emergency fallback only. R2 is the preferred evidence archive now that the subscription exists.</li>
           <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
           <li><strong>Serafina confirmation:</strong> after automatic escalation, show: <q>I've escalated this to Sheriff Lone Star with a link to view the case.</q> Include the direct case link and an optional receive-updates field.</li>
           <li><strong>Update notifications:</strong> collect optional email for case updates. Store the email preference with the case, redact contact details from public case reads, and send only from admin-triggered case updates.</li>
@@ -276,7 +276,7 @@
           <li><strong>Wrangler:</strong> Cloudflare Wrangler is available for local deployment and database setup. OAuth details are private operational metadata.</li>
           <li><strong>D1 status:</strong> <code>sheriff_lone_star_cases</code> exists, schema is applied, and the Worker has an active <code>env.DB</code> binding.</li>
           <li><strong>Admin closeout:</strong> the route exists, rejects close attempts without the admin token, and now includes lifecycle cleanup for case evidence.</li>
-          <li><strong>R2 status:</strong> Wrangler returned Cloudflare API code <code>10042</code>: R2 must be enabled through the Cloudflare dashboard before buckets can be listed or created.</li>
+          <li><strong>R2 status:</strong> the Worker is configured for bucket <code>sheriff-lone-star-evidence</code> with binding <code>EVIDENCE</code>. Local notes are in <code>workers/sheriff-lone-star-case-api/R2_EVIDENCE_SETUP.md</code>.</li>
           <li><strong>Email status:</strong> <code>ADMIN_TOKEN</code> is the only Worker secret currently configured. Email updates need <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code> before they can be activated.</li>
         </ul>
       </section>
@@ -298,7 +298,7 @@ codex mcp login cloudflare</code></pre>
         <h2>Remaining Implementation Details</h2>
         <ul>
           <li>Build the password-protected Sheriff admin panel that collects the token once per session and calls <code>POST /cases/:id/close</code>.</li>
-          <li>Enable R2 in the Cloudflare dashboard, create the Sheriff evidence bucket, add the R2 binding, and rerun the evidence upload smoke test.</li>
+          <li>Create the R2 bucket if it does not already exist, deploy the Worker with the <code>EVIDENCE</code> binding, and rerun the evidence upload smoke test.</li>
           <li>Add email provider secrets after account setup: <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code>.</li>
           <li>Run one email test from an admin case-update route before announcing notifications as live.</li>
           <li>Decide whether large video evidence should use a future R2 multipart/direct-upload flow or stay manual/chat-only.</li>

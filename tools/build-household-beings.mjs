@@ -1362,9 +1362,9 @@ const blockedWorkflows = [
     role: "Sheriff",
     priority: "P1",
     workflow: "Evidence archive for case photos and videos",
-    blockedBy: "Cloudflare R2 bucket, upload path, size rules, and private/public media policy",
-    currentFallback: "Media metadata in forms; actual visual inspection only when media is attached in chat.",
-    reviewQuestion: "Should R2 evidence upload be next after D1, or should evidence stay chat-only for the first production pass?"
+    blockedBy: "R2 bucket deployment and one live upload smoke test",
+    currentFallback: "Worker stores file metadata in D1; actual visual inspection can still happen by chat if R2 upload fails.",
+    reviewQuestion: "After deploying the R2 bucket binding, does a mobile photo upload land in private R2 storage and delete on Case Closed?"
   },
   {
     role: "Serafina",

@@ -451,9 +451,9 @@
             <span>Workflow owner: Sheriff</span>
           </div>
         </div>
-        <p><strong>Blocked by:</strong> Cloudflare R2 bucket, upload path, size rules, and private/public media policy</p>
-        <p><strong>Current fallback:</strong> Media metadata in forms; actual visual inspection only when media is attached in chat.</p>
-        <p><strong>Review question:</strong> Should R2 evidence upload be next after D1, or should evidence stay chat-only for the first production pass?</p>
+        <p><strong>Blocked by:</strong> R2 bucket deployment and one live upload smoke test</p>
+        <p><strong>Current fallback:</strong> Worker stores file metadata in D1; actual visual inspection can still happen by chat if R2 upload fails.</p>
+        <p><strong>Review question:</strong> After deploying the R2 bucket binding, does a mobile photo upload land in private R2 storage and delete on Case Closed?</p>
         <div class="two">
           <label class="check">
             <input type="checkbox" data-blocker-done="p1-2-sheriff-evidence-archive-for-case-photos-and-videos">

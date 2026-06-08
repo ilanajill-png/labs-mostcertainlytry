@@ -3,6 +3,20 @@ const ALLOWED_ORIGINS = new Set([
   "http://localhost:8787",
   "http://127.0.0.1:8787"
 ]);
+const EVIDENCE_BUCKET_NAME = "sheriff-lone-star-evidence";
+const EVIDENCE_PATH_PREFIX = "private/cases";
+const EVIDENCE_MAX_FILE_BYTES = 25 * 1024 * 1024;
+const EVIDENCE_MAX_FILES_PER_REQUEST = 6;
+const EVIDENCE_POLICY = {
+  access: "private",
+  publicUrls: false,
+  objectPath: `${EVIDENCE_PATH_PREFIX}/{caseId}/evidence/{timestamp}-{safeFilename}`,
+  maxFileBytes: EVIDENCE_MAX_FILE_BYTES,
+  maxFilesPerRequest: EVIDENCE_MAX_FILES_PER_REQUEST,
+  allowedContentTypes: ["image/*", "video/*"],
+  retention: "temporary-until-case-close",
+  closeout: "delete R2 objects and clear attachment records when an admin closes a case"
+};
 
 function corsHeaders(request) {
   const origin = request.headers.get("Origin") || "";
@@ -131,6 +145,8 @@ function databaseStatus(env) {
 function evidenceStatus(env) {
   return {
     r2Bound: Boolean(env.EVIDENCE),
+    bucketName: EVIDENCE_BUCKET_NAME,
+    policy: EVIDENCE_POLICY,
     googleDriveConfigured: Boolean(env.GOOGLE_DRIVE_FOLDER_ID && (
       (env.GOOGLE_CLIENT_EMAIL && env.GOOGLE_PRIVATE_KEY) ||
       (env.GOOGLE_OAUTH_CLIENT_ID && env.GOOGLE_OAUTH_CLIENT_SECRET && env.GOOGLE_OAUTH_REFRESH_TOKEN)
@@ -140,6 +156,15 @@ function evidenceStatus(env) {
 
 function safeFileName(name) {
   return clean(name).replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "evidence";
+}
+
+function evidenceObjectKey(caseId, fileName, now = Date.now()) {
+  return `${EVIDENCE_PATH_PREFIX}/${safeFileName(caseId)}/evidence/${now}-${safeFileName(fileName)}`;
+}
+
+function allowedEvidenceType(type) {
+  const cleanType = clean(type).toLowerCase();
+  return cleanType.startsWith("image/") || cleanType.startsWith("video/") || cleanType === "application/octet-stream";
 }
 
 function base64UrlEncode(input) {
@@ -483,30 +508,42 @@ async function uploadCaseEvidence(env, request, id) {
   const form = await request.formData();
   const files = form.getAll("mediaFiles").filter((file) => file && typeof file === "object" && "arrayBuffer" in file);
   if (!files.length) return jsonResponse(request, { error: "No evidence files were provided" }, 400);
+  if (files.length > EVIDENCE_MAX_FILES_PER_REQUEST) {
+    return jsonResponse(request, { error: `Upload no more than ${EVIDENCE_MAX_FILES_PER_REQUEST} evidence files at a time` }, 413);
+  }
 
-  const maxBytes = 25 * 1024 * 1024;
   const current = JSON.parse(existing.data);
   const uploaded = [];
   for (const file of files) {
-    if (file.size > maxBytes) {
+    const mediaType = file.type || "application/octet-stream";
+    if (file.size > EVIDENCE_MAX_FILE_BYTES) {
       return jsonResponse(request, { error: `${file.name} is over the 25 MB mobile upload limit` }, 413);
     }
+    if (!allowedEvidenceType(mediaType)) {
+      return jsonResponse(request, { error: `${file.name} is not an allowed evidence type; upload images or videos only` }, 415);
+    }
     if (env.EVIDENCE) {
-      const key = `cases/${id}/evidence/${Date.now()}-${safeFileName(file.name)}`;
+      const key = evidenceObjectKey(id, file.name);
       await env.EVIDENCE.put(key, await file.arrayBuffer(), {
-        httpMetadata: { contentType: file.type || "application/octet-stream" },
+        httpMetadata: { contentType: mediaType },
         customMetadata: {
           caseId: id,
           originalName: clean(file.name),
-          uploadedAt: new Date().toISOString()
+          uploadedAt: new Date().toISOString(),
+          access: EVIDENCE_POLICY.access,
+          retention: EVIDENCE_POLICY.retention
         }
       });
       uploaded.push({
         name: clean(file.name),
-        type: file.type || "application/octet-stream",
+        type: mediaType,
         sizeBytes: file.size,
         size: `${Math.round(file.size / 1024)} KB`,
         r2Key: key,
+        bucketName: EVIDENCE_BUCKET_NAME,
+        publicUrl: "",
+        access: EVIDENCE_POLICY.access,
+        retention: EVIDENCE_POLICY.retention,
         storedIn: "Cloudflare R2",
         uploadedAt: new Date().toISOString()
       });
