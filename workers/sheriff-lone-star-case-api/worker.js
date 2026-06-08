@@ -114,6 +114,39 @@ function safeFileName(name) {
   return clean(name).replace(/[^a-zA-Z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "evidence";
 }
 
+async function cleanupCaseEvidence(env, current) {
+  const attachments = Array.isArray(current.mediaAttachments) ? current.mediaAttachments : [];
+  const r2Attachments = attachments.filter((item) => clean(item.r2Key));
+  if (r2Attachments.length && !env.EVIDENCE) {
+    throw new Error("R2 evidence cleanup requires the EVIDENCE binding");
+  }
+
+  if (env.EVIDENCE) {
+    await Promise.all(r2Attachments.map((item) => env.EVIDENCE.delete(item.r2Key)));
+  }
+
+  return {
+    deletedAt: new Date().toISOString(),
+    deletedR2Objects: r2Attachments.length,
+    clearedAttachmentRecords: attachments.length,
+    retainedEvidence: false,
+    policy: "Evidence files and attachment records are removed when a case is marked closed."
+  };
+}
+
+async function closeoutCase(env, current, patch, id) {
+  const evidenceCleanup = await cleanupCaseEvidence(env, current);
+  return normalizeCase({
+    ...current,
+    ...patch,
+    id,
+    status: "Closed",
+    closedAt: new Date().toISOString(),
+    mediaAttachments: [],
+    evidenceCleanup
+  });
+}
+
 async function sendEmail(env, issue, message) {
   if (!providerStatus(env).email) return { sent: false, reason: "email provider not configured" };
   const response = await fetch("https://api.resend.com/emails", {
@@ -190,7 +223,9 @@ async function updateCase(env, request, id) {
   if (closingCase(current, patch) && !hasAdminToken(request, env)) {
     return jsonResponse(request, { error: "Closing a case requires Sheriff admin token" }, 403);
   }
-  const issue = normalizeCase({ ...current, ...patch, id });
+  const issue = closingCase(current, patch)
+    ? await closeoutCase(env, current, patch, id)
+    : normalizeCase({ ...current, ...patch, id });
   await env.DB.prepare(
     "UPDATE cases SET status = ?, updated_at = ?, data = ? WHERE id = ?"
   )
@@ -207,13 +242,7 @@ async function closeCase(env, request, id) {
   if (!existing) return jsonResponse(request, { error: "Case not found" }, 404);
   const body = request.headers.get("Content-Length") === "0" ? {} : await request.json().catch(() => ({}));
   const current = JSON.parse(existing.data);
-  const issue = normalizeCase({
-    ...current,
-    ...body,
-    id,
-    status: "Closed",
-    closedAt: new Date().toISOString()
-  });
+  const issue = await closeoutCase(env, current, body, id);
   await env.DB.prepare(
     "UPDATE cases SET status = ?, updated_at = ?, data = ? WHERE id = ?"
   )

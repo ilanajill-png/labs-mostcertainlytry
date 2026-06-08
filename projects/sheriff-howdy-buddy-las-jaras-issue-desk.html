@@ -1651,7 +1651,11 @@
         const merged = localMergeCase(closedIssue);
         renderCases(merged);
         renderLatestCurrentRead(merged);
-        sharedStatus.textContent = "Case closed on the shared Worker board.";
+        const cleanup = closedIssue.evidenceCleanup;
+        const cleanupText = cleanup
+          ? ` Evidence cleanup: ${cleanup.deletedR2Objects || 0} stored file${cleanup.deletedR2Objects === 1 ? "" : "s"} deleted and ${cleanup.clearedAttachmentRecords || 0} attachment record${cleanup.clearedAttachmentRecords === 1 ? "" : "s"} cleared.`
+          : "";
+        sharedStatus.textContent = `Case closed on the shared Worker board.${cleanupText}`;
       } catch (error) {
         if (String(error.message).includes("token") || String(error.message).includes("403")) clearAdminToken();
         sharedStatus.textContent = `Case close failed. ${error.message}`;

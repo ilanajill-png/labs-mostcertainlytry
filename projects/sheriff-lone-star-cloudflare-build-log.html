@@ -182,6 +182,12 @@
               <td>Use a conservative first-pass cap of 25 MB per file for direct mobile uploads. Larger videos should go through chat/manual evidence handling or a future R2 multipart/direct-upload flow.</td>
             </tr>
             <tr>
+              <td>Add evidence lifecycle cleanup on closeout</td>
+              <td>Complete</td>
+              <td>15 minutes</td>
+              <td>Closing a case now runs an admin cleanup flow: stored R2 evidence objects are deleted, attachment records are cleared from the D1 case payload, and the close response reports the cleanup count.</td>
+            </tr>
+            <tr>
               <td>Auto-create Sheriff case from Serafina escalation</td>
               <td>Accepted</td>
               <td>20 to 35 minutes</td>
@@ -205,10 +211,11 @@
           <li><code>POST /cases</code> creates or replaces a case.</li>
           <li><code>GET /cases/:id</code> reads one case.</li>
           <li><code>PUT /cases/:id</code> updates status, checklist state, closeout data, or other case fields.</li>
-          <li><code>POST /cases/:id/close</code> closes one case and requires <code>X-Sheriff-Admin-Token</code>.</li>
+          <li><code>POST /cases/:id/close</code> closes one case, requires <code>X-Sheriff-Admin-Token</code>, and runs evidence cleanup.</li>
           <li><code>POST /cases/:id/updates</code> records an admin case update and can send an email once provider secrets are configured.</li>
           <li><code>POST /cases/:id/evidence</code> is prepared for R2 evidence uploads and returns a clear configuration error until R2 is enabled and bound.</li>
           <li>Changing a case from open to closed requires <code>X-Sheriff-Admin-Token</code> and the Worker secret <code>ADMIN_TOKEN</code>.</li>
+          <li>When a case is marked closed, the Worker deletes any stored R2 evidence listed on that case and clears attachment metadata from the D1 record.</li>
           <li>CORS is limited to <code>https://labs.mostcertainlytry.com</code> plus local Worker preview URLs.</li>
         </ul>
       </section>
@@ -221,6 +228,7 @@
           <li><strong>Case closure:</strong> require an admin token to close cases. Sheriff jurisdiction is public-facing, but the badge does not hand out the Case Closed stamp to every passerby.</li>
           <li><strong>Evidence storage:</strong> recommend Cloudflare R2 for production evidence files, D1 for case metadata, and chat attachments for visual analysis. FormSubmit can remain a backup notification path, not the evidence system of record.</li>
           <li><strong>Mobile upload cap:</strong> start with 25 MB per file for direct uploads. This is below common mobile pain thresholds and avoids pushing large video bodies through the Worker until a direct R2 multipart flow is built.</li>
+          <li><strong>Evidence lifecycle:</strong> evidence should be temporary by default. When an admin marks a case closed, the Worker deletes stored evidence files and clears attachment records so the board does not become a long-term evidence warehouse by accident.</li>
           <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
           <li><strong>Serafina confirmation:</strong> after automatic escalation, show: <q>I've escalated this to Sheriff Lone Star with a link to view the case.</q> Include the direct case link and an optional receive-updates field.</li>
           <li><strong>Update notifications:</strong> collect optional email for case updates. Store the email preference with the case, redact contact details from public case reads, and send only from admin-triggered case updates.</li>
@@ -237,7 +245,7 @@
           <li><strong>Worker deployed:</strong> <code>https://sheriff-lone-star-case-api.ilanajill.workers.dev</code>.</li>
           <li><strong>Wrangler:</strong> Cloudflare Wrangler is available for local deployment and database setup. OAuth details are private operational metadata.</li>
           <li><strong>D1 status:</strong> <code>sheriff_lone_star_cases</code> exists, schema is applied, and the Worker has an active <code>env.DB</code> binding.</li>
-          <li><strong>Admin closeout:</strong> the route exists and rejects close attempts without the admin token.</li>
+          <li><strong>Admin closeout:</strong> the route exists, rejects close attempts without the admin token, and now includes lifecycle cleanup for case evidence.</li>
           <li><strong>R2 status:</strong> Wrangler returned Cloudflare API code <code>10042</code>: R2 must be enabled through the Cloudflare dashboard before buckets can be listed or created.</li>
           <li><strong>Email status:</strong> <code>ADMIN_TOKEN</code> is the only Worker secret currently configured. Email updates need <code>RESEND_API_KEY</code> and <code>FROM_EMAIL</code> before they can be activated.</li>
         </ul>
