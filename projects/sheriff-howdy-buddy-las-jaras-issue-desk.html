@@ -1431,18 +1431,8 @@
       }
 
       const payload = new FormData();
-      payload.append("_subject", `Las Jaras Sheriff Evidence: ${issue.caseTitle}`);
-      payload.append("_template", "table");
-      payload.append("_captcha", "false");
-      payload.append("case_id", issue.id);
-      payload.append("case_title", issue.caseTitle);
-      payload.append("case_status", issue.status);
-      payload.append("evidence_stage", context.stage || "case evidence");
-      payload.append("follow_up_id", context.followUpId || "");
-      payload.append("submitted_at", new Date().toISOString());
-      payload.append("evidence_note", context.note || issue.mediaDescription || "");
-      payload.append("evidence_files", fileList.map((file) => `${file.name} (${file.type || "unknown"}, ${fileSizeLabel(file.size)})`).join("; "));
-      payload.append("case_json", JSON.stringify(issue, null, 2));
+      const fields = evidenceEmailFields(issue, fileList, context);
+      for (const [key, value] of Object.entries(fields)) payload.append(key, value);
       for (const file of fileList) payload.append("attachment", file, file.name);
 
       try {
@@ -1458,12 +1448,112 @@
           message: `${fileList.length} evidence file${fileList.length === 1 ? "" : "s"} sent by email copy.`
         };
       } catch (error) {
-        return {
-          ok: false,
-          count: 0,
-          message: `Evidence email copy failed; metadata remains on the case. ${error.message}`
-        };
+        return submitEvidenceEmailFormFallback(issue, fileList, context, error);
       }
+    }
+
+    function evidenceEmailFields(issue, files, context = {}) {
+      return {
+        _subject: `Las Jaras Sheriff Evidence: ${issue.caseTitle}`,
+        _template: "table",
+        _captcha: "false",
+        case_id: issue.id,
+        case_title: issue.caseTitle,
+        case_status: issue.status,
+        evidence_stage: context.stage || "case evidence",
+        follow_up_id: context.followUpId || "",
+        submitted_at: new Date().toISOString(),
+        evidence_note: context.note || issue.mediaDescription || "",
+        evidence_files: files.map((file) => `${file.name} (${file.type || "unknown"}, ${fileSizeLabel(file.size)})`).join("; "),
+        case_json: JSON.stringify(issue, null, 2)
+      };
+    }
+
+    function submitEvidenceEmailFormFallback(issue, files, context = {}, originalError = null) {
+      const action = formSubmitEndpoint.replace("/ajax/", "/");
+      return new Promise((resolve) => {
+        const iframeName = `sheriff-evidence-email-${Date.now()}`;
+        const iframe = document.createElement("iframe");
+        iframe.name = iframeName;
+        iframe.title = "Sheriff evidence email handoff";
+        iframe.hidden = true;
+        iframe.style.display = "none";
+
+        const form = document.createElement("form");
+        form.action = action;
+        form.method = "POST";
+        form.enctype = "multipart/form-data";
+        form.target = iframeName;
+        form.hidden = true;
+
+        const fields = evidenceEmailFields(issue, files, context);
+        for (const [key, value] of Object.entries(fields)) {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = value;
+          form.append(input);
+        }
+
+        let attached = 0;
+        for (const file of files) {
+          try {
+            const transfer = new DataTransfer();
+            transfer.items.add(file);
+            const input = document.createElement("input");
+            input.type = "file";
+            input.name = "attachment";
+            input.files = transfer.files;
+            form.append(input);
+            attached += 1;
+          } catch (_error) {
+            // Some browsers do not allow assigning FileList programmatically.
+          }
+        }
+
+        const cleanup = () => {
+          form.remove();
+          iframe.remove();
+        };
+
+        let settled = false;
+        const finish = (result) => {
+          if (settled) return;
+          settled = true;
+          cleanup();
+          resolve(result);
+        };
+
+        iframe.addEventListener("load", () => {
+          finish({
+            ok: true,
+            count: attached,
+            message: `${attached} evidence file${attached === 1 ? "" : "s"} handed to email fallback. Check ilanajill@gmail.com for the attachment.`
+          });
+        }, { once: true });
+
+        document.body.append(iframe, form);
+        try {
+          form.submit();
+        } catch (error) {
+          finish({
+            ok: false,
+            count: 0,
+            message: `Evidence email copy failed; metadata remains on the case. ${error.message || originalError?.message || "FormSubmit fallback failed"}`
+          });
+          return;
+        }
+
+        window.setTimeout(() => {
+          finish({
+            ok: attached > 0,
+            count: attached,
+            message: attached > 0
+              ? `${attached} evidence file${attached === 1 ? "" : "s"} handed to email fallback. Check ilanajill@gmail.com for the attachment.`
+              : `Evidence email copy failed; metadata remains on the case. ${originalError?.message || "Browser could not attach the selected file."}`
+          });
+        }, 8000);
+      });
     }
 
     function normalizeImportedCase(data) {
