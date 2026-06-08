@@ -53,6 +53,27 @@ function normalizeNotificationConsent(input = {}) {
   };
 }
 
+function normalizeInvestigationWorkflow(input = {}, caseStatus = "Open") {
+  const now = new Date().toISOString();
+  const closed = clean(caseStatus) === "Closed";
+  const status = closed ? "resolved" : clean(input.status) || "queued";
+  return {
+    ...input,
+    status,
+    assignedTo: clean(input.assignedTo) || "Sheriff Lone Star",
+    queuedAt: clean(input.queuedAt) || now,
+    updatedAt: now,
+    lastRunAt: clean(input.lastRunAt) || null,
+    nextAction: clean(input.nextAction) || (closed
+      ? "Case closed; no further investigation scheduled."
+      : "Start active investigation from the stored case prompt."),
+    evidenceMode: clean(input.evidenceMode) || "Use D1 case context and metadata; inspect actual media only when it is attached in chat or uploaded to evidence storage.",
+    resultSummary: clean(input.resultSummary),
+    blocker: clean(input.blocker),
+    runLog: Array.isArray(input.runLog) ? input.runLog : []
+  };
+}
+
 function normalizeCase(input) {
   const now = new Date().toISOString();
   const id = clean(input.id) || `sheriff-case-${Date.now()}`;
@@ -75,6 +96,7 @@ function normalizeCase(input) {
     mediaAttachments: Array.isArray(input.mediaAttachments) ? input.mediaAttachments : [],
     actionLane: Array.isArray(input.actionLane) ? input.actionLane : [],
     solutionStatus: input.solutionStatus && typeof input.solutionStatus === "object" ? input.solutionStatus : {},
+    investigationWorkflow: normalizeInvestigationWorkflow(input.investigationWorkflow, status),
     notificationConsent: normalizeNotificationConsent(input.notificationConsent),
     notificationLog: Array.isArray(input.notificationLog) ? input.notificationLog : []
   };

@@ -454,6 +454,11 @@
       color: #7b2f34;
     }
 
+    .workflow-chip {
+      background: rgba(169, 113, 31, .13);
+      color: #7a4b12;
+    }
+
     .solution-list {
       display: grid;
       gap: 8px;
@@ -704,6 +709,8 @@
             <dd id="case-receipt-id"></dd>
             <dt>Status</dt>
             <dd id="case-receipt-status"></dd>
+            <dt>Workflow</dt>
+            <dd id="case-receipt-workflow"></dd>
             <dt>Evidence</dt>
             <dd id="case-receipt-evidence"></dd>
             <dt>Updates</dt>
@@ -795,6 +802,7 @@
     const caseReceiptMessage = document.querySelector("#case-receipt-message");
     const caseReceiptId = document.querySelector("#case-receipt-id");
     const caseReceiptStatus = document.querySelector("#case-receipt-status");
+    const caseReceiptWorkflow = document.querySelector("#case-receipt-workflow");
     const caseReceiptEvidence = document.querySelector("#case-receipt-evidence");
     const caseReceiptUpdates = document.querySelector("#case-receipt-updates");
     const copyReceiptLink = document.querySelector("#copy-receipt-link");
@@ -958,6 +966,7 @@
       caseReceiptMessage.textContent = result.message || "The shared case board received this case.";
       caseReceiptId.textContent = issue.id;
       caseReceiptStatus.textContent = issue.status || "Open";
+      caseReceiptWorkflow.textContent = workflowLabel(issue.investigationWorkflow);
       caseReceiptEvidence.textContent = evidenceText;
       caseReceiptUpdates.textContent = updateText;
       caseReceipt.focus({ preventScroll: false });
@@ -979,6 +988,41 @@
         contact: optedIn ? clean(data.get("updateContact")) : "",
         consentText: optedIn && data.get("updateConsent") === "yes" ? updateConsentText() : "",
         consentedAt: optedIn && data.get("updateConsent") === "yes" ? new Date().toISOString() : null
+      };
+    }
+
+    function workflowLabel(workflow = {}) {
+      const labels = {
+        queued: "Queued for Sheriff investigation",
+        in_progress: "Sheriff investigation in progress",
+        needs_evidence: "Needs evidence in chat",
+        ready_for_review: "Ready for human review",
+        resolved: "Resolved"
+      };
+      return labels[workflow.status] || "Queued for Sheriff investigation";
+    }
+
+    function buildInvestigationWorkflow(issue) {
+      const now = new Date().toISOString();
+      const hasMedia = Boolean(issue.mediaAttachments?.length);
+      return {
+        status: "queued",
+        assignedTo: "Sheriff Lone Star",
+        queuedAt: now,
+        updatedAt: now,
+        lastRunAt: null,
+        nextAction: hasMedia
+          ? "Start active investigation from the case context; ask for the selected media in chat when visual inspection is needed."
+          : "Start active investigation from the case context and ask follow-up questions if evidence is missing.",
+        evidenceMode: hasMedia
+          ? "File metadata is on the case; actual media must be attached in chat until evidence storage is enabled."
+          : "No media selected; investigate from description and ask for photos only if useful.",
+        resultSummary: "",
+        blocker: "",
+        runLog: [{
+          at: now,
+          event: "Case submitted; Sheriff workflow queued."
+        }]
       };
     }
 
@@ -1221,6 +1265,7 @@
       issue.sheriffFirstRead = suggestionFor(issue);
       issue.solutionStatus = {};
       issue.investigationPrompt = buildInvestigationPrompt(issue);
+      issue.investigationWorkflow = buildInvestigationWorkflow(issue);
       return issue;
     }
 
@@ -1374,6 +1419,7 @@
       issue.solutionStatus = data.solutionStatus || {};
       issue.sharedSubmission = data.sharedSubmission || null;
       issue.investigationPrompt = data.investigationPrompt || buildInvestigationPrompt(issue);
+      issue.investigationWorkflow = data.investigationWorkflow || buildInvestigationWorkflow(issue);
       return issue;
     }
 
@@ -1480,6 +1526,7 @@
       sheriffNote.innerHTML = `
         <b>Case opened: ${escapeHtml(issue.caseTitle)}</b>
         <p><strong>Status:</strong> ${escapeHtml(issue.status)}. Sheriff has enough to start, not enough to be smug.</p>
+        <p><strong>Workflow:</strong> ${escapeHtml(workflowLabel(issue.investigationWorkflow))}. ${escapeHtml(issue.investigationWorkflow?.nextAction || "Start active investigation from the stored case prompt.")}</p>
         <p><strong>Severity log:</strong> ${escapeHtml(severity.level)} — ${escapeHtml(severity.target)}</p>
         ${updates}
         ${shared}
@@ -1550,6 +1597,7 @@
             <div class="case-meta">
               <span class="chip">${escapeHtml(issue.status)}</span>
               <span class="chip severity">${escapeHtml(severity.level)}</span>
+              <span class="chip workflow-chip">${escapeHtml(workflowLabel(issue.investigationWorkflow))}</span>
               <span>${escapeHtml(issue.location)}</span>
               <span>${escapeHtml(issue.caseType)}</span>
               <span>${escapeHtml(issue.urgency)}</span>
@@ -1557,6 +1605,7 @@
             <p>${escapeHtml(issue.description)}</p>
             <p><strong>Severity target:</strong> ${escapeHtml(severity.target)}</p>
             <p><strong>Evidence:</strong> ${escapeHtml(media)}</p>
+            <p><strong>Workflow next action:</strong> ${escapeHtml(issue.investigationWorkflow?.nextAction || "Start active investigation from the stored case prompt.")}</p>
             <p><strong>Shared status:</strong> ${escapeHtml(sharedLabel)}</p>
             <p><strong>Updates:</strong> ${escapeHtml(updateLabel)}</p>
             ${renderSolutionChecklist(issue, steps)}
