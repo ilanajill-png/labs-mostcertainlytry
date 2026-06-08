@@ -203,7 +203,7 @@
               <td>Add email evidence fallback</td>
               <td>Complete</td>
               <td>20 minutes</td>
-              <td>Until R2 is available, attached case and follow-up evidence files are also sent through the FormSubmit email endpoint while D1 keeps the dashboard metadata and evidence email log.</td>
+              <td>Until R2 is available, attached case and follow-up evidence files are also sent through the FormSubmit email endpoint while D1 keeps the dashboard metadata and evidence email log. Evidence copies now route to <code>ilanajill@gmail.com</code>, the mailbox available to the Sheriff inspection workflow.</td>
             </tr>
             <tr>
               <td>Auto-create Sheriff case from Serafina escalation</td>
@@ -252,7 +252,7 @@
           <li><strong>Evidence lifecycle:</strong> evidence should be temporary by default. When an admin marks a case closed, the Worker deletes stored evidence files and clears attachment records so the board does not become a long-term evidence warehouse by accident.</li>
           <li><strong>Automation model:</strong> new cases should automatically enter a Sheriff investigation queue. The web page displays the queue state; OpenClaw or another scheduled runner can poll D1 and advance cases from queued to working, needs evidence, ready for review, or resolved.</li>
           <li><strong>Follow-up capture:</strong> when Sheriff needs more information, the case board should accept human text answers and photo/video metadata directly on the case. Actual media inspection still requires chat attachment or future evidence storage.</li>
-          <li><strong>No-R2 evidence bridge:</strong> while Cloudflare R2 is blocked, file uploads should send an email copy through FormSubmit and store structured metadata plus email-send status in D1.</li>
+          <li><strong>No-R2 evidence bridge:</strong> while Cloudflare R2 is blocked, file uploads should send an email copy through FormSubmit to <code>ilanajill@gmail.com</code> and store structured metadata plus email-send status in D1.</li>
           <li><strong>Serafina escalation:</strong> yes, Serafina should automatically create a Sheriff case through the same API when escalation is selected.</li>
           <li><strong>Serafina confirmation:</strong> after automatic escalation, show: <q>I've escalated this to Sheriff Lone Star with a link to view the case.</q> Include the direct case link and an optional receive-updates field.</li>
           <li><strong>Update notifications:</strong> collect optional email for case updates. Store the email preference with the case, redact contact details from public case reads, and send only from admin-triggered case updates.</li>
