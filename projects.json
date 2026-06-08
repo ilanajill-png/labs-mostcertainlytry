@@ -16,7 +16,7 @@
       "Household Operations"
     ],
     "summary": "A profile directory and interaction chart for the beings, agents, lights, and role-personas running Las Jaras household workflows.",
-    "outcome": "Created a household role hierarchy with 27 profile pages, 27 browser-local daily workflow logs, a blocked-workflow review queue, jurisdiction links, persona names, and a cross-functional interaction map.",
+    "outcome": "Created a household role hierarchy with 27 profile pages, 27 browser-local daily workflow logs, an interactive blocked-workflow checklist managed by the Webmaster, jurisdiction links, persona names, and a cross-functional interaction map.",
     "url": "projects/household-beings.html",
     "source": "tools/build-household-beings.mjs"
   },

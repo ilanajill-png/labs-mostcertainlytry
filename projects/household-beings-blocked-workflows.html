@@ -300,6 +300,32 @@
       background: rgba(219, 234, 254, .7);
       color: var(--ink);
     }
+    .checklist-card {
+      display: grid;
+      gap: 14px;
+    }
+    .checklist-card.is-reviewed {
+      opacity: .68;
+      background: rgba(243, 244, 246, .85);
+    }
+    .checklist-card.is-reviewed h3,
+    .checklist-card.is-reviewed p {
+      color: #4b5563;
+    }
+    .checklist-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .checklist-meta span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .82);
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 850;
+    }
     pre {
       white-space: pre-wrap;
       overflow-wrap: anywhere;
@@ -361,15 +387,16 @@
       <div>
         <p class="kicker">Workflow review queue</p>
         <h1>Blocked Household Staff Workflows</h1>
-        <p class="lede">These are workflows that can be drafted, logged, or partially handled now, but need a missing backend, provider, hardware, permission, or data source before they can run repeatably.</p>
+        <p class="lede">These are workflows that can be drafted, logged, or partially handled now, but need a missing backend, provider, hardware, permission, or data source before they can run repeatably. Blue Static the Webmaster keeps the master checklist; the named role owns the actual workflow requirements.</p>
         <div class="toolbar">
           <a class="button primary" href="household-beings.html">Back to directory</a>
           <a class="button" href="#queue">Review queue</a>
         </div>
       </div>
       <aside class="panel">
-        <p class="label">Review rule</p>
-        <p>Handle these one at a time. For each blocker, decide: build now, buy/setup later, keep manual, or delete the workflow.</p>
+        <p class="label">Checklist manager</p>
+        <h2>Webmaster / Blue Static</h2>
+        <p>Blue Static manages the board because most blockers are systems, integrations, publishing, compliance, backend readiness, or build-log problems. Sheriff Lone Star and Serafina are first deputies for the P1 case-flow blockers.</p>
       </aside>
     </section>
     <section class="section panel">
@@ -378,281 +405,1044 @@
     </section>
     <section class="section" id="queue" aria-labelledby="queue-title">
       <h2 id="queue-title">One-By-One Review Queue</h2>
-      <div class="role-grid"><article class="role-card">
+      <p class="status-note" id="checklist-status" role="status" aria-live="polite">Loading checklist state.</p>
+      <div class="toolbar">
+        <button type="button" class="primary" id="copy-checklist">Copy checklist JSON</button>
+        <button type="button" id="download-checklist">Download checklist JSON</button>
+        <button type="button" class="danger" id="reset-checklist">Reset browser checklist</button>
+      </div>
+      <div class="role-grid"><article class="role-card checklist-card" data-blocker-card="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow">
         <div>
           <p class="label">P1 review 1</p>
           <h3>Sheriff: Cross-device case board and Case Closed admin flow</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Sheriff</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Cloudflare D1 binding, deployed Worker API, and admin closeout route</p>
         <p><strong>Current fallback:</strong> Browser-local Sheriff board plus FormSubmit backup.</p>
         <p><strong>Review question:</strong> Do we finish D1 first, or keep testing with local/browser notes a little longer?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow">
+            <span>Review complete</span>
+          </label>
+          <label for="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow-decision">Decision
+            <select id="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow-decision" data-blocker-decision="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow-notes">Review notes / next concrete step
+          <textarea id="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow-notes" data-blocker-notes="p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p1-2-sheriff-evidence-archive-for-case-photos-and-videos">
         <div>
           <p class="label">P1 review 2</p>
           <h3>Sheriff: Evidence archive for case photos and videos</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Sheriff</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Cloudflare R2 bucket, upload path, size rules, and private/public media policy</p>
         <p><strong>Current fallback:</strong> Media metadata in forms; actual visual inspection only when media is attached in chat.</p>
         <p><strong>Review question:</strong> Should R2 evidence upload be next after D1, or should evidence stay chat-only for the first production pass?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p1-2-sheriff-evidence-archive-for-case-photos-and-videos">
+            <span>Review complete</span>
+          </label>
+          <label for="p1-2-sheriff-evidence-archive-for-case-photos-and-videos-decision">Decision
+            <select id="p1-2-sheriff-evidence-archive-for-case-photos-and-videos-decision" data-blocker-decision="p1-2-sheriff-evidence-archive-for-case-photos-and-videos">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p1-2-sheriff-evidence-archive-for-case-photos-and-videos-notes">Review notes / next concrete step
+          <textarea id="p1-2-sheriff-evidence-archive-for-case-photos-and-videos-notes" data-blocker-notes="p1-2-sheriff-evidence-archive-for-case-photos-and-videos" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form">
         <div>
           <p class="label">P1 review 3</p>
           <h3>Serafina: Automatic Sheriff escalation from Serafina form</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Serafina</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Shared Sheriff API endpoint and D1 case creation being live</p>
         <p><strong>Current fallback:</strong> Serafina browser-local handoff pre-fills the Sheriff form on the same device.</p>
         <p><strong>Review question:</strong> Should Serafina auto-create cases as soon as D1 is live?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form">
+            <span>Review complete</span>
+          </label>
+          <label for="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form-decision">Decision
+            <select id="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form-decision" data-blocker-decision="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form-notes">Review notes / next concrete step
+          <textarea id="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form-notes" data-blocker-notes="p1-3-serafina-automatic-sheriff-escalation-from-serafina-form" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-4-sheriff-email-updates-on-case-progress">
         <div>
           <p class="label">P2 review 4</p>
           <h3>Sheriff: Email updates on case progress</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Sheriff</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Resend account setup, verified sender, Worker secrets, and one test send</p>
         <p><strong>Current fallback:</strong> Optional email consent is captured; no outgoing updates are sent yet.</p>
         <p><strong>Review question:</strong> Do we set up Resend now, or wait until the shared case board is live?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-4-sheriff-email-updates-on-case-progress">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-4-sheriff-email-updates-on-case-progress-decision">Decision
+            <select id="p2-4-sheriff-email-updates-on-case-progress-decision" data-blocker-decision="p2-4-sheriff-email-updates-on-case-progress">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-4-sheriff-email-updates-on-case-progress-notes">Review notes / next concrete step
+          <textarea id="p2-4-sheriff-email-updates-on-case-progress-notes" data-blocker-notes="p2-4-sheriff-email-updates-on-case-progress" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-5-all-staff-daily-notes-that-sync-across-devices">
         <div>
           <p class="label">P2 review 5</p>
           <h3>All Staff: Daily notes that sync across devices</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: All Staff</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Shared backend for daily notes</p>
         <p><strong>Current fallback:</strong> Each staff daily-note page saves notes in the current browser only.</p>
         <p><strong>Review question:</strong> Should daily notes share the Sheriff D1 database, or get their own D1 table?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-5-all-staff-daily-notes-that-sync-across-devices">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-5-all-staff-daily-notes-that-sync-across-devices-decision">Decision
+            <select id="p2-5-all-staff-daily-notes-that-sync-across-devices-decision" data-blocker-decision="p2-5-all-staff-daily-notes-that-sync-across-devices">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-5-all-staff-daily-notes-that-sync-across-devices-notes">Review notes / next concrete step
+          <textarea id="p2-5-all-staff-daily-notes-that-sync-across-devices-notes" data-blocker-notes="p2-5-all-staff-daily-notes-that-sync-across-devices" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-6-mailman-email-list-sign-up-and-follow-up-crm">
         <div>
           <p class="label">P2 review 6</p>
           <h3>Mailman: Email-list sign-up and follow-up CRM</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Mailman</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Mailing-list provider, consent storage, contact tagging, and unsubscribe path</p>
         <p><strong>Current fallback:</strong> Draft follow-ups in chat; Gmail only when explicitly requested.</p>
         <p><strong>Review question:</strong> Should Mailman use Resend audiences, a simple D1 contacts table, or a full CRM?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-6-mailman-email-list-sign-up-and-follow-up-crm">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-6-mailman-email-list-sign-up-and-follow-up-crm-decision">Decision
+            <select id="p2-6-mailman-email-list-sign-up-and-follow-up-crm-decision" data-blocker-decision="p2-6-mailman-email-list-sign-up-and-follow-up-crm">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-6-mailman-email-list-sign-up-and-follow-up-crm-notes">Review notes / next concrete step
+          <textarea id="p2-6-mailman-email-list-sign-up-and-follow-up-crm-notes" data-blocker-notes="p2-6-mailman-email-list-sign-up-and-follow-up-crm" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts">
         <div>
           <p class="label">P2 review 7</p>
           <h3>Personal Assistant: Shared calendar dashboard and timed alerts</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Personal Assistant</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Calendar integration, alert rules, and preferred notification channel</p>
         <p><strong>Current fallback:</strong> Manual chat reminders and OpenClaw cron/reminder notes when requested.</p>
         <p><strong>Review question:</strong> Which calendar source should be authoritative?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts-decision">Decision
+            <select id="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts-decision" data-blocker-decision="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts-notes">Review notes / next concrete step
+          <textarea id="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts-notes" data-blocker-notes="p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support">
         <div>
           <p class="label">P2 review 8</p>
           <h3>Sundries: Inventory intake with photos, receipts, and H-E-B ordering support</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Sundries</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Shared inventory API, receipt OCR, product-photo storage, and authenticated H-E-B browser access</p>
         <p><strong>Current fallback:</strong> Local inventory files and manual H-E-B checks when logged in.</p>
         <p><strong>Review question:</strong> Do we prioritize receipt import, pantry scanning, or H-E-B cart support first?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support-decision">Decision
+            <select id="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support-decision" data-blocker-decision="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support-notes">Review notes / next concrete step
+          <textarea id="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support-notes" data-blocker-notes="p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness">
         <div>
           <p class="label">P2 review 9</p>
           <h3>Webmaster: Automated site compliance, link checks, and build-log freshness</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Webmaster</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> CI link checker, scheduled audit job, and published-report format</p>
         <p><strong>Current fallback:</strong> Manual link checks before commits.</p>
         <p><strong>Review question:</strong> Should GitHub Actions run link checks on every push?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness-decision">Decision
+            <select id="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness-decision" data-blocker-decision="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness-notes">Review notes / next concrete step
+          <textarea id="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness-notes" data-blocker-notes="p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-10-archivist-searchable-durable-household-archive">
         <div>
           <p class="label">P2 review 10</p>
           <h3>Archivist: Searchable durable household archive</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Archivist</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Knowledge base/search layer and photo/archive storage policy</p>
         <p><strong>Current fallback:</strong> Workspace memory files, Labs pages, and git history.</p>
         <p><strong>Review question:</strong> Should the archive live in files, Notion, D1, or another searchable system?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-10-archivist-searchable-durable-household-archive">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-10-archivist-searchable-durable-household-archive-decision">Decision
+            <select id="p2-10-archivist-searchable-durable-household-archive-decision" data-blocker-decision="p2-10-archivist-searchable-durable-household-archive">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-10-archivist-searchable-durable-household-archive-notes">Review notes / next concrete step
+          <textarea id="p2-10-archivist-searchable-durable-household-archive-notes" data-blocker-notes="p2-10-archivist-searchable-durable-household-archive" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-11-librarian-reference-library-and-annotated-reading-lists">
         <div>
           <p class="label">P2 review 11</p>
           <h3>Librarian: Reference library and annotated reading lists</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Librarian</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Library database, saved-article workflow, tags, and source-quality rubric</p>
         <p><strong>Current fallback:</strong> Links in Labs pages and ad hoc web research.</p>
         <p><strong>Review question:</strong> Should Librarian use a simple HTML index first, or a dedicated library tool?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-11-librarian-reference-library-and-annotated-reading-lists">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-11-librarian-reference-library-and-annotated-reading-lists-decision">Decision
+            <select id="p2-11-librarian-reference-library-and-annotated-reading-lists-decision" data-blocker-decision="p2-11-librarian-reference-library-and-annotated-reading-lists">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-11-librarian-reference-library-and-annotated-reading-lists-notes">Review notes / next concrete step
+          <textarea id="p2-11-librarian-reference-library-and-annotated-reading-lists-notes" data-blocker-notes="p2-11-librarian-reference-library-and-annotated-reading-lists" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p2-12-treasurer-budget-subscription-and-receipt-tracking">
         <div>
           <p class="label">P2 review 12</p>
           <h3>Treasurer: Budget, subscription, and receipt tracking</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Treasurer</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Budget data source, subscription list, receipt OCR, and spending-permission boundary</p>
         <p><strong>Current fallback:</strong> No spending without explicit human confirmation; costs are discussed in chat.</p>
         <p><strong>Review question:</strong> Should Treasurer start with subscriptions, receipts, or project budgets?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p2-12-treasurer-budget-subscription-and-receipt-tracking">
+            <span>Review complete</span>
+          </label>
+          <label for="p2-12-treasurer-budget-subscription-and-receipt-tracking-decision">Decision
+            <select id="p2-12-treasurer-budget-subscription-and-receipt-tracking-decision" data-blocker-decision="p2-12-treasurer-budget-subscription-and-receipt-tracking">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p2-12-treasurer-budget-subscription-and-receipt-tracking-notes">Review notes / next concrete step
+          <textarea id="p2-12-treasurer-budget-subscription-and-receipt-tracking-notes" data-blocker-notes="p2-12-treasurer-budget-subscription-and-receipt-tracking" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-13-groundskeeper-outdoor-condition-monitoring">
         <div>
           <p class="label">P3 review 13</p>
           <h3>Groundskeeper: Outdoor condition monitoring</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Groundskeeper</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Weather station, soil sensors, garden photo archive, and routine field checks</p>
         <p><strong>Current fallback:</strong> Garden checklist pages and Serafina/Sheriff reports.</p>
         <p><strong>Review question:</strong> Are sensors worth it, or should we start with scheduled photo checks?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-13-groundskeeper-outdoor-condition-monitoring">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-13-groundskeeper-outdoor-condition-monitoring-decision">Decision
+            <select id="p3-13-groundskeeper-outdoor-condition-monitoring-decision" data-blocker-decision="p3-13-groundskeeper-outdoor-condition-monitoring">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-13-groundskeeper-outdoor-condition-monitoring-notes">Review notes / next concrete step
+          <textarea id="p3-13-groundskeeper-outdoor-condition-monitoring-notes" data-blocker-notes="p3-13-groundskeeper-outdoor-condition-monitoring" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard">
         <div>
           <p class="label">P3 review 14</p>
           <h3>Safety Officer: Home safety and emergency-prep dashboard</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Safety Officer</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Battery/expiration tracker, sensor dashboard, emergency-kit inventory</p>
         <p><strong>Current fallback:</strong> Manual Sheriff/Safety notes and room maintenance inventory.</p>
         <p><strong>Review question:</strong> Should the first Safety workflow be batteries, locks, emergency kit, or trip hazards?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard-decision">Decision
+            <select id="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard-decision" data-blocker-decision="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard-notes">Review notes / next concrete step
+          <textarea id="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard-notes" data-blocker-notes="p3-14-safety-officer-home-safety-and-emergency-prep-dashboard" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences">
         <div>
           <p class="label">P3 review 15</p>
           <h3>Concierge: Guestbook, welcome packets, and guest preferences</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Concierge</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Guest preference store, reusable welcome packet, and room-readiness checklist</p>
         <p><strong>Current fallback:</strong> Room guide and chat-prepared guest notes.</p>
         <p><strong>Review question:</strong> Should Concierge start with a guest intake form?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences-decision">Decision
+            <select id="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences-decision" data-blocker-decision="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences-notes">Review notes / next concrete step
+          <textarea id="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences-notes" data-blocker-notes="p3-15-concierge-guestbook-welcome-packets-and-guest-preferences" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-16-pr-affiliate-and-public-persona-tracking">
         <div>
           <p class="label">P3 review 16</p>
           <h3>PR: Affiliate and public persona tracking</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: PR</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Affiliate dashboard, disclosure templates, public metrics, and campaign tracker</p>
         <p><strong>Current fallback:</strong> Labs build logs and manual public-safe messaging review.</p>
         <p><strong>Review question:</strong> Which affiliate area should PR track first?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-16-pr-affiliate-and-public-persona-tracking">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-16-pr-affiliate-and-public-persona-tracking-decision">Decision
+            <select id="p3-16-pr-affiliate-and-public-persona-tracking-decision" data-blocker-decision="p3-16-pr-affiliate-and-public-persona-tracking">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-16-pr-affiliate-and-public-persona-tracking-notes">Review notes / next concrete step
+          <textarea id="p3-16-pr-affiliate-and-public-persona-tracking-notes" data-blocker-notes="p3-16-pr-affiliate-and-public-persona-tracking" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-17-social-media-manager-scheduled-social-posts">
         <div>
           <p class="label">P3 review 17</p>
           <h3>Social Media Manager: Scheduled social posts</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Social Media Manager</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Social scheduler, platform connections, approval workflow, and analytics</p>
         <p><strong>Current fallback:</strong> Draft captions in chat for human review.</p>
         <p><strong>Review question:</strong> Which platform should be first: Instagram, TikTok, LinkedIn, or something else?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-17-social-media-manager-scheduled-social-posts">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-17-social-media-manager-scheduled-social-posts-decision">Decision
+            <select id="p3-17-social-media-manager-scheduled-social-posts-decision" data-blocker-decision="p3-17-social-media-manager-scheduled-social-posts">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-17-social-media-manager-scheduled-social-posts-notes">Review notes / next concrete step
+          <textarea id="p3-17-social-media-manager-scheduled-social-posts-notes" data-blocker-notes="p3-17-social-media-manager-scheduled-social-posts" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-18-stylist-visual-moodboard-and-styling-library">
         <div>
           <p class="label">P3 review 18</p>
           <h3>Stylist: Visual moodboard and styling library</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Stylist</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Moodboard tool, swatch/photo library, and photo-lighting kit</p>
         <p><strong>Current fallback:</strong> Room guide, local design notes, and chat suggestions.</p>
         <p><strong>Review question:</strong> Should Stylist begin with room styling, wardrobe, or public project visuals?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-18-stylist-visual-moodboard-and-styling-library">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-18-stylist-visual-moodboard-and-styling-library-decision">Decision
+            <select id="p3-18-stylist-visual-moodboard-and-styling-library-decision" data-blocker-decision="p3-18-stylist-visual-moodboard-and-styling-library">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-18-stylist-visual-moodboard-and-styling-library-notes">Review notes / next concrete step
+          <textarea id="p3-18-stylist-visual-moodboard-and-styling-library-notes" data-blocker-notes="p3-18-stylist-visual-moodboard-and-styling-library" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker">
         <div>
           <p class="label">P3 review 19</p>
           <h3>Director of Fun: Event discovery and ticket deadline tracker</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Director of Fun</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Event aggregator, ticket-price tracker, and shared fun calendar</p>
         <p><strong>Current fallback:</strong> Manual web research and calendar reminders.</p>
         <p><strong>Review question:</strong> Which event sources should be watched first?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker-decision">Decision
+            <select id="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker-decision" data-blocker-decision="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker-notes">Review notes / next concrete step
+          <textarea id="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker-notes" data-blocker-notes="p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-20-theatre-streaming-availability-and-watchlist-manager">
         <div>
           <p class="label">P3 review 20</p>
           <h3>Theatre: Streaming availability and watchlist manager</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Theatre</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Watchlist database and streaming availability source</p>
         <p><strong>Current fallback:</strong> Manual watchlist notes in chat.</p>
         <p><strong>Review question:</strong> Should Theatre track household watchlists by mood, platform, or guest group first?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-20-theatre-streaming-availability-and-watchlist-manager">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-20-theatre-streaming-availability-and-watchlist-manager-decision">Decision
+            <select id="p3-20-theatre-streaming-availability-and-watchlist-manager-decision" data-blocker-decision="p3-20-theatre-streaming-availability-and-watchlist-manager">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-20-theatre-streaming-availability-and-watchlist-manager-notes">Review notes / next concrete step
+          <textarea id="p3-20-theatre-streaming-availability-and-watchlist-manager-notes" data-blocker-notes="p3-20-theatre-streaming-availability-and-watchlist-manager" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-21-dj-playlist-and-speaker-room-automation">
         <div>
           <p class="label">P3 review 21</p>
           <h3>DJ: Playlist and speaker-room automation</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: DJ</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Music-service integration and speaker/room automation permissions</p>
         <p><strong>Current fallback:</strong> Manual playlist notes and recommendations.</p>
         <p><strong>Review question:</strong> Which music service and rooms should DJ support first?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-21-dj-playlist-and-speaker-room-automation">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-21-dj-playlist-and-speaker-room-automation-decision">Decision
+            <select id="p3-21-dj-playlist-and-speaker-room-automation-decision" data-blocker-decision="p3-21-dj-playlist-and-speaker-room-automation">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-21-dj-playlist-and-speaker-room-automation-notes">Review notes / next concrete step
+          <textarea id="p3-21-dj-playlist-and-speaker-room-automation-notes" data-blocker-notes="p3-21-dj-playlist-and-speaker-room-automation" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-22-coach-fitness-tracker-and-routine-history">
         <div>
           <p class="label">P3 review 22</p>
           <h3>Coach: Fitness tracker and routine history</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Coach</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Fitness tracker integration, routine database, and recovery tracking</p>
         <p><strong>Current fallback:</strong> Manual movement planning in chat.</p>
         <p><strong>Review question:</strong> Should Coach start with daily movement, stretching, or strength tracking?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-22-coach-fitness-tracker-and-routine-history">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-22-coach-fitness-tracker-and-routine-history-decision">Decision
+            <select id="p3-22-coach-fitness-tracker-and-routine-history-decision" data-blocker-decision="p3-22-coach-fitness-tracker-and-routine-history">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-22-coach-fitness-tracker-and-routine-history-notes">Review notes / next concrete step
+          <textarea id="p3-22-coach-fitness-tracker-and-routine-history-notes" data-blocker-notes="p3-22-coach-fitness-tracker-and-routine-history" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-23-nanny-guest-wellness-and-comfort-preferences">
         <div>
           <p class="label">P3 review 23</p>
           <h3>Nanny: Guest wellness and comfort preferences</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Nanny</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Guest preference store, quiet-hours reminder, and first-aid inventory tracker</p>
         <p><strong>Current fallback:</strong> Manual guest comfort checklists.</p>
         <p><strong>Review question:</strong> Should Nanny start with guest comfort or household wellness reminders?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-23-nanny-guest-wellness-and-comfort-preferences">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-23-nanny-guest-wellness-and-comfort-preferences-decision">Decision
+            <select id="p3-23-nanny-guest-wellness-and-comfort-preferences-decision" data-blocker-decision="p3-23-nanny-guest-wellness-and-comfort-preferences">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-23-nanny-guest-wellness-and-comfort-preferences-notes">Review notes / next concrete step
+          <textarea id="p3-23-nanny-guest-wellness-and-comfort-preferences-notes" data-blocker-notes="p3-23-nanny-guest-wellness-and-comfort-preferences" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking">
         <div>
           <p class="label">P3 review 24</p>
           <h3>Guru: Spiritual check-in rhythm and ritual supply tracking</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Guru</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Reflection library, seasonal tracker, and ritual supply inventory</p>
         <p><strong>Current fallback:</strong> Serafina Sacred Calendar and chat prompts.</p>
         <p><strong>Review question:</strong> Should Guru start with a weekly check-in form?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking-decision">Decision
+            <select id="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking-decision" data-blocker-decision="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking-notes">Review notes / next concrete step
+          <textarea id="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking-notes" data-blocker-notes="p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-25-chef-recipe-database-tied-to-inventory">
         <div>
           <p class="label">P3 review 25</p>
           <h3>Chef: Recipe database tied to inventory</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Chef</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Recipe database, pantry integration, and meal-planning calendar</p>
         <p><strong>Current fallback:</strong> Pantry cookbook notes and active inventory files.</p>
         <p><strong>Review question:</strong> Should Chef start with shelf-stable recipes or weekly meal planning?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-25-chef-recipe-database-tied-to-inventory">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-25-chef-recipe-database-tied-to-inventory-decision">Decision
+            <select id="p3-25-chef-recipe-database-tied-to-inventory-decision" data-blocker-decision="p3-25-chef-recipe-database-tied-to-inventory">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-25-chef-recipe-database-tied-to-inventory-notes">Review notes / next concrete step
+          <textarea id="p3-25-chef-recipe-database-tied-to-inventory-notes" data-blocker-notes="p3-25-chef-recipe-database-tied-to-inventory" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-26-barista-drink-recipe-and-staple-tracker">
         <div>
           <p class="label">P3 review 26</p>
           <h3>Barista: Drink recipe and staple tracker</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Barista</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Coffee/tea inventory tracker and drink recipe card system</p>
         <p><strong>Current fallback:</strong> Manual recipes and inventory notes.</p>
         <p><strong>Review question:</strong> Should Barista start with coffee, tea, smoothies, or slushies?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-26-barista-drink-recipe-and-staple-tracker">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-26-barista-drink-recipe-and-staple-tracker-decision">Decision
+            <select id="p3-26-barista-drink-recipe-and-staple-tracker-decision" data-blocker-decision="p3-26-barista-drink-recipe-and-staple-tracker">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-26-barista-drink-recipe-and-staple-tracker-notes">Review notes / next concrete step
+          <textarea id="p3-26-barista-drink-recipe-and-staple-tracker-notes" data-blocker-notes="p3-26-barista-drink-recipe-and-staple-tracker" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-27-baker-baking-tool-and-ingredient-readiness">
         <div>
           <p class="label">P3 review 27</p>
           <h3>Baker: Baking tool and ingredient readiness</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Baker</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Baking inventory tracker, recipe testing log, and equipment list</p>
         <p><strong>Current fallback:</strong> Pantry notes and recipe drafts.</p>
         <p><strong>Review question:</strong> Should Baker start with bread, cookies, cakes, or tools?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-27-baker-baking-tool-and-ingredient-readiness">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-27-baker-baking-tool-and-ingredient-readiness-decision">Decision
+            <select id="p3-27-baker-baking-tool-and-ingredient-readiness-decision" data-blocker-decision="p3-27-baker-baking-tool-and-ingredient-readiness">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-27-baker-baking-tool-and-ingredient-readiness-notes">Review notes / next concrete step
+          <textarea id="p3-27-baker-baking-tool-and-ingredient-readiness-notes" data-blocker-notes="p3-27-baker-baking-tool-and-ingredient-readiness" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker">
         <div>
           <p class="label">P3 review 28</p>
           <h3>Bartender: Bar inventory and cocktail spec tracker</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Bartender</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Bar inventory app, wine/cellar tracker, and batched-syrup labels</p>
         <p><strong>Current fallback:</strong> Andre Mack guide and manual inventory notes.</p>
         <p><strong>Review question:</strong> Should Bartender start with wine, spirits, beer, or tiki supplies?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker-decision">Decision
+            <select id="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker-decision" data-blocker-decision="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker-notes">Review notes / next concrete step
+          <textarea id="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker-notes" data-blocker-notes="p3-28-bartender-bar-inventory-and-cocktail-spec-tracker" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking">
         <div>
           <p class="label">P3 review 29</p>
           <h3>Laundramat: Fabric-care guide and stain kit tracking</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Laundramat</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Laundry label/photo guide and fabric-care supply tracker</p>
         <p><strong>Current fallback:</strong> Room maintenance inventory and chat troubleshooting.</p>
         <p><strong>Review question:</strong> Should Laundramat start with stain guide or fabric care labels?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking-decision">Decision
+            <select id="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking-decision" data-blocker-decision="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking-notes">Review notes / next concrete step
+          <textarea id="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking-notes" data-blocker-notes="p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article>
-<article class="role-card">
+<article class="role-card checklist-card" data-blocker-card="p3-30-keeper-recurring-cleaning-dashboard">
         <div>
           <p class="label">P3 review 30</p>
           <h3>Keeper: Recurring cleaning dashboard</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: Keeper</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> Cleaning schedule app, robot vacuum map, and tool inventory</p>
         <p><strong>Current fallback:</strong> Room maintenance inventory and manual cleaning notes.</p>
         <p><strong>Review question:</strong> Should Keeper start with dusting/vacuuming cadence or room reset checklists?</p>
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="p3-30-keeper-recurring-cleaning-dashboard">
+            <span>Review complete</span>
+          </label>
+          <label for="p3-30-keeper-recurring-cleaning-dashboard-decision">Decision
+            <select id="p3-30-keeper-recurring-cleaning-dashboard-decision" data-blocker-decision="p3-30-keeper-recurring-cleaning-dashboard">
+              <option value="review-next">Review next</option>
+<option value="build-now">Build now</option>
+<option value="keep-manual">Keep manual</option>
+<option value="buy-setup-later">Buy/setup later</option>
+<option value="delete-defer">Delete/defer</option>
+            </select>
+          </label>
+        </div>
+        <label for="p3-30-keeper-recurring-cleaning-dashboard-notes">Review notes / next concrete step
+          <textarea id="p3-30-keeper-recurring-cleaning-dashboard-notes" data-blocker-notes="p3-30-keeper-recurring-cleaning-dashboard" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
       </article></div>
+      <h2>Current Checklist Data</h2>
+      <pre id="checklist-output">{}</pre>
     </section>
   </main>
   <footer>
     <span>Built as a blocker review list for Las Jaras staff workflows.</span>
     <a href="household-beings.html">Household beings directory</a>
-  </footer>
+  </footer><script>
+(() => {
+  const items = [{"id":"p1-1-sheriff-cross-device-case-board-and-case-closed-admin-flow","role":"Sheriff","priority":"P1","workflow":"Cross-device case board and Case Closed admin flow","manager":"Webmaster / Blue Static","owner":"Sheriff"},{"id":"p1-2-sheriff-evidence-archive-for-case-photos-and-videos","role":"Sheriff","priority":"P1","workflow":"Evidence archive for case photos and videos","manager":"Webmaster / Blue Static","owner":"Sheriff"},{"id":"p1-3-serafina-automatic-sheriff-escalation-from-serafina-form","role":"Serafina","priority":"P1","workflow":"Automatic Sheriff escalation from Serafina form","manager":"Webmaster / Blue Static","owner":"Serafina"},{"id":"p2-4-sheriff-email-updates-on-case-progress","role":"Sheriff","priority":"P2","workflow":"Email updates on case progress","manager":"Webmaster / Blue Static","owner":"Sheriff"},{"id":"p2-5-all-staff-daily-notes-that-sync-across-devices","role":"All Staff","priority":"P2","workflow":"Daily notes that sync across devices","manager":"Webmaster / Blue Static","owner":"All Staff"},{"id":"p2-6-mailman-email-list-sign-up-and-follow-up-crm","role":"Mailman","priority":"P2","workflow":"Email-list sign-up and follow-up CRM","manager":"Webmaster / Blue Static","owner":"Mailman"},{"id":"p2-7-personal-assistant-shared-calendar-dashboard-and-timed-alerts","role":"Personal Assistant","priority":"P2","workflow":"Shared calendar dashboard and timed alerts","manager":"Webmaster / Blue Static","owner":"Personal Assistant"},{"id":"p2-8-sundries-inventory-intake-with-photos-receipts-and-h-e-b-ordering-support","role":"Sundries","priority":"P2","workflow":"Inventory intake with photos, receipts, and H-E-B ordering support","manager":"Webmaster / Blue Static","owner":"Sundries"},{"id":"p2-9-webmaster-automated-site-compliance-link-checks-and-build-log-freshness","role":"Webmaster","priority":"P2","workflow":"Automated site compliance, link checks, and build-log freshness","manager":"Webmaster / Blue Static","owner":"Webmaster"},{"id":"p2-10-archivist-searchable-durable-household-archive","role":"Archivist","priority":"P2","workflow":"Searchable durable household archive","manager":"Webmaster / Blue Static","owner":"Archivist"},{"id":"p2-11-librarian-reference-library-and-annotated-reading-lists","role":"Librarian","priority":"P2","workflow":"Reference library and annotated reading lists","manager":"Webmaster / Blue Static","owner":"Librarian"},{"id":"p2-12-treasurer-budget-subscription-and-receipt-tracking","role":"Treasurer","priority":"P2","workflow":"Budget, subscription, and receipt tracking","manager":"Webmaster / Blue Static","owner":"Treasurer"},{"id":"p3-13-groundskeeper-outdoor-condition-monitoring","role":"Groundskeeper","priority":"P3","workflow":"Outdoor condition monitoring","manager":"Webmaster / Blue Static","owner":"Groundskeeper"},{"id":"p3-14-safety-officer-home-safety-and-emergency-prep-dashboard","role":"Safety Officer","priority":"P3","workflow":"Home safety and emergency-prep dashboard","manager":"Webmaster / Blue Static","owner":"Safety Officer"},{"id":"p3-15-concierge-guestbook-welcome-packets-and-guest-preferences","role":"Concierge","priority":"P3","workflow":"Guestbook, welcome packets, and guest preferences","manager":"Webmaster / Blue Static","owner":"Concierge"},{"id":"p3-16-pr-affiliate-and-public-persona-tracking","role":"PR","priority":"P3","workflow":"Affiliate and public persona tracking","manager":"Webmaster / Blue Static","owner":"PR"},{"id":"p3-17-social-media-manager-scheduled-social-posts","role":"Social Media Manager","priority":"P3","workflow":"Scheduled social posts","manager":"Webmaster / Blue Static","owner":"Social Media Manager"},{"id":"p3-18-stylist-visual-moodboard-and-styling-library","role":"Stylist","priority":"P3","workflow":"Visual moodboard and styling library","manager":"Webmaster / Blue Static","owner":"Stylist"},{"id":"p3-19-director-of-fun-event-discovery-and-ticket-deadline-tracker","role":"Director of Fun","priority":"P3","workflow":"Event discovery and ticket deadline tracker","manager":"Webmaster / Blue Static","owner":"Director of Fun"},{"id":"p3-20-theatre-streaming-availability-and-watchlist-manager","role":"Theatre","priority":"P3","workflow":"Streaming availability and watchlist manager","manager":"Webmaster / Blue Static","owner":"Theatre"},{"id":"p3-21-dj-playlist-and-speaker-room-automation","role":"DJ","priority":"P3","workflow":"Playlist and speaker-room automation","manager":"Webmaster / Blue Static","owner":"DJ"},{"id":"p3-22-coach-fitness-tracker-and-routine-history","role":"Coach","priority":"P3","workflow":"Fitness tracker and routine history","manager":"Webmaster / Blue Static","owner":"Coach"},{"id":"p3-23-nanny-guest-wellness-and-comfort-preferences","role":"Nanny","priority":"P3","workflow":"Guest wellness and comfort preferences","manager":"Webmaster / Blue Static","owner":"Nanny"},{"id":"p3-24-guru-spiritual-check-in-rhythm-and-ritual-supply-tracking","role":"Guru","priority":"P3","workflow":"Spiritual check-in rhythm and ritual supply tracking","manager":"Webmaster / Blue Static","owner":"Guru"},{"id":"p3-25-chef-recipe-database-tied-to-inventory","role":"Chef","priority":"P3","workflow":"Recipe database tied to inventory","manager":"Webmaster / Blue Static","owner":"Chef"},{"id":"p3-26-barista-drink-recipe-and-staple-tracker","role":"Barista","priority":"P3","workflow":"Drink recipe and staple tracker","manager":"Webmaster / Blue Static","owner":"Barista"},{"id":"p3-27-baker-baking-tool-and-ingredient-readiness","role":"Baker","priority":"P3","workflow":"Baking tool and ingredient readiness","manager":"Webmaster / Blue Static","owner":"Baker"},{"id":"p3-28-bartender-bar-inventory-and-cocktail-spec-tracker","role":"Bartender","priority":"P3","workflow":"Bar inventory and cocktail spec tracker","manager":"Webmaster / Blue Static","owner":"Bartender"},{"id":"p3-29-laundramat-fabric-care-guide-and-stain-kit-tracking","role":"Laundramat","priority":"P3","workflow":"Fabric-care guide and stain kit tracking","manager":"Webmaster / Blue Static","owner":"Laundramat"},{"id":"p3-30-keeper-recurring-cleaning-dashboard","role":"Keeper","priority":"P3","workflow":"Recurring cleaning dashboard","manager":"Webmaster / Blue Static","owner":"Keeper"}];
+  const storageKey = "las-jaras-blocked-workflow-checklist-v1";
+  const statusEl = document.querySelector("#checklist-status");
+  const outputEl = document.querySelector("#checklist-output");
+  const defaultEntry = () => ({ reviewed: false, decision: "review-next", notes: "" });
+  function readState() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  }
+  function writeState(state) {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  }
+  function normalizeState(state) {
+    const next = {};
+    items.forEach((item) => {
+      next[item.id] = { ...defaultEntry(), ...(state[item.id] || {}) };
+    });
+    return next;
+  }
+  function collectState() {
+    const state = {};
+    items.forEach((item) => {
+      const reviewed = document.querySelector('[data-blocker-done="' + item.id + '"]');
+      const decision = document.querySelector('[data-blocker-decision="' + item.id + '"]');
+      const notes = document.querySelector('[data-blocker-notes="' + item.id + '"]');
+      state[item.id] = {
+        reviewed: Boolean(reviewed && reviewed.checked),
+        decision: decision ? decision.value : "review-next",
+        notes: notes ? notes.value.trim() : ""
+      };
+    });
+    return state;
+  }
+  function exportData(state) {
+    return {
+      checklistManager: "Webmaster / Blue Static",
+      deputies: ["Sheriff Lone Star for P1 case blockers", "Serafina for escalation blockers"],
+      updatedAt: new Date().toISOString(),
+      items: items.map((item) => ({ ...item, ...(state[item.id] || defaultEntry()) }))
+    };
+  }
+  function render() {
+    const state = normalizeState(readState());
+    items.forEach((item) => {
+      const entry = state[item.id];
+      const reviewed = document.querySelector('[data-blocker-done="' + item.id + '"]');
+      const decision = document.querySelector('[data-blocker-decision="' + item.id + '"]');
+      const notes = document.querySelector('[data-blocker-notes="' + item.id + '"]');
+      const card = document.querySelector('[data-blocker-card="' + item.id + '"]');
+      if (reviewed) reviewed.checked = entry.reviewed;
+      if (decision) decision.value = entry.decision;
+      if (notes) notes.value = entry.notes;
+      if (card) card.classList.toggle("is-reviewed", entry.reviewed);
+    });
+    const reviewedCount = Object.values(state).filter((entry) => entry.reviewed).length;
+    statusEl.textContent = "Blue Static is managing " + reviewedCount + " of " + items.length + " blockers reviewed. Work one item at a time; P1 goes first.";
+    outputEl.textContent = JSON.stringify(exportData(state), null, 2);
+    writeState(state);
+  }
+  function persist() {
+    writeState(normalizeState(collectState()));
+    render();
+  }
+  document.querySelectorAll("[data-blocker-done], [data-blocker-decision]").forEach((field) => {
+    field.addEventListener("change", persist);
+  });
+  document.querySelectorAll("[data-blocker-notes]").forEach((field) => {
+    field.addEventListener("input", persist);
+  });
+  document.querySelector("#copy-checklist").addEventListener("click", async () => {
+    const text = outputEl.textContent;
+    await navigator.clipboard.writeText(text);
+    statusEl.textContent = "Checklist JSON copied. Blue Static tips their little webmaster hat.";
+  });
+  document.querySelector("#download-checklist").addEventListener("click", () => {
+    const blob = new Blob([outputEl.textContent], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "las-jaras-blocked-workflow-checklist.json";
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
+  document.querySelector("#reset-checklist").addEventListener("click", () => {
+    if (!confirm("Reset this browser's blocked workflow checklist?")) return;
+    localStorage.removeItem(storageKey);
+    render();
+  });
+  render();
+})();
+</script>
 </body>
 </html>

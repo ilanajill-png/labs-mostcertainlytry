@@ -640,6 +640,32 @@ const pageCss = `
       background: rgba(219, 234, 254, .7);
       color: var(--ink);
     }
+    .checklist-card {
+      display: grid;
+      gap: 14px;
+    }
+    .checklist-card.is-reviewed {
+      opacity: .68;
+      background: rgba(243, 244, 246, .85);
+    }
+    .checklist-card.is-reviewed h3,
+    .checklist-card.is-reviewed p {
+      color: #4b5563;
+    }
+    .checklist-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .checklist-meta span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .82);
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 850;
+    }
     pre {
       white-space: pre-wrap;
       overflow-wrap: anywhere;
@@ -1566,30 +1592,70 @@ const blockedWorkflows = [
   }
 ];
 
-const blockedCards = blockedWorkflows.map((item, index) => `<article class="role-card">
+const blockerId = (item, index) => `${item.priority.toLowerCase()}-${index + 1}-${slugify(item.role)}-${slugify(item.workflow)}`;
+const decisionOptions = [
+  ["review-next", "Review next"],
+  ["build-now", "Build now"],
+  ["keep-manual", "Keep manual"],
+  ["buy-setup-later", "Buy/setup later"],
+  ["delete-defer", "Delete/defer"]
+];
+const blockedChecklistData = blockedWorkflows.map((item, index) => ({
+  id: blockerId(item, index),
+  role: item.role,
+  priority: item.priority,
+  workflow: item.workflow,
+  manager: "Webmaster / Blue Static",
+  owner: item.role
+}));
+
+const blockedCards = blockedWorkflows.map((item, index) => {
+  const id = blockerId(item, index);
+  const options = decisionOptions.map(([value, label]) => `<option value="${esc(value)}">${esc(label)}</option>`).join("\n");
+  return `<article class="role-card checklist-card" data-blocker-card="${esc(id)}">
         <div>
           <p class="label">${esc(item.priority)} review ${index + 1}</p>
           <h3>${esc(item.role)}: ${esc(item.workflow)}</h3>
+          <div class="checklist-meta" aria-label="Checklist ownership">
+            <span>Manager: Webmaster / Blue Static</span>
+            <span>Workflow owner: ${esc(item.role)}</span>
+          </div>
         </div>
         <p><strong>Blocked by:</strong> ${esc(item.blockedBy)}</p>
         <p><strong>Current fallback:</strong> ${esc(item.currentFallback)}</p>
         <p><strong>Review question:</strong> ${esc(item.reviewQuestion)}</p>
-      </article>`).join("\n");
+        <div class="two">
+          <label class="check">
+            <input type="checkbox" data-blocker-done="${esc(id)}">
+            <span>Review complete</span>
+          </label>
+          <label for="${esc(id)}-decision">Decision
+            <select id="${esc(id)}-decision" data-blocker-decision="${esc(id)}">
+              ${options}
+            </select>
+          </label>
+        </div>
+        <label for="${esc(id)}-notes">Review notes / next concrete step
+          <textarea id="${esc(id)}-notes" data-blocker-notes="${esc(id)}" placeholder="Example: Build D1 first, then test mobile case creation."></textarea>
+        </label>
+      </article>`;
+}).join("\n");
 
 const blockedWorkflowBody = `<main>
     <section class="hero">
       <div>
         <p class="kicker">Workflow review queue</p>
         <h1>Blocked Household Staff Workflows</h1>
-        <p class="lede">These are workflows that can be drafted, logged, or partially handled now, but need a missing backend, provider, hardware, permission, or data source before they can run repeatably.</p>
+        <p class="lede">These are workflows that can be drafted, logged, or partially handled now, but need a missing backend, provider, hardware, permission, or data source before they can run repeatably. Blue Static the Webmaster keeps the master checklist; the named role owns the actual workflow requirements.</p>
         <div class="toolbar">
           <a class="button primary" href="household-beings.html">Back to directory</a>
           <a class="button" href="#queue">Review queue</a>
         </div>
       </div>
       <aside class="panel">
-        <p class="label">Review rule</p>
-        <p>Handle these one at a time. For each blocker, decide: build now, buy/setup later, keep manual, or delete the workflow.</p>
+        <p class="label">Checklist manager</p>
+        <h2>Webmaster / Blue Static</h2>
+        <p>Blue Static manages the board because most blockers are systems, integrations, publishing, compliance, backend readiness, or build-log problems. Sheriff Lone Star and Serafina are first deputies for the P1 case-flow blockers.</p>
       </aside>
     </section>
     <section class="section panel">
@@ -1598,13 +1664,118 @@ const blockedWorkflowBody = `<main>
     </section>
     <section class="section" id="queue" aria-labelledby="queue-title">
       <h2 id="queue-title">One-By-One Review Queue</h2>
+      <p class="status-note" id="checklist-status" role="status" aria-live="polite">Loading checklist state.</p>
+      <div class="toolbar">
+        <button type="button" class="primary" id="copy-checklist">Copy checklist JSON</button>
+        <button type="button" id="download-checklist">Download checklist JSON</button>
+        <button type="button" class="danger" id="reset-checklist">Reset browser checklist</button>
+      </div>
       <div class="role-grid">${blockedCards}</div>
+      <h2>Current Checklist Data</h2>
+      <pre id="checklist-output">{}</pre>
     </section>
   </main>
   <footer>
     <span>Built as a blocker review list for Las Jaras staff workflows.</span>
     <a href="household-beings.html">Household beings directory</a>
   </footer>`;
+
+const blockedWorkflowScript = `<script>
+(() => {
+  const items = ${JSON.stringify(blockedChecklistData)};
+  const storageKey = "las-jaras-blocked-workflow-checklist-v1";
+  const statusEl = document.querySelector("#checklist-status");
+  const outputEl = document.querySelector("#checklist-output");
+  const defaultEntry = () => ({ reviewed: false, decision: "review-next", notes: "" });
+  function readState() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch (error) {
+      return {};
+    }
+  }
+  function writeState(state) {
+    localStorage.setItem(storageKey, JSON.stringify(state));
+  }
+  function normalizeState(state) {
+    const next = {};
+    items.forEach((item) => {
+      next[item.id] = { ...defaultEntry(), ...(state[item.id] || {}) };
+    });
+    return next;
+  }
+  function collectState() {
+    const state = {};
+    items.forEach((item) => {
+      const reviewed = document.querySelector('[data-blocker-done="' + item.id + '"]');
+      const decision = document.querySelector('[data-blocker-decision="' + item.id + '"]');
+      const notes = document.querySelector('[data-blocker-notes="' + item.id + '"]');
+      state[item.id] = {
+        reviewed: Boolean(reviewed && reviewed.checked),
+        decision: decision ? decision.value : "review-next",
+        notes: notes ? notes.value.trim() : ""
+      };
+    });
+    return state;
+  }
+  function exportData(state) {
+    return {
+      checklistManager: "Webmaster / Blue Static",
+      deputies: ["Sheriff Lone Star for P1 case blockers", "Serafina for escalation blockers"],
+      updatedAt: new Date().toISOString(),
+      items: items.map((item) => ({ ...item, ...(state[item.id] || defaultEntry()) }))
+    };
+  }
+  function render() {
+    const state = normalizeState(readState());
+    items.forEach((item) => {
+      const entry = state[item.id];
+      const reviewed = document.querySelector('[data-blocker-done="' + item.id + '"]');
+      const decision = document.querySelector('[data-blocker-decision="' + item.id + '"]');
+      const notes = document.querySelector('[data-blocker-notes="' + item.id + '"]');
+      const card = document.querySelector('[data-blocker-card="' + item.id + '"]');
+      if (reviewed) reviewed.checked = entry.reviewed;
+      if (decision) decision.value = entry.decision;
+      if (notes) notes.value = entry.notes;
+      if (card) card.classList.toggle("is-reviewed", entry.reviewed);
+    });
+    const reviewedCount = Object.values(state).filter((entry) => entry.reviewed).length;
+    statusEl.textContent = "Blue Static is managing " + reviewedCount + " of " + items.length + " blockers reviewed. Work one item at a time; P1 goes first.";
+    outputEl.textContent = JSON.stringify(exportData(state), null, 2);
+    writeState(state);
+  }
+  function persist() {
+    writeState(normalizeState(collectState()));
+    render();
+  }
+  document.querySelectorAll("[data-blocker-done], [data-blocker-decision]").forEach((field) => {
+    field.addEventListener("change", persist);
+  });
+  document.querySelectorAll("[data-blocker-notes]").forEach((field) => {
+    field.addEventListener("input", persist);
+  });
+  document.querySelector("#copy-checklist").addEventListener("click", async () => {
+    const text = outputEl.textContent;
+    await navigator.clipboard.writeText(text);
+    statusEl.textContent = "Checklist JSON copied. Blue Static tips their little webmaster hat.";
+  });
+  document.querySelector("#download-checklist").addEventListener("click", () => {
+    const blob = new Blob([outputEl.textContent], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "las-jaras-blocked-workflow-checklist.json";
+    link.click();
+    URL.revokeObjectURL(link.href);
+  });
+  document.querySelector("#reset-checklist").addEventListener("click", () => {
+    if (!confirm("Reset this browser's blocked workflow checklist?")) return;
+    localStorage.removeItem(storageKey);
+    render();
+  });
+  render();
+})();
+</script>`;
 
 writeFileSync(join(process.cwd(), "projects", "household-beings.html"), layout({
   title: "Las Jaras Household Beings Directory",
@@ -1616,7 +1787,7 @@ writeFileSync(join(process.cwd(), "projects", "household-beings.html"), layout({
 writeFileSync(join(process.cwd(), "projects", "household-beings-blocked-workflows.html"), layout({
   title: "Blocked Household Staff Workflows",
   description: "A one-by-one review queue for Las Jaras household staff workflows blocked by missing tools, integrations, permissions, or data.",
-  body: blockedWorkflowBody,
+  body: blockedWorkflowBody + blockedWorkflowScript,
   prefix: ""
 }));
 
