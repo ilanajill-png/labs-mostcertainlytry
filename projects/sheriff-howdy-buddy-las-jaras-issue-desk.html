@@ -517,6 +517,12 @@
       gap: 10px;
     }
 
+    .follow-up-status {
+      min-height: 22px;
+      color: var(--green);
+      font-weight: 850;
+    }
+
     .flow {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1706,6 +1712,7 @@
             <div class="actions">
               <button type="submit">Send Follow-Up To Sheriff</button>
             </div>
+            <p class="follow-up-status" role="status" aria-live="polite"></p>
           </form>
         </section>
       `;
@@ -1827,10 +1834,13 @@
     }
 
     async function submitFollowUp(formElement) {
+      if (formElement.dataset.sending === "true") return;
       const caseId = formElement.dataset.followupCase;
       const cases = loadCases();
       const issue = cases.find((item) => item.id === caseId);
       if (!issue) return;
+      const button = formElement.querySelector('button[type="submit"]');
+      const status = formElement.querySelector(".follow-up-status");
       const data = new FormData(formElement);
       const text = clean(data.get("followUpText"));
       const input = formElement.querySelector('input[name="followUpFiles"]');
@@ -1841,44 +1851,63 @@
       })) : [];
       if (!text && !files.length) {
         sharedStatus.textContent = "Add a note or select a file before sending Sheriff a follow-up.";
+        if (status) status.textContent = "Add a note or select a file first.";
         return;
       }
-      const now = new Date().toISOString();
-      const response = {
-        id: `follow-up-${Date.now()}`,
-        createdAt: now,
-        text,
-        mediaAttachments: files
-      };
-      issue.followUpResponses = [...(issue.followUpResponses || []), response];
-      issue.mediaAttachments = [...(issue.mediaAttachments || []), ...files];
-      issue.investigationWorkflow = {
-        ...(issue.investigationWorkflow || buildInvestigationWorkflow(issue)),
-        status: "queued",
-        updatedAt: now,
-        nextAction: "Review the latest human follow-up response and update the Sheriff read.",
-        blocker: "",
-        runLog: [
-          ...((issue.investigationWorkflow && issue.investigationWorkflow.runLog) || []),
-          { at: now, event: "Human follow-up response submitted from the Sheriff board." }
-        ]
-      };
-      issue.updatedAt = now;
-      const result = await saveCaseUpdate(issue);
-      const emailResult = await sendEvidenceEmailCopy(result.issue, input?.files || [], {
-        stage: "Sheriff follow-up",
-        followUpId: response.id,
-        note: text || "Photo/video follow-up submitted from Sheriff board."
-      });
-      const loggedIssue = appendEvidenceEmailLog(result.issue, emailResult, {
-        stage: "Sheriff follow-up",
-        followUpId: response.id
-      });
-      const loggedResult = await saveCaseUpdate(loggedIssue);
-      renderCases(loggedResult.cases);
-      renderSheriffRead(loggedResult.issue);
-      sharedStatus.textContent = `Follow-up sent to Sheriff and queued for review. ${emailResult.message}`;
-      formElement.reset();
+      formElement.dataset.sending = "true";
+      if (button) {
+        button.disabled = true;
+        button.textContent = "Sending...";
+      }
+      if (status) status.textContent = "Sending follow-up to Sheriff...";
+      try {
+        const now = new Date().toISOString();
+        const response = {
+          id: `follow-up-${Date.now()}`,
+          createdAt: now,
+          text,
+          mediaAttachments: files
+        };
+        issue.followUpResponses = [...(issue.followUpResponses || []), response];
+        issue.mediaAttachments = [...(issue.mediaAttachments || []), ...files];
+        issue.investigationWorkflow = {
+          ...(issue.investigationWorkflow || buildInvestigationWorkflow(issue)),
+          status: "queued",
+          updatedAt: now,
+          nextAction: "Review the latest human follow-up response and update the Sheriff read.",
+          blocker: "",
+          runLog: [
+            ...((issue.investigationWorkflow && issue.investigationWorkflow.runLog) || []),
+            { at: now, event: "Human follow-up response submitted from the Sheriff board." }
+          ]
+        };
+        issue.updatedAt = now;
+        const result = await saveCaseUpdate(issue);
+        const emailResult = await sendEvidenceEmailCopy(result.issue, input?.files || [], {
+          stage: "Sheriff follow-up",
+          followUpId: response.id,
+          note: text || "Photo/video follow-up submitted from Sheriff board."
+        });
+        const loggedIssue = appendEvidenceEmailLog(result.issue, emailResult, {
+          stage: "Sheriff follow-up",
+          followUpId: response.id
+        });
+        const loggedResult = await saveCaseUpdate(loggedIssue);
+        renderCases(loggedResult.cases);
+        renderSheriffRead(loggedResult.issue);
+        const confirmation = `Follow-up received. ID: ${response.id}. ${files.length} file${files.length === 1 ? "" : "s"} recorded. ${emailResult.message}`;
+        sharedStatus.textContent = confirmation;
+        formElement.reset();
+      } catch (error) {
+        sharedStatus.textContent = `Follow-up failed. ${error.message}`;
+        if (status) status.textContent = `Follow-up failed. ${error.message}`;
+      } finally {
+        formElement.dataset.sending = "false";
+        if (button) {
+          button.disabled = false;
+          button.textContent = "Send Follow-Up To Sheriff";
+        }
+      }
     }
 
     async function closeCase(caseId) {
