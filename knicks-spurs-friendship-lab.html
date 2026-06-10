@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Can AI Make Knicks Fans and Spurs Fans Friends? | Most Certainly Try Labs</title>
+    <meta name="description" content="A white paper and interactive lab exploring whether AI can help Knicks and Spurs fans turn playoff heat into better conversations.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      :root {
+        --knicks-blue: #1d4f91;
+        --knicks-orange: #f58426;
+        --spurs-black: #15171a;
+        --spurs-silver: #c4ced4;
+      }
+
+      .rivalry-hero {
+        min-height: auto;
+        grid-template-columns: minmax(0, 1fr) minmax(300px, 430px);
+        padding: 46px 0 30px;
+      }
+
+      .court-card {
+        position: relative;
+        overflow: hidden;
+        min-height: 360px;
+        padding: 22px;
+        color: #fff;
+        background:
+          linear-gradient(90deg, rgba(29, 79, 145, 0.92), rgba(21, 23, 26, 0.92)),
+          radial-gradient(circle at 48% 50%, rgba(245, 132, 38, 0.52), transparent 28%);
+      }
+
+      .court-lines {
+        position: absolute;
+        inset: 22px;
+        border: 2px solid rgba(255, 255, 255, 0.55);
+        border-radius: 8px;
+      }
+
+      .court-lines::before,
+      .court-lines::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 118px;
+        height: 164px;
+        border: 2px solid rgba(255, 255, 255, 0.48);
+      }
+
+      .court-lines::before {
+        left: -2px;
+        border-left: 0;
+        border-radius: 0 90px 90px 0;
+      }
+
+      .court-lines::after {
+        right: -2px;
+        border-right: 0;
+        border-radius: 90px 0 0 90px;
+      }
+
+      .center-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 96px;
+        height: 96px;
+        border: 2px solid rgba(255, 255, 255, 0.55);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .court-copy {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        align-content: end;
+        min-height: 312px;
+      }
+
+      .court-copy strong {
+        display: block;
+        max-width: 320px;
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        line-height: 0.96;
+      }
+
+      .court-copy span {
+        max-width: 300px;
+        margin-top: 12px;
+        color: rgba(255, 255, 255, 0.8);
+        font-weight: 750;
+      }
+
+      .white-paper {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+        gap: 20px;
+        align-items: start;
+        padding: 18px 0 50px;
+      }
+
+      .paper-body {
+        display: grid;
+        gap: 18px;
+      }
+
+      .paper-section,
+      .lab-panel,
+      .source-card {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .paper-section h2,
+      .lab-panel h2 {
+        color: var(--green-dark);
+      }
+
+      .paper-section p,
+      .paper-section li,
+      .source-card p,
+      .result-copy {
+        color: var(--muted);
+      }
+
+      .lab-panel {
+        position: sticky;
+        top: 92px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .lab-form {
+        display: grid;
+        gap: 14px;
+      }
+
+      .choice-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .choice-chip {
+        display: flex;
+        gap: 9px;
+        align-items: flex-start;
+        padding: 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fffdfa;
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .choice-chip input {
+        width: auto;
+        margin-top: 4px;
+      }
+
+      .meter {
+        overflow: hidden;
+        height: 12px;
+        border-radius: 999px;
+        background: #e9edf0;
+      }
+
+      .meter span {
+        display: block;
+        width: 62%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--knicks-blue), var(--knicks-orange), var(--spurs-black));
+        transition: width 180ms ease;
+      }
+
+      .result-box {
+        padding: 16px;
+        border-left: 4px solid var(--knicks-orange);
+        border-radius: 8px;
+        background: #fff8ee;
+      }
+
+      .prompt-list {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .prompt-list li {
+        padding: 9px 10px;
+        border-radius: 8px;
+        background: var(--field);
+        color: var(--green-dark);
+        font-weight: 800;
+      }
+
+      .source-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .source-card a {
+        color: var(--green-dark);
+        font-weight: 900;
+        text-underline-offset: 4px;
+      }
+
+      .note {
+        padding: 16px;
+        border-left: 4px solid var(--gold);
+        border-radius: 8px;
+        background: #fff8ee;
+      }
+
+      @media (max-width: 860px) {
+        .rivalry-hero,
+        .white-paper,
+        .source-grid,
+        .choice-row {
+          grid-template-columns: 1fr;
+        }
+
+        .lab-panel {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Public experiments, useful weirdness</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="field-guide.html">Captain's Log</a>
+        <a href="we-should-be-friends.html">We Should Be Friends</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero rivalry-hero">
+        <div>
+          <p class="kicker">White Paper + Party Lab</p>
+          <h1>Can AI make Knicks fans and Spurs fans friends?</h1>
+          <p class="lede">A fast cultural prototype for turning playoff heat into better questions, sharper jokes, and a little less sidewalk nonsense.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#fan-lab">Try the fan friendship scout</a>
+            <a class="button" href="#white-paper">Read the white paper</a>
+          </div>
+        </div>
+        <aside class="content-panel court-card" aria-label="Basketball court illustration">
+          <div class="court-lines"><span class="center-circle"></span></div>
+          <div class="court-copy">
+            <strong>Rivalry is data with feelings.</strong>
+            <span>AI cannot make anyone less loyal. It can help people find the shared human signal under the jersey.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="white-paper" id="white-paper">
+        <div class="paper-body">
+          <article class="paper-section">
+            <p class="kicker">Executive Summary</p>
+            <h2>Yes, probably. But not by making anyone neutral.</h2>
+            <p>AI should not sand the edges off fandom. Knicks fans should still sound like Knicks fans. Spurs fans should still sound like Spurs fans. The useful question is whether AI can help people keep the loyalty and lose the worst behavior.</p>
+            <p>This lab proposes a small, consent-based fan friendship experience. It does not decide who is right. It translates rivalry into shared values: patience, pain, role-player love, beautiful basketball, civic pride, and the complicated pleasure of caring too much.</p>
+          </article>
+
+          <article class="paper-section">
+            <p class="kicker">The Problem</p>
+            <h2>The playoffs are giving us a real-time case study.</h2>
+            <p>Recent coverage has a clear pattern: huge Knicks energy around Madison Square Garden, an ascendant Spurs team built around Victor Wembanyama, and a Finals atmosphere hot enough to turn fan identity into a public safety issue. The cultural opportunity is sitting right there.</p>
+            <p>Sports culture usually rewards the fastest insult. AI can help create the better second question. Not, "Why is your team trash?" but, "What kind of basketball pain made you this way?"</p>
+          </article>
+
+          <article class="paper-section">
+            <p class="kicker">The Method</p>
+            <h2>Use AI as a translator, not a referee.</h2>
+            <p>The fan friendship model maps five kinds of signal:</p>
+            <ul>
+              <li><strong>Basketball aesthetic:</strong> defense, pace, passing, shot-making, chaos, systems, and player development.</li>
+              <li><strong>Emotional style:</strong> loud, skeptical, patient, fatalistic, analytical, superstitious, or loyal against evidence.</li>
+              <li><strong>Historical memory:</strong> dynasty years, rebuilding years, the 1999 shadow, and the feeling of being back.</li>
+              <li><strong>Player archetype:</strong> stars, glue guys, defensive sickos, irrational bench legends, and coaches' favorites.</li>
+              <li><strong>Rivalry compatibility:</strong> whether the person can talk trash and still be a decent hang.</li>
+            </ul>
+          </article>
+
+          <article class="paper-section">
+            <p class="kicker">Recent Playoff Context</p>
+            <h2>Five pieces this lab is reacting to.</h2>
+            <div class="source-grid">
+              <div class="source-card">
+                <a href="https://www.mysanantonio.com/sports/spurs/article/mamdani-nyc-spurs-knicks-fans-22298237.php">MySA: NYC Mayor responds after Spurs fans harassed</a>
+                <p>Useful because it frames the fan-conduct problem directly: passion is fine; intimidation and violence are not.</p>
+              </div>
+              <div class="source-card">
+                <a href="https://www.nba.com/news/knicks-spurs-set-to-add-a-new-chapter-to-madison-square-garden-lore">NBA.com: Knicks, Spurs add a new chapter to MSG lore</a>
+                <p>Useful because it captures why this matchup feels bigger than a series: arena mythology, city identity, and the return of Finals stakes.</p>
+              </div>
+              <div class="source-card">
+                <a href="https://www.nba.com/news/nba-finals-2026-spurs-knicks-game-3-viewership">NBA.com: Game 3 was the most-watched Finals Game 3 since 1998</a>
+                <p>Useful because it proves this is a broad cultural moment, not just a niche basketball argument.</p>
+              </div>
+              <div class="source-card">
+                <a href="https://ny1.com/nyc/all-boroughs/sports/2026/05/26/fans-celebrate-knicks-sweep-outside-msg-despite-watch-party-crackdown">NY1: Knicks fans celebrate outside MSG despite watch-party crackdown</a>
+                <p>Useful because it shows the community side of fandom and the safety concerns that come with scale.</p>
+              </div>
+              <div class="source-card">
+                <a href="https://www.theguardian.com/sport/2026/may/16/nba-playoffs-spurs-timberwolves-victor-wembanyama-pistons-cavaliers">The Guardian: Wembanyama's Spurs knock Timberwolves out</a>
+                <p>Useful because it shows the Spurs story before the Finals: Wembanyama, growth, and a team becoming dangerous ahead of schedule.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="paper-section">
+            <p class="kicker">Design Principles</p>
+            <h2>How to build the experience without making it corny.</h2>
+            <ul>
+              <li><strong>Keep the rivalry alive.</strong> Friendship is less interesting if everyone has to pretend not to care.</li>
+              <li><strong>Make the prompts specific.</strong> "Who is your favorite player?" is fine. "Which role player made you irrational?" is better.</li>
+              <li><strong>Use humor as the bridge.</strong> Fans trust a good joke before they trust a lecture.</li>
+              <li><strong>Do not collect more data than you need.</strong> The point is connection, not surveillance with confetti.</li>
+              <li><strong>End with something people can say out loud.</strong> The output should start an actual conversation.</li>
+            </ul>
+          </article>
+
+          <article class="paper-section">
+            <p class="kicker">Conclusion</p>
+            <h2>AI can make the first better question easier.</h2>
+            <p>Can AI make Knicks fans and Spurs fans friends? It can help. Not by declaring peace. Not by awarding moral victory. Not by flattening either fan base into bland sportsmanship copy.</p>
+            <p>The better use is smaller and more human: find the shared signal, name the tension, give people a smarter opening line, and let the rivalry become a conversation instead of a shove.</p>
+          </article>
+        </div>
+
+        <aside class="lab-panel" id="fan-lab">
+          <p class="kicker">Interactive Lab</p>
+          <h2>Fan Friendship Scout</h2>
+          <form class="lab-form" id="rivalry-form">
+            <label>
+              Which side are you walking in with?
+              <select id="team">
+                <option>Knicks fan</option>
+                <option>Spurs fan</option>
+                <option>Basketball neutral</option>
+                <option>Here for the drama</option>
+              </select>
+            </label>
+
+            <label>
+              Your fan style
+              <select id="style">
+                <option value="loud loyalty">Loud loyalty</option>
+                <option value="patient systems thinking">Patient systems thinking</option>
+                <option value="scarred but hopeful">Scarred but hopeful</option>
+                <option value="analytics with feelings">Analytics with feelings</option>
+                <option value="vibes and grudges">Vibes and grudges</option>
+              </select>
+            </label>
+
+            <label>
+              The player type you trust
+              <select id="player-type">
+                <option value="the glue guy who does the invisible work">Glue guy</option>
+                <option value="the star who bends the whole room">Franchise star</option>
+                <option value="the defensive menace">Defensive menace</option>
+                <option value="the bench legend who becomes a folk hero">Bench folk hero</option>
+                <option value="the weird international chess piece">International chess piece</option>
+              </select>
+            </label>
+
+            <fieldset>
+              <legend>What can you respect in the other fan base?</legend>
+              <div class="choice-row">
+                <label class="choice-chip"><input type="checkbox" name="bridge" value="patience through long seasons" data-weight="3"> Patience</label>
+                <label class="choice-chip"><input type="checkbox" name="bridge" value="a city that treats basketball like civic identity" data-weight="3"> City identity</label>
+                <label class="choice-chip"><input type="checkbox" name="bridge" value="role players with cult followings" data-weight="2"> Role players</label>
+                <label class="choice-chip"><input type="checkbox" name="bridge" value="defense that makes people mad" data-weight="2"> Defense</label>
+                <label class="choice-chip"><input type="checkbox" name="bridge" value="being loyal when the math says leave" data-weight="3"> Loyalty</label>
+                <label class="choice-chip"><input type="checkbox" name="bridge" value="a perfectly timed basketball grudge" data-weight="1"> Grudges</label>
+              </div>
+            </fieldset>
+
+            <label>
+              The thing you promise not to be awful about
+              <textarea id="truce" rows="3" placeholder="1999, officiating, Wemby villain discourse, media attention, market size, etc."></textarea>
+            </label>
+          </form>
+
+          <div class="result-box" aria-live="polite">
+            <h3 id="result-title">Friendship compatibility: 68%</h3>
+            <div class="meter" aria-hidden="true"><span id="meter-fill"></span></div>
+            <p class="result-copy" id="result-copy">Pick a few bridge points and this scout will write the truce language.</p>
+            <ul class="prompt-list" id="prompt-list"></ul>
+          </div>
+
+          <p class="note">This prototype runs in the browser. No fan feelings are stored, which is probably for the best.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>Most Certainly Try Labs</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+
+    <script>
+      const form = document.querySelector("#rivalry-form");
+      const team = document.querySelector("#team");
+      const style = document.querySelector("#style");
+      const playerType = document.querySelector("#player-type");
+      const truce = document.querySelector("#truce");
+      const resultTitle = document.querySelector("#result-title");
+      const resultCopy = document.querySelector("#result-copy");
+      const meterFill = document.querySelector("#meter-fill");
+      const promptList = document.querySelector("#prompt-list");
+
+      function selectedBridge() {
+        return Array.from(document.querySelectorAll("input[name='bridge']:checked"));
+      }
+
+      function updateScout() {
+        const bridge = selectedBridge();
+        const bridgeValues = bridge.map(item => item.value);
+        const bridgePoints = bridge.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0);
+        const truceText = truce.value.trim();
+        const score = Math.min(96, 50 + bridgePoints * 6 + (truceText ? 10 : 0));
+        const side = team.value;
+        const styleText = style.value;
+        const playerText = playerType.value;
+        const bridgeLine = bridgeValues.length ? bridgeValues.join(", ") : "at least one thing that is not yelling";
+        const truceLine = truceText || "the one subject most likely to turn a joke into a group-chat incident";
+
+        resultTitle.textContent = `Friendship compatibility: ${score}%`;
+        meterFill.style.width = `${score}%`;
+        resultCopy.textContent = `${side} energy plus ${styleText} can work if the conversation starts with ${bridgeLine}. The shared player language is ${playerText}. Avoid making ${truceLine} the first topic.`;
+
+        const prompts = [
+          `Ask: Which player made you care about the little things?`,
+          `Admit: The other fan base has one thing you secretly respect.`,
+          `Offer: one clean basketball take before one spicy one.`,
+          `Exit ramp: If this gets too heated, ask what food belongs at the watch party.`
+        ];
+
+        promptList.innerHTML = "";
+        prompts.forEach(prompt => {
+          const li = document.createElement("li");
+          li.textContent = prompt;
+          promptList.appendChild(li);
+        });
+      }
+
+      form.addEventListener("input", updateScout);
+      form.addEventListener("change", updateScout);
+      updateScout();
+    </script>
+  </body>
+</html>
