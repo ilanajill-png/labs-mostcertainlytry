@@ -111,6 +111,11 @@
         background: #fff8ee;
       }
 
+      .share-results {
+        margin-top: 14px;
+        width: 100%;
+      }
+
       .tiny-note {
         color: var(--muted);
         font-size: 0.9rem;
@@ -251,7 +256,7 @@
           </div>
 
           <button class="button primary" type="submit">Show me why we should be friends</button>
-          <p class="tiny-note">This form runs entirely in your browser. It does not send, save, or store your answers or contact info.</p>
+          <p class="tiny-note">This form runs entirely in your browser. It does not send, save, or store your answers or contact info unless you choose to share the result.</p>
         </form>
 
         <aside class="content-panel result-panel" aria-live="polite">
@@ -264,6 +269,7 @@
             <h3>Start with this</h3>
             <p id="conversation-starter">Ask Ilana what she is trying to make easier for people to understand this week.</p>
           </div>
+          <a class="button primary share-results" id="share-results" href="mailto:mostcertainlytry@gmail.com?subject=We%20Should%20Be%20Friends%20result&body=I%20filled%20out%20the%20We%20Should%20Be%20Friends%20form.%0A%0AScore%3A%200%25" aria-label="Share these results with Ilana">Share these results with Ilana</a>
         </aside>
       </section>
     </main>
@@ -280,6 +286,7 @@
       const copy = document.querySelector("#result-copy");
       const matchList = document.querySelector("#match-list");
       const starter = document.querySelector("#conversation-starter");
+      const shareResults = document.querySelector("#share-results");
 
       const starterMap = {
         "AI without the hype": "Ask Ilana what AI thing she thinks people are overcomplicating right now.",
@@ -346,6 +353,21 @@
         } else {
           starter.textContent = starterMap[first] || "Ask Ilana what she is trying to make easier for people to understand this week.";
         }
+
+        const emailBody = [
+          "I filled out the We Should Be Friends form.",
+          "",
+          `Name: ${displayName}`,
+          `Score: ${percent}%`,
+          values.length ? `Shared territory: ${values.join(", ")}` : "Shared territory: not picked yet",
+          party[0] ? `Party style: ${party[0].value}` : "Party style: not picked yet",
+          contact[0] ? `Preferred follow-up: ${contact[0].value}` : "Preferred follow-up: not picked yet",
+          contactDetails.length ? `Contact details: ${contactDetails.map(([label, value]) => `${label}: ${value}`).join(" | ")}` : "Contact details: not entered yet",
+          curiosity ? `Trying to understand: ${curiosity}` : "Trying to understand: not entered yet",
+          "",
+          `Conversation starter: ${starter.textContent}`
+        ].join("\n");
+        shareResults.href = `mailto:mostcertainlytry@gmail.com?subject=${encodeURIComponent(`We Should Be Friends result from ${displayName}`)}&body=${encodeURIComponent(emailBody)}`;
       }
 
       form.addEventListener("submit", updateResult);
