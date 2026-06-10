@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>We Should Be Friends | Most Certainly Try Labs</title>
+    <meta name="description" content="A tiny party lab that finds mutual interests and gives people an easy first conversation with Ilana.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      .friend-hero {
+        min-height: auto;
+        grid-template-columns: minmax(0, 1.05fr) minmax(280px, 420px);
+        padding: 46px 0 28px;
+      }
+
+      .friend-card {
+        padding: 22px;
+      }
+
+      .friend-form {
+        padding-bottom: 54px;
+      }
+
+      .choice-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 10px;
+      }
+
+      .choice {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .choice input {
+        width: auto;
+        margin-top: 4px;
+      }
+
+      .question-block {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fffdfa;
+      }
+
+      .result-panel {
+        position: sticky;
+        top: 92px;
+        padding: 22px;
+      }
+
+      .result-panel h2 {
+        font-size: 1.65rem;
+      }
+
+      .score {
+        display: inline-grid;
+        place-items: center;
+        width: 84px;
+        height: 84px;
+        margin: 6px 0 14px;
+        border-radius: 50%;
+        background: var(--green);
+        color: #fff;
+        font-size: 1.7rem;
+        font-weight: 900;
+      }
+
+      .match-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .match-list li {
+        border-radius: 999px;
+        padding: 6px 10px;
+        background: var(--field);
+        color: var(--green-dark);
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .conversation-card {
+        margin-top: 16px;
+        padding: 16px;
+        border-left: 4px solid var(--gold);
+        border-radius: 8px;
+        background: #fff8ee;
+      }
+
+      .tiny-note {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 760px) {
+        .friend-hero,
+        .field-output-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .result-panel {
+          position: static;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Public experiments, useful weirdness</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="field-guide.html">Captain's Log</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero friend-hero">
+        <div>
+          <p class="kicker">Party Lab</p>
+          <h1>We Should Be Friends</h1>
+          <p class="lede">Answer a few fast questions. This tiny lab will find the overlap between what you like and what Ilana likes, then hand you an easy first conversation.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#friend-form">Find our overlap</a>
+            <a class="button" href="https://mostcertainlytry.com">Most Certainly Try</a>
+          </div>
+        </div>
+        <aside class="snapshot friend-card" aria-label="How it works">
+          <div>
+            <span class="metric">3</span>
+            <span>questions</span>
+          </div>
+          <div>
+            <span class="metric">0</span>
+            <span>data collected</span>
+          </div>
+          <div>
+            <span class="metric">1</span>
+            <span>conversation starter</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="field-output-grid friend-form" id="friend-form">
+        <form class="content-panel friend-card" id="friendship-form">
+          <div class="question-block">
+            <label>
+              Your name, nickname, or party alias
+              <input id="guest-name" type="text" autocomplete="name" placeholder="Optional, but fun">
+            </label>
+          </div>
+
+          <div class="question-block">
+            <h2>What are you almost always happy to talk about?</h2>
+            <div class="choice-grid">
+              <label class="choice"><input type="checkbox" name="likes" value="AI without the hype" data-weight="3"> AI without the hype</label>
+              <label class="choice"><input type="checkbox" name="likes" value="founder stories and product pivots" data-weight="2"> Founder stories and product pivots</label>
+              <label class="choice"><input type="checkbox" name="likes" value="food, restaurants, and hospitality" data-weight="2"> Food, restaurants, and hospitality</label>
+              <label class="choice"><input type="checkbox" name="likes" value="Spurs, basketball, and sports metaphors" data-weight="2"> Spurs, basketball, and sports metaphors</label>
+              <label class="choice"><input type="checkbox" name="likes" value="retail, pop-ups, and fandom" data-weight="3"> Retail, pop-ups, and fandom</label>
+              <label class="choice"><input type="checkbox" name="likes" value="writing that makes hard things clear" data-weight="3"> Writing that makes hard things clear</label>
+              <label class="choice"><input type="checkbox" name="likes" value="Austin, Texas, and local scenes" data-weight="2"> Austin, Texas, and local scenes</label>
+              <label class="choice"><input type="checkbox" name="likes" value="beautifully impractical rabbit holes" data-weight="2"> Beautifully impractical rabbit holes</label>
+              <label class="choice"><input type="checkbox" name="likes" value="tools, workflows, and little systems" data-weight="3"> Tools, workflows, and little systems</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <h2>What kind of person are you at a party?</h2>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="party" value="the person asking useful questions" data-weight="3"> The person asking useful questions</label>
+              <label class="choice"><input type="radio" name="party" value="the person connecting two people who should meet" data-weight="3"> The person connecting two people who should meet</label>
+              <label class="choice"><input type="radio" name="party" value="the person with one excellent niche story" data-weight="2"> The person with one excellent niche story</label>
+              <label class="choice"><input type="radio" name="party" value="the person quietly observing the room" data-weight="2"> The person quietly observing the room</label>
+            </div>
+          </div>
+
+          <div class="question-block">
+            <label>
+              What is one thing you are trying to understand right now?
+              <textarea id="curiosity" rows="4" placeholder="A technology, a career turn, a city, a person, a business idea, whatever is taking up brain space."></textarea>
+            </label>
+          </div>
+
+          <button class="button primary" type="submit">Show me why we should be friends</button>
+          <p class="tiny-note">This form runs entirely in your browser. It does not send or store your answers.</p>
+        </form>
+
+        <aside class="content-panel result-panel" aria-live="polite">
+          <p class="kicker">Friendship Map</p>
+          <h2 id="result-title">Your result will show up here.</h2>
+          <div class="score" id="score">0%</div>
+          <p id="result-copy">Pick a few things you like and I will make the first conversation less awkward.</p>
+          <ul class="match-list" id="match-list"></ul>
+          <div class="conversation-card">
+            <h3>Start with this</h3>
+            <p id="conversation-starter">Ask Ilana what she is trying to make easier for people to understand this week.</p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer>
+      <span>Most Certainly Try Labs</span>
+      <a href="mailto:mostcertainlytry@gmail.com">mostcertainlytry@gmail.com</a>
+    </footer>
+
+    <script>
+      const form = document.querySelector("#friendship-form");
+      const title = document.querySelector("#result-title");
+      const score = document.querySelector("#score");
+      const copy = document.querySelector("#result-copy");
+      const matchList = document.querySelector("#match-list");
+      const starter = document.querySelector("#conversation-starter");
+
+      const starterMap = {
+        "AI without the hype": "Ask Ilana what AI thing she thinks people are overcomplicating right now.",
+        "founder stories and product pivots": "Ask Ilana which founder story feels like a technology shift in disguise.",
+        "food, restaurants, and hospitality": "Ask Ilana whether AI belongs in food and prepare for a real answer.",
+        "Spurs, basketball, and sports metaphors": "Ask Ilana which Spurs player would make the best AI product.",
+        "retail, pop-ups, and fandom": "Ask Ilana what makes people actually show up for a brand experience.",
+        "writing that makes hard things clear": "Ask Ilana what sentence she would rewrite on your website first.",
+        "Austin, Texas, and local scenes": "Ask Ilana what Austin room has the best mix of weird and useful people.",
+        "beautifully impractical rabbit holes": "Ask Ilana what research rabbit hole got more useful the longer she stayed in it.",
+        "tools, workflows, and little systems": "Ask Ilana what tiny workflow made her week easier."
+      };
+
+      function selected(selector) {
+        return Array.from(document.querySelectorAll(selector + ":checked"));
+      }
+
+      function updateResult(event) {
+        if (event) event.preventDefault();
+        const name = document.querySelector("#guest-name").value.trim();
+        const likes = selected("input[name='likes']");
+        const party = selected("input[name='party']");
+        const curiosity = document.querySelector("#curiosity").value.trim();
+        const points = likes.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + party.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + (curiosity ? 3 : 0);
+        const percent = Math.min(98, Math.round(34 + points * 4.2));
+        const values = likes.map(item => item.value);
+        const first = values[0] || (party[0] && party[0].value) || "curiosity";
+        const displayName = name || "You";
+
+        title.textContent = percent > 76 ? `${displayName} and Ilana should probably talk immediately.` : `${displayName} and Ilana have a promising overlap.`;
+        score.textContent = `${percent}%`;
+        copy.textContent = values.length
+          ? `Shared territory: ${values.slice(0, 3).join(", ")}${values.length > 3 ? ", and more" : ""}.`
+          : "You did not pick a topic yet, but curiosity still counts.";
+
+        matchList.innerHTML = "";
+        values.slice(0, 6).forEach(value => {
+          const li = document.createElement("li");
+          li.textContent = value;
+          matchList.appendChild(li);
+        });
+
+        if (curiosity) {
+          starter.textContent = `Tell Ilana: "I am trying to understand ${curiosity}." That is exactly the kind of thread she likes pulling on.`;
+        } else {
+          starter.textContent = starterMap[first] || "Ask Ilana what she is trying to make easier for people to understand this week.";
+        }
+      }
+
+      form.addEventListener("submit", updateResult);
+      form.addEventListener("change", updateResult);
+      form.addEventListener("input", event => {
+        if (event.target.matches("#guest-name, #curiosity")) updateResult();
+      });
+    </script>
+  </body>
+</html>
