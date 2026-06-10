@@ -47,6 +47,12 @@
         margin-top: 4px;
       }
 
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+      }
+
       .question-block {
         display: grid;
         gap: 12px;
@@ -217,6 +223,24 @@
               <label class="choice"><input type="radio" name="contact" value="Cell phone" data-weight="1"> Cell phone</label>
               <label class="choice"><input type="radio" name="contact" value="Email" data-weight="1"> Email</label>
             </div>
+            <div class="contact-grid">
+              <label>
+                Instagram username
+                <input id="instagram-handle" type="text" inputmode="text" placeholder="@yourhandle">
+              </label>
+              <label>
+                TikTok username
+                <input id="tiktok-handle" type="text" inputmode="text" placeholder="@yourhandle">
+              </label>
+              <label>
+                Cell phone
+                <input id="cell-phone" type="tel" autocomplete="tel" placeholder="(555) 555-5555">
+              </label>
+              <label>
+                Email
+                <input id="email-address" type="email" autocomplete="email" placeholder="you@example.com">
+              </label>
+            </div>
           </div>
 
           <div class="question-block">
@@ -227,7 +251,7 @@
           </div>
 
           <button class="button primary" type="submit">Show me why we should be friends</button>
-          <p class="tiny-note">This form runs entirely in your browser. It does not send or store your answers.</p>
+          <p class="tiny-note">This form runs entirely in your browser. It does not send, save, or store your answers or contact info.</p>
         </form>
 
         <aside class="content-panel result-panel" aria-live="polite">
@@ -290,18 +314,25 @@
         const party = selected("input[name='party']");
         const contact = selected("input[name='contact']");
         const curiosity = document.querySelector("#curiosity").value.trim();
+        const contactDetails = [
+          ["Instagram", document.querySelector("#instagram-handle").value.trim()],
+          ["TikTok", document.querySelector("#tiktok-handle").value.trim()],
+          ["Cell", document.querySelector("#cell-phone").value.trim()],
+          ["Email", document.querySelector("#email-address").value.trim()]
+        ].filter(([, value]) => value);
         const points = likes.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + party.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + contact.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + (curiosity ? 3 : 0);
         const percent = Math.min(98, Math.round(34 + points * 4.2));
         const values = likes.map(item => item.value);
         const first = values[0] || (party[0] && party[0].value) || "curiosity";
         const displayName = name || "You";
         const contactText = contact[0] ? ` Preferred follow-up: ${contact[0].value}.` : "";
+        const detailText = contactDetails.length ? ` Contact details shown here: ${contactDetails.map(([label, value]) => `${label}: ${value}`).join(" | ")}.` : "";
 
         title.textContent = percent > 76 ? `${displayName} and Ilana should probably talk immediately.` : `${displayName} and Ilana have a promising overlap.`;
         score.textContent = `${percent}%`;
         copy.textContent = values.length
-          ? `Shared territory: ${values.slice(0, 3).join(", ")}${values.length > 3 ? ", and more" : ""}.${contactText}`
-          : `You did not pick a topic yet, but curiosity still counts.${contactText}`;
+          ? `Shared territory: ${values.slice(0, 3).join(", ")}${values.length > 3 ? ", and more" : ""}.${contactText}${detailText}`
+          : `You did not pick a topic yet, but curiosity still counts.${contactText}${detailText}`;
 
         matchList.innerHTML = "";
         values.slice(0, 6).forEach(value => {
@@ -320,7 +351,7 @@
       form.addEventListener("submit", updateResult);
       form.addEventListener("change", updateResult);
       form.addEventListener("input", event => {
-        if (event.target.matches("#guest-name, #curiosity")) updateResult();
+        if (event.target.matches("#guest-name, #curiosity, #instagram-handle, #tiktok-handle, #cell-phone, #email-address")) updateResult();
       });
     </script>
   </body>
