@@ -347,6 +347,22 @@
             <p>Can AI make Knicks fans and Spurs fans friends? It can help. Not by declaring peace. Not by awarding moral victory. Not by flattening either fan base into bland sportsmanship copy.</p>
             <p>The better use is smaller and more human: find the shared signal, name the tension, give people a smarter opening line, and let the rivalry become a conversation instead of a shove.</p>
           </article>
+
+          <article class="paper-section">
+            <p class="kicker">Build Notes</p>
+            <h2>How V1 of the app was built and published.</h2>
+            <p>This version is intentionally static: one HTML file with embedded CSS and JavaScript. That keeps the party demo fast, cheap, resilient, and privacy-light. No account system, no database, no silent collection of fan feelings.</p>
+            <ul>
+              <li><strong>Research tools:</strong> Web search and source review were used to pull recent playoff context from MySA, NBA.com, NY1, and The Guardian. Those links became the white paper's reference spine.</li>
+              <li><strong>Writing tools:</strong> Codex helped turn the research into the white paper argument, keeping the tone specific, practical, and a little mischievous instead of generic sportsmanship mush.</li>
+              <li><strong>Build tools:</strong> HTML, CSS, and vanilla JavaScript were used for the live app. The scout calculates a playful compatibility score, writes a short truce readout, and generates conversation prompts entirely in the browser.</li>
+              <li><strong>Validation tools:</strong> Python's standard HTML parser checked that the new page and Labs homepage still parse. `rg` verified the expected sections, links, and app text were present before publishing.</li>
+              <li><strong>Publishing tools:</strong> `git` committed the new lab page and homepage link, then pushed to GitHub. GitHub Pages publishes the `main` branch to the public Labs site.</li>
+              <li><strong>Cloudflare/custom domain role:</strong> `labs.mostcertainlytry.com` is the public custom domain. The repo's `CNAME` file points the Labs site to that hostname, and DNS resolves the subdomain to GitHub Pages. V1 does not need Cloudflare Workers, D1, KV, or R2 because nothing is stored server-side.</li>
+              <li><strong>Cache check:</strong> After publishing, the live page was verified with a cache-busted URL so the new version could be confirmed even if an edge/browser cache was slow to refresh.</li>
+            </ul>
+            <p class="note"><strong>V2 option:</strong> If the app needs real submissions later, the clean next step would be a Cloudflare Worker endpoint with D1 or KV storage, explicit consent, spam protection, and a simple admin/export view. For tonight, browser-only is the safer demo.</p>
+          </article>
         </div>
 
         <aside class="lab-panel" id="fan-lab">
