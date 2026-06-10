@@ -203,6 +203,16 @@
           </div>
 
           <div class="question-block">
+            <h2>How should we stay in touch?</h2>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="contact" value="Instagram" data-weight="1"> Instagram</label>
+              <label class="choice"><input type="radio" name="contact" value="TikTok" data-weight="1"> TikTok</label>
+              <label class="choice"><input type="radio" name="contact" value="Cell phone" data-weight="1"> Cell phone</label>
+              <label class="choice"><input type="radio" name="contact" value="Email" data-weight="1"> Email</label>
+            </div>
+          </div>
+
+          <div class="question-block">
             <label>
               What is one thing you are trying to understand right now?
               <textarea id="curiosity" rows="4" placeholder="A technology, a career turn, a city, a person, a business idea, whatever is taking up brain space."></textarea>
@@ -267,18 +277,20 @@
         const name = document.querySelector("#guest-name").value.trim();
         const likes = selected("input[name='likes']");
         const party = selected("input[name='party']");
+        const contact = selected("input[name='contact']");
         const curiosity = document.querySelector("#curiosity").value.trim();
-        const points = likes.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + party.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + (curiosity ? 3 : 0);
+        const points = likes.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + party.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + contact.reduce((sum, item) => sum + Number(item.dataset.weight || 1), 0) + (curiosity ? 3 : 0);
         const percent = Math.min(98, Math.round(34 + points * 4.2));
         const values = likes.map(item => item.value);
         const first = values[0] || (party[0] && party[0].value) || "curiosity";
         const displayName = name || "You";
+        const contactText = contact[0] ? ` Preferred follow-up: ${contact[0].value}.` : "";
 
         title.textContent = percent > 76 ? `${displayName} and Ilana should probably talk immediately.` : `${displayName} and Ilana have a promising overlap.`;
         score.textContent = `${percent}%`;
         copy.textContent = values.length
-          ? `Shared territory: ${values.slice(0, 3).join(", ")}${values.length > 3 ? ", and more" : ""}.`
-          : "You did not pick a topic yet, but curiosity still counts.";
+          ? `Shared territory: ${values.slice(0, 3).join(", ")}${values.length > 3 ? ", and more" : ""}.${contactText}`
+          : `You did not pick a topic yet, but curiosity still counts.${contactText}`;
 
         matchList.innerHTML = "";
         values.slice(0, 6).forEach(value => {
