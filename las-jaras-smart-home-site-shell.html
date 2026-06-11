@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Las Jaras Intelligent Sanctuary | Smart Home Site Shell</title>
+    <meta name="description" content="A mobile-first site shell for the Las Jaras smart home presentation: modern mission hospitality, calm IoT workflows, and South Texas experience design.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      :root {
+        --terra: #a84f35;
+        --terra-dark: #713524;
+        --clay: #d7a077;
+        --sand: #f4eadb;
+        --cream: #fffaf1;
+        --cobalt: #1f4f9a;
+        --mesquite: #3e3329;
+        --olive: #68775a;
+        --ink-soft: #302820;
+      }
+
+      body.lj {
+        background: var(--sand);
+        color: var(--ink-soft);
+      }
+
+      .lj .site-header {
+        background: rgba(244, 234, 219, 0.9);
+      }
+
+      .aman-shell {
+        width: min(1180px, calc(100% - 28px));
+      }
+
+      .mobile-shell {
+        overflow: hidden;
+        margin: 24px auto 44px;
+        border: 1px solid rgba(62, 51, 41, 0.22);
+        border-radius: 34px;
+        background: var(--cream);
+        box-shadow: 0 24px 70px rgba(62, 51, 41, 0.18);
+      }
+
+      .mobile-top {
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 16px;
+        border-bottom: 1px solid rgba(62, 51, 41, 0.16);
+        background: rgba(255, 250, 241, 0.88);
+        backdrop-filter: blur(14px);
+      }
+
+      .mobile-top span {
+        font-size: 0.76rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .icon-lines {
+        display: grid;
+        gap: 4px;
+        width: 24px;
+      }
+
+      .icon-lines i {
+        display: block;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--mesquite);
+      }
+
+      .lj-hero {
+        position: relative;
+        min-height: 78svh;
+        display: grid;
+        align-items: end;
+        padding: 28px 18px;
+        color: #fff;
+        background:
+          linear-gradient(180deg, rgba(48, 40, 32, 0.12), rgba(48, 40, 32, 0.76)),
+          url("assets/red-room/las-jaras-red-room-top.png") center / cover;
+      }
+
+      .lj-hero h1 {
+        max-width: 760px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(3.2rem, 16vw, 7rem);
+        font-weight: 400;
+        line-height: 0.92;
+      }
+
+      .lj-hero p {
+        max-width: 620px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.02rem;
+      }
+
+      .quiet-nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(62, 51, 41, 0.14);
+        background: #fff7ec;
+      }
+
+      .quiet-nav a {
+        flex: 0 0 auto;
+        padding: 8px 11px;
+        border: 1px solid rgba(62, 51, 41, 0.16);
+        border-radius: 999px;
+        color: var(--mesquite);
+        font-size: 0.82rem;
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .lj-section {
+        padding: 34px 18px;
+        border-bottom: 1px solid rgba(62, 51, 41, 0.14);
+      }
+
+      .lj-section h2 {
+        max-width: 760px;
+        color: var(--terra-dark);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.1rem, 9vw, 4.4rem);
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .lj-section .lede {
+        color: #6a5d50;
+      }
+
+      .split-grid,
+      .card-grid,
+      .standards-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .card-grid,
+      .standards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .ritual-card,
+      .standard-card,
+      .prompt-card,
+      .source-card {
+        padding: 16px;
+        border: 1px solid rgba(62, 51, 41, 0.15);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.82);
+      }
+
+      .ritual-card h3,
+      .standard-card h3,
+      .prompt-card h3,
+      .source-card h3 {
+        color: var(--mesquite);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.45rem;
+        font-weight: 400;
+      }
+
+      .ritual-card p,
+      .standard-card p,
+      .prompt-card p,
+      .prompt-card li,
+      .source-card p {
+        color: #6a5d50;
+      }
+
+      .material-strip {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .swatch {
+        min-height: 84px;
+        padding: 10px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 850;
+      }
+
+      .swatch:nth-child(1) { background: var(--terra); }
+      .swatch:nth-child(2) { background: var(--clay); color: var(--mesquite); }
+      .swatch:nth-child(3) { background: var(--sand); color: var(--mesquite); border: 1px solid rgba(62, 51, 41, 0.18); }
+      .swatch:nth-child(4) { background: var(--cobalt); }
+      .swatch:nth-child(5) { background: var(--olive); }
+
+      .timeline {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline li {
+        padding: 14px;
+        border-left: 4px solid var(--terra);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.78);
+        color: #6a5d50;
+      }
+
+      .tool-table {
+        overflow-x: auto;
+      }
+
+      .tool-table table {
+        min-width: 760px;
+      }
+
+      .citation-list a {
+        color: var(--terra-dark);
+        font-weight: 850;
+        text-underline-offset: 4px;
+      }
+
+      @media (max-width: 760px) {
+        .mobile-shell {
+          margin-top: 8px;
+          border-radius: 22px;
+        }
+
+        .card-grid,
+        .standards-grid,
+        .material-strip {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body class="lj">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Las Jaras presentation shell</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="projects/las-jaras-hue-lighting-build-log.html">Hue Build</a>
+        <a href="las-jaras-smart-home-intake.html">Smart Intake</a>
+      </nav>
+    </header>
+
+    <main class="aman-shell">
+      <section class="mobile-shell" aria-label="Mobile-first Las Jaras site prototype">
+        <div class="mobile-top">
+          <span>Las Jaras</span>
+          <span>Schertz, Texas</span>
+          <span class="icon-lines" aria-hidden="true"><i></i><i></i></span>
+        </div>
+
+        <section class="lj-hero">
+          <div>
+            <p class="kicker">Modern mission sanctuary</p>
+            <h1>Peace, automated gently.</h1>
+            <p>A 1952 South Texas home becoming a smart, soulful retreat: terracotta light, cobalt thresholds, guest-ready rituals, and technology that knows when to disappear.</p>
+          </div>
+        </section>
+
+        <nav class="quiet-nav" aria-label="Prototype sections">
+          <a href="#sitemap">Site Map</a>
+          <a href="#standards">Design</a>
+          <a href="#content">Content</a>
+          <a href="#iot">IoT</a>
+          <a href="#adventures">Adventures</a>
+          <a href="#charm">Local Charm</a>
+          <a href="#prompts">Prompt Library</a>
+        </nav>
+
+        <section class="lj-section" id="ethos">
+          <p class="kicker">Ethos</p>
+          <h2>If Amangiri had a clever South Texas cousin.</h2>
+          <p class="lede">The Las Jaras site should feel less like a smart-home product page and more like a quiet invitation into a living system: a modern-day mission with hospitality logic, old-house character, and automation designed around nervous-system ease.</p>
+          <div class="card-grid">
+            <article class="ritual-card">
+              <h3>Ritz-Carlton service, no visible fuss</h3>
+              <p>Everything works before a guest has to ask: arrival lighting, clear room rituals, a calm guest brief, easy Wi-Fi guidance, and physical controls for anyone who does not want an app.</p>
+            </article>
+            <article class="ritual-card">
+              <h3>Aman quiet, South Texas soul</h3>
+              <p>Stone, clay, shade, water, plants, warm light, thick curtains, collected rooms, local day trips, and technology that supports stillness instead of showing off.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="lj-section" id="sitemap">
+          <p class="kicker">1. Proposed Site Map</p>
+          <h2>A destination site with a build-log spine.</h2>
+          <ul class="timeline">
+            <li><strong>Home:</strong> sanctuary premise, hero film/photo, invitation to join the build, and 3 signature rituals.</li>
+            <li><strong>The House:</strong> 1952 Schertz house, room stories, Gramercy/bohemian-luxe details, garden/site plan, and modern mission design language.</li>
+            <li><strong>Intelligent Comfort:</strong> Hue lighting, Home Assistant, smart dashboards, VIZIO TV, bird feeder, sensors, scenes, and guest controls.</li>
+            <li><strong>Rituals:</strong> Arrival, morning, bath, reading, hosting, movie night, night path, garden check, and checkout/reset.</li>
+            <li><strong>Build Notes:</strong> every automation, the prompt someone else can reuse, tools used, setup steps, blockers, screenshots, and what changed.</li>
+            <li><strong>Two-Hour Field Guide:</strong> Hill Country, San Antonio, Austin, small-town drives, water, missions, food, music, plants, and antique trails.</li>
+            <li><strong>Join the Build:</strong> collaborators, tool partners, smart-home brands, local makers, hospitality/design friends, and presentation updates.</li>
+          </ul>
+        </section>
+
+        <section class="lj-section" id="standards">
+          <p class="kicker">2. Design Standards</p>
+          <h2>Terracotta, shade, cobalt, and restraint.</h2>
+          <div class="standards-grid">
+            <article class="standard-card">
+              <h3>Mobile first</h3>
+              <p>Full-bleed image, minimal header, horizontal section pills, generous spacing, restrained copy, and one calm action at a time.</p>
+            </article>
+            <article class="standard-card">
+              <h3>Southwest palette</h3>
+              <p>Terracotta, clay, sand, mesquite brown, olive, weathered black, and Las Jaras cobalt as the memorable accent.</p>
+            </article>
+            <article class="standard-card">
+              <h3>Material language</h3>
+              <p>Limewash, plaster, carved wood, wrought iron, saltillo tile, linen, thick drapery, stone, matte metal, and warm glass.</p>
+            </article>
+            <article class="standard-card">
+              <h3>Motion language</h3>
+              <p>Slow fades, sunrise transitions, evening dim-downs, no flashy smart-home dashboards unless the story is explicitly about the build.</p>
+            </article>
+          </div>
+          <div class="material-strip" aria-label="Color palette">
+            <div class="swatch">Terracotta</div>
+            <div class="swatch">Clay</div>
+            <div class="swatch">Limestone</div>
+            <div class="swatch">Cobalt</div>
+            <div class="swatch">Olive</div>
+          </div>
+        </section>
+
+        <section class="lj-section" id="content">
+          <p class="kicker">3. Content Buckets</p>
+          <h2>What the site should teach, show, and invite.</h2>
+          <div class="card-grid">
+            <article class="ritual-card"><h3>Room transformations</h3><p>Before/after stories for Red Room, Green Room, Yellow Room, living room, bathrooms, hallways, kitchen, porch, and garden.</p></article>
+            <article class="ritual-card"><h3>Automation recipes</h3><p>Each workflow gets a purpose, prompt, device list, human steps, test steps, fallback, and tools-used ledger.</p></article>
+            <article class="ritual-card"><h3>Hospitality rituals</h3><p>Arrival, tea/coffee, bath, reading, music, movie, garden, dinner, night path, checkout, and house reset.</p></article>
+            <article class="ritual-card"><h3>Field-guide living</h3><p>Where to eat, walk, soak, shop, listen, read, garden, and disappear for half a day within two hours of Schertz.</p></article>
+          </div>
+        </section>
+
+        <section class="lj-section" id="experience">
+          <p class="kicker">4. Ways to Make the Home and Experience</p>
+          <h2>Luxury as fewer decisions, better atmosphere, and proof of care.</h2>
+          <ul class="timeline">
+            <li><strong>Arrival sequence:</strong> porch warmth, hall glow, welcome dashboard, music low, guest room scene already set.</li>
+            <li><strong>Room personalities:</strong> chakra-based color scenes, Gramercy-inspired collected rooms, and physical notes that explain the mood without overexplaining the tech.</li>
+            <li><strong>Host mode:</strong> lighting, playlist, kitchen task light, patio path, and room reset bundled into one scene.</li>
+            <li><strong>Rest mode:</strong> amber night path, reduced notification surface, cool-down TV scene, and no blue-white light after a set hour.</li>
+            <li><strong>Guest autonomy:</strong> tap buttons, printed room cards, QR guide, and a guest-safe dashboard that hides private data.</li>
+          </ul>
+        </section>
+
+        <section class="lj-section" id="iot">
+          <p class="kicker">5. IoT for Peace and Comfort</p>
+          <h2>The smartest room is the one that feels easy.</h2>
+          <div class="card-grid">
+            <article class="ritual-card"><h3>Light as nervous-system care</h3><p>Hue scenes for Guest Arrival, Morning Ritual, Cleaning, Reading, Bathing in Green, Movie Night, Night Path, and All Off.</p></article>
+            <article class="ritual-card"><h3>Home Assistant as quiet concierge</h3><p>Dashboards for morning, midday, evening, guest mode, garden status, weather, pantry prompts, and household reset.</p></article>
+            <article class="ritual-card"><h3>Nature signals</h3><p>Smart bird feeder events, garden watering guidance, weather-aware reminders, and seasonal plant prompts.</p></article>
+            <article class="ritual-card"><h3>Media without friction</h3><p>VIZIO/TV control, movie-night scenes, playlist-matched lighting, and guest-ready remote/streaming notes.</p></article>
+          </div>
+        </section>
+
+        <section class="lj-section" id="adventures">
+          <p class="kicker">6. Amangiri-Feeling Adventures Within Two Hours</p>
+          <h2>Desert calm, river roads, old stone, and big-sky errands.</h2>
+          <div class="card-grid">
+            <article class="ritual-card"><h3>Mission Reach and San Antonio Missions</h3><p>Old stone, river paths, shade, ritual architecture, and the modern mission thread that belongs directly in the Las Jaras story.</p></article>
+            <article class="ritual-card"><h3>Natural Bridge Caverns and wildlife drives</h3><p>Subterranean scale, limestone drama, and a sense of South Texas geology without needing a plane ticket.</p></article>
+            <article class="ritual-card"><h3>Gruene, New Braunfels, and the Guadalupe</h3><p>Water, old dance halls, small-town texture, antique stops, and a slow day that can end with live music.</p></article>
+            <article class="ritual-card"><h3>Wimberley, Blanco, and Driftwood</h3><p>Hill Country swimming holes, market wandering, limestone, BBQ, wineries, and a soft adventure rhythm.</p></article>
+            <article class="ritual-card"><h3>Austin day into night</h3><p>Bookstores, gardens, live music, hotel lobbies, restaurants, and creative-tech conversations that feed the house back home.</p></article>
+            <article class="ritual-card"><h3>Fredericksburg and Luckenbach</h3><p>Long-drive romance, wine-country texture, old Texas music lore, peaches, stargazing, and a good hat moment.</p></article>
+          </div>
+        </section>
+
+        <section class="lj-section" id="charm">
+          <p class="kicker">7. San Antonio and Austin Charm to Bring Home</p>
+          <h2>The house should feel like the region has been invited in.</h2>
+          <div class="card-grid">
+            <article class="ritual-card"><h3>San Antonio</h3><p>Missions, tile, courtyards, mercado color, breakfast tacos, river-stone calm, old houses, family tables, and a sense of history that does not need to shout.</p></article>
+            <article class="ritual-card"><h3>Austin</h3><p>Live music, smart creative people, bookstores, food trucks, swimming holes, good coffee, porch conversations, and technology that still has a little weirdness in it.</p></article>
+            <article class="ritual-card"><h3>Schertz and the in-between</h3><p>The liminal magic of being close to everything: city, Hill Country, missions, rivers, highways, garden centers, H-E-B, and home by sunset.</p></article>
+            <article class="ritual-card"><h3>Las Jaras signature</h3><p>Cobalt details, terracotta glow, collected rooms, garden intelligence, practical hospitality, and the feeling that the house is paying attention kindly.</p></article>
+          </div>
+        </section>
+
+        <section class="lj-section" id="prompts">
+          <p class="kicker">Automation Prompt Library</p>
+          <h2>Every workflow should be reusable by another human.</h2>
+          <div class="card-grid">
+            <article class="prompt-card">
+              <h3>Hue Arrival Scene</h3>
+              <p><strong>Reusable prompt:</strong> Create a guest-arrival lighting scene for an older home using warm terracotta, rose-gold, and low amber. Include brightness levels by room, physical switch notes, and a fallback if smart bulbs are offline.</p>
+              <p><strong>Tools ledger:</strong> Philips Hue, Hue Bridge/Bridge Pro, Hue app, Home Assistant, room audit, bulb-base checklist.</p>
+            </article>
+            <article class="prompt-card">
+              <h3>Guest Brief Dashboard</h3>
+              <p><strong>Reusable prompt:</strong> Build a privacy-safe guest dashboard for a smart home that shows weather, welcome notes, Wi-Fi guidance, door reminders, garden cautions, and checkout/reset prompts while hiding private calendars and inventory.</p>
+              <p><strong>Tools ledger:</strong> Home Assistant, dashboard cards, Schertz weather source, static Art Mode artwork, guest-mode content rules.</p>
+            </article>
+            <article class="prompt-card">
+              <h3>Garden Peace Check</h3>
+              <p><strong>Reusable prompt:</strong> Design a daily garden check for South Texas heat using forecast, watering needs, plant stress signs, bird activity, and a minimal reminder style that does not nag.</p>
+              <p><strong>Tools ledger:</strong> weather feed, garden checklist, bird feeder events, Home Assistant helpers, plant notes.</p>
+            </article>
+            <article class="prompt-card">
+              <h3>Night Path</h3>
+              <p><strong>Reusable prompt:</strong> Create a night-path automation that uses dim amber/red light, avoids blue-white light, preserves sleepiness, and gives guests safe movement from bedroom to bathroom and kitchen.</p>
+              <p><strong>Tools ledger:</strong> Hue scenes, motion/contact sensor plan, tap buttons, room labels, Home Assistant automation rules.</p>
+            </article>
+          </div>
+          <div class="tool-table">
+            <table>
+              <thead>
+                <tr><th>Workflow</th><th>Primary tools</th><th>Documentation to keep</th><th>Proof to capture</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Lighting conversion</td><td>Philips Hue, Hue app, Home Assistant</td><td>prompt, bulb count, fixture risk, scene settings</td><td>before/after photos, brightness recipes, guest test</td></tr>
+                <tr><td>Guest dashboard</td><td>Home Assistant, weather, Art Mode graphic</td><td>prompt, hidden/private fields, visible guest fields</td><td>screenshot, mobile view, guest comprehension notes</td></tr>
+                <tr><td>Bird/garden signals</td><td>VicoHome feeder, HA integration, weather</td><td>prompt, entity names, battery/signal status, alert rules</td><td>event screenshot, alert log, garden action taken</td></tr>
+                <tr><td>Media comfort</td><td>VIZIO TV bridge, Hue Sync, playlists</td><td>prompt, pairing steps, scene map, fallback remote notes</td><td>movie-night scene photo, successful control test</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="lj-section citation-list" id="sources">
+          <p class="kicker">Aman Inspiration Sources</p>
+          <h2>References for the shell's ethos.</h2>
+          <div class="card-grid">
+            <article class="source-card"><h3><a href="https://www.aman.com/">Aman.com</a></h3><p>Destination-first language, quiet luxury structure, wellness and experience hierarchy.</p></article>
+            <article class="source-card"><h3><a href="https://www.aman.com/resorts/amangiri">Amangiri</a></h3><p>Desert retreat positioning, adventure plus stillness, place-led hospitality.</p></article>
+            <article class="source-card"><h3><a href="https://www.aman.com/resorts/amangiri/gallery">Amangiri Gallery</a></h3><p>Warm stone, water, yoga, dusk architecture, and the visual grammar of quiet escape.</p></article>
+            <article class="source-card"><h3><a href="https://www.aman.com/wellness">Aman Wellness</a></h3><p>Personalized journeys, rituals, movement, spa, and wellbeing as the organizing principle.</p></article>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <span>Las Jaras smart home presentation shell</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+  </body>
+</html>
