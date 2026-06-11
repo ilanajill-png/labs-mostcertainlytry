@@ -7,8 +7,9 @@ Purpose: translate the Las Jaras ethos into practical automations that make the 
 ## Management Model
 
 - Final decision-maker: Ilana / buddy.
-- Master list owner: HOWDY PARTNER as House Chief of Staff.
-- Implementation owner: Home Assistant Steward, managed by HOWDY PARTNER through Home Assistant, device docs, and test logs.
+- Master list owner: Soma Hearthline, the Las Jaras Living System Steward.
+- Coordination owner: HOWDY PARTNER as House Chief of Staff.
+- Implementation owner: Home Assistant Steward, managed by Soma and HOWDY PARTNER through Home Assistant, device docs, and test logs.
 - Guest experience owner: Hospitality Ritual Steward, focused on arrival, room cards, guest mode, and physical controls.
 - Lighting owner: Lighting Steward, focused on Hue scenes, switches, room moods, and no-blue-light rules.
 - Garden/environment owner: Garden Heat Manager, focused on plants, weather, air, porch, and outdoor comfort.
@@ -27,7 +28,7 @@ Purpose: translate the Las Jaras ethos into practical automations that make the 
 | Planned | Quiet doorbell after dark | Doorbell/chime gets softer during wind-down and sleep windows. | Safety/privacy owner |
 | Planned | Air refresh mode | Track CO2/humidity/particulates once sensors exist; nudge ventilation or purifier use only when useful. | Garden/environment owner |
 | Planned | Storm comfort scene | Warm lights, charged devices reminder, porch/security check, and calm dashboard language during storms. | Home Assistant Steward |
-| Planned | One-button no-visible-fuss reset | All core public spaces return to clean, warm, guest-ready baseline. | House Chief of Staff |
+| Planned | One-button no-visible-fuss reset | All core public spaces return to clean, warm, guest-ready baseline. | Soma Hearthline |
 
 ## Operating Rules
 
