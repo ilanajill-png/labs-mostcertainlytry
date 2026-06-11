@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Las Jaras Daily | Thursday, June 11, 2026</title>
+    <meta name="description" content="The first dated Las Jaras Daily edition, with a Thursday, June 11, 2026 report from each household being.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      :root {
+        --terra: #a84f35;
+        --terra-dark: #713524;
+        --sand: #f4eadb;
+        --cream: #fffaf1;
+        --cobalt: #1f4f9a;
+        --mesquite: #3e3329;
+        --olive: #68775a;
+        --line: rgba(62, 51, 41, 0.16);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body.daily-edition {
+        background: var(--sand);
+        color: var(--mesquite);
+        overflow-x: hidden;
+      }
+
+      .daily-edition .site-header {
+        background: rgba(244, 234, 219, 0.92);
+      }
+
+      .edition-wrap {
+        width: min(1160px, 100%);
+        padding: 0 14px;
+        margin: 0 auto 54px;
+        overflow-x: hidden;
+      }
+
+      .edition-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: clamp(20px, 4vw, 46px);
+        align-items: end;
+        padding: 44px 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .kicker,
+      .label {
+        margin: 0 0 8px;
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--terra-dark);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(3rem, 9vw, 7rem);
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 5vw, 4rem);
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        color: var(--mesquite);
+        font-size: 1.45rem;
+      }
+
+      p,
+      li {
+        color: #65584c;
+        overflow-wrap: anywhere;
+      }
+
+      .lede {
+        max-width: 720px;
+        font-size: 1.08rem;
+      }
+
+      .edition-card,
+      .section-card,
+      .report-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.9);
+        box-shadow: 0 24px 70px rgba(62, 51, 41, 0.1);
+      }
+
+      .edition-card,
+      .section-card {
+        padding: 18px;
+      }
+
+      .edition-card dl {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .edition-card dt {
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .edition-card dd {
+        margin: 0;
+        color: var(--mesquite);
+        font-weight: 850;
+        overflow-wrap: anywhere;
+      }
+
+      .paper-nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 14px 0 24px;
+      }
+
+      .paper-nav a,
+      .daily-button {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--cream);
+        color: var(--mesquite);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .daily-button.primary {
+        border-color: var(--terra-dark);
+        background: var(--terra-dark);
+        color: #fff;
+      }
+
+      .section-block {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .front-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+      }
+
+      .report-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .report-card {
+        padding: 16px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .report-card p {
+        margin: 0;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .pill {
+        display: inline-flex;
+        min-height: 28px;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(215, 160, 119, 0.3);
+        color: var(--mesquite);
+        font-size: 0.78rem;
+        font-weight: 850;
+      }
+
+      .note-list {
+        display: grid;
+        gap: 9px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .note-list li {
+        padding: 11px 13px;
+        border-left: 4px solid var(--terra);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.82);
+      }
+
+      .note-list strong {
+        color: var(--mesquite);
+      }
+
+      @media (max-width: 760px) {
+        .edition-wrap {
+          width: 100vw;
+          max-width: 100vw;
+          padding: 0 14px;
+        }
+
+        .edition-hero,
+        .front-grid,
+        .report-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .edition-hero,
+        .edition-hero > *,
+        .edition-card,
+        .section-card,
+        .report-card {
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .lede {
+          max-width: min(100%, 315px);
+        }
+
+        h1 {
+          max-width: 8.6ch;
+          font-size: clamp(3rem, 14vw, 4.1rem);
+        }
+      }
+    </style>
+  </head>
+  <body class="daily-edition">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Las Jaras living system</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="las-jaras-daily.html">Newspaper</a>
+        <a href="projects/household-beings.html">Beings</a>
+        <a href="las-jaras-smart-home-site-shell.html">Las Jaras</a>
+      </nav>
+    </header>
+
+    <main class="edition-wrap">
+      <section class="edition-hero">
+        <div>
+          <p class="kicker">Thursday edition</p>
+          <h1>The Las Jaras Daily</h1>
+          <p class="lede">A first dated edition for Thursday, June 11, 2026. Each household being files a concise desk note: what they are watching, what matters today, and the next quiet move.</p>
+        </div>
+        <aside class="edition-card">
+          <dl>
+            <div><dt>Editor</dt><dd>Librarian Margot Index</dd></div>
+            <div><dt>Date</dt><dd>Thursday, June 11, 2026</dd></div>
+            <div><dt>Status</dt><dd>Initial private-safe edition</dd></div>
+            <div><dt>Rule</dt><dd>No purchases or posts without Ilana</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <nav class="paper-nav" aria-label="Edition sections">
+        <a href="#front-page">Front Page</a>
+        <a href="#living-system">Living System</a>
+        <a href="#operations">Operations</a>
+        <a href="#public-face">Public Face</a>
+        <a href="#care">Care</a>
+        <a href="#experience">Experience</a>
+        <a href="#kitchen">Kitchen</a>
+        <a href="#housekeeping">Housekeeping</a>
+        <a href="#editor">Editor's Note</a>
+      </nav>
+
+      <section class="section-block" id="front-page">
+        <p class="label">Front Page</p>
+        <h2>Today the house chooses calm over clever.</h2>
+        <div class="front-grid">
+          <article class="section-card">
+            <h3>Lead story</h3>
+            <p>The first full set of being reports points toward one operating principle: Las Jaras should feel alive without making itself loud. The strongest work for today is to turn research, garden vision, guest rituals, and IoT ideas into calm checklists with human approval points clearly marked.</p>
+            <div class="meta-row">
+              <span class="pill">Mood: held</span>
+              <span class="pill">Priority: organize</span>
+              <span class="pill">Risk: over-automating</span>
+            </div>
+          </article>
+          <article class="section-card">
+            <h3>Today at a glance</h3>
+            <ul class="note-list">
+              <li><strong>Soma:</strong> automation should support nervous-system ease, not become a dashboard performance.</li>
+              <li><strong>Groundskeeper:</strong> both garden sides now want a real plant and material list.</li>
+              <li><strong>Margot:</strong> daily reports need one source of truth before Pinterest or Instagram.</li>
+              <li><strong>Blue Static:</strong> public pages are ready for richer Labs storytelling after privacy review.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="living-system">
+        <p class="label">Living System</p>
+        <h2>The house is giving you a long strong hug.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Soma Hearthline</h3>
+            <p><strong>Report:</strong> The nervous-system checklist should become the first real operating standard. Every automation needs a calm purpose, a human override, a privacy check, and a no-app fallback.</p>
+            <p><strong>Watching:</strong> circadian light, quiet doorbell, guest arrival, sleep cocoon, heat pre-cool, and no-visible-fuss reset.</p>
+            <p><strong>Next:</strong> rank the ten IoT ideas by effort, comfort impact, and whether they can be tested without buying anything.</p>
+            <div class="meta-row"><span class="pill">Owner: Living System</span><span class="pill">Needs Ilana: soon</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Serafina de las Jaras</h3>
+            <p><strong>Report:</strong> The new ethos is landing correctly: Southern Charmed to meet you, but not precious. The house should feel attentive through atmosphere, thresholds, plants, weather, and rituals.</p>
+            <p><strong>Watching:</strong> magnolia shade, cobalt thresholds, garden mood, guest arrival tone, and field notes that may become cases.</p>
+            <p><strong>Next:</strong> create a daily field note prompt that asks what felt loved, what felt loud, and what the house seemed to request.</p>
+            <div class="meta-row"><span class="pill">Owner: Household Intelligence</span><span class="pill">Needs Ilana: taste call</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="operations">
+        <p class="label">Operations</p>
+        <h2>The operating room of the house.</h2>
+        <div class="report-grid">
+          <article class="report-card"><h3>Postmaster Juniper</h3><p><strong>Report:</strong> Follow-ups need a single daily lane so ideas do not disappear after a good conversation.</p><p><strong>Watching:</strong> questions for Ilana, pending approvals, replies owed, and daily newspaper action items.</p><p><strong>Next:</strong> add a “needs reply / needs decision / no reply needed” marker to future daily editions.</p><div class="meta-row"><span class="pill">Communications</span><span class="pill">No external sends</span></div></article>
+          <article class="report-card"><h3>Sundries, Keeper of the Useful Drawer</h3><p><strong>Report:</strong> Purchase research should stay separate from purchase action. Interesting items belong in a watch list until Ilana approves.</p><p><strong>Watching:</strong> smart buttons, air sensors, garden materials, guest supplies, and room reset tools.</p><p><strong>Next:</strong> create a candidate supply table with item, why it matters, price range, and approval status.</p><div class="meta-row"><span class="pill">Operations</span><span class="pill">Spend: no</span></div></article>
+          <article class="report-card"><h3>Tock Bellwether</h3><p><strong>Report:</strong> The presentation next month needs a weekly cadence now, not a final-week scramble wearing a cute hat.</p><p><strong>Watching:</strong> site sections, automation prompts, build notes, garden concepts, and presentation milestones.</p><p><strong>Next:</strong> propose a weekly Las Jaras build rhythm: research day, build day, polish day, publish day.</p><div class="meta-row"><span class="pill">Time</span><span class="pill">Needs calendar later</span></div></article>
+          <article class="report-card"><h3>Archivist Vellum</h3><p><strong>Report:</strong> The house is accumulating durable decisions quickly. The daily newspaper should cite source pages and preserve why a choice was made.</p><p><strong>Watching:</strong> protocols, live Labs URLs, design decisions, source links, and image assets.</p><p><strong>Next:</strong> keep a dated index of Las Jaras pages, reports, and approved ethos language.</p><div class="meta-row"><span class="pill">Records</span><span class="pill">Privacy-minded</span></div></article>
+          <article class="report-card"><h3>Librarian Margot Index</h3><p><strong>Report:</strong> The first edition proves the format works. The Daily should stay short enough to read and structured enough to act on.</p><p><strong>Watching:</strong> repeated patterns across beings, research links, questions that need Ilana, and notes worth saving.</p><p><strong>Next:</strong> use this edition as the template for future daily reports and move only polished excerpts to Labs.</p><div class="meta-row"><span class="pill">Editor</span><span class="pill">Synthesizes daily</span></div></article>
+          <article class="report-card"><h3>Penny Cobalt</h3><p><strong>Report:</strong> “Interesting” is currently trying to sneak into “buy this.” It will be stopped politely at the ledger.</p><p><strong>Watching:</strong> smart home hardware, xeriscape materials, hospitality supplies, subscriptions, and any tool that creates recurring cost.</p><p><strong>Next:</strong> add budget buckets before the shopping list grows legs.</p><div class="meta-row"><span class="pill">Treasury</span><span class="pill">Approval required</span></div></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="public-face">
+        <p class="label">Public Face</p>
+        <h2>Tell the story without turning the house into content.</h2>
+        <div class="report-grid">
+          <article class="report-card"><h3>Cobalt Gloss</h3><p><strong>Report:</strong> The public positioning is strong: Texas spirit, Texas soul, living system, mid-century charm, modern day magic.</p><p><strong>Watching:</strong> language that feels warm but not gimmicky, public-safe claims, and presentation narrative.</p><p><strong>Next:</strong> turn the ethos into a short public manifesto and a longer presenter note.</p><div class="meta-row"><span class="pill">PR</span><span class="pill">Public-safe</span></div></article>
+          <article class="report-card"><h3>Velvet Thimble</h3><p><strong>Report:</strong> The visual direction should stay warm, layered, collected, and calm. Technology should disappear behind texture.</p><p><strong>Watching:</strong> terracotta light, cobalt thresholds, Gramercy textures, garden colors, and room photo-readiness.</p><p><strong>Next:</strong> create styling prompts for each room so future visuals do not drift into generic smart-home gloss.</p><div class="meta-row"><span class="pill">Styling</span><span class="pill">No visible fuss</span></div></article>
+          <article class="report-card"><h3>Mira Queue</h3><p><strong>Report:</strong> Instagram is not the research archive. It is the finished story shelf after privacy and taste review.</p><p><strong>Watching:</strong> potential story fragments: the yellow house, xeriscape, house beings, daily newspaper, and no-visible-fuss automations.</p><p><strong>Next:</strong> draft three post concepts but do not publish: exterior vision, living-system ethos, and the Daily.</p><div class="meta-row"><span class="pill">Social</span><span class="pill">Draft only</span></div></article>
+          <article class="report-card"><h3>Blue Static</h3><p><strong>Report:</strong> Labs can host the presentation shell, beings directory, and Daily as public artifacts, as long as private details stay out.</p><p><strong>Watching:</strong> broken links, dated cache-busting, build notes, privacy edges, and mobile readability.</p><p><strong>Next:</strong> add a “current Las Jaras views” index once the presentation set has more pages.</p><div class="meta-row"><span class="pill">Webmaster</span><span class="pill">Labs hygiene</span></div></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="care">
+        <p class="label">Care</p>
+        <h2>Human comfort before house cleverness.</h2>
+        <div class="report-grid">
+          <article class="report-card"><h3>Guru Marigold</h3><p><strong>Report:</strong> The living-system ethos needs a daily grounding ritual so the house does not become another productivity machine.</p><p><strong>Watching:</strong> morning tenderness, end-of-day closure, reflection prompts, and quiet invitations.</p><p><strong>Next:</strong> write a one-minute morning blessing that can live in the Daily without sounding like a wellness brochure.</p><div class="meta-row"><span class="pill">Care</span><span class="pill">Grounded first</span></div></article>
+          <article class="report-card"><h3>Nanny Hearth</h3><p><strong>Report:</strong> Guest comfort should be practical: water, sleep, towels, temperature, paths at night, and easy instructions.</p><p><strong>Watching:</strong> guest room readiness, hydration, bathroom comfort, sleep basics, and wellness disclaimers.</p><p><strong>Next:</strong> create a guest comfort checklist that Concierge can use before arrivals.</p><div class="meta-row"><span class="pill">Care</span><span class="pill">Guest basics</span></div></article>
+          <article class="report-card"><h3>Coach Switchback</h3><p><strong>Report:</strong> Movement at Las Jaras should feel like restoration, not punishment disguised as optimization.</p><p><strong>Watching:</strong> walkability, porch stretches, recovery cues, heat-aware routines, and non-annoying habit prompts.</p><p><strong>Next:</strong> propose two tiny movement rituals: morning porch reset and evening decompression walk.</p><div class="meta-row"><span class="pill">Movement</span><span class="pill">Gentle cadence</span></div></article>
+          <article class="report-card"><h3>Officer Ember</h3><p><strong>Report:</strong> Calm depends on basic safety being handled quietly. The house should feel cared for because batteries, paths, locks, and heat plans are boringly reliable.</p><p><strong>Watching:</strong> smoke/CO checks, trip hazards, storm comfort, heat risk, exterior lighting, and guest safety.</p><p><strong>Next:</strong> pair every comfort automation with a safety check and manual fallback.</p><div class="meta-row"><span class="pill">Safety</span><span class="pill">Low drama</span></div></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="experience">
+        <p class="label">Experience</p>
+        <h2>The house should feel alive, not busy.</h2>
+        <div class="report-grid">
+          <article class="report-card"><h3>Jubilee RSVP</h3><p><strong>Report:</strong> The presentation should include joy, not just systems. A smart home with no delight is just chores with Wi-Fi.</p><p><strong>Watching:</strong> local adventures, house gatherings, Amangiri-feeling day trips, and small rituals worth inviting people into.</p><p><strong>Next:</strong> build a “two hours from Schertz” adventure shortlist with mood, drive time, and what to bring home.</p><div class="meta-row"><span class="pill">Experience</span><span class="pill">Joy required</span></div></article>
+          <article class="report-card"><h3>Marquee Clementine</h3><p><strong>Report:</strong> The media experience should support room mood: quiet nights, guest movie moments, background classics, and presentation ambiance.</p><p><strong>Watching:</strong> watchlists, projector/TV moments, conversation-safe films, and house-lore screenings.</p><p><strong>Next:</strong> create three Las Jaras viewing modes: dinner background, soft reset, and house party classic.</p><div class="meta-row"><span class="pill">Theatre</span><span class="pill">Mood-led</span></div></article>
+          <article class="report-card"><h3>DJ Bluehour</h3><p><strong>Report:</strong> Sound is one of the fastest ways to soothe or irritate the nervous system. It needs zones, not random playlists.</p><p><strong>Watching:</strong> morning, cooking, cleaning, guest arrival, dinner, bath, and golden-hour transitions.</p><p><strong>Next:</strong> design three playlist prompts: terracotta morning, cobalt threshold, and long strong hug.</p><div class="meta-row"><span class="pill">Sound</span><span class="pill">Soft transitions</span></div></article>
+          <article class="report-card"><h3>Concierge Paloma</h3><p><strong>Report:</strong> Guest arrival mode should feel like being expected, not processed.</p><p><strong>Watching:</strong> room cards, Wi-Fi, towels, water, temperature, local recommendations, and physical controls.</p><p><strong>Next:</strong> draft a one-page guest card that explains comfort controls without making the house feel complicated.</p><div class="meta-row"><span class="pill">Hospitality</span><span class="pill">Held, not managed</span></div></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="kitchen">
+        <p class="label">Kitchen</p>
+        <h2>Daily care starts with something good to drink.</h2>
+        <div class="report-grid">
+          <article class="report-card"><h3>Chef Mise</h3><p><strong>Report:</strong> The kitchen should support guest rituals and pantry intelligence before it tries to be impressive.</p><p><strong>Watching:</strong> pantry recipes, meal ideas, guest-ready staples, and low-stress dinner plans.</p><p><strong>Next:</strong> build a Las Jaras hospitality pantry list: snacks, breakfast basics, coffee companions, and shelf-stable backups.</p><div class="meta-row"><span class="pill">Kitchen</span><span class="pill">Flavor-forward</span></div></article>
+          <article class="report-card"><h3>Barista Luma</h3><p><strong>Report:</strong> The morning beverage ritual is core to the house hug. It should be simple, beautiful, and repeatable.</p><p><strong>Watching:</strong> coffee, tea, smoothie/slushie supplies, glassware, timing, and guest preferences.</p><p><strong>Next:</strong> define a default “Las Jaras morning tray” with coffee/tea, water, and one small kindness.</p><div class="meta-row"><span class="pill">Beverage</span><span class="pill">Morning ritual</span></div></article>
+          <article class="report-card"><h3>Proof Darling</h3><p><strong>Report:</strong> Baking should be a hospitality signal, not a production burden.</p><p><strong>Watching:</strong> shelf-stable baking basics, freezer-friendly dough, guest treats, and low-effort scent moments.</p><p><strong>Next:</strong> propose one house cookie and one emergency dessert that can be made without leaving for groceries.</p><div class="meta-row"><span class="pill">Baking</span><span class="pill">Cozy, not fussy</span></div></article>
+          <article class="report-card"><h3>Captain Coupe</h3><p><strong>Report:</strong> Hosting drinks need restraint: beautiful options, water always, and no one feeling pushed toward alcohol.</p><p><strong>Watching:</strong> wine guide, tiki bar inventory, NA options, glassware, and dinner pairings.</p><p><strong>Next:</strong> create a Las Jaras welcome drink menu with one cocktail, one wine, one NA spritz, and one “just water, gorgeous” option.</p><div class="meta-row"><span class="pill">Bar</span><span class="pill">Measured hospitality</span></div></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="housekeeping">
+        <p class="label">Housekeeping And Grounds</p>
+        <h2>Quiet maintenance is part of luxury.</h2>
+        <div class="report-grid">
+          <article class="report-card"><h3>Madame Spin</h3><p><strong>Report:</strong> Textiles are part of the Las Jaras story. Gramercy pieces, curtains, bedding, and towels need care rules before accidents teach them rudely.</p><p><strong>Watching:</strong> laundry labels, guest linens, stain treatment, heat risks, and textile preservation.</p><p><strong>Next:</strong> create a textile care sheet for special curtains, bedding, and guest towels.</p><div class="meta-row"><span class="pill">Laundry</span><span class="pill">Protect texture</span></div></article>
+          <article class="report-card"><h3>Keeper Brisk</h3><p><strong>Report:</strong> “No visible fuss” requires invisible routines. Reset rhythms should be short, predictable, and tied to rooms.</p><p><strong>Watching:</strong> dusting, vacuuming, room reset, guest turnover, and the moment clutter starts whispering.</p><p><strong>Next:</strong> make a 20-minute daily reset map for the public rooms.</p><div class="meta-row"><span class="pill">Housekeeping</span><span class="pill">Small repeats</span></div></article>
+          <article class="report-card"><h3>Groundskeeper Larkspur</h3><p><strong>Report:</strong> The exterior concept is now specific enough to become a real garden plan: keep the magnolia, preserve the yellow house, xeriscape both sides.</p><p><strong>Watching:</strong> prickly pear, purple wandering jew, decomposed granite, limestone edging, irrigation, heat stress, and shade.</p><p><strong>Next:</strong> build a plant/material checklist with sun exposure, water needs, install order, and local availability.</p><div class="meta-row"><span class="pill">Grounds</span><span class="pill">Magnolia stays</span></div></article>
+          <article class="report-card"><h3>Sheriff Lone Star</h3><p><strong>Report:</strong> No new emergency cases today. The only active concern is keeping speculation, purchases, and public claims in their proper lanes.</p><p><strong>Watching:</strong> safety escalations, creature/garden mysteries, broken systems, and any automation that creates risk or confusion.</p><p><strong>Next:</strong> add a case trigger rule: if a note affects safety, habitability, privacy, or money, it becomes a tracked case.</p><div class="meta-row"><span class="pill">Cases</span><span class="pill">Clear triggers</span></div></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="editor">
+        <p class="label">Editor's Note</p>
+        <h2>Margot's closing read.</h2>
+        <article class="section-card">
+          <p>The first daily reports show that Las Jaras is not trying to be a gadget house. It is trying to be a living system with manners. The beings are aligned around the same center: comfort, privacy, beauty, hospitality, and calm. The next useful move is to turn each report into one of three buckets: a private note, a visual board, or a public-safe Labs story.</p>
+          <ul class="note-list">
+            <li><strong>Private note:</strong> product research, prices, accounts, schedules, safety details, household routines.</li>
+            <li><strong>Pinterest/mood board:</strong> garden references, room texture, colors, materials, table settings, and visual inspiration.</li>
+            <li><strong>Labs/public:</strong> approved ethos, protocols, build notes, presentation pages, and polished examples.</li>
+          </ul>
+          <p>
+            <a class="daily-button primary" href="las-jaras-daily.html">Back to newspaper hub</a>
+            <a class="daily-button" href="projects/household-beings.html">Open beings directory</a>
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
