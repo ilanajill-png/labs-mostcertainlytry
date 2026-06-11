@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Las Jaras Daily | Living System Newspaper Prototype</title>
+    <meta name="description" content="A Labs-viewable placeholder edition of The Las Jaras Daily, the private newspaper edited from the household beings' daily notes.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      :root {
+        --terra: #a84f35;
+        --terra-dark: #713524;
+        --clay: #d7a077;
+        --sand: #f4eadb;
+        --cream: #fffaf1;
+        --cobalt: #1f4f9a;
+        --mesquite: #3e3329;
+        --olive: #68775a;
+        --ink-soft: #302820;
+        --line: rgba(62, 51, 41, 0.16);
+      }
+
+      body.daily {
+        background: var(--sand);
+        color: var(--ink-soft);
+      }
+
+      .daily * {
+        box-sizing: border-box;
+      }
+
+      .daily .site-header {
+        background: rgba(244, 234, 219, 0.9);
+      }
+
+      .daily-wrap {
+        width: min(1120px, calc(100% - 28px));
+        margin: 0 auto 48px;
+      }
+
+      .paper-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: clamp(22px, 4vw, 46px);
+        align-items: end;
+        padding: 42px 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .kicker,
+      .label {
+        margin: 0 0 8px;
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--terra-dark);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        line-height: 0.98;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 780px;
+        font-size: clamp(3.2rem, 10vw, 7.4rem);
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 6vw, 4rem);
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        color: var(--mesquite);
+        font-size: 1.55rem;
+      }
+
+      p,
+      li {
+        color: #6a5d50;
+        overflow-wrap: break-word;
+      }
+
+      .lede {
+        max-width: 690px;
+        font-size: 1.08rem;
+      }
+
+      .edition-card,
+      .story-card,
+      .front-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.88);
+        box-shadow: 0 24px 70px rgba(62, 51, 41, 0.12);
+      }
+
+      .edition-card {
+        padding: 18px;
+      }
+
+      .edition-card dl {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .edition-card dt {
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .edition-card dd {
+        margin: 0;
+        color: var(--mesquite);
+        font-weight: 850;
+        overflow-wrap: anywhere;
+      }
+
+      .paper-nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 14px 0 24px;
+      }
+
+      .paper-nav a,
+      .daily-button {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--cream);
+        color: var(--mesquite);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .daily-button.primary {
+        border-color: var(--terra-dark);
+        background: var(--terra-dark);
+        color: #fff;
+      }
+
+      .front-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.65fr;
+        gap: 14px;
+        margin: 18px 0 28px;
+      }
+
+      .front-card,
+      .story-card {
+        padding: 18px;
+      }
+
+      .story-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .section-block {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .note-list {
+        display: grid;
+        gap: 10px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .note-list li {
+        padding: 12px 14px;
+        border-left: 4px solid var(--terra);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.78);
+      }
+
+      .status-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .pill {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(215, 160, 119, 0.28);
+        color: var(--mesquite);
+        font-size: 0.8rem;
+        font-weight: 850;
+      }
+
+      .source-note {
+        margin-top: 18px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(31, 79, 154, 0.08);
+      }
+
+      @media (max-width: 760px) {
+        .paper-hero,
+        .front-grid,
+        .story-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: 8.5ch;
+          font-size: clamp(3rem, 14vw, 4rem);
+        }
+
+        .lede,
+        .edition-card p,
+        .story-card p,
+        .front-card p {
+          max-width: min(100%, 310px);
+        }
+      }
+    </style>
+  </head>
+  <body class="daily">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Las Jaras living system</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="las-jaras-smart-home-site-shell.html">Las Jaras</a>
+        <a href="projects/household-beings.html">Beings</a>
+        <a href="las-jaras-daily-newspaper-protocol.md">Protocol</a>
+      </nav>
+    </header>
+
+    <main class="daily-wrap">
+      <section class="paper-hero">
+        <div>
+          <p class="kicker">Prototype edition</p>
+          <h1>The Las Jaras Daily</h1>
+          <p class="lede">A placeholder view of the private daily newspaper Librarian Margot Index will edit from every household being's notes: what matters, what needs Ilana, what can wait, and what the house seems to be asking for next.</p>
+        </div>
+        <aside class="edition-card">
+          <dl>
+            <div><dt>Editor</dt><dd>Librarian Margot Index</dd></div>
+            <div><dt>Edition</dt><dd>Placeholder / V1</dd></div>
+            <div><dt>Source</dt><dd>Daily notes from each Las Jaras being</dd></div>
+            <div><dt>Privacy</dt><dd>Private first; public excerpts after review</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <nav class="paper-nav" aria-label="Newspaper sections">
+        <a href="#today">Today's Edition</a>
+        <a href="#action">Notes To Action</a>
+        <a href="#purchase">Purchase Watch</a>
+        <a href="#mood">Mood Board</a>
+        <a href="#story">Story Queue</a>
+        <a href="#questions">Questions</a>
+        <a href="#theme">House Theme</a>
+        <a href="#signals">Signals</a>
+        <a href="#sources">Sources</a>
+        <a href="#not-automate">Do Not Automate</a>
+      </nav>
+
+      <section class="section-block" id="today">
+        <p class="label">1. Today's Edition</p>
+        <h2>The front page shows the day at a glance.</h2>
+        <div class="front-grid">
+          <article class="front-card">
+            <p class="kicker">Front Page</p>
+            <h3>Placeholder headline: the house wants quieter mornings.</h3>
+            <p>This lead story will summarize the most important pattern across all being notes. In a real edition, Margot might notice that lighting, coffee, temperature, and calendar stress are all pointing to the same need: a softer morning ritual.</p>
+            <div class="status-row">
+              <span class="pill">Needs Ilana: maybe</span>
+              <span class="pill">Owner: Soma + Barista</span>
+              <span class="pill">Priority: gentle</span>
+            </div>
+          </article>
+          <article class="front-card">
+            <p class="kicker">Top Notes</p>
+            <ul class="note-list">
+              <li>Comfort Report: test warmer sunrise lighting before buying new devices.</li>
+              <li>Research Desk: save xeriscape border ideas to Pinterest, but keep plant list private.</li>
+              <li>Open Case: decide whether guest arrival mode needs a printed room card.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="action">
+        <p class="label">2. How Notes Become Action</p>
+        <h2>Observation becomes a calm next step.</h2>
+        <div class="story-grid">
+          <article class="story-card"><h3>Being observes</h3><p>A being notices a purchase idea, article, room issue, guest friction, or repeated house pattern inside its jurisdiction.</p></article>
+          <article class="story-card"><h3>Margot edits</h3><p>Librarian Margot Index turns all daily notes into a readable edition with patterns, decisions, and context.</p></article>
+          <article class="story-card"><h3>Follow-up routes</h3><p>Mailman tracks replies, Archivist records decisions, Penny reviews purchases, and Ilana only sees the decisions that matter.</p></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="purchase">
+        <p class="label">3. Purchase Watch Desk</p>
+        <h2>Interesting is not the same as approved.</h2>
+        <p>This section tracks possible purchases without turning them into carts. Penny Cobalt reviews price, purpose, alternatives, urgency, and whether it supports the Las Jaras ethos.</p>
+        <ul class="note-list">
+          <li><strong>Placeholder:</strong> low-profile physical smart buttons for guest rooms. Why interesting: no app required. Status: research only.</li>
+          <li><strong>Placeholder:</strong> air quality sensor for bedroom sleep cocoon. Why interesting: comfort data without guesswork. Status: needs comparison.</li>
+          <li><strong>Placeholder:</strong> limestone edging for both xeriscape beds. Why interesting: makes the garden feel finished. Status: save local supplier options.</li>
+        </ul>
+      </section>
+
+      <section class="section-block" id="mood">
+        <p class="label">4. Mood Board Dispatch</p>
+        <h2>Pinterest gets the visual memory.</h2>
+        <p>This section lists what should become visual boards: not decisions, just references worth seeing together.</p>
+        <div class="story-grid">
+          <article class="story-card"><h3>Garden</h3><p>Prickly pear, purple wandering jew, limestone edging, decomposed granite, magnolia shade, and low-water South Texas planting.</p></article>
+          <article class="story-card"><h3>Rooms</h3><p>Terracotta light, cobalt thresholds, Gramercy textures, soft drapery, warm glass, layered guest rooms, and no visible tech clutter.</p></article>
+          <article class="story-card"><h3>Rituals</h3><p>Breakfast trays, bath moments, night paths, reading corners, guest cards, coffee setup, and soft welcome scenes.</p></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="story">
+        <p class="label">5. Public Story Queue</p>
+        <h2>Instagram only gets the finished story.</h2>
+        <p>This section separates private working notes from public-safe storytelling. Mira Queue drafts posts, PR checks framing, Blue Static checks privacy, and Ilana approves.</p>
+        <ul class="note-list">
+          <li><strong>Private:</strong> exact device setup notes, account details, household routines, personal schedule, and unapproved purchases.</li>
+          <li><strong>Draftable:</strong> before/after garden visual, “no visible fuss” button concept, daily newspaper idea, and house-being introductions.</li>
+          <li><strong>Publishable after approval:</strong> peaceful exterior hero, Las Jaras ethos, public build notes, and polished automation prompts.</li>
+        </ul>
+      </section>
+
+      <section class="section-block" id="questions">
+        <p class="label">6. Open Questions For Ilana</p>
+        <h2>Only the few decisions that need taste.</h2>
+        <p>This keeps the newspaper from becoming another task list. Margot should surface only the questions that genuinely need Ilana's preference, approval, budget decision, or public-facing taste.</p>
+        <ul class="note-list">
+          <li>Should the first real edition feel more like a newspaper, a hotel briefing, or a house diary?</li>
+          <li>Do the beings stay whimsical in public, or become more editorial and refined for presentation mode?</li>
+          <li>Which board should we build first: garden, guest arrival, lighting, or bath ritual?</li>
+        </ul>
+      </section>
+
+      <section class="section-block" id="theme">
+        <p class="label">7. This Week's House Theme</p>
+        <h2>A soft editorial focus keeps the house moving.</h2>
+        <p>Each week gets one theme so notes across beings can gather around a shared direction.</p>
+        <article class="story-card">
+          <h3>Placeholder theme: Cooler sleep, warmer mornings.</h3>
+          <p>Soma watches bedtime comfort, DJ Bluehour watches sound, Barista Luma watches morning ritual, Tock watches schedule friction, and Keeper Brisk watches the bedroom reset rhythm.</p>
+        </article>
+      </section>
+
+      <section class="section-block" id="signals">
+        <p class="label">8. Signals From The House</p>
+        <h2>Patterns matter more than pings.</h2>
+        <p>This is where Margot synthesizes repeated signals from multiple beings.</p>
+        <ul class="note-list">
+          <li>If three beings mention the same room, that room is asking for attention.</li>
+          <li>If a purchase idea appears twice, Penny Cobalt opens a watch item instead of buying anything.</li>
+          <li>If a guest friction repeats, Concierge Paloma turns it into a ritual or physical fallback.</li>
+          <li>If an automation feels noisy, Soma redesigns it for nervous-system ease.</li>
+        </ul>
+      </section>
+
+      <section class="section-block" id="sources">
+        <p class="label">9. Source Library</p>
+        <h2>The record stays findable.</h2>
+        <p>Archivist Vellum keeps the source trail, Librarian Margot makes it readable, and Blue Static decides what is public-safe.</p>
+        <div class="story-grid">
+          <article class="story-card"><h3>Articles</h3><p>Smart-home wellbeing, circadian lighting, hospitality, gardening, interior design, local travel, and safety references.</p></article>
+          <article class="story-card"><h3>Products</h3><p>Candidate devices, furniture, textiles, tools, plants, and supplies with caution notes and purchase status.</p></article>
+          <article class="story-card"><h3>Visuals</h3><p>Pinterest boards, photos, sketches, renderings, before/after images, screenshots, and public-ready assets.</p></article>
+        </div>
+      </section>
+
+      <section class="section-block" id="not-automate">
+        <p class="label">10. What Not To Automate</p>
+        <h2>Some care should stay human.</h2>
+        <p>This may be the most important section. A living system is not a fully automated system. Some things should stay tactile, chosen, slow, private, or human.</p>
+        <ul class="note-list">
+          <li>Do not automate anything that makes guests feel watched.</li>
+          <li>Do not automate personal communications without review.</li>
+          <li>Do not automate purchases, account signups, or public posts.</li>
+          <li>Do not replace human hospitality with dashboards.</li>
+          <li>Do not make the house louder just because it became smarter.</li>
+        </ul>
+      </section>
+
+      <section class="section-block">
+        <p class="label">Next build</p>
+        <h2>From placeholder to real edition.</h2>
+        <p>The next step is to connect the page to actual daily notes from each being, then let Margot produce a daily private edition before any public excerpts are selected.</p>
+        <p>
+          <a class="daily-button primary" href="projects/household-beings.html">Open Household Beings</a>
+          <a class="daily-button" href="las-jaras-daily-newspaper-protocol.md">Read protocol</a>
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
