@@ -33,6 +33,7 @@ Sundries' daily packet should include:
 - 3-7 links, unless there are no useful finds that day.
 - A one-line reason each link matters.
 - Category: storage / pantry / cleaning / laundry / bathroom / guest supplies / kitchen tool / garden supply / product lookalike / other.
+- Pinterest pin type: image / video / recipe rich pin / article rich pin / product rich pin / product pin / not Pinterest-suitable.
 - Relevance: useful now / watch later / compare before buying / visual reference only.
 - Purchase status: no purchase / maybe / needs Penny Cobalt review / needs Ilana review.
 - Privacy status: private only / Pinterest candidate / Labs reference candidate.
@@ -40,9 +41,18 @@ Sundries' daily packet should include:
 Mira Queue reviews the packet and sorts each link:
 
 - Private note: useful, but not visual or public-safe.
-- Pinterest board candidate: visual, household-relevant, and safe to save as inspiration.
+- Pinterest board candidate: visual, household-relevant, safe to save as inspiration, and matched to the correct pin type.
 - Labs reference candidate: useful for a future public-safe project page or build note.
 - Reject: too generic, too salesy, irrelevant, or not aligned with Las Jaras.
+
+Pinterest pin-type guide:
+
+- Image pin: one strong still image, such as an organizer, room detail, label system, supply setup, tool, before/after, or product lookalike.
+- Video pin: motion or multi-step visual reference, such as a folding method, cleaning demo, drawer reset, decanting flow, or room setup.
+- Recipe rich pin: recipe source that can carry title, servings, cook time, ratings, diet preference, and ingredients from the source site.
+- Article rich pin: article or blog source where description, author, headline, or title matters.
+- Product rich pin / product pin: purchasable item with price, availability, product details, or retailer destination. Route purchase-relevant items to Penny Cobalt before Ilana review.
+- Not Pinterest-suitable: private, nonvisual, sensitive, account-gated, low-quality, duplicated, or mainly operational.
 
 Mira does not pin, post, publish, affiliate-link, or create public content without Ilana's approval. The daily handoff creates a queue for review, not an action that leaves the house.
 
