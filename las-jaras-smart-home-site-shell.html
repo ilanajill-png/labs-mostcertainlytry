@@ -179,6 +179,14 @@
         color: #6a5d50;
       }
 
+      a.source-card {
+        display: inline-block;
+        margin-top: 8px;
+        color: var(--terra-dark);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
       .material-strip {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -236,6 +244,15 @@
           border-radius: 22px;
         }
 
+        .lj-hero h1 {
+          max-width: 8.5ch;
+          font-size: clamp(3rem, 13vw, 3.6rem);
+        }
+
+        .lj-hero p {
+          max-width: min(100%, 310px);
+        }
+
         .card-grid,
         .standards-grid,
         .material-strip {
@@ -281,6 +298,7 @@
           <a href="#standards">Design</a>
           <a href="#content">Content</a>
           <a href="#iot">IoT</a>
+          <a href="#beings">Beings</a>
           <a href="#adventures">Adventures</a>
           <a href="#charm">Local Charm</a>
           <a href="#prompts">Prompt Library</a>
@@ -385,6 +403,19 @@
             <li><strong>Garden and Environment Steward:</strong> air refresh mode, Texas heat pre-cool, storm comfort, garden watering signals, and outdoor calm.</li>
             <li><strong>Presence and Privacy Steward:</strong> quiet doorbell after dark, company/renter/away modes, private dashboard rules, and camera boundaries.</li>
           </ul>
+        </section>
+
+        <section class="lj-section" id="beings">
+          <p class="kicker">Household Beings</p>
+          <h2>The care team behind the living system.</h2>
+          <p class="lede">Las Jaras is managed by named household beings: not mascots, but clear jurisdictions for comfort, safety, hospitality, public storytelling, records, maintenance, food, garden, and automation designed around nervous system ease.</p>
+          <div class="card-grid">
+            <article class="ritual-card"><h3>Soma Hearthline</h3><p>The Living System Steward. Owns nervous-system IoT, quiet automation, physical fallbacks, and the no-visible-fuss reset.</p></article>
+            <article class="ritual-card"><h3>Serafina de las Jaras</h3><p>The threshold intelligence. Reads human-informed field notes, mood, plants, weather, and house texture before escalating anything into a case.</p></article>
+            <article class="ritual-card"><h3>Concierge Paloma</h3><p>The guest-care steward. Makes arrivals, room instructions, amenities, local recommendations, and hospitality rituals feel held instead of managed.</p></article>
+            <article class="ritual-card"><h3>Blue Static</h3><p>The public-site steward. Keeps Labs, build notes, privacy boundaries, and public project pages clear, current, and trustworthy.</p></article>
+          </div>
+          <p><a class="source-card" href="projects/household-beings.html">Open the Household Beings directory</a></p>
         </section>
 
         <section class="lj-section" id="adventures">
