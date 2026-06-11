@@ -794,7 +794,7 @@ const titleOps = {
     wishlist: ["Resend audience/list tooling", "shared follow-up CRM", "lightweight email template library"]
   },
   Sundries: {
-    daily: ["Process new receipts, forms, and supply notes into inventory.", "Check low-stock and expiring household items.", "Prepare H-E-B cart suggestions without checking out."],
+    daily: ["Process new receipts, forms, and supply notes into inventory.", "Check low-stock and expiring household items.", "Prepare H-E-B cart suggestions without checking out.", "Feed Mira Queue a daily Pinterest link packet for useful-object, supply, storage, product, and household-tool references."],
     force: ["FIFO pantry practice", "retail inventory controls", "H-E-B sale/coupon workflow notes"],
     tools: ["household inventory files", "H-E-B site when logged in", "Sheriff and Serafina intake forms"],
     wishlist: ["barcode scanner", "pantry label printer", "R2-backed evidence/file intake storage"]
@@ -824,7 +824,7 @@ const titleOps = {
     wishlist: ["portable photo light kit", "fabric/color swatch library", "visual moodboard board"]
   },
   "Social Media Manager": {
-    daily: ["Draft public-safe post ideas from finished projects.", "Maintain a content queue by platform and timing.", "Prepare captions for human review, never auto-post."],
+    daily: ["Draft public-safe post ideas from finished projects.", "Maintain a content queue by platform and timing.", "Prepare captions for human review, never auto-post.", "Review Sundries' daily Pinterest link packet and sort links into private note, Pinterest board candidate, Labs reference, or reject."],
     force: ["platform caption conventions", "content calendar planning", "privacy-first publishing rules"],
     tools: ["Labs project catalog", "AI Product Video Creator assets", "active chat drafts"],
     wishlist: ["social scheduler", "link-in-bio manager", "post analytics dashboard"]

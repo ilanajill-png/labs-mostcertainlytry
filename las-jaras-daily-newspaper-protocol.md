@@ -22,6 +22,7 @@ The digest should include:
 - Comfort report: anything affecting nervous-system ease, sleep, quiet, lighting, guest care, or no-visible-fuss living.
 - House operations: errands, supplies, repairs, cleaning, safety, garden, food, and schedule notes.
 - Research desk: interesting purchases, articles, references, products, and visual ideas discovered by the beings.
+- Pinterest link feed: Sundries' daily packet of useful-object and household-tool links for Mira Queue to sort into private note, Pinterest board candidate, Labs reference, or reject.
 - Society page: gatherings, guests, meals, music, movies, outings, and local charm.
 - Open cases: anything Sheriff, Safety Officer, Soma, or Concierge needs reviewed.
 - Editor's note: one short synthesis of what the house seems to be asking for next.
@@ -31,6 +32,7 @@ The digest should include:
 - Private source of truth: daily newspaper drafts live in private Las Jaras notes first.
 - Public-safe archive: Blue Static can publish selected editions or excerpts to Labs only after private details are removed.
 - Visual inspiration: Pinterest can receive mood-board items pulled from the Research Desk.
+- Daily handoff: Sundries may feed Mira Queue links for Pinterest review each day, but Mira only creates board candidates until Ilana approves any external save, public use, or purchase-relevant follow-up.
 - Social storytelling: Instagram receives only approved, polished story fragments, never raw notes.
 
 ## Guardrails
