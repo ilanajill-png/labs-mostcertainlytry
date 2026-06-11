@@ -21,6 +21,7 @@ Pinterest:
 - Best for visual research: rooms, gardens, materials, lighting mood, guest-room styling, xeriscape references, table settings, bath rituals, textiles, exterior details, and product lookalikes.
 - Treat Pinterest as a mood board, not the source of truth.
 - Every pin-worthy idea should still have a private note if it affects a purchase or design decision.
+- Mira Queue is trusted to create/save Pinterest pins from approved-safe research finds. Ilana can delete anything that misses the mark.
 
 ## Daily Pinterest Link Feed
 
@@ -36,12 +37,12 @@ Sundries' daily packet should include:
 - Pinterest pin type: image / video / recipe rich pin / article rich pin / product rich pin / product pin / not Pinterest-suitable.
 - Relevance: useful now / watch later / compare before buying / visual reference only.
 - Purchase status: no purchase / maybe / needs Penny Cobalt review / needs Ilana review.
-- Privacy status: private only / Pinterest candidate / Labs reference candidate.
+- Privacy status: private only / okay to pin / Labs reference candidate.
 
 Mira Queue reviews the packet and sorts each link:
 
 - Private note: useful, but not visual or public-safe.
-- Pinterest board candidate: visual, household-relevant, safe to save as inspiration, and matched to the correct pin type.
+- Create Pinterest pin: visual, household-relevant, safe to save as inspiration, matched to the correct pin type, and destined for an existing appropriate board.
 - Labs reference candidate: useful for a future public-safe project page or build note.
 - Reject: too generic, too salesy, irrelevant, or not aligned with Las Jaras.
 
@@ -54,7 +55,9 @@ Pinterest pin-type guide:
 - Product rich pin / product pin: purchasable item with price, availability, product details, or retailer destination. Route purchase-relevant items to Penny Cobalt before Ilana review.
 - Not Pinterest-suitable: private, nonvisual, sensitive, account-gated, low-quality, duplicated, or mainly operational.
 
-Mira does not pin, post, publish, affiliate-link, or create public content without Ilana's approval. The daily handoff creates a queue for review, not an action that leaves the house.
+Mira may create/save Pinterest pins from this workflow without asking each time when the item is visual, public-safe, and non-sensitive. Mira should use existing relevant boards. If no board fits, mark it "needs board" rather than creating a new board without approval.
+
+Mira does not post to Instagram, publish to Labs, create affiliate links, add to cart, purchase, create accounts, create new Pinterest boards, or expose private household details without Ilana's approval.
 
 Instagram:
 
@@ -65,7 +68,7 @@ Instagram:
 Recommended structure:
 
 1. Private note first.
-2. Pinterest if visual.
+2. Pinterest if visual and safe to pin.
 3. Labs if useful to the project story.
 4. Instagram only when it is public-safe, beautiful, and intentional.
 
@@ -97,7 +100,7 @@ Recommended structure:
 
 ## Guardrails
 
-- No spending, checkout, account creation, affiliate application, or public post without Ilana's approval.
+- No spending, checkout, account creation, affiliate application, new Pinterest board, Instagram post, or Labs publication without Ilana's approval.
 - Do not store passwords, private account details, or sensitive personal information in public notes.
 - If a source is only inspiration, label it as inspiration.
 - If a source affects safety, installation, electrical work, health, or privacy, route it to Officer Ember or Soma before acting.

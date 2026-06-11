@@ -824,7 +824,7 @@ const titleOps = {
     wishlist: ["portable photo light kit", "fabric/color swatch library", "visual moodboard board"]
   },
   "Social Media Manager": {
-    daily: ["Draft public-safe post ideas from finished projects.", "Maintain a content queue by platform and timing.", "Prepare captions for human review, never auto-post.", "Review Sundries' daily Pinterest link packet and sort links into private note, Pinterest board candidate, Labs reference, or reject."],
+    daily: ["Draft public-safe post ideas from finished projects.", "Maintain a content queue by platform and timing.", "Prepare captions for human review, never auto-post.", "Review Sundries' daily Pinterest link packet, create safe pins on existing boards, and sort the rest into private note, Labs reference, needs board, or reject."],
     force: ["platform caption conventions", "content calendar planning", "privacy-first publishing rules"],
     tools: ["Labs project catalog", "AI Product Video Creator assets", "active chat drafts"],
     wishlist: ["social scheduler", "link-in-bio manager", "post analytics dashboard"]
