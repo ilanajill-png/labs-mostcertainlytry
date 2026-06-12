@@ -1,5 +1,26 @@
 [
   {
+    "id": "glp1-texas-spa-cookbook",
+    "title": "GLP-1 Texas Spa Cookbook",
+    "category": "Cookbook",
+    "type": "Wellness Hospitality Recipes",
+    "status": "Published",
+    "date": "2026-06-12",
+    "featured": true,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "Nutrition Research",
+      "Recipe Development",
+      "Hospitality Design",
+      "Static HTML"
+    ],
+    "summary": "A Las Jaras cookbook of GLP-1-friendly, Texas spa-inspired recipes based on wellness meals, juices, bowls, seafood dishes, and calm pantry food from leading Texas resorts.",
+    "outcome": "Converted Texas health-spa menu research into original home-cookable recipes with GLP-1-friendly pantry tags, health notes, and Learn More source links.",
+    "url": "projects/glp1-texas-spa-cookbook.html",
+    "source": "projects/glp1-texas-spa-cookbook.html"
+  },
+  {
     "id": "pantry-staples-for-glp1",
     "title": "Pantry Staples for GLP-1",
     "category": "White Paper",

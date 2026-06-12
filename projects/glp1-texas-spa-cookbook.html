@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GLP-1 Texas Spa Cookbook | Most Certainly Try Labs</title>
+    <meta name="description" content="A Las Jaras cookbook of GLP-1-friendly, Texas spa-inspired recipes based on wellness meals, juices, bowls, seafood dishes, and calm pantry food from leading Texas resorts.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      .cookbook {
+        width: min(1160px, calc(100% - 34px));
+        margin: 0 auto;
+        padding: 50px 0;
+      }
+
+      .cookbook-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+        gap: clamp(24px, 5vw, 62px);
+        align-items: end;
+        padding: 34px 0 24px;
+      }
+
+      .summary-card,
+      .cookbook-section,
+      .recipe-card,
+      .source-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .summary-card {
+        display: grid;
+        gap: 10px;
+        padding: 22px;
+        background: #eef4ef;
+      }
+
+      .cookbook-section {
+        display: grid;
+        gap: 18px;
+        padding: clamp(20px, 4vw, 30px);
+        margin: 18px 0;
+      }
+
+      .recipe-grid,
+      .source-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 14px;
+      }
+
+      .recipe-card,
+      .source-card {
+        display: grid;
+        gap: 11px;
+        padding: 18px;
+      }
+
+      .recipe-card h3,
+      .source-card h3 {
+        margin-bottom: 0;
+      }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        width: fit-content;
+        min-height: 30px;
+        padding: 5px 9px;
+        border-radius: 8px;
+        background: #f3f0e8;
+        color: var(--ink);
+        font-size: 0.82rem;
+        font-weight: 850;
+      }
+
+      .pill.green { background: #dfeee4; color: #163b28; }
+      .pill.blue { background: #dde9f8; color: #18365c; }
+      .pill.coral { background: #f7dfd8; color: #6d2515; }
+      .pill.gold { background: #f7e7b8; color: #473608; }
+
+      .recipe-card ul,
+      .recipe-card ol {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .recipe-card li {
+        margin: 5px 0;
+      }
+
+      .health-note {
+        margin: 0;
+        padding: 12px;
+        border-left: 5px solid var(--green);
+        border-radius: 8px;
+        background: #f3f8f5;
+      }
+
+      .source-note {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 820px) {
+        .cookbook-hero { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Projects</a>
+        <a href="pantry-staples-for-glp1-white-paper.html">GLP-1 White Paper</a>
+        <a href="#recipes">Recipes</a>
+        <a href="#sources">Sources</a>
+      </nav>
+    </header>
+
+    <main class="cookbook">
+      <section class="cookbook-hero">
+        <div>
+          <p class="kicker">Cookbook · Las Jaras hospitality lab · 2026-06-12</p>
+          <h1>GLP-1 Texas Spa Cookbook</h1>
+          <p class="lede">Original, home-cookable recipes inspired by wellness meals, juices, bowls, seafood dishes, and spa-cafe menus from leading Texas health resorts. Built for calm portions, protein-forward plates, gentle fiber, hydration, and guest-friendly pantry labeling.</p>
+        </div>
+        <aside class="summary-card">
+          <strong>Cookbook Rule</strong>
+          <p>These are not proprietary resort recipes. They are Las Jaras versions inspired by public menus and wellness patterns: smaller plates, clean protein, easy digestion, and food that still feels like hospitality.</p>
+        </aside>
+      </section>
+
+      <section class="cookbook-section">
+        <h2>How To Use This Cookbook</h2>
+        <p>For guests taking GLP-1 medicines, the meal strategy is small portions, protein first, gentle fiber, modest fat, and steady hydration. Each recipe includes a source inspiration, a meal description, pantry/fridge tags, and a health note. When a resort menu stated a benefit, that benefit is called out. When no benefit was stated, the note stays practical and non-medical.</p>
+        <div class="meta-row" aria-label="GLP-1 cookbook tags">
+          <span class="pill green">Protein-forward</span>
+          <span class="pill blue">Gentle fiber</span>
+          <span class="pill coral">Hydration</span>
+          <span class="pill gold">Gentle stomach</span>
+          <span class="pill">Small portion</span>
+        </div>
+      </section>
+
+      <section class="cookbook-section" id="recipes">
+        <h2>Juices, Smoothies, and Hydration</h2>
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Lake Austin Spa Resort</p>
+            <h3>Lovely Green Ginger Juice</h3>
+            <p>A bright green juice with pineapple, cucumber, apple, lemon, ginger, and greens.</p>
+            <div class="meta-row"><span class="pill coral">Hydration</span><span class="pill gold">Gentle stomach</span></div>
+            <ul>
+              <li>1 cup cucumber</li>
+              <li>1/2 green apple</li>
+              <li>1/2 cup pineapple</li>
+              <li>1 packed cup spinach</li>
+              <li>1 tablespoon lemon juice</li>
+              <li>1/2 teaspoon grated ginger</li>
+              <li>1/2 cup cold water</li>
+            </ul>
+            <ol>
+              <li>Blend everything until smooth.</li>
+              <li>Strain for a spa-style juice, or leave whole for more fiber.</li>
+              <li>Serve very cold in a small glass.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> hydrate, aid digestion, and support alkalizing balance.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Lake Austin Spa Resort</p>
+            <h3>Golden Aura Carrot Citrus Shot</h3>
+            <p>A small turmeric-ginger citrus drink for guests who want a light, zippy start.</p>
+            <div class="meta-row"><span class="pill coral">Hydration</span><span class="pill">Small portion</span></div>
+            <ul>
+              <li>1/2 cup carrot juice</li>
+              <li>1/3 cup orange juice</li>
+              <li>1 teaspoon lemon juice</li>
+              <li>1/4 teaspoon turmeric</li>
+              <li>1/4 teaspoon grated ginger</li>
+              <li>Tiny pinch cayenne, optional</li>
+            </ul>
+            <ol>
+              <li>Whisk or shake all ingredients with ice.</li>
+              <li>Pour into two small glasses.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> immunity, inflammation support, and natural energy.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Ottine Mineral Springs</p>
+            <h3>Cucumber Watermelon Mineral Cooler</h3>
+            <p>A poolside-style cooler with cucumber, watermelon, lime, and a pinch of mineral salt.</p>
+            <div class="meta-row"><span class="pill coral">Hydration</span><span class="pill">Low effort</span></div>
+            <ul>
+              <li>1 cup watermelon cubes</li>
+              <li>1/2 cup cucumber</li>
+              <li>1 tablespoon lime juice</li>
+              <li>Pinch mineral salt</li>
+              <li>1/2 cup sparkling water</li>
+            </ul>
+            <ol>
+              <li>Blend watermelon, cucumber, lime, and salt.</li>
+              <li>Pour over ice and top with sparkling water.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> hydration, antioxidants, and electrolytes.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Quenche Juicery at La Cantera</p>
+            <h3>Banana Oats Recovery Smoothie</h3>
+            <p>A soft breakfast smoothie with banana, oats, almond milk, flax, cinnamon, and cocoa nibs.</p>
+            <div class="meta-row"><span class="pill blue">Gentle fiber</span><span class="pill gold">Gentle stomach</span></div>
+            <ul>
+              <li>1 small banana</li>
+              <li>1 cup unsweetened almond milk</li>
+              <li>2 tablespoons rolled oats</li>
+              <li>1 tablespoon ground flax</li>
+              <li>1 teaspoon honey, optional</li>
+              <li>Pinch cinnamon</li>
+              <li>1 teaspoon cocoa nibs, optional</li>
+            </ul>
+            <ol>
+              <li>Blend until fully smooth.</li>
+              <li>Serve as one modest smoothie or two small portions.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> Quenche describes its juices and smoothies as nutrition-dense and wellness-supportive.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cookbook-section">
+        <h2>Breakfast and First Meals</h2>
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Lake Austin Spa Resort</p>
+            <h3>Egg White Kale Scramble</h3>
+            <p>A light protein breakfast with mushrooms, tomato, greens, and a little goat cheese.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill">Small portion</span></div>
+            <ul>
+              <li>3 egg whites or 1/2 cup liquid egg whites</li>
+              <li>1 cup chopped kale or spinach</li>
+              <li>1/3 cup sliced mushrooms</li>
+              <li>1/4 cup chopped tomato</li>
+              <li>1 tablespoon goat cheese</li>
+              <li>1 teaspoon olive oil</li>
+            </ul>
+            <ol>
+              <li>Saute mushrooms and greens in olive oil until soft.</li>
+              <li>Add egg whites and tomato; stir gently until set.</li>
+              <li>Finish with goat cheese.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free, vegetarian, and nut-free.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Ottine Mineral Springs</p>
+            <h3>Greek Yogurt Honey Granola Cup</h3>
+            <p>A small parfait with Greek yogurt, fruit, honey, and a measured crunch of granola.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill blue">Gentle fiber</span></div>
+            <ul>
+              <li>3/4 cup plain Greek yogurt</li>
+              <li>1/3 cup berries or diced fruit</li>
+              <li>1 tablespoon granola</li>
+              <li>1 teaspoon honey</li>
+              <li>1 teaspoon chia seeds, optional</li>
+            </ul>
+            <ol>
+              <li>Layer yogurt, fruit, granola, honey, and chia in a small glass.</li>
+              <li>Chill 10 minutes if using chia.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> vegetarian tag; no item-specific health claim.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Lost Pines breakfast menus</p>
+            <h3>Small Oatmeal Bowl With Ginger Apples</h3>
+            <p>A gentler alternative to a giant brunch plate, with oats, apple, ginger, and nut butter.</p>
+            <div class="meta-row"><span class="pill blue">Gentle fiber</span><span class="pill gold">Gentle stomach</span></div>
+            <ul>
+              <li>1/2 cup rolled oats</li>
+              <li>1 cup water or milk</li>
+              <li>1/2 apple, diced</li>
+              <li>1/4 teaspoon grated ginger</li>
+              <li>1 tablespoon peanut or almond butter</li>
+              <li>Pinch cinnamon</li>
+            </ul>
+            <ol>
+              <li>Cook oats with water or milk.</li>
+              <li>Stir in apple, ginger, cinnamon, and nut butter.</li>
+              <li>Serve in a small bowl.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> none. Las Jaras note: oats give a soft fiber base in a modest portion.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cookbook-section">
+        <h2>Bowls, Wraps, and Spa Lunches</h2>
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Lake Austin Spa Resort</p>
+            <h3>Autumn Grain Bowl With Avocado and Hemp</h3>
+            <p>A small grain bowl with quinoa, sweet potato, cucumber, mushrooms, avocado, hemp seeds, and pesto.</p>
+            <div class="meta-row"><span class="pill blue">Gentle fiber</span><span class="pill">Add protein</span></div>
+            <ul>
+              <li>1/3 cup cooked quinoa</li>
+              <li>1/3 cup roasted sweet potato cubes</li>
+              <li>1/4 cup sauteed mushrooms</li>
+              <li>1/4 cup diced cucumber</li>
+              <li>1/4 avocado, sliced</li>
+              <li>1 teaspoon hemp seeds</li>
+              <li>1 tablespoon pesto</li>
+              <li>Optional: 3 ounces chicken, tuna, tofu, or salmon</li>
+            </ul>
+            <ol>
+              <li>Arrange warm quinoa, sweet potato, and mushrooms in a bowl.</li>
+              <li>Add cucumber, avocado, hemp, and pesto.</li>
+              <li>Add protein if serving as a full meal.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> vegetarian and nut-free; no item-specific health claim.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Miraval Austin</p>
+            <h3>Thai Lettuce Wraps With Tamari Chili Mushrooms</h3>
+            <p>Butter lettuce cups filled with crunchy root slaw, marinated mushrooms, cilantro, and tamari-chili sauce.</p>
+            <div class="meta-row"><span class="pill blue">Gentle fiber</span><span class="pill">Light lunch</span></div>
+            <ul>
+              <li>6 butter lettuce leaves</li>
+              <li>1 cup shredded carrot and cabbage</li>
+              <li>1/2 cup thin-sliced mushrooms</li>
+              <li>1 tablespoon tamari</li>
+              <li>1 teaspoon lime juice</li>
+              <li>1 teaspoon chili sauce</li>
+              <li>Cilantro to finish</li>
+            </ul>
+            <ol>
+              <li>Toss mushrooms with tamari, lime, and chili sauce.</li>
+              <li>Fill lettuce leaves with slaw and mushrooms.</li>
+              <li>Top with cilantro and serve immediately.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free, dairy-free, vegetarian, vegan, nut-free; 85 calories listed.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Miraval Austin</p>
+            <h3>Simply Balanced Chicken Rice Plate</h3>
+            <p>A plain, reassuring plate of chicken, rice, and seasonal vegetables.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill gold">Gentle stomach</span></div>
+            <ul>
+              <li>3 ounces grilled or poached chicken breast</li>
+              <li>1/2 cup cooked rice</li>
+              <li>1 cup steamed zucchini, carrots, or green beans</li>
+              <li>1 teaspoon olive oil</li>
+              <li>Lemon, salt, and herbs</li>
+            </ul>
+            <ol>
+              <li>Season chicken simply with lemon, salt, and herbs.</li>
+              <li>Serve with warm rice and vegetables.</li>
+              <li>Keep sauce light and optional.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free, dairy-free, nut-free, soy-free; 30g protein listed.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Ottine Mineral Springs</p>
+            <h3>Edamame Lime Bowl</h3>
+            <p>A chilled bowl with edamame, roasted peppers, corn, tomato, cilantro, red onion, and lime.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill blue">Gentle fiber</span></div>
+            <ul>
+              <li>1 cup shelled edamame</li>
+              <li>1/4 cup roasted peppers</li>
+              <li>1/4 cup corn</li>
+              <li>1/4 cup chopped tomato</li>
+              <li>1 tablespoon minced red onion</li>
+              <li>1 tablespoon lime juice</li>
+              <li>Cilantro and salt</li>
+            </ul>
+            <ol>
+              <li>Toss all ingredients together.</li>
+              <li>Chill 15 minutes before serving.</li>
+              <li>Serve as a small bowl or with whole-grain crackers.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free, vegan, and vegetarian.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cookbook-section">
+        <h2>Seafood, Chicken, and Dinner Plates</h2>
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Miraval Austin</p>
+            <h3>Achiote Citrus Chicken With Greens</h3>
+            <p>Chicken with achiote-orange glaze, soft greens, and a small scoop of hominy grits or rice.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill">Dinner</span></div>
+            <ul>
+              <li>4 ounces chicken breast or thigh</li>
+              <li>1 teaspoon achiote paste</li>
+              <li>2 tablespoons orange juice</li>
+              <li>1 teaspoon lime juice</li>
+              <li>1 cup sauteed greens</li>
+              <li>1/3 cup cooked hominy grits or rice</li>
+            </ul>
+            <ol>
+              <li>Mix achiote, orange, lime, and a pinch of salt.</li>
+              <li>Brush chicken and cook until done.</li>
+              <li>Serve with greens and grits or rice.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> 38g protein listed; gluten-free, nut-free, soy-free.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Miraval Austin</p>
+            <h3>Fresh Catch With Turnip Puree</h3>
+            <p>White fish with a light turnip puree, herbs, and a crisp potato bite.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill">Light dinner</span></div>
+            <ul>
+              <li>4 ounces cod, snapper, or trout</li>
+              <li>1 cup diced turnip</li>
+              <li>1 small potato, grated or sliced thin</li>
+              <li>1 teaspoon olive oil</li>
+              <li>Herbs, lemon, salt, and pepper</li>
+            </ul>
+            <ol>
+              <li>Simmer turnip until soft; blend with a splash of cooking water and salt.</li>
+              <li>Pan-sear fish in olive oil and lemon.</li>
+              <li>Crisp the potato in a small nonstick pan.</li>
+              <li>Plate fish over puree with potato and herbs.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> 36g protein listed; nut-free and soy-free.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Mokara / Ostra seafood menus</p>
+            <h3>Citrus Shrimp Ceviche Cups</h3>
+            <p>A small chilled shrimp dish with lime, tomato, cucumber, cilantro, and avocado.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill coral">Hydration</span></div>
+            <ul>
+              <li>8 ounces cooked shrimp, chopped</li>
+              <li>1/2 cup chopped tomato</li>
+              <li>1/2 cup chopped cucumber</li>
+              <li>2 tablespoons lime juice</li>
+              <li>1 tablespoon orange juice</li>
+              <li>1/4 avocado, diced</li>
+              <li>Cilantro, salt, and jalapeno to taste</li>
+            </ul>
+            <ol>
+              <li>Toss shrimp, tomato, cucumber, citrus, and cilantro.</li>
+              <li>Chill 20 minutes.</li>
+              <li>Fold in avocado just before serving.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> Ostra emphasizes sustainable seafood; no item-specific health claim.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Hyatt Hill Country in-room dining</p>
+            <h3>Blackened Redfish With Mango Cucumber Salsa</h3>
+            <p>A lighter Texas fish plate with fruit salsa and a small rice portion.</p>
+            <div class="meta-row"><span class="pill green">Protein-forward</span><span class="pill">Texas resort dinner</span></div>
+            <ul>
+              <li>4 ounces redfish, snapper, or trout</li>
+              <li>1/2 teaspoon blackening spice</li>
+              <li>1/3 cup cooked rice</li>
+              <li>1/4 cup diced mango</li>
+              <li>1/4 cup diced cucumber</li>
+              <li>1 tablespoon lime juice</li>
+              <li>1 teaspoon olive oil</li>
+            </ul>
+            <ol>
+              <li>Season fish lightly with blackening spice.</li>
+              <li>Sear in olive oil until cooked through.</li>
+              <li>Mix mango, cucumber, lime, and salt.</li>
+              <li>Serve fish with rice and salsa.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> none. Las Jaras note: lean fish, small rice portion, and water-rich salsa keep the plate lighter.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cookbook-section">
+        <h2>Snacks, Sides, and Gentle Desserts</h2>
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Lake Austin Spa Resort</p>
+            <h3>Classic Chickpea Hummus Plate</h3>
+            <p>A small hummus plate with cucumbers, carrots, peppers, and whole-grain crackers.</p>
+            <div class="meta-row"><span class="pill blue">Gentle fiber</span><span class="pill">Snack plate</span></div>
+            <ul>
+              <li>1 can chickpeas, rinsed</li>
+              <li>2 tablespoons tahini</li>
+              <li>1 tablespoon lemon juice</li>
+              <li>1 small garlic clove</li>
+              <li>1 tablespoon olive oil</li>
+              <li>2 to 4 tablespoons water</li>
+              <li>Vegetables and crackers</li>
+            </ul>
+            <ol>
+              <li>Blend chickpeas, tahini, lemon, garlic, olive oil, and water.</li>
+              <li>Serve 1/4 cup portions with vegetables and crackers.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free, dairy-free, vegetarian, and nut-free.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Ottine Mineral Springs</p>
+            <h3>Watermelon Cucumber Feta Salad</h3>
+            <p>A cold salad with watermelon, cucumber, mint, feta, and balsamic glaze.</p>
+            <div class="meta-row"><span class="pill coral">Hydration</span><span class="pill">Small side</span></div>
+            <ul>
+              <li>1 cup watermelon cubes</li>
+              <li>1/2 cup cucumber slices</li>
+              <li>1 tablespoon crumbled feta</li>
+              <li>1 teaspoon chopped mint</li>
+              <li>1 teaspoon balsamic glaze</li>
+            </ul>
+            <ol>
+              <li>Toss watermelon and cucumber.</li>
+              <li>Top with feta, mint, and balsamic glaze.</li>
+              <li>Serve cold in a small bowl.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free and vegetarian.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Trellis Spa / Houstonian light spa dining</p>
+            <h3>Herbal Tea and Ginger Applesauce Tray</h3>
+            <p>A very gentle snack tray for nausea-prone arrivals: tea, applesauce, crackers, and ginger.</p>
+            <div class="meta-row"><span class="pill gold">Gentle stomach</span><span class="pill">Arrival tray</span></div>
+            <ul>
+              <li>1 cup unsweetened applesauce</li>
+              <li>1/4 teaspoon grated ginger</li>
+              <li>Plain crackers or toast</li>
+              <li>Peppermint or ginger tea</li>
+            </ul>
+            <ol>
+              <li>Stir ginger into applesauce.</li>
+              <li>Serve in 1/2 cup portions with tea and crackers.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> Trellis states it offers a health-focused menu with herbal teas and light snacks; no item-specific claim.</p>
+          </article>
+
+          <article class="recipe-card">
+            <p class="kicker">Inspired by Miraval Austin</p>
+            <h3>Chocolate Date Almond Mini Pie Cups</h3>
+            <p>A tiny no-bake dessert with dates, cocoa, almond butter, coconut milk, and berries.</p>
+            <div class="meta-row"><span class="pill">Dessert</span><span class="pill">Small portion</span></div>
+            <ul>
+              <li>6 pitted dates</li>
+              <li>2 tablespoons almond butter</li>
+              <li>1 tablespoon cocoa powder</li>
+              <li>2 tablespoons coconut milk</li>
+              <li>Pinch salt</li>
+              <li>Berries to serve</li>
+            </ul>
+            <ol>
+              <li>Blend dates, almond butter, cocoa, coconut milk, and salt into a paste.</li>
+              <li>Press into four small cups.</li>
+              <li>Chill and top with berries.</li>
+            </ol>
+            <p class="health-note"><strong>Stated benefit from source menu:</strong> gluten-free, dairy-free, vegetarian, vegan, soy-free; 19g protein listed on the source dessert.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cookbook-section">
+        <h2>Las Jaras Pantry Labels</h2>
+        <p>Use these labels on the pantry shelf or fridge bin instead of diet language. The label should help guests choose quickly without disclosing why they need a gentler option.</p>
+        <div class="recipe-grid">
+          <article class="recipe-card">
+            <h3>Hydration</h3>
+            <p>Use for juices, mineral coolers, electrolyte packets, broth, herbal tea, sparkling water, watermelon salad, and cucumber-heavy snacks.</p>
+          </article>
+          <article class="recipe-card">
+            <h3>Protein-forward</h3>
+            <p>Use for egg cups, Greek yogurt, chicken rice plates, fish plates, shrimp cups, tuna packets, cottage cheese, and edamame bowls.</p>
+          </article>
+          <article class="recipe-card">
+            <h3>Gentle Fiber</h3>
+            <p>Use for oats, hummus, quinoa bowls, chia, flax, beans, lentils, applesauce, berries, and cooked vegetable soups.</p>
+          </article>
+          <article class="recipe-card">
+            <h3>Gentle Stomach</h3>
+            <p>Use for tea, broth, rice, toast, crackers, banana smoothies, applesauce, and low-sauce plates.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="cookbook-section" id="sources">
+        <h2>Menu Inspiration and Source Links</h2>
+        <p class="source-note">These recipes are original Las Jaras adaptations. The sources below supplied menu inspiration, dietary tags, or wellness framing.</p>
+        <div class="source-grid">
+          <article class="source-card">
+            <h3>Lake Austin Spa Resort</h3>
+            <p>Juices, egg white scramble, grain bowl, hummus, and spa-wellness dining language.</p>
+            <a class="button" href="https://www.lakeaustin.com/experience/dining/menus/">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Miraval Austin</h3>
+            <p>Thai lettuce wraps, balanced protein plates, achiote chicken, fresh catch, and nutrition-tagged wellness menu items.</p>
+            <a class="button" href="https://www.miravalresorts.com/austin/stay-with-us/dining">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Ottine Mineral Springs</h3>
+            <p>Mineral-springs food and drink menu, ceviche, edamame bowl, watermelon salad, and juice benefit notes.</p>
+            <a class="button" href="https://ottinemineralsprings.com/dining/">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Trellis Spa at The Houstonian</h3>
+            <p>Health-focused spa dining, herbal teas, light snacks, and spa hospitality framing.</p>
+            <a class="button" href="https://www.trellisspa.com/spa-dining-menu">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Quenche Juicery at La Cantera</h3>
+            <p>Juice and smoothie profiles including Energizer, Immunity, Slim Greens, and Banana Oats.</p>
+            <a class="button" href="https://www.hilton.com/en/hotels/satcnsa-signia-la-cantera-resort-and-spa/dining/quenche-juicery/">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>JW Marriott San Antonio Hill Country</h3>
+            <p>Replenish Spa Bistro and health-conscious, fresh-from-the-garden spa dining language.</p>
+            <a class="button" href="https://www.marriott.com/en-us/hotels/satjw-jw-marriott-san-antonio-hill-country-resort-and-spa/dining/">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Hyatt Regency Hill Country</h3>
+            <p>Resort dining and blackened redfish inspiration from in-room dining.</p>
+            <a class="button" href="https://www.hyatt.com/hyatt-regency/en-US/sanhc-hyatt-regency-hill-country-resort-and-villas/dining">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Mokara Hotel & Spa San Antonio</h3>
+            <p>Spa cuisine, rooftop cafe light fare, and seafood inspiration from Ostra.</p>
+            <a class="button" href="https://www.omnihotels.com/hotels/san-antonio-mokara/dining/ostra">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Hyatt Regency Lost Pines</h3>
+            <p>Breakfast and seasonal resort dining inspiration.</p>
+            <a class="button" href="https://www.lostpinesresortandspa.com/things-to-do/romantic-itinerary">Learn More</a>
+          </article>
+          <article class="source-card">
+            <h3>Omni Barton Creek Resort & Spa</h3>
+            <p>Spa Creek Cafe healthy spa meal framing and seasonal seafood inspiration.</p>
+            <a class="button" href="https://www.omnihotels.com/hotels/austin-barton-creek/dining">Learn More</a>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
