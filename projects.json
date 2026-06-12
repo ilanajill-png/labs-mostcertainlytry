@@ -20,6 +20,26 @@
     "source": "projects/pantry-staples-for-glp1-white-paper.html"
   },
   {
+    "id": "las-jaras-household-beings-management-white-paper",
+    "title": "Why Las Jaras Uses Household Beings",
+    "category": "White Paper",
+    "type": "Household Operating Model",
+    "status": "Published",
+    "date": "2026-06-11",
+    "featured": true,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "Workflow Design",
+      "Household Operations",
+      "Static HTML"
+    ],
+    "summary": "A short whitepaper explaining why named household beings make Las Jaras easier to manage, explain, research, review, and improve.",
+    "outcome": "Defined the household-being model as a management interface with jurisdictions, routing, human approval boundaries, and a research-to-visual-memory loop.",
+    "url": "projects/las-jaras-household-beings-management-white-paper.html",
+    "source": "projects/las-jaras-household-beings-management-white-paper.html"
+  },
+  {
     "id": "las-jaras-household-beings-directory",
     "title": "Las Jaras Household Beings Directory",
     "category": "Tool",
