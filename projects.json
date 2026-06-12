@@ -1,5 +1,25 @@
 [
   {
+    "id": "pantry-staples-for-glp1",
+    "title": "Pantry Staples for GLP-1",
+    "category": "White Paper",
+    "type": "Hospitality Pantry Framework",
+    "status": "Published",
+    "date": "2026-06-12",
+    "featured": true,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "Nutrition Research",
+      "Hospitality Design",
+      "Static HTML"
+    ],
+    "summary": "A Las Jaras white paper on GLP-1-friendly pantry staples, calm guest-facing labels, and a tag system for protein-forward, gentle-fiber, hydration, and sensitive-stomach foods.",
+    "outcome": "Defined what healthy means for GLP-1 guests, converted it into a non-medical pantry tag taxonomy, and added Learn More source links for nutrition guidance.",
+    "url": "projects/pantry-staples-for-glp1-white-paper.html",
+    "source": "projects/pantry-staples-for-glp1-white-paper.html"
+  },
+  {
     "id": "las-jaras-household-beings-directory",
     "title": "Las Jaras Household Beings Directory",
     "category": "Tool",
