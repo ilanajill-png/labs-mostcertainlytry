@@ -777,7 +777,102 @@
       ],
       "tarotMessage": "Household message: The Hermit asks everyone at Las Jaras to notice the first true need before rushing. Wheel of Fortune describes the weather inside and outside the walls. Death names what could complicate the day if ignored. Temperance shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun; I will secure loose things and watch the thresholds. The Hermit tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-14": {
+      "date": "2026-06-14",
+      "weekday": "Sunday",
+      "generatedAt": "2026-06-14T13:18:04.746Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Solar Plexus chakra (confidence, willpower, and self-trust): I act before the sun gets bossy, choosing one necessary mercy and finishing it with authority.",
+      "morningIntentionChakra": {
+        "chakra": "Solar Plexus",
+        "focus": "confidence, willpower, and self-trust",
+        "intention": "I act before the sun gets bossy, choosing one necessary mercy and finishing it with authority."
+      },
+      "practicalRite": "I tighten one loose boundary before a squirrel finds it.",
+      "weather": {
+        "sunrise": "06:32 AM",
+        "sunset": "08:34 PM",
+        "highF": "92",
+        "lowF": "76",
+        "rained": true,
+        "rainInches": "0.10",
+        "extremeWeather": [
+          "high UV",
+          "thunder risk"
+        ],
+        "uvIndex": "10",
+        "maxGustMph": 19,
+        "maxThunderChance": 43,
+        "moonPhase": "Waning Crescent",
+        "moonIllumination": "2%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-06-16",
+          "name": "Islamic New Year / Muharram Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "terracotta for rooted courage",
+        "breakfast": "fruit, toast, and tea if the morning needs gentleness",
+        "lunch": "a salad with protein, crunch, and no sadness",
+        "dinner": "a simple plate: protein, starch, vegetable, and one kind thing said aloud",
+        "luckyObject": "a smooth stone",
+        "personToCall": "a friend who sends excellent nonsense",
+        "strangerKindness": "let someone merge without making a federal case of it"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:32 AM; sunset 08:34 PM; 14h 02m daylight.",
+        "moon": "Waning Crescent, 2% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Tranquility",
+        "franklinMeasure": "Do not be disturbed by trifles, weather moods, or preventable squirrel politics.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "inspect drainage, empty standing water, and let rain change the chore list",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Tranquility: Do not be disturbed by trifles, weather moods, or preventable squirrel politics. Therefore the household should inspect drainage, empty standing water, and let rain change the chore list."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "Wheel of Fortune",
+          "reading": "I know weather turns; I do the part that is mine."
+        },
+        {
+          "position": "Weather",
+          "card": "Justice",
+          "reading": "I know what was neglected will present a bill."
+        },
+        {
+          "position": "Garden",
+          "card": "The Hanged One",
+          "reading": "I pause before forcing the issue."
+        },
+        {
+          "position": "Household",
+          "card": "Death",
+          "reading": "I clear what is finished so life has room."
+        },
+        {
+          "position": "Warning",
+          "card": "Temperance",
+          "reading": "I measure water, heat, effort, and drama."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Devil",
+          "reading": "I do not let convenience become a leash."
+        }
+      ],
+      "tarotMessage": "Household message: Wheel of Fortune asks everyone at Las Jaras to notice the first true need before rushing. Justice describes the weather inside and outside the walls. Temperance names what could complicate the day if ignored. The Devil shows the help already available if everyone moves with care.",
+      "note": "I will inspect drainage before celebrating the rain; I will move mercy work ahead of the punishing sun; I will secure loose things and watch the thresholds. Wheel of Fortune tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-13T13:24:23.906Z"
+  "updatedAt": "2026-06-14T13:18:04.746Z"
 }
