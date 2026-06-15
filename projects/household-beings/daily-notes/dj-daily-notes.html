@@ -420,7 +420,7 @@
               Primary task
               <select id="primary-task" name="primaryTask" required>
                 <option value="">Choose a workflow</option>
-                <option value="0">Prepare playlists for cooking, work, cleaning, hosting, and wind-down.</option><option value="1">Track room mood and transition points.</option><option value="2">Refresh playlists when they get stale.</option>
+                <option value="0">Prepare playlists for cooking, work, cleaning, hosting, and wind-down.</option><option value="1">Track room mood and transition points.</option><option value="2">Refresh playlists when they get stale.</option><option value="3">For Samsung Frame playback, use a real queue/jukebox URL, recover from Art Mode first, and do not claim playback from an API ok alone.</option>
               </select>
             </label>
             <label for="status">
@@ -441,7 +441,8 @@
           <legend>Task checklist</legend>
           <div class="checks"><label class="check"><input type="checkbox" name="taskDone" value="0"> Prepare playlists for cooking, work, cleaning, hosting, and wind-down.</label>
 <label class="check"><input type="checkbox" name="taskDone" value="1"> Track room mood and transition points.</label>
-<label class="check"><input type="checkbox" name="taskDone" value="2"> Refresh playlists when they get stale.</label></div>
+<label class="check"><input type="checkbox" name="taskDone" value="2"> Refresh playlists when they get stale.</label>
+<label class="check"><input type="checkbox" name="taskDone" value="3"> For Samsung Frame playback, use a real queue/jukebox URL, recover from Art Mode first, and do not claim playback from an API ok alone.</label></div>
         </fieldset>
 
         <fieldset>
@@ -490,22 +491,26 @@
     "tasks": [
         "Prepare playlists for cooking, work, cleaning, hosting, and wind-down.",
         "Track room mood and transition points.",
-        "Refresh playlists when they get stale."
+        "Refresh playlists when they get stale.",
+        "For Samsung Frame playback, use a real queue/jukebox URL, recover from Art Mode first, and do not claim playback from an API ok alone."
     ],
     "force": [
         "playlist sequencing",
         "room energy reading",
-        "hosting music etiquette"
+        "hosting music etiquette",
+        "Samsung Frame YouTube/browser recovery rules"
     ],
     "tools": [
         "playlist notes",
         "active chat",
-        "room mood context"
+        "room mood context",
+        "workflows/samsung-frame-youtube-browser-workflow.md"
     ],
     "wishlist": [
         "music-service integration",
         "speaker/room automation",
-        "playlist analytics"
+        "playlist analytics",
+        "visual or app playback-state confirmation"
     ]
 };
     const storageKey = "las-jaras-daily-notes-" + "dj" + "-v1";

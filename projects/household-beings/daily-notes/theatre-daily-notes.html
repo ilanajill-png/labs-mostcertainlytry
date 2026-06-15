@@ -420,7 +420,7 @@
               Primary task
               <select id="primary-task" name="primaryTask" required>
                 <option value="">Choose a workflow</option>
-                <option value="0">Maintain watchlists by mood, runtime, and guest group.</option><option value="1">Suggest what to watch based on available attention.</option><option value="2">Track recommendations worth revisiting.</option>
+                <option value="0">Maintain watchlists by mood, runtime, and guest group.</option><option value="1">Suggest what to watch based on available attention.</option><option value="2">Track recommendations worth revisiting.</option><option value="3">Before claiming a movie, YouTube, or browser page is on the Samsung Frame, recover from Art Mode and verify visible playback.</option>
               </select>
             </label>
             <label for="status">
@@ -441,7 +441,8 @@
           <legend>Task checklist</legend>
           <div class="checks"><label class="check"><input type="checkbox" name="taskDone" value="0"> Maintain watchlists by mood, runtime, and guest group.</label>
 <label class="check"><input type="checkbox" name="taskDone" value="1"> Suggest what to watch based on available attention.</label>
-<label class="check"><input type="checkbox" name="taskDone" value="2"> Track recommendations worth revisiting.</label></div>
+<label class="check"><input type="checkbox" name="taskDone" value="2"> Track recommendations worth revisiting.</label>
+<label class="check"><input type="checkbox" name="taskDone" value="3"> Before claiming a movie, YouTube, or browser page is on the Samsung Frame, recover from Art Mode and verify visible playback.</label></div>
         </fieldset>
 
         <fieldset>
@@ -490,22 +491,26 @@
     "tasks": [
         "Maintain watchlists by mood, runtime, and guest group.",
         "Suggest what to watch based on available attention.",
-        "Track recommendations worth revisiting."
+        "Track recommendations worth revisiting.",
+        "Before claiming a movie, YouTube, or browser page is on the Samsung Frame, recover from Art Mode and verify visible playback."
     ],
     "force": [
         "curation methods",
         "guest-friendly programming",
-        "runtime and mood matching"
+        "runtime and mood matching",
+        "Samsung Frame browser recovery rules"
     ],
     "tools": [
         "active chat lists",
         "streaming-service notes",
-        "Whimsy pages"
+        "Whimsy pages",
+        "workflows/samsung-frame-youtube-browser-workflow.md"
     ],
     "wishlist": [
         "watchlist manager",
         "streaming availability tracker",
-        "shared movie-night calendar"
+        "shared movie-night calendar",
+        "screen-state verification for the living-room Frame"
     ]
 };
     const storageKey = "las-jaras-daily-notes-" + "theatre" + "-v1";

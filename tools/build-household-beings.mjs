@@ -866,16 +866,16 @@ const titleOps = {
     wishlist: ["fitness tracker integration", "mobility video library", "home equipment inventory"]
   },
   Theatre: {
-    daily: ["Maintain watchlists by mood, runtime, and guest group.", "Suggest what to watch based on available attention.", "Track recommendations worth revisiting."],
-    force: ["curation methods", "guest-friendly programming", "runtime and mood matching"],
-    tools: ["active chat lists", "streaming-service notes", "Whimsy pages"],
-    wishlist: ["watchlist manager", "streaming availability tracker", "shared movie-night calendar"]
+    daily: ["Maintain watchlists by mood, runtime, and guest group.", "Suggest what to watch based on available attention.", "Track recommendations worth revisiting.", "Before claiming a movie, YouTube, or browser page is on the Samsung Frame, recover from Art Mode and verify visible playback."],
+    force: ["curation methods", "guest-friendly programming", "runtime and mood matching", "Samsung Frame browser recovery rules"],
+    tools: ["active chat lists", "streaming-service notes", "Whimsy pages", "workflows/samsung-frame-youtube-browser-workflow.md"],
+    wishlist: ["watchlist manager", "streaming availability tracker", "shared movie-night calendar", "screen-state verification for the living-room Frame"]
   },
   DJ: {
-    daily: ["Prepare playlists for cooking, work, cleaning, hosting, and wind-down.", "Track room mood and transition points.", "Refresh playlists when they get stale."],
-    force: ["playlist sequencing", "room energy reading", "hosting music etiquette"],
-    tools: ["playlist notes", "active chat", "room mood context"],
-    wishlist: ["music-service integration", "speaker/room automation", "playlist analytics"]
+    daily: ["Prepare playlists for cooking, work, cleaning, hosting, and wind-down.", "Track room mood and transition points.", "Refresh playlists when they get stale.", "For Samsung Frame playback, use a real queue/jukebox URL, recover from Art Mode first, and do not claim playback from an API ok alone."],
+    force: ["playlist sequencing", "room energy reading", "hosting music etiquette", "Samsung Frame YouTube/browser recovery rules"],
+    tools: ["playlist notes", "active chat", "room mood context", "workflows/samsung-frame-youtube-browser-workflow.md"],
+    wishlist: ["music-service integration", "speaker/room automation", "playlist analytics", "visual or app playback-state confirmation"]
   },
   Chef: {
     daily: ["Turn inventory and cravings into recipe options.", "Add shelf-stable recipes when pantry ingredients are added.", "Prepare missing-ingredient notes before shopping."],
