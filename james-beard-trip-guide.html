@@ -187,7 +187,7 @@
 
     <section id="restaurants">
       <h2>Restaurant Notes</h2>
-      <p class="city-note">Each card includes the Beard recognition, why it is worth going, what to order or expect, a wine order shaped by Andre Mack’s usual food-first logic, and four research links. “Press links” are built to surface current articles/reviews from reliable food publications and local press.</p>
+      <p class="city-note">Each card includes the Beard recognition, why it is worth going, what to order or expect, a wine order shaped by Andre Mack’s usual food-first logic, and four verified article/source links from the James Beard Foundation, local food press, review outlets, or guide publications.</p>
       <div class="grid" id="cards"></div>
     </section>
   </main>
@@ -544,19 +544,113 @@
       }
     ];
 
-    const pressTemplates = [
-      ["JBF / award context", r => `https://www.google.com/search?q=${encodeURIComponent(r.q + " James Beard Foundation")}`],
-      ["Eater / dining press", r => `https://www.google.com/search?q=${encodeURIComponent(r.q + " site:eater.com OR site:eateratlanta.com OR site:boston.eater.com")}`],
-      ["Local review", r => `https://www.google.com/search?q=${encodeURIComponent(r.q + " review local magazine newspaper")}`],
-      ["Best dish / what to order", r => `https://www.google.com/search?q=${encodeURIComponent(r.name + " " + r.city + " what to order best dishes")}`]
-    ];
+    const sourceLinks = {
+      jbfNominees: ["JBF 2026 nominees", "https://www.jamesbeard.org/stories/james-beard-awards-restaurant-and-chef-nominees-2026"],
+      jbfSemis: ["JBF 2026 semifinalists", "https://www.jamesbeard.org/stories/james-beard-award-semifinalists-2026"],
+      sanAntonioCurrent: ["San Antonio Current semifinalists", "https://www.sacurrent.com/food-drink/flavor/eight-san-antonio-chefs-two-restaurants-among-latest-james-beard-semifinalists/"],
+      tprSanAntonio: ["TPR San Antonio finalists", "https://www.tpr.org/news/2026-04-01/san-antonio-clinches-two-james-beard-award-finalist-nominations"],
+      expressFinalists: ["Express-News finalists", "https://www.expressnews.com/food/restaurants/article/james-beard-finalists-2026-san-antonio-22161987.php"],
+      houstonChronicle: ["Houston Chronicle nominees", "https://www.houstonchronicle.com/food-restaurants/article/james-beard-awards-tonight-nominees-22257361.php"],
+      houstonCultureMap: ["CultureMap Houston finalists", "https://houston.culturemap.com/news/restaurants-bars/houston-james-beard-finalists-2026/"],
+      kutAustin: ["KUT Austin finalists update", "https://www.kut.org/austin/2026-03-31/austin-tx-no-james-beard-award-finalists-texas"],
+      kvueAustin: ["KVUE Austin semifinalists", "https://www.kvue.com/article/life/food/austin-texas-chefs-restaurants-2026-james-beard-semifinalists/269-e14904f5-870a-4c6a-85b5-f4f40808e2ee"],
+      cultureMapAustin: ["CultureMap Austin semifinalists", "https://austin.culturemap.com/news/restaurants-bars/2026-james-beard-award-semifinalists/"],
+      sixAmAustin: ["6AM City Austin semifinalists", "https://6amcity.com/web/tx/austin/food-and-drink/austinites-2026-james-beard-award"],
+      eaterAtlanta: ["Eater Atlanta finalists", "https://atlanta.eater.com/restaurant-news/87260/atlanta-2026-james-beard-award-restaurant-chef-nominees"],
+      roughDraftAtlanta: ["Rough Draft Atlanta finalists", "https://roughdraftatlanta.com/2026/03/31/james-beard-awards-2026-atlanta-finalists/"],
+      atlantaNewsFirst: ["Atlanta News First semifinalists", "https://www.atlantanewsfirst.com/2026/01/22/metro-atlanta-food-scene-shines-2026-james-beard-semifinalist-list/"],
+      wjclGeorgia: ["WJCL Georgia semifinalists", "https://www.wjcl.com/article/georgia-south-carolina-2026-james-beard-awards/70081614"],
+      bostonMag: ["Boston Magazine semifinalists", "https://www.bostonmagazine.com/restaurants/2026/03/31/boston-james-beard-nominees-2026/"],
+      eaterBoston: ["Eater Boston finalists", "https://boston.eater.com/restaurant-news/124149/james-beard-award-finalists-2026-boston"],
+      cbsBoston: ["CBS Boston semifinalists", "https://www.cbsnews.com/boston/news/james-beard-award-2026-semifinalists-list-boston-massachusetts/"]
+    };
+
+    const restaurantArticles = {
+      "Mixtli": [
+        ["Eater: Mixtli service profile", "https://austin.eater.com/san-antonio/114810/mixtli-san-antonio-outstanding-service-award-james-beard"],
+        ["San Antonio Report: Michelin kitchen", "https://sanantonioreport.org/the-dance-of-culinary-art-in-the-michelin-star-kitchen-at-mixtli/"],
+        ["Express-News Mixtli review", "https://www.expressnews.com/food/restaurants/article/Review-Mixtli-s-modernist-Mexican-food-earns-13652352.php"],
+        sourceLinks.expressFinalists
+      ],
+      "Nicosi": [
+        ["Express-News first look", "https://www.expressnews.com/food/restaurants/article/nicosi-opening-pullman-market-19539026.php"],
+        ["San Antonio Report: Tavel Bristol-Joseph", "https://sanantonioreport.org/pastry-chef-at-michelin-starred-nicosi-serves-art-on-a-plate/"],
+        ["Eater venue: Nicosi", "https://www.eater.com/venue/102265/nicosi"],
+        sourceLinks.expressFinalists
+      ],
+      "JŪN": [
+        ["Infatuation Houston review", "https://www.theinfatuation.com/houston/reviews/jun"],
+        ["Texas Monthly: Jūn", "https://www.texasmonthly.com/restaurant/jun-houston/"],
+        ["Houstonia: why Jūn is unique", "https://www.houstoniamag.com/eat-and-drink/2024/01/chef-evelyn-garcia-jun-houston"],
+        ["Eater Houston venue: Jūn", "https://houston.eater.com/venue/95282/jun"]
+      ],
+      "ChòpnBlọk": [
+        ["Michelin Guide: ChòpnBlọk", "https://guide.michelin.com/us/en/texas/houston_2986624/restaurant/chopnblok"],
+        ["Eater Houston opening", "https://houston.eater.com/2024/9/25/24254158/chopnblok-houston-montrose-west-african-cuisine-restaurant-openings"],
+        ["Texas Monthly review", "https://www.texasmonthly.com/food/chopnblok-houston-restaurant-review/"],
+        sourceLinks.houstonCultureMap
+      ],
+      "Avize": [
+        ["Michelin Guide: Avize", "https://guide.michelin.com/us/en/georgia/atlanta_2884144/restaurant/avize"],
+        ["Eater Atlanta opening", "https://atlanta.eater.com/2024/9/24/24253036/avize-opens-in-atlanta"],
+        ["Infatuation Atlanta review", "https://www.theinfatuation.com/atlanta/reviews/avize-modern-alpine"],
+        sourceLinks.atlantaNewsFirst
+      ],
+      "Tonino": [
+        ["Boston Magazine review", "https://www.bostonmagazine.com/restaurants/2023/04/25/tonino-jamaica-plain/"],
+        ["Condé Nast Traveler review", "https://www.cntraveler.com/restaurants/boston/tonino"],
+        sourceLinks.eaterBoston,
+        sourceLinks.cbsBoston
+      ],
+      "Comfort Kitchen": [
+        sourceLinks.cbsBoston,
+        sourceLinks.eaterBoston,
+        sourceLinks.bostonMag,
+        ["Wikipedia source index", "https://en.wikipedia.org/wiki/Comfort_Kitchen"]
+      ],
+      "Aria": [
+        ["Aria press page", "https://www.aria-atl.com/awards-recognition-press"],
+        sourceLinks.eaterAtlanta,
+        sourceLinks.roughDraftAtlanta,
+        sourceLinks.jbfNominees
+      ],
+      "Mujō": [
+        sourceLinks.eaterAtlanta,
+        sourceLinks.roughDraftAtlanta,
+        ["Wikipedia source index", "https://en.wikipedia.org/wiki/Muj%C5%8D_(restaurant)"],
+        sourceLinks.jbfNominees
+      ],
+      "Madeira Park": [
+        ["Madeira Park about/press", "https://www.madeiraparkatl.com/about"],
+        sourceLinks.atlantaNewsFirst,
+        sourceLinks.wjclGeorgia,
+        sourceLinks.jbfSemis
+      ]
+    };
+
+    function articleLinksFor(r) {
+      if (restaurantArticles[r.name]) return restaurantArticles[r.name];
+      if (r.city === "San Antonio") {
+        return [sourceLinks.jbfSemis, sourceLinks.sanAntonioCurrent, sourceLinks.tprSanAntonio, sourceLinks.expressFinalists];
+      }
+      if (r.city === "Houston") {
+        return [sourceLinks.jbfNominees, sourceLinks.jbfSemis, sourceLinks.houstonChronicle, sourceLinks.houstonCultureMap];
+      }
+      if (r.city === "Austin") {
+        return [sourceLinks.jbfSemis, sourceLinks.kutAustin, sourceLinks.kvueAustin, sourceLinks.cultureMapAustin];
+      }
+      if (r.city === "Atlanta") {
+        return [sourceLinks.jbfNominees, sourceLinks.eaterAtlanta, sourceLinks.roughDraftAtlanta, sourceLinks.atlantaNewsFirst];
+      }
+      return [sourceLinks.jbfSemis, sourceLinks.bostonMag, sourceLinks.eaterBoston, sourceLinks.cbsBoston];
+    }
 
     const cards = document.getElementById("cards");
     restaurants.forEach(r => {
       const article = document.createElement("article");
       article.className = "card";
       const tags = `<span class="tag gold">${r.city}</span><span class="tag">${r.status}</span><span class="tag green">${r.category}</span>`;
-      const press = pressTemplates.map(([label, fn]) => `<a href="${fn(r)}" target="_blank" rel="noopener">${label}</a>`).join("");
+      const press = articleLinksFor(r).map(([label, url]) => `<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join("");
       article.innerHTML = `
         <h3>${r.name}</h3>
         <div>${tags}</div>
