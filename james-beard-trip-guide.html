@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>James Beard Trip Guide: Texas, Atlanta, Massachusetts</title>
+  <style>
+    :root {
+      --ink: #1f2723;
+      --muted: #66706b;
+      --line: #d8ded9;
+      --paper: #fbfaf6;
+      --panel: #ffffff;
+      --accent: #1456a0;
+      --accent-soft: #e8f1fb;
+      --gold: #a97823;
+      --green: #426b4f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.5;
+    }
+    header {
+      padding: 40px 22px 28px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(20,86,160,.12), transparent 58%),
+        linear-gradient(180deg, #fff, var(--paper));
+    }
+    main { max-width: 1180px; margin: 0 auto; padding: 22px; }
+    h1 { max-width: 980px; margin: 0 auto 10px; font-size: clamp(2rem, 5vw, 4.4rem); line-height: .98; letter-spacing: 0; }
+    .subtitle { max-width: 980px; margin: 0 auto; color: var(--muted); font-size: 1.05rem; }
+    h2 { margin: 36px 0 12px; font-size: 1.8rem; }
+    h3 { margin: 0 0 6px; font-size: 1.12rem; }
+    p { margin: 0 0 10px; }
+    a { color: var(--accent); text-decoration-thickness: .08em; text-underline-offset: .18em; }
+    .notice {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-left: 5px solid var(--gold);
+      padding: 14px 16px;
+      margin: 18px 0;
+      border-radius: 6px;
+    }
+    .topline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0 0;
+      justify-content: center;
+    }
+    .pill {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 10px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 1px 0 rgba(31,39,35,.04);
+    }
+    .meta { color: var(--muted); font-size: .92rem; margin-bottom: 10px; }
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #164878;
+      padding: 3px 8px;
+      font-size: .78rem;
+      margin: 0 6px 6px 0;
+    }
+    .tag.green { background: #e8f3eb; color: var(--green); }
+    .tag.gold { background: #f8eedb; color: #7b5619; }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      text-decoration: none;
+      font-size: .88rem;
+    }
+    .priority {
+      border-color: rgba(169,120,35,.45);
+      background: linear-gradient(180deg, #fff, #fffaf0);
+    }
+    .city-note {
+      color: var(--muted);
+      margin-bottom: 12px;
+      max-width: 880px;
+    }
+    .field { margin: 8px 0; }
+    .label { color: var(--muted); font-size: .83rem; text-transform: uppercase; letter-spacing: .04em; display: block; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { background: #f2f5f2; font-size: .88rem; color: var(--muted); }
+    tr:last-child td { border-bottom: 0; }
+    footer { color: var(--muted); padding: 30px 22px 42px; max-width: 1180px; margin: 0 auto; font-size: .92rem; }
+    @media print {
+      body { background: #fff; }
+      .card { break-inside: avoid; }
+      .links a { border: 0; padding: 0; display: inline; margin-right: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>James Beard Trip Guide</h1>
+    <p class="subtitle">A reservation-ready shortlist for San Antonio, Houston, Austin, Atlanta, and Massachusetts based on the 2026 James Beard Restaurant & Chef nominees and semifinalists.</p>
+    <div class="topline">
+      <span class="pill">Texas: July 3-31, party of 2</span>
+      <span class="pill">Atlanta: June 26-July 2, party of 2</span>
+      <span class="pill">Massachusetts: list + reservation setup links</span>
+      <span class="pill">Wine lens: Andre Mack-style, acid-driven, low-oak, food-first</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="notice">
+      <strong>Booking note:</strong> I did not actually reserve tables because the request does not include exact dining dates, preferred times, lodging neighborhoods, budget, dietary restrictions, or permission to place bookings in your name. The guide below gives direct reservation links and the dates to target. Once you pick dates/times, book the priority tables first: Mixtli, Nicosi, March, JŪN, Tsuke Edomae, Mujō, and O Ya.
+    </section>
+
+    <section>
+      <h2>Best First Moves</h2>
+      <div class="grid">
+        <article class="card priority">
+          <h3>San Antonio</h3>
+          <p class="meta">For July 3-31, book one tasting-menu anchor and one lower-pressure meal.</p>
+          <p><strong>First choice:</strong> Mixtli for the full progressive Mexican tasting menu. <strong>Second:</strong> Nicosi for Tavel Bristol-Joseph’s dessert-focused room. <strong>Backup:</strong> Leche de Tigre or The Magpie.</p>
+        </article>
+        <article class="card priority">
+          <h3>Houston</h3>
+          <p class="meta">Houston had the deepest 2026 finalist showing in this set.</p>
+          <p><strong>First choice:</strong> March if the budget allows and reservations are open. <strong>Second:</strong> JŪN or ChòpnBlọk for food with a strong point of view. <strong>Backup:</strong> Agnes and Sherman, Maximo, Katami, Xochi.</p>
+        </article>
+        <article class="card priority">
+          <h3>Austin</h3>
+          <p class="meta">No Austin restaurants advanced to the 2026 finalist list, so these are semifinalist picks.</p>
+          <p><strong>First choice:</strong> Tsuke Edomae if you can get seats. <strong>Second:</strong> Barley Swine or Este. <strong>Casual stars:</strong> P Thai’s, la Barbecue, Mercado Sin Nombre, La Santa Barbacha, Lao’d Bar.</p>
+        </article>
+        <article class="card priority">
+          <h3>Atlanta</h3>
+          <p class="meta">For June 26-July 2, book fine dining early.</p>
+          <p><strong>First choice:</strong> Mujō for J. Trent Harris’s Best Chef: Southeast finalist run. <strong>Second:</strong> Aria for hospitality and a classic Atlanta room. <strong>Drinks:</strong> Kimball House, Avize, Lucky Star, Madeira Park.</p>
+        </article>
+        <article class="card priority">
+          <h3>Massachusetts</h3>
+          <p class="meta">No Massachusetts restaurants advanced to the 2026 finalist list, but the semifinalist pool is strong.</p>
+          <p><strong>First choice:</strong> O Ya for a celebratory splurge. <strong>Second:</strong> Comfort Kitchen, Tonino, Lenox Sophia, Lê Madeline, La Padrona, Verveine, Talulla, State Road.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reservation Targets</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Trip Window</th>
+            <th>Target</th>
+            <th>Suggested Plan for Two</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>San Antonio, July 3-31</td>
+            <td>Mixtli + Nicosi</td>
+            <td>Book Mixtli as dinner. Use Nicosi as a dessert/date-night counterpoint if available. Add Naco or Leche de Tigre for a less formal meal.</td>
+          </tr>
+          <tr>
+            <td>Houston, July 3-31</td>
+            <td>March + JŪN/ChòpnBlọk</td>
+            <td>Book March first because it is the hardest structured reservation. Pair it with JŪN for dinner or ChòpnBlọk for a more casual West African fast-casual hit.</td>
+          </tr>
+          <tr>
+            <td>Austin, July 3-31</td>
+            <td>Tsuke Edomae + Barley Swine/Este</td>
+            <td>Tsuke Edomae releases are difficult. If seats are gone, Barley Swine gives a more controlled tasting-menu evening and Este gives a seafood-and-wine angle.</td>
+          </tr>
+          <tr>
+            <td>Atlanta, June 26-July 2</td>
+            <td>Mujō + Aria</td>
+            <td>Book Mujō first, then Aria. Keep Kimball House or Avize as beverage-forward backup nights.</td>
+          </tr>
+          <tr>
+            <td>Massachusetts</td>
+            <td>O Ya + one neighborhood pick</td>
+            <td>Use the reservation links below. O Ya is the splurge; Comfort Kitchen, Tonino, Lenox Sophia, Lê Madeline, and Verveine make a more flexible Boston-area list.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="restaurants">
+      <h2>Restaurant Notes</h2>
+      <p class="city-note">Each card includes the Beard recognition, why it is worth going, what to order or expect, a wine order shaped by Andre Mack’s usual food-first logic, and four research links. “Press links” are built to surface current articles/reviews from reliable food publications and local press.</p>
+      <div class="grid" id="cards"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Core sources:</strong> James Beard Foundation 2026 <a href="https://www.jamesbeard.org/stories/james-beard-awards-restaurant-and-chef-nominees-2026">nominees/finalists</a> and <a href="https://www.jamesbeard.org/stories/james-beard-award-semifinalists-2026">semifinalists</a>; local finalist coverage from <a href="https://www.expressnews.com/food/restaurants/article/james-beard-awards-2026-watch-live-22302977.php">San Antonio Express-News</a>, <a href="https://houston.culturemap.com/news/restaurants-bars/houston-james-beard-finalists-2026/">CultureMap Houston</a>, <a href="https://www.kut.org/austin/2026-03-31/austin-tx-no-james-beard-award-finalists-texas">KUT Austin</a>, <a href="https://atlanta.eater.com/restaurant-news/87260/atlanta-2026-james-beard-award-restaurant-chef-nominees">Eater Atlanta</a>, and <a href="https://www.bostonmagazine.com/restaurants/2026/03/31/boston-james-beard-nominees-2026/">Boston Magazine</a>. Wine guidance draws from Food & Wine’s profiles of Andre Mack, especially his acid-forward, low-oak, food-as-center pairing approach and his preference for medium-bodied acidic wines with strong flavors.</p>
+  </footer>
+
+  <script>
+    const restaurants = [
+      {
+        city: "San Antonio", status: "2026 finalist", name: "Mixtli", category: "Outstanding Restaurant finalist",
+        reserve: "https://www.restaurantmixtli.com/reservations",
+        why: "The most destination-worthy San Antonio pick: progressive Mexican cooking built around regional stories, rare masa work, and a polished tasting-menu rhythm.",
+        dish: "Order the current tasting menu and pay attention to masa, moles, and seafood courses rather than hunting one static signature.",
+        wine: "Ask for a high-acid Mexican, Spanish, or Loire white, or a lighter red with minimal oak. If bubbles are available, start there.",
+        q: "Mixtli San Antonio James Beard review"
+      },
+      {
+        city: "San Antonio", status: "2026 finalist", name: "Nicosi", category: "Outstanding Pastry Chef or Baker finalist, Tavel Bristol-Joseph",
+        reserve: "https://www.nicosi.com/",
+        why: "A rare dessert-led reservation, immersive and intimate, from one of Texas’s most thoughtful pastry voices.",
+        dish: "The dessert tasting experience is the dish. Expect texture, temperature, fruit, spice, and savory edges.",
+        wine: "Go slightly off-dry and bright: demi-sec Chenin, Kabinett Riesling, Moscato d’Asti, or a lean sparkling wine.",
+        q: "Nicosi San Antonio Tavel Bristol Joseph review"
+      },
+      {
+        city: "San Antonio", status: "2026 semifinalist", name: "Naco Mexican", category: "Best Chef: Texas semifinalists, Francisco Estrada and Lizzeth Martinez",
+        reserve: "https://www.nacomexican.com/",
+        why: "A food-truck-to-restaurant success story with focused, lively Mexican cooking and a strong local following.",
+        dish: "Tacos and breakfast plates; choose the house masa and salsa-driven items.",
+        wine: "If wine is available, choose sparkling rose, dry Riesling, or a citrusy white. Otherwise beer is honestly the Mack-ish move: delicious beats fancy.",
+        q: "Naco Mexican San Antonio James Beard review"
+      },
+      {
+        city: "San Antonio", status: "2026 semifinalist", name: "The Magpie", category: "Best Chef: Texas semifinalist, Jungsuk Kim",
+        reserve: "https://www.magpiesatx.com/",
+        why: "Korean and South Texas flavors in a small, personal restaurant that feels more specific than trend-driven.",
+        dish: "Order kimchi-forward, seafood, and grilled items; the menu changes, so follow the staff’s lead.",
+        wine: "Chilled Gamay, dry Riesling, or sparkling rose to handle heat, acid, and fermented flavors.",
+        q: "The Magpie San Antonio Jungsuk Kim review"
+      },
+      {
+        city: "San Antonio", status: "2026 semifinalist", name: "Leche de Tigre", category: "Best Chef: Texas semifinalist, Emil Oliva",
+        reserve: "https://www.lechedetigretx.com/",
+        why: "Peruvian flavors, bright ceviche, and a room with energy. A smart San Antonio choice when you want punch and polish without a long tasting menu.",
+        dish: "Ceviche or tiradito, plus anticuchos if available.",
+        wine: "Vinho Verde, Txakolina, Muscadet, or Champagne-method bubbles for citrus, salt, and chile.",
+        q: "Leche de Tigre San Antonio Emil Oliva review"
+      },
+      {
+        city: "San Antonio", status: "2026 semifinalist", name: "Anacacho Coffee & Cantina", category: "Best New Restaurant semifinalist",
+        reserve: "https://www.anacachocoffee.com/",
+        why: "A newer Leo Davila project with daytime ease and chef credibility, useful as a flexible add-on meal.",
+        dish: "Breakfast tacos, coffee, and cantina plates with Tex-Mex/South Texas roots.",
+        wine: "For brunch, keep it easy: sparkling wine, crisp rose, or skip wine for coffee/cocktails.",
+        q: "Anacacho Coffee Cantina San Antonio review"
+      },
+      {
+        city: "Houston", status: "2026 finalist", name: "JŪN", category: "Best Chef: Texas finalist, Evelyn Garcia and Henry Lu",
+        reserve: "https://www.junbykin.com/reservations",
+        why: "A tight, contemporary Houston restaurant where Asian American, Gulf, and personal-history cooking feels precise but not stiff.",
+        dish: "Carrots with salsa macha, beef tartare, and anything smoky or Gulf-seafood driven.",
+        wine: "Aromatic white with acid: Riesling, Albarino, Gruner, or a chillable red if the meal leans smoky.",
+        q: "JUN Houston Evelyn Garcia Henry Lu review"
+      },
+      {
+        city: "Houston", status: "2026 finalist", name: "ChòpnBlọk", category: "Best Chef: Texas finalist, Ope Amosu",
+        reserve: "https://www.chopnblok.co/",
+        why: "West African fast-casual cooking with a clear voice and serious momentum. It is more casual, but very worth the stop.",
+        dish: "Jollof, suya, greens, and bowls with yaji spice.",
+        wine: "Sparkling rose, Lambrusco, or off-dry Riesling. The acid and bubbles help with chile, smoke, and richness.",
+        q: "ChopnBlok Houston Ope Amosu review"
+      },
+      {
+        city: "Houston", status: "2026 finalist", name: "March", category: "Outstanding Professional in Beverage Service finalist, June Rodil",
+        reserve: "https://www.marchrestaurant.com/reservations",
+        why: "The strongest wine-program destination on the Houston list, with a tasting-menu structure and serious regional Mediterranean research.",
+        dish: "Book the tasting menu and let the current region guide the meal.",
+        wine: "Let the team pair. If ordering a bottle, ask for high-acid, lower-oak Mediterranean white or a structured but not heavy red.",
+        q: "March Houston June Rodil review"
+      },
+      {
+        city: "Houston", status: "2026 finalist", name: "Agnes and Sherman", category: "Best New Restaurant finalist",
+        reserve: "https://www.agnesandsherman.com/",
+        why: "A new-school Houston room channeling Filipino American and diner energy with enough warmth to make the finalist nod feel logical.",
+        dish: "Look for Filipino breakfast, rice, pork, and dessert-driven comfort dishes.",
+        wine: "High-acid rose, Chenin Blanc, or sparkling wine. With fried or pork-heavy dishes, avoid heavy oak.",
+        q: "Agnes and Sherman Houston review"
+      },
+      {
+        city: "Houston", status: "2026 finalist", name: "Maximo", category: "Emerging Chef finalist, Adrian Torres",
+        reserve: "https://www.maximohouston.com/",
+        why: "Modern Mexican cooking in West University Place with a young chef getting national attention.",
+        dish: "Seafood, masa, and chile-forward plates; ask what the kitchen is most excited about that night.",
+        wine: "Albarino, Vermentino, or lean Chardonnay. For red, ask for a juicy, low-tannin bottle.",
+        q: "Maximo Houston Adrian Torres review"
+      },
+      {
+        city: "Houston", status: "2026 finalist group", name: "Xochi / Hugo's / Urbe", category: "Outstanding Restaurateur finalist, Hugo Ortega and Tracy Vaught",
+        reserve: "https://www.xochihouston.com/reservations/",
+        why: "The H Town Restaurant Group nomination is about long-term excellence. Xochi is the most destination-friendly choice; Hugo’s is the classic.",
+        dish: "At Xochi, order mole, masa, and Oaxacan-influenced dishes. At Hugo’s, order regional Mexican classics.",
+        wine: "Ask for Mexican wine if available, or go with Rioja, Mencia, or crisp white with mole and chile.",
+        q: "Xochi Houston Hugo Ortega review"
+      },
+      {
+        city: "Houston", status: "2026 semifinalist", name: "Katami", category: "Outstanding Chef semifinalist, Manabu Horiuchi",
+        reserve: "https://katamihouston.com/",
+        why: "A strong sushi choice from one of Houston’s most respected Japanese chefs.",
+        dish: "Nigiri, seasonal sashimi, and chef-selected specials.",
+        wine: "Champagne, grower sparkling, Chablis, or sake. Mack’s principle here: acidity and texture, not oak.",
+        q: "Katami Houston Manabu Horiuchi review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "Tsuke Edomae", category: "Best Chef: Texas semifinalist, Michael Che",
+        reserve: "https://www.tsukeedomae.com/",
+        why: "Tiny, exacting omakase and one of Austin’s hardest tables. Prioritize this first if July dates align.",
+        dish: "The omakase is the order.",
+        wine: "Sake pairing if offered; otherwise Champagne, Chablis, or dry Riesling.",
+        q: "Tsuke Edomae Austin Michael Che review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "Barley Swine", category: "Outstanding Hospitality semifinalist",
+        reserve: "https://www.barleyswine.com/reservations",
+        why: "A long-running Austin tasting-menu room that still feels local, seasonal, and hospitality-minded.",
+        dish: "The seasonal tasting menu, especially vegetable and pork courses.",
+        wine: "Let the pairing team work. If ordering one bottle, choose high-acid white Burgundy, Oregon Pinot, or grower bubbles.",
+        q: "Barley Swine Austin review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "Este", category: "Outstanding Professional in Beverage Service semifinalist, Celia Pellegrini",
+        reserve: "https://www.esteatx.com/",
+        why: "Seafood, Mexican coastal flavors, and a wine program that makes this an easy dinner pick.",
+        dish: "Seafood tostadas, ceviche, whole fish, and masa.",
+        wine: "Txakolina, Muscadet, Albarino, or sparkling wine with saline snap.",
+        q: "Este Austin Celia Pellegrini review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "P Thai's Khao Man Gai & Noodles", category: "Best Chef: Texas semifinalist, Thai Changthong",
+        reserve: "https://www.pthais.com/",
+        why: "Precise, soulful Thai chicken rice and noodles that deliver more joy than many fancy meals.",
+        dish: "Khao man gai and noodle specials.",
+        wine: "Off-dry Riesling, sparkling rose, or a cold beer. With ginger, chile, and broth, keep alcohol modest.",
+        q: "P Thai's Khao Man Gai Austin review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "la Barbecue", category: "Best Chef: Texas semifinalist, Ali Clem",
+        reserve: "https://www.labarbecue.com/",
+        why: "Austin barbecue with national pull and a Beard-recognized pitmaster.",
+        dish: "Brisket, ribs, sausage, and pickles.",
+        wine: "Sparkling red, Lambrusco, Zinfandel with restraint, or peppery Syrah. Avoid big oaky reds with smoke.",
+        q: "la Barbecue Austin Ali Clem review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "Mercado Sin Nombre", category: "Outstanding Bakery semifinalist",
+        reserve: "https://www.mercadosinnombre.com/",
+        why: "Masa, coffee, and breakfast/lunch built around Mexican corn culture. A daytime must.",
+        dish: "Masa-based specials, pastries, and coffee.",
+        wine: "No wine needed; if this becomes brunch, choose sparkling wine or a dry, citrusy white.",
+        q: "Mercado Sin Nombre Austin review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "La Santa Barbacha", category: "Best Chef: Texas semifinalists, Rosa De Lima Hernandez and Daniela Hernandez",
+        reserve: "https://www.lasantabarbacha.com/",
+        why: "Barbacoa and Mexican breakfast/lunch cooking with heart, craft, and strong local flavor.",
+        dish: "Barbacoa tacos and consomme.",
+        wine: "If available, sparkling rose or a fresh red like Mencia. Beer or agua fresca may be the better pairing.",
+        q: "La Santa Barbacha Austin review"
+      },
+      {
+        city: "Austin", status: "2026 semifinalist", name: "Lao'd Bar", category: "Best Chef: Texas semifinalist, Bob Somsith",
+        reserve: "https://www.laodbar.com/",
+        why: "Lao flavors with heat, funk, herbs, and grilled depth. Great for a more casual but memorable night.",
+        dish: "Laab, grilled meats, sticky rice, and spicy salads.",
+        wine: "Off-dry Riesling, pet-nat, or bubbles. Keep tannin low and acidity high.",
+        q: "Lao'd Bar Austin Bob Somsith review"
+      },
+      {
+        city: "Atlanta", status: "2026 finalist", name: "Mujō", category: "Best Chef: Southeast finalist, J. Trent Harris",
+        reserve: "https://www.mujoatl.com/reservations",
+        why: "Atlanta’s highest-priority fine-dining booking: intimate omakase, luxury ingredients, and exacting technique.",
+        dish: "The omakase; add beverage pairing if the budget works.",
+        wine: "Sake or Champagne. If ordering wine, ask for precise, mineral whites with low oak.",
+        q: "Mujo Atlanta J Trent Harris review"
+      },
+      {
+        city: "Atlanta", status: "2026 finalist", name: "Aria", category: "Outstanding Hospitality finalist",
+        reserve: "https://www.aria-atl.com/reservations",
+        why: "A polished Buckhead institution recognized specifically for hospitality, the sort of room that can make a trip feel properly hosted.",
+        dish: "Seasonal modern American plates; order the fish or duck if they are on the menu.",
+        wine: "Oregon Pinot Noir, white Burgundy, or Champagne. Ask for elegance over power.",
+        q: "Aria Atlanta Outstanding Hospitality review"
+      },
+      {
+        city: "Atlanta", status: "2026 semifinalist", name: "Atlas", category: "Best Chef: Southeast semifinalist, Freddy Money",
+        reserve: "https://atlasrestaurant.com/reservations/",
+        why: "Luxury hotel fine dining with technical ambition and an art-filled room.",
+        dish: "Tasting menu, seafood, and composed seasonal plates.",
+        wine: "Classic pairing territory: Champagne, Burgundy, or acid-driven Italian whites. Let the sommelier keep it nimble.",
+        q: "Atlas Atlanta Freddy Money review"
+      },
+      {
+        city: "Atlanta", status: "2026 semifinalist", name: "Kimball House", category: "Outstanding Professional in Cocktail Service semifinalist, Miles Macquarrie",
+        reserve: "https://kimball-house.com/",
+        why: "One of Atlanta’s essential oyster/cocktail rooms, useful when you want less ceremony than omakase.",
+        dish: "Oysters, seafood, and steakhouse-adjacent plates.",
+        wine: "Muscadet, Chablis, Champagne, or a martini if cocktails are the reason you came.",
+        q: "Kimball House Atlanta Miles Macquarrie review"
+      },
+      {
+        city: "Atlanta", status: "2026 semifinalist", name: "Avize", category: "Outstanding Professional in Beverage Service semifinalist, Taurean Philpott",
+        reserve: "https://www.avizeatl.com/",
+        why: "A beverage-forward Atlanta pick with serious wine-program promise.",
+        dish: "Seasonal small plates; choose dishes that let the wine list shine.",
+        wine: "Ask for the nerdiest high-acid white or chillable red by the glass.",
+        q: "Avize Atlanta Taurean Philpott review"
+      },
+      {
+        city: "Atlanta", status: "2026 semifinalist", name: "Lucky Star", category: "Best New Bar semifinalist",
+        reserve: "https://www.luckystaratl.com/",
+        why: "A new bar recognized nationally, good for a looser night inside the Atlanta window.",
+        dish: "Bar snacks and signature cocktails.",
+        wine: "Cocktails first. If wine, choose bubbles or a bright chilled red.",
+        q: "Lucky Star Atlanta Best New Bar review"
+      },
+      {
+        city: "Atlanta", status: "2026 semifinalist", name: "Madeira Park", category: "Best New Bar semifinalist",
+        reserve: "https://www.madeiraparkatl.com/",
+        why: "Another Beard-noted new bar for a flexible pre- or post-dinner stop.",
+        dish: "Bar snacks and signature drinks.",
+        wine: "Madeira, sherry, bubbles, or whatever fortified option the team is proudest of.",
+        q: "Madeira Park Atlanta Best New Bar review"
+      },
+      {
+        city: "Atlanta", status: "2026 semifinalist", name: "Bar ANA", category: "Outstanding Pastry Chef or Baker semifinalist, Claudia Martinez",
+        reserve: "https://www.baranaatl.com/",
+        why: "Go when dessert and cocktails matter; Claudia Martinez’s pastry recognition is the draw.",
+        dish: "Dessert, pastry, and any composed sweets.",
+        wine: "Moscato d’Asti, demi-sec Chenin, Sauternes by the glass, or dry bubbles if the dessert is fruit-forward.",
+        q: "Bar ANA Atlanta Claudia Martinez review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "O Ya", category: "Outstanding Restaurant semifinalist",
+        reserve: "https://www.o-ya.restaurant/reservations",
+        why: "The Massachusetts splurge: intimate Japanese tasting menu, serious reputation, and the highest-ceiling celebration meal here.",
+        dish: "Chef’s tasting menu.",
+        wine: "Sake, Champagne, or Chablis. Keep oak out of the way.",
+        q: "O Ya Boston review James Beard"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Comfort Kitchen", category: "Best Chef: Northeast semifinalist, Sāsha Coleman",
+        reserve: "https://www.comfortkitchenbos.com/reservations",
+        why: "A warm, globally minded Dorchester restaurant with diaspora storytelling and real hospitality.",
+        dish: "Spice-driven seasonal plates, roti, and dishes that show the kitchen’s global pantry.",
+        wine: "Off-dry Riesling, Chenin Blanc, or sparkling rose for spice and acid.",
+        q: "Comfort Kitchen Boston Sasha Coleman review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Tonino", category: "Best Chef: Northeast semifinalist, Luke Fetbroth",
+        reserve: "https://www.toninojp.com/",
+        why: "A neighborhood Italian pick with enough precision to earn Beard attention.",
+        dish: "Pasta, seasonal antipasti, and whatever the kitchen says not to miss.",
+        wine: "High-acid Italian red: Chianti Classico, Etna Rosso, or a bright Barbera.",
+        q: "Tonino Boston Luke Fetbroth review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Lenox Sophia", category: "Best Chef: Northeast semifinalist, Shi Mei",
+        reserve: "https://www.lenoxsophia.com/reservations",
+        why: "A small South End tasting-menu room with calm confidence and a personal feel.",
+        dish: "The current tasting menu.",
+        wine: "Let the pairing lead, or choose Champagne, Loire Chenin, or a light Pinot Noir.",
+        q: "Lenox Sophia Boston Shi Mei review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Lê Madeline", category: "Best Chef: Northeast semifinalist, Peter Nguyen",
+        reserve: "https://www.lemadelinequincy.com/",
+        why: "Vietnamese cooking in Quincy with enough personality to stand apart from the Boston fine-dining lane.",
+        dish: "Noodles, seafood, herbs, and dishes with fish sauce brightness.",
+        wine: "Dry Riesling, pet-nat, or sparkling rose. Low tannin is your friend.",
+        q: "Le Madeline Quincy Peter Nguyen review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "La Padrona", category: "Best Chef: Northeast semifinalist, Amarilys Colon",
+        reserve: "https://www.lapadronaboston.com/reservations",
+        why: "Big-city Italian in Back Bay with Beard-recognized kitchen leadership.",
+        dish: "Fresh pasta, crudo, and seasonal Italian plates.",
+        wine: "Etna Bianco, Verdicchio, Chianti Classico, or Champagne if starting with crudo.",
+        q: "La Padrona Boston Amarilys Colon review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Verveine Cafe & Bakery", category: "Outstanding Pastry Chef or Baker semifinalist, Monica Glass",
+        reserve: "https://www.verveinecafe.com/",
+        why: "A pastry-led Cambridge stop that belongs on the daytime list.",
+        dish: "Croissants, seasonal pastries, and whatever sells out first.",
+        wine: "Coffee first. If pairing for dessert, try demi-sec Chenin, Moscato d’Asti, or dry sparkling wine.",
+        q: "Verveine Cafe Bakery Cambridge Monica Glass review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Talulla", category: "Outstanding Wine and Other Beverages Program semifinalist",
+        reserve: "https://www.talullacambridge.com/reservations",
+        why: "A Cambridge restaurant where the wine program is the reason to build dinner around it.",
+        dish: "Seasonal New American dishes and anything the sommelier says is pairing best.",
+        wine: "Ask for the high-acid, small-producer bottle they are most excited about. This is the Mack lane.",
+        q: "Talulla Cambridge wine program review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Ostra", category: "Outstanding Hospitality semifinalist",
+        reserve: "https://www.ostraboston.com/reservations/",
+        why: "Polished seafood, grown-up room, and hospitality recognition make it a dependable Boston reservation.",
+        dish: "Crudo, oysters, whole fish, and composed seafood plates.",
+        wine: "Chablis, Muscadet, Champagne, or coastal Italian whites.",
+        q: "Ostra Boston Outstanding Hospitality review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "State Road", category: "Outstanding Hospitality semifinalist",
+        reserve: "https://www.stateroadmv.com/reservations",
+        why: "A Martha’s Vineyard hospitality pick, best if Massachusetts travel includes the island.",
+        dish: "Seasonal New England produce, seafood, and farm-driven plates.",
+        wine: "Loire white, crisp rose, or Oregon Pinot Noir for a flexible table bottle.",
+        q: "State Road Martha's Vineyard review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "The Koji Club", category: "Outstanding Professional in Beverage Service semifinalist, Alyssa Mikiko DiPasquale",
+        reserve: "https://www.thekojiclub.com/",
+        why: "A sake-focused bar that gives the trip a beverage education stop without a formal dinner.",
+        dish: "Sake flights and Japanese snacks.",
+        wine: "Sake is the point. Ask for a bright, food-friendly flight rather than the most expensive pour.",
+        q: "The Koji Club Boston Alyssa Mikiko DiPasquale review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Gaaeng Supper Club", category: "Emerging Chef semifinalist, Pao Thampitak",
+        reserve: "https://www.gaaeng.com/",
+        why: "Thai supper-club energy and emerging-chef recognition, best if a pop-up/date aligns.",
+        dish: "Whatever the supper club is serving; expect Thai flavors and a set menu format.",
+        wine: "Off-dry Riesling, pet-nat, or bubbles with enough acid for chile and herbs.",
+        q: "Gaaeng Supper Club Boston Pao Thampitak review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Zurito", category: "Outstanding Professional in Beverage Service semifinalist, Nader Asgari-Tari",
+        reserve: "https://www.zuritoboston.com/",
+        why: "A beverage-service semifinalist useful for a wine-bar style reservation.",
+        dish: "Spanish-leaning small plates and snacks.",
+        wine: "Txakolina, Godello, Mencia, sherry, or Cava.",
+        q: "Zurito Boston Nader Asgari-Tari review"
+      },
+      {
+        city: "Massachusetts", status: "2026 semifinalist", name: "Cuvée at Chatham Inn", category: "Outstanding Pastry Chef or Baker semifinalist, Whitney Stancil",
+        reserve: "https://www.chathaminn.com/cuvee/",
+        why: "A Cape Cod fine-dining option if the Massachusetts itinerary bends coastal.",
+        dish: "Tasting menu with dessert as a highlighted course.",
+        wine: "Ask for a pairing with lean whites and a lighter dessert wine; avoid syrupy sweetness unless dessert demands it.",
+        q: "Cuvée at Chatham Inn Whitney Stancil review"
+      }
+    ];
+
+    const pressTemplates = [
+      ["JBF / award context", r => `https://www.google.com/search?q=${encodeURIComponent(r.q + " James Beard Foundation")}`],
+      ["Eater / dining press", r => `https://www.google.com/search?q=${encodeURIComponent(r.q + " site:eater.com OR site:eateratlanta.com OR site:boston.eater.com")}`],
+      ["Local review", r => `https://www.google.com/search?q=${encodeURIComponent(r.q + " review local magazine newspaper")}`],
+      ["Best dish / what to order", r => `https://www.google.com/search?q=${encodeURIComponent(r.name + " " + r.city + " what to order best dishes")}`]
+    ];
+
+    const cards = document.getElementById("cards");
+    restaurants.forEach(r => {
+      const article = document.createElement("article");
+      article.className = "card";
+      const tags = `<span class="tag gold">${r.city}</span><span class="tag">${r.status}</span><span class="tag green">${r.category}</span>`;
+      const press = pressTemplates.map(([label, fn]) => `<a href="${fn(r)}" target="_blank" rel="noopener">${label}</a>`).join("");
+      article.innerHTML = `
+        <h3>${r.name}</h3>
+        <div>${tags}</div>
+        <div class="field"><span class="label">Why go</span>${r.why}</div>
+        <div class="field"><span class="label">Dish / order</span>${r.dish}</div>
+        <div class="field"><span class="label">Wine order</span>${r.wine}</div>
+        <div class="links">
+          <a href="${r.reserve}" target="_blank" rel="noopener">Reserve / official site</a>
+          ${press}
+        </div>
+      `;
+      cards.appendChild(article);
+    });
+  </script>
+</body>
+</html>
