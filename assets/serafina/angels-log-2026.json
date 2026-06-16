@@ -966,7 +966,112 @@
       ],
       "tarotMessage": "Household message: Justice asks everyone at Las Jaras to notice the first true need before rushing. The Hanged One describes the weather inside and outside the walls. The Devil names what could complicate the day if ignored. The Tower shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will secure loose things and watch the thresholds. Justice tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-16": {
+      "date": "2026-06-16",
+      "weekday": "Tuesday",
+      "generatedAt": "2026-06-16T17:10:01.934Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Throat chakra (truth, expression, and clear communication): I tell the truth cleanly: what is dry, what is thriving, what needs help, and what is merely being dramatic.",
+      "morningIntentionChakra": {
+        "chakra": "Throat",
+        "focus": "truth, expression, and clear communication",
+        "intention": "I tell the truth cleanly: what is dry, what is thriving, what needs help, and what is merely being dramatic."
+      },
+      "practicalRite": "I notice the moon's work and then return to the actual chore.",
+      "weather": {
+        "sunrise": "06:32 AM",
+        "sunset": "08:35 PM",
+        "highF": "88",
+        "lowF": "74",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "high UV"
+        ],
+        "uvIndex": "12",
+        "maxGustMph": 14,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Crescent",
+        "moonIllumination": "1%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-06-16",
+            "name": "Islamic New Year / Muharram Begins",
+            "origin": "Beginning of the Hijri year and the sacred month of Muharram; dates may vary by moon sighting.",
+            "crystals": "No crystal rite required.",
+            "cleaning": "Keep a quiet clean place for prayer or reflection if needed.",
+            "food": "Tea, dates, fruit, or a simple meal.",
+            "gift": "Give charity, food, or respectful quiet.",
+            "modernCelebration": "At Las Jaras I would honor the day quietly with respect, charity, and no borrowed ritual. No practice required unless someone observing asks for support."
+          }
+        ],
+        "alerts": [],
+        "next": {
+          "date": "2026-06-16",
+          "name": "Islamic New Year / Muharram Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "black for quiet power",
+        "breakfast": "leftover rice with egg or vegetables, because the pantry also deserves respect",
+        "lunch": "a bowl with beans, rice, greens, and something sharp",
+        "dinner": "roasted vegetables with rice or potatoes and a good sauce",
+        "luckyObject": "a key you actually need",
+        "personToCall": "a sibling or cousin who knows an old version of you",
+        "strangerKindness": "carry small cash for a tip jar"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:32 AM; sunset 08:35 PM; 14h 03m daylight.",
+        "moon": "Waxing Crescent, 1% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Tranquility",
+        "franklinMeasure": "Do not be disturbed by trifles, weather moods, or preventable squirrel politics.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Tranquility: Do not be disturbed by trifles, weather moods, or preventable squirrel politics. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Hanged One",
+          "reading": "I pause before forcing the issue."
+        },
+        {
+          "position": "Weather",
+          "card": "Death",
+          "reading": "I clear what is finished so life has room."
+        },
+        {
+          "position": "Garden",
+          "card": "Temperance",
+          "reading": "I measure water, heat, effort, and drama."
+        },
+        {
+          "position": "Household",
+          "card": "The Devil",
+          "reading": "I do not let convenience become a leash."
+        },
+        {
+          "position": "Warning",
+          "card": "The Tower",
+          "reading": "I check what wind, heat, or pride could knock over."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Star",
+          "reading": "I treat hope as a maintenance practice."
+        }
+      ],
+      "tarotMessage": "Household message: The Hanged One asks everyone at Las Jaras to notice the first true need before rushing. Death describes the weather inside and outside the walls. The Tower names what could complicate the day if ignored. The Star shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Hanged One tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-15T13:18:01.153Z"
+  "updatedAt": "2026-06-16T17:10:01.934Z"
 }
