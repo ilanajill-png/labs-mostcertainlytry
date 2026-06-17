@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las Jaras Freezer Monitor IoT White Paper | Most Certainly Try Labs</title>
+  <meta name="description" content="An IoT white paper and 80-step checklist for setting up a GoveeLife Smart Thermometer R1 with Wi-Fi Gateway as a freezer safety monitor at Las Jaras.">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root {
+      --cobalt: #0047ab;
+      --ink: #172033;
+      --muted: #5b6575;
+      --paper: #f7f5ef;
+      --panel: #ffffff;
+      --line: #d8ddea;
+      --blue-soft: #edf4ff;
+      --mint: #dff5ea;
+      --amber: #fff3d6;
+      --red: #ffe6e2;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-underline-offset: 4px; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px clamp(16px, 4vw, 52px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 245, 239, .94);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand, nav { display: flex; align-items: center; gap: 10px; }
+    .brand { font-weight: 900; text-decoration: none; }
+    .brand img { width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 8px; }
+    nav { flex-wrap: wrap; justify-content: flex-end; }
+
+    nav a, .button {
+      min-height: 40px;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+
+    .shell { width: min(1180px, calc(100% - 34px)); margin: 0 auto; }
+    .hero { padding: 56px 0 34px; border-bottom: 1px solid var(--line); }
+    .eyebrow, footer { color: var(--muted); font-size: .82rem; font-weight: 900; letter-spacing: 0; text-transform: uppercase; }
+    h1, h2, h3, p, td, th { overflow-wrap: anywhere; }
+    h1 { max-width: 980px; margin: 0; color: #002f73; font-size: clamp(2.5rem, 6.2vw, 5.7rem); line-height: .95; letter-spacing: 0; }
+    h2 { margin: 0 0 12px; color: #002f73; font-size: clamp(1.55rem, 3vw, 2.55rem); line-height: 1.05; }
+    h3 { margin: 0 0 8px; }
+    p { margin-top: 0; }
+    .lede { max-width: 830px; margin: 18px 0 0; color: var(--muted); font-size: clamp(1.03rem, 1.6vw, 1.22rem); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 24px; }
+    .stat, .panel, .table-card, .rule-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 18px 44px rgba(23, 32, 51, .08);
+    }
+    .stat { padding: 16px; }
+    .stat b { display: block; color: var(--cobalt); font-size: clamp(1.35rem, 3vw, 2.25rem); line-height: 1; }
+    .stat span { display: block; margin-top: 7px; color: var(--muted); font-size: .86rem; }
+
+    .section { padding: 34px 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+    .panel { padding: 20px; }
+    .panel p:last-child { margin-bottom: 0; }
+    .panel ul, .panel ol { margin: 0; padding-left: 22px; }
+    .panel li + li { margin-top: 8px; }
+
+    .rule-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .rule-card { padding: 16px; }
+    .rule-card.green { background: var(--mint); }
+    .rule-card.yellow { background: var(--amber); }
+    .rule-card.orange { background: #ffe7ca; }
+    .rule-card.red { background: var(--red); }
+
+    .table-card { overflow: hidden; }
+    .table-intro { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 18px; border-bottom: 1px solid var(--line); }
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; min-width: 1080px; border-collapse: collapse; font-size: .86rem; }
+    th, td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { position: sticky; top: 69px; z-index: 5; background: #002f73; color: #fff; font-size: .74rem; text-transform: uppercase; }
+    tr:nth-child(even) td { background: #fbfcff; }
+    .num { color: var(--cobalt); font-weight: 900; text-align: right; }
+    .tag { display: inline-block; padding: 3px 7px; border-radius: 999px; background: var(--blue-soft); color: #002f73; font-weight: 900; font-size: .76rem; }
+    code { padding: 1px 5px; border-radius: 5px; background: var(--blue-soft); color: #002f73; font-weight: 800; }
+    footer { padding: 34px 0 54px; border-top: 1px solid var(--line); }
+
+    @media (max-width: 860px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .stats, .grid, .rule-grid, .table-intro { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(2.25rem, 13vw, 4.4rem); }
+      th { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><img src="../assets/howdy-partner-logo.png" alt="" aria-hidden="true"> Most Certainly Try Labs</a>
+    <nav aria-label="Project navigation">
+      <a href="../index.html">All projects</a>
+      <a href="#checklist">80-step checklist</a>
+      <a href="../docs/las-jaras-goveelife-freezer-monitor-checklist.md">Source notes</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">IoT White Paper · Las Jaras Freezer Safety · 2026-06-17</p>
+      <h1>Turning a freezer scare into a household nervous-system sensor.</h1>
+      <p class="lede">The GoveeLife Smart Thermometer R1 with Wi-Fi Gateway is being set up as a freezer monitor for Las Jaras. The point is practical: catch a warming freezer early enough to protect food, money, and household calm.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#checklist">Read the checklist</a>
+        <a class="button" href="#human-help">What needs human help</a>
+      </div>
+      <div class="stats" aria-label="Project facts">
+        <div class="stat"><b>R1</b><span>GoveeLife Smart Thermometer confirmed from box photo</span></div>
+        <div class="stat"><b>H5108</b><span>Manual/product family for the thermometer</span></div>
+        <div class="stat"><b>0°F</b><span>Food-safety freezer target</span></div>
+        <div class="stat"><b>80</b><span>Setup and test steps</span></div>
+      </div>
+    </section>
+
+    <section class="section grid" id="premise">
+      <article class="panel">
+        <p class="eyebrow">Premise</p>
+        <h2>The alert matters more than the chart.</h2>
+        <p>A freezer sensor is useful only if it changes behavior before a loss happens. The Las Jaras setup treats the R1 as a small household safety service: a probe in the freezer, a gateway for remote monitoring, a notification plan, and a shared response script for what to do when the temperature rises.</p>
+        <p>GoveeLife's product page lists the R1 as Model <code>H5108&amp;B5108</code>, with app alerts, remote monitoring through Govee Home, a probe range from -40°F to 158°F, anti-false-alarm delay, and two-year data storage. The FCC manual record identifies H5108 as Smart Thermometer R1.</p>
+      </article>
+      <aside class="panel" id="human-help">
+        <p class="eyebrow">Human Help Needed</p>
+        <ul>
+          <li>Open the box, pull the battery tab, plug in the probe, and place the sensor.</li>
+          <li>Use the Govee Home phone app for pairing, Bluetooth permission, push notifications, and Wi-Fi credentials.</li>
+          <li>Enter Wi-Fi only inside the app. Do not send passwords, QR codes, serial numbers, or account screens.</li>
+          <li>Send screenshots of settings, readings, and alert history so HOWDY can verify thresholds and interpret the trend.</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section grid">
+      <article class="panel">
+        <p class="eyebrow">What HOWDY Can Do</p>
+        <ul>
+          <li>Identify the device, build the setup plan, and keep the public documentation privacy-safe.</li>
+          <li>Translate screenshots into a pass/fail setup status.</li>
+          <li>Interpret the freezer trend against food-safety targets.</li>
+          <li>Update the Samsung freezer case with readings and next actions if requested.</li>
+          <li>Draft response prompts for future freezer alerts.</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">What The Human Owns</p>
+        <ul>
+          <li>Physical placement: probe location, gasket check, cable routing, and battery access.</li>
+          <li>App control: account login, device pairing, Wi-Fi, phone permissions, and notification settings.</li>
+          <li>Food judgment: frozen solid, softening, leaking, thawed, or visibly unsafe.</li>
+          <li>Final decisions: whether to share alerts with another phone, add Home Assistant later, or buy more sensors.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="section" id="rules">
+      <p class="eyebrow">Operating Rules</p>
+      <h2>Green, yellow, orange, red.</h2>
+      <div class="rule-grid">
+        <article class="rule-card green">
+          <h3>Green</h3>
+          <p>Freezer is at or below 0°F and food is frozen solid.</p>
+        </article>
+        <article class="rule-card yellow">
+          <h3>Yellow</h3>
+          <p>Freezer is 1°F to 9°F or showing short spikes that recover quickly.</p>
+        </article>
+        <article class="rule-card orange">
+          <h3>Orange</h3>
+          <p>Freezer reaches 10°F or higher, repeats spikes, or recovers slowly.</p>
+        </article>
+        <article class="rule-card red">
+          <h3>Red</h3>
+          <p>Food is softening, thawed, leaking, or freezer approaches or holds above 32°F.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="checklist">
+      <div class="table-card">
+        <div class="table-intro">
+          <div>
+            <p class="eyebrow">Checklist</p>
+            <h2>80-step setup and test plan</h2>
+            <p>Designed to separate assistant work from physical/app work so the setup can move quickly without pretending browser automation can press buttons on a freezer thermometer.</p>
+          </div>
+          <a class="button primary" href="../docs/las-jaras-goveelife-freezer-monitor-checklist.md">Open source checklist</a>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Owner</th>
+                <th>Status</th>
+                <th>Step</th>
+                <th>Pass Criteria</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="num">1</td><td><span class="tag">HOWDY</span></td><td>Done</td><td>Identify device from photo.</td><td>Photo shows GoveeLife Smart Thermometer R1 with Wi-Fi Gateway.</td></tr>
+              <tr><td class="num">2</td><td><span class="tag">HOWDY</span></td><td>Done</td><td>Match product family to public docs.</td><td>GoveeLife page lists Model H5108&amp;B5108.</td></tr>
+              <tr><td class="num">3</td><td><span class="tag">HOWDY</span></td><td>Done</td><td>Confirm food-safety target.</td><td>Freezer target is 0°F or below.</td></tr>
+              <tr><td class="num">4</td><td><span class="tag">HOWDY</span></td><td>Done</td><td>Create public-safe setup checklist.</td><td>Source checklist exists.</td></tr>
+              <tr><td class="num">5</td><td><span class="tag">HOWDY</span></td><td>Done</td><td>Create Labs white paper.</td><td>This public page exists.</td></tr>
+              <tr><td class="num">6</td><td>Buddy</td><td>Needed</td><td>Open the box and lay out all parts.</td><td>Gateway, sensor/display, probe, clips/lanyard, batteries or pull tab, paperwork are visible.</td></tr>
+              <tr><td class="num">7</td><td>Buddy</td><td>Needed</td><td>Photograph included parts if anything looks different from the box.</td><td>HOWDY can compare against expected kit.</td></tr>
+              <tr><td class="num">8</td><td>Buddy</td><td>Needed</td><td>Check for a printed QR code or serial number and keep it private.</td><td>No serial/QR gets posted publicly.</td></tr>
+              <tr><td class="num">9</td><td>Buddy</td><td>Needed</td><td>Install or open the Govee Home app.</td><td>App opens on phone.</td></tr>
+              <tr><td class="num">10</td><td>Buddy</td><td>Needed</td><td>Log in or create/confirm the Govee account if required.</td><td>App can add devices.</td></tr>
+              <tr><td class="num">11</td><td>Buddy</td><td>Needed</td><td>Confirm Bluetooth is enabled on the phone.</td><td>App can scan nearby devices.</td></tr>
+              <tr><td class="num">12</td><td>Buddy</td><td>Needed</td><td>Confirm phone is on the intended 2.4 GHz Wi-Fi network if pairing asks for Wi-Fi.</td><td>Gateway pairing is not blocked by 5 GHz-only network.</td></tr>
+              <tr><td class="num">13</td><td>Buddy</td><td>Needed</td><td>Plug in the Wi-Fi gateway near the freezer for first pairing.</td><td>Gateway powers on close to the freezer.</td></tr>
+              <tr><td class="num">14</td><td>Buddy</td><td>Needed</td><td>Pull the thermometer battery insulation tab or install batteries.</td><td>Screen wakes up.</td></tr>
+              <tr><td class="num">15</td><td>Buddy</td><td>Needed</td><td>Plug the temperature probe into the thermometer if separate.</td><td>Screen shows a live temperature.</td></tr>
+              <tr><td class="num">16</td><td>Buddy</td><td>Needed</td><td>Keep probe and sensor at room temperature for the first app pairing.</td><td>Device is easy to handle while pairing.</td></tr>
+              <tr><td class="num">17</td><td>Buddy</td><td>Needed</td><td>Tap Add Device in Govee Home.</td><td>App starts device discovery.</td></tr>
+              <tr><td class="num">18</td><td>Buddy</td><td>Needed</td><td>Select the R1/H5108 thermometer if shown.</td><td>Correct device is selected.</td></tr>
+              <tr><td class="num">19</td><td>Buddy</td><td>Needed</td><td>Pair the sensor over Bluetooth.</td><td>App shows the thermometer in the device list.</td></tr>
+              <tr><td class="num">20</td><td>Buddy</td><td>Needed</td><td>Pair/bind the thermometer to the Wi-Fi gateway.</td><td>App shows remote monitoring available.</td></tr>
+              <tr><td class="num">21</td><td>Buddy</td><td>Needed</td><td>Enter Wi-Fi credentials only in the app.</td><td>Gateway connects successfully.</td></tr>
+              <tr><td class="num">22</td><td><span class="tag">HOWDY</span></td><td>Can guide</td><td>Troubleshoot pairing screenshots if pairing fails.</td><td>We can identify whether it is Bluetooth, Wi-Fi, location permission, or gateway binding.</td></tr>
+              <tr><td class="num">23</td><td>Buddy</td><td>Needed</td><td>Rename device <code>Las Jaras Freezer</code>.</td><td>App list is readable later.</td></tr>
+              <tr><td class="num">24</td><td>Buddy</td><td>Needed</td><td>Set temperature unit to Fahrenheit.</td><td>App and display show °F.</td></tr>
+              <tr><td class="num">25</td><td>Buddy</td><td>Needed</td><td>Take a screenshot of device home/status page.</td><td>HOWDY can verify connected state without seeing private credentials.</td></tr>
+              <tr><td class="num">26</td><td>Shared</td><td>Planned</td><td>Confirm gateway update interval expectation.</td><td>App history populates; public product FAQ says gateway-bound data updates every 10 minutes.</td></tr>
+              <tr><td class="num">27</td><td>Buddy</td><td>Needed</td><td>Place sensor/display outside the freezer or on the freezer exterior if probe cable allows.</td><td>Electronics are not unnecessarily kept in deep cold unless product placement requires it.</td></tr>
+              <tr><td class="num">28</td><td>Buddy</td><td>Needed</td><td>Place probe inside freezer center zone.</td><td>Probe is not against a wall, vent, door, gasket, or ice buildup.</td></tr>
+              <tr><td class="num">29</td><td>Buddy</td><td>Needed</td><td>Secure probe cable so door gasket still closes fully.</td><td>No visible gap, pinching, or frost leak.</td></tr>
+              <tr><td class="num">30</td><td>Buddy</td><td>Needed</td><td>Close freezer door and leave unopened for 30 minutes.</td><td>Reading starts dropping toward freezer range.</td></tr>
+              <tr><td class="num">31</td><td>Shared</td><td>Planned</td><td>Record reading at 30 minutes.</td><td>Log time and temperature.</td></tr>
+              <tr><td class="num">32</td><td>Buddy</td><td>Needed</td><td>Leave freezer unopened until 60 minutes.</td><td>Reading stabilizes further.</td></tr>
+              <tr><td class="num">33</td><td>Shared</td><td>Planned</td><td>Record reading at 60 minutes.</td><td>Log time and temperature.</td></tr>
+              <tr><td class="num">34</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Interpret early readings against target.</td><td>0°F or below is healthy; above 0°F needs context and trend.</td></tr>
+              <tr><td class="num">35</td><td>Buddy</td><td>Needed</td><td>Check whether food is frozen solid.</td><td>Food condition informs safety, not just thermometer data.</td></tr>
+              <tr><td class="num">36</td><td>Buddy</td><td>Needed</td><td>Photograph softening, frost melt, leakage, or freezer display/settings if relevant.</td><td>Evidence is available for issue triage.</td></tr>
+              <tr><td class="num">37</td><td>Shared</td><td>Planned</td><td>Decide first alert thresholds.</td><td>Warning and urgent thresholds are set intentionally.</td></tr>
+              <tr><td class="num">38</td><td>Buddy</td><td>Needed</td><td>Set low-temperature floor only if the app requires it.</td><td>Avoid noisy alerts for harmless colder temps.</td></tr>
+              <tr><td class="num">39</td><td>Buddy</td><td>Needed</td><td>Set warning/high-temp alert around 5°F.</td><td>Mild drift gets noticed.</td></tr>
+              <tr><td class="num">40</td><td>Buddy</td><td>Needed</td><td>Set urgent/high-temp alert around 10°F.</td><td>Serious warming gets attention before disaster.</td></tr>
+              <tr><td class="num">41</td><td>Buddy</td><td>Needed</td><td>Enable app push notifications for Govee Home.</td><td>Phone can receive alerts.</td></tr>
+              <tr><td class="num">42</td><td>Buddy</td><td>Needed</td><td>Disable Focus/notification settings that would hide critical alerts if desired.</td><td>Alerts can actually interrupt when needed.</td></tr>
+              <tr><td class="num">43</td><td>Buddy</td><td>Needed</td><td>Set anti-false-alarm delay to 10 minutes if available.</td><td>Door openings do not create constant noise.</td></tr>
+              <tr><td class="num">44</td><td><span class="tag">HOWDY</span></td><td>Can guide</td><td>Review screenshots of alert settings.</td><td>Thresholds and delay look correct.</td></tr>
+              <tr><td class="num">45</td><td>Buddy</td><td>Needed</td><td>Do a controlled door-open test for 60 seconds.</td><td>Temperature rises enough to show responsiveness.</td></tr>
+              <tr><td class="num">46</td><td>Buddy</td><td>Needed</td><td>Close freezer and wait for recovery.</td><td>Temperature begins moving back down.</td></tr>
+              <tr><td class="num">47</td><td>Shared</td><td>Planned</td><td>Log open-test start, peak, and recovery time.</td><td>Baseline recovery profile exists.</td></tr>
+              <tr><td class="num">48</td><td>Buddy</td><td>Needed</td><td>Temporarily warm probe by holding it outside freezer if needed to trigger alert safely.</td><td>Alert fires without risking food.</td></tr>
+              <tr><td class="num">49</td><td>Buddy</td><td>Needed</td><td>Confirm push alert appears on phone.</td><td>Human sees the alert.</td></tr>
+              <tr><td class="num">50</td><td>Buddy</td><td>Needed</td><td>Confirm app history logs the excursion.</td><td>Data is retained in graph/history.</td></tr>
+              <tr><td class="num">51</td><td>Shared</td><td>Planned</td><td>Screenshot alert notification/history.</td><td>Evidence confirms monitor is working.</td></tr>
+              <tr><td class="num">52</td><td>Buddy</td><td>Needed</td><td>Return probe to normal freezer placement.</td><td>Monitoring resumes.</td></tr>
+              <tr><td class="num">53</td><td>Buddy</td><td>Needed</td><td>Leave freezer closed for 2 hours.</td><td>Trend stabilizes.</td></tr>
+              <tr><td class="num">54</td><td>Shared</td><td>Planned</td><td>Record 2-hour min/max/current temp.</td><td>Short baseline exists.</td></tr>
+              <tr><td class="num">55</td><td>Buddy</td><td>Needed</td><td>Run overnight monitoring.</td><td>Natural defrost cycles and room conditions are captured.</td></tr>
+              <tr><td class="num">56</td><td>Shared</td><td>Planned</td><td>Review overnight high temp.</td><td>Any spike above 10°F is investigated.</td></tr>
+              <tr><td class="num">57</td><td>Shared</td><td>Planned</td><td>Review overnight low temp.</td><td>System is actually freezing, not just briefly cooling.</td></tr>
+              <tr><td class="num">58</td><td>Shared</td><td>Planned</td><td>Review notification history.</td><td>No missed critical alerts.</td></tr>
+              <tr><td class="num">59</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Create a freezer incident rubric.</td><td>Green/yellow/red interpretation rules are written.</td></tr>
+              <tr><td class="num">60</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Update the Samsung freezer case with test results if requested.</td><td>Case has readings, timing, and next action.</td></tr>
+              <tr><td class="num">61</td><td>Buddy</td><td>Needed</td><td>Decide whether alert should also go to another household phone.</td><td>Additional human recipient is a privacy/account choice.</td></tr>
+              <tr><td class="num">62</td><td>Buddy</td><td>Needed</td><td>Decide whether Govee account sharing is acceptable.</td><td>No account sharing happens by accident.</td></tr>
+              <tr><td class="num">63</td><td><span class="tag">HOWDY</span></td><td>Can research</td><td>Check whether Home Assistant integration is worth attempting later.</td><td>Recommendation separates app-first from HA-first.</td></tr>
+              <tr><td class="num">64</td><td>Buddy</td><td>Needed</td><td>If HA is desired, provide screenshots of device model/entities after app setup.</td><td>Integration research has real device context.</td></tr>
+              <tr><td class="num">65</td><td>Shared</td><td>Optional</td><td>Test freezer-door-open behavior during real use.</td><td>Normal household use does not create false panic.</td></tr>
+              <tr><td class="num">66</td><td>Shared</td><td>Optional</td><td>Test power outage behavior when safe.</td><td>We know whether gateway reconnects and history resumes.</td></tr>
+              <tr><td class="num">67</td><td>Buddy</td><td>Needed</td><td>Avoid posting QR codes, serial numbers, MAC addresses, Wi-Fi names, or account screens.</td><td>Public Labs artifact remains privacy-safe.</td></tr>
+              <tr><td class="num">68</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Keep public paper generic and non-sensitive.</td><td>Labs page describes workflow, not private credentials.</td></tr>
+              <tr><td class="num">69</td><td>Buddy</td><td>Needed</td><td>Confirm final physical mounting location.</td><td>Probe/sensor placement is stable and gasket-safe.</td></tr>
+              <tr><td class="num">70</td><td>Buddy</td><td>Needed</td><td>Check battery status after first cold cycle.</td><td>No immediate low-battery surprise.</td></tr>
+              <tr><td class="num">71</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Add battery-replacement reminder if buddy wants.</td><td>Future maintenance is scheduled.</td></tr>
+              <tr><td class="num">72</td><td>Shared</td><td>Planned</td><td>Define response when alert fires at 5°F.</td><td>Check door, gasket, power, contents, and trend.</td></tr>
+              <tr><td class="num">73</td><td>Shared</td><td>Planned</td><td>Define response when alert fires at 10°F.</td><td>Inspect immediately and start food-safety decision tree.</td></tr>
+              <tr><td class="num">74</td><td>Shared</td><td>Planned</td><td>Define response when alert fires at 32°F or food is thawing.</td><td>Treat as urgent and evaluate food condition.</td></tr>
+              <tr><td class="num">75</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Draft a “what to send HOWDY after an alert” prompt.</td><td>Buddy can paste readings/history/photos quickly.</td></tr>
+              <tr><td class="num">76</td><td>Buddy</td><td>Needed</td><td>Save Govee Home app in an easy phone location.</td><td>Alert response does not start with app hunting.</td></tr>
+              <tr><td class="num">77</td><td>Shared</td><td>Planned</td><td>Recheck after 7 days.</td><td>Week-one behavior is understood.</td></tr>
+              <tr><td class="num">78</td><td>Shared</td><td>Planned</td><td>Decide whether to buy/add a second sensor for the other freezer.</td><td>Decision is based on data.</td></tr>
+              <tr><td class="num">79</td><td><span class="tag">HOWDY</span></td><td>Can do</td><td>Convert results into a Labs follow-up once tested.</td><td>Public update stays useful and privacy-safe.</td></tr>
+              <tr><td class="num">80</td><td>Shared</td><td>Planned</td><td>Mark freezer monitor setup complete.</td><td>Device alerts, logs, and overnight baseline all passed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section grid" id="sources">
+      <article class="panel">
+        <p class="eyebrow">Source Trail</p>
+        <ul>
+          <li><a href="https://us.goveelife.com/products/goveelife-smart-thermometer-r1">GoveeLife Smart Thermometer R1 product page</a></li>
+          <li><a href="https://fccid.io/2AQA6-H5108/User-Manual/15-H5108-UserMan-US-6836898">FCC H5108 Smart Thermometer R1 manual record</a></li>
+          <li><a href="https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts">FoodSafety.gov cold food storage chart</a></li>
+          <li><a href="https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety">FDA refrigerator thermometer guidance</a></li>
+        </ul>
+      </article>
+      <article class="panel">
+        <p class="eyebrow">Privacy Note</p>
+        <p>This page deliberately does not include the Las Jaras Wi-Fi name, Govee account details, serial numbers, QR codes, MAC addresses, or private screenshots. The public paper documents the workflow; the private setup happens on the phone and in household notes.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="shell">
+    Most Certainly Try Labs · Las Jaras freezer monitor IoT paper · Built with HOWDY PARTNER
+  </footer>
+</body>
+</html>
