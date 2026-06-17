@@ -8,11 +8,13 @@ Likely device family: H5108 sensor + B5108 gateway, based on GoveeLife product l
 
 Set up one freezer monitor as a practical safety system for the Samsung freezer concern at Las Jaras. The goal is not just a pretty temperature chart. The goal is early warning when freezer temperature rises enough that food, money, and peace of mind are at risk.
 
+Hard requirement: the monitor must become machine-readable by HOWDY through Home Assistant, MQTT, a local API, a cloud API, email/webhook forwarding, or another reliable automation path. A product that only works when Buddy sends screenshots is not acceptable for the Las Jaras house-alert stack. Screenshots are only a temporary setup/debug fallback.
+
 ## Ownership Legend
 
-- HOWDY: work I can do from the workspace, browser, public docs, screenshots, and follow-up prompts.
+- HOWDY: work I can do from the workspace, browser, public docs, Home Assistant, APIs, logs, and follow-up prompts.
 - Buddy: work that needs physical access, phone app access, account permissions, Wi-Fi credentials, or judgment about food condition.
-- Shared: work we do by passing screenshots, readings, and decisions back and forth.
+- Shared: work we do by passing readings, decisions, and limited setup evidence back and forth.
 
 ## 80-Step Setup And Test Checklist
 
@@ -39,10 +41,10 @@ Set up one freezer monitor as a practical safety system for the Samsung freezer 
 | 19 | Buddy | Needed | Pair the sensor over Bluetooth. | App shows the thermometer in the device list. |
 | 20 | Buddy | Needed | Pair/bind the thermometer to the Wi-Fi gateway. | App shows remote monitoring available. |
 | 21 | Buddy | Needed | Enter Wi-Fi credentials only in the app. | Gateway connects successfully. |
-| 22 | HOWDY | Can guide | Troubleshoot pairing screenshots if pairing fails. | We can identify whether it is Bluetooth, Wi-Fi, location permission, or gateway binding. |
+| 22 | HOWDY | Can guide | Troubleshoot pairing if pairing fails. | We can identify whether it is Bluetooth, Wi-Fi, location permission, or gateway binding from app-visible errors or device behavior. |
 | 23 | Buddy | Needed | Rename device `Las Jaras Freezer`. | App list is readable later. |
 | 24 | Buddy | Needed | Set temperature unit to Fahrenheit. | App and display show °F. |
-| 25 | Buddy | Needed | Take a screenshot of device home/status page. | HOWDY can verify connected state without seeing private credentials. |
+| 25 | Buddy | Needed | Confirm the device home/status page shows connected. | App confirms the gateway and thermometer are online without sharing private credentials. |
 | 26 | Shared | Planned | Confirm gateway update interval expectation. | App history populates; public product FAQ says gateway-bound data updates every 10 minutes. |
 | 27 | Buddy | Needed | Place sensor/display outside the freezer or on the freezer exterior if probe cable allows. | Electronics are not unnecessarily kept in deep cold unless product placement requires it. |
 | 28 | Buddy | Needed | Place probe inside freezer center zone. | Probe is not against a wall, vent, door, gasket, or ice buildup. |
@@ -61,14 +63,14 @@ Set up one freezer monitor as a practical safety system for the Samsung freezer 
 | 41 | Buddy | Needed | Enable app push notifications for Govee Home. | Phone can receive alerts. |
 | 42 | Buddy | Needed | Disable Focus/notification settings that would hide critical alerts if desired. | Alerts can actually interrupt when needed. |
 | 43 | Buddy | Needed | Set anti-false-alarm delay to 10 minutes if available. | Door openings do not create constant noise. |
-| 44 | HOWDY | Can guide | Review screenshots of alert settings. | Thresholds and delay look correct. |
+| 44 | HOWDY | Can guide | Review alert settings if Buddy reads them out or shares a limited setup screenshot. | Thresholds and delay look correct; screenshot review is a fallback, not the operating model. |
 | 45 | Buddy | Needed | Do a controlled door-open test for 60 seconds. | Temperature rises enough to show responsiveness. |
 | 46 | Buddy | Needed | Close freezer and wait for recovery. | Temperature begins moving back down. |
 | 47 | Shared | Planned | Log open-test start, peak, and recovery time. | Baseline recovery profile exists. |
 | 48 | Buddy | Needed | Temporarily warm probe by holding it outside freezer if needed to trigger alert safely. | Alert fires without risking food. |
 | 49 | Buddy | Needed | Confirm push alert appears on phone. | Human sees the alert. |
 | 50 | Buddy | Needed | Confirm app history logs the excursion. | Data is retained in graph/history. |
-| 51 | Shared | Planned | Screenshot alert notification/history. | Evidence confirms monitor is working. |
+| 51 | Shared | Planned | Confirm alert notification/history exists. | Evidence confirms monitor is working; local automation still remains the real pass gate. |
 | 52 | Buddy | Needed | Return probe to normal freezer placement. | Monitoring resumes. |
 | 53 | Buddy | Needed | Leave freezer closed for 2 hours. | Trend stabilizes. |
 | 54 | Shared | Planned | Record 2-hour min/max/current temp. | Short baseline exists. |
@@ -80,8 +82,8 @@ Set up one freezer monitor as a practical safety system for the Samsung freezer 
 | 60 | HOWDY | Can do | Update the Samsung freezer case with test results if requested. | Case has readings, timing, and next action. |
 | 61 | Buddy | Needed | Decide whether alert should also go to another household phone. | Additional human recipient is a privacy/account choice. |
 | 62 | Buddy | Needed | Decide whether Govee account sharing is acceptable. | No account sharing happens by accident. |
-| 63 | HOWDY | Can research | Check whether Home Assistant integration is worth attempting later. | Recommendation separates app-first from HA-first. |
-| 64 | Buddy | Needed | If HA is desired, provide screenshots of device model/entities after app setup. | Integration research has real device context. |
+| 63 | HOWDY | Can research | Attempt Home Assistant or API integration before declaring the device approved. | The device produces readable current temperature, battery/status, and update timestamps for HOWDY. |
+| 64 | Shared | Needed | If Home Assistant cannot see the device, decide whether to return/replace it. | Screenshot-only monitoring fails the Las Jaras alert-system requirement. |
 | 65 | Shared | Optional | Test freezer-door-open behavior during real use. | Normal household use does not create false panic. |
 | 66 | Shared | Optional | Test power outage behavior when safe. | We know whether gateway reconnects and history resumes. |
 | 67 | Buddy | Needed | Avoid posting QR codes, serial numbers, MAC addresses, Wi-Fi names, or account screens. | Public Labs artifact remains privacy-safe. |
@@ -92,12 +94,24 @@ Set up one freezer monitor as a practical safety system for the Samsung freezer 
 | 72 | Shared | Planned | Define response when alert fires at 5°F. | Check door, gasket, power, contents, and trend. |
 | 73 | Shared | Planned | Define response when alert fires at 10°F. | Inspect immediately and start food-safety decision tree. |
 | 74 | Shared | Planned | Define response when alert fires at 32°F or food is thawing. | Treat as urgent and evaluate food condition. |
-| 75 | HOWDY | Can do | Draft a “what to send HOWDY after an alert” prompt. | Buddy can paste readings/history/photos quickly. |
+| 75 | HOWDY | Can do | Draft a fallback “what to send HOWDY after an alert” prompt. | Buddy can paste readings/history/photos if automation is degraded. |
 | 76 | Buddy | Needed | Save Govee Home app in an easy phone location. | Alert response does not start with app hunting. |
 | 77 | Shared | Planned | Recheck after 7 days. | Week-one behavior is understood. |
 | 78 | Shared | Planned | Decide whether to buy/add a second sensor for the other freezer. | Decision is based on data. |
 | 79 | HOWDY | Can do | Convert results into a Labs follow-up once tested. | Public update stays useful and privacy-safe. |
-| 80 | Shared | Planned | Mark freezer monitor setup complete. | Device alerts, logs, and overnight baseline all passed. |
+| 80 | Shared | Planned | Mark freezer monitor setup complete. | Device alerts, Home Assistant/API visibility, logs, and overnight baseline all passed. |
+
+## Approval Gate
+
+This device is not approved for the Las Jaras house-alert stack until HOWDY can read it without Buddy manually sending screenshots. The minimum acceptable entities/events are:
+
+- Current freezer temperature
+- Last update timestamp or freshness signal
+- Battery status if exposed
+- Gateway/device online or unavailable state
+- Alertable threshold crossings in Home Assistant or an equivalent alert bus
+
+If the Govee R1 cannot expose those signals reliably, the correct outcome is not "Buddy sends screenshots forever." The correct outcome is return, replace, or bridge it through a better integration path.
 
 ## First Alert Rules
 
@@ -123,7 +137,7 @@ GoveeLife R1 freezer test:
 - Alert thresholds:
 - Alert delay:
 - Food condition:
-- Any screenshots/photos attached:
+- Any fallback screenshots/photos attached:
 Please interpret the trend and tell me whether the Samsung freezer case is green, yellow, orange, or red.
 ```
 
@@ -131,5 +145,7 @@ Please interpret the trend and tell me whether the Samsung freezer case is green
 
 - GoveeLife Smart Thermometer R1 product page: https://us.goveelife.com/products/goveelife-smart-thermometer-r1
 - FCC H5108 Smart Thermometer R1 manual record: https://fccid.io/2AQA6-H5108/User-Manual/15-H5108-UserMan-US-6836898
+- Home Assistant Govee BLE integration: https://www.home-assistant.io/integrations/govee_ble/
+- Govee Developer Platform: https://developer.govee.com/
 - FoodSafety.gov cold food storage chart: https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts
 - FDA refrigerator thermometer guidance: https://www.fda.gov/food/buy-store-serve-safe-food/refrigerator-thermometers-cold-facts-about-food-safety
