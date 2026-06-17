@@ -83,7 +83,7 @@ Hard requirement: the monitor must become machine-readable by HOWDY through Home
 | 61 | Buddy | Needed | Decide whether alert should also go to another household phone. | Additional human recipient is a privacy/account choice. |
 | 62 | Buddy | Needed | Decide whether Govee account sharing is acceptable. | No account sharing happens by accident. |
 | 63 | HOWDY | Can research | Attempt Home Assistant or API integration before declaring the device approved. | The device produces readable current temperature, battery/status, and update timestamps for HOWDY. |
-| 64 | Shared | Needed | If Home Assistant cannot see the device, decide whether to return/replace it. | Screenshot-only monitoring fails the Las Jaras alert-system requirement. |
+| 64 | Shared | Needed | If Home Assistant cannot see the device, return/replace it and buy a different product. | Screenshot-only monitoring fails the Las Jaras alert-system requirement. |
 | 65 | Shared | Optional | Test freezer-door-open behavior during real use. | Normal household use does not create false panic. |
 | 66 | Shared | Optional | Test power outage behavior when safe. | We know whether gateway reconnects and history resumes. |
 | 67 | Buddy | Needed | Avoid posting QR codes, serial numbers, MAC addresses, Wi-Fi names, or account screens. | Public Labs artifact remains privacy-safe. |
@@ -111,7 +111,7 @@ This device is not approved for the Las Jaras house-alert stack until HOWDY can 
 - Gateway/device online or unavailable state
 - Alertable threshold crossings in Home Assistant or an equivalent alert bus
 
-If the Govee R1 cannot expose those signals reliably, the correct outcome is not "Buddy sends screenshots forever." The correct outcome is return, replace, or bridge it through a better integration path.
+If the Govee R1 cannot expose those signals reliably, the correct outcome is not "Buddy sends screenshots forever." The correct outcome is return it, replace it, or buy a different freezer monitor that is known to feed Home Alerts.
 
 ## First Alert Rules
 
