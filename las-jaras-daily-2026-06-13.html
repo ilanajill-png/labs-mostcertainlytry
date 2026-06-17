@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Las Jaras Daily | Saturday, June 13, 2026</title>
+    <meta name="description" content="The Las Jaras Daily edition for Saturday, June 13, 2026, covering Home Assistant remote readiness, IoT staging, Pinterest research, Spurs map work, and open house cases.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      :root {
+        --terra: #a84f35;
+        --terra-dark: #713524;
+        --sand: #f4eadb;
+        --cream: #fffaf1;
+        --cobalt: #1f4f9a;
+        --mesquite: #3e3329;
+        --olive: #68775a;
+        --line: rgba(62, 51, 41, 0.16);
+      }
+
+      * { box-sizing: border-box; }
+
+      body.daily-edition {
+        background: var(--sand);
+        color: var(--mesquite);
+        overflow-x: hidden;
+      }
+
+      .daily-edition .site-header {
+        background: rgba(244, 234, 219, 0.92);
+      }
+
+      .edition-wrap {
+        width: min(1160px, 100%);
+        padding: 0 14px;
+        margin: 0 auto 54px;
+        overflow-x: hidden;
+      }
+
+      .edition-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: clamp(20px, 4vw, 46px);
+        align-items: end;
+        padding: 44px 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .kicker,
+      .label {
+        margin: 0 0 8px;
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--terra-dark);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(3rem, 9vw, 7rem);
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 5vw, 4rem);
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        color: var(--mesquite);
+        font-size: 1.45rem;
+      }
+
+      p,
+      li {
+        color: #65584c;
+        overflow-wrap: anywhere;
+      }
+
+      .lede {
+        max-width: 720px;
+        font-size: 1.08rem;
+      }
+
+      .edition-card,
+      .section-card,
+      .report-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.9);
+        box-shadow: 0 24px 70px rgba(62, 51, 41, 0.1);
+      }
+
+      .edition-card,
+      .section-card {
+        padding: 18px;
+      }
+
+      .edition-card dl {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .edition-card dt {
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .edition-card dd {
+        margin: 0;
+        color: var(--mesquite);
+        font-weight: 850;
+        overflow-wrap: anywhere;
+      }
+
+      .paper-nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 14px 0 24px;
+      }
+
+      .paper-nav a,
+      .daily-button {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--cream);
+        color: var(--mesquite);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .daily-button.primary {
+        border-color: var(--terra-dark);
+        background: var(--terra-dark);
+        color: #fff;
+      }
+
+      .section-block {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .front-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+      }
+
+      .report-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .report-card {
+        padding: 16px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .report-card p { margin: 0; }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .pill {
+        display: inline-flex;
+        min-height: 28px;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(215, 160, 119, 0.3);
+        color: var(--mesquite);
+        font-size: 0.78rem;
+        font-weight: 850;
+      }
+
+      .note-list {
+        display: grid;
+        gap: 9px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .note-list li {
+        padding: 11px 13px;
+        border-left: 4px solid var(--terra);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.82);
+      }
+
+      .note-list strong { color: var(--mesquite); }
+
+      .source-list {
+        display: grid;
+        gap: 10px;
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .source-list li {
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.82);
+      }
+
+      .source-list a {
+        color: var(--cobalt);
+        font-weight: 900;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+
+      .source-list span {
+        display: block;
+        margin-top: 4px;
+        color: #65584c;
+      }
+
+      @media (max-width: 760px) {
+        .edition-wrap {
+          width: 100vw;
+          max-width: 100vw;
+          padding: 0 14px;
+        }
+
+        .edition-hero,
+        .front-grid,
+        .report-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .edition-hero,
+        .edition-hero > *,
+        .edition-card,
+        .section-card,
+        .report-card {
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .lede { max-width: min(100%, 315px); }
+
+        h1 {
+          max-width: 8.6ch;
+          font-size: clamp(3rem, 14vw, 4.1rem);
+        }
+      }
+    </style>
+  </head>
+  <body class="daily-edition">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Las Jaras living system</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="las-jaras-daily.html">Newspaper</a>
+        <a href="projects/household-beings.html">Beings</a>
+        <a href="las-jaras-smart-home-site-shell.html">Las Jaras</a>
+      </nav>
+    </header>
+
+    <main class="edition-wrap">
+      <section class="edition-hero">
+        <div>
+          <p class="kicker">Saturday edition</p>
+          <h1>The Las Jaras Daily</h1>
+          <p class="lede">A private-safe edition for Saturday, June 13, 2026. Tonight's paper marks a real shift: Home Assistant remote access is working, the IoT plan is staged instead of rushed, Mira has a sorted link packet, and the Spurs map is ready for buddy's Google Map pass.</p>
+        </div>
+        <aside class="edition-card">
+          <dl>
+            <div><dt>Editor</dt><dd>Librarian Margot Index</dd></div>
+            <div><dt>Date</dt><dd>Saturday, June 13, 2026</dd></div>
+            <div><dt>Status</dt><dd>Scheduled edition generated by the 11:45 PM Central workflow</dd></div>
+            <div><dt>Boundary</dt><dd>No spending, posting, board creation, or external messages without buddy</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <nav class="paper-nav" aria-label="Edition sections">
+        <a href="#front-page">Front Page</a>
+        <a href="#comfort">Comfort Report</a>
+        <a href="#operations">House Operations</a>
+        <a href="#research">Research Desk</a>
+        <a href="#pinterest">Pinterest Feed</a>
+        <a href="#society">Society Page</a>
+        <a href="#cases">Open Cases</a>
+        <a href="#links">Source Links</a>
+        <a href="#editor">Editor's Note</a>
+      </nav>
+
+      <section class="section-block" id="front-page">
+        <p class="label">Front Page</p>
+        <h2>The house gained a remote nervous system.</h2>
+        <div class="front-grid">
+          <article class="section-card">
+            <h3>Lead story</h3>
+            <p>Home Assistant moved from local-only curiosity into a working away-ready foundation. Browser access, companion-app access over cellular, and phone push notifications all passed by late Friday night. This does not mean the house should start unboxing everything. It means the backbone is finally sturdy enough for the next careful test.</p>
+            <div class="meta-row">
+              <span class="pill">Mood: steady</span>
+              <span class="pill">Priority: remote reliability</span>
+              <span class="pill">Next: staged unboxing</span>
+            </div>
+          </article>
+          <article class="section-card">
+            <h3>Today at a glance</h3>
+            <ul class="note-list">
+              <li><strong>Soma:</strong> Home Assistant remote browser, companion app, and phone notification paths are working.</li>
+              <li><strong>Officer Ember:</strong> physical installs are still on hold until device photos, labels, wiring checks, and safety gates are complete.</li>
+              <li><strong>Mira:</strong> June 13's Pinterest packet is sorted, but no pins or boards were created.</li>
+              <li><strong>Blue Static:</strong> the Spurs Game 5 watch-map page now combines local spots with official public watch parties.</li>
+              <li><strong>Sheriff:</strong> Samsung freezer case remains open pending real temperature and food-condition evidence.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="comfort">
+        <p class="label">Comfort Report</p>
+        <h2>No-visible-fuss now has a stronger backbone.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Soma Hearthline</h3>
+            <p><strong>Report:</strong> Remote access is now practical enough to support house status checks and push alerts. The best version of this is quiet: notify when needed, stay out of the way when nothing is wrong.</p>
+            <p><strong>Watching:</strong> notification reliability, cellular app loading, Home Assistant entity health, Hue bridge setup, and guest-friendly physical controls.</p>
+            <p><strong>Next:</strong> do a labeled-photo inventory before opening Hue or ecobee boxes.</p>
+            <div class="meta-row"><span class="pill">Living System</span><span class="pill">Needs buddy: physical inventory</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Nanny Hearth</h3>
+            <p><strong>Report:</strong> Comfort means the system should not create a new mental load. The phone app is useful only if alerts are rare, clear, and actionable.</p>
+            <p><strong>Watching:</strong> whether notifications feel helpful, whether remote dashboards stay legible, and whether safety issues are routed without drama.</p>
+            <p><strong>Next:</strong> keep any alert wording plain and non-alarming unless there is a real urgent condition.</p>
+            <div class="meta-row"><span class="pill">Care</span><span class="pill">Quiet alerts</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="operations">
+        <p class="label">House Operations</p>
+        <h2>The next move is inventory, not installation.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Officer Ember</h3>
+            <p><strong>Report:</strong> The IoT master plan is explicit: no broad bulb installation, thermostat wiring, TV strip adhesive, or freezer-sensor purchase until the safety gates are met.</p>
+            <p><strong>Watching:</strong> fixture ratings, switch behavior, thermostat C-wire or PEK path, smoke/CO checklist, freezer state, and any exposed cords or trip risks during staging.</p>
+            <p><strong>Next:</strong> photograph unopened device boxes and model labels, avoiding passwords, pairing codes, serials in public, and receipts.</p>
+            <div class="meta-row"><span class="pill">Safety</span><span class="pill">Install hold</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Blue Static</h3>
+            <p><strong>Report:</strong> The local Spurs Game 5 page now has the full map seed list: official/public watch parties, confirmed local spots, Pluckers deal locations, and call-ahead spots.</p>
+            <p><strong>Watching:</strong> link quality, mobile readability, and keeping the page as a local planning aid rather than a published announcement.</p>
+            <p><strong>Next:</strong> buddy can use the addresses to build a Google Map, then decide whether any version is worth sharing.</p>
+            <div class="meta-row"><span class="pill">Local guide</span><span class="pill">Ready for map</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Tock Bellwether</h3>
+            <p><strong>Report:</strong> Margot's Daily cron ran on the intended 11:45 PM Central schedule. The edition date is Saturday, June 13, because this job prepares the local calendar date that begins after the scheduled run.</p>
+            <p><strong>Watching:</strong> Mira's 11:55 PM packet job, date anchoring, and delivery summaries for recurring work.</p>
+            <p><strong>Next:</strong> keep Margot before Mira so the paper can reference current board state before the next packet lands.</p>
+            <div class="meta-row"><span class="pill">Time</span><span class="pill">Date anchored</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Archivist Vellum</h3>
+            <p><strong>Report:</strong> The record trail is improving: the task board, workflow table, Home Assistant session notes, IoT master plan, Pinterest packet, and dated Daily editions now point to one another.</p>
+            <p><strong>Watching:</strong> which private operational details should stay out of public pages, especially account routes, device identities, and household routines.</p>
+            <p><strong>Next:</strong> preserve source links locally while keeping public excerpts scrubbed.</p>
+            <div class="meta-row"><span class="pill">Records</span><span class="pill">Private first</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="research">
+        <p class="label">Research Desk</p>
+        <h2>The useful links are sorted by what they should become.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Groundskeeper Larkspur</h3>
+            <p><strong>Report:</strong> Garden Style San Antonio's planting plans are the cleanest Pinterest candidate. Texas A&amp;M Earth-Kind is better as a source-library reference for future xeriscape notes.</p>
+            <p><strong>Watching:</strong> water-saving layouts, South Texas plant choices, soil, irrigation, limestone edging, and the existing magnolia as the front-yard anchor.</p>
+            <p><strong>Next:</strong> compare the planting-plan shapes against the Las Jaras site plan before any plant decisions.</p>
+            <div class="meta-row"><span class="pill">Garden</span><span class="pill">No purchase</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Officer Ember</h3>
+            <p><strong>Report:</strong> NFPA smoke-alarm guidance belongs in a private safety checklist, not Pinterest. It is operational reference material.</p>
+            <p><strong>Watching:</strong> smoke and CO placement, battery cadence, freezer temperatures, and install decisions that need real-world inspection.</p>
+            <p><strong>Next:</strong> create a checklist only after the house layout and current device locations are verified.</p>
+            <div class="meta-row"><span class="pill">Safety</span><span class="pill">Private only</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Penny Cobalt</h3>
+            <p><strong>Report:</strong> Guest-room supplies, Pan de Cristal tools or ingredients, and food-storage containers are all watch items. None should become a purchase without an explicit category decision.</p>
+            <p><strong>Watching:</strong> charm that disguises itself as urgency.</p>
+            <p><strong>Next:</strong> only price compare if buddy asks to pursue guest readiness, kitchen ritual, or storage standardization.</p>
+            <div class="meta-row"><span class="pill">Treasury</span><span class="pill">Approval required</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Soma Hearthline</h3>
+            <p><strong>Report:</strong> Home Assistant Flux is a useful circadian-lighting reference, but it should stay private until implementation details are tested and scrubbed.</p>
+            <p><strong>Watching:</strong> whether native Hue behavior, Home Assistant scenes, or Flux gives the calmest sunrise and wind-down without brittle complexity.</p>
+            <p><strong>Next:</strong> one-bulb pilot first; whole-house lighting ideas later.</p>
+            <div class="meta-row"><span class="pill">Lighting</span><span class="pill">Private note</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="pinterest">
+        <p class="label">Pinterest Link Feed</p>
+        <h2>Mira sorted the packet; the hands stayed off the buttons.</h2>
+        <article class="section-card">
+          <ul class="note-list">
+            <li><strong>Existing-board pin candidate:</strong> Garden Style San Antonio Plant By Numbers can go to `Las Jaras / Garden And Exterior` when authenticated Pinterest tooling is available.</li>
+            <li><strong>Labs reference candidate:</strong> Texas A&amp;M Earth-Kind publications can support future public-safe garden notes if cited carefully.</li>
+            <li><strong>Private operational notes:</strong> Home Assistant Flux and NFPA smoke alarms stay in the internal stack.</li>
+            <li><strong>Needs board approval:</strong> guest-room ideas, Pan de Cristal, and food-storage containers need new board decisions before pinning.</li>
+            <li><strong>Held boundary:</strong> no Pinterest saves, board creation, cart actions, affiliate links, or public posts were attempted.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section-block" id="society">
+        <p class="label">Society Page</p>
+        <h2>The city is giving the house a game-night map.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Jubilee RSVP</h3>
+            <p><strong>Report:</strong> The Spurs Game 5 watch-party research is now in one local HTML page with official/public stops and local spots. It is ready to become a Google Map seed list.</p>
+            <p><strong>Next:</strong> buddy chooses whether this is just for personal use or whether any public-safe excerpt should be cleaned up later.</p>
+            <div class="meta-row"><span class="pill">Local charm</span><span class="pill">Needs buddy taste</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Concierge Paloma</h3>
+            <p><strong>Report:</strong> Guest-room ideas remain useful, but the best first move is a house-specific readiness checklist: towels, water, lighting, charging, fan or temperature comfort, and simple room controls.</p>
+            <p><strong>Next:</strong> draft the guest checklist after the Red Room lighting pilot clarifies physical controls.</p>
+            <div class="meta-row"><span class="pill">Hospitality</span><span class="pill">Can wait</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Proof Darling + Chef Mise</h3>
+            <p><strong>Report:</strong> Pan de Cristal is a fine house-table candidate for a future hosting rhythm, especially if pantry staples already cover most of it.</p>
+            <p><strong>Next:</strong> check pantry reality before turning the recipe into a recurring Las Jaras ritual.</p>
+            <div class="meta-row"><span class="pill">Kitchen</span><span class="pill">Watch later</span></div>
+          </article>
+          <article class="report-card">
+            <h3>DJ Bluehour</h3>
+            <p><strong>Report:</strong> The Home Assistant milestone opens the door for scene names, but music still needs human taste. Good room modes should feel like hospitality, not showroom demos.</p>
+            <p><strong>Next:</strong> keep sound modes as prompts until the first lighting room actually works.</p>
+            <div class="meta-row"><span class="pill">Atmosphere</span><span class="pill">No automation rush</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="cases">
+        <p class="label">Open Cases</p>
+        <h2>Three gates need buddy, and one can wait.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Samsung freezer case</h3>
+            <p><strong>Status:</strong> Open. The freezer-sensor research is ready, but the case still needs actual freezer temperature readings, food-condition notes, and any useful display/settings photos.</p>
+            <p><strong>Decision needed:</strong> after evidence, approve a specific sensor option or keep researching.</p>
+            <div class="meta-row"><span class="pill">Needs buddy</span><span class="pill">Safety/food risk</span></div>
+          </article>
+          <article class="report-card">
+            <h3>IoT unboxing gate</h3>
+            <p><strong>Status:</strong> Waiting. The remote foundation works, but Hue and ecobee installs should not start until boxes and model labels are photographed and the first-room plan is chosen.</p>
+            <p><strong>Decision needed:</strong> approve the first staged Hue pilot location after physical inventory.</p>
+            <div class="meta-row"><span class="pill">Needs buddy</span><span class="pill">Do not install yet</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Pinterest board decisions</h3>
+            <p><strong>Status:</strong> Waiting. Guest, kitchen, and useful-storage items all need board approval before Mira can pin them cleanly.</p>
+            <p><strong>Decision needed:</strong> create or decline proposed boards such as guest rituals, kitchen rituals, and useful drawer.</p>
+            <div class="meta-row"><span class="pill">Needs buddy</span><span class="pill">No board creation</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Public excerpts</h3>
+            <p><strong>Status:</strong> Hold. The garden source stack, living-system language, and Spurs map format could become public-safe after review, but the Home Assistant setup details should stay private.</p>
+            <p><strong>Decision needed:</strong> choose excerpts only after Blue Static removes private operational details.</p>
+            <div class="meta-row"><span class="pill">Review first</span><span class="pill">Private by default</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="links">
+        <p class="label">Source Links</p>
+        <h2>The clickable stack behind today's notes.</h2>
+        <article class="section-card">
+          <ul class="source-list">
+            <li>
+              <a href="las-jaras-pinterest-pins-2026-06-13.md">June 13 Pinterest link packet</a>
+              <span>Mira's sorted packet: garden, safety, smart-lighting, guest, recipe, and storage references.</span>
+            </li>
+            <li>
+              <a href="../LAS_JARAS_IOT_MASTER_PLAN_2026-06-12.md">Las Jaras IoT master plan</a>
+              <span>The staged setup plan that says what to open, what to hold, and what needs inspection first.</span>
+            </li>
+            <li>
+              <a href="../LAS_JARAS_HOME_ASSISTANT_REMOTE_SETUP_SESSION_2026-06-12.md">Home Assistant remote setup session notes</a>
+              <span>Private technical record of the remote-access setup and verification path.</span>
+            </li>
+            <li>
+              <a href="../LAS_JARAS_FREEZER_SENSOR_RESEARCH_2026-06-11.md">Freezer sensor research</a>
+              <span>Shortlist and approval prompts for the Samsung freezer case.</span>
+            </li>
+            <li>
+              <a href="spurs-game-5-local-watch-map.html">Spurs Game 5 watch map seed page</a>
+              <span>The local HTML list combining official/public watch parties and local spots for a Google Map.</span>
+            </li>
+            <li>
+              <a href="../AGENT_TASK_BOARD.html">House Ops Board</a>
+              <span>Current tasks, scheduled jobs, waiting items, and being lanes.</span>
+            </li>
+            <li>
+              <a href="https://www.gardenstylesanantonio.com/resources/plant-by-numbers/" target="_blank" rel="noopener">Garden Style San Antonio - Plant By Numbers</a>
+              <span>Public-safe visual garden reference and likely Pinterest candidate.</span>
+            </li>
+            <li>
+              <a href="https://aggie-horticulture.tamu.edu/earthkind/publications/" target="_blank" rel="noopener">Texas A&amp;M AgriLife Earth-Kind publications</a>
+              <span>Research-backed landscape source for the garden library.</span>
+            </li>
+            <li>
+              <a href="https://www.home-assistant.io/integrations/flux/" target="_blank" rel="noopener">Home Assistant Flux integration</a>
+              <span>Private smart-lighting reference for circadian color-temperature experiments.</span>
+            </li>
+            <li>
+              <a href="https://www.nfpa.org/education-and-research/home-fire-safety/smoke-alarms/installing-and-maintaining-smoke-alarms" target="_blank" rel="noopener">NFPA smoke-alarm guidance</a>
+              <span>Private safety reference for Officer Ember's future checklist.</span>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section-block" id="editor">
+        <p class="label">Editor's Note</p>
+        <h2>The house is ready for one careful pilot.</h2>
+        <article class="section-card">
+          <p>Margot's read: the system is asking for patience. The remote path works, which is a major foundation piece, but the next best household move is small and physical: photograph the boxes, confirm what is actually present, choose one safe lamp, and prove one bulb before the whole house becomes a project.</p>
+          <p>What needs buddy's decision: freezer evidence and sensor approval, Pinterest board choices, first Hue pilot location, and whether the Spurs watch map stays private or becomes a cleaned public excerpt.</p>
+          <p>What can wait: guest-room boards, kitchen ritual boards, storage-system comparison, Instagram storytelling, and any broader lighting expansion.</p>
+          <p>What should stay private: account routes, app setup details, device identifiers, household routines, safety checklists in draft, and any Home Assistant implementation specifics.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

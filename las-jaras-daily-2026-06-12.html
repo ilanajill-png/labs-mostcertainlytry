@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Las Jaras Daily | Friday, June 12, 2026</title>
+    <meta name="description" content="The Las Jaras Daily edition for Friday, June 12, 2026, covering the freezer case, Margot cron repair, date-safe packets, and the house ops board.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      :root {
+        --terra: #a84f35;
+        --terra-dark: #713524;
+        --sand: #f4eadb;
+        --cream: #fffaf1;
+        --cobalt: #1f4f9a;
+        --mesquite: #3e3329;
+        --olive: #68775a;
+        --line: rgba(62, 51, 41, 0.16);
+      }
+
+      * { box-sizing: border-box; }
+
+      body.daily-edition {
+        background: var(--sand);
+        color: var(--mesquite);
+        overflow-x: hidden;
+      }
+
+      .daily-edition .site-header {
+        background: rgba(244, 234, 219, 0.92);
+      }
+
+      .edition-wrap {
+        width: min(1160px, 100%);
+        padding: 0 14px;
+        margin: 0 auto 54px;
+        overflow-x: hidden;
+      }
+
+      .edition-hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+        gap: clamp(20px, 4vw, 46px);
+        align-items: end;
+        padding: 44px 0 28px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .kicker,
+      .label {
+        margin: 0 0 8px;
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        color: var(--terra-dark);
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(3rem, 9vw, 7rem);
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        font-size: clamp(2rem, 5vw, 4rem);
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        color: var(--mesquite);
+        font-size: 1.45rem;
+      }
+
+      p,
+      li {
+        color: #65584c;
+        overflow-wrap: anywhere;
+      }
+
+      .lede {
+        max-width: 720px;
+        font-size: 1.08rem;
+      }
+
+      .edition-card,
+      .section-card,
+      .report-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.9);
+        box-shadow: 0 24px 70px rgba(62, 51, 41, 0.1);
+      }
+
+      .edition-card,
+      .section-card {
+        padding: 18px;
+      }
+
+      .edition-card dl {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .edition-card dt {
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .edition-card dd {
+        margin: 0;
+        color: var(--mesquite);
+        font-weight: 850;
+        overflow-wrap: anywhere;
+      }
+
+      .paper-nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 14px 0 24px;
+      }
+
+      .paper-nav a,
+      .daily-button {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--cream);
+        color: var(--mesquite);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .daily-button.primary {
+        border-color: var(--terra-dark);
+        background: var(--terra-dark);
+        color: #fff;
+      }
+
+      .section-block {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .front-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 14px;
+      }
+
+      .report-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .report-card {
+        padding: 16px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .report-card p { margin: 0; }
+
+      .meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .pill {
+        display: inline-flex;
+        min-height: 28px;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(215, 160, 119, 0.3);
+        color: var(--mesquite);
+        font-size: 0.78rem;
+        font-weight: 850;
+      }
+
+      .note-list {
+        display: grid;
+        gap: 9px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .note-list li {
+        padding: 11px 13px;
+        border-left: 4px solid var(--terra);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.82);
+      }
+
+      .note-list strong { color: var(--mesquite); }
+
+      .source-list {
+        display: grid;
+        gap: 10px;
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .source-list li {
+        padding: 13px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.82);
+      }
+
+      .source-list a {
+        color: var(--cobalt);
+        font-weight: 900;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+
+      .source-list span {
+        display: block;
+        margin-top: 4px;
+        color: #65584c;
+      }
+
+      @media (max-width: 760px) {
+        .edition-wrap {
+          width: 100vw;
+          max-width: 100vw;
+          padding: 0 14px;
+        }
+
+        .edition-hero,
+        .front-grid,
+        .report-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .edition-hero,
+        .edition-hero > *,
+        .edition-card,
+        .section-card,
+        .report-card {
+          min-width: 0;
+          max-width: 100%;
+        }
+
+        .lede { max-width: min(100%, 315px); }
+
+        h1 {
+          max-width: 8.6ch;
+          font-size: clamp(3rem, 14vw, 4.1rem);
+        }
+      }
+    </style>
+  </head>
+  <body class="daily-edition">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Las Jaras living system</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="las-jaras-daily.html">Newspaper</a>
+        <a href="projects/household-beings.html">Beings</a>
+        <a href="las-jaras-smart-home-site-shell.html">Las Jaras</a>
+      </nav>
+    </header>
+
+    <main class="edition-wrap">
+      <section class="edition-hero">
+        <div>
+          <p class="kicker">Friday edition</p>
+          <h1>The Las Jaras Daily</h1>
+          <p class="lede">A private-safe edition for Friday, June 12, 2026. Today's paper catches the house back up: one freezer case, one scheduling bug, one new board column, and a cleaner path for Margot's editions.</p>
+        </div>
+        <aside class="edition-card">
+          <dl>
+            <div><dt>Editor</dt><dd>Librarian Margot Index</dd></div>
+            <div><dt>Date</dt><dd>Friday, June 12, 2026</dd></div>
+            <div><dt>Status</dt><dd>Backfill edition generated on request</dd></div>
+            <div><dt>Rule</dt><dd>No purchases, posts, boards, or external sends without buddy</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <nav class="paper-nav" aria-label="Edition sections">
+        <a href="#front-page">Front Page</a>
+        <a href="#comfort">Comfort Report</a>
+        <a href="#operations">House Operations</a>
+        <a href="#research">Research Desk</a>
+        <a href="#pinterest">Pinterest Feed</a>
+        <a href="#society">Society Page</a>
+        <a href="#cases">Open Cases</a>
+        <a href="#links">Source Links</a>
+        <a href="#editor">Editor's Note</a>
+      </nav>
+
+      <section class="section-block" id="front-page">
+        <p class="label">Front Page</p>
+        <h2>The house asks for dates that stay put.</h2>
+        <div class="front-grid">
+          <article class="section-card">
+            <h3>Lead story</h3>
+            <p>The Daily did not fail last night so much as reveal the missing machinery: Margot had a protocol, but no dedicated cron. The only 11:55 PM job belonged to Mira's research-to-Pinterest packet, and when it started after midnight it interpreted "tomorrow" as June 13. Today's repair is simple: give Margot her own daily run and make Mira's date logic explicit.</p>
+            <div class="meta-row">
+              <span class="pill">Mood: practical</span>
+              <span class="pill">Priority: fix the rails</span>
+              <span class="pill">Risk: vague dates</span>
+            </div>
+          </article>
+          <article class="section-card">
+            <h3>Today at a glance</h3>
+            <ul class="note-list">
+              <li><strong>Margot:</strong> June 12 edition is now backfilled and needs its own recurring job going forward.</li>
+              <li><strong>Sheriff:</strong> Samsung freezer case stays open until buddy has actual temperature and food-condition evidence.</li>
+              <li><strong>Soma:</strong> freezer sensors and Home Assistant lighting both need calm purpose, manual fallback, and privacy checks.</li>
+              <li><strong>Archivist:</strong> House Ops Board now records date added, so task history stops floating in the soup.</li>
+              <li><strong>Mira:</strong> the June 13 link packet exists, but no Pinterest saves happened without authenticated tooling.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="comfort">
+        <p class="label">Comfort Report</p>
+        <h2>Comfort begins with boring reliability.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Soma Hearthline</h3>
+            <p><strong>Report:</strong> The smart-home story is strongest when it makes the house feel held, not watched. Date-safe automation belongs in the same category as quiet lighting: it removes tiny frictions without demanding attention.</p>
+            <p><strong>Watching:</strong> freezer alert options, Home Assistant Flux, daily paper scheduling, guest fallback controls, and the "long strong hug" ethos.</p>
+            <p><strong>Next:</strong> anchor every recurring job to local Central time and define what date the output file represents.</p>
+            <div class="meta-row"><span class="pill">Living System</span><span class="pill">Needs Ilana: no</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Serafina de las Jaras</h3>
+            <p><strong>Report:</strong> The house is not asking for more chatter. It is asking for steadier rituals, clearer handoffs, and fewer "wait, what day did that mean?" moments.</p>
+            <p><strong>Watching:</strong> daily field notes, garden vision, freezer case reality, and whether the public story still feels like South Texas charm instead of tech theater.</p>
+            <p><strong>Next:</strong> keep asking what felt loved, what felt loud, and what needs to become a real checklist.</p>
+            <div class="meta-row"><span class="pill">House Intelligence</span><span class="pill">Taste call later</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="operations">
+        <p class="label">House Operations</p>
+        <h2>The board gets a timestamp spine.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Archivist Vellum</h3>
+            <p><strong>Report:</strong> The House Ops Board now has a Date added column in both Markdown and HTML. Existing records were initialized to June 11, with the board itself updated on June 12.</p>
+            <p><strong>Watching:</strong> which rows become stale, which scheduled rhythms actually have cron backing, and which pages need to be linked from the newspaper hub.</p>
+            <p><strong>Next:</strong> add future tasks with their real add date instead of backfilling by memory.</p>
+            <div class="meta-row"><span class="pill">Records</span><span class="pill">Done today</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Tock Bellwether</h3>
+            <p><strong>Report:</strong> The 11:55 PM job fired late, at 12:07 AM Central. That is survivable only if the prompt knows how to interpret delayed starts.</p>
+            <p><strong>Watching:</strong> Margot's new Daily job, Mira's updated date logic, delivery routes, and any cron jobs reporting errors.</p>
+            <p><strong>Next:</strong> run Margot before Mira so the Daily exists before the research packet tries to reference or route it.</p>
+            <div class="meta-row"><span class="pill">Time</span><span class="pill">Cron repair</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Postmaster Juniper</h3>
+            <p><strong>Report:</strong> The Mira packet did not announce cleanly because delivery resolved to iMessage without a target. Internal files were saved, but buddy did not get the summary.</p>
+            <p><strong>Watching:</strong> job delivery settings and whether future cron runs have a reliable announcement path.</p>
+            <p><strong>Next:</strong> prefer current-session or explicit channel delivery for recurring work that should visibly report back.</p>
+            <div class="meta-row"><span class="pill">Communications</span><span class="pill">No external sends</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Sundries</h3>
+            <p><strong>Report:</strong> Interesting research is moving properly into packets and watch lists, not carts. The June 13 packet includes garden, smart-lighting, smoke-alarm, guest-room, bread, and storage references.</p>
+            <p><strong>Watching:</strong> any item that tries to turn into a purchase before Penny reviews it.</p>
+            <p><strong>Next:</strong> keep "purchase status" and "privacy status" in every packet row.</p>
+            <div class="meta-row"><span class="pill">Useful Drawer</span><span class="pill">Spend: no</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="research">
+        <p class="label">Research Desk</p>
+        <h2>Seven links came in; only some belong in public.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Groundskeeper Larkspur</h3>
+            <p><strong>Report:</strong> Garden Style San Antonio and Texas A&amp;M Earth-Kind are useful exterior references. One is visual and pin-friendly; one is better as a source-library citation.</p>
+            <p><strong>Watching:</strong> sun exposure, water needs, decomposed granite, limestone edging, prickly pear, purple wandering jew, and the magnolia staying central.</p>
+            <p><strong>Next:</strong> turn the links into a plant/material checklist before anyone shops.</p>
+            <div class="meta-row"><span class="pill">Garden</span><span class="pill">No purchase</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Officer Ember</h3>
+            <p><strong>Report:</strong> NFPA smoke-alarm guidance is not Pinterest material. It is a private safety reference and should become a quiet checklist.</p>
+            <p><strong>Watching:</strong> smoke/CO locations, battery cadence, heat risk, freezer reliability, and guest-safe fallbacks.</p>
+            <p><strong>Next:</strong> route any replacement-device need to Penny before buying.</p>
+            <div class="meta-row"><span class="pill">Safety</span><span class="pill">Private only</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Penny Cobalt</h3>
+            <p><strong>Report:</strong> Martha Stewart guest-room ideas, Pan de Cristal, and Serious Eats containers are all allowed to be interesting. None are allowed to spend money by being charming.</p>
+            <p><strong>Watching:</strong> guest supplies, kitchen tools, storage systems, and any "needs board" request that becomes a shopping urge.</p>
+            <p><strong>Next:</strong> only price compare if buddy asks to pursue the category.</p>
+            <div class="meta-row"><span class="pill">Treasury</span><span class="pill">Approval required</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Blue Static</h3>
+            <p><strong>Report:</strong> The public-safe candidates are strongest when they show principles and sources, not household routines. Garden reference and living-system principles can become Labs excerpts after privacy review.</p>
+            <p><strong>Watching:</strong> links, hub navigation, mobile readability, and whether private operational details stay out of public pages.</p>
+            <p><strong>Next:</strong> keep the June 12 edition linked from the newspaper hub but treat it as private-safe working copy unless approved for public storytelling.</p>
+            <div class="meta-row"><span class="pill">Webmaster</span><span class="pill">Privacy review</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="pinterest">
+        <p class="label">Pinterest Link Feed</p>
+        <h2>Mira has candidates, not marching orders.</h2>
+        <article class="section-card">
+          <ul class="note-list">
+            <li><strong>Pin candidate with existing board:</strong> Garden Style San Antonio Plant By Numbers to `Las Jaras / Garden And Exterior` when authenticated tooling is available.</li>
+            <li><strong>Labs reference candidate:</strong> Texas A&amp;M Earth-Kind publications for garden source notes.</li>
+            <li><strong>Private notes:</strong> Home Assistant Flux and NFPA smoke alarms.</li>
+            <li><strong>Needs board approval:</strong> guest-room ideas, Pan de Cristal, and food-storage container comparison.</li>
+            <li><strong>No action taken:</strong> no Pinterest saves, no board creation, no carts, no affiliate links, no publishing.</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section-block" id="links">
+        <p class="label">Source Links</p>
+        <h2>The clickable stack behind today's notes.</h2>
+        <article class="section-card">
+          <ul class="source-list">
+            <li>
+              <a href="las-jaras-pinterest-pins-2026-06-13.md">June 13 Pinterest link packet</a>
+              <span>The saved packet that supplied the seven research links summarized in this edition.</span>
+            </li>
+            <li>
+              <a href="../AGENT_TASK_BOARD.html">House Ops Board</a>
+              <span>The operations board with the new Date added column.</span>
+            </li>
+            <li>
+              <a href="HOUSE_AI_WORKFLOWS.md">House AI Workflows</a>
+              <span>The workflow notes documenting Margot's daily paper cron and the date-anchoring repair.</span>
+            </li>
+            <li>
+              <a href="https://www.gardenstylesanantonio.com/resources/plant-by-numbers/" target="_blank" rel="noopener">Garden Style San Antonio - Plant By Numbers</a>
+              <span>Local water-saving planting plans for Groundskeeper Larkspur's xeriscape source stack.</span>
+            </li>
+            <li>
+              <a href="https://aggie-horticulture.tamu.edu/earthkind/publications/" target="_blank" rel="noopener">Texas A&amp;M AgriLife - Earth-Kind Landscaping Publications</a>
+              <span>Extension-backed landscape guidance for soil, irrigation, plant selection, and water conservation.</span>
+            </li>
+            <li>
+              <a href="https://www.home-assistant.io/integrations/flux/" target="_blank" rel="noopener">Home Assistant Flux Integration</a>
+              <span>Circadian lighting reference for Soma Hearthline's comfort automation research.</span>
+            </li>
+            <li>
+              <a href="https://www.nfpa.org/education-and-research/home-fire-safety/smoke-alarms/installing-and-maintaining-smoke-alarms" target="_blank" rel="noopener">NFPA - Installing And Maintaining Smoke Alarms</a>
+              <span>Private safety reference for Officer Ember's smoke and CO checklist work.</span>
+            </li>
+            <li>
+              <a href="https://www.marthastewart.com/guest-room-ideas-8401713" target="_blank" rel="noopener">Martha Stewart - Guest Room Ideas</a>
+              <span>Guest-readiness inspiration for Concierge Paloma and Velvet Thimble, with no shopping action implied.</span>
+            </li>
+            <li>
+              <a href="https://www.kingarthurbaking.com/recipes/pan-de-cristal-recipe" target="_blank" rel="noopener">King Arthur Baking - Pan De Cristal</a>
+              <span>Recipe watch item for Proof Darling and Chef Mise.</span>
+            </li>
+            <li>
+              <a href="https://www.seriouseats.com/best-food-storage-containers-6750861" target="_blank" rel="noopener">Serious Eats - Best Food Storage Containers</a>
+              <span>Storage-system comparison source for Sundries and Penny Cobalt, not a cart instruction.</span>
+            </li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="section-block" id="society">
+        <p class="label">Society Page</p>
+        <h2>Hospitality is becoming an operating habit.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Concierge Paloma</h3>
+            <p><strong>Report:</strong> The guest-room research belongs in a gentle readiness checklist, not a buying spree. Water, towels, lighting, sleep comfort, and simple controls matter first.</p>
+            <p><strong>Next:</strong> draft the one-page guest card after the house modes are clearer.</p>
+            <div class="meta-row"><span class="pill">Hospitality</span><span class="pill">Needs taste later</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Proof Darling + Chef Mise</h3>
+            <p><strong>Report:</strong> Pan de Cristal is a good house-table idea if pantry reality supports it. It belongs in recipe watch, not an urgent plan.</p>
+            <p><strong>Next:</strong> check current pantry staples before calling it a Las Jaras house bread.</p>
+            <div class="meta-row"><span class="pill">Kitchen</span><span class="pill">Watch later</span></div>
+          </article>
+          <article class="report-card">
+            <h3>DJ Bluehour</h3>
+            <p><strong>Report:</strong> The living-system presentation still needs sound modes: morning, cooking, porch hour, dinner, bath, and wind-down.</p>
+            <p><strong>Next:</strong> make playlist prompts that support the house without turning every room into a performance.</p>
+            <div class="meta-row"><span class="pill">Sound</span><span class="pill">Soft transitions</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Mira Queue</h3>
+            <p><strong>Report:</strong> The strongest public story today is not the bug. It is the discipline: the house has approval gates, privacy boundaries, and a newspaper that can admit when the schedule was fuzzy.</p>
+            <p><strong>Next:</strong> hold all post ideas as drafts until buddy approves wording and destination.</p>
+            <div class="meta-row"><span class="pill">Social</span><span class="pill">Draft only</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="cases">
+        <p class="label">Open Cases</p>
+        <h2>The freezer case needs facts, not vibes.</h2>
+        <div class="report-grid">
+          <article class="report-card">
+            <h3>Sheriff Lone Star</h3>
+            <p><strong>Report:</strong> Samsung freezers are not staying frozen remains the active case. The case cannot move cleanly until buddy checks temperature, food condition, and visible display/settings.</p>
+            <p><strong>Watching:</strong> whether food is softening or thawed, whether temperature is stable, and whether an alert sensor is a necessary safeguard.</p>
+            <p><strong>Next:</strong> collect readings and photos, then update severity and closure criteria.</p>
+            <div class="meta-row"><span class="pill">Open case</span><span class="pill">Needs evidence</span></div>
+          </article>
+          <article class="report-card">
+            <h3>Officer Ember + Soma</h3>
+            <p><strong>Report:</strong> Freezer sensors are worth researching because the risk is practical: food safety, missed failures, and alerts that need to be heard without creating panic.</p>
+            <p><strong>Watching:</strong> device reliability, local alerting, guest confusion, battery life, and what happens when Wi-Fi or an app fails.</p>
+            <p><strong>Next:</strong> recommend only after evidence confirms the need and Penny reviews cost.</p>
+            <div class="meta-row"><span class="pill">Safety</span><span class="pill">No purchase yet</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-block" id="editor">
+        <p class="label">Editor's Note</p>
+        <h2>Margot's closing read.</h2>
+        <article class="section-card">
+          <p>Today the house learned a useful maintenance lesson: a ritual is only real when it has rails. The Daily had a beautiful concept, but Mira had the only clock. Now Margot gets her own clock, Mira gets clearer dates, and the House Ops Board gets enough history to tell when a task entered the room. That is not glamorous. That is why it works.</p>
+          <ul class="note-list">
+            <li><strong>Needs buddy:</strong> freezer evidence; whether to create new Pinterest boards for guest rituals, kitchen rituals, or useful drawer.</li>
+            <li><strong>Can wait:</strong> public excerpts, guest-card copy, recipe testing, storage-system comparisons, and new boards.</li>
+            <li><strong>Save privately:</strong> cron repair details, delivery bug, freezer case facts, smart-home implementation notes, and safety references.</li>
+            <li><strong>Public-safe later:</strong> "dates that stay put," garden source stack, living-system principles, and the no-visible-fuss automation ethos.</li>
+          </ul>
+          <p>
+            <a class="daily-button primary" href="las-jaras-daily.html">Back to newspaper hub</a>
+            <a class="daily-button" href="projects/household-beings.html">Open beings directory</a>
+          </p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
