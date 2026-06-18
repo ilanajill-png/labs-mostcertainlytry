@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Texas Summer Solstice Food & Ritual Plan</title>
+  <style>
+    :root {
+      --ink: #241a14;
+      --muted: #6d5b4e;
+      --paper: #fff8ec;
+      --sun: #f8b84e;
+      --tomato: #c6472f;
+      --cobalt: #1647a3;
+      --leaf: #4e7c45;
+      --water: #1e8aa3;
+      --line: rgba(36, 26, 20, .16);
+      --shadow: 0 18px 45px rgba(59, 35, 17, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(248, 184, 78, .30), transparent 28rem),
+        radial-gradient(circle at 88% 20%, rgba(30, 138, 163, .18), transparent 26rem),
+        linear-gradient(180deg, #fffdf7 0%, var(--paper) 52%, #f4eadb 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: var(--cobalt); font-weight: 700; text-decoration-thickness: .08em; text-underline-offset: .18em; }
+    a:hover { color: var(--tomato); }
+
+    .page {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 32px 18px 48px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+      gap: 28px;
+      align-items: end;
+      min-height: 72vh;
+      padding: 42px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--tomato);
+      font-size: .84rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 22px 0 0;
+      color: #3d3028;
+      font-size: 1.14rem;
+    }
+
+    .solar-card {
+      position: relative;
+      padding: 24px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .solar-card::before {
+      content: "";
+      display: block;
+      width: 138px;
+      height: 138px;
+      margin: 4px auto 20px;
+      border-radius: 999px;
+      background:
+        repeating-conic-gradient(from 0deg, rgba(198, 71, 47, .88) 0deg 5deg, transparent 5deg 13deg),
+        radial-gradient(circle, #ffd978 0 38%, #f8b84e 39% 58%, transparent 59%);
+      filter: drop-shadow(0 14px 22px rgba(198, 71, 47, .22));
+    }
+
+    .solar-card h2 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .solar-card p { margin: 0 0 12px; color: var(--muted); }
+
+    .stat {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      font-size: .96rem;
+    }
+
+    .stat strong { font-size: 1.1rem; color: var(--ink); }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 18px 0 4px;
+    }
+
+    nav a {
+      display: inline-flex;
+      min-height: 38px;
+      align-items: center;
+      padding: 8px 12px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, .58);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: .92rem;
+    }
+
+    section {
+      padding: 42px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0 0 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      max-width: 780px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      padding: 18px;
+      background: rgba(255, 255, 255, .64);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 32px rgba(59, 35, 17, .08);
+    }
+
+    .card p,
+    .card ul { margin: 0; color: #493b32; }
+
+    .card ul { padding-left: 1.1rem; }
+
+    .recipe {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, .68fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .callout {
+      padding: 18px;
+      color: #fffdf7;
+      background: var(--cobalt);
+      border-radius: 8px;
+    }
+
+    .callout a { color: #fff3b0; }
+    .callout p { margin: 0; color: #eef4ff; }
+
+    .ingredients {
+      columns: 2;
+      column-gap: 28px;
+      padding-left: 1.1rem;
+      margin: 0;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 10px;
+      max-width: 850px;
+    }
+
+    .time-row {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr);
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .time-row strong { color: var(--tomato); }
+
+    .refs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 16px;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 8px 8px 0;
+      padding: 5px 9px;
+      color: #fffdf7;
+      background: var(--leaf);
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    footer {
+      padding: 28px 0 0;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .recipe,
+      .grid,
+      .two,
+      .refs { grid-template-columns: 1fr; }
+      .hero { min-height: auto; padding-top: 24px; }
+      .ingredients { columns: 1; }
+      .time-row { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Las Jaras / Schertz, Texas / June 2026</p>
+        <h1>Texas Summer Solstice Food</h1>
+        <p class="intro">A bright, practical plan for the longest-light weekend: clean the house like a ritual, cook with Gulf seafood and Texas summer produce, tend the garden before the heat gets rude, say a few words of gratitude, and rise early enough to meet the sun without becoming a crispy little tragedy.</p>
+        <nav aria-label="Page sections">
+          <a href="#local">Local Inspiration</a>
+          <a href="#guru-practice">Guru Practice</a>
+          <a href="#cleaning">Solstice Cleaning</a>
+          <a href="#cooking">Solstice Cooking</a>
+          <a href="#native">Texas Native American Traditions</a>
+          <a href="#meal-times">Meal Times</a>
+          <a href="#gardening">Solstice Gardening</a>
+          <a href="#prayers">Solstice Prayers</a>
+          <a href="#rise">Perfect Time to Rise</a>
+          <a href="#six-flags">Six Flags Meaning</a>
+          <a href="#references">References</a>
+        </nav>
+      </div>
+      <aside class="solar-card" aria-label="Solstice timing">
+        <h2>Solstice Clock</h2>
+        <p>The astronomical solstice arrives before dawn in Central Texas, while the useful ritual moment is sunrise.</p>
+        <div class="stat"><span>June solstice</span><strong>Sun Jun 21</strong></div>
+        <div class="stat"><span>Moment</span><strong>3:24 a.m. CDT</strong></div>
+        <div class="stat"><span>Schertz sunrise</span><strong>6:31 a.m.</strong></div>
+        <div class="stat"><span>San Antonio sunrise</span><strong>6:33 a.m.</strong></div>
+      </aside>
+    </header>
+
+    <section id="local">
+      <h2>Local Inspiration</h2>
+      <p class="lede">The local pattern is clear: water, shade, music, light, Gulf seafood, and wellness. This page turns that into a home version with optional field trips.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Miraval Austin</h3>
+          <p>Miraval is framing the season as a wellness threshold with its <a href="https://www.miravalresorts.com/austin/events/summer-pleasures-celestial-supper">Summer Pleasures Celestial Supper</a> on June 21 and a <a href="https://www.miravalresorts.com/austin/day-spa-packages">Summer Solstice Day Spa</a> package. Translate that at home as lunch, water, quiet, body care, and a beautiful dinner.</p>
+        </article>
+        <article class="card">
+          <h3>Bunkhouse Austin</h3>
+          <p>Bunkhouse's Austin energy is pool-and-courtyard summer: <a href="https://www.bunkhousehotels.com/austin-motel/events/splash-dance">Austin Motel Splash Dance</a>, swim club passes, and Hotel San Jose's <a href="https://www.bunkhousehotels.com/hotel-san-jose/happenings/hotel-events">music and courtyard events</a>. Home version: splash, music, cold drinks, and low-pretense good taste.</p>
+        </article>
+        <article class="card">
+          <h3>Pearl + Downtown</h3>
+          <p>Pearl's weekend points toward the menu: <a href="https://events.atpearl.com/series/farmers-market/">Farmers Market</a>, <a href="https://events.atpearl.com/event/pullman-market-presents-seafood-street-market/">Seafood Street Market</a>, <a href="https://events.atpearl.com/event/burger-showdown-2026/">Burger Showdown</a>, and <a href="https://events.atpearl.com/event/viaje-sunday-vinyl-series-jue-let/2026-06-21/">Summer Vinyl Series</a>. Downtown adds the <a href="https://www.thesanantonioriverwalk.com/events/artisan-shows/">River Walk Summer Artisan Show</a>.</p>
+        </article>
+        <article class="card">
+          <h3>Missions + Museums</h3>
+          <p>The <a href="https://www.nps.gov/saan/planyourvisit/hours.htm">San Antonio Missions</a> are the cleanest sunrise move. Later, SAMA has Sunday tours listed on its <a href="https://www.samuseum.org/events/">events calendar</a>, including Museum Highlights and New African Masquerades.</p>
+        </article>
+        <article class="card">
+          <h3>Music + Light</h3>
+          <p>URBAN-15's <a href="https://urban15.org/events/summer-solstice-performance-2026/?occurrence=2026-06-21">Summer Solstice Performance</a> is the most literal San Antonio solstice ritual: dance inside the airport's Passing Light solar sculpture. The Botanical Garden hosts <a href="https://sabgtx.org/event/free-summer-evening-make-music-san-antonio/">Make Music San Antonio</a> from 4-10 p.m.</p>
+        </article>
+        <article class="card">
+          <h3>Historical Thread</h3>
+          <p>NASA explains the solstice as Earth's tilt giving the Northern Hemisphere its strongest direct light. Older traditions made that cosmic fact tangible through fire, herbs, water, music, feasting, and crop protection.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="guru-practice">
+      <h2>Guru Marigold's Sun Throne Practice</h2>
+      <p class="lede">This folds the seasonal practice tracker into the food page so the solstice is not split across competing pages. Guru Marigold holds the meaning: honor abundance, respect heat, water early, gather beauty before noon, and let evening carry the celebration.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Ritual Meaning</h3>
+          <p>The solstice is a lesson in proportion. The sun gives the year its longest light, and South Texas immediately reminds everyone that too much light becomes a safety issue. The practice is gratitude with boundaries.</p>
+        </article>
+        <article class="card">
+          <h3>Prayer</h3>
+          <p>May I receive the light without worshiping exhaustion. May this house know the difference between abundance and overexposure. Bless the shade, the water, the early hour, and the wisdom to stop.</p>
+        </article>
+        <article class="card">
+          <h3>Objects To Set Out</h3>
+          <ul>
+            <li>Cool water or lemonade.</li>
+            <li>Summer Solstice note, printed card, or small sun-colored object.</li>
+            <li>Small bowl of herbs, berries, citrus, or edible flowers.</li>
+            <li>Fan, sunscreen, hat, or cooling cloth.</li>
+            <li>One candle only if fire safety and weather allow.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid" style="margin-top: 14px;">
+        <article class="card">
+          <h3>Morning Flow</h3>
+          <ul>
+            <li>Drink water before beginning.</li>
+            <li>Water plants early or make a shade plan.</li>
+            <li>Gather herbs, flowers, berries, or citrus before the heat climbs.</li>
+            <li>Say the prayer at the door, porch, or kitchen counter.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Sunset Flow</h3>
+          <ul>
+            <li>Set crystals for brief sunrise or sunset light only; do not bake delicate stones.</li>
+            <li>Sweep the porch or outdoor table.</li>
+            <li>Clear candle, grill, or fire hazards.</li>
+            <li>Serve something cool: berries, herbs, lemonade, grilled vegetables after the heat breaks.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Close</h3>
+          <ul>
+            <li>Name one thing that is abundant.</li>
+            <li>Name one place where abundance needs a boundary.</li>
+            <li>Give the garden mulch, shade, or water.</li>
+            <li>Record the practice in <a href="projects/household-beings/daily-notes/guru-seasonal-practice-daily.html">Guru's daily seasonal log</a>.</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="grid two" style="margin-top: 14px;">
+        <article class="card">
+          <h3>Heat Rule</h3>
+          <p>No noon heroics. Outdoor practice happens early morning or near sunset. Nanny and Officer Ember outrank symbolism if heat, smoke, fire, or fatigue makes the ritual foolish.</p>
+        </article>
+        <article class="card">
+          <h3>Being Assignments</h3>
+          <p><strong>Guru Marigold</strong> holds prayer, reflection, and the abundance-with-boundaries prompt. <strong>Serafina and Groundskeeper Larkspur</strong> check garden timing, shade, watering, and porch conditions. <strong>Nanny Hearth and Officer Ember</strong> check heat, hydration, flame, smoke, food safety, and whether guests should be invited at all.</p>
+          <p style="margin-top: 10px;"><a href="projects/household-beings/guru-seasonal-practice-tracker.html">Open Guru's Seasonal Practice Tracker</a></p>
+        </article>
+      </div>
+    </section>
+
+    <section id="native">
+      <h2>Solstice Texas Native American Traditions</h2>
+      <p class="lede">There is not one single "Texas Native American solstice tradition." Texas contains many Indigenous homelands and living Native communities, and public sources do not support flattening them into one ritual. The respectful Texas version is to honor place, sky, water, food, and continuity while keeping named sacred practices specific to the peoples who hold them.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Caddo East Texas</h3>
+          <p>The Caddo built ceremonial mound centers in East Texas. Caddo Mounds is described by the Texas Historical Commission and NPS as a village and ceremonial center where Caddo people still connect with ancestors. For the solstice page, this supports a theme of community, ancestors, agriculture, and ceremonial landscape, not a borrowed Caddo ceremony.</p>
+          <p>References: <a href="https://thc.texas.gov/historic-sites/caddo-mounds">Texas Historical Commission Caddo Mounds</a>, <a href="https://www.nps.gov/places/caddo-mounds-state-historic-site.htm">NPS Caddo Mounds</a>.</p>
+        </article>
+        <article class="card">
+          <h3>Lower Pecos Sky + Cosmology</h3>
+          <p>The Lower Pecos canyonlands hold ancient rock art tied to cosmology, cyclical time, ritual knowledge, and sacred story. Recent Texas State and Shumla-linked research emphasizes an enduring Indigenous worldview rather than a simple seasonal decoration. For this meal, use the connection as humility: sky, water, stone, and time are bigger than the party.</p>
+          <p>References: <a href="https://news.txst.edu/research-and-innovation/2025/pecos-river-rock-art.html">Texas State University Pecos River rock art</a>, <a href="https://www.archaeological.org/lower-pecos-rock-art-recording-and-preservation-project/">Archaeological Institute of America Lower Pecos project</a>.</p>
+        </article>
+        <article class="card">
+          <h3>Broader Indigenous Solstice Themes</h3>
+          <p>Across Native North America, solstices can be times of prayer, renewal, ceremony, planting cycles, and relationship with the sun. Use that as a guide for conduct: give thanks, avoid extraction, do not cosplay a closed ceremony, and make a concrete gesture toward Native-led preservation or education.</p>
+          <p>References: <a href="https://history.illinois.edu/news/2022-12-21/what-winter-solstice-rituals-tell-us-about-indigenous-people">University of Illinois on Indigenous solstice rituals</a>, <a href="https://nativenewsonline.net/environment/summer-solstice-brings-prayers-ceremony-to-indian-country/">Native News Online summer solstice ceremonies</a>, <a href="https://indianpueblo.org/summer-solstice/">Indian Pueblo Cultural Center summer solstice</a>.</p>
+        </article>
+      </div>
+      <div class="card" style="margin-top: 14px;">
+        <h3>Las Jaras Version</h3>
+        <p>Before eating, name the land and water without pretending ownership of a tradition: "May this meal honor the peoples who knew this place before Texas had flags, borders, or deeds. May we care for the water, soil, plants, and stories that remain." Then make the action practical: donate to or visit a Native-led site, learn the names of local Indigenous peoples, or choose native plants for the yard.</p>
+      </div>
+    </section>
+
+    <section id="cleaning">
+      <h2>Solstice Cleaning</h2>
+      <p class="lede">Treat cleaning as making room for light. The historical connection is purification and protection: midsummer traditions often used bonfires, herbs, water, and thresholds to symbolically clear the home and protect the growing season.</p>
+      <div class="grid two">
+        <article class="card">
+          <h3>Do This</h3>
+          <ul>
+            <li>Open curtains at first light; wash or shake out one set if dusty.</li>
+            <li>Clear the kitchen counters before cooking; keep only citrus, herbs, bread, and water visible.</li>
+            <li>Wipe the front door, porch table, and outdoor chairs.</li>
+            <li>Make a mint-rosemary-lavender simmer pot or cold bowl of scented water.</li>
+            <li>Put one donation bag by the door: old towels, clutter, expired pantry extras.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Why It Fits</h3>
+          <p>Bonfire customs were about strengthening light and protecting crops; herb traditions treated midsummer plants as especially potent. A Texas version does not need a bonfire in June. Clean thresholds, cold herb water, and one candle after sunset get the point across without turning the house into a sauna.</p>
+          <p>References: <a href="https://www.nationaltrust.org.uk/discover/history/history-of-summer-solstice-traditions">National Trust solstice history</a>, <a href="https://blog.herbsociety.org/sunlight-and-sage-welcoming-the-summer-solstice/">Herb Society solstice herbs</a>, <a href="https://www.slowfood.org.uk/2022/06/20/the-summer-solstice-a-day-to-celebrate-and-appreciate-midsummers-gifts-and-traditions/">Slow Food midsummer traditions</a>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="cooking">
+      <h2>Solstice Cooking</h2>
+      <p class="lede">The food should look like the day: yellow corn, red tomato, green herbs, white Gulf seafood, watermelon, peaches, honey, and a loaf that feels sunny without requiring oven drama.</p>
+      <div class="recipe">
+        <article>
+          <h3>The Main Spread</h3>
+          <p><span class="tag">Gulf</span><span class="tag">Peach</span><span class="tag">Corn</span><span class="tag">Herbs</span></p>
+          <ul class="ingredients">
+            <li>Chile-lime shrimp or fish tacos</li>
+            <li>Charred corn, tomato, cucumber, avocado salad</li>
+            <li>Watermelon-lime agua fresca with mint</li>
+            <li>Texas peach and blueberry cobbler</li>
+            <li>Jalapeno-cheddar-cornmeal breadmaker loaf</li>
+            <li>Honey-lime butter</li>
+          </ul>
+        </article>
+        <aside class="callout">
+          <h3>Recipe Links</h3>
+          <p><a href="https://www.heb.com/static-page/article-template/shrimp-tacos-video">H-E-B shrimp taco ideas</a> and <a href="https://www.heb.com/recipe/recipe-detail/spicy-blackened-shrimp-tacos">H-E-B blackened shrimp tacos</a> keep it Texas Gulf. <a href="https://dinnertonight.tamu.edu/recipe/aguas-frescas-watermelon-and-lime/">Texas A&amp;M Dinner Tonight watermelon-lime agua fresca</a> covers the drink. <a href="https://www.southernliving.com/recipes/peach-blueberry-cobbler">Southern Living peach-blueberry cobbler</a> handles dessert.</p>
+        </aside>
+      </div>
+
+      <div class="grid" style="margin-top: 18px;">
+        <article class="card">
+          <h3>Breadmaker Sun Loaf</h3>
+          <p>Your breadmaker recipe belongs here because bread is ritual food: grain, sun, heat, and sharing. The cornmeal nods to Texas and Indigenous-to-Southern corn traditions; cheddar and jalapeno make it cookout-friendly; honey-lime butter ties it to midsummer honey and citrus.</p>
+        </article>
+        <article class="card">
+          <h3>Historical Tie</h3>
+          <p>Midsummer feasts often celebrated the first abundance of the season: herbs, berries, dairy, grains, and foods cooked over fire. The Texas translation is grilled or seared seafood, corn, watermelon, tomatoes, peaches, herbs, and honey.</p>
+        </article>
+        <article class="card">
+          <h3>Serve It Like This</h3>
+          <p>Late breakfast fruit, cold prep midday, tacos and salad at sunset, cobbler after dark. Put the loaf on a board with salted butter, honey, lime zest, sliced jalapenos, and a small bowl of flaky salt.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="meal-times">
+      <h2>Solstice Perfect Time to Eat Each Meal</h2>
+      <p class="lede">For Schertz on the June solstice, build the eating day around light and heat: hydrate before sunrise, eat fruit after sunrise, keep the main cooking out of the hottest window, and make dinner late enough to feel ceremonial but early enough that nobody melts.</p>
+      <div class="timeline">
+        <div class="time-row">
+          <strong>5:55 a.m.</strong>
+          <span>Water, coffee, or tea before sunrise. This is not a meal; it is the "I am awake and not foolish" course.</span>
+        </div>
+        <div class="time-row">
+          <strong>6:45 a.m.</strong>
+          <span>Sunrise fruit: peaches, yogurt, honey, lime zest, and pecans. Eat after the 6:31-6:33 a.m. sunrise window.</span>
+        </div>
+        <div class="time-row">
+          <strong>9:30 a.m.</strong>
+          <span>Late breakfast or brunch: a slice of the breadmaker sun loaf with eggs, avocado, or honey-lime butter.</span>
+        </div>
+        <div class="time-row">
+          <strong>12:30 p.m.</strong>
+          <span>Cold lunch: watermelon agua fresca, cucumber-tomato salad, queso fresco, and leftover bread. No heavy stove work.</span>
+        </div>
+        <div class="time-row">
+          <strong>4:00 p.m.</strong>
+          <span>Pool/spa snack: watermelon, Tajin, smoked almonds, pickles, and cold mint towels. This lines up with the Botanical Garden Make Music start time if going out.</span>
+        </div>
+        <div class="time-row">
+          <strong>7:15 p.m.</strong>
+          <span>Main solstice dinner: chile-lime shrimp or fish tacos, charred corn salad, bread, and agua fresca. Sunset is late enough to make this feel golden.</span>
+        </div>
+        <div class="time-row">
+          <strong>8:45 p.m.</strong>
+          <span>Dessert after sunset glow: peach-blueberry cobbler with vanilla ice cream, then candles or porch lights.</span>
+        </div>
+      </div>
+      <p class="lede" style="margin-top: 18px;">Timing references: <a href="https://sunrise-sunset.org/us/schertz-tx">Schertz sunrise/sunset</a>, <a href="https://www.timeanddate.com/sun/%4011788957?month=6">Timeanddate San Antonio June 2026</a>, <a href="https://sabgtx.org/event/free-summer-evening-make-music-san-antonio/">Botanical Garden Make Music San Antonio</a>.</p>
+    </section>
+
+    <section id="gardening">
+      <h2>Solstice Gardening</h2>
+      <p class="lede">In Texas, solstice gardening is less "plant everything" and more "protect what survives July." Do it before breakfast or near sunset.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>Morning Task</h3>
+          <p>Deep-water containers and new plantings, then refresh mulch. Texas A&amp;M's vegetable guidance emphasizes sun, soil, water access, and choosing crops that actually fit your space.</p>
+        </article>
+        <article class="card">
+          <h3>Plant or Tend</h3>
+          <p>For summer mood: basil, rosemary, thyme, oregano, mint in a pot, zinnias, sunflowers, celosia, Pride of Barbados, salvia, and native pollinator plants. Central Texas Gardener's June list is a good heat-aware guide.</p>
+        </article>
+        <article class="card">
+          <h3>Make It Solstice</h3>
+          <p>Harvest a tiny bundle of rosemary, mint, basil, or lavender. Use it in the kitchen, the cleaning bowl, and the table setting so the garden participates in the meal.</p>
+        </article>
+      </div>
+      <p class="lede" style="margin-top: 18px;">References: <a href="https://agrilifeextension.tamu.edu/library/gardening/texas-home-vegetable-gardening-guide/">Texas A&amp;M AgriLife Home Vegetable Gardening Guide</a>, <a href="https://www.centraltexasgardener.org/resource/june-to-do-list/">Central Texas Gardener June To Do List</a>, <a href="https://www.npsot.org/resources/start-a-native-garden/">Native Plant Society of Texas native garden guide</a>, <a href="https://aggie-horticulture.tamu.edu/vegetable/easy-gardening-series/">Aggie Horticulture Easy Gardening Series</a>.</p>
+    </section>
+
+    <section id="prayers">
+      <h2>Solstice Prayers</h2>
+      <p class="lede">These are original, short, and flexible. Use one, or read them as intentions instead of formal prayers.</p>
+      <div class="grid">
+        <article class="card">
+          <h3>At Sunrise</h3>
+          <p>For the long light, thank you. For the body that can rise, the house that can hold us, the garden that keeps trying, and the food that gathers us: let this day make us awake, generous, and well.</p>
+        </article>
+        <article class="card">
+          <h3>Before Cooking</h3>
+          <p>Bless the hands that grew, caught, packed, carried, bought, washed, chopped, stirred, and served this food. May the table be bright, the work shared, and the leftovers useful.</p>
+        </article>
+        <article class="card">
+          <h3>At Sunset</h3>
+          <p>What has ripened, let us receive. What has burned too hot, let us release. What needs tending, let us tend with patience. Let the light we gathered today become courage for the season ahead.</p>
+        </article>
+      </div>
+      <p class="lede" style="margin-top: 18px;">Reference traditions and alternate readings: <a href="https://www.xavier.edu/jesuitresource/online-resources/prayer-index/summer-prayers">Xavier University summer prayers</a>, <a href="https://www.spiritualityandpractice.com/practices/naming-the-days/view/23141/summer-solstice">Spirituality &amp; Practice on solstice ritual</a>, <a href="https://www.portlaoiseparish.ie/a-summer-solstice-prayer/">Portlaoise Parish summer solstice prayer</a>, <a href="https://www.learnreligions.com/prayers-and-blessings-for-litha-4051842">Litha prayers and blessings</a>.</p>
+    </section>
+
+    <section id="rise">
+      <h2>Solstice Perfect Time to Rise</h2>
+      <p class="lede">For Schertz/Las Jaras, the useful answer is: wake at <strong>5:55 a.m.</strong>, be outside by <strong>6:15 a.m.</strong>, and watch sunrise around <strong>6:31 a.m.</strong> on the solstice weekend. San Antonio sunrise is about <strong>6:33 a.m.</strong>.</p>
+      <div class="timeline">
+        <div class="time-row">
+          <strong>5:55 a.m.</strong>
+          <span>Wake, drink water, start coffee or tea. No phone scrolling. The sun is doing all this work; we can at least show up.</span>
+        </div>
+        <div class="time-row">
+          <strong>6:05 a.m.</strong>
+          <span>Step outside, open curtains, light one candle if staying inside, or drive to a Mission if leaving home.</span>
+        </div>
+        <div class="time-row">
+          <strong>6:15 a.m.</strong>
+          <span>Begin the sunrise prayer, slow walk, or porch sit. First light has already started; this is the blue-gold window.</span>
+        </div>
+        <div class="time-row">
+          <strong>6:31-6:33 a.m.</strong>
+          <span>Sunrise. Take one photo if you want, then put the phone away for three minutes.</span>
+        </div>
+        <div class="time-row">
+          <strong>7:00 a.m.</strong>
+          <span>Water garden, harvest herbs, then get back inside before Texas starts acting like Texas.</span>
+        </div>
+      </div>
+      <p class="lede" style="margin-top: 18px;">Timing references: <a href="https://sunrise-sunset.org/us/schertz-tx">Schertz sunrise/sunset</a>, <a href="https://sunrise-sunset.org/us/san-antonio-tx">San Antonio sunrise/sunset</a>, <a href="https://www.timeanddate.com/sun/%4011788957?month=6">Timeanddate San Antonio June 2026</a>, <a href="https://www.almanac.com/content/first-day-summer-summer-solstice">Old Farmer's Almanac 2026 solstice time</a>.</p>
+    </section>
+
+    <section id="six-flags">
+      <h2>Solstice Meaning to Each of the Six Countries Texas Once Was</h2>
+      <p class="lede">Texas' "six flags" are Spain, France, Mexico, the Republic of Texas, the Confederate States, and the United States. This section treats them as historical layers, not equal moral inheritances. The original Indigenous presence predates all six.</p>
+      <div class="grid two">
+        <article class="card">
+          <h3>Spain</h3>
+          <p>Meaning: fire, Saint John, water, Catholic feast layered over older midsummer customs. Spain's San Juan bonfires celebrate summer with music, fireworks, fire, and cleansing. Texas translation: clean the threshold, use herbs, light candles after sunset, skip dangerous June bonfires.</p>
+          <p>References: <a href="https://www.spain.info/en/calendar/bonfires-san-juan-alicante/">Spain.info Bonfires of San Juan</a>, <a href="https://www.tsl.texas.gov/ref/abouttx/sixflags.html">Texas State Library Six Flags</a>.</p>
+        </article>
+        <article class="card">
+          <h3>France</h3>
+          <p>Meaning: music in the streets. France's modern Fete de la Musique was launched on June 21, the symbolic solstice date, and turned the longest day into a public, democratic music ritual. Texas translation: Pearl vinyl, Make Music San Antonio, porch playlist, and open windows before it gets too hot.</p>
+          <p>References: <a href="https://fetedelamusique.culture.gouv.fr/actualites/historique-de-la-fete-de-la-musique">French Ministry of Culture history</a>, <a href="https://makemusicday.org/about/">Make Music Day history</a>.</p>
+        </article>
+        <article class="card">
+          <h3>Mexico</h3>
+          <p>Meaning: sun, maize, Catholic feast days, and Indigenous astronomical knowledge in many regions. Texas was Mexican from 1821 to 1836, and Mexican solstice meaning can include layered Indigenous and Catholic calendars. Texas translation: corn, chile, lime, water, gratitude for heat without romanticizing it.</p>
+          <p>References: <a href="https://www.tsl.texas.gov/ref/abouttx/sixflags.html">Texas State Library Six Flags</a>, <a href="https://inah.gob.mx/boletines/aspectos-calendaricos-y-astronomicos-de-el-castillo-de-chichen-itza-en-arqueologia-mexicana">INAH on calendar and astronomy at El Castillo</a>, <a href="https://www.inah.gob.mx/boletines/el-inah-implementara-operativo-equinoccio-de-primavera-2026-en-la-zona-arqueologica-de-chichen-itza">INAH Chichen Itza seasonal visitor operations</a>.</p>
+        </article>
+        <article class="card">
+          <h3>Republic of Texas</h3>
+          <p>Meaning: agrarian timing, survival, weather, harvest, and settlement. In this layer, solstice is less a formal holy day and more a practical turning point: long workday, crop heat, cattle, water, and the need to organize summer labor.</p>
+          <p>References: <a href="https://www.tshaonline.org/handbook/entries/republic-of-texas">TSHA Republic of Texas</a>, <a href="https://www.tshaonline.org/handbook/entries/cotton-culture">TSHA cotton culture</a>.</p>
+        </article>
+        <article class="card">
+          <h3>Confederate States</h3>
+          <p>Meaning: not celebration. Texas' Confederate period is inseparable from slavery and secession. Because Juneteenth falls on June 19, just before the 2026 solstice, the honest ritual meaning is remembrance, freedom, repair, and refusing nostalgia.</p>
+          <p>References: <a href="https://nmaahc.si.edu/explore/stories/historical-legacy-juneteenth">NMAAHC Juneteenth legacy</a>, <a href="https://www.tsl.texas.gov/ref/abouttx/juneteenth">Texas State Library Juneteenth</a>, <a href="https://www.tshaonline.org/handbook/entries/juneteenth">TSHA Juneteenth</a>.</p>
+        </article>
+        <article class="card">
+          <h3>United States</h3>
+          <p>Meaning: civic summer, public museums, parks, music, science, and long-evening gathering. The U.S. layer is where Smithsonian Solstice Saturday, NASA/NOAA astronomy, national parks, and local public programming fit the day.</p>
+          <p>References: <a href="https://www.si.edu/events/solstice">Smithsonian Solstice Saturday</a>, <a href="https://www.nesdis.noaa.gov/about/k-12-education/optical-phenomena/what-solstice">NOAA solstice explainer</a>, <a href="https://spaceplace.nasa.gov/seasons/">NASA Space Place seasons</a>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="references">
+      <h2>References</h2>
+      <p class="lede">Source links used for the page, grouped so the rabbit holes are tidy.</p>
+      <ul class="refs">
+        <li><a href="https://svs.gsfc.nasa.gov/14366/">NASA Scientific Visualization Studio: Solstice animations</a></li>
+        <li><a href="https://spaceplace.nasa.gov/seasons/">NASA Space Place: What causes the seasons</a></li>
+        <li><a href="https://www.nesdis.noaa.gov/about/k-12-education/optical-phenomena/what-solstice">NOAA: What is a solstice?</a></li>
+        <li><a href="https://www.english-heritage.org.uk/visit/places/stonehenge/things-to-do/solstice/what-is-the-summer-solstice/">English Heritage: What is the summer solstice?</a></li>
+        <li><a href="https://www.english-heritage.org.uk/visit/places/stonehenge/things-to-do/solstice/summer-solstice-2026/">English Heritage: Summer Solstice 2026 at Stonehenge</a></li>
+        <li><a href="https://www.britishmuseum.org/blog/here-comes-sun-stonehenge-and-summer-solstice">British Museum: Stonehenge and the summer solstice</a></li>
+        <li><a href="https://www.nationaltrust.org.uk/discover/history/history-of-summer-solstice-traditions">National Trust: History of summer solstice traditions</a></li>
+        <li><a href="https://www.tsl.texas.gov/ref/abouttx/sixflags.html">Texas State Library: Six Flags of Texas</a></li>
+        <li><a href="https://www.tshaonline.org/handbook/entries/flags-of-texas">TSHA: Flags of Texas</a></li>
+        <li><a href="https://thc.texas.gov/historic-sites/caddo-mounds">Texas Historical Commission: Caddo Mounds</a></li>
+        <li><a href="https://news.txst.edu/research-and-innovation/2025/pecos-river-rock-art.html">Texas State University: Pecos River rock art</a></li>
+        <li><a href="https://www.tsl.texas.gov/ref/abouttx/juneteenth">Texas State Library: Texas Observes Juneteenth</a></li>
+        <li><a href="https://www.miravalresorts.com/austin/events/summer-pleasures-celestial-supper">Miraval Austin: Summer Pleasures Celestial Supper</a></li>
+        <li><a href="https://www.miravalresorts.com/austin/day-spa-packages">Miraval Austin: Summer Solstice Day Spa</a></li>
+        <li><a href="https://www.bunkhousehotels.com/austin-motel/events/splash-dance">Austin Motel: Splash Dance</a></li>
+        <li><a href="https://events.atpearl.com/event/pullman-market-presents-seafood-street-market/">Pearl: Seafood Street Market</a></li>
+        <li><a href="https://events.atpearl.com/event/viaje-sunday-vinyl-series-jue-let/2026-06-21/">Pearl: Summer Vinyl Series</a></li>
+        <li><a href="https://urban15.org/events/summer-solstice-performance-2026/?occurrence=2026-06-21">URBAN-15: Summer Solstice Performance 2026</a></li>
+        <li><a href="https://sabgtx.org/event/free-summer-evening-make-music-san-antonio/">San Antonio Botanical Garden: Make Music San Antonio</a></li>
+        <li><a href="https://www.samuseum.org/events/">San Antonio Museum of Art events</a></li>
+        <li><a href="https://www.thesanantonioriverwalk.com/events/artisan-shows/">San Antonio River Walk Artisan Shows</a></li>
+        <li><a href="https://www.nps.gov/saan/planyourvisit/hours.htm">San Antonio Missions hours</a></li>
+        <li><a href="https://www.heb.com/static-page/article-template/shrimp-tacos-video">H-E-B shrimp taco recipes</a></li>
+        <li><a href="https://dinnertonight.tamu.edu/recipe/aguas-frescas-watermelon-and-lime/">Texas A&amp;M Dinner Tonight: Watermelon-lime agua fresca</a></li>
+        <li><a href="https://www.southernliving.com/recipes/peach-blueberry-cobbler">Southern Living: Peach and blueberry cobbler</a></li>
+        <li><a href="https://agrilifeextension.tamu.edu/library/gardening/texas-home-vegetable-gardening-guide/">Texas A&amp;M AgriLife: Home vegetable gardening</a></li>
+        <li><a href="https://www.centraltexasgardener.org/resource/june-to-do-list/">Central Texas Gardener: June to-do list</a></li>
+        <li><a href="https://www.npsot.org/resources/start-a-native-garden/">Native Plant Society of Texas: Start a native garden</a></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
