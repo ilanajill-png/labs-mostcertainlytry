@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guru Marigold Guided Reflection Library | Las Jaras</title>
+  <meta name="description" content="A guided reflection library for Guru Marigold at Las Jaras: short prompts, seasonal reflections, spa ceremony reflections, and practical house check-ins.">
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#626b78; --paper:#f7f5ef; --panel:#fffdfa; --line:#d7d9d0; --cobalt:#0047ab; --marigold:#c77d13; --leaf:#2f6f4f; --rose:#a54f5d; --violet:#42385f; --danger:#9f2f2f; --shadow:0 18px 44px rgba(23,32,51,.1); }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:radial-gradient(circle at 14% 8%, rgba(199,125,19,.16), transparent 24rem), radial-gradient(circle at 86% 12%, rgba(0,71,171,.1), transparent 24rem), var(--paper); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height:1.55; }
+    a { color:var(--cobalt); text-underline-offset:4px; font-weight:850; }
+    header { position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line); background:rgba(247,245,239,.92); backdrop-filter:blur(14px); }
+    .bar, main, footer { width:min(1180px, calc(100% - 34px)); margin:0 auto; }
+    .bar { min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:var(--cobalt); font-weight:950; text-decoration:none; }
+    nav, .toolbar { display:flex; flex-wrap:wrap; gap:8px; }
+    nav a, .button, button { min-height:38px; padding:8px 11px; border:1px solid var(--line); border-radius:8px; background:rgba(255,253,250,.88); color:var(--ink); font:inherit; font-size:.9rem; font-weight:850; text-decoration:none; cursor:pointer; }
+    .button.primary, button.primary { border-color:var(--cobalt); background:var(--cobalt); color:white; }
+    button.danger { color:var(--danger); }
+    .hero { min-height:calc(58vh - 64px); display:grid; grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr); gap:24px; align-items:center; padding:52px 0 34px; }
+    .kicker, .label, footer { color:var(--muted); font-size:.78rem; font-weight:900; letter-spacing:0; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(3rem, 7vw, 6.4rem); line-height:.9; letter-spacing:0; }
+    h2 { margin:0; font-size:clamp(1.8rem, 3vw, 2.8rem); line-height:1.04; letter-spacing:0; }
+    h3, p { margin:0; }
+    .lede { color:var(--muted); font-size:clamp(1.06rem, 1.8vw, 1.28rem); max-width:850px; }
+    .panel, .card, .status-note { border:1px solid var(--line); border-radius:8px; background:rgba(255,253,250,.9); box-shadow:var(--shadow); }
+    .panel, .card, .status-note { padding:18px; display:grid; gap:12px; }
+    .section { padding:42px 0; border-top:1px solid var(--line); }
+    .section-head { display:grid; gap:8px; max-width:900px; margin-bottom:20px; }
+    .controls { display:grid; grid-template-columns:minmax(220px, 1fr) repeat(2, minmax(160px, .35fr)); gap:10px; margin:18px 0; }
+    input, select { width:100%; min-height:42px; border:1px solid var(--line); border-radius:8px; background:white; color:var(--ink); font:inherit; padding:9px 10px; }
+    .grid { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:14px; }
+    .reflection-card { border-top:6px solid var(--marigold); }
+    .reflection-card[data-category="Seasonal"] { border-top-color:var(--leaf); }
+    .reflection-card[data-category="Spa"] { border-top-color:var(--rose); }
+    .reflection-card[data-category="Decision"] { border-top-color:var(--cobalt); }
+    .reflection-card[data-category="Repair"] { border-top-color:var(--violet); }
+    .chip-row { display:flex; flex-wrap:wrap; gap:6px; }
+    .chip { padding:5px 8px; border-radius:999px; background:rgba(47,111,79,.1); color:var(--leaf); font-size:.74rem; font-weight:900; }
+    .used { background:rgba(0,71,171,.08); color:var(--cobalt); }
+    .prompt-list { margin:0; padding-left:20px; color:var(--muted); }
+    .empty { color:var(--muted); }
+    footer { padding:26px 0 46px; border-top:1px solid var(--line); text-transform:none; }
+    @media (max-width:920px) { .hero, .grid, .controls { grid-template-columns:1fr; } }
+    @media (max-width:720px) { .bar { align-items:flex-start; flex-direction:column; padding:12px 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="guru.html">Guru Marigold</a>
+      <nav aria-label="Guided reflection navigation">
+        <a href="guru.html">Guru Profile</a>
+        <a href="daily-notes/guru-daily-notes.html">Daily Notes</a>
+        <a href="guru-seasonal-practice-tracker.html">Seasonal Tracker</a>
+        <a href="spa-ceremonies/index.html">Spa Ceremonies</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="kicker">Care practice</p>
+        <h1>Guided Reflection Library</h1>
+        <p class="lede">Short, practical reflection scripts for Guru Marigold: daily check-ins, seasonal thresholds, spa ceremonies, repair after hard days, and decisions that need calm instead of spiraling.</p>
+        <div class="toolbar">
+          <a class="button primary" href="#library">Open Library</a>
+          <button id="random-reflection" type="button">Choose One</button>
+          <button class="danger" id="clear-used" type="button">Clear Used Marks</button>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="label">House rule</p>
+        <p>Reflections are not homework. Pick one, answer honestly, and stop when the next practical step is visible.</p>
+        <p class="status-note" id="status" role="status" aria-live="polite">Ready.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="library">
+      <div class="section-head">
+        <p class="label">Library</p>
+        <h2>Choose A Reflection</h2>
+        <p>Use filters when you know what kind of attention is needed. Use Choose One when the whole point is to stop negotiating with yourself.</p>
+      </div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search title, prompt, being, or keyword">
+        <select id="category-filter" aria-label="Category filter"><option value="">All categories</option></select>
+        <select id="time-filter" aria-label="Time filter"><option value="">Any length</option><option value="1">1 minute</option><option value="3">3 minutes</option><option value="5">5 minutes</option><option value="10">10 minutes</option></select>
+      </div>
+      <div class="grid" id="reflection-grid"></div>
+    </section>
+  </main>
+  <footer>
+    <span>Guru Marigold guided reflection library</span>
+  </footer>
+  <script>
+    const storageKey = "guru-guided-reflection-used-v1";
+    const reflections = [
+      { id:"morning-ground", title:"Morning Ground", category:"Daily", minutes:1, being:"Guru Marigold", use:"When the day is starting too loudly.", opening:"Put both feet on the floor and let the house be ordinary for one breath.", prompts:["What does my body know before my calendar starts talking?","What is the one kind thing that would make today easier?","What does not need to be solved before breakfast?"], closing:"Name the first small action and do only that." },
+      { id:"evening-close", title:"Evening Close", category:"Daily", minutes:3, being:"Guru Marigold + Keeper Brisk", use:"When the day needs a gentle ending.", opening:"Turn down one light and put one object away.", prompts:["What did I carry today that can be set down?","What did the house do well for me?","What is one thing tomorrow can hold instead of tonight?"], closing:"Say: enough for today, and mean it a little." },
+      { id:"body-weather", title:"Body Weather Report", category:"Body", minutes:3, being:"Nanny Hearth", use:"When mood, pain, heat, or fatigue is steering.", opening:"Check water, food, temperature, medication, and rest before interpreting the day spiritually.", prompts:["What is the weather inside my body?","What would make my body 5 percent more comfortable?","What practical care outranks symbolism right now?"], closing:"Do the practical care first." },
+      { id:"house-ask", title:"What The House Is Asking", category:"House", minutes:5, being:"Guru Marigold + Keeper Brisk", use:"When the house feels loud or neglected.", opening:"Stand in one room without fixing anything for 20 seconds.", prompts:["What is the room asking for: clearing, repair, beauty, air, or rest?","What is the smallest respectful response?","What can wait because it is not actually urgent?"], closing:"Do the smallest response or schedule it honestly." },
+      { id:"threshold-question", title:"Threshold Question", category:"Seasonal", minutes:5, being:"Guru Marigold + Serafina", use:"For solstices, equinoxes, and seasonal threshold days.", opening:"Face a doorway, window, porch, or table.", prompts:["What season am I leaving?","What season am I entering?","What needs a blessing, a boundary, or a broom?"], closing:"Mark the threshold with water, sweeping, food, or one written sentence." },
+      { id:"summer-heat", title:"Heat Discipline Reflection", category:"Seasonal", minutes:3, being:"Nanny Hearth + Officer Ember", use:"For Texas summer, solstice, or any overheated day.", opening:"Drink water first. No exceptions, very glamorous.", prompts:["Where is abundance becoming overexposure?","What should happen before noon or after sunset?","What is the cooling plan for body, porch, pets, plants, and guests?"], closing:"Choose shade, water, and timing before beauty." },
+      { id:"harvest-accounting", title:"Harvest Accounting", category:"Seasonal", minutes:10, being:"Guru Marigold + Archivist Vellum", use:"For Lammas, autumn equinox, pantry reviews, and end-of-project moments.", opening:"Set two notes: received and released.", prompts:["What fed me this season?","What did I keep that I did not use?","What should be shared, composted, archived, or retired?"], closing:"Write three keepers and one release." },
+      { id:"winter-mend", title:"Winter Mending", category:"Seasonal", minutes:5, being:"Guru Marigold + Keeper Brisk", use:"For winter solstice, cold nights, or repair moods.", opening:"Turn on one warm lamp and choose one small broken thing.", prompts:["What needs warmth?","What needs repair, not reinvention?","What can remain dormant without guilt?"], closing:"Mend one small thing or write the repair down clearly." },
+      { id:"spa-before", title:"Before A Spa Ceremony", category:"Spa", minutes:3, being:"Guru Marigold + Nanny Hearth", use:"Before any Las Jaras spa ceremony.", opening:"Set out water and check the floor before products come out.", prompts:["What am I asking this ceremony to help with?","Is my body safe for heat, scent, oils, scrubs, or fatigue today?","What would make this ceremony simpler and kinder?"], closing:"Choose the ceremony only after the safety answer is clear." },
+      { id:"spa-after", title:"After A Spa Ceremony", category:"Spa", minutes:5, being:"Archivist Vellum", use:"After a spa ceremony, while the details are fresh.", opening:"Drink water before reviewing the ritual.", prompts:["What step actually helped?","What product, scent, heat level, or music should be changed?","What needs restocking, washing, or avoiding next time?"], closing:"Record one improvement and reset the room." },
+      { id:"abundance-boundary", title:"Abundance With Boundaries", category:"Decision", minutes:5, being:"Guru Marigold", use:"When something good is becoming too much.", opening:"Name the good thing without apologizing for needing limits.", prompts:["Where is enough already present?","Where is more becoming mess, heat, cost, fatigue, or obligation?","What boundary protects the good part?"], closing:"Keep the good. Cut the overflow." },
+      { id:"decision-door", title:"The Decision Door", category:"Decision", minutes:10, being:"Coach + Guru Marigold", use:"When choosing between options.", opening:"Write each option as a door, not a life sentence.", prompts:["What happens if I choose this for one week?","What cost is hidden because the option looks prettier?","Which door gives future-me more steadiness?"], closing:"Choose the next reversible step, not the whole destiny." },
+      { id:"repair-after-hard-day", title:"Repair After A Hard Day", category:"Repair", minutes:5, being:"Guru Marigold + Nanny Hearth", use:"When the day went sideways.", opening:"No verdicts for 60 seconds. Just water, breath, and a chair.", prompts:["What actually happened, without the courtroom voice?","What still needs care tonight?","What apology, boundary, or rest can wait until I am regulated?"], closing:"Do one body-care action before any message, decision, or cleanup spiral." },
+      { id:"grief-soft-place", title:"Soft Place For Grief", category:"Repair", minutes:10, being:"Guru Marigold", use:"When sadness needs a place to sit.", opening:"Put one soft object nearby: towel, blanket, pillow, sweater, or robe.", prompts:["What am I missing?","What is love asking me to remember without making me perform?","What would make the next hour gentler?"], closing:"Leave one light on for the living." },
+      { id:"guest-energy", title:"Before Guests", category:"House", minutes:5, being:"Concierge + Guru Marigold", use:"Before inviting or hosting.", opening:"Picture the guest experience from the doorway.", prompts:["What do guests need to feel safe, cooled, fed, oriented, and welcome?","What private thing should be put away?","What can be simple instead of impressive?"], closing:"Prepare comfort first, spectacle second." },
+      { id:"money-meaning", title:"Money And Meaning", category:"Decision", minutes:5, being:"Treasurer + Guru Marigold", use:"Before buying ritual supplies, decor, or ceremony objects.", opening:"Set the object name and price in the same sentence.", prompts:["What job will this object do?","Do I already own something that can do that job?","Will buying this reduce friction or create storage?"], closing:"If it still matters in 24 hours, let Treasurer review it." },
+      { id:"mirror-kindness", title:"Mirror Kindness", category:"Body", minutes:1, being:"Guru Marigold", use:"When the mirror is acting like a rude committee.", opening:"Look at one neutral detail: shoulder, hand, hair, color, breath.", prompts:["What can I describe without judging?","What does this body need today?","What sentence would I never withhold from someone I love?"], closing:"Say the kinder sentence once. No debate." },
+      { id:"creative-spark", title:"Creative Spark Without Fire", category:"Daily", minutes:3, being:"Director of Fun + Guru Marigold", use:"When the house needs delight but not chaos.", opening:"Choose one playful object, song, color, or ingredient.", prompts:["What would make the next 20 minutes more alive?","What is the low-mess version?","Who needs to be warned, invited, or spared?"], closing:"Make the small delightful thing and clean up immediately after." },
+      { id:"ancestor-table", title:"Ancestor Table", category:"Seasonal", minutes:10, being:"Guru Marigold + Archivist Vellum", use:"For Samhain, birthdays, anniversaries, and memory days.", opening:"Set a photo, name, recipe, or object on a clean surface.", prompts:["Who or what am I remembering?","What did they teach, leave, complicate, or bless?","How can I honor memory without getting stuck in it?"], closing:"Thank the remembered one and return the surface to daily life." },
+      { id:"night-path", title:"Night Path", category:"Daily", minutes:3, being:"Soma Hearthline + Guru Marigold", use:"Before sleep or after late work.", opening:"Check the path from bed to bathroom, water, and door.", prompts:["What needs to be safe before I sleep?","What light is enough?","What thought can be written down instead of carried into bed?"], closing:"Set the path, write the thought, lower the lights." },
+      { id:"conflict-cooling", title:"Conflict Cooling", category:"Repair", minutes:5, being:"Guru Marigold + Coach", use:"Before responding when activated.", opening:"Put the reply down. Hands off keyboard for 60 seconds.", prompts:["What am I trying to protect?","What would be true if I used half as many words?","What response can wait until my nervous system stops driving?"], closing:"Draft only. Send nothing until reviewed." },
+      { id:"small-vow", title:"Small Vow", category:"Daily", minutes:1, being:"Guru Marigold", use:"When a full plan is too much.", opening:"Put a hand on the table, wall, or heart.", prompts:["What is one small vow I can keep by bedtime?","What would make it easier to keep?","What counts as done?"], closing:"Make the vow small enough to survive the day." },
+      { id:"beauty-with-purpose", title:"Beauty With Purpose", category:"House", minutes:5, being:"Velvet Thimble + Guru Marigold", use:"Before styling a room, tray, altar, or ceremony setup.", opening:"Name the function before choosing the beauty.", prompts:["What must this setup help someone do?","What visual element supports that instead of distracting?","What should be removed so the beauty can breathe?"], closing:"Remove one thing before adding another." },
+      { id:"monthly-review", title:"Month-End Blessing", category:"Seasonal", minutes:10, being:"Archivist Vellum + Guru Marigold", use:"At month-end or before a new monthly plan.", opening:"Open notes, calendar, or receipts only after taking one breath.", prompts:["What did this month teach the house?","What pattern keeps repeating?","What deserves to become a rule, page, recipe, or ritual?"], closing:"Save one lesson and release the rest of the pile." }
+    ];
+
+    const grid = document.getElementById("reflection-grid");
+    const search = document.getElementById("search");
+    const categoryFilter = document.getElementById("category-filter");
+    const timeFilter = document.getElementById("time-filter");
+    const status = document.getElementById("status");
+
+    function escapeHtml(value) {
+      return String(value || "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+
+    function usedMap() {
+      try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch { return {}; }
+    }
+
+    function saveUsed(map) {
+      localStorage.setItem(storageKey, JSON.stringify(map));
+    }
+
+    function reflectionText(item) {
+      return `${item.title}\n\nOpening: ${item.opening}\n\nPrompts:\n${item.prompts.map((prompt, index) => `${index + 1}. ${prompt}`).join("\n")}\n\nClosing: ${item.closing}`;
+    }
+
+    function matches(item) {
+      const query = search.value.trim().toLowerCase();
+      const category = categoryFilter.value;
+      const minutes = timeFilter.value;
+      const haystack = [item.title, item.category, item.being, item.use, item.opening, item.closing, ...item.prompts].join(" ").toLowerCase();
+      return (!query || haystack.includes(query)) && (!category || item.category === category) && (!minutes || String(item.minutes) === minutes);
+    }
+
+    function render() {
+      const used = usedMap();
+      const items = reflections.filter(matches);
+      if (!items.length) {
+        grid.innerHTML = '<p class="empty">No reflections match those filters.</p>';
+        return;
+      }
+      grid.innerHTML = items.map((item) => `
+        <article class="card reflection-card" data-category="${escapeHtml(item.category)}">
+          <div class="chip-row"><span class="chip">${escapeHtml(item.category)}</span><span class="chip">${item.minutes} min</span>${used[item.id] ? '<span class="chip used">used</span>' : ''}</div>
+          <h3>${escapeHtml(item.title)}</h3>
+          <p><strong>Use when:</strong> ${escapeHtml(item.use)}</p>
+          <p><strong>Lead:</strong> ${escapeHtml(item.being)}</p>
+          <p><strong>Opening:</strong> ${escapeHtml(item.opening)}</p>
+          <ol class="prompt-list">${item.prompts.map((prompt) => `<li>${escapeHtml(prompt)}</li>`).join("")}</ol>
+          <p><strong>Closing:</strong> ${escapeHtml(item.closing)}</p>
+          <div class="toolbar">
+            <button type="button" data-copy="${item.id}">Copy</button>
+            <button type="button" data-used="${item.id}">${used[item.id] ? "Mark Unused" : "Mark Used"}</button>
+          </div>
+        </article>
+      `).join("");
+      grid.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const item = reflections.find((reflection) => reflection.id === button.dataset.copy);
+          await navigator.clipboard.writeText(reflectionText(item));
+          status.textContent = `${item.title} copied.`;
+        });
+      });
+      grid.querySelectorAll("[data-used]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const used = usedMap();
+          used[button.dataset.used] = !used[button.dataset.used];
+          saveUsed(used);
+          render();
+        });
+      });
+    }
+
+    function populateFilters() {
+      [...new Set(reflections.map((item) => item.category))].sort().forEach((category) => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        categoryFilter.append(option);
+      });
+    }
+
+    document.getElementById("random-reflection").addEventListener("click", () => {
+      const pool = reflections.filter(matches);
+      const item = pool[Math.floor(Math.random() * pool.length)] || reflections[Math.floor(Math.random() * reflections.length)];
+      search.value = item.title;
+      categoryFilter.value = "";
+      timeFilter.value = "";
+      status.textContent = `Chosen: ${item.title}.`;
+      render();
+      document.getElementById("library").scrollIntoView({ block: "start" });
+    });
+
+    document.getElementById("clear-used").addEventListener("click", () => {
+      if (!confirm("Clear used marks for guided reflections in this browser?")) return;
+      localStorage.removeItem(storageKey);
+      status.textContent = "Used marks cleared.";
+      render();
+    });
+
+    [search, categoryFilter, timeFilter].forEach((control) => control.addEventListener("input", render));
+    populateFilters();
+    render();
+  </script>
+</body>
+</html>
