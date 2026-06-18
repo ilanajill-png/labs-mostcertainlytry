@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guru Marigold Seasonal Practice Tracker | Las Jaras</title>
+  <meta name="description" content="A practical seasonal practice tracker for Guru Marigold at Las Jaras.">
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#626b78; --paper:#f7f5ef; --panel:#fffdfa; --line:#d7d9d0; --cobalt:#0047ab; --marigold:#c77d13; --leaf:#2f6f4f; --rose:#a54f5d; --violet:#42385f; --shadow:0 18px 44px rgba(23,32,51,.1); }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; background:linear-gradient(135deg, rgba(199,125,19,.13), transparent 34%), radial-gradient(circle at 80% 8%, rgba(0,71,171,.12), transparent 24rem), var(--paper); color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height:1.55; }
+    a { color:inherit; text-underline-offset:4px; }
+    header { position:sticky; top:0; z-index:10; border-bottom:1px solid var(--line); background:rgba(247,245,239,.92); backdrop-filter:blur(14px); }
+    .bar, main, footer { width:min(1180px, calc(100% - 34px)); margin:0 auto; }
+    .bar { min-height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:var(--cobalt); font-weight:950; text-decoration:none; }
+    nav { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:8px; }
+    nav a, .button, button { min-height:38px; padding:8px 11px; border:1px solid var(--line); border-radius:8px; background:rgba(255,253,250,.88); color:var(--ink); font:inherit; font-size:.9rem; font-weight:850; text-decoration:none; cursor:pointer; }
+    .button.primary, button.primary { border-color:rgba(0,71,171,.35); background:var(--cobalt); color:white; }
+    .hero { min-height:calc(58vh - 64px); display:grid; grid-template-columns:minmax(0, 1.35fr) minmax(280px, .65fr); gap:24px; align-items:center; padding:52px 0 34px; }
+    .label, .kicker, footer { color:var(--muted); font-size:.78rem; font-weight:900; letter-spacing:0; text-transform:uppercase; }
+    h1, h2, h3, p, li { overflow-wrap:anywhere; }
+    h1 { margin:0; font-size:clamp(3rem, 7vw, 6.4rem); line-height:.9; letter-spacing:0; }
+    h2 { margin:0; font-size:clamp(1.8rem, 3vw, 2.8rem); line-height:1.04; letter-spacing:0; }
+    h3, p { margin:0; }
+    .lede { max-width:850px; color:var(--muted); font-size:clamp(1.06rem, 1.8vw, 1.28rem); }
+    .toolbar { display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+    .panel, .card { border:1px solid var(--line); border-radius:8px; background:rgba(255,253,250,.9); box-shadow:var(--shadow); }
+    .panel { padding:18px; display:grid; gap:12px; }
+    .section { padding:42px 0; border-top:1px solid var(--line); }
+    .section-head { display:grid; gap:8px; max-width:900px; margin-bottom:20px; }
+    .grid { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:14px; }
+    .card { padding:18px; display:grid; gap:12px; }
+    .season-card { border-top:6px solid var(--leaf); }
+    .season-card[data-season="summer"] { border-top-color:var(--marigold); }
+    .season-card[data-season="autumn"] { border-top-color:var(--rose); }
+    .season-card[data-season="winter"] { border-top-color:var(--violet); }
+    .season-card[data-season="spring"] { border-top-color:var(--leaf); }
+    .chip-row { display:flex; flex-wrap:wrap; gap:6px; }
+    .chip { padding:5px 8px; border-radius:999px; background:rgba(47,111,79,.1); color:var(--leaf); font-size:.74rem; font-weight:900; }
+    .checklist { display:grid; gap:8px; }
+    label.check { display:flex; align-items:flex-start; gap:8px; padding:10px; border:1px solid rgba(215,217,208,.9); border-radius:8px; background:rgba(247,245,239,.58); color:var(--muted); }
+    input[type="checkbox"] { margin-top:4px; accent-color:var(--cobalt); }
+    .today { border-color:rgba(0,71,171,.5); background:linear-gradient(135deg, rgba(0,71,171,.08), transparent 48%), rgba(255,253,250,.95); }
+    .practice-list { margin:0; padding-left:19px; color:var(--muted); }
+    .status { color:var(--cobalt); font-weight:900; }
+    footer { padding:26px 0 46px; border-top:1px solid var(--line); text-transform:none; }
+    @media (max-width:900px) { .hero, .grid { grid-template-columns:1fr; } }
+    @media (max-width:720px) { .bar { align-items:flex-start; flex-direction:column; padding:12px 0; } nav { justify-content:flex-start; } .hero { min-height:auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="guru.html">Guru Marigold</a>
+      <nav aria-label="Seasonal practice navigation">
+        <a href="guru.html">Guru Profile</a>
+        <a href="daily-notes/guru-seasonal-practice-daily.html">Daily Log</a>
+        <a href="seasonal-practices/summer-solstice.html">Summer Solstice</a>
+        <a href="../serafina-sacred-calendar.html">Sacred Calendar</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="kicker">Care practice</p>
+        <h1>Seasonal Practice Tracker</h1>
+        <p class="lede">Guru Marigold keeps the seasonal practice layer for Las Jaras: small rites, safety checks, reflection prompts, and sane transitions between heat, harvest, rest, and renewal.</p>
+        <div class="toolbar">
+          <a class="button primary" href="#current">Open Current Season</a>
+          <a class="button" href="daily-notes/guru-seasonal-practice-daily.html">Record Today</a>
+          <button id="reset-progress" type="button">Reset Checkoffs</button>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="label">Today</p>
+        <h2 id="today-title">Reading the season</h2>
+        <p id="today-note" class="lede"></p>
+        <p class="status" id="progress-status">No checkoffs yet.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="current">
+      <div class="section-head">
+        <p class="label">Now</p>
+        <h2>Current Seasonal Practice</h2>
+        <p>Use this as the daily operating page. It keeps the practice grounded: one body check, one house check, one beauty or meaning check, then stop before it becomes homework with candles.</p>
+      </div>
+      <div class="grid" id="current-grid"></div>
+    </section>
+
+    <section class="section" id="wheel">
+      <div class="section-head">
+        <p class="label">Year wheel</p>
+        <h2>Seasonal Lanes</h2>
+        <p>Guru owns the reflective practice. Serafina owns sky and garden timing. Nanny and Officer Ember can veto anything unsafe, overheated, slippery, smoky, or too ambitious.</p>
+      </div>
+      <div class="grid" id="season-grid"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <p class="label">Threshold pages</p>
+        <h2>Practice Pages</h2>
+        <p>Start with the closest threshold and add more detailed pages as the house actually uses them.</p>
+      </div>
+      <div class="grid">
+        <article class="card today">
+          <h3><a href="seasonal-practices/summer-solstice.html">Summer Solstice / Sun Throne</a></h3>
+          <p>Heat-aware longest-light practice for June 20, 2026 in Schertz.</p>
+          <div class="chip-row"><span class="chip">active example</span><span class="chip">heat rules</span><span class="chip">evening supper</span></div>
+        </article>
+        <article class="card">
+          <h3>Autumn Equinox</h3>
+          <p>Future page: accounting, pantry balance, threshold sweeping, and gratitude without clutter.</p>
+        </article>
+        <article class="card">
+          <h3>Winter Solstice / Yule</h3>
+          <p>Future page: candlelight, repair, rest, and returning light with fire safety in charge.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span>Guru Marigold seasonal tracker</span>
+  </footer>
+  <script>
+    const storageKey = "guru-seasonal-practice-tracker-v1";
+    const seasons = [
+      {
+        id: "spring",
+        title: "Spring: Renewal Without Overcommitting",
+        range: "March equinox to June solstice",
+        practice: ["Open windows when weather allows.", "Choose one renewal, not twelve.", "Refresh a prayer, plant, shelf, or habit."],
+        checks: ["Name what is waking up.", "Clear one small surface.", "Ask what support the new thing needs."]
+      },
+      {
+        id: "summer",
+        title: "Summer: Abundance With Heat Discipline",
+        range: "June solstice to September equinox",
+        practice: ["Water early.", "Rest at peak heat.", "Celebrate in shade, evening, or air conditioning."],
+        checks: ["Hydrate before ritual.", "Check heat index before inviting guests.", "Make a cooling plan for body, porch, pets, and plants."]
+      },
+      {
+        id: "autumn",
+        title: "Autumn: Harvest, Accounting, Release",
+        range: "September equinox to December solstice",
+        practice: ["Count what worked.", "Let one stale plan compost.", "Stock only what the house will use."],
+        checks: ["Name one harvest.", "Release one obligation.", "Make one practical repair before winter."]
+      },
+      {
+        id: "winter",
+        title: "Winter: Rest, Repair, Return Of Light",
+        range: "December solstice to March equinox",
+        practice: ["Choose warmth over performance.", "Mend, archive, simplify.", "Use candlelight only with fire safety awake."],
+        checks: ["Lower the household pace.", "Repair one neglected thing.", "Keep one small light visible."]
+      }
+    ];
+
+    function centralDate() {
+      const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(new Date());
+      const value = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+      return `${value.year}-${value.month}-${value.day}`;
+    }
+
+    function currentSeasonId(date) {
+      const md = date.slice(5);
+      if (md >= "03-20" && md < "06-20") return "spring";
+      if (md >= "06-20" && md < "09-22") return "summer";
+      if (md >= "09-22" && md < "12-21") return "autumn";
+      return "winter";
+    }
+
+    function loadProgress() {
+      try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch { return {}; }
+    }
+
+    function saveProgress(progress) {
+      localStorage.setItem(storageKey, JSON.stringify(progress));
+    }
+
+    function seasonCard(season, isCurrent) {
+      const progress = loadProgress();
+      return `
+        <article class="card season-card ${isCurrent ? "today" : ""}" data-season="${season.id}">
+          <p class="label">${season.range}</p>
+          <h3>${season.title}</h3>
+          <ul class="practice-list">${season.practice.map((item) => `<li>${item}</li>`).join("")}</ul>
+          <div class="checklist">
+            ${season.checks.map((item, index) => {
+              const id = `${season.id}-${index}`;
+              return `<label class="check"><input type="checkbox" data-check="${id}" ${progress[id] ? "checked" : ""}> ${item}</label>`;
+            }).join("")}
+          </div>
+        </article>
+      `;
+    }
+
+    function render() {
+      const today = centralDate();
+      const currentId = currentSeasonId(today);
+      const current = seasons.find((season) => season.id === currentId);
+      document.getElementById("today-title").textContent = current.title;
+      document.getElementById("today-note").textContent = `Central date ${today}. Guru Marigold opens the ${current.range.toLowerCase()} practice.`;
+      document.getElementById("current-grid").innerHTML = seasonCard(current, true);
+      document.getElementById("season-grid").innerHTML = seasons.map((season) => seasonCard(season, season.id === currentId)).join("");
+      updateStatus();
+      document.querySelectorAll("[data-check]").forEach((box) => {
+        box.addEventListener("change", () => {
+          const progress = loadProgress();
+          progress[box.dataset.check] = box.checked;
+          saveProgress(progress);
+          render();
+        });
+      });
+    }
+
+    function updateStatus() {
+      const progress = loadProgress();
+      const done = Object.values(progress).filter(Boolean).length;
+      document.getElementById("progress-status").textContent = done ? `${done} seasonal checkoff(s) saved in this browser.` : "No checkoffs yet.";
+    }
+
+    document.getElementById("reset-progress").addEventListener("click", () => {
+      if (!confirm("Reset seasonal practice checkoffs in this browser?")) return;
+      localStorage.removeItem(storageKey);
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>
