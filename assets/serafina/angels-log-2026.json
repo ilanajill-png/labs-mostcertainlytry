@@ -1364,7 +1364,121 @@
       ],
       "tarotMessage": "Household message: The Devil asks everyone at Las Jaras to notice the first true need before rushing. The Tower describes the weather inside and outside the walls. The Sun names what could complicate the day if ignored. Judgement shows the help already available if everyone moves with care.",
       "note": "I will inspect drainage before celebrating the rain; I will move mercy work ahead of the punishing sun; I will secure loose things and watch the thresholds. The Devil tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-20": {
+      "date": "2026-06-20",
+      "weekday": "Saturday",
+      "generatedAt": "2026-06-20T22:14:00.874Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Sacral chakra (creativity, pleasure, and emotional flow): I let the day move like water: useful, clean, and creative without flooding the whole household.",
+      "morningIntentionChakra": {
+        "chakra": "Sacral",
+        "focus": "creativity, pleasure, and emotional flow",
+        "intention": "I let the day move like water: useful, clean, and creative without flooding the whole household."
+      },
+      "practicalRite": "I water by touch, not by panic.",
+      "weather": {
+        "sunrise": "06:33 AM",
+        "sunset": "08:36 PM",
+        "highF": "87",
+        "lowF": "72",
+        "rained": true,
+        "rainInches": "0.10",
+        "extremeWeather": [
+          "high UV"
+        ],
+        "uvIndex": "11",
+        "maxGustMph": 16,
+        "maxThunderChance": 29,
+        "moonPhase": "Waxing Crescent",
+        "moonIllumination": "30%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-06-20",
+            "name": "Summer Solstice / Sun Throne",
+            "origin": "Northern Hemisphere June solstice; in Schertz the astronomical threshold arrives late June 20 Central time.",
+            "crystals": "Yes. Solar charge at sunrise or sunset; do not bake delicate stones in afternoon heat.",
+            "cleaning": "Sweep porch and outdoor table; clear fire or candle hazards.",
+            "food": "Grilled vegetables, herbs, berries, lemonade, honey cake, or a cool supper.",
+            "gift": "Give guests herbs, sunscreen, a fan, or a cooling cloth; give the garden mulch or shade.",
+            "modernCelebration": "I would water early, make shade plans, gather herbs before heat, set crystals for brief sunset light, and invite people only if the evening is humane."
+          }
+        ],
+        "alerts": [
+          {
+            "days": 14,
+            "date": "2026-07-04",
+            "name": "Independence Day",
+            "message": "14-day guest reminder: Invite guests for a cookout only if pet safety, heat, parking, and cleanup are handled.",
+            "food": "Cookout food, watermelon, corn, beans, lemonade, or chilled desserts.",
+            "gift": "Give guests cold drinks; give Pinky calm, shade, and sound protection."
+          }
+        ],
+        "next": {
+          "date": "2026-06-20",
+          "name": "Summer Solstice / Sun Throne"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "gold for generous attention",
+        "breakfast": "toast with butter and jam, plus water before coffee gets dramatic",
+        "lunch": "a grain bowl with vegetables, herbs, and enough salt to be civilized",
+        "dinner": "a pantry curry or stew that makes tomorrow easier",
+        "luckyObject": "a reusable bag",
+        "personToCall": "the person you keep meaning to thank",
+        "strangerKindness": "leave a five-star review for a small local place that earned it"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:33 AM; sunset 08:36 PM; 14h 03m daylight.",
+        "moon": "Waxing Crescent, 30% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Chastity",
+        "franklinMeasure": "Keep desire, novelty, and impulse under household governance.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "inspect drainage, empty standing water, and let rain change the chore list",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Chastity: Keep desire, novelty, and impulse under household governance. Therefore the household should inspect drainage, empty standing water, and let rain change the chore list."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Tower",
+          "reading": "I check what wind, heat, or pride could knock over."
+        },
+        {
+          "position": "Weather",
+          "card": "The Star",
+          "reading": "I treat hope as a maintenance practice."
+        },
+        {
+          "position": "Garden",
+          "card": "The Moon",
+          "reading": "I trust intuition, then verify the footing."
+        },
+        {
+          "position": "Household",
+          "card": "The Sun",
+          "reading": "I use the light; I do not challenge it."
+        },
+        {
+          "position": "Warning",
+          "card": "Judgement",
+          "reading": "I answer what has been calling for attention."
+        },
+        {
+          "position": "Blessing",
+          "card": "The World",
+          "reading": "I close the loop: water, record, return the tool."
+        }
+      ],
+      "tarotMessage": "Household message: The Tower asks everyone at Las Jaras to notice the first true need before rushing. The Star describes the weather inside and outside the walls. Judgement names what could complicate the day if ignored. The World shows the help already available if everyone moves with care.",
+      "note": "I will inspect drainage before celebrating the rain; I will move mercy work ahead of the punishing sun. The Tower tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-19T13:18:54.221Z"
+  "updatedAt": "2026-06-20T22:14:00.874Z"
 }
