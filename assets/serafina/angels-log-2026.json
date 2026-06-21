@@ -1478,7 +1478,103 @@
       ],
       "tarotMessage": "Household message: The Tower asks everyone at Las Jaras to notice the first true need before rushing. The Star describes the weather inside and outside the walls. Judgement names what could complicate the day if ignored. The World shows the help already available if everyone moves with care.",
       "note": "I will inspect drainage before celebrating the rain; I will move mercy work ahead of the punishing sun. The Tower tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-21": {
+      "date": "2026-06-21",
+      "weekday": "Sunday",
+      "generatedAt": "2026-06-21T13:20:25.747Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Solar Plexus chakra (confidence, willpower, and self-trust): I act before the sun gets bossy, choosing one necessary mercy and finishing it with authority.",
+      "morningIntentionChakra": {
+        "chakra": "Solar Plexus",
+        "focus": "confidence, willpower, and self-trust",
+        "intention": "I act before the sun gets bossy, choosing one necessary mercy and finishing it with authority."
+      },
+      "practicalRite": "I sweep a path and call it ceremony.",
+      "weather": {
+        "sunrise": "06:33 AM",
+        "sunset": "08:36 PM",
+        "highF": "95",
+        "lowF": "75",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV",
+          "thunder risk"
+        ],
+        "uvIndex": "12",
+        "maxGustMph": 25,
+        "maxThunderChance": 43,
+        "moonPhase": "First Quarter",
+        "moonIllumination": "40%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-06-24",
+          "name": "Midsummer / Nativity of St. John"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "white linen for clean beginnings",
+        "breakfast": "beans and eggs, practical abundance with no nonsense",
+        "lunch": "quesadillas with beans or greens and a side of water",
+        "dinner": "breakfast-for-dinner if morale needs repair",
+        "luckyObject": "a sprig of rosemary or another honest herb",
+        "personToCall": "someone who once helped you move through a hard week",
+        "strangerKindness": "put a cart away that is not yours"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:33 AM; sunset 08:36 PM; 14h 03m daylight.",
+        "moon": "First Quarter, 40% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Chastity",
+        "franklinMeasure": "Keep desire, novelty, and impulse under household governance.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Chastity: Keep desire, novelty, and impulse under household governance. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Star",
+          "reading": "I treat hope as a maintenance practice."
+        },
+        {
+          "position": "Weather",
+          "card": "The Moon",
+          "reading": "I trust intuition, then verify the footing."
+        },
+        {
+          "position": "Garden",
+          "card": "The Sun",
+          "reading": "I use the light; I do not challenge it."
+        },
+        {
+          "position": "Household",
+          "card": "Judgement",
+          "reading": "I answer what has been calling for attention."
+        },
+        {
+          "position": "Warning",
+          "card": "The World",
+          "reading": "I close the loop: water, record, return the tool."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Fool",
+          "reading": "I begin, but I look where the path actually is."
+        }
+      ],
+      "tarotMessage": "Household message: The Star asks everyone at Las Jaras to notice the first true need before rushing. The Moon describes the weather inside and outside the walls. The World names what could complicate the day if ignored. The Fool shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun; I will secure loose things and watch the thresholds. The Star tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-20T22:14:00.874Z"
+  "updatedAt": "2026-06-21T13:20:25.747Z"
 }
