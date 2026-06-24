@@ -1764,7 +1764,113 @@
       ],
       "tarotMessage": "Household message: The Sun asks everyone at Las Jaras to notice the first true need before rushing. Judgement describes the weather inside and outside the walls. The Magician names what could complicate the day if ignored. The High Priestess shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun; I will secure loose things and watch the thresholds. The Sun tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-24": {
+      "date": "2026-06-24",
+      "weekday": "Wednesday",
+      "generatedAt": "2026-06-24T13:26:12.308Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Third Eye chakra (intuition, insight, and inner knowing): I trust the quiet pattern, then verify it with weather, soil, shade, and the actual evidence underfoot.",
+      "morningIntentionChakra": {
+        "chakra": "Third Eye",
+        "focus": "intuition, insight, and inner knowing",
+        "intention": "I trust the quiet pattern, then verify it with weather, soil, shade, and the actual evidence underfoot."
+      },
+      "practicalRite": "I leave one seed head for the birds if it has earned the honor.",
+      "weather": {
+        "sunrise": "06:34 AM",
+        "sunset": "08:36 PM",
+        "highF": "95",
+        "lowF": "76",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV"
+        ],
+        "uvIndex": "12",
+        "maxGustMph": 26,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Gibbous",
+        "moonIllumination": "70%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-06-24",
+            "name": "Midsummer / Nativity of St. John",
+            "origin": "Christian feast and European midsummer customs around fire, water, herbs, and thresholds.",
+            "crystals": "Optional. Use moonlight or candle-adjacent indoor placement, not unsafe fire.",
+            "cleaning": "Clear the threshold and any candle/fire area.",
+            "food": "Herb bread, berries, honey, fish, or a light summer table.",
+            "gift": "Give guests herbs, flowers, or blessed water in a small bottle.",
+            "modernCelebration": "I would gather one herb, light one safe candle, bless water, and check every outdoor flame twice."
+          }
+        ],
+        "alerts": [],
+        "next": {
+          "date": "2026-06-24",
+          "name": "Midsummer / Nativity of St. John"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "black for quiet power",
+        "breakfast": "leftover rice with egg or vegetables, because the pantry also deserves respect",
+        "lunch": "a bowl with beans, rice, greens, and something sharp",
+        "dinner": "roasted vegetables with rice or potatoes and a good sauce",
+        "luckyObject": "a key you actually need",
+        "personToCall": "a sibling or cousin who knows an old version of you",
+        "strangerKindness": "carry small cash for a tip jar"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:34 AM; sunset 08:36 PM; 14h 02m daylight.",
+        "moon": "Waxing Gibbous, 70% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Chastity",
+        "franklinMeasure": "Keep desire, novelty, and impulse under household governance.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Chastity: Keep desire, novelty, and impulse under household governance. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "Judgement",
+          "reading": "I answer what has been calling for attention."
+        },
+        {
+          "position": "Weather",
+          "card": "The World",
+          "reading": "I close the loop: water, record, return the tool."
+        },
+        {
+          "position": "Garden",
+          "card": "The Fool",
+          "reading": "I begin, but I look where the path actually is."
+        },
+        {
+          "position": "Household",
+          "card": "The Magician",
+          "reading": "I use the tools already on the table before asking for a miracle."
+        },
+        {
+          "position": "Warning",
+          "card": "The High Priestess",
+          "reading": "I observe the quiet pattern; the garden has not finished speaking."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Empress",
+          "reading": "I tend growth, water, shade, and the beings who depend on them."
+        }
+      ],
+      "tarotMessage": "Household message: Judgement asks everyone at Las Jaras to notice the first true need before rushing. The World describes the weather inside and outside the walls. The High Priestess names what could complicate the day if ignored. The Empress shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. Judgement tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-23T18:28:01.993Z"
+  "updatedAt": "2026-06-24T13:26:12.308Z"
 }
