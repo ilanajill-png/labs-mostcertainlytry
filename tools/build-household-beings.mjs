@@ -253,7 +253,8 @@ const roles = [
     role: "Keeper Brisk manages the dusting and vacuuming schedule, room reset rhythms, and the small repeating jobs that make a house feel cared for before anyone can name why. They specialize in preventing cleaning from becoming either invisible labor or a dramatic emergency.",
     links: [
       ["Room Maintenance Inventory", "../las-jaras-room-maintenance-inventory.html"],
-      ["80-Step Kitchen Deep Clean Plan", "keeper-kitchen-deep-clean-80-step-plan.html"]
+      ["Kitchen Deep Clean Supply Checklist", "keeper-kitchen-deep-clean-80-step-plan.html?v=supplies#supplies"],
+      ["80-Step Kitchen Deep Clean Plan", "keeper-kitchen-deep-clean-80-step-plan.html?v=supplies#steps"]
     ]
   },
   {
