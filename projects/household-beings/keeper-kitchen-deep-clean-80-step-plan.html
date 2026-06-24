@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keeper Brisk: 80-Step Kitchen Deep Clean Plan</title>
+  <meta name="description" content="An 80-step Keeper Brisk kitchen deep-clean plan for Las Jaras.">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #162033;
+      --muted: #56616f;
+      --paper: #f7f8f4;
+      --panel: #ffffff;
+      --line: #d4d9df;
+      --cobalt: #0047ab;
+      --leaf: #2f6f4f;
+      --berry: #8b3f64;
+      --gold: #b27723;
+      --sky: #dbeafe;
+      --shadow: 0 18px 38px rgba(22, 32, 51, .1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(0, 71, 171, .12), transparent 34%),
+        linear-gradient(230deg, rgba(47, 111, 79, .12), transparent 38%),
+        var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; text-underline-offset: 4px; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(247, 248, 244, .94);
+      backdrop-filter: blur(12px);
+    }
+    .bar, main, footer {
+      width: min(1180px, calc(100% - 34px));
+      margin: 0 auto;
+    }
+    .bar {
+      min-height: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand { color: var(--cobalt); font-weight: 950; text-decoration: none; }
+    nav, .toolbar { display: flex; flex-wrap: wrap; gap: 8px; }
+    nav { justify-content: flex-end; }
+    nav a, .button {
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      font-weight: 850;
+      text-decoration: none;
+    }
+    .button.primary { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+    :focus-visible { outline: 4px solid #111827; outline-offset: 3px; }
+    .hero {
+      padding: 52px 0 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      gap: clamp(24px, 4vw, 48px);
+      align-items: end;
+    }
+    .kicker, .label {
+      margin: 0 0 8px;
+      color: var(--cobalt);
+      font-size: .78rem;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(2.15rem, 5vw, 4.8rem);
+      line-height: .96;
+      letter-spacing: 0;
+    }
+    h2, h3 { letter-spacing: 0; line-height: 1.1; }
+    h2 { margin: 0 0 14px; font-size: clamp(1.45rem, 3vw, 2.25rem); }
+    h3 { margin: 0 0 8px; font-size: 1.02rem; }
+    .lede { max-width: 760px; color: var(--muted); font-size: 1.06rem; }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 3vw, 28px);
+    }
+    .section { padding: 26px 0; }
+    .table-scroll {
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .95);
+      box-shadow: var(--shadow);
+    }
+    table {
+      width: 100%;
+      min-width: 1120px;
+      border-collapse: collapse;
+      font-size: .92rem;
+    }
+    th, td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #eef4ff;
+      color: #173763;
+      font-size: .78rem;
+      text-transform: uppercase;
+    }
+    tbody tr:nth-child(even) { background: rgba(219, 234, 254, .24); }
+    .num {
+      width: 54px;
+      color: var(--cobalt);
+      font-weight: 950;
+      text-align: right;
+      white-space: nowrap;
+    }
+    code {
+      border-radius: 5px;
+      background: rgba(22, 32, 51, .08);
+      padding: 1px 5px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .86em;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .9);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .card p, .panel p { color: var(--muted); }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 28px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+    }
+    @media (max-width: 820px) {
+      .hero, .grid { grid-template-columns: 1fr; }
+      .bar { align-items: flex-start; flex-direction: column; padding: 12px 0; }
+      nav { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="../household-beings.html">Las Jaras Beings</a>
+      <nav aria-label="Profile navigation">
+        <a href="../household-beings.html">Directory</a>
+        <a href="keeper.html">Keeper</a>
+        <a href="../las-jaras-room-maintenance-inventory.html">Room Inventory</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div>
+        <p class="kicker">Keeper Brisk kitchen protocol</p>
+        <h1>80-Step Kitchen Deep Clean Plan</h1>
+        <p class="lede">A practical, phase-based deep clean for the Las Jaras kitchen, modeled after the 80-step Hue build log: every row has an owner, estimate, dependency, success condition, and note so the work can pause without losing the plot.</p>
+        <div class="toolbar">
+          <a class="button primary" href="#steps">Open steps</a>
+          <a class="button" href="keeper.html">Back to Keeper</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <p class="label">Keeper rule</p>
+        <p>Top to bottom, dry before wet, food safety before shine. Stop for leaks, electrical issues, pest evidence, broken glass, moldy surprises, or anything that needs Sheriff Lone Star instead of a sponge.</p>
+      </aside>
+    </section>
+
+    <section class="section grid" aria-label="Deep clean summary">
+      <article class="card">
+        <p class="label">Best use</p>
+        <h2>One full day or four sessions</h2>
+        <p>Run phases 1-3 as setup, 4-6 as the main clean, 7 as floors, and 8 as QA/reset.</p>
+      </article>
+      <article class="card">
+        <p class="label">Coordination</p>
+        <h2>Sundries gets the supply gaps</h2>
+        <p>Any missing cleaner, sponge, trash bag, liner, label, or storage bin becomes a Sundries note before it becomes a shopping side quest.</p>
+      </article>
+      <article class="card">
+        <p class="label">Evidence</p>
+        <h2>Photos help future Keeper</h2>
+        <p>Photograph before, any weird findings, appliance model labels, and the final reset so the next pass knows what normal looks like.</p>
+      </article>
+    </section>
+
+    <section class="section" id="steps">
+      <p class="label">Build-log style checklist</p>
+      <h2>Kitchen Deep Clean Steps</h2>
+      <div class="table-scroll" role="region" aria-label="Kitchen deep clean 80-step table" tabindex="0">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Phase</th><th>Task</th><th>Owner</th><th>Estimate</th><th>Actual</th><th>Dependencies</th><th>Done When</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="num">1</td><td>Setup</td><td>Open the plan, choose the work window, and decide whether this is one full pass or a staged clean.</td><td>Human + Keeper</td><td>3 min</td><td>TBD</td><td>Kitchen access</td><td>Work window is named.</td><td>Do not start at midnight unless chaos has been formally invited.</td></tr>
+            <tr><td class="num">2</td><td>Setup</td><td>Take wide before photos of counters, sink, stove, refrigerator, floors, pantry zones, and trash area.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 1</td><td>Reference photos exist.</td><td>Useful for progress and future reset standards.</td></tr>
+            <tr><td class="num">3</td><td>Setup</td><td>Turn on bright kitchen lighting and add a portable work light if corners are dim.</td><td>Human</td><td>2 min</td><td>TBD</td><td>Step 1</td><td>All work surfaces are visible.</td><td>Bad light lies about crumbs.</td></tr>
+            <tr><td class="num">4</td><td>Setup</td><td>Start a cleaning playlist or timer block if it helps momentum.</td><td>Human</td><td>2 min</td><td>TBD</td><td>Step 1</td><td>Time container is active.</td><td>Optional, but Keeper approves rhythm.</td></tr>
+            <tr><td class="num">5</td><td>Setup</td><td>Stage trash bags, recycling bin, donation box, laundry basket, and return-to-other-room basket.</td><td>Human</td><td>5 min</td><td>TBD</td><td>Step 1</td><td>Sort containers are ready.</td><td>This prevents counter piles from migrating.</td></tr>
+            <tr><td class="num">6</td><td>Setup</td><td>Stage supplies: dish soap, all-purpose cleaner, degreaser, glass cleaner, disinfectant, microfiber cloths, scrub pads, gloves, towels, broom, mop, vacuum.</td><td>Human + Sundries</td><td>8 min</td><td>TBD</td><td>Step 5</td><td>Supplies are visible.</td><td>Do not mix chemicals. Especially no bleach with ammonia or acids.</td></tr>
+            <tr><td class="num">7</td><td>Setup</td><td>Check whether any product needs contact time, ventilation, gloves, or food-surface rinse.</td><td>Keeper</td><td>5 min</td><td>TBD</td><td>Step 6</td><td>Cleaner rules are known.</td><td>Read labels before ambition starts spraying.</td></tr>
+            <tr><td class="num">8</td><td>Setup</td><td>Move pets, pet bowls, and pet food away from active cleaning zones.</td><td>Human</td><td>4 min</td><td>TBD</td><td>Step 6</td><td>Pet items are safe.</td><td>Food safety counts for all household beings.</td></tr>
+            <tr><td class="num">9</td><td>Setup</td><td>Start a laundry load for washable kitchen towels, cloth napkins, and dirty microfiber if enough exist.</td><td>Human + Laundramat</td><td>5 min</td><td>TBD</td><td>Step 6</td><td>Kitchen textiles are washing or staged.</td><td>Keep greasy towels separate if needed.</td></tr>
+            <tr><td class="num">10</td><td>Setup</td><td>Put a clean towel or tray down as a temporary landing zone for small counter objects.</td><td>Human</td><td>2 min</td><td>TBD</td><td>Step 5</td><td>Landing zone exists.</td><td>Small objects need a corral, not a diaspora.</td></tr>
+            <tr><td class="num">11</td><td>Declutter</td><td>Collect obvious trash from counters, table, floor edges, windowsills, and appliance tops.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 5</td><td>Loose trash is bagged.</td><td>Do not deep-clean around trash.</td></tr>
+            <tr><td class="num">12</td><td>Declutter</td><td>Collect recycling and break down boxes that are cluttering the kitchen.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 11</td><td>Recycling is in the correct container.</td><td>Flatten boxes before they become architecture.</td></tr>
+            <tr><td class="num">13</td><td>Declutter</td><td>Move non-kitchen items to the return-to-other-room basket.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 11</td><td>Non-kitchen items are contained.</td><td>Return them later; do not abandon the kitchen mission.</td></tr>
+            <tr><td class="num">14</td><td>Declutter</td><td>Gather all dirty dishes, cups, utensils, and cooking tools into dish zones.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 11</td><td>Dishes are no longer scattered.</td><td>Put sharp knives in a visible safe spot.</td></tr>
+            <tr><td class="num">15</td><td>Dishes</td><td>Unload clean dishwasher items or drying rack items.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 14</td><td>Dishwasher/drying rack is empty.</td><td>Make room before adding more work.</td></tr>
+            <tr><td class="num">16</td><td>Dishes</td><td>Load dishwasher with dishwasher-safe items by category.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 15</td><td>Dishwasher is loaded sensibly.</td><td>Keep wood, cast iron, delicate glass, and questionable items out.</td></tr>
+            <tr><td class="num">17</td><td>Dishes</td><td>Handwash knives, wood, delicate items, and oversized pots.</td><td>Human</td><td>15 min</td><td>TBD</td><td>Step 16</td><td>Handwash-only items are clean.</td><td>Dry knives immediately.</td></tr>
+            <tr><td class="num">18</td><td>Dishes</td><td>Start dishwasher if full enough and safe to run.</td><td>Human</td><td>2 min</td><td>TBD</td><td>Step 16</td><td>Dishwasher is running or intentionally held.</td><td>Record detergent shortage for Sundries.</td></tr>
+            <tr><td class="num">19</td><td>Declutter</td><td>Clear the main countertops completely except for fixed appliances.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Steps 14-18</td><td>Counters are exposed.</td><td>Put undecided items in the landing zone.</td></tr>
+            <tr><td class="num">20</td><td>Declutter</td><td>Clear the kitchen table or island and sort every item into keep, return, wash, trash, or review.</td><td>Human + Keeper</td><td>12 min</td><td>TBD</td><td>Step 19</td><td>Table/island is exposed.</td><td>Review pile must fit in one container.</td></tr>
+            <tr><td class="num">21</td><td>Food Safety</td><td>Open refrigerator and remove expired, spoiled, or mysterious food.</td><td>Human + Sundries</td><td>12 min</td><td>TBD</td><td>Step 5</td><td>Bad food is bagged.</td><td>When in doubt, do not taste-test history.</td></tr>
+            <tr><td class="num">22</td><td>Food Safety</td><td>Group refrigerator keepers by category on a clean counter or cooler if needed.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 21</td><td>Keepers are grouped.</td><td>Work quickly; cold food should not linger.</td></tr>
+            <tr><td class="num">23</td><td>Refrigerator</td><td>Remove refrigerator shelves, drawers, and bins that can be safely removed.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 22</td><td>Removable parts are out.</td><td>Do not force brittle plastic.</td></tr>
+            <tr><td class="num">24</td><td>Refrigerator</td><td>Wash removable refrigerator parts with warm soapy water and dry fully.</td><td>Human</td><td>18 min</td><td>TBD</td><td>Step 23</td><td>Shelves and bins are clean and dry.</td><td>Let glass warm slightly before hot water.</td></tr>
+            <tr><td class="num">25</td><td>Refrigerator</td><td>Wipe refrigerator interior walls, seals, tracks, handles, and door bins.</td><td>Human</td><td>15 min</td><td>TBD</td><td>Step 23</td><td>Interior is clean.</td><td>Use food-safe cleaner and rinse if required.</td></tr>
+            <tr><td class="num">26</td><td>Refrigerator</td><td>Reinstall shelves and bins, then return food by category.</td><td>Human + Sundries</td><td>12 min</td><td>TBD</td><td>Steps 24-25</td><td>Fridge is organized.</td><td>Put soonest-use items where they can be seen.</td></tr>
+            <tr><td class="num">27</td><td>Freezer</td><td>Do a quick freezer scan for expired, unlabeled, or freezer-burned items.</td><td>Human + Sundries</td><td>8 min</td><td>TBD</td><td>Step 26</td><td>Freezer problem items are removed or noted.</td><td>Keep door-open time short.</td></tr>
+            <tr><td class="num">28</td><td>Pantry</td><td>Scan pantry or dry storage for expired food, open duplicates, spills, and pest evidence.</td><td>Human + Sundries</td><td>15 min</td><td>TBD</td><td>Step 20</td><td>Pantry problem list exists.</td><td>Escalate pest evidence to Sheriff.</td></tr>
+            <tr><td class="num">29</td><td>Pantry</td><td>Wipe sticky pantry spots and reset food categories without a full reorganization spiral.</td><td>Human</td><td>15 min</td><td>TBD</td><td>Step 28</td><td>Storage zones are usable.</td><td>This is deep cleaning, not a pantry identity crisis.</td></tr>
+            <tr><td class="num">30</td><td>Food Safety</td><td>Create a Sundries note for expiring food, missing labels, low staples, or needed storage containers.</td><td>Keeper + Sundries</td><td>8 min</td><td>TBD</td><td>Steps 21-29</td><td>Supply and food notes are captured.</td><td>No shopping commitment, just clear needs.</td></tr>
+            <tr><td class="num">31</td><td>Appliances</td><td>Unplug movable countertop appliances before cleaning around them where practical.</td><td>Human</td><td>3 min</td><td>TBD</td><td>Step 19</td><td>Appliances are safe to move.</td><td>Do not unplug refrigerator or major appliances casually.</td></tr>
+            <tr><td class="num">32</td><td>Appliances</td><td>Move toaster, coffee maker, kettle, blender, and other small appliances onto the landing zone.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 31</td><td>Counter under appliances is exposed.</td><td>Watch cords and crumb trails.</td></tr>
+            <tr><td class="num">33</td><td>Appliances</td><td>Empty toaster crumb tray and wipe toaster exterior.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 32</td><td>Toaster is crumb-free and dry.</td><td>Never submerge electrical appliances.</td></tr>
+            <tr><td class="num">34</td><td>Appliances</td><td>Clean coffee maker or kettle exterior and rinse removable parts.</td><td>Human + Barista</td><td>10 min</td><td>TBD</td><td>Step 32</td><td>Beverage station is clean.</td><td>Descale only if the product manual supports the method.</td></tr>
+            <tr><td class="num">35</td><td>Appliances</td><td>Clean blender, food processor, or mixer parts that are out or visibly used.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 32</td><td>Parts are clean and dry.</td><td>Check blades before reaching into anything.</td></tr>
+            <tr><td class="num">36</td><td>Microwave</td><td>Remove microwave turntable and support ring.</td><td>Human</td><td>3 min</td><td>TBD</td><td>Step 19</td><td>Removable parts are out.</td><td>Handle glass carefully.</td></tr>
+            <tr><td class="num">37</td><td>Microwave</td><td>Steam microwave interior with a microwave-safe bowl of water and wipe loosened soil.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 36</td><td>Interior is clean.</td><td>Use caution with hot water and steam.</td></tr>
+            <tr><td class="num">38</td><td>Microwave</td><td>Wash and reinstall microwave turntable and support ring.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 37</td><td>Microwave is reset.</td><td>Dry glass before reinstalling.</td></tr>
+            <tr><td class="num">39</td><td>Stove</td><td>Remove stove grates, burner caps, drip trays, or loose parts according to stove type.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 19</td><td>Removable stove parts are out.</td><td>Do not force parts or soak anything the manual forbids.</td></tr>
+            <tr><td class="num">40</td><td>Stove</td><td>Soak or scrub removable stove parts using the correct cleaner for the material.</td><td>Human</td><td>18 min</td><td>TBD</td><td>Step 39</td><td>Parts are degreased and drying.</td><td>Label any stubborn part for a second pass.</td></tr>
+            <tr><td class="num">41</td><td>Stove</td><td>Degrease stove top, knobs, control panel, and front edge.</td><td>Human</td><td>15 min</td><td>TBD</td><td>Step 39</td><td>Stove surface is clean.</td><td>Keep liquid away from controls and igniters.</td></tr>
+            <tr><td class="num">42</td><td>Stove</td><td>Clean backsplash and wall area behind the stove.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 41</td><td>Grease film is removed.</td><td>Start gentle, then escalate cleaner if needed.</td></tr>
+            <tr><td class="num">43</td><td>Oven</td><td>Open oven and decide whether it needs wipe-only, rack clean, or a separate oven-cleaning project.</td><td>Keeper + Human</td><td>5 min</td><td>TBD</td><td>Step 41</td><td>Oven scope is chosen.</td><td>Self-clean cycles can be harsh; do not casually start one.</td></tr>
+            <tr><td class="num">44</td><td>Oven</td><td>Wipe oven door exterior, handle, and visible crumbs at the front edge.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 43</td><td>Oven exterior is clean.</td><td>Deep oven interior can be scheduled separately.</td></tr>
+            <tr><td class="num">45</td><td>Stove</td><td>Reinstall dry stove parts and confirm burners or elements are seated correctly.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Steps 40-44</td><td>Stove is reassembled.</td><td>Test only when fully dry.</td></tr>
+            <tr><td class="num">46</td><td>High Dust</td><td>Dust top edges of upper cabinets, refrigerator top, open shelves, vents, and light fixtures reachable safely.</td><td>Human + Keeper</td><td>15 min</td><td>TBD</td><td>Step 3</td><td>High dust is removed.</td><td>No unstable climbing. If it needs a ladder, it needs respect.</td></tr>
+            <tr><td class="num">47</td><td>Cabinets</td><td>Spot-clean upper cabinet fronts, pulls, and touch zones.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Step 46</td><td>Upper cabinets feel clean to the touch.</td><td>Use finish-safe cleaner.</td></tr>
+            <tr><td class="num">48</td><td>Cabinets</td><td>Spot-clean lower cabinet fronts, drawer fronts, and handles.</td><td>Human</td><td>15 min</td><td>TBD</td><td>Step 47</td><td>Lower cabinets are clean.</td><td>Pay attention near trash, sink, and stove.</td></tr>
+            <tr><td class="num">49</td><td>Drawers</td><td>Open utensil and high-use drawers, remove loose crumbs, and wipe trays if needed.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Step 48</td><td>High-use drawers are crumb-free.</td><td>Do not reorganize every drawer unless it is dirty.</td></tr>
+            <tr><td class="num">50</td><td>Cabinets</td><td>Open under-sink cabinet, remove items, and check for leaks, dampness, or damaged supplies.</td><td>Human + Sheriff if needed</td><td>10 min</td><td>TBD</td><td>Step 48</td><td>Under-sink condition is known.</td><td>Leak evidence becomes a case, not a cleaning note.</td></tr>
+            <tr><td class="num">51</td><td>Cabinets</td><td>Wipe under-sink floor and walls, then discard unusable supplies.</td><td>Human + Sundries</td><td>12 min</td><td>TBD</td><td>Step 50</td><td>Under-sink zone is clean and dry.</td><td>Keep only clearly labeled products.</td></tr>
+            <tr><td class="num">52</td><td>Cabinets</td><td>Reset under-sink supplies by category and record low or missing products.</td><td>Human + Sundries</td><td>8 min</td><td>TBD</td><td>Step 51</td><td>Supplies are organized.</td><td>Keep dangerous cleaners away from food and pets.</td></tr>
+            <tr><td class="num">53</td><td>Counters</td><td>Dry-wipe crumbs from counters, seams, edges, and appliance parking spots.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 32</td><td>Loose debris is gone.</td><td>Dry before wet prevents paste.</td></tr>
+            <tr><td class="num">54</td><td>Counters</td><td>Wash counters with surface-appropriate cleaner.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Step 53</td><td>Counters are clean.</td><td>Stone, wood, laminate, and tile want different treatment.</td></tr>
+            <tr><td class="num">55</td><td>Counters</td><td>Rinse or food-surface wipe counters where cleaner label requires it.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 54</td><td>Food-contact zones are safe.</td><td>Shiny is not the same as food-safe.</td></tr>
+            <tr><td class="num">56</td><td>Counters</td><td>Dry counters and inspect for missed sticky spots.</td><td>Human</td><td>5 min</td><td>TBD</td><td>Step 55</td><td>Counters are dry and smooth.</td><td>Use touch, not just eyesight.</td></tr>
+            <tr><td class="num">57</td><td>Appliance Reset</td><td>Wipe bottoms of small appliances before returning them.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Steps 33-35, 56</td><td>Appliances return clean.</td><td>Crumb bases ruin clean counters immediately.</td></tr>
+            <tr><td class="num">58</td><td>Appliance Reset</td><td>Return only daily-use appliances to counters; store occasional-use items if they have a known home.</td><td>Human + Keeper</td><td>8 min</td><td>TBD</td><td>Step 57</td><td>Counters are reset, not crowded.</td><td>Unknown home means review pile, not random cabinet shove.</td></tr>
+            <tr><td class="num">59</td><td>Sink</td><td>Clear sink fully and remove drain baskets, stoppers, mats, and drying accessories.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Steps 17-18</td><td>Sink basin is empty.</td><td>Sharp objects should already be handled.</td></tr>
+            <tr><td class="num">60</td><td>Sink</td><td>Scrub sink basins, faucet, handles, sprayer, splash zone, and drain edges.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Step 59</td><td>Sink is visibly clean.</td><td>Use non-scratching method for the sink material.</td></tr>
+            <tr><td class="num">61</td><td>Sink</td><td>Clean drain baskets, stoppers, mats, and drying accessories before reinstalling.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 60</td><td>Sink accessories are clean.</td><td>Replace anything sour, cracked, or permanently gross.</td></tr>
+            <tr><td class="num">62</td><td>Dish Area</td><td>Clean dish rack, drying mat, sponge holder, soap tray, and brush cup.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 59</td><td>Dish area tools are clean.</td><td>Record sponge/brush replacement needs.</td></tr>
+            <tr><td class="num">63</td><td>Trash</td><td>Empty kitchen trash and recycling.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 12</td><td>Trash and recycling are out.</td><td>Do this before floor work.</td></tr>
+            <tr><td class="num">64</td><td>Trash</td><td>Clean trash can exterior, lid, pedal, rim, and nearby wall or cabinet touch points.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Step 63</td><td>Trash zone is clean.</td><td>Use disinfectant correctly if needed.</td></tr>
+            <tr><td class="num">65</td><td>Trash</td><td>Replace liner and reset trash/recycling area.</td><td>Human</td><td>4 min</td><td>TBD</td><td>Step 64</td><td>Fresh liner is installed.</td><td>Record low trash bags for Sundries.</td></tr>
+            <tr><td class="num">66</td><td>Disinfect</td><td>Disinfect high-touch points: handles, switches, faucet, refrigerator handle, microwave buttons, trash lid, and drawer pulls.</td><td>Human + Keeper</td><td>10 min</td><td>TBD</td><td>Steps 45, 48, 58, 65</td><td>High-touch points are treated.</td><td>Honor contact time; wipe/rinse if label says so.</td></tr>
+            <tr><td class="num">67</td><td>Floors</td><td>Move chairs, mats, small bins, pet bowls, and floor obstacles out of the way.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 66</td><td>Floor is open.</td><td>Do not block exits.</td></tr>
+            <tr><td class="num">68</td><td>Floors</td><td>Vacuum or sweep under cabinets, toe kicks, appliance edges, table, and trash area.</td><td>Human + Keeper</td><td>12 min</td><td>TBD</td><td>Step 67</td><td>Dry debris is removed.</td><td>Use crevice tool where crumbs gather.</td></tr>
+            <tr><td class="num">69</td><td>Floors</td><td>Spot-scrub sticky floor spots, corners, and baseboards.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Step 68</td><td>Sticky spots are gone.</td><td>Do corners before mopping the open floor.</td></tr>
+            <tr><td class="num">70</td><td>Floors</td><td>Mop using the correct method for the kitchen floor material.</td><td>Human</td><td>15 min</td><td>TBD</td><td>Step 69</td><td>Floor is clean.</td><td>Do not over-wet wood or water-sensitive surfaces.</td></tr>
+            <tr><td class="num">71</td><td>Floors</td><td>Let floor dry with clear walking path marked or understood.</td><td>Human</td><td>10 min</td><td>TBD</td><td>Step 70</td><td>Floor is dry enough to reset.</td><td>No dramatic slipping allowed.</td></tr>
+            <tr><td class="num">72</td><td>Floors</td><td>Clean or shake kitchen mats and inspect whether any need washing or replacing.</td><td>Human + Laundramat</td><td>10 min</td><td>TBD</td><td>Step 71</td><td>Mats are clean or staged for laundry.</td><td>Do not put a dirty mat on a clean floor.</td></tr>
+            <tr><td class="num">73</td><td>Floors</td><td>Return chairs, mats, bins, and pet items only after floor is dry.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 72</td><td>Floor zone is reset.</td><td>Pet water returns last if floor is still damp.</td></tr>
+            <tr><td class="num">74</td><td>Reset</td><td>Put clean dishes, handwashed items, and dry appliance parts away.</td><td>Human</td><td>12 min</td><td>TBD</td><td>Steps 17-18, 73</td><td>No clean dish backlog remains.</td><td>If dishwasher is still running, note the pending unload.</td></tr>
+            <tr><td class="num">75</td><td>Reset</td><td>Resolve the review pile: assign homes, discard, donate, or write a follow-up note.</td><td>Human + Keeper</td><td>15 min</td><td>TBD</td><td>Step 20</td><td>Review pile is gone or documented.</td><td>Do not hide the pile in a cabinet and call it growth.</td></tr>
+            <tr><td class="num">76</td><td>Reset</td><td>Return non-kitchen items to their rooms or stage them outside the kitchen for a separate reset.</td><td>Human</td><td>8 min</td><td>TBD</td><td>Step 13</td><td>Kitchen is free of wandering objects.</td><td>Separate reset is acceptable; kitchen mission stays complete.</td></tr>
+            <tr><td class="num">77</td><td>QA</td><td>Walk the kitchen clockwise and inspect counters, sink, stove, fridge handles, cabinet fronts, trash zone, and floor edges.</td><td>Keeper + Human</td><td>8 min</td><td>TBD</td><td>Steps 66-76</td><td>Missed spots are listed or fixed.</td><td>Clockwise walk prevents random fussing.</td></tr>
+            <tr><td class="num">78</td><td>QA</td><td>Take after photos from the same angles as the before photos.</td><td>Human</td><td>6 min</td><td>TBD</td><td>Step 77</td><td>After photos exist.</td><td>Useful for future Keeper standards and morale.</td></tr>
+            <tr><td class="num">79</td><td>QA</td><td>Write final notes: actual duration, supplies used, supplies missing, repairs noticed, food discarded, and next cadence.</td><td>Keeper</td><td>10 min</td><td>TBD</td><td>Step 78</td><td>Closeout note exists.</td><td>Route supplies to Sundries and repair concerns to Sheriff.</td></tr>
+            <tr><td class="num">80</td><td>QA</td><td>Set the next kitchen reset reminder: daily tiny reset, weekly surface pass, monthly appliance/detail pass, or next deep-clean date.</td><td>Keeper + Tock</td><td>5 min</td><td>TBD</td><td>Step 79</td><td>Next cadence is chosen.</td><td>The clean only counts if it has a future that is not panic.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <span>Keeper Brisk kitchen protocol</span>
+    <a href="keeper.html">Back to Keeper</a>
+  </footer>
+</body>
+</html>

@@ -252,7 +252,8 @@ const roles = [
     tone: "steady, efficient, unsentimental about dust",
     role: "Keeper Brisk manages the dusting and vacuuming schedule, room reset rhythms, and the small repeating jobs that make a house feel cared for before anyone can name why. They specialize in preventing cleaning from becoming either invisible labor or a dramatic emergency.",
     links: [
-      ["Room Maintenance Inventory", "../las-jaras-room-maintenance-inventory.html"]
+      ["Room Maintenance Inventory", "../las-jaras-room-maintenance-inventory.html"],
+      ["80-Step Kitchen Deep Clean Plan", "keeper-kitchen-deep-clean-80-step-plan.html"]
     ]
   },
   {
@@ -908,7 +909,7 @@ const titleOps = {
     wishlist: ["fabric shaver", "stain kit", "laundry label/photo guide"]
   },
   Keeper: {
-    daily: ["Check dusting, vacuuming, and room reset cadence.", "Batch cleaning tasks by room and effort.", "Flag supply or tool needs to Sundries."],
+    daily: ["Check dusting, vacuuming, and room reset cadence.", "Batch cleaning tasks by room and effort.", "Flag supply or tool needs to Sundries.", "Use the 80-step kitchen deep-clean plan for full kitchen resets."],
     force: ["zone-cleaning methods", "maintenance scheduling", "guest-readiness checklists"],
     tools: ["Room Maintenance Inventory", "household cleaning notes", "active chat"],
     wishlist: ["robot vacuum map", "cleaning caddy system", "recurring task dashboard"]
