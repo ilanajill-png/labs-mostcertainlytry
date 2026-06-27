@@ -1975,7 +1975,122 @@
       ],
       "tarotMessage": "Household message: The World asks everyone at Las Jaras to notice the first true need before rushing. The Fool describes the weather inside and outside the walls. The Empress names what could complicate the day if ignored. The Emperor shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The World tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-06-27": {
+      "date": "2026-06-27",
+      "weekday": "Saturday",
+      "generatedAt": "2026-06-27T13:26:39.702Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Sacral chakra (creativity, pleasure, and emotional flow): I let the day move like water: useful, clean, and creative without flooding the whole household.",
+      "morningIntentionChakra": {
+        "chakra": "Sacral",
+        "focus": "creativity, pleasure, and emotional flow",
+        "intention": "I let the day move like water: useful, clean, and creative without flooding the whole household."
+      },
+      "practicalRite": "I make a shade plan before lunch becomes a dare.",
+      "weather": {
+        "sunrise": "06:35 AM",
+        "sunset": "08:37 PM",
+        "highF": "96",
+        "lowF": "76",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV"
+        ],
+        "uvIndex": "12",
+        "maxGustMph": 26,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Gibbous",
+        "moonIllumination": "92%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-06-27",
+            "name": "Master of the Lions / Bear-Spirit Birthday",
+            "origin": "A Las Jaras and Serafina household observance for the birthday of Serafina's former brief owner: the Master of the Lions, remembered through the lion guardians she left behind and the symbolic spirit of the bear.",
+            "crystals": "No moon charge required. Place grounding stones indoors near Serafina or the door for protection, then return them before the night gets dramatic.",
+            "cleaning": "Clean the front threshold, any lion or guardian image, Serafina's basin, and one resting place in the house. A den should be safe before it is symbolic.",
+            "food": "Honey, berries, salmon if desired, bread, tea, nuts, or a small cake with a bear-spirit mood: dark, sweet, sturdy, and not fussy.",
+            "gift": "Give the Master of the Lions a symbolic gift in memory: flowers near Serafina, a candle, honey, a handwritten blessing, or a donation to wildlife habitat or animal care.",
+            "modernCelebration": "At Las Jaras I would honor the Master of the Lions by tending thresholds, speaking kindly of the former guardian, and making one bear-spirit offering: rest without guilt, protection without noise, and strength that does not need to posture. No public spectacle required; this is a warm, private dignity day."
+          }
+        ],
+        "alerts": [
+          {
+            "days": 7,
+            "date": "2026-07-04",
+            "name": "Independence Day",
+            "message": "7-day guest reminder: Invite guests for a cookout only if pet safety, heat, parking, and cleanup are handled.",
+            "food": "Cookout food, watermelon, corn, beans, lemonade, or chilled desserts.",
+            "gift": "Give guests cold drinks; give Pinky calm, shade, and sound protection."
+          }
+        ],
+        "next": {
+          "date": "2026-06-27",
+          "name": "Master of the Lions / Bear-Spirit Birthday"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "leaf green for growth that does not need applause",
+        "breakfast": "yogurt with berries and nuts, bright enough to count as a small blessing",
+        "lunch": "leftovers made intentional, not eaten like evidence",
+        "dinner": "tacos with beans, vegetables, salsa, and restraint",
+        "luckyObject": "lip balm, because cracked lips are not abundance",
+        "personToCall": "someone whose name made you smile the last time it appeared",
+        "strangerKindness": "send a useful recommendation to someone who asked the internet for help"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:35 AM; sunset 08:37 PM; 14h 02m daylight.",
+        "moon": "Waxing Gibbous, 92% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Humility",
+        "franklinMeasure": "Imitate useful modesty: observe first, then claim authority.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Humility: Imitate useful modesty: observe first, then claim authority. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Magician",
+          "reading": "I use the tools already on the table before asking for a miracle."
+        },
+        {
+          "position": "Weather",
+          "card": "The High Priestess",
+          "reading": "I observe the quiet pattern; the garden has not finished speaking."
+        },
+        {
+          "position": "Garden",
+          "card": "The Empress",
+          "reading": "I tend growth, water, shade, and the beings who depend on them."
+        },
+        {
+          "position": "Household",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Warning",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        }
+      ],
+      "tarotMessage": "Household message: The Magician asks everyone at Las Jaras to notice the first true need before rushing. The High Priestess describes the weather inside and outside the walls. The Hierophant names what could complicate the day if ignored. The Lovers shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Magician tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-25T13:18:03.263Z"
+  "updatedAt": "2026-06-27T13:26:39.702Z"
 }
