@@ -2185,7 +2185,102 @@
       ],
       "tarotMessage": "Household message: The High Priestess asks everyone at Las Jaras to notice the first true need before rushing. The Empress describes the weather inside and outside the walls. The Lovers names what could complicate the day if ignored. The Chariot shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The High Priestess tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-07-02": {
+      "date": "2026-07-02",
+      "weekday": "Thursday",
+      "generatedAt": "2026-07-02T13:20:51.369Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Crown chakra (connection, purpose, and spiritual openness): I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house.",
+      "morningIntentionChakra": {
+        "chakra": "Crown",
+        "focus": "connection, purpose, and spiritual openness",
+        "intention": "I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house."
+      },
+      "practicalRite": "I water by touch, not by panic.",
+      "weather": {
+        "sunrise": "06:37 AM",
+        "sunset": "08:37 PM",
+        "highF": "97",
+        "lowF": "74",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV"
+        ],
+        "uvIndex": "11",
+        "maxGustMph": 22,
+        "maxThunderChance": 0,
+        "moonPhase": "Waning Gibbous",
+        "moonIllumination": "96%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-07-04",
+          "name": "Independence Day"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "black for quiet power",
+        "breakfast": "leftover rice with egg or vegetables, because the pantry also deserves respect",
+        "lunch": "a bowl with beans, rice, greens, and something sharp",
+        "dinner": "roasted vegetables with rice or potatoes and a good sauce",
+        "luckyObject": "a key you actually need",
+        "personToCall": "a sibling or cousin who knows an old version of you",
+        "strangerKindness": "carry small cash for a tip jar"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:37 AM; sunset 08:37 PM; 14h 00m daylight.",
+        "moon": "Waning Gibbous, 96% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Humility",
+        "franklinMeasure": "Imitate useful modesty: observe first, then claim authority.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Humility: Imitate useful modesty: observe first, then claim authority. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Weather",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Garden",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        },
+        {
+          "position": "Household",
+          "card": "The Hermit",
+          "reading": "I step outside alone long enough to notice one true thing."
+        },
+        {
+          "position": "Warning",
+          "card": "Wheel of Fortune",
+          "reading": "I know weather turns; I do the part that is mine."
+        },
+        {
+          "position": "Blessing",
+          "card": "Justice",
+          "reading": "I know what was neglected will present a bill."
+        }
+      ],
+      "tarotMessage": "Household message: The Lovers asks everyone at Las Jaras to notice the first true need before rushing. The Chariot describes the weather inside and outside the walls. Wheel of Fortune names what could complicate the day if ignored. Justice shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Lovers tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-06-28T13:29:00.710Z"
+  "updatedAt": "2026-07-02T13:20:51.369Z"
 }
