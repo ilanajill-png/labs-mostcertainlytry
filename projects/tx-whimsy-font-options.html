@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TX Whimsy Font Options</title>
+  <script>
+    document.documentElement.classList.add("txw-locked");
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Caprasimo&family=DynaPuff:wght@600;700&family=Familjen+Grotesk:wght@500;600;700&family=Karla:wght@400;600;700;800&family=Lilita+One&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&family=Orelega+One&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Shrikhand&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --txw-cobalt: #1557ff;
+      --txw-watermelon: #f2547d;
+      --txw-mango: #ffb23f;
+      --txw-cream: #fff4e2;
+      --txw-ink: #2e1714;
+      --txw-mint: #76d7c4;
+      --txw-chamoy: #b92b2e;
+      --txw-white: #fffdf7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--txw-cream);
+      color: var(--txw-ink);
+      font-family: "Nunito Sans", system-ui, sans-serif;
+      line-height: 1.45;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .intro {
+      display: grid;
+      gap: 14px;
+      padding: 26px 0 18px;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: clamp(2.7rem, 8vw, 6.6rem);
+      line-height: .88;
+      color: var(--txw-cobalt);
+    }
+
+    .intro p {
+      max-width: 760px;
+      font-size: 1.08rem;
+      font-weight: 700;
+    }
+
+    .swatches {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(36px, 1fr));
+      gap: 8px;
+      margin: 12px 0 20px;
+    }
+
+    .swatch {
+      min-height: 44px;
+      border-radius: 8px;
+      border: 1px solid rgba(46, 23, 20, .18);
+    }
+
+    .txw-locked body > *:not(.txw-gate) {
+      display: none !important;
+    }
+
+    .txw-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: var(--txw-cream);
+      color: var(--txw-ink);
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    }
+
+    .txw-gate__panel {
+      width: min(440px, 100%);
+      border: 2px solid var(--txw-cobalt);
+      border-radius: 8px;
+      padding: 24px;
+      background: var(--txw-white);
+      box-shadow: 0 18px 44px rgba(46, 23, 20, .14);
+    }
+
+    .txw-gate h1 {
+      margin: 0 0 10px;
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-size: 2.7rem;
+      line-height: .9;
+      color: var(--txw-cobalt);
+    }
+
+    .txw-gate p {
+      margin: 0 0 18px;
+      font-weight: 700;
+    }
+
+    .txw-gate label {
+      display: grid;
+      gap: 7px;
+      font-weight: 900;
+    }
+
+    .txw-gate input {
+      width: 100%;
+      border: 1px solid rgba(46, 23, 20, .24);
+      border-radius: 8px;
+      padding: 12px;
+      color: var(--txw-ink);
+      font: inherit;
+    }
+
+    .txw-gate button {
+      width: 100%;
+      min-height: 44px;
+      margin-top: 12px;
+      border: 1px solid var(--txw-cobalt);
+      border-radius: 8px;
+      background: var(--txw-cobalt);
+      color: var(--txw-white);
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .txw-gate__error {
+      min-height: 1.4em;
+      margin: 10px 0 0 !important;
+      color: var(--txw-chamoy);
+      font-weight: 900;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 16px;
+    }
+
+    .option {
+      min-height: 420px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid rgba(46, 23, 20, .16);
+      border-radius: 8px;
+      background: var(--txw-white);
+      box-shadow: 0 10px 24px rgba(46, 23, 20, .08);
+    }
+
+    .hero-sample {
+      min-height: 178px;
+      display: grid;
+      align-content: end;
+      gap: 8px;
+      padding: 18px;
+      border-radius: 8px;
+      color: var(--txw-white);
+      background:
+        linear-gradient(135deg, rgba(21, 87, 255, .94), rgba(118, 215, 196, .82)),
+        radial-gradient(circle at 82% 22%, var(--txw-mango) 0 54px, transparent 56px);
+      overflow: hidden;
+    }
+
+    .hero-sample .eyebrow {
+      font-size: .76rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .hero-sample .brand {
+      font-size: clamp(3.9rem, 11vw, 6.6rem);
+      line-height: .82;
+    }
+
+    .sample-body {
+      display: grid;
+      gap: 12px;
+    }
+
+    .sample-body h2 {
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--txw-cobalt);
+    }
+
+    .menu-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: baseline;
+      padding: 12px 0;
+      border-top: 1px solid rgba(46, 23, 20, .16);
+    }
+
+    .menu-row:first-of-type {
+      border-top: 0;
+    }
+
+    .item-name {
+      font-weight: 900;
+    }
+
+    .price {
+      min-width: 52px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: var(--txw-mango);
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .label {
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 9px;
+      border-radius: 6px;
+      background: var(--txw-watermelon);
+      color: var(--txw-white);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .notes {
+      display: grid;
+      gap: 8px;
+      font-size: .94rem;
+    }
+
+    .notes a {
+      color: var(--txw-cobalt);
+      font-weight: 900;
+    }
+
+    .bricolage { font-family: "Bricolage Grotesque", system-ui, sans-serif; }
+    .caprasimo { font-family: "Caprasimo", Georgia, serif; }
+    .bagel { font-family: "Bagel Fat One", system-ui, sans-serif; }
+    .dynapuff { font-family: "DynaPuff", system-ui, sans-serif; }
+    .lilita { font-family: "Lilita One", system-ui, sans-serif; }
+    .shrikhand { font-family: "Shrikhand", Georgia, serif; }
+    .orelega { font-family: "Orelega One", Georgia, serif; }
+    .familjen { font-family: "Familjen Grotesk", system-ui, sans-serif; }
+    .nunito { font-family: "Nunito Sans", system-ui, sans-serif; }
+    .karla { font-family: "Karla", system-ui, sans-serif; }
+    .jakarta { font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+
+    @media (max-width: 760px) {
+      main {
+        width: min(100% - 20px, 1180px);
+        padding-top: 18px;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .option {
+        min-height: auto;
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="intro">
+      <h1>TX Whimsy Font Options</h1>
+      <p>Same color direction, different personality. Every option below is free through Google Fonts and downloadable from its linked specimen page.</p>
+      <div class="swatches" aria-label="TX Whimsy color palette">
+        <div class="swatch" style="background:#1557ff"></div>
+        <div class="swatch" style="background:#f2547d"></div>
+        <div class="swatch" style="background:#ffb23f"></div>
+        <div class="swatch" style="background:#fff4e2"></div>
+        <div class="swatch" style="background:#76d7c4"></div>
+        <div class="swatch" style="background:#b92b2e"></div>
+        <div class="swatch" style="background:#2e1714"></div>
+        <div class="swatch" style="background:#fffdf7"></div>
+      </div>
+    </section>
+
+    <section class="options">
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow nunito">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand bricolage">TX Whimsy</div>
+        </div>
+        <div class="sample-body jakarta">
+          <h2 class="bricolage">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Best balance</span>
+        </div>
+        <div class="notes">
+          <strong>Bricolage Grotesque + Plus Jakarta Sans</strong>
+          <span>Modern, odd, polished. My strongest pick if TX Whimsy should feel designed but not precious.</span>
+          <a href="https://fonts.google.com/specimen/Bricolage+Grotesque">Download Bricolage Grotesque</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow nunito">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand caprasimo">TX Whimsy</div>
+        </div>
+        <div class="sample-body nunito">
+          <h2 class="caprasimo">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Retro snack sign</span>
+        </div>
+        <div class="notes">
+          <strong>Caprasimo + Nunito Sans</strong>
+          <span>Chunky, warm, close to Cooper Black energy without needing a paid font. Very friendly and sign-like.</span>
+          <a href="https://fonts.google.com/specimen/Caprasimo">Download Caprasimo</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow karla">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand bagel">TX Whimsy</div>
+        </div>
+        <div class="sample-body karla">
+          <h2 class="bagel">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Most playful</span>
+        </div>
+        <div class="notes">
+          <strong>Bagel Fat One + Karla</strong>
+          <span>Big, squishy, dessert-forward. Memorable, but it may read younger than the business plan.</span>
+          <a href="https://fonts.google.com/specimen/Bagel+Fat+One">Download Bagel Fat One</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow nunito">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand dynapuff">TX Whimsy</div>
+        </div>
+        <div class="sample-body nunito">
+          <h2 class="dynapuff">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Candy wrapper</span>
+        </div>
+        <div class="notes">
+          <strong>DynaPuff + Nunito Sans</strong>
+          <span>Handmade and sticker-like. Good for social graphics, a little softer for a whole site.</span>
+          <a href="https://fonts.google.com/specimen/DynaPuff">Download DynaPuff</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow karla">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand lilita">TX Whimsy</div>
+        </div>
+        <div class="sample-body karla">
+          <h2 class="lilita">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Menu-board strong</span>
+        </div>
+        <div class="notes">
+          <strong>Lilita One + Karla</strong>
+          <span>Bold, compact, readable from a distance. Useful if the truck/menu-board world matters most.</span>
+          <a href="https://fonts.google.com/specimen/Lilita+One">Download Lilita One</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow jakarta">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand shrikhand">TX Whimsy</div>
+        </div>
+        <div class="sample-body jakarta">
+          <h2 class="shrikhand">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Loudest voice</span>
+        </div>
+        <div class="notes">
+          <strong>Shrikhand + Plus Jakarta Sans</strong>
+          <span>Highly distinctive and hand-painted. Great if you want maximal personality, risky if overused.</span>
+          <a href="https://fonts.google.com/specimen/Shrikhand">Download Shrikhand</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow karla">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand orelega">TX Whimsy</div>
+        </div>
+        <div class="sample-body karla">
+          <h2 class="orelega">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Boutique whimsy</span>
+        </div>
+        <div class="notes">
+          <strong>Orelega One + Karla</strong>
+          <span>Quirky serif, less chunky than Caprasimo. Good if the site should feel editorial and charming.</span>
+          <a href="https://fonts.google.com/specimen/Orelega+One">Download Orelega One</a>
+        </div>
+      </article>
+
+      <article class="option">
+        <div class="hero-sample">
+          <div class="eyebrow nunito">Paletas, dirty sodas, tiny Texas joy</div>
+          <div class="brand familjen">TX Whimsy</div>
+        </div>
+        <div class="sample-body nunito">
+          <h2 class="familjen">Dressed Paletas</h2>
+          <div class="menu-row"><span><span class="item-name">Mango Loco</span><br>Chamoy, Tajin, mango drizzle</span><span class="price">$6</span></div>
+          <div class="menu-row"><span><span class="item-name">Coco Crunch</span><br>White chocolate, toasted coconut</span><span class="price">$6</span></div>
+          <span class="label">Cleanest</span>
+        </div>
+        <div class="notes">
+          <strong>Familjen Grotesk + Nunito Sans</strong>
+          <span>Not cutesy, still distinctive. The safest choice if you want a grown-up local brand.</span>
+          <a href="https://fonts.google.com/specimen/Familjen+Grotesk">Download Familjen Grotesk</a>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script>
+    (function () {
+      const passwordHash = "1fe0d1c30383ad";
+      const sessionKey = "tx-whimsy-font-options-unlocked-v1";
+
+      function hashString(value) {
+        let h1 = 0xdeadbeef ^ value.length;
+        let h2 = 0x41c6ce57 ^ value.length;
+        for (let i = 0, ch; i < value.length; i += 1) {
+          ch = value.charCodeAt(i);
+          h1 = Math.imul(h1 ^ ch, 2654435761);
+          h2 = Math.imul(h2 ^ ch, 1597334677);
+        }
+        h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+        h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+        return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16);
+      }
+
+      function unlock() {
+        sessionStorage.setItem(sessionKey, "yes");
+        document.documentElement.classList.remove("txw-locked");
+        const gate = document.querySelector(".txw-gate");
+        if (gate) gate.remove();
+      }
+
+      function showGate() {
+        if (sessionStorage.getItem(sessionKey) === "yes") {
+          unlock();
+          return;
+        }
+
+        const gate = document.createElement("div");
+        gate.className = "txw-gate";
+        gate.innerHTML = `
+          <form class="txw-gate__panel">
+            <h1>TX Whimsy</h1>
+            <p>This font preview is password protected.</p>
+            <label>
+              Password
+              <input type="password" autocomplete="current-password" required autofocus>
+            </label>
+            <button type="submit">Open Preview</button>
+            <p class="txw-gate__error" aria-live="polite"></p>
+          </form>
+        `;
+        document.body.appendChild(gate);
+
+        const form = gate.querySelector("form");
+        const input = gate.querySelector("input");
+        const error = gate.querySelector(".txw-gate__error");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          try {
+            if (hashString(input.value) === passwordHash) {
+              unlock();
+            } else {
+              error.textContent = "Wrong password.";
+              input.select();
+            }
+          } catch {
+            error.textContent = "This browser cannot unlock the preview.";
+          }
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", showGate);
+      } else {
+        showGate();
+      }
+    })();
+  </script>
+</body>
+</html>
