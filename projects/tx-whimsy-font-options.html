@@ -577,6 +577,10 @@
         return (4294967296 * (2097151 & h2) + (h1 >>> 0)).toString(16);
       }
 
+      function normalizePassword(value) {
+        return value.trim().toLowerCase().replace(/[\s-]+/g, "");
+      }
+
       function unlock() {
         sessionStorage.setItem(sessionKey, "yes");
         document.documentElement.classList.remove("txw-locked");
@@ -612,7 +616,7 @@
         form.addEventListener("submit", (event) => {
           event.preventDefault();
           try {
-            if (hashString(input.value) === passwordHash) {
+            if (hashString(normalizePassword(input.value)) === passwordHash) {
               unlock();
             } else {
               error.textContent = "Wrong password.";
