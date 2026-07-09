@@ -2766,7 +2766,102 @@
       ],
       "tarotMessage": "Household message: Justice asks everyone at Las Jaras to notice the first true need before rushing. The Hanged One describes the weather inside and outside the walls. The Devil names what could complicate the day if ignored. The Tower shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. Justice tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-07-09": {
+      "date": "2026-07-09",
+      "weekday": "Thursday",
+      "generatedAt": "2026-07-09T13:18:04.485Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Crown chakra (connection, purpose, and spiritual openness): I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house.",
+      "morningIntentionChakra": {
+        "chakra": "Crown",
+        "focus": "connection, purpose, and spiritual openness",
+        "intention": "I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house."
+      },
+      "practicalRite": "I make a shade plan before lunch becomes a dare.",
+      "weather": {
+        "sunrise": "06:40 AM",
+        "sunset": "08:36 PM",
+        "highF": "99",
+        "lowF": "74",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV"
+        ],
+        "uvIndex": "11",
+        "maxGustMph": 27,
+        "maxThunderChance": 0,
+        "moonPhase": "Waning Crescent",
+        "moonIllumination": "37%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-07-22",
+          "name": "Tisha B'Av Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "rose for sweetness with boundaries",
+        "breakfast": "a breakfast taco with something green tucked inside",
+        "lunch": "noodle soup or ramen upgraded with vegetables and an egg",
+        "dinner": "beans, greens, and cornbread for old-fashioned staying power",
+        "luckyObject": "a clean handkerchief",
+        "personToCall": "an elder who would like to be remembered before an emergency",
+        "strangerKindness": "compliment a worker to their manager or in writing"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:40 AM; sunset 08:36 PM; 13h 56m daylight.",
+        "moon": "Waning Crescent, 37% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Temperance",
+        "franklinMeasure": "Measure appetite, heat, water, and effort before excess makes a fool of the house.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Temperance: Measure appetite, heat, water, and effort before excess makes a fool of the house. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "Death",
+          "reading": "I clear what is finished so life has room."
+        },
+        {
+          "position": "Weather",
+          "card": "Temperance",
+          "reading": "I measure water, heat, effort, and drama."
+        },
+        {
+          "position": "Garden",
+          "card": "The Devil",
+          "reading": "I do not let convenience become a leash."
+        },
+        {
+          "position": "Household",
+          "card": "The Tower",
+          "reading": "I check what wind, heat, or pride could knock over."
+        },
+        {
+          "position": "Warning",
+          "card": "The Star",
+          "reading": "I treat hope as a maintenance practice."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Moon",
+          "reading": "I trust intuition, then verify the footing."
+        }
+      ],
+      "tarotMessage": "Household message: Death asks everyone at Las Jaras to notice the first true need before rushing. Temperance describes the weather inside and outside the walls. The Star names what could complicate the day if ignored. The Moon shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. Death tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-07-07T13:22:26.129Z"
+  "updatedAt": "2026-07-09T13:18:04.485Z"
 }
