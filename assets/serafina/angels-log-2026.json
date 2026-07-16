@@ -3143,7 +3143,101 @@
       ],
       "tarotMessage": "Household message: The Sun asks everyone at Las Jaras to notice the first true need before rushing. Judgement describes the weather inside and outside the walls. The Magician names what could complicate the day if ignored. The High Priestess shows the help already available if everyone moves with care.",
       "note": "I will inspect drainage before celebrating the rain. The Sun tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-07-16": {
+      "date": "2026-07-16",
+      "weekday": "Thursday",
+      "generatedAt": "2026-07-16T13:30:36.945Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Crown chakra (connection, purpose, and spiritual openness): I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house.",
+      "morningIntentionChakra": {
+        "chakra": "Crown",
+        "focus": "connection, purpose, and spiritual openness",
+        "intention": "I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house."
+      },
+      "practicalRite": "I move one vulnerable thing out of punishment sun.",
+      "weather": {
+        "sunrise": "06:44 AM",
+        "sunset": "08:34 PM",
+        "highF": "87",
+        "lowF": "74",
+        "rained": true,
+        "rainInches": "0.10",
+        "extremeWeather": [
+          "none flagged"
+        ],
+        "uvIndex": "2",
+        "maxGustMph": 16,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Crescent",
+        "moonIllumination": "4%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-07-22",
+          "name": "Tisha B'Av Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "terracotta for rooted courage",
+        "breakfast": "fruit, toast, and tea if the morning needs gentleness",
+        "lunch": "a salad with protein, crunch, and no sadness",
+        "dinner": "a simple plate: protein, starch, vegetable, and one kind thing said aloud",
+        "luckyObject": "a smooth stone",
+        "personToCall": "a friend who sends excellent nonsense",
+        "strangerKindness": "let someone merge without making a federal case of it"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:44 AM; sunset 08:34 PM; 13h 50m daylight.",
+        "moon": "Waxing Crescent, 4% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Silence",
+        "franklinMeasure": "Speak only what helps the work, the truth, or the peace of the garden.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "inspect drainage, empty standing water, and let rain change the chore list",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Silence: Speak only what helps the work, the truth, or the peace of the garden. Therefore the household should inspect drainage, empty standing water, and let rain change the chore list."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "Judgement",
+          "reading": "I answer what has been calling for attention."
+        },
+        {
+          "position": "Weather",
+          "card": "The World",
+          "reading": "I close the loop: water, record, return the tool."
+        },
+        {
+          "position": "Garden",
+          "card": "The Fool",
+          "reading": "I begin, but I look where the path actually is."
+        },
+        {
+          "position": "Household",
+          "card": "The Magician",
+          "reading": "I use the tools already on the table before asking for a miracle."
+        },
+        {
+          "position": "Warning",
+          "card": "The High Priestess",
+          "reading": "I observe the quiet pattern; the garden has not finished speaking."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Empress",
+          "reading": "I tend growth, water, shade, and the beings who depend on them."
+        }
+      ],
+      "tarotMessage": "Household message: Judgement asks everyone at Las Jaras to notice the first true need before rushing. The World describes the weather inside and outside the walls. The High Priestess names what could complicate the day if ignored. The Empress shows the help already available if everyone moves with care.",
+      "note": "I will inspect drainage before celebrating the rain. Judgement tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-07-15T13:24:36.805Z"
+  "updatedAt": "2026-07-16T13:30:36.945Z"
 }
