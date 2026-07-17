@@ -3237,7 +3237,101 @@
       ],
       "tarotMessage": "Household message: Judgement asks everyone at Las Jaras to notice the first true need before rushing. The World describes the weather inside and outside the walls. The High Priestess names what could complicate the day if ignored. The Empress shows the help already available if everyone moves with care.",
       "note": "I will inspect drainage before celebrating the rain. Judgement tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-07-17": {
+      "date": "2026-07-17",
+      "weekday": "Friday",
+      "generatedAt": "2026-07-17T13:18:06.059Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Root chakra (safety, grounding, and stability): I ground the house first: threshold swept, vulnerable things shaded, water offered only where the soil asks.",
+      "morningIntentionChakra": {
+        "chakra": "Root",
+        "focus": "safety, grounding, and stability",
+        "intention": "I ground the house first: threshold swept, vulnerable things shaded, water offered only where the soil asks."
+      },
+      "practicalRite": "I deadhead only what is truly finished.",
+      "weather": {
+        "sunrise": "06:44 AM",
+        "sunset": "08:34 PM",
+        "highF": "93",
+        "lowF": "76",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "high UV"
+        ],
+        "uvIndex": "10",
+        "maxGustMph": 26,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Crescent",
+        "moonIllumination": "9%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-07-22",
+          "name": "Tisha B'Av Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "rose for sweetness with boundaries",
+        "breakfast": "a breakfast taco with something green tucked inside",
+        "lunch": "noodle soup or ramen upgraded with vegetables and an egg",
+        "dinner": "beans, greens, and cornbread for old-fashioned staying power",
+        "luckyObject": "a clean handkerchief",
+        "personToCall": "an elder who would like to be remembered before an emergency",
+        "strangerKindness": "compliment a worker to their manager or in writing"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:44 AM; sunset 08:34 PM; 13h 50m daylight.",
+        "moon": "Waxing Crescent, 9% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Order",
+        "franklinMeasure": "Let each tool, hour, pot, and obligation have its proper place.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Order: Let each tool, hour, pot, and obligation have its proper place. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The World",
+          "reading": "I close the loop: water, record, return the tool."
+        },
+        {
+          "position": "Weather",
+          "card": "The Fool",
+          "reading": "I begin, but I look where the path actually is."
+        },
+        {
+          "position": "Garden",
+          "card": "The Magician",
+          "reading": "I use the tools already on the table before asking for a miracle."
+        },
+        {
+          "position": "Household",
+          "card": "The High Priestess",
+          "reading": "I observe the quiet pattern; the garden has not finished speaking."
+        },
+        {
+          "position": "Warning",
+          "card": "The Empress",
+          "reading": "I tend growth, water, shade, and the beings who depend on them."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        }
+      ],
+      "tarotMessage": "Household message: The World asks everyone at Las Jaras to notice the first true need before rushing. The Fool describes the weather inside and outside the walls. The Empress names what could complicate the day if ignored. The Emperor shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The World tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-07-16T13:30:36.945Z"
+  "updatedAt": "2026-07-17T13:18:06.059Z"
 }
