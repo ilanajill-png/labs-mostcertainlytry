@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>San Antonio Area Garden Events | Most Certainly Try Labs</title>
+    <meta name="description" content="A rolling 30-day list of plant swaps, garden events, flower events, gardening classes, and Master Gardener events in Bexar and Guadalupe County.">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #5d6774;
+        --paper: #f6f4ec;
+        --panel: #fffdfa;
+        --line: #d8d6c8;
+        --cobalt: #0047ab;
+        --leaf: #2f6f4f;
+        --terra: #a45234;
+        --gold: #a9781f;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background:
+          linear-gradient(180deg, rgba(47, 111, 79, .14), transparent 24rem),
+          var(--paper);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.5;
+      }
+
+      a { color: inherit; text-underline-offset: 4px; }
+
+      .bar,
+      main,
+      footer {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: rgba(246, 244, 236, .92);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      .bar {
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .brand {
+        color: var(--cobalt);
+        font-weight: 950;
+        text-decoration: none;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      nav a,
+      .button {
+        min-height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 253, 250, .86);
+        font-size: .9rem;
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .hero {
+        padding: 48px 0 30px;
+        display: grid;
+        gap: 18px;
+      }
+
+      .eyebrow,
+      .label,
+      footer {
+        color: var(--muted);
+        font-size: .78rem;
+        font-weight: 900;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p,
+      td,
+      th {
+        overflow-wrap: anywhere;
+      }
+
+      h1 {
+        max-width: 980px;
+        margin: 0;
+        font-size: clamp(2.5rem, 6.5vw, 5.6rem);
+        line-height: .92;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.5rem);
+        line-height: 1.05;
+      }
+
+      p { margin: 0; }
+
+      .lede {
+        max-width: 820px;
+        color: var(--muted);
+        font-size: clamp(1.02rem, 1.7vw, 1.25rem);
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .stat,
+      .notice,
+      .event-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 253, 250, .9);
+      }
+
+      .stat {
+        padding: 14px;
+      }
+
+      .metric {
+        display: block;
+        color: var(--leaf);
+        font-size: 1.55rem;
+        font-weight: 950;
+      }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: end;
+        margin: 18px 0;
+      }
+
+      label {
+        display: grid;
+        gap: 5px;
+        color: var(--muted);
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      input,
+      select {
+        min-height: 42px;
+        min-width: 210px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        color: var(--ink);
+        font: inherit;
+        padding: 8px 10px;
+      }
+
+      .notice {
+        margin: 14px 0;
+        padding: 14px;
+        color: var(--muted);
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 880px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th {
+        color: var(--muted);
+        font-size: .78rem;
+        font-weight: 950;
+        text-transform: uppercase;
+      }
+
+      tr:last-child td { border-bottom: 0; }
+
+      .event-title {
+        font-weight: 950;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 25px;
+        padding: 3px 8px;
+        border: 1px solid rgba(47, 111, 79, .25);
+        border-radius: 999px;
+        background: rgba(47, 111, 79, .08);
+        color: var(--leaf);
+        font-size: .78rem;
+        font-weight: 900;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: .92rem;
+      }
+
+      .cards {
+        display: none;
+        gap: 12px;
+      }
+
+      .event-card {
+        padding: 15px;
+        display: grid;
+        gap: 10px;
+      }
+
+      .card-top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .date-chip {
+        min-width: 72px;
+        border-radius: 8px;
+        background: var(--cobalt);
+        color: white;
+        padding: 8px;
+        text-align: center;
+        font-weight: 950;
+      }
+
+      .date-chip span {
+        display: block;
+        font-size: .78rem;
+        text-transform: uppercase;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 34px 0;
+      }
+
+      @media (max-width: 760px) {
+        .bar,
+        footer { align-items: flex-start; flex-direction: column; }
+        .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .table-wrap { display: none; }
+        .cards { display: grid; }
+        input,
+        select { min-width: min(100%, 340px); }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="bar">
+        <a class="brand" href="../index.html">Most Certainly Try Labs</a>
+        <nav aria-label="Primary navigation">
+          <a href="../index.html">Projects</a>
+          <a href="../field-guide.html">Captain's Log</a>
+          <a href="../about.html">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Bexar + Guadalupe County rolling calendar</p>
+        <h1>Plant swaps, garden events, flower happenings, and Master Gardener classes.</h1>
+        <p class="lede">A public 30-day list for San Antonio, Schertz, Seguin, and nearby communities. Updated from official and local garden calendars, sorted by date.</p>
+        <div class="stats" aria-label="Calendar status">
+          <div class="stat"><span class="metric" id="event-count">0</span><span class="label">Events</span></div>
+          <div class="stat"><span class="metric" id="master-count">0</span><span class="label">Master Gardener</span></div>
+          <div class="stat"><span class="metric" id="swap-count">0</span><span class="label">Swaps</span></div>
+          <div class="stat"><span class="metric" id="window-label">30 days</span><span class="label">Rolling window</span></div>
+        </div>
+      </section>
+
+      <section aria-label="Filters">
+        <div class="toolbar">
+          <label>
+            Search
+            <input id="search" type="search" placeholder="Try Schertz, seeds, herbs, native">
+          </label>
+          <label>
+            Type
+            <select id="type-filter">
+              <option value="all">All types</option>
+            </select>
+          </label>
+          <label>
+            Source
+            <select id="source-filter">
+              <option value="all">All sources</option>
+            </select>
+          </label>
+        </div>
+        <p class="notice" id="updated-note">Loading garden events...</p>
+      </section>
+
+      <section aria-label="Garden events table">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Event</th>
+                <th>Where</th>
+                <th>Cost</th>
+                <th>Link</th>
+              </tr>
+            </thead>
+            <tbody id="event-rows"></tbody>
+          </table>
+        </div>
+        <div class="cards" id="event-cards"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Data refreshes nightly.</span>
+      <a href="../data/garden-events.json">Open JSON feed</a>
+    </footer>
+
+    <script>
+      const state = { events: [], query: "", type: "all", source: "all" };
+      const dateFmt = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+
+      const els = {
+        count: document.querySelector("#event-count"),
+        master: document.querySelector("#master-count"),
+        swaps: document.querySelector("#swap-count"),
+        window: document.querySelector("#window-label"),
+        note: document.querySelector("#updated-note"),
+        rows: document.querySelector("#event-rows"),
+        cards: document.querySelector("#event-cards"),
+        search: document.querySelector("#search"),
+        type: document.querySelector("#type-filter"),
+        source: document.querySelector("#source-filter"),
+      };
+
+      function escapeHtml(value) {
+        return String(value || "").replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        })[char]);
+      }
+
+      function formatDate(date) {
+        const parsed = new Date(`${date}T12:00:00`);
+        return dateFmt.format(parsed);
+      }
+
+      function shortDate(date) {
+        const parsed = new Date(`${date}T12:00:00`);
+        return {
+          month: parsed.toLocaleDateString("en-US", { month: "short" }),
+          day: parsed.toLocaleDateString("en-US", { day: "numeric" }),
+        };
+      }
+
+      function filteredEvents() {
+        const query = state.query.toLowerCase();
+        return state.events.filter((event) => {
+          const haystack = `${event.title} ${event.location} ${event.source} ${event.summary} ${event.type}`.toLowerCase();
+          return (!query || haystack.includes(query)) &&
+            (state.type === "all" || event.type === state.type) &&
+            (state.source === "all" || event.source === state.source);
+        });
+      }
+
+      function fillSelect(select, values) {
+        values.forEach((value) => {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = value;
+          select.appendChild(option);
+        });
+      }
+
+      function render() {
+        const events = filteredEvents();
+        els.rows.innerHTML = events.map((event) => `
+          <tr>
+            <td><strong>${escapeHtml(formatDate(event.date))}</strong></td>
+            <td>${escapeHtml(event.time)}</td>
+            <td>
+              <div class="event-title">${escapeHtml(event.title)}</div>
+              <div class="muted">${escapeHtml(event.source)}</div>
+              <span class="tag">${escapeHtml(event.type)}</span>
+            </td>
+            <td>${escapeHtml(event.location || "See event page")}</td>
+            <td>${escapeHtml(event.cost || "See event page")}</td>
+            <td><a href="${escapeHtml(event.registerLink || event.link)}">Open event</a></td>
+          </tr>
+        `).join("");
+
+        els.cards.innerHTML = events.map((event) => {
+          const date = shortDate(event.date);
+          return `
+            <article class="event-card">
+              <div class="card-top">
+                <div>
+                  <h3>${escapeHtml(event.title)}</h3>
+                  <p class="muted">${escapeHtml(event.source)}</p>
+                </div>
+                <div class="date-chip"><span>${escapeHtml(date.month)}</span>${escapeHtml(date.day)}</div>
+              </div>
+              <p><strong>${escapeHtml(event.time)}</strong></p>
+              <p>${escapeHtml(event.location || "See event page")}</p>
+              <p>Cost: ${escapeHtml(event.cost || "See event page")}</p>
+              <span class="tag">${escapeHtml(event.type)}</span>
+              <a class="button" href="${escapeHtml(event.registerLink || event.link)}">Open event</a>
+            </article>
+          `;
+        }).join("");
+      }
+
+      fetch("../data/garden-events.json")
+        .then((response) => response.json())
+        .then((data) => {
+          state.events = data.events || [];
+          const types = [...new Set(state.events.map((event) => event.type).filter(Boolean))].sort();
+          const sources = [...new Set(state.events.map((event) => event.source).filter(Boolean))].sort();
+          fillSelect(els.type, types);
+          fillSelect(els.source, sources);
+          els.count.textContent = String(state.events.length);
+          els.master.textContent = String(state.events.filter((event) => event.type === "Master Gardener").length);
+          els.swaps.textContent = String(state.events.filter((event) => /swap|exchange/i.test(event.type)).length);
+          els.window.textContent = `${data.window.start.slice(5).replace("-", "/")} - ${data.window.end.slice(5).replace("-", "/")}`;
+          els.note.textContent = `Last refreshed ${new Date(data.generatedAt).toLocaleString("en-US", { timeZone: data.timezone })}. Showing ${data.window.start} through ${data.window.end}. Sources: ${data.sources.map((source) => source.name).join(", ")}.`;
+          render();
+        })
+        .catch((error) => {
+          els.note.textContent = `Could not load garden event data: ${error.message}`;
+        });
+
+      els.search.addEventListener("input", () => {
+        state.query = els.search.value.trim();
+        render();
+      });
+      els.type.addEventListener("change", () => {
+        state.type = els.type.value;
+        render();
+      });
+      els.source.addEventListener("change", () => {
+        state.source = els.source.value;
+        render();
+      });
+    </script>
+  </body>
+</html>
