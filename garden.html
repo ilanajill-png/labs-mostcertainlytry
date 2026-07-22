@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Garden | Most Certainly Try Labs</title>
-    <meta name="description" content="Garden planning tools for San Antonio seed libraries and garden events.">
+    <meta name="description" content="Garden planning tools for San Antonio and Austin seed libraries and garden events.">
     <link rel="stylesheet" href="styles.css">
     <style>
       .garden-shell {
@@ -100,8 +100,8 @@
       <section class="hero garden-hero">
         <div>
           <p class="kicker">Garden</p>
-          <h1>San Antonio garden routes and events.</h1>
-          <p class="lede">Two working tools for planning seed-library visits, garden classes, plant swaps, and field days around Schertz and San Antonio.</p>
+          <h1>Texas garden routes and events.</h1>
+          <p class="lede">Working tools for planning seed-library visits, garden classes, plant swaps, and field days around San Antonio and Austin.</p>
         </div>
       </section>
 
@@ -109,6 +109,8 @@
         <div class="garden-tabs" role="tablist" aria-label="Garden sections">
           <button class="garden-tab" id="seed-library-tab" type="button" role="tab" aria-selected="true" aria-controls="seed-library-panel" data-target="seed-library-panel">San Antonio Seed Library</button>
           <button class="garden-tab" id="garden-events-tab" type="button" role="tab" aria-selected="false" aria-controls="garden-events-panel" data-target="garden-events-panel">San Antonio Garden Events</button>
+          <button class="garden-tab" id="austin-seed-library-tab" type="button" role="tab" aria-selected="false" aria-controls="austin-seed-library-panel" data-target="austin-seed-library-panel">Austin Seed Library</button>
+          <button class="garden-tab" id="austin-garden-events-tab" type="button" role="tab" aria-selected="false" aria-controls="austin-garden-events-panel" data-target="austin-garden-events-panel">Austin Garden Events</button>
         </div>
 
         <section class="garden-panel active" id="seed-library-panel" role="tabpanel" aria-labelledby="seed-library-tab">
@@ -127,6 +129,25 @@
           </div>
           <div class="garden-frame-wrap">
             <iframe class="garden-frame" src="projects/san-antonio-garden-events.html" title="San Antonio Garden Events"></iframe>
+          </div>
+        </section>
+
+        <section class="garden-panel" id="austin-seed-library-panel" role="tabpanel" aria-labelledby="austin-seed-library-tab">
+          <div class="garden-link-row">
+            <a href="projects/austin-seed-library.html">Open Austin Seed Library full page</a>
+          </div>
+          <div class="garden-frame-wrap">
+            <iframe class="garden-frame" src="projects/austin-seed-library.html" title="Austin Seed Library"></iframe>
+          </div>
+        </section>
+
+        <section class="garden-panel" id="austin-garden-events-panel" role="tabpanel" aria-labelledby="austin-garden-events-tab">
+          <div class="garden-link-row">
+            <a href="projects/austin-garden-events.html">Open Austin Garden Events full page</a>
+            <a href="data/austin-garden-events.json">Open Austin garden events JSON feed</a>
+          </div>
+          <div class="garden-frame-wrap">
+            <iframe class="garden-frame" src="projects/austin-garden-events.html" title="Austin Garden Events"></iframe>
           </div>
         </section>
       </section>
