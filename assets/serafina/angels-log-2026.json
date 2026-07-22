@@ -3426,7 +3426,113 @@
       ],
       "tarotMessage": "Household message: The Empress asks everyone at Las Jaras to notice the first true need before rushing. The Emperor describes the weather inside and outside the walls. The Chariot names what could complicate the day if ignored. Strength shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Empress tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-07-22": {
+      "date": "2026-07-22",
+      "weekday": "Wednesday",
+      "generatedAt": "2026-07-22T13:18:03.308Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Third Eye chakra (intuition, insight, and inner knowing): I trust the quiet pattern, then verify it with weather, soil, shade, and the actual evidence underfoot.",
+      "morningIntentionChakra": {
+        "chakra": "Third Eye",
+        "focus": "intuition, insight, and inner knowing",
+        "intention": "I trust the quiet pattern, then verify it with weather, soil, shade, and the actual evidence underfoot."
+      },
+      "practicalRite": "I notice the moon's work and then return to the actual chore.",
+      "weather": {
+        "sunrise": "06:47 AM",
+        "sunset": "08:31 PM",
+        "highF": "103",
+        "lowF": "77",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV"
+        ],
+        "uvIndex": "12",
+        "maxGustMph": 17,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Gibbous",
+        "moonIllumination": "55%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-07-22",
+            "name": "Tisha B'Av Begins",
+            "origin": "Jewish fast and mourning day remembering the destruction of the Temples and other tragedies; begins at sundown.",
+            "crystals": "No crystal rite required.",
+            "cleaning": "Keep the house simple and avoid noisy projects.",
+            "food": "Food is not the center; prepare gentle food for after the fast if supporting someone observing.",
+            "gift": "Give quiet, practical support, or a donation in memory and repair.",
+            "modernCelebration": "At Las Jaras I would keep the tone quiet for anyone observing. No ritual required from others; do not plan a cheerful Jewish-themed gathering on this night."
+          }
+        ],
+        "alerts": [],
+        "next": {
+          "date": "2026-07-22",
+          "name": "Tisha B'Av Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "gold for generous attention",
+        "breakfast": "toast with butter and jam, plus water before coffee gets dramatic",
+        "lunch": "a grain bowl with vegetables, herbs, and enough salt to be civilized",
+        "dinner": "a pantry curry or stew that makes tomorrow easier",
+        "luckyObject": "a reusable bag",
+        "personToCall": "the person you keep meaning to thank",
+        "strangerKindness": "leave a five-star review for a small local place that earned it"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 06:47 AM; sunset 08:31 PM; 13h 44m daylight.",
+        "moon": "Waxing Gibbous, 55% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Order",
+        "franklinMeasure": "Let each tool, hour, pot, and obligation have its proper place.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Order: Let each tool, hour, pot, and obligation have its proper place. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Weather",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Garden",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Household",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Warning",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Hermit",
+          "reading": "I step outside alone long enough to notice one true thing."
+        }
+      ],
+      "tarotMessage": "Household message: The Emperor asks everyone at Las Jaras to notice the first true need before rushing. The Hierophant describes the weather inside and outside the walls. Strength names what could complicate the day if ignored. The Hermit shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Emperor tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-07-21T13:18:03.012Z"
+  "updatedAt": "2026-07-22T13:18:03.308Z"
 }
