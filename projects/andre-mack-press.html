@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Press - André Hueston Mack</title>
+  <meta name="description" content="Updated press page for André Hueston Mack, also searched as André Mack and Andre Hueston Mack: sommelier, winemaker, author, designer, and host.">
+  <meta name="robots" content="noindex,nofollow">
+  <style>
+    :root {
+      --ink: #181818;
+      --muted: #6d6a63;
+      --paper: #f8f6ef;
+      --line: #ddd8ca;
+      --accent: #0f4ccf;
+      --wine: #7a1d38;
+      --gold: #c49a32;
+      --tile: #fffdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      letter-spacing: 0;
+    }
+    a { color: inherit; }
+    .top {
+      padding: 28px 18px 20px;
+      text-align: center;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      width: min(380px, 78vw);
+      margin: 0 auto 22px;
+    }
+    .brand img { display: block; width: 100%; height: auto; }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px 24px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    nav a { text-decoration: none; border-bottom: 1px solid transparent; }
+    nav a:hover { border-color: currentColor; }
+    .hero img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1562 / 681;
+      object-fit: cover;
+      object-position: center;
+    }
+    main {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 74px;
+    }
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 22px;
+      align-items: end;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 24px 0;
+      margin-bottom: 34px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 6vw, 70px);
+      line-height: .96;
+      font-weight: 400;
+    }
+    .intro p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .contact {
+      display: inline-block;
+      padding: 11px 14px;
+      border: 1px solid var(--ink);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      white-space: nowrap;
+      background: #fff;
+    }
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 22px;
+    }
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    button {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      padding: 9px 12px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      cursor: pointer;
+    }
+    button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .count { color: var(--muted); font-size: 13px; align-self: center; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+    .card {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-height: 294px;
+      background: var(--tile);
+      border: 1px solid var(--line);
+      text-decoration: none;
+      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #9b927e;
+      box-shadow: 0 14px 28px rgba(24, 24, 24, .12);
+    }
+    .thumb {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #181818;
+      color: #fff;
+      position: relative;
+    }
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb .mark {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: .95;
+      background:
+        linear-gradient(135deg, rgba(15, 76, 207, .88), rgba(122, 29, 56, .88)),
+        radial-gradient(circle at 24% 22%, rgba(196, 154, 50, .95), transparent 34%),
+        #191919;
+    }
+    .meta {
+      padding: 13px 14px 16px;
+      display: grid;
+      gap: 7px;
+    }
+    .source {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .title {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .tag {
+      justify-self: start;
+      margin-top: 4px;
+      padding: 4px 7px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: #fff;
+    }
+    .sources {
+      margin-top: 42px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+    .sources a { color: var(--accent); overflow-wrap: anywhere; }
+    @media (max-width: 960px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      .intro { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+      .card { min-height: 260px; }
+    }
+    @media (max-width: 460px) {
+      .grid { grid-template-columns: 1fr; }
+      nav { gap: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="https://www.andrehmack.com/" aria-label="Andre Hueston Mack home">
+      <img src="https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1355378723613-S06TXMUA865EYDWO1F0B/AHM_LOGO1-01.png" alt="Andre Hueston Mack">
+    </a>
+    <nav aria-label="Andre Hueston Mack navigation">
+      <a href="https://www.andrehmack.com/andre-hueston-mack">About</a>
+      <a href="https://www.youtube.com/playlist?list=PLKtIunYVkv_RpjXAgcKGgR2BFXpgBU7FQ">World of Wine</a>
+      <a href="https://www.andrehmack.com/wine">Wines</a>
+      <a href="https://www.andrehmack.com/hospitality">Hospitality</a>
+      <a href="https://www.andrehmack.com/book-1">Books</a>
+      <a href="https://www.andrehmack.com/talks">Talks</a>
+      <a href="https://www.andrehmack.com/press">Original Press</a>
+    </nav>
+  </header>
+  <div class="hero">
+    <img src="https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1530716299638-7894X4G0N1IARS9X15F4/AHM_WEBSITE_PIC_2-01.jpg" alt="Andre Hueston Mack press banner">
+  </div>
+  <main>
+    <section class="intro">
+      <div>
+        <h1>Press</h1>
+      <p>Updated press wall for André Hueston Mack, also indexed as André Mack and Andre Hueston Mack: sommelier, winemaker, author, designer, restaurateur, cultural educator, and host of Bon Appetit's World of Wine. The layout keeps the clean image-grid rhythm of the current Squarespace page while adding recent coverage, podcasts, video, awards, and event features.</p>
+      </div>
+      <a class="contact" href="mailto:ahm@maisonnoirwines.com">Press Inquiries</a>
+    </section>
+    <section class="tools" aria-label="Press filters">
+      <div class="filters" id="filters"></div>
+      <div class="count" id="count"></div>
+    </section>
+    <section class="grid" id="grid" aria-live="polite"></section>
+    <section class="sources">
+      <strong>Research note:</strong> built July 22, 2026 from Andre's current press page plus web research for "Andre Mack," "Andre Hueston Mack," "André Mack," and "André Hueston Mack." Selected links were checked locally with HTTP requests; sites that block HEAD but load in a browser are retained. Older third-party links that were fragile on the original page are normalized to Andre-hosted pages or PDFs where available.
+    </section>
+  </main>
+  <script>
+    const press = [
+      {
+        year: "2026",
+        source: "Wine & Hip Hop",
+        title: "Episode 111: Deeply Rooted III Featuring Andre Mack",
+        note: "Live Philbrook Museum conversation on wine, entrepreneurship, hip hop, storytelling, and what Mack is building next.",
+        category: "Podcast",
+        url: "https://wineandhiphop.com/podcasts/2026/4/30/episode-111-deeply-rooted-iii-featuring-andre-mack"
+      },
+      {
+        year: "2026",
+        source: "City Winery NYC",
+        title: "Thirst Trap: An Evening With Andre Hueston Mack",
+        note: "New live tasting format: part guided tasting, part storytelling, part late-night conversation.",
+        category: "Event",
+        url: "https://tickets.citywinery.com/event/andre-hueston-mack-presents-thirst-trap-shx415"
+      },
+      {
+        year: "2025",
+        source: "The Drinks Business",
+        title: "In 2025 the biggest challenge of being a somm is having a job",
+        note: "Exclusive interview on sommelier culture, the fate of & Sons, and the state of restaurants.",
+        category: "Interview",
+        url: "https://www.thedrinksbusiness.com/2025/09/andre-hueston-mack-in-2025-the-biggest-challenge-of-being-a-somm-is-having-a-job/"
+      },
+      {
+        year: "2024",
+        source: "Wine Industry Advisor",
+        title: "Wine's Most Inspiring People 2024: Andre Hueston Mack",
+        note: "Profile naming Mack one of wine's most inspiring people and framing his multi-hyphenate business impact.",
+        category: "Award",
+        url: "https://wineindustryadvisor.com/2024/01/17/wines-most-inspiring-people-2024-andre-hueston-mack-entrepreneur-in-the-world-of-wine"
+      },
+      {
+        year: "2024",
+        source: "Escoffier Podcast",
+        title: "How Andre Hueston Mack Is Making Wine Less Intimidating and More Fun",
+        note: "Long-form career and culture conversation about Maison Noir, wine education, and approachable expertise.",
+        category: "Podcast",
+        url: "https://www.escoffier.edu/podcast/132-andre-hueston-mack-redefining-wine-culture/"
+      },
+      {
+        year: "2024",
+        source: "Restaurants Canada",
+        title: "RC Show bar and beverage keynote lineup",
+        note: "Industry event coverage identifying Mack as a bar keynote speaker and recent Most Inspiring People honoree.",
+        category: "Event",
+        url: "https://www.restaurantscanada.org/rc-show-2024-unveils-exciting-bar-and-beverage-lineup-to-help-level-up-industry-standards/"
+      },
+      {
+        year: "2023",
+        source: "Shondaland",
+        title: "The Flaky Biscuit: Andre Hueston Mack's Butterscotch Krimpets",
+        note: "Food-memory podcast feature with Mack on Tastykake Krimpets, childhood nostalgia, and a Krug pairing.",
+        category: "Podcast",
+        url: "https://www.shondaland.com/our-podcasts/the-flaky-biscuit-how-to-make-andr-hueston-macks-butterscotch-krimpets"
+      },
+      {
+        year: "2023",
+        source: "Bon Appetit",
+        title: "Sommelier Tries Every Trader Joe's Wine",
+        note: "World of Wine episode continuing Mack's high-reach consumer wine education series.",
+        category: "Video",
+        url: "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-every-trader-joes-wine"
+      },
+      {
+        year: "2023",
+        source: "Bon Appetit",
+        title: "Sommelier Tests if a $1,500 Bottle of Wine Is Worth It",
+        note: "World of Wine episode using luxury pricing as a teaching format for value, quality, and context.",
+        category: "Video",
+        url: "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tests-if-a-1500-dollars-bottle-of-wine-is-worth-it"
+      },
+      {
+        year: "2023",
+        source: "Bon Appetit",
+        title: "Sommelier Tastes Champagne at Different Ages",
+        note: "World of Wine age-comparison episode translating bottle maturity and Champagne structure for a broad audience.",
+        category: "Video",
+        url: "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tastes-the-same-champagne-at-different-ages"
+      },
+      {
+        year: "2022",
+        source: "TASTE",
+        title: "This Is TASTE 218: Andre Hueston Mack",
+        note: "Podcast interview on Mack's career highlights, 99 Bottles, hospitality, and World of Wine.",
+        category: "Podcast",
+        url: "https://tastecooking.com/taste-podcast-218-andre-mack/"
+      },
+      {
+        year: "2022",
+        source: "Bon Appetit",
+        title: "Sommelier Pairs Wine and Fast Food",
+        note: "World of Wine episode turning fast food into an approachable pairing lesson.",
+        category: "Video",
+        url: "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-pairs-wine-and-fast-food"
+      },
+      {
+        year: "2021",
+        source: "Bon Appetit",
+        title: "Sommelier Tries 16 Boxed Wines",
+        note: "World of Wine episode evaluating boxed wine quality, value, and packaging assumptions.",
+        category: "Video",
+        url: "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-16-boxed-wines"
+      },
+      {
+        year: "2020",
+        source: "Oregon Wine Press",
+        title: "Q&A: Andre Mack",
+        note: "Oregon-focused Q&A on Maison Noir, diversity, education, and Mack's view of Oregon wine.",
+        category: "Interview",
+        url: "https://www.oregonwinepress.com/q-and-a-andre-mack"
+      },
+      {
+        year: "2020",
+        source: "Great Northwest Wine",
+        title: "Salty fries and old Spatlese: the 99 Bottles that made Andre Mack a somm",
+        note: "Book coverage tying 99 Bottles to Mack's personal wine education and storytelling style.",
+        category: "Books",
+        url: "https://greatnorthwestwine.com/2020/05/13/salty-fries-and-old-spatlese-the-99-bottles-that-made-andre-mack-a-somm/"
+      },
+      {
+        year: "2020",
+        source: "L.M. Archer",
+        title: "The Future of Somm Culture",
+        note: "Interview on hospitality after Covid-19 and Mack's view of where sommelier culture could move.",
+        category: "Interview",
+        url: "https://lmarcher.com/2020/08/28/the-future-of-somm-culture-sommelier-andre-hueston-mack-shares-his-thoughts/"
+      },
+      {
+        year: "2019",
+        source: "USA Today / AAAV",
+        title: "Andre Mack wants to bring hip hop culture to winemaking",
+        note: "Profile on Mack's blend of wine, hip hop, skate culture, design, and independent business building.",
+        category: "Profile",
+        url: "https://aaavintners.org/andre-mack-of-mason-noir/"
+      },
+      {
+        year: "2018",
+        source: "SevenFifty Daily",
+        title: "How Andre Mack Uses Digital Media to Market His Wines",
+        note: "Trade story on direct-to-consumer marketing, social reach, and the brand system behind Maison Noir.",
+        category: "Business",
+        url: "https://daily.sevenfifty.com/how-andre-mack-uses-digital-media-to-market-his-wines/"
+      },
+      {
+        year: "2017",
+        source: "Well Rounded",
+        title: "How a Traveling Dad Can Be a Present Dad",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/well-rounded",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495489674045-BK0BJALJPQC1GLE2VLY9/How+a+Traveling+Dad+Can+be+a+Present+Dad+++Well+Rounded+NY.png"
+      },
+      {
+        year: "2017",
+        source: "The Globe and Mail",
+        title: "Winemaker Andre Hueston Mack brings garage wine to the fast casual crowd",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/globe-mail-2017",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495581446069-WBMH81I6TJ398HLVG7E5/The+Globe+And+Mail_Winemaker+Andr%C3%A9+Hueston+Mack+brings+%E2%80%98garage+wine%E2%80%99+to+the+fast+casual+crowd+++The+Globe+and+Mail.png"
+      },
+      {
+        year: "2017",
+        source: "IdeaMensch",
+        title: "Andre Hueston Mack, Maker of Mouton Noir Wines",
+        note: "Original press-page entrepreneur interview.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/idea-mensch",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495498593248-3BU29AP98SGFRXY8FRRH/Andr%C3%A9+Hueston+Mack+++Maker+of+Mouton+Noir+Wines.png"
+      },
+      {
+        year: "2016",
+        source: "Microsoft",
+        title: "How a black sheep wine man found success as an entrepreneur",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/microsoft",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495499031647-8P7CDTRSYHP441UUYHN6/Andr%C3%A9+Mack++How+a+%E2%80%98black+sheep%E2%80%99+wine+man+found+success+as+an+entrepreneur+++News+Center.png"
+      },
+      {
+        year: "2016",
+        source: "Wine Enthusiast",
+        title: "Must-Try Somm Wine",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/wine-enthusiast-2016",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495652311217-3B0OL5JVCJCK5MSAI0T1/Must+Try+Somm+Wine+++Wine+Enthusiast+Magazine.png"
+      },
+      {
+        year: "2016",
+        source: "Ebony",
+        title: "Being the Black Sheep of the Wine Business",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/ebony-2016",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495499274442-WNUUACRZZVAPMC0JNRMN/Being+the++Black+Sheep++of+the+Wine+Business+++EBONY.png"
+      },
+      {
+        year: "2016",
+        source: "Rolling Out",
+        title: "Meet Andre Hueston Mack, top African American winemaker",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/roll-out-mag",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1495490651893-MXIR1QM00NYUHNL6O0FQ/Meet+Andre+Hueston+Mack++top+African+American+winemaker+++Rolling+Out.png"
+      },
+      {
+        year: "2013",
+        source: "Hypebeast",
+        title: "Hypebeast feature",
+        note: "Original press-page feature.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/new-page",
+        image: "https://images.squarespace-cdn.com/content/v1/50c9569ae4b0d5715a8cd5ab/1443390181285-N7J87D1EREBSIQMR3L3C/image-asset.png"
+      },
+      {
+        year: "2012",
+        source: "Cuisine Noir",
+        title: "Cuisine Noir Summer 2012",
+        note: "Original hosted PDF from Andre's press archive.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/s/Cuisine-Noir-Summer-2012.pdf"
+      },
+      {
+        year: "2012",
+        source: "The Huffington Post",
+        title: "Holiday drinks from sommelier Andre Mack",
+        note: "Original hosted PDF from Andre's press archive.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/s/img269.pdf"
+      },
+      {
+        year: "2011",
+        source: "Wall Street Journal",
+        title: "A Wine Man in a Hurry",
+        note: "Original hosted PDF from Andre's press archive.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/s/img023.pdf"
+      },
+      {
+        year: "2009",
+        source: "King",
+        title: "King magazine feature",
+        note: "Original hosted PDF from Andre's press archive.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/s/img019.pdf"
+      },
+      {
+        year: "2008",
+        source: "Food & Wine",
+        title: "Food & Wine April 2008",
+        note: "Original hosted PDF from Andre's press archive.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/s/FW-April-2008.pdf"
+      },
+      {
+        year: "2005",
+        source: "Black Enterprise",
+        title: "In High Spirits",
+        note: "Original hosted PDF from Andre's press archive.",
+        category: "Archive",
+        url: "https://www.andrehmack.com/s/Black-Enterprise.pdf"
+      }
+    ];
+
+    const categories = ["All", "Interview", "Podcast", "Video", "Award", "Event", "Books", "Business", "Archive"];
+    const filters = document.getElementById("filters");
+    const grid = document.getElementById("grid");
+    const count = document.getElementById("count");
+    let active = "All";
+
+    function initials(source) {
+      return source.split(/\s+/).filter(Boolean).slice(0, 3).map(part => part[0]).join("");
+    }
+
+    function card(item) {
+      const thumb = item.image
+        ? `<img src="${item.image}" alt="">`
+        : `<div class="mark">${initials(item.source)}</div>`;
+      return `<a class="card" href="${item.url}" target="_blank" rel="noopener">
+        <div class="thumb">${thumb}</div>
+        <div class="meta">
+          <div class="source">${item.source} ${item.year}</div>
+          <h2 class="title">${item.title}</h2>
+          <p class="note">${item.note}</p>
+          <span class="tag">${item.category}</span>
+        </div>
+      </a>`;
+    }
+
+    function render() {
+      const items = active === "All" ? press : press.filter(item => item.category === active);
+      grid.innerHTML = items.map(card).join("");
+      count.textContent = `${items.length} ${items.length === 1 ? "item" : "items"}`;
+      [...filters.querySelectorAll("button")].forEach(button => {
+        button.setAttribute("aria-pressed", button.dataset.category === active ? "true" : "false");
+      });
+    }
+
+    filters.innerHTML = categories.map(category => `<button type="button" data-category="${category}" aria-pressed="false">${category}</button>`).join("");
+    filters.addEventListener("click", event => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      active = button.dataset.category;
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>
