@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Garden | Most Certainly Try Labs</title>
+    <meta name="description" content="Garden planning tools for San Antonio seed libraries and garden events.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+      .garden-shell {
+        padding-bottom: 56px;
+      }
+
+      .garden-hero {
+        min-height: auto;
+        grid-template-columns: minmax(0, 1fr);
+        padding-bottom: 30px;
+      }
+
+      .garden-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 12px 0 18px;
+      }
+
+      .garden-tab {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 11px 14px;
+        background: var(--panel);
+        color: var(--ink);
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .garden-tab[aria-selected="true"] {
+        background: var(--green);
+        border-color: var(--green);
+        color: #fff;
+      }
+
+      .garden-panel {
+        display: none;
+      }
+
+      .garden-panel.active {
+        display: block;
+      }
+
+      .garden-frame-wrap {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+      }
+
+      .garden-frame {
+        display: block;
+        width: 100%;
+        height: min(1200px, 78vh);
+        border: 0;
+        background: #fff;
+      }
+
+      .garden-link-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 0 0 14px;
+      }
+
+      .garden-link-row a {
+        color: var(--blue);
+        font-weight: 800;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="garden.html" aria-current="page">Garden</a>
+        <a href="field-guide.html">Captain's Log</a>
+        <a href="new-project.html">New Entry</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main class="garden-shell">
+      <section class="hero garden-hero">
+        <div>
+          <p class="kicker">Garden</p>
+          <h1>San Antonio garden routes and events.</h1>
+          <p class="lede">Two working tools for planning seed-library visits, garden classes, plant swaps, and field days around Schertz and San Antonio.</p>
+        </div>
+      </section>
+
+      <section aria-label="Garden tools">
+        <div class="garden-tabs" role="tablist" aria-label="Garden sections">
+          <button class="garden-tab" id="seed-library-tab" type="button" role="tab" aria-selected="true" aria-controls="seed-library-panel" data-target="seed-library-panel">San Antonio Seed Library</button>
+          <button class="garden-tab" id="garden-events-tab" type="button" role="tab" aria-selected="false" aria-controls="garden-events-panel" data-target="garden-events-panel">San Antonio Garden Events</button>
+        </div>
+
+        <section class="garden-panel active" id="seed-library-panel" role="tabpanel" aria-labelledby="seed-library-tab">
+          <div class="garden-link-row">
+            <a href="projects/san-antonio-seed-library.html">Open San Antonio Seed Library full page</a>
+          </div>
+          <div class="garden-frame-wrap">
+            <iframe class="garden-frame" src="projects/san-antonio-seed-library.html" title="San Antonio Seed Library"></iframe>
+          </div>
+        </section>
+
+        <section class="garden-panel" id="garden-events-panel" role="tabpanel" aria-labelledby="garden-events-tab">
+          <div class="garden-link-row">
+            <a href="projects/san-antonio-garden-events.html">Open San Antonio Garden Events full page</a>
+            <a href="data/garden-events.json">Open garden events JSON feed</a>
+          </div>
+          <div class="garden-frame-wrap">
+            <iframe class="garden-frame" src="projects/san-antonio-garden-events.html" title="San Antonio Garden Events"></iframe>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+
+    <script>
+      const tabs = [...document.querySelectorAll(".garden-tab")];
+      const panels = [...document.querySelectorAll(".garden-panel")];
+
+      function activateTab(tab) {
+        tabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
+        panels.forEach((panel) => panel.classList.toggle("active", panel.id === tab.dataset.target));
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => activateTab(tab));
+      });
+    </script>
+  </body>
+</html>

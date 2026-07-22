@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>San Antonio Seed Library Rankings</title>
+  <style>
+    :root {
+      --ink: #202119;
+      --muted: #646a5d;
+      --paper: #f8f4e8;
+      --panel: #fffdf8;
+      --line: #ded3bd;
+      --cobalt: #1446a0;
+      --green: #386d3d;
+      --gold: #d3a13a;
+      --clay: #ad5d42;
+      --rose: #8c3850;
+      --shadow: 0 18px 46px rgba(32, 33, 25, .11);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(120deg, rgba(20, 70, 160, .08), transparent 38%),
+        repeating-linear-gradient(90deg, rgba(56, 109, 61, .08) 0 1px, transparent 1px 90px),
+        var(--paper);
+      line-height: 1.5;
+    }
+
+    a {
+      color: var(--cobalt);
+      text-decoration-thickness: .08em;
+      text-underline-offset: .18em;
+    }
+
+    header {
+      padding: 56px 20px 24px;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 16% 16%, rgba(211, 161, 58, .25), transparent 24%),
+        linear-gradient(135deg, #fffdf8, #efe8d4);
+    }
+
+    .shell {
+      width: min(1240px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(42px, 7vw, 92px);
+      line-height: .95;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid var(--line);
+      background: rgba(248, 244, 232, .92);
+      backdrop-filter: blur(12px);
+    }
+
+    nav .shell {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+
+    nav a:hover {
+      background: var(--panel);
+      border-color: var(--line);
+    }
+
+    section {
+      padding: 44px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .metric,
+    .card,
+    .template-card,
+    .note {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, .86);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset;
+    }
+
+    .metric {
+      padding: 16px;
+      min-height: 126px;
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--cobalt);
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric p,
+    .card p,
+    .note p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      min-height: 340px;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 7px;
+      background: var(--green);
+    }
+
+    .card.strong::before { background: var(--gold); }
+    .card.useful::before { background: var(--cobalt); }
+    .card.optional::before { background: var(--clay); }
+
+    .rank-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .rank {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      flex: 0 0 auto;
+      color: white;
+      background: var(--ink);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .score {
+      color: var(--green);
+      font-size: 28px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 8px;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      background: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .links a,
+    .links span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 9px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .links span {
+      color: var(--muted);
+      background: rgba(255, 255, 255, .58);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .78);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 760px;
+    }
+
+    th,
+    td {
+      padding: 13px 12px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    th {
+      background: #eee2c8;
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .template-card,
+    .note {
+      padding: 16px;
+    }
+
+    .template-card strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 960px) {
+      .section-head,
+      .notes {
+        grid-template-columns: 1fr;
+      }
+
+      .score-grid,
+      .cards,
+      .template-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      header { padding-top: 38px; }
+
+      .score-grid,
+      .cards,
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card { min-height: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <p class="eyebrow">Las Jaras route notebook</p>
+      <h1>San Antonio Seed Library Rankings</h1>
+      <p class="lede">A reporting rubric, social-link directory, and priority chart for visiting seed libraries from 406 Brooks Ave.</p>
+    </div>
+  </header>
+
+  <nav aria-label="Page sections">
+    <div class="shell">
+      <a href="#rubric">Rubric</a>
+      <a href="#rankings">Rankings</a>
+      <a href="#chart">Full Chart</a>
+      <a href="#rules">Rules</a>
+      <a href="#driving-plan">Driving Plan</a>
+      <a href="#template">Report Template</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main class="shell">
+    <section id="rubric">
+      <div class="section-head">
+        <h2>Ranking System</h2>
+        <p class="lede">Scores are designed for reporting value, not moral worth. The best stops have useful seeds, reliable access, visual story value, and a clear link to the Las Jaras fall garden.</p>
+      </div>
+      <div class="score-grid">
+        <article class="metric"><strong>25</strong><p><b>Seed usefulness</b><br>Fall-garden relevance, native/adapted seeds, vegetables, herbs, labels, seasonal fit.</p></article>
+        <article class="metric"><strong>20</strong><p><b>Access reliability</b><br>Public access, clear hours, parking, current availability, easy seed-box location.</p></article>
+        <article class="metric"><strong>15</strong><p><b>Reporting value</b><br>Visual appeal, unusual setup, community garden context, photo/video potential.</p></article>
+        <article class="metric"><strong>15</strong><p><b>Las Jaras relevance</b><br>Mission garden usefulness, pollinator layer, heat strategy, donation/swap potential.</p></article>
+        <article class="metric"><strong>10</strong><p><b>Community practice</b><br>Donation instructions, swap norms, educational material, plant-share culture.</p></article>
+        <article class="metric"><strong>10</strong><p><b>Digital presence</b><br>Website, Instagram/TikTok, active posts, easy tagging and crediting.</p></article>
+        <article class="metric"><strong>5</strong><p><b>Route efficiency</b><br>How naturally the stop fits a loop from 406 Brooks.</p></article>
+        <article class="metric"><strong>100</strong><p><b>Total score</b><br>85+ is Must Visit, 75-84 Strong Stop, 65-74 Useful Stop, below 65 verify first.</p></article>
+      </div>
+    </section>
+
+    <section id="rankings">
+      <div class="section-head">
+        <h2>Priority Stops</h2>
+        <p class="lede">These cards keep the useful field-reporting details up front: what to visit first, why it matters, and where to tag it.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="rank-line"><span class="rank">1</span><span class="score">90</span></div>
+          <h3>Roots In the City Landscape Design</h3>
+          <span class="tag">Must Visit</span>
+          <p>Best Las Jaras fit: native seeds, organic vegetable garden focus, packet growing info, and strong long-term yard relevance.</p>
+          <p><b>Address:</b> 411 Springwood Ln, San Antonio, TX 78216</p>
+          <div class="links"><a href="https://www.rootsinthecitytx.com/">Website</a><a href="https://www.instagram.com/rootsinthecitytx/">Instagram</a><a href="https://www.facebook.com/rootsinthecitytx/">Facebook</a><span>TikTok not found</span></div>
+        </article>
+        <article class="card">
+          <div class="rank-line"><span class="rank">2</span><span class="score">86</span></div>
+          <h3>Igo Library</h3>
+          <span class="tag">Must Visit</span>
+          <p>Card-catalog seed setup, solar-powered branch, Texas native seed stock, and a very clean reporting hook.</p>
+          <p><b>Address:</b> 13330 Kyle Seale Pkwy, San Antonio, TX 78249</p>
+          <div class="links"><a href="https://www.mysapl.org/Visit/Locations/Igo-Library">Website</a><a href="https://www.instagram.com/mysapl/">Instagram</a><a href="https://www.mysapl.org/events-news/news-media-center/social-media">SAPL Social</a><span>TikTok not found</span></div>
+        </article>
+        <article class="card strong">
+          <div class="rank-line"><span class="rank">3</span><span class="score">84</span></div>
+          <h3>Confluence Park</h3>
+          <span class="tag">Strong Stop</span>
+          <p>Best ecological story: Friendship Garden, landmark water-wise park, and strong native/river context.</p>
+          <p><b>Address:</b> 310 W Mitchell St, San Antonio, TX 78204</p>
+          <div class="links"><a href="https://sariverfound.org/confluence-park/">Website</a><a href="https://www.instagram.com/sariverfoundation/">Instagram</a><span>TikTok not found</span></div>
+        </article>
+        <article class="card strong">
+          <div class="rank-line"><span class="rank">4</span><span class="score">82</span></div>
+          <h3>Landa Library</h3>
+          <span class="tag">Strong Stop</span>
+          <p>Historic branch, beautiful grounds, seed envelopes available, and strong photo/story value.</p>
+          <p><b>Address:</b> 233 Bushnell Ave, San Antonio, TX 78212</p>
+          <div class="links"><a href="https://www.mysapl.org/Visit/Locations/Landa-Library">Website</a><a href="https://www.instagram.com/mysapl/">Instagram</a><span>TikTok not found</span></div>
+        </article>
+        <article class="card strong">
+          <div class="rank-line"><span class="rank">5</span><span class="score">80</span></div>
+          <h3>Little Red House - Kaiser Drive</h3>
+          <span class="tag">Strong Stop</span>
+          <p>Wide seed selection, potted plants, and community plant-share culture. Treat as a private-home stop.</p>
+          <p><b>Address:</b> 2611 Kaiser Drive, San Antonio, TX 78222</p>
+          <div class="links"><a href="https://getrealtytx.com/little-red-house/">Website</a><a href="https://www.instagram.com/livesimplyoutdoors/">Instagram</a><a href="https://www.facebook.com/groups/706615517440402/">Facebook</a><span>TikTok not found</span></div>
+        </article>
+        <article class="card strong">
+          <div class="rank-line"><span class="rank">6</span><span class="score">78</span></div>
+          <h3>Little Red House - Gemini Drive</h3>
+          <span class="tag">Strong Stop</span>
+          <p>Same community network, strong plant-share angle, slightly lower because donation placement was less clear.</p>
+          <p><b>Address:</b> 9703 Gemini Dr, San Antonio, TX 78217</p>
+          <div class="links"><a href="https://getrealtytx.com/little-red-house/">Website</a><a href="https://www.instagram.com/livesimplyoutdoors/">Instagram</a><a href="https://nextdoor.com/g/rokbaivyq/">Nextdoor</a><span>TikTok not found</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="chart">
+      <div class="section-head">
+        <h2>Full Chart</h2>
+        <p class="lede">All StoryMap locations are included, plus nearby additions found in a Schertz-radius search. The chart now follows the three-leg driving order instead of rank order.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Leg</th><th>Location</th><th>Address</th><th>Hours</th><th>Rules</th><th>Tag</th><th>Instagram</th><th>TikTok</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Leg 1</td><td><a href="https://www.schertz.com/2184/Library">Schertz Public Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=798%20Schertz%20Parkway%2C%20Schertz%2C%20TX%2078154">798 Schertz Parkway, Schertz, TX 78154</a></td><td>Mon-Thu 10a-8p; Fri-Sat 10a-6p; Sun noon-6p</td><td>Pay-it-forward; donate native seeds in brown paper bag labeled with scientific name</td><td>Must Visit</td><td><a href="https://www.instagram.com/schertzlibrary/">@schertzlibrary</a></td><td>Not found official</td><td>Nearby addition: native seed library in Schertz, indexed by NPSOT and stocked through a pay-it-forward model.</td></tr>
+            <tr><td>Leg 1</td><td><a href="https://www.ci.garden-ridge.tx.us/103/Library">Garden Ridge Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=9400%20Municipal%20Parkway%2C%20Garden%20Ridge%2C%20TX%2078266">9400 Municipal Parkway, Garden Ridge, TX 78266</a></td><td>Mon-Thu 10a-6p; Fri 10a-5p; Sat 10a-1p; Sun closed</td><td>Native seed library; borrow/share free; verify posted limits</td><td>Strong Stop</td><td><a href="https://www.instagram.com/gardenridgelibrary/">@gardenridgelibrary</a></td><td>Not found official</td><td>Nearby addition: NPSOT Lindheimer Chapter announced the Garden Ridge native seed library in 2025.</td></tr>
+            <tr><td>Leg 1</td><td><a href="https://www.mysapl.org/Visit/Locations/Encino-Library">Encino Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=2515%20E%20Evans%20Road%2C%20San%20Antonio%2C%20TX%2078259">2515 E Evans Road, San Antonio, TX 78259</a></td><td>Sun 10a-6p; Mon-Tue noon-8p; Wed-Sat 10a-6p</td><td>Take up to 2 packets per visit; write down seeds taken; posted signs override</td><td>Useful Stop</td><td><a href="https://www.instagram.com/mysapl/">@mysapl</a></td><td>Not found official</td><td>Newer SAPL seed library.</td></tr>
+            <tr><td>Leg 1</td><td><a href="https://www.sanantonio.gov/ParksAndRec/Parks-Facilities/All-Parks-Facilities/Parks-Facilities-Details/ArtMID/14820/ArticleID/2652/Eisenhower-Park">Eisenhower Park</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=19399%20NW%20Military%20Hwy%2C%20San%20Antonio%2C%20TX%2078257">19399 NW Military Hwy, San Antonio, TX 78257</a></td><td>Daily sunrise-sunset</td><td>Take up to 2 packets per visit; write down seeds taken; respect park/garden rules</td><td>Optional / Verify First</td><td>Not found official</td><td>Not found official</td><td>Seed library near yellow house by parking.</td></tr>
+            <tr><td>Leg 1</td><td><a href="https://www.mysapl.org/Visit/Locations/Igo-Library">Igo Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=13330%20Kyle%20Seale%20Pkwy%2C%20San%20Antonio%2C%20TX%2078249">13330 Kyle Seale Pkwy, San Antonio, TX 78249</a></td><td>Sun 10a-6p; Mon-Tue noon-8p; Wed-Sat 10a-6p</td><td>Take up to 2 packets per visit; write down seeds taken; posted signs override</td><td>Must Visit</td><td><a href="https://www.instagram.com/mysapl/">@mysapl</a></td><td>Not found official</td><td>Card catalog setup; solar-powered branch.</td></tr>
+            <tr><td>Leg 1</td><td><a href="https://www.mysapl.org/Visit/Locations/Cody-Library">Cody Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=11441%20Vance%20Jackson%2C%20San%20Antonio%2C%20TX%2078230">11441 Vance Jackson, San Antonio, TX 78230</a></td><td>Branch closed; interim Tue noon-8p, Wed-Sat 10a-6p; unavailable Jul 18-25</td><td>When service active: take up to 2 packets; write down seeds; verify seed station first</td><td>Useful Stop</td><td><a href="https://www.instagram.com/mysapl/">@mysapl</a></td><td>Not found official</td><td>Self-checkout seed area; verify service status.</td></tr>
+            <tr><td>Leg 2</td><td><a href="https://www.mysapl.org/Visit/Locations/johnston-Library">Johnston Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=6307%20Sun%20Valley%2C%20San%20Antonio%2C%20TX%2078227">6307 Sun Valley, San Antonio, TX 78227</a></td><td>Sun 10a-6p; Mon-Tue noon-8p; Wed-Sat 10a-6p</td><td>Take up to 2 packets per visit; write down seeds taken; posted signs override</td><td>Optional / Verify First</td><td><a href="https://www.instagram.com/mysapl/">@mysapl</a></td><td>Not found official</td><td>StoryMap names it Johnson; SAPL branch is Johnston.</td></tr>
+            <tr><td>Leg 2</td><td><a href="https://www.mysapl.org/Visit/Locations/Landa-Library">Landa Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=233%20Bushnell%20Ave%2C%20San%20Antonio%2C%20TX%2078212">233 Bushnell Ave, San Antonio, TX 78212</a></td><td>Sun 10a-6p; Mon-Tue noon-8p; Wed-Sat 10a-6p</td><td>Take up to 2 packets per visit; write down seeds taken; posted signs override</td><td>Strong Stop</td><td><a href="https://www.instagram.com/mysapl/">@mysapl</a></td><td>Not found official</td><td>Historic branch and grounds.</td></tr>
+            <tr><td>Leg 2</td><td><a href="https://www.rootsinthecitytx.com/">Roots In the City Landscape Design</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=411%20Springwood%20Ln%2C%20San%20Antonio%2C%20TX%2078216">411 Springwood Ln, San Antonio, TX 78216</a></td><td>By appointment / verify before visiting</td><td>Verify appointment and posted rules before taking or donating seeds</td><td>Must Visit</td><td><a href="https://www.instagram.com/rootsinthecitytx/">@rootsinthecitytx</a></td><td>Not found</td><td>Native/edible garden designer seed library.</td></tr>
+            <tr><td>Leg 2</td><td><a href="https://sariverfound.org/confluence-park/">Confluence Park</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=310%20W%20Mitchell%20St%2C%20San%20Antonio%2C%20TX%2078204">310 W Mitchell St, San Antonio, TX 78204</a></td><td>Daily dawn-dusk</td><td>Take up to 2 packets per visit; write down seeds taken; respect park/garden rules</td><td>Strong Stop</td><td><a href="https://www.instagram.com/sariverfoundation/">@sariverfoundation</a></td><td>Not found official</td><td>Friendship Garden seed house.</td></tr>
+            <tr><td>Leg 2</td><td><a href="https://www.mysapl.org/visit/locations/mission-library">Mission Library</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=3134%20Roosevelt%20Ave%2C%20San%20Antonio%2C%20TX%2078214">3134 Roosevelt Ave, San Antonio, TX 78214</a></td><td>Sun 10a-6p; Mon-Tue noon-8p; Wed-Sat 10a-6p</td><td>Take up to 2 packets per visit; write down seeds taken; posted signs override</td><td>Useful Stop</td><td><a href="https://www.instagram.com/mysapl/">@mysapl</a></td><td>Not found official</td><td>Community garden behind library.</td></tr>
+            <tr><td>Leg 3</td><td><a href="https://getrealtytx.com/little-red-house/">Little Red House - Kaiser Drive</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=2611%20Kaiser%20Drive%2C%20San%20Antonio%2C%20TX%2078222">2611 Kaiser Drive, San Antonio, TX 78222</a></td><td>No posted hours; daylight respectful visit; verify in group</td><td>Free trades; no sales; private-home courtesy; leave area tidy</td><td>Strong Stop</td><td><a href="https://www.instagram.com/livesimplyoutdoors/">@livesimplyoutdoors</a></td><td>Not found official</td><td>Private-home seed and plant share.</td></tr>
+            <tr><td>Leg 3</td><td><a href="https://www.facebook.com/groups/706615517440402/">Little Red House - Rustic Forest</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=8123%20Rustic%20Forest%2C%20San%20Antonio%2C%20TX%2078239">8123 Rustic Forest, San Antonio, TX 78239</a></td><td>No posted hours; daylight respectful visit; verify in group</td><td>Free trades; no sales; private-home courtesy; leave area tidy</td><td>Strong Stop</td><td><a href="https://www.instagram.com/livesimplyoutdoors/">@livesimplyoutdoors</a></td><td>Not found official</td><td>Private-home seed and plant share; public snippets list it as LRH3 / Life Regeneration Homestead Hub.</td></tr>
+            <tr><td>Leg 3</td><td><a href="https://getrealtytx.com/little-red-house/">Little Red House - Gemini Drive</a></td><td><a href="https://www.google.com/maps/search/?api=1&amp;query=9703%20Gemini%20Dr%2C%20San%20Antonio%2C%20TX%2078217">9703 Gemini Dr, San Antonio, TX 78217</a></td><td>No posted hours; daylight respectful visit; verify in group</td><td>Free trades; no sales; private-home courtesy; leave area tidy</td><td>Strong Stop</td><td><a href="https://www.instagram.com/livesimplyoutdoors/">@livesimplyoutdoors</a></td><td>Not found official</td><td>Private-home seed and plant share.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rules">
+      <div class="section-head">
+        <h2>Seed Library Rules</h2>
+        <p class="lede">Use posted rules at each stop first. These are the route-wide rules and norms confirmed from the current source pass.</p>
+      </div>
+      <div class="notes">
+        <article class="note">
+          <h3>Checkout</h3>
+          <p>For the StoryMap-listed San Antonio seed libraries, plan on two seed packets per visit and write down the seeds you take on the provided notepad.</p>
+        </article>
+        <article class="note">
+          <h3>Schertz</h3>
+          <p>Schertz Public Library describes its native seed library as pay-it-forward. Seed donations are welcome; bring seeds in a brown paper bag labeled with the scientific name.</p>
+        </article>
+        <article class="note">
+          <h3>Native Seeds</h3>
+          <p>The NPSOT seed-library network is for borrowing and sharing native seeds for free. Prefer clearly labeled native seeds, especially locally adapted South/Central Texas plants.</p>
+        </article>
+        <article class="note">
+          <h3>Little Red House</h3>
+          <p>Trades are free and sales are not allowed. Treat Kaiser, Rustic Forest, and Gemini as private-home stops: visit during reasonable daylight hours, avoid filming house details, and leave the area tidy.</p>
+        </article>
+        <article class="note">
+          <h3>Donations</h3>
+          <p>Bring dry, clean, labeled seeds. Include plant name, date collected, and any useful variety or growing notes. Skip invasive, mystery, wet, moldy, or unlabeled seed donations.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="driving-plan">
+      <div class="section-head">
+        <h2>Driving Plan</h2>
+        <p class="lede">A 14-stop route plan, split into three Google Maps legs so the route stays manageable. The full note version is saved as <a href="SAN_ANTONIO_SEED_LIBRARY_14_STOP_DRIVING_PLAN.md">SAN_ANTONIO_SEED_LIBRARY_14_STOP_DRIVING_PLAN.md</a>.</p>
+      </div>
+      <div class="notes">
+        <article class="note">
+          <h3>Route Links</h3>
+          <p>Leg 1: <a href="https://www.google.com/maps/dir/?api=1&amp;origin=798%20Schertz%20Parkway%2C%20Schertz%2C%20TX%2078154&amp;destination=11441%20Vance%20Jackson%2C%20San%20Antonio%2C%20TX%2078230&amp;waypoints=9400%20Municipal%20Parkway%2C%20Garden%20Ridge%2C%20TX%2078266%7C2515%20E%20Evans%20Road%2C%20San%20Antonio%2C%20TX%2078259%7C19399%20NW%20Military%20Hwy%2C%20San%20Antonio%2C%20TX%2078257%7C13330%20Kyle%20Seale%20Pkwy%2C%20San%20Antonio%2C%20TX%2078249">Google Maps</a> / <a href="https://maps.apple.com/?dirflg=d&amp;saddr=798%20Schertz%20Parkway%2C%20Schertz%2C%20TX%2078154&amp;daddr=9400%20Municipal%20Parkway%2C%20Garden%20Ridge%2C%20TX%2078266&amp;daddr=2515%20E%20Evans%20Road%2C%20San%20Antonio%2C%20TX%2078259&amp;daddr=19399%20NW%20Military%20Hwy%2C%20San%20Antonio%2C%20TX%2078257&amp;daddr=13330%20Kyle%20Seale%20Pkwy%2C%20San%20Antonio%2C%20TX%2078249&amp;daddr=11441%20Vance%20Jackson%2C%20San%20Antonio%2C%20TX%2078230">Apple Maps</a></p>
+          <p>Leg 2: <a href="https://www.google.com/maps/dir/?api=1&amp;origin=11441%20Vance%20Jackson%2C%20San%20Antonio%2C%20TX%2078230&amp;destination=3134%20Roosevelt%20Ave%2C%20San%20Antonio%2C%20TX%2078214&amp;waypoints=6307%20Sun%20Valley%2C%20San%20Antonio%2C%20TX%2078227%7C233%20Bushnell%20Ave%2C%20San%20Antonio%2C%20TX%2078212%7C411%20Springwood%20Ln%2C%20San%20Antonio%2C%20TX%2078216%7C310%20W%20Mitchell%20St%2C%20San%20Antonio%2C%20TX%2078204">Google Maps</a> / <a href="https://maps.apple.com/?dirflg=d&amp;saddr=11441%20Vance%20Jackson%2C%20San%20Antonio%2C%20TX%2078230&amp;daddr=6307%20Sun%20Valley%2C%20San%20Antonio%2C%20TX%2078227&amp;daddr=233%20Bushnell%20Ave%2C%20San%20Antonio%2C%20TX%2078212&amp;daddr=411%20Springwood%20Ln%2C%20San%20Antonio%2C%20TX%2078216&amp;daddr=310%20W%20Mitchell%20St%2C%20San%20Antonio%2C%20TX%2078204&amp;daddr=3134%20Roosevelt%20Ave%2C%20San%20Antonio%2C%20TX%2078214">Apple Maps</a></p>
+          <p>Leg 3: <a href="https://www.google.com/maps/dir/?api=1&amp;origin=3134%20Roosevelt%20Ave%2C%20San%20Antonio%2C%20TX%2078214&amp;destination=9703%20Gemini%20Dr%2C%20San%20Antonio%2C%20TX%2078217&amp;waypoints=2611%20Kaiser%20Drive%2C%20San%20Antonio%2C%20TX%2078222%7C8123%20Rustic%20Forest%2C%20San%20Antonio%2C%20TX%2078239">Google Maps</a> / <a href="https://maps.apple.com/?dirflg=d&amp;saddr=3134%20Roosevelt%20Ave%2C%20San%20Antonio%2C%20TX%2078214&amp;daddr=2611%20Kaiser%20Drive%2C%20San%20Antonio%2C%20TX%2078222&amp;daddr=8123%20Rustic%20Forest%2C%20San%20Antonio%2C%20TX%2078239&amp;daddr=9703%20Gemini%20Dr%2C%20San%20Antonio%2C%20TX%2078217">Apple Maps</a></p>
+        </article>
+        <article class="note">
+          <h3>Stop Order</h3>
+          <p>Schertz Public Library -> Garden Ridge Library -> Encino Library -> Eisenhower Park -> Igo Library -> Cody Library -> Johnston Library -> Landa Library -> Roots In the City -> Confluence Park -> Mission Library -> Little Red House Kaiser -> Little Red House Rustic Forest -> Little Red House Gemini.</p>
+        </article>
+        <article class="note">
+          <h3>Timing</h3>
+          <p>Expect an all-day run: roughly 4 to 5 hours of driving before parking, checking seed stock, photos, breaks, and sorting. A two-day split is easier: north/west stops first, then central/south/east stops. If Apple Maps drops intermediate stops, add them manually from the stop order.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="template">
+      <div class="section-head">
+        <h2>Visit Report Template</h2>
+        <p class="lede">Use this as the field note checklist at each stop.</p>
+      </div>
+      <div class="template-grid">
+        <article class="template-card"><strong>Basic visit</strong>Location, date/time, parking, hours, and whether the seed library was easy to find.</article>
+        <article class="template-card"><strong>Seed condition</strong>Full, medium, sparse, or empty. Note best seeds found and whether fall-garden seeds were available.</article>
+        <article class="template-card"><strong>Las Jaras fit</strong>Score 1-5 for mission garden usefulness, native/pollinator value, and heat strategy.</article>
+        <article class="template-card"><strong>Community rules</strong>Donation instructions visible, envelope system, swap notes, and any checkout limits.</article>
+        <article class="template-card"><strong>Content notes</strong>Photo/video opportunities, signage, garden context, and anything worth posting.</article>
+        <article class="template-card"><strong>Social tags</strong>Website, Instagram, TikTok if official, plus the safest account to credit.</article>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <h2>Source Notes</h2>
+        <p class="lede">The StoryMap supplies original stop descriptions and addresses. Nearby Schertz-radius additions were checked against official library pages and Native Plant Society of Texas pages; ambiguous TikToks are not guessed.</p>
+      </div>
+      <div class="notes">
+        <article class="note">
+          <h3>Primary Map</h3>
+          <p><a href="https://storymaps.arcgis.com/stories/6783b8095bde4b2f876e718353ffef10">Free Seed Libraries in San Antonio</a></p>
+        </article>
+        <article class="note">
+          <h3>Private Stops</h3>
+          <p>Gemini, Kaiser, and Rustic Forest are individual-home seed libraries. Search snippets for the Little Red House Facebook group list three total locations: 9703 Gemini, 2611 Kaiser, and 8123 Rustic Forest. Report respectfully and avoid filming house details beyond the public seed-library feature without permission.</p>
+        </article>
+        <article class="note">
+          <h3>Schertz Radius</h3>
+          <p><a href="https://www.schertz.com/calendar.aspx?EID=6387">Schertz Public Library native seed library</a> and <a href="https://www.npsot.org/event/city-of-garden-ridge-library-seed-library-grand-opening/">Garden Ridge Library native seed library</a> were added after a 20-mile Schertz search. New Braunfels showed current seed-library activity but appears close to or just outside the 20-mile cutoff, so it is not added here.</p>
+        </article>
+        <article class="note">
+          <h3>Hours</h3>
+          <p>Library and park hours were checked against official pages on July 22, 2026. Cody is marked with its temporary HVAC closure/interim-service note. Roots In the City and Little Red House stops should be verified before visiting because public hours were not posted.</p>
+        </article>
+        <article class="note">
+          <h3>Rules</h3>
+          <p>Seed library rules were checked from the San Antonio StoryMap, Schertz Public Library event pages, NPSOT native seed-library pages, and Little Red House public snippets. Posted on-site rules should override this planning chart.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <p>HTML version of <code>SAN_ANTONIO_SEED_LIBRARY_RANKING_CHART.md</code>.</p>
+  </footer>
+</body>
+</html>
