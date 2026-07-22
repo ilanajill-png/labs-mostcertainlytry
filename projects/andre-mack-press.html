@@ -570,7 +570,7 @@
     const existingUrls = new Set(press.map(item => item.url));
     for (const [year, source, title, note, url] of videoArchive) {
       if (existingUrls.has(url)) continue;
-      press.unshift({ year, source, title, note, category: "Video", url });
+      press.push({ year, source, title, note, category: "Video", url });
       existingUrls.add(url);
     }
 
@@ -607,9 +607,12 @@
     ];
     for (const [year, source, title, note, category, url] of discoveryArchive) {
       if (existingUrls.has(url)) continue;
-      press.unshift({ year, source, title, note, category, url });
+      press.push({ year, source, title, note, category, url });
       existingUrls.add(url);
     }
+    press.forEach((item, index) => {
+      item.sortIndex = index;
+    });
 
     const categories = ["All", "Interview", "Podcast", "Video", "Profile", "News", "Limited Access", "Award", "Event", "Books", "Business", "Blog", "Archive"];
     const filters = document.getElementById("filters");
@@ -655,7 +658,12 @@
     }
 
     function render() {
-      const items = active === "All" ? press : press.filter(item => item.category === active);
+      const items = (active === "All" ? press : press.filter(item => item.category === active))
+        .slice()
+        .sort((a, b) => {
+          const yearDifference = Number(b.year) - Number(a.year);
+          return yearDifference || a.sortIndex - b.sortIndex;
+        });
       grid.innerHTML = items.map(card).join("");
       count.textContent = `${items.length} ${items.length === 1 ? "item" : "items"}`;
       [...filters.querySelectorAll("button")].forEach(button => {
