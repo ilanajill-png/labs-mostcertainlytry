@@ -253,7 +253,7 @@
     <section class="intro">
       <div>
         <h1>Press</h1>
-      <p>Updated press wall for André Hueston Mack, also indexed as André Mack and Andre Hueston Mack: sommelier, winemaker, author, designer, restaurateur, cultural educator, and host of Bon Appetit's World of Wine. The layout keeps the clean image-grid rhythm of the current Squarespace page while adding recent coverage, podcasts, video, awards, and event features.</p>
+        <p>Updated press wall for André Hueston Mack, also indexed as André Mack and Andre Hueston Mack: sommelier, winemaker, author, designer, restaurateur, cultural educator, and host of Bon Appetit's World of Wine. The layout keeps the clean image-grid rhythm of the current Squarespace page while adding recent coverage, podcasts, awards, event features, and a much deeper video archive.</p>
       </div>
       <a class="contact" href="mailto:ahm@maisonnoirwines.com">Press Inquiries</a>
     </section>
@@ -263,7 +263,7 @@
     </section>
     <section class="grid" id="grid" aria-live="polite"></section>
     <section class="sources">
-      <strong>Research note:</strong> built July 22, 2026 from Andre's current press page plus web research for "Andre Mack," "Andre Hueston Mack," "André Mack," and "André Hueston Mack." Selected links were checked locally with HTTP requests; sites that block HEAD but load in a browser are retained. Older third-party links that were fragile on the original page are normalized to Andre-hosted pages or PDFs where available.
+      <strong>Research note:</strong> built July 22, 2026 from Andre's current press page plus web research for "Andre Mack," "Andre Hueston Mack," "André Mack," and "André Hueston Mack" across public press sites, Bon Appetit, WIRED, Forbes, YouTube, podcast pages, and event pages. Selected links were checked locally with HTTP requests; sites that block HEAD but load in a browser are retained. Older third-party links that were fragile on the original page are normalized to Andre-hosted pages or PDFs where available.
     </section>
   </main>
   <script>
@@ -533,6 +533,60 @@
         url: "https://www.andrehmack.com/s/Black-Enterprise.pdf"
       }
     ];
+
+    const videoArchive = [
+      ["2025", "Bon Appetit", "Sommelier Breaks Down How to Order Wine Like a Pro", "World of Wine restaurant-ordering guide.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-breaks-down-how-to-order-wine-like-a-pro"],
+      ["2025", "Bon Appetit", "Sommelier Breaks Down Every Italian Wine", "World of Wine regional Italy explainer.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-breaks-down-every-italian-wine"],
+      ["2025", "Huckberry", "Huckberry Homes: André Hueston Mack", "Home/design profile video.", "https://www.youtube.com/watch?v=pQjK7O78_B0"],
+      ["2025", "Nimmo Bay", "Wine Tasting 101 with Andre Mack and Claire King", "BC Riesling tasting video.", "https://www.youtube.com/watch?v=5dk-VYMgmx8"],
+      ["2025", "YouTube", "Explore The World of Wine with André Hueston Mack", "Recent public wine education appearance.", "https://www.youtube.com/watch?v=sK5ukmg9MVk"],
+      ["2024", "Bon Appetit", "The 54-Aroma Kit Sommeliers Use to Train Their Noses", "World of Wine aroma training kit episode.", "https://www.bonappetit.com/video/watch/world-of-wine-the-54-scent-kit-sommeliers-use-to-train-their-noses"],
+      ["2024", "Bon Appetit", "Sommelier Tests 13 Wine Bottle Openers", "World of Wine bottle-opener gadget test.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tests-13-wine-bottle-openers"],
+      ["2024", "Bon Appetit", "Sommelier Tries 12 Non-Alcoholic Beverages", "World of Wine non-alcoholic beverage tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-professional-sommelier-tries-12-non-alcoholic-beverages"],
+      ["2024", "Bon Appetit", "Sommelier Tries 10 Bourbons From $20-$200", "World of Wine bourbon price-point tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-10-bourbons-%2410-%24200"],
+      ["2024", "Bon Appetit", "Sommelier Tries Every Costco Wine", "World of Wine Kirkland wine tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-every-costco-wine"],
+      ["2024", "Bon Appetit", "Sommelier Tries Every Costco Liquor", "World of Wine Kirkland spirits tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-every-costco-kirkland-liquor"],
+      ["2024", "Escoffier", "How André Hueston Mack Is Redefining Wine Culture", "Video version of the Escoffier interview.", "https://www.youtube.com/watch?v=Y8X7oOfwiFs"],
+      ["2024", "Wine Centric Show", "André Mack Pops, Pours & Pairs Sparkling Wine at BBQ & Bubbly", "Sparkling wine pairing appearance.", "https://www.youtube.com/watch?v=22Gq9cFrxzc"],
+      ["2024", "Wine Centric Show", "From Michelin 3 Star French Laundry to Maison Noir Wines", "Career-path interview segment.", "https://www.youtube.com/watch?v=I7D3-qE74zk"],
+      ["2023", "Bon Appetit", "Sommelier Tries 10 Tequilas From $20-$175", "World of Wine tequila price-point tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-10-tequilas-from-%2420-%24175"],
+      ["2023", "Bon Appetit", "Sommelier Tastes the Same Champagne at Different Ages", "World of Wine Veuve Clicquot age comparison.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tastes-the-same-champagne-at-different-ages"],
+      ["2023", "Bon Appetit", "Sommelier Tries 20 Rose Wines Under $20", "World of Wine rose value tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-20-rose-wines-under-20-dollars"],
+      ["2023", "Bon Appetit", "How A Sommelier Designs The Wine List For A Restaurant", "World of Wine restaurant list-building episode.", "https://www.bonappetit.com/video/watch/world-of-wine-how-a-sommelier-designs-the-wine-list-for-a-restaurant"],
+      ["2023", "Bon Appetit", "Sommelier Pairs Wine With 5 Classic Pasta Dishes", "World of Wine pasta pairing episode.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-pairs-wine-with-5-classic-pasta-dishes"],
+      ["2023", "Bon Appetit", "Sommelier Tests 10 Wine Gadgets", "World of Wine wine gadget test.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tests-10-wine-gadgets"],
+      ["2023", "Bon Appetit", "Sommelier Tries The Same Wine From 7 Different Countries", "World of Wine Pinot Noir country comparison.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-the-same-wine-from-7-different-countries"],
+      ["2023", "WIRED", "Sommelier André Mack Answers Wine Questions From Twitter", "WIRED Tech Support wine Q&A.", "https://www.youtube.com/watch?v=HM6Rak_d-5s"],
+      ["2022", "Bon Appetit", "Sommelier Tries Wine from Every State: Alabama-Missouri", "World of Wine state-by-state tasting, part one.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-wine-from-every-state-alabama-missouri"],
+      ["2022", "Bon Appetit", "Sommelier Tries Wine from Every State: Montana-Wyoming", "World of Wine state-by-state tasting, part two.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-wine-from-every-state-montana-wyoming"],
+      ["2022", "Bon Appetit", "Sommelier Tries A 94 Year Old Red Wine", "World of Wine historic bottle tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-a-94-year-old-red-wine"],
+      ["2022", "Bon Appetit", "Sommelier Tries 14 More Celebrity Wines", "World of Wine celebrity wine sequel.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-14-more-celebrity-wines"],
+      ["2022", "Bon Appetit", "Thor's Tessa Thompson Guesses Cheap vs. Expensive Wines", "Through the Grapevine celebrity tasting.", "https://www.bonappetit.com/video/watch/thors-tessa-thompson-guesses-cheap-vs-expensive-wines"],
+      ["2022", "Bon Appetit", "Sommelier Tries The Same Red Wine At 4 Prices", "World of Wine Cabernet price comparison.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-the-same-red-wine-at-4-prices-%2418-%24300"],
+      ["2022", "Bon Appetit", "Sommelier Answers Wine Questions From the Internet", "World of Wine internet Q&A.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-answers-wine-questions-from-the-internet"],
+      ["2022", "Bon Appetit", "Sommelier Pairs Wine and Fast Food", "World of Wine fast-food pairing episode.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-pairs-wine-and-fast-food"],
+      ["2021", "Bon Appetit", "Sommelier Breaks Down Every Wine Glass", "World of Wine glassware explainer.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-breaks-down-every-wine-glass"],
+      ["2021", "Bon Appetit", "Every Wine Tool a Sommelier Uses", "World of Wine professional tools episode.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-demonstrates-wine-tools-used-by-professionals"],
+      ["2021", "Bon Appetit", "Sommelier Tastes the Same Wine at 5 Ages", "World of Wine Heitz Cellar vertical tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tastes-the-same-wine-at-5-ages-1978-2016"],
+      ["2021", "Bon Appetit", "Sommelier Tries 12 Sparkling Wines", "World of Wine sparkling wine tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-12-sparkling-wines"],
+      ["2021", "Bon Appetit", "Sommelier Tries 16 Boxed Wines", "World of Wine boxed wine tasting.", "https://www.bonappetit.com/video/watch/world-of-wine-sommelier-tries-16-boxed-wines"],
+      ["2021", "Bon Appetit", "Sommelier Tries 16 Celebrity Wines", "World of Wine celebrity wine tasting.", "https://www.bonappetit.com/video/watch/sommelier-tries-12-celebrity-wines"],
+      ["2021", "LOL Network", "Why Are We Drinking This!? Andre Hueston Mack, Kevin Hart", "Celebrity tasting segment with Kevin Hart.", "https://www.youtube.com/watch?v=s5-JuGn5eYY"],
+      ["2021", "Forbes", "Andre Mack's Evolution From Winemaker To Serial Entrepreneurial", "Forbes video profile/interview.", "https://www.youtube.com/watch?v=RSCxoSrYp4s"],
+      ["2020", "YouTube", "American Duck Press - Featuring André Hueston Mack", "My Dinner With André cooking/wine appearance.", "https://www.youtube.com/watch?v=9SKirlRSSZ8"],
+      ["2020", "Black Wine Guy", "The Black Wine Guy Experience Episode 7 - Andre Mack", "Long-form wine podcast video.", "https://www.youtube.com/watch?v=Ej7eqXVEnfI"],
+      ["2019", "YouTube", "Interviewing André Hueston Mack", "Sommelier, winemaker, author, and bar owner interview.", "https://www.youtube.com/watch?v=Z_LnY-1L7Sw"],
+      ["2019", "YouTube", "Life & Wine with André Mack", "Wine education and career conversation.", "https://www.youtube.com/watch?v=N0SJFo3uX9E"],
+      ["2018", "YouTube", "André Hueston Mack's OPP inspired by Naughty by Nature", "Mouton Noir O.P.P. wine segment.", "https://www.youtube.com/watch?v=g6Kpn8revrQ"],
+      ["2017", "HospitaliTV", "Interview with Andre Mack, Mouton Noir Wines", "Hospitality trade interview.", "https://m.youtube.com/watch?v=bo4ZDoocjeY"],
+      ["2016", "Andre Mack", "National Car Rental: Local Legends - Andre Hueston Mack", "Brand-partner Local Legends video.", "https://www.youtube.com/watch?v=KEaM6bH89Qg"]
+    ];
+    const existingUrls = new Set(press.map(item => item.url));
+    for (const [year, source, title, note, url] of videoArchive) {
+      if (existingUrls.has(url)) continue;
+      press.unshift({ year, source, title, note, category: "Video", url });
+      existingUrls.add(url);
+    }
 
     const categories = ["All", "Interview", "Podcast", "Video", "Award", "Event", "Books", "Business", "Archive"];
     const filters = document.getElementById("filters");
