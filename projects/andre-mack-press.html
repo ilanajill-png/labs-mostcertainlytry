@@ -57,9 +57,9 @@
       object-position: center;
     }
     main {
-      width: min(1160px, calc(100% - 32px));
+      width: min(1040px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 34px 0 74px;
+      padding: 34px 0 82px;
     }
     .intro {
       display: grid;
@@ -125,57 +125,45 @@
     .count { color: var(--muted); font-size: 13px; align-self: center; }
     .grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 36px 28px;
     }
     .card {
-      display: grid;
-      grid-template-rows: auto 1fr;
-      min-height: 294px;
-      background: var(--tile);
-      border: 1px solid var(--line);
+      display: block;
+      background: transparent;
+      border: 0;
       text-decoration: none;
-      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+      transition: transform .16s ease;
     }
     .card:hover {
-      transform: translateY(-3px);
-      border-color: #9b927e;
-      box-shadow: 0 14px 28px rgba(24, 24, 24, .12);
+      transform: translateY(-4px);
     }
     .thumb {
       display: grid;
       place-items: center;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 3 / 4;
       overflow: hidden;
-      background: #181818;
-      color: #fff;
+      background: #fff;
+      color: var(--ink);
       position: relative;
+      border: 1px solid #d9d2c3;
+      box-shadow: 0 10px 20px rgba(24, 24, 24, .10);
     }
     .thumb img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: filter .16s ease;
     }
-    .thumb .mark {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      text-align: center;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: .95;
-      background:
-        linear-gradient(135deg, rgba(15, 76, 207, .88), rgba(122, 29, 56, .88)),
-        radial-gradient(circle at 24% 22%, rgba(196, 154, 50, .95), transparent 34%),
-        #191919;
+    .card:hover .thumb img {
+      filter: contrast(1.04) saturate(1.04);
     }
     .meta {
-      padding: 13px 14px 16px;
+      padding: 13px 4px 0;
       display: grid;
       gap: 7px;
+      text-align: center;
     }
     .source {
       color: var(--muted);
@@ -186,18 +174,19 @@
     }
     .title {
       margin: 0;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.25;
       font-weight: 800;
+      text-transform: uppercase;
     }
     .note {
       margin: 0;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
       line-height: 1.45;
     }
     .tag {
-      justify-self: start;
+      justify-self: center;
       margin-top: 4px;
       padding: 4px 7px;
       border: 1px solid var(--line);
@@ -218,12 +207,11 @@
     }
     .sources a { color: var(--accent); overflow-wrap: anywhere; }
     @media (max-width: 960px) {
-      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 720px) {
       .intro { grid-template-columns: 1fr; }
-      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-      .card { min-height: 260px; }
+      .grid { gap: 24px 16px; }
     }
     @media (max-width: 460px) {
       .grid { grid-template-columns: 1fr; }
@@ -628,21 +616,39 @@
     const count = document.getElementById("count");
     let active = "All";
 
-    function initials(source) {
-      return source.split(/\s+/).filter(Boolean).slice(0, 3).map(part => part[0]).join("");
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function thumbnailSlug(item) {
+      return `${item.year}-${item.source}-${item.title}`
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 96);
+    }
+
+    function thumbnailUrl(item) {
+      return item.image || `../assets/andre-mack/press-thumbnails/${thumbnailSlug(item)}.svg`;
     }
 
     function card(item) {
-      const thumb = item.image
-        ? `<img src="${item.image}" alt="">`
-        : `<div class="mark">${initials(item.source)}</div>`;
-      return `<a class="card" href="${item.url}" target="_blank" rel="noopener">
-        <div class="thumb">${thumb}</div>
+      return `<a class="card" href="${escapeHtml(item.url)}" target="_blank" rel="noopener">
+        <div class="thumb"><img src="${escapeHtml(thumbnailUrl(item))}" alt=""></div>
         <div class="meta">
-          <div class="source">${item.source} ${item.year}</div>
-          <h2 class="title">${item.title}</h2>
-          <p class="note">${item.note}</p>
-          <span class="tag">${item.category}</span>
+          <div class="source">${escapeHtml(item.source)} ${escapeHtml(item.year)}</div>
+          <h2 class="title">${escapeHtml(item.title)}</h2>
+          <p class="note">${escapeHtml(item.note)}</p>
+          <span class="tag">${escapeHtml(item.category)}</span>
         </div>
       </a>`;
     }

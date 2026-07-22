@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-label="Black Enterprise 2005 In High Spirits">
+  <defs>
+    <pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 13h14M13 0v14" stroke="#181818" stroke-opacity=".035"/></pattern>
+    <style>
+      .source{font:700 30px Helvetica,Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;fill:#181818}
+      .year{font:700 46px Georgia,serif;fill:#181818}
+      .title{font:700 48px Georgia,serif;fill:#181818}
+      .note{font:400 25px Helvetica,Arial,sans-serif;fill:#181818;opacity:.68}
+      .tag{font:700 24px Helvetica,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;fill:#f7f2e8}
+      .mono{font:700 28px Helvetica,Arial,sans-serif;letter-spacing:2px;fill:#f7f2e8}
+    </style>
+  </defs>
+  <rect width="900" height="1200" fill="#f7f2e8"/>
+  <rect width="900" height="1200" fill="url(#grain)"/>
+  <rect x="38" y="38" width="824" height="1124" fill="none" stroke="#181818" stroke-opacity=".22" stroke-width="2"/>
+  <rect x="74" y="72" width="187" height="18" fill="#8d8575"/>
+  <rect x="297" y="72" width="84" height="18" fill="#c99a28"/>
+  <circle cx="744" cy="180" r="82" fill="#8d8575" opacity=".9"/>
+  <text x="744" y="192" text-anchor="middle" class="mono">BE</text>
+  <text x="74" y="174" class="source">Black Enterprise</text>
+  <text x="74" y="276" class="year">2005</text>
+  <line x1="74" y1="336" x2="826" y2="336" stroke="#181818" stroke-opacity=".25" stroke-width="2"/>
+  <text x="74" y="430" class="title">In High Spirits</text>
+  <rect x="74" y="770" width="340" height="9" fill="#8d8575" opacity=".9"/>
+  <rect x="74" y="808" width="210" height="48" fill="#181818"/>
+  <text x="98" y="840" class="tag">Archive</text>
+  <text x="74" y="900" class="note">Original hosted PDF from Andre&apos;s</text>
+<text x="74" y="934" class="note">press archive.</text>
+  <text x="74" y="1108" class="source">ANDRE HUESTON MACK PRESS</text>
+</svg>

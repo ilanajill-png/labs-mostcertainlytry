@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-label="The Restaurant Guys 2018 André Mack of Maison Noir Wines">
+  <defs>
+    <pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 13h14M13 0v14" stroke="#fff6df" stroke-opacity=".035"/></pattern>
+    <style>
+      .source{font:700 30px Helvetica,Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;fill:#fff6df}
+      .year{font:700 46px Georgia,serif;fill:#fff6df}
+      .title{font:700 48px Georgia,serif;fill:#fff6df}
+      .note{font:400 25px Helvetica,Arial,sans-serif;fill:#fff6df;opacity:.68}
+      .tag{font:700 24px Helvetica,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;fill:#16213a}
+      .mono{font:700 28px Helvetica,Arial,sans-serif;letter-spacing:2px;fill:#16213a}
+    </style>
+  </defs>
+  <rect width="900" height="1200" fill="#16213a"/>
+  <rect width="900" height="1200" fill="url(#grain)"/>
+  <rect x="38" y="38" width="824" height="1124" fill="none" stroke="#fff6df" stroke-opacity=".22" stroke-width="2"/>
+  <rect x="74" y="72" width="198" height="18" fill="#c99a28"/>
+  <rect x="308" y="72" width="84" height="18" fill="#7a1f3d"/>
+  <circle cx="744" cy="180" r="82" fill="#c99a28" opacity=".9"/>
+  <text x="744" y="192" text-anchor="middle" class="mono">TRG</text>
+  <text x="74" y="174" class="source">The Restaurant Guys</text>
+  <text x="74" y="276" class="year">2018</text>
+  <line x1="74" y1="336" x2="826" y2="336" stroke="#fff6df" stroke-opacity=".25" stroke-width="2"/>
+  <text x="74" y="430" class="title">André Mack of Maison</text>
+<text x="74" y="488" class="title">Noir Wines</text>
+  <rect x="74" y="770" width="430" height="9" fill="#c99a28" opacity=".9"/>
+  <rect x="74" y="808" width="210" height="48" fill="#fff6df"/>
+  <text x="98" y="840" class="tag">Podcast</text>
+  <text x="74" y="900" class="note">Spotify-hosted Restaurant Guys</text>
+<text x="74" y="934" class="note">podcast episode with Mack.</text>
+  <text x="74" y="1108" class="source">ANDRE HUESTON MACK PRESS</text>
+</svg>

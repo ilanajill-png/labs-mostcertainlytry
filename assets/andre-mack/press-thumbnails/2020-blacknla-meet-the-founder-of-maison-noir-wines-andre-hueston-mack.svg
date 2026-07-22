@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-label="BlackNLA 2020 Meet the Founder of Maison Noir Wines: André Hueston Mack">
+  <defs>
+    <pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 13h14M13 0v14" stroke="#181818" stroke-opacity=".035"/></pattern>
+    <style>
+      .source{font:700 30px Helvetica,Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;fill:#181818}
+      .year{font:700 46px Georgia,serif;fill:#181818}
+      .title{font:700 48px Georgia,serif;fill:#181818}
+      .note{font:400 25px Helvetica,Arial,sans-serif;fill:#181818;opacity:.68}
+      .tag{font:700 24px Helvetica,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;fill:#fff8ea}
+      .mono{font:700 28px Helvetica,Arial,sans-serif;letter-spacing:2px;fill:#fff8ea}
+    </style>
+  </defs>
+  <rect width="900" height="1200" fill="#fff8ea"/>
+  <rect width="900" height="1200" fill="url(#grain)"/>
+  <rect x="38" y="38" width="824" height="1124" fill="none" stroke="#181818" stroke-opacity=".22" stroke-width="2"/>
+  <rect x="74" y="72" width="159" height="18" fill="#d63f2f"/>
+  <rect x="269" y="72" width="84" height="18" fill="#154fe0"/>
+  <circle cx="744" cy="180" r="82" fill="#d63f2f" opacity=".9"/>
+  <text x="744" y="192" text-anchor="middle" class="mono">B</text>
+  <text x="74" y="174" class="source">BlackNLA</text>
+  <text x="74" y="276" class="year">2020</text>
+  <line x1="74" y1="336" x2="826" y2="336" stroke="#181818" stroke-opacity=".25" stroke-width="2"/>
+  <text x="74" y="430" class="title">Meet the Founder of</text>
+<text x="74" y="488" class="title">Maison Noir Wines:</text>
+<text x="74" y="546" class="title">André Hueston Mack</text>
+  <rect x="74" y="770" width="580" height="9" fill="#d63f2f" opacity=".9"/>
+  <rect x="74" y="808" width="210" height="48" fill="#181818"/>
+  <text x="98" y="840" class="tag">Blog</text>
+  <text x="74" y="900" class="note">Black wine and lifestyle profile</text>
+<text x="74" y="934" class="note">of Mack&apos;s Maison Noir story.</text>
+  <text x="74" y="1108" class="source">ANDRE HUESTON MACK PRESS</text>
+</svg>

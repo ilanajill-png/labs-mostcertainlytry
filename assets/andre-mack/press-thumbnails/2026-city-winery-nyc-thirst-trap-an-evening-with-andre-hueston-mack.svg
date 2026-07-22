@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-label="City Winery NYC 2026 Thirst Trap: An Evening With Andre Hueston Mack">
+  <defs>
+    <pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><path d="M0 13h14M13 0v14" stroke="#fffaf0" stroke-opacity=".035"/></pattern>
+    <style>
+      .source{font:700 30px Helvetica,Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;fill:#fffaf0}
+      .year{font:700 46px Georgia,serif;fill:#fffaf0}
+      .title{font:700 48px Georgia,serif;fill:#fffaf0}
+      .note{font:400 25px Helvetica,Arial,sans-serif;fill:#fffaf0;opacity:.68}
+      .tag{font:700 24px Helvetica,Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;fill:#13271f}
+      .mono{font:700 28px Helvetica,Arial,sans-serif;letter-spacing:2px;fill:#13271f}
+    </style>
+  </defs>
+  <rect width="900" height="1200" fill="#13271f"/>
+  <rect width="900" height="1200" fill="url(#grain)"/>
+  <rect x="38" y="38" width="824" height="1124" fill="none" stroke="#fffaf0" stroke-opacity=".22" stroke-width="2"/>
+  <rect x="74" y="72" width="127" height="18" fill="#2f7055"/>
+  <rect x="237" y="72" width="84" height="18" fill="#c99a28"/>
+  <circle cx="744" cy="180" r="82" fill="#2f7055" opacity=".9"/>
+  <text x="744" y="192" text-anchor="middle" class="mono">CWN</text>
+  <text x="74" y="174" class="source">City Winery NYC</text>
+  <text x="74" y="276" class="year">2026</text>
+  <line x1="74" y1="336" x2="826" y2="336" stroke="#fffaf0" stroke-opacity=".25" stroke-width="2"/>
+  <text x="74" y="430" class="title">Thirst Trap: An</text>
+<text x="74" y="488" class="title">Evening With Andre</text>
+<text x="74" y="546" class="title">Hueston Mack</text>
+  <rect x="74" y="770" width="520" height="9" fill="#2f7055" opacity=".9"/>
+  <rect x="74" y="808" width="210" height="48" fill="#fffaf0"/>
+  <text x="98" y="840" class="tag">Event</text>
+  <text x="74" y="900" class="note">New live tasting format: part</text>
+<text x="74" y="934" class="note">guided tasting, part storytelling,</text>
+<text x="74" y="968" class="note">part late-night conversation.</text>
+  <text x="74" y="1108" class="source">ANDRE HUESTON MACK PRESS</text>
+</svg>
