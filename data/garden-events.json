@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-21T14:38:46.825Z",
+  "generatedAt": "2026-07-22T07:30:28.674Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-07-21",
-    "end": "2026-08-20"
+    "start": "2026-07-22",
+    "end": "2026-08-21"
   },
-  "eventCount": 76,
+  "eventCount": 73,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,57 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/little-sprouts-hike-0721/:2026-07-21:10 - 10:30 a.m.",
-      "title": "Little Sprouts Hike",
-      "date": "2026-07-21",
-      "startDateTime": "2026-07-21",
-      "endDateTime": "2026-07-21",
-      "time": "10 - 10:30 a.m.",
-      "cost": "Included with Garden admission and membership",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/little-sprouts-hike-0721/",
-      "registerLink": "https://sabgtx.org/event/little-sprouts-hike-0721/",
-      "summary": "Each hike features a different nature-based lesson designed to inspire a love and appreciation of the natural world. All hikes begin at the garden gift shop. Some trails are unpaved, so all-terrain strollers are recommended. Recommended for ages 5 and under."
-    },
-    {
-      "id": "Bexar County Master Gardeners:78465:2026-07-21 18:00:00",
-      "title": "General Meeting - Zoom",
-      "date": "2026-07-21",
-      "startDateTime": "2026-07-21 18:00:00",
-      "endDateTime": "2026-07-21 20:00:00",
-      "time": "6 p.m. - 8 p.m.",
-      "cost": "See event page",
-      "location": "",
-      "city": "",
-      "source": "Bexar County Master Gardeners",
-      "sourceKind": "Master Gardener calendar",
-      "type": "Master Gardener",
-      "link": "https://bexarmg.org/event/general-meeting-6/",
-      "registerLink": "https://zoom.us/webinar/register/WN_z9LjCd4YQ-iVhTld4zDj4w",
-      "summary": "@ Please register with link below. BCMG: VMS Code 002, Credit: 1 CE Hour Add to calendar Google Calendar iCalendar Outlook 365 Outlook Live"
-    },
-    {
-      "id": "Garden Style San Antonio:31304:2026-07-21 19:00:00",
-      "title": "Summer Garden 101 Workshop",
-      "date": "2026-07-21",
-      "startDateTime": "2026-07-21 19:00:00",
-      "endDateTime": "2026-07-21 20:00:00",
-      "time": "7 p.m. - 8 p.m.",
-      "cost": "donation based",
-      "location": "Gardopia Gardens, 619 N New Braunfels Ave, San Antonio, TX, 78202",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/summer-garden-101-workshop/",
-      "registerLink": "https://www.eventbrite.com/e/summer-garden-101-workshop-tickets-1992837316058",
-      "summary": "Join Ashton Ellis at Gardopia Gardens to learn the best secrets to caring for your garden through the summer. He'll discuss ways to prep your soil for fall as well as the best things to plant in a Texas summer garden. Tickets are donatio..."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/:2026-07-22:10 - 10:30 a.m.",
       "title": "Nature Exploration in the Family Adventure Garden",
