@@ -405,7 +405,7 @@
       <a href="https://www.lowes.com/pd/Ferry-Morse-12-Dry-Quart-Seed-Starting-Mix/1000213229">Jiffy Seed Starting Mix</a>
       <a href="https://www.lowes.com/pd/Jiffy-JIFFY-PEAT-STRIPS-N-GREENHOUSE-SEED-STARTING-KIT/5016321101">Jiffy Greenhouse Starter Kit Peat Cells</a>
       <a href="https://www.lowes.com/pd/Jiffy-JIFFY-72-PELLET-PRO-SEED-STARTING-GREENHOUSE/5016321089">Jiffy Greenhouse Kit with Expanding Peat Pellets</a>
-      <a href="https://www.lowes.com/pd/Scotts-MG-ORGANIC-OUTDOOR-POTTING-MIX-25QT/5015272245">Organic Soil for Seed Snails</a>
+      <a href="https://www.lowes.com/pd/Scotts-MG-ORGANIC-OUTDOOR-POTTING-MIX-25QT/5015272245">Organic Soil for Seed Snails, K-cups, and Root Maker</a>
     </div>
 
     <div class="table-wrap">
@@ -742,8 +742,16 @@
       "Root Maker"
     ];
 
+    const methodMedia = {
+      "Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix": "Jiffy Seed Starting Mix",
+      "Jiffy Greenhouse Kit with Expanding Peat Pellets": "Expanding peat pellets",
+      "Seed Snail with Organic Soil": "Organic soil",
+      "K-cup": "Organic soil",
+      "Root Maker": "Organic soil"
+    };
+
     const starterRows = photo9051Rows.flatMap(row => (
-      plannedTestMethods.map(method => ({ ...blankRow, ...row, "Test method": method }))
+      plannedTestMethods.map(method => ({ ...blankRow, ...row, "Test method": method, Medium: methodMedia[method] || "" }))
     ));
 
     const tableBody = document.querySelector("#tableBody");
