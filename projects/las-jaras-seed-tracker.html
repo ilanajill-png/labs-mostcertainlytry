@@ -782,6 +782,8 @@
       "Root Maker": "Organic soil"
     };
 
+    const methodOrder = new Map(plannedTestMethods.map((method, index) => [method, index]));
+
     const defaultSeedGuidance = {
       "Impatiens|Mixed Colors": {
         "Watering notes": "Mist or bottom-water gently so surface-sown seed stays exposed and evenly damp. Vent cover after sprouts.",
@@ -894,6 +896,18 @@
 
     function withDefaultGuidance(row) {
       return { ...row, ...(defaultSeedGuidance[guidanceKey(row)] || {}) };
+    }
+
+    function sortRows(rows) {
+      return [...rows].sort((a, b) => {
+        const seedCompare = String(a.Seed || "").localeCompare(String(b.Seed || ""), undefined, { sensitivity: "base" });
+        if (seedCompare) return seedCompare;
+        const varietyCompare = String(a.Variety || "").localeCompare(String(b.Variety || ""), undefined, { sensitivity: "base" });
+        if (varietyCompare) return varietyCompare;
+        const sourceCompare = String(a["Lot/packet source"] || "").localeCompare(String(b["Lot/packet source"] || ""), undefined, { sensitivity: "base" });
+        if (sourceCompare) return sourceCompare;
+        return (methodOrder.get(a["Test method"]) ?? 999) - (methodOrder.get(b["Test method"]) ?? 999);
+      });
     }
 
     const starterRows = photo9051Rows.flatMap(row => (
@@ -1037,7 +1051,7 @@
       });
       const existingKeys = new Set(hydratedSavedRows.map(seedKey));
       const missingDefaults = defaultRows.filter(row => !existingKeys.has(seedKey(row)));
-      return hydratedSavedRows.concat(missingDefaults);
+      return sortRows(hydratedSavedRows.concat(missingDefaults));
     }
 
     function collectState() {
@@ -1059,7 +1073,7 @@
         if (state.meta && input.id in state.meta) input.value = state.meta[input.id];
       });
       tableBody.innerHTML = "";
-      const rows = state.rows && state.rows.length ? mergeSavedRows(state.rows, starterRows) : starterRows;
+      const rows = state.rows && state.rows.length ? mergeSavedRows(state.rows, starterRows) : sortRows(starterRows);
       rows.forEach(addRow);
       setEditMode(editUnlocked);
     }
