@@ -226,5 +226,11 @@
     <span>Built with static files.</span>
     <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
   </footer>
+  <script>
+    document.querySelectorAll('a[href^="http"]').forEach((link) => {
+      link.target = "_blank";
+      link.rel = "noopener";
+    });
+  </script>
 </body>
 </html>
