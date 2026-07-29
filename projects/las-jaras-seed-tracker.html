@@ -298,12 +298,31 @@
       font-size: 13px;
     }
 
-    .note {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.45;
-    }
+      .note {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .supply-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .supply-links strong {
+        color: var(--ink);
+      }
+
+      .supply-links a {
+        color: var(--cobalt);
+        font-weight: 800;
+      }
 
     @media (max-width: 760px) {
       header,
@@ -364,6 +383,7 @@
         <select id="defaultMethod">
           <option>Paper towel / bag</option>
           <option>Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix</option>
+          <option>Jiffy Greenhouse Kit with Expanding Peat Pellets</option>
           <option>Fridge</option>
           <option>K-cup</option>
           <option>Root Maker</option>
@@ -378,6 +398,13 @@
         <textarea id="batchNotes" placeholder="Light, heat mat, packet photo location, shared setup notes."></textarea>
       </label>
     </section>
+
+    <div class="supply-links" aria-label="Testing supplies">
+      <strong>Testing supplies:</strong>
+      <a href="https://www.lowes.com/pd/Ferry-Morse-12-Dry-Quart-Seed-Starting-Mix/1000213229">Jiffy Seed Starting Mix</a>
+      <a href="https://www.lowes.com/pd/Jiffy-JIFFY-PEAT-STRIPS-N-GREENHOUSE-SEED-STARTING-KIT/5016321101">Jiffy Greenhouse Starter Kit Peat Cells</a>
+      <a href="https://www.lowes.com/pd/Jiffy-JIFFY-72-PELLET-PRO-SEED-STARTING-GREENHOUSE/5016321089">Jiffy Greenhouse Kit with Expanding Peat Pellets</a>
+    </div>
 
     <div class="table-wrap">
       <table id="trackerTable">
@@ -421,6 +448,7 @@
           <option></option>
           <option>Paper towel / bag</option>
           <option>Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix</option>
+          <option>Jiffy Greenhouse Kit with Expanding Peat Pellets</option>
           <option>Fridge</option>
           <option>K-cup</option>
           <option>Root Maker</option>
@@ -704,6 +732,7 @@
 
     const plannedTestMethods = [
       "Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix",
+      "Jiffy Greenhouse Kit with Expanding Peat Pellets",
       "Fridge",
       "K-cup",
       "Root Maker"
