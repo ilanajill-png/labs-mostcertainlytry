@@ -363,6 +363,10 @@
         Default test method
         <select id="defaultMethod">
           <option>Paper towel / bag</option>
+          <option>Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix</option>
+          <option>Fridge</option>
+          <option>K-cup</option>
+          <option>Root Maker</option>
           <option>Seed-starting tray</option>
           <option>Self-watering tray</option>
           <option>Direct sow</option>
@@ -416,6 +420,10 @@
         <select data-field="Test method">
           <option></option>
           <option>Paper towel / bag</option>
+          <option>Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix</option>
+          <option>Fridge</option>
+          <option>K-cup</option>
+          <option>Root Maker</option>
           <option>Seed-starting tray</option>
           <option>Self-watering tray</option>
           <option>Direct sow</option>
@@ -694,7 +702,16 @@
       }
     ];
 
-    const starterRows = photo9051Rows.map(row => ({ ...blankRow, ...row }));
+    const plannedTestMethods = [
+      "Jiffy Greenhouse Starter Kit Peat Cells & Jiffy Seed Starting Mix",
+      "Fridge",
+      "K-cup",
+      "Root Maker"
+    ];
+
+    const starterRows = photo9051Rows.flatMap(row => (
+      plannedTestMethods.map(method => ({ ...blankRow, ...row, "Test method": method }))
+    ));
 
     const tableBody = document.querySelector("#tableBody");
     const template = document.querySelector("#rowTemplate");
@@ -779,7 +796,7 @@
     }
 
     function seedKey(row) {
-      return [row.Seed, row.Variety, row["Lot/packet source"], row["Photo ref"]]
+      return [row.Seed, row.Variety, row["Lot/packet source"], row["Photo ref"], row["Test method"]]
         .map(value => String(value || "").trim().toLowerCase())
         .join("|");
     }
