@@ -548,6 +548,15 @@
 
     const photo9051Rows = [
       {
+        Seed: "Bluebonnet",
+        Variety: "Texas Bluebonnet (Lupinus texensis)",
+        "Lot/packet source": "Manual add-on seed request",
+        "Test method": "Direct sow",
+        "Seed depth": "1/8 in / light cover; scarify first",
+        "Seedling vigor notes": "Added by request; classic Texas fall-sown wildflower.",
+        "Photo ref": "Manual add 2026-07-29"
+      },
+      {
         Seed: "Impatiens",
         Variety: "Mixed Colors",
         "Lot/packet source": "American Seed packet",
@@ -623,6 +632,15 @@
         "Seed depth": "1/2 in",
         "Seedling vigor notes": "Packet visible in IMG_9051; 53 days to harvest shown.",
         "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Cucumber",
+        Variety: "Lemon",
+        "Lot/packet source": "Manual add-on seed request",
+        "Test method": "Direct sow",
+        "Seed depth": "1/2 in",
+        "Seedling vigor notes": "Added by request; round yellow cucumber suited to warm-season trialing.",
+        "Photo ref": "Manual add 2026-07-29"
       },
       {
         Seed: "Carrot",
@@ -785,6 +803,10 @@
     const methodOrder = new Map(plannedTestMethods.map((method, index) => [method, index]));
 
     const defaultSeedGuidance = {
+      "Bluebonnet|Texas Bluebonnet (Lupinus texensis)": {
+        "Watering notes": "Scarify before sowing, then water in once. Keep lightly moist only until fall rains take over; do not keep soggy.",
+        "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for small starts"
+      },
       "Impatiens|Mixed Colors": {
         "Watering notes": "Mist or bottom-water gently so surface-sown seed stays exposed and evenly damp. Vent cover after sprouts.",
         "Ideal transplant date": "Sep 15, 2026 in shade; protect from heat"
@@ -814,6 +836,10 @@
         "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
       },
       "Cucumber|Garden Bush Slicer Hybrid": {
+        "Watering notes": "Pre-moisten soil and keep evenly moist until emergence. After sprout, water at soil line.",
+        "Ideal transplant date": "Aug 13, 2026"
+      },
+      "Cucumber|Lemon": {
         "Watering notes": "Pre-moisten soil and keep evenly moist until emergence. After sprout, water at soil line.",
         "Ideal transplant date": "Aug 13, 2026"
       },
