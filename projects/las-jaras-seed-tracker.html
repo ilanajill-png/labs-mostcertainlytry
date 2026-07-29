@@ -414,6 +414,7 @@
           <tr>
             <th class="seed-col">Seed</th>
             <th class="medium">Variety</th>
+            <th class="medium">Edible / Ornamental</th>
             <th class="long">Lot / packet source</th>
             <th class="medium">Seed depth</th>
             <th class="long">Watering notes</th>
@@ -447,6 +448,7 @@
     <tr>
       <td class="seed-col"><input data-field="Seed" placeholder="e.g. Okra"></td>
       <td class="medium"><input data-field="Variety" placeholder="Variety / cultivar"></td>
+      <td class="medium"><input data-field="Edible/Ornamental" placeholder="Edible, ornamental, or both"></td>
       <td class="long"><textarea data-field="Lot/packet source" placeholder="Seed library, packet brand, lot, date acquired"></textarea></td>
       <td class="medium"><input data-field="Seed depth" placeholder="e.g. 1/4 in, surface sow"></td>
       <td class="long"><textarea data-field="Watering notes" placeholder="Mist daily, bottom water, kept barely damp..."></textarea></td>
@@ -503,6 +505,7 @@
     const fields = [
       "Seed",
       "Variety",
+      "Edible/Ornamental",
       "Lot/packet source",
       "Seed depth",
       "Watering notes",
@@ -526,6 +529,7 @@
     const blankRow = {
       Seed: "",
       Variety: "",
+      "Edible/Ornamental": "",
       "Lot/packet source": "",
       "Test method": "",
       "Seed depth": "",
@@ -804,102 +808,127 @@
 
     const defaultSeedGuidance = {
       "Bluebonnet|Texas Bluebonnet (Lupinus texensis)": {
+        "Edible/Ornamental": "Ornamental / native",
         "Watering notes": "Scarify before sowing, then water in once. Keep lightly moist only until fall rains take over; do not keep soggy.",
         "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for small starts"
       },
       "Impatiens|Mixed Colors": {
+        "Edible/Ornamental": "Ornamental",
         "Watering notes": "Mist or bottom-water gently so surface-sown seed stays exposed and evenly damp. Vent cover after sprouts.",
         "Ideal transplant date": "Sep 15, 2026 in shade; protect from heat"
       },
       "Marigold|Dwarf French Double Mixed Colors": {
+        "Edible/Ornamental": "Ornamental",
         "Watering notes": "Keep mix evenly moist until sprouts, then water when the top of the mix just starts to dry.",
         "Ideal transplant date": "Sep 1, 2026"
       },
       "Melon|Mystery Melon": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten soil, water deeply after sowing, and keep evenly moist but never soggy until emergence.",
         "Ideal transplant date": "Aug 1, 2026; late after mid-August"
       },
       "Lima Bean|": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Water deeply after sowing and keep soil lightly moist until sprout. Avoid cold or soggy medium.",
         "Ideal transplant date": "Aug 20, 2026"
       },
       "Melon|Charentais": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten soil, water deeply after sowing, and keep evenly moist but never soggy until emergence.",
         "Ideal transplant date": "Aug 1, 2026; late after mid-August"
       },
       "Ratibida columnifera|Mexican Hat": {
+        "Edible/Ornamental": "Ornamental / native",
         "Watering notes": "Press or rake into moist soil before rain. If rains fail, keep the surface lightly damp for 2-3 weeks.",
         "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
       },
       "Ipomopsis rubra|Standing Cypress": {
+        "Edible/Ornamental": "Ornamental / native",
         "Watering notes": "Press or rake into moist soil before rain. If rains fail, keep the surface lightly damp for 2-3 weeks.",
         "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
       },
       "Cucumber|Garden Bush Slicer Hybrid": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten soil and keep evenly moist until emergence. After sprout, water at soil line.",
         "Ideal transplant date": "Aug 13, 2026"
       },
       "Cucumber|Lemon": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten soil and keep evenly moist until emergence. After sprout, water at soil line.",
         "Ideal transplant date": "Aug 13, 2026"
       },
       "Carrot|Petite Sweet Little Finger": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Keep the top 1/4 inch constantly moist until germination. Mist gently and do not let soil crust.",
         "Ideal transplant date": "Do not transplant; direct sow Sep 15, 2026"
       },
       "Squash, Summer|Black Beauty Zucchini": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Water deeply after sowing and keep evenly moist until emergence. Avoid keeping the crown wet after sprout.",
         "Ideal transplant date": "Aug 13, 2026"
       },
       "Chromolaena odorata|Crucita": {
+        "Edible/Ornamental": "Ornamental / native",
         "Watering notes": "Press onto moist soil and mist gently. Keep the surface lightly damp, then rely on fall rain when possible.",
         "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
       },
       "Monarda citriodora|Lemon Mint": {
+        "Edible/Ornamental": "Edible / ornamental",
         "Watering notes": "Tiny seed: mist or bottom-water and keep the surface damp but airy. Do not bury or flood.",
         "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
       },
       "Zinnia|Semi-Dwarf Pumila Mixed Colors": {
+        "Edible/Ornamental": "Ornamental",
         "Watering notes": "Water after sowing and keep evenly moist until sprout, then let the top soil dry slightly between waterings.",
         "Ideal transplant date": "Sep 1, 2026"
       },
       "Pumpkin|Spookie": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Water deeply after sowing and keep evenly moist until germination. Avoid soggy soil.",
         "Ideal transplant date": "Aug 1, 2026"
       },
       "Onion|Red Burgundy": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Keep the shallow seed row evenly damp and do not let the surface crust. Bottom-water trays.",
         "Ideal transplant date": "Nov 15, 2026 as sets; seed starts for winter"
       },
       "Celery|Tall Utah 5270, Improved": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Surface or barely covered seed must stay constantly moist. Mist or bottom-water; do not let dry out.",
         "Ideal transplant date": "Oct 15, 2026"
       },
       "Tomato|Cherry, Large Fruited": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten mix and bottom-water. Keep evenly moist and warm, not wet.",
         "Ideal transplant date": "Jul 10, 2026; late now, transplant ASAP with shade"
       },
       "Capsicum annuum|Chile Pequin": {
+        "Edible/Ornamental": "Edible / ornamental",
         "Watering notes": "After soaking treatment, keep warm and evenly moist but not waterlogged. Rainwater is ideal if available.",
         "Ideal transplant date": "Sep 1, 2026 in pots; spring after last frost for open garden"
       },
       "Pepper, Sweet|Quadrato D'Asti Rosso": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten mix and bottom-water. Keep warm, evenly moist, and never soggy.",
         "Ideal transplant date": "Jul 15, 2026; late now, transplant ASAP with shade"
       },
       "Pepper, Hot|Jalapeno, Mild": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten mix and bottom-water. Keep warm, evenly moist, and never soggy.",
         "Ideal transplant date": "Jul 15, 2026; late now, transplant ASAP with shade"
       },
       "Brassica rapa subsp. chinensis|Pak Choi": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Keep evenly moist; brassicas dislike drying out. Water at soil line once seedlings are up.",
         "Ideal transplant date": "Sep 15, 2026"
       },
       "Neptunia lutea|Yellow Puff / Yellow Sensitive Briar": {
+        "Edible/Ornamental": "Ornamental / native",
         "Watering notes": "Press into moist soil or lightly cover. Keep lightly damp after scarification or stratification; avoid soggy soil.",
         "Ideal transplant date": "Oct 15, 2026 direct sow; spring after stratification for seedlings"
       },
       "Thai lavender eggplant|": {
+        "Edible/Ornamental": "Edible",
         "Watering notes": "Pre-moisten mix and bottom-water. Keep warm and evenly moist, not wet.",
         "Ideal transplant date": "Jul 10, 2026; late now, transplant ASAP with shade"
       }
@@ -1068,6 +1097,7 @@
         return {
           ...defaultRow,
           ...row,
+          "Edible/Ornamental": row["Edible/Ornamental"] || defaultRow["Edible/Ornamental"] || "",
           "Seed depth": row["Seed depth"] || defaultRow["Seed depth"] || "",
           "Watering notes": row["Watering notes"] && !legacyWateringNotes.has(row["Watering notes"])
             ? row["Watering notes"]
