@@ -416,11 +416,12 @@
             <th class="medium">Variety</th>
             <th class="long">Lot / packet source</th>
             <th class="medium">Seed depth</th>
+            <th class="long">Watering notes</th>
             <th class="medium">Test method</th>
             <th class="medium">Start date</th>
+            <th class="medium">Ideal transplant date</th>
             <th class="medium">Temperature</th>
             <th class="medium">Medium</th>
-            <th class="long">Watering notes</th>
             <th class="small">Seeds tested</th>
             <th class="small">Day 4 count</th>
             <th class="small">Day 7 count</th>
@@ -439,7 +440,7 @@
     </div>
 
     <p class="note">Tip: enter <b>Seeds tested</b> and <b>Final germinated</b>; the germination percentage updates automatically. Seed depth is a starting guideline; packet directions win when they are clearly readable. Data is saved to browser local storage for this file.</p>
-    <p class="note">Depth sources: <a href="https://agrilifeextension.tamu.edu/library/gardening/texas-home-vegetable-gardening-guide/">Texas A&amp;M AgriLife seed-depth guidance</a>, <a href="https://extension.umn.edu/gardening-minnesota/starting-seeds-indoors">University of Minnesota indoor seed-starting guidance</a>, and Wildflower Center / Native Plant Society guidance for native packets that say to press, rake, or lightly cover seed.</p>
+    <p class="note">Depth and fall timing sources: <a href="https://agrilifeextension.tamu.edu/library/gardening/texas-home-vegetable-gardening-guide/">Texas A&amp;M AgriLife seed-depth guidance</a>, <a href="https://extension.umn.edu/gardening-minnesota/starting-seeds-indoors">University of Minnesota indoor seed-starting guidance</a>, <a href="https://bexarmg.org/may-we-help/vegetable-gardening/vegetable-planting-calendar/">Bexar County Master Gardeners vegetable planting calendar</a>, <a href="https://agrilifeextension.tamu.edu/browse/featured-solutions/gardening-landscaping/fall-vegetable-gardening-guide-for-texas/">Texas A&amp;M fall vegetable guide</a>, and Wildflower Center / Native Plant Society guidance for native packets.</p>
   </main>
 
   <template id="rowTemplate">
@@ -448,6 +449,7 @@
       <td class="medium"><input data-field="Variety" placeholder="Variety / cultivar"></td>
       <td class="long"><textarea data-field="Lot/packet source" placeholder="Seed library, packet brand, lot, date acquired"></textarea></td>
       <td class="medium"><input data-field="Seed depth" placeholder="e.g. 1/4 in, surface sow"></td>
+      <td class="long"><textarea data-field="Watering notes" placeholder="Mist daily, bottom water, kept barely damp..."></textarea></td>
       <td class="medium">
         <select data-field="Test method">
           <option></option>
@@ -465,9 +467,9 @@
         </select>
       </td>
       <td class="medium"><input data-field="Start date" type="date"></td>
+      <td class="medium"><input data-field="Ideal transplant date" placeholder="e.g. Sep 15, 2026"></td>
       <td class="medium"><input data-field="Temperature" placeholder="e.g. 72-78 F"></td>
       <td class="medium"><input data-field="Medium" placeholder="Mix, towel, soil, etc."></td>
-      <td class="long"><textarea data-field="Watering notes" placeholder="Mist daily, bottom water, kept barely damp..."></textarea></td>
       <td class="small"><input data-field="Seeds tested" type="number" min="0" step="1"></td>
       <td class="small"><input data-field="Day 4 count" type="number" min="0" step="1"></td>
       <td class="small"><input data-field="Day 7 count" type="number" min="0" step="1"></td>
@@ -503,11 +505,12 @@
       "Variety",
       "Lot/packet source",
       "Seed depth",
+      "Watering notes",
       "Test method",
       "Start date",
+      "Ideal transplant date",
       "Temperature",
       "Medium",
-      "Watering notes",
       "Seeds tested",
       "Day 4 count",
       "Day 7 count",
@@ -526,10 +529,11 @@
       "Lot/packet source": "",
       "Test method": "",
       "Seed depth": "",
+      "Watering notes": "",
       "Start date": "",
+      "Ideal transplant date": "",
       Temperature: "",
       Medium: "",
-      "Watering notes": "",
       "Seeds tested": "",
       "Day 4 count": "",
       "Day 7 count": "",
@@ -778,8 +782,122 @@
       "Root Maker": "Organic soil"
     };
 
+    const defaultSeedGuidance = {
+      "Impatiens|Mixed Colors": {
+        "Watering notes": "Mist or bottom-water gently so surface-sown seed stays exposed and evenly damp. Vent cover after sprouts.",
+        "Ideal transplant date": "Sep 15, 2026 in shade; protect from heat"
+      },
+      "Marigold|Dwarf French Double Mixed Colors": {
+        "Watering notes": "Keep mix evenly moist until sprouts, then water when the top of the mix just starts to dry.",
+        "Ideal transplant date": "Sep 1, 2026"
+      },
+      "Melon|Mystery Melon": {
+        "Watering notes": "Pre-moisten soil, water deeply after sowing, and keep evenly moist but never soggy until emergence.",
+        "Ideal transplant date": "Aug 1, 2026; late after mid-August"
+      },
+      "Lima Bean|": {
+        "Watering notes": "Water deeply after sowing and keep soil lightly moist until sprout. Avoid cold or soggy medium.",
+        "Ideal transplant date": "Aug 20, 2026"
+      },
+      "Melon|Charentais": {
+        "Watering notes": "Pre-moisten soil, water deeply after sowing, and keep evenly moist but never soggy until emergence.",
+        "Ideal transplant date": "Aug 1, 2026; late after mid-August"
+      },
+      "Ratibida columnifera|Mexican Hat": {
+        "Watering notes": "Press or rake into moist soil before rain. If rains fail, keep the surface lightly damp for 2-3 weeks.",
+        "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
+      },
+      "Ipomopsis rubra|Standing Cypress": {
+        "Watering notes": "Press or rake into moist soil before rain. If rains fail, keep the surface lightly damp for 2-3 weeks.",
+        "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
+      },
+      "Cucumber|Garden Bush Slicer Hybrid": {
+        "Watering notes": "Pre-moisten soil and keep evenly moist until emergence. After sprout, water at soil line.",
+        "Ideal transplant date": "Aug 13, 2026"
+      },
+      "Carrot|Petite Sweet Little Finger": {
+        "Watering notes": "Keep the top 1/4 inch constantly moist until germination. Mist gently and do not let soil crust.",
+        "Ideal transplant date": "Do not transplant; direct sow Sep 15, 2026"
+      },
+      "Squash, Summer|Black Beauty Zucchini": {
+        "Watering notes": "Water deeply after sowing and keep evenly moist until emergence. Avoid keeping the crown wet after sprout.",
+        "Ideal transplant date": "Aug 13, 2026"
+      },
+      "Chromolaena odorata|Crucita": {
+        "Watering notes": "Press onto moist soil and mist gently. Keep the surface lightly damp, then rely on fall rain when possible.",
+        "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
+      },
+      "Monarda citriodora|Lemon Mint": {
+        "Watering notes": "Tiny seed: mist or bottom-water and keep the surface damp but airy. Do not bury or flood.",
+        "Ideal transplant date": "Oct 15, 2026 direct sow; Nov 1 for starts"
+      },
+      "Zinnia|Semi-Dwarf Pumila Mixed Colors": {
+        "Watering notes": "Water after sowing and keep evenly moist until sprout, then let the top soil dry slightly between waterings.",
+        "Ideal transplant date": "Sep 1, 2026"
+      },
+      "Pumpkin|Spookie": {
+        "Watering notes": "Water deeply after sowing and keep evenly moist until germination. Avoid soggy soil.",
+        "Ideal transplant date": "Aug 1, 2026"
+      },
+      "Onion|Red Burgundy": {
+        "Watering notes": "Keep the shallow seed row evenly damp and do not let the surface crust. Bottom-water trays.",
+        "Ideal transplant date": "Nov 15, 2026 as sets; seed starts for winter"
+      },
+      "Celery|Tall Utah 5270, Improved": {
+        "Watering notes": "Surface or barely covered seed must stay constantly moist. Mist or bottom-water; do not let dry out.",
+        "Ideal transplant date": "Oct 15, 2026"
+      },
+      "Tomato|Cherry, Large Fruited": {
+        "Watering notes": "Pre-moisten mix and bottom-water. Keep evenly moist and warm, not wet.",
+        "Ideal transplant date": "Jul 10, 2026; late now, transplant ASAP with shade"
+      },
+      "Capsicum annuum|Chile Pequin": {
+        "Watering notes": "After soaking treatment, keep warm and evenly moist but not waterlogged. Rainwater is ideal if available.",
+        "Ideal transplant date": "Sep 1, 2026 in pots; spring after last frost for open garden"
+      },
+      "Pepper, Sweet|Quadrato D'Asti Rosso": {
+        "Watering notes": "Pre-moisten mix and bottom-water. Keep warm, evenly moist, and never soggy.",
+        "Ideal transplant date": "Jul 15, 2026; late now, transplant ASAP with shade"
+      },
+      "Pepper, Hot|Jalapeno, Mild": {
+        "Watering notes": "Pre-moisten mix and bottom-water. Keep warm, evenly moist, and never soggy.",
+        "Ideal transplant date": "Jul 15, 2026; late now, transplant ASAP with shade"
+      },
+      "Brassica rapa subsp. chinensis|Pak Choi": {
+        "Watering notes": "Keep evenly moist; brassicas dislike drying out. Water at soil line once seedlings are up.",
+        "Ideal transplant date": "Sep 15, 2026"
+      },
+      "Neptunia lutea|Yellow Puff / Yellow Sensitive Briar": {
+        "Watering notes": "Press into moist soil or lightly cover. Keep lightly damp after scarification or stratification; avoid soggy soil.",
+        "Ideal transplant date": "Oct 15, 2026 direct sow; spring after stratification for seedlings"
+      },
+      "Thai lavender eggplant|": {
+        "Watering notes": "Pre-moisten mix and bottom-water. Keep warm and evenly moist, not wet.",
+        "Ideal transplant date": "Jul 10, 2026; late now, transplant ASAP with shade"
+      }
+    };
+
+    const legacyWateringNotes = new Set([
+      "Packet note: direct sow 1/2 inch deep.",
+      "Packet note: direct sow 1/4 inch deep; pole beans need trellising.",
+      "Packet note: direct sow 1/4 inch deep.",
+      "Envelope note: plant spring (Feb-May) or fall (Aug-Nov).",
+      "Envelope note: plant fall (Aug-Nov).",
+      "Envelope note: plant fall (Aug-Nov); press seed into soil ahead of rain; plant will emerge in spring.",
+      "Envelope note: soak in aerated solution of 1 tbsp potassium nitrate per gallon of rain water 2-3 days before planting in 4 inch pots.",
+      "Envelope note: plant in fall; press seeds into soil and lightly cover ahead of rain. Alternately cold moist stratify over winter and plant seedlings after last frost."
+    ]);
+
+    function guidanceKey(row) {
+      return `${row.Seed || ""}|${row.Variety || ""}`;
+    }
+
+    function withDefaultGuidance(row) {
+      return { ...row, ...(defaultSeedGuidance[guidanceKey(row)] || {}) };
+    }
+
     const starterRows = photo9051Rows.flatMap(row => (
-      plannedTestMethods.map(method => ({ ...blankRow, ...row, "Test method": method, Medium: methodMedia[method] || "" }))
+      plannedTestMethods.map(method => ({ ...blankRow, ...withDefaultGuidance(row), "Test method": method, Medium: methodMedia[method] || "" }))
     ));
 
     const tableBody = document.querySelector("#tableBody");
@@ -906,7 +1024,16 @@
       const defaultByKey = new Map(defaultRows.map(row => [seedKey(row), row]));
       const hydratedSavedRows = usableSavedRows.map(row => {
         const defaultRow = defaultByKey.get(seedKey(row));
-        return defaultRow ? { ...defaultRow, ...row, "Seed depth": row["Seed depth"] || defaultRow["Seed depth"] || "" } : row;
+        if (!defaultRow) return row;
+        return {
+          ...defaultRow,
+          ...row,
+          "Seed depth": row["Seed depth"] || defaultRow["Seed depth"] || "",
+          "Watering notes": row["Watering notes"] && !legacyWateringNotes.has(row["Watering notes"])
+            ? row["Watering notes"]
+            : defaultRow["Watering notes"] || "",
+          "Ideal transplant date": row["Ideal transplant date"] || defaultRow["Ideal transplant date"] || ""
+        };
       });
       const existingKeys = new Set(hydratedSavedRows.map(seedKey));
       const missingDefaults = defaultRows.filter(row => !existingKeys.has(seedKey(row)));
