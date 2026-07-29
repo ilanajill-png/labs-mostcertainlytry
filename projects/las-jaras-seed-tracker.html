@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Las Jaras Seed Germination Tracker</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18201d;
+      --muted: #61706a;
+      --line: #d7dfd8;
+      --paper: #fbfaf6;
+      --panel: #ffffff;
+      --cobalt: #0647a8;
+      --leaf: #2f7d51;
+      --clay: #b95d35;
+      --amber: #f1c84b;
+      --soft: #eef4ed;
+      --danger: #9d2e2e;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    header {
+      padding: 28px 28px 16px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f6f3ec 100%);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      max-width: 980px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 16px 28px;
+      border-bottom: 1px solid var(--line);
+      background: var(--panel);
+      position: sticky;
+      top: 0;
+        z-index: 3;
+      }
+
+      .edit-gate {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: 10px;
+        padding: 12px 28px;
+        border-bottom: 1px solid var(--line);
+        background: #f6f9f7;
+      }
+
+      .edit-gate strong {
+        align-self: center;
+        margin-right: 6px;
+        color: var(--ink);
+      }
+
+      .gate-label {
+        display: grid;
+        gap: 4px;
+        max-width: 260px;
+      }
+
+      .gate-label input {
+        min-width: 220px;
+      }
+
+      .edit-status {
+        align-self: center;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      body:not(.edit-unlocked) .toolbar .danger,
+      body:not(.edit-unlocked) #addRow {
+        opacity: .45;
+      }
+
+    button {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      min-height: 38px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    button.primary {
+      background: var(--cobalt);
+      border-color: var(--cobalt);
+      color: #fff;
+    }
+
+    button.danger {
+      color: var(--danger);
+    }
+
+      button:hover {
+        filter: brightness(.98);
+      }
+
+      button:disabled,
+      input:disabled,
+      textarea:disabled,
+      select:disabled {
+        cursor: not-allowed;
+        opacity: .66;
+      }
+
+    main {
+      padding: 20px 28px 36px;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      max-width: 1180px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      padding: 8px 9px;
+    }
+
+    textarea {
+      min-height: 38px;
+      resize: vertical;
+    }
+
+    .table-wrap {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      overflow: auto;
+      max-height: calc(100vh - 255px);
+    }
+
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: max-content;
+      min-width: 100%;
+    }
+
+    th,
+    td {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #eaf1ee;
+      color: #22332b;
+      min-width: 130px;
+      padding: 9px 10px;
+      text-align: left;
+      font-size: 12px;
+      line-height: 1.25;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    th.seed-col,
+    td.seed-col {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      min-width: 170px;
+      background: #fffdf8;
+      box-shadow: 1px 0 0 var(--line);
+    }
+
+    th.seed-col {
+      z-index: 4;
+      background: #e1ebe5;
+    }
+
+    td {
+      background: #fff;
+      min-width: 130px;
+      padding: 0;
+    }
+
+    td.small,
+    th.small {
+      min-width: 86px;
+    }
+
+    td.medium,
+    th.medium {
+      min-width: 150px;
+    }
+
+    td.long,
+    th.long {
+      min-width: 230px;
+    }
+
+    td.actions,
+    th.actions {
+      min-width: 112px;
+      text-align: center;
+      background: #fbfaf6;
+    }
+
+    td input,
+    td textarea,
+    td select {
+      border: 0;
+      border-radius: 0;
+      min-height: 42px;
+      background: transparent;
+    }
+
+    td textarea {
+      min-height: 42px;
+    }
+
+    td.output {
+      padding: 10px;
+      background: #f8fbf8;
+      font-variant-numeric: tabular-nums;
+      color: #173b28;
+      font-weight: 750;
+    }
+
+    .row-actions {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 6px;
+    }
+
+    .icon-btn {
+      width: 32px;
+      min-height: 30px;
+      padding: 0;
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .status {
+      align-self: center;
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 760px) {
+      header,
+      main,
+      .toolbar {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      .meta {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar .status {
+        width: 100%;
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Las Jaras Seed Germination Tracker</h1>
+    <p class="lede">Editable germination log for the seed packets shown in Reference Images 8979 and 9051. Use one row per seed, variety, packet, and method combination.</p>
+  </header>
+
+  <section class="edit-gate" aria-label="Edit access">
+    <strong id="modeLabel">Read-only mode</strong>
+    <label class="gate-label">
+      Edit password
+      <input id="editPassword" type="password" autocomplete="current-password" placeholder="Enter password">
+    </label>
+    <button class="primary" id="unlockEdit" type="button">Unlock editing</button>
+    <button id="lockEdit" type="button" hidden>Lock</button>
+    <span class="edit-status" id="editStatus">Viewing only. Export and print still work.</span>
+  </section>
+
+  <section class="toolbar" aria-label="Table actions">
+    <button class="primary" id="addRow" type="button">Add row</button>
+    <button id="exportCsv" type="button">Export CSV</button>
+    <button id="printPage" type="button">Print</button>
+    <button class="danger" id="clearSaved" type="button">Clear saved edits</button>
+    <span class="status" id="status">Autosaves in this browser.</span>
+  </section>
+
+  <main>
+    <section class="meta" aria-label="Batch notes">
+      <label>
+        Reference photo
+        <input id="referencePhoto" value="IMG_9051">
+      </label>
+      <label>
+        Trial location
+        <input id="trialLocation" placeholder="Tray, windowsill, garage shelf, etc.">
+      </label>
+      <label>
+        Default test method
+        <select id="defaultMethod">
+          <option>Paper towel / bag</option>
+          <option>Seed-starting tray</option>
+          <option>Self-watering tray</option>
+          <option>Direct sow</option>
+          <option>Other</option>
+        </select>
+      </label>
+      <label>
+        Batch notes
+        <textarea id="batchNotes" placeholder="Light, heat mat, packet photo location, shared setup notes."></textarea>
+      </label>
+    </section>
+
+    <div class="table-wrap">
+      <table id="trackerTable">
+        <thead>
+          <tr>
+            <th class="seed-col">Seed</th>
+            <th class="medium">Variety</th>
+            <th class="long">Lot / packet source</th>
+            <th class="medium">Test method</th>
+            <th class="medium">Start date</th>
+            <th class="medium">Temperature</th>
+            <th class="medium">Medium</th>
+            <th class="long">Watering notes</th>
+            <th class="small">Seeds tested</th>
+            <th class="small">Day 4 count</th>
+            <th class="small">Day 7 count</th>
+            <th class="small">Final germinated</th>
+            <th class="small">Germination %</th>
+            <th class="small">Abnormal / failed count</th>
+            <th class="small">Days to first sprout</th>
+            <th class="long">Seedling vigor notes</th>
+            <th class="medium">Photo ref</th>
+            <th class="medium">Decision</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <p class="note">Tip: enter <b>Seeds tested</b> and <b>Final germinated</b>; the germination percentage updates automatically. Data is saved to browser local storage for this file.</p>
+  </main>
+
+  <template id="rowTemplate">
+    <tr>
+      <td class="seed-col"><input data-field="Seed" placeholder="e.g. Okra"></td>
+      <td class="medium"><input data-field="Variety" placeholder="Variety / cultivar"></td>
+      <td class="long"><textarea data-field="Lot/packet source" placeholder="Seed library, packet brand, lot, date acquired"></textarea></td>
+      <td class="medium">
+        <select data-field="Test method">
+          <option></option>
+          <option>Paper towel / bag</option>
+          <option>Seed-starting tray</option>
+          <option>Self-watering tray</option>
+          <option>Direct sow</option>
+          <option>Other</option>
+        </select>
+      </td>
+      <td class="medium"><input data-field="Start date" type="date"></td>
+      <td class="medium"><input data-field="Temperature" placeholder="e.g. 72-78 F"></td>
+      <td class="medium"><input data-field="Medium" placeholder="Mix, towel, soil, etc."></td>
+      <td class="long"><textarea data-field="Watering notes" placeholder="Mist daily, bottom water, kept barely damp..."></textarea></td>
+      <td class="small"><input data-field="Seeds tested" type="number" min="0" step="1"></td>
+      <td class="small"><input data-field="Day 4 count" type="number" min="0" step="1"></td>
+      <td class="small"><input data-field="Day 7 count" type="number" min="0" step="1"></td>
+      <td class="small"><input data-field="Final germinated" type="number" min="0" step="1"></td>
+      <td class="small output" data-field="Germination %"></td>
+      <td class="small"><input data-field="Abnormal/failed count" type="number" min="0" step="1"></td>
+      <td class="small"><input data-field="Days to first sprout" type="number" min="0" step="1"></td>
+      <td class="long"><textarea data-field="Seedling vigor notes" placeholder="Stout, leggy, uneven, pale, strong roots..."></textarea></td>
+      <td class="medium"><input data-field="Photo ref" placeholder="IMG_8979, tray photo, etc."></td>
+      <td class="medium">
+        <select data-field="Decision">
+          <option></option>
+          <option>Plant out</option>
+          <option>Retest</option>
+          <option>Start more</option>
+          <option>Discard packet</option>
+          <option>Hold</option>
+        </select>
+      </td>
+      <td class="actions">
+        <div class="row-actions">
+          <button class="icon-btn duplicate" type="button" title="Duplicate row">+</button>
+          <button class="icon-btn remove" type="button" title="Delete row">x</button>
+        </div>
+      </td>
+    </tr>
+  </template>
+
+  <script>
+    const storageKey = "las-jaras-seed-germination-tracker-v1";
+    const fields = [
+      "Seed",
+      "Variety",
+      "Lot/packet source",
+      "Test method",
+      "Start date",
+      "Temperature",
+      "Medium",
+      "Watering notes",
+      "Seeds tested",
+      "Day 4 count",
+      "Day 7 count",
+      "Final germinated",
+      "Germination %",
+      "Abnormal/failed count",
+      "Days to first sprout",
+      "Seedling vigor notes",
+      "Photo ref",
+      "Decision"
+    ];
+
+    const blankRow = {
+      Seed: "",
+      Variety: "",
+      "Lot/packet source": "",
+      "Test method": "",
+      "Start date": "",
+      Temperature: "",
+      Medium: "",
+      "Watering notes": "",
+      "Seeds tested": "",
+      "Day 4 count": "",
+      "Day 7 count": "",
+      "Final germinated": "",
+      "Germination %": "",
+      "Abnormal/failed count": "",
+      "Days to first sprout": "",
+      "Seedling vigor notes": "",
+      "Photo ref": "",
+      Decision: ""
+    };
+
+    const photo9051Rows = [
+      {
+        Seed: "Impatiens",
+        Variety: "Mixed Colors",
+        "Lot/packet source": "American Seed packet",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; ornamental flower.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Marigold",
+        Variety: "Dwarf French Double Mixed Colors",
+        "Lot/packet source": "American Seed packet",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; ornamental flower.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Melon",
+        Variety: "Mystery Melon",
+        "Lot/packet source": "Roots in the City packet; possibly delicious cantaloupe variety 'Amish'",
+        "Test method": "Direct sow",
+        "Watering notes": "Packet note: direct sow 1/2 inch deep.",
+        "Seedling vigor notes": "Label partly uncertain: 'Amish' is visible but exact variety may need a closer photo.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Lima Bean",
+        Variety: "",
+        "Lot/packet source": "Roots in the City packet",
+        "Test method": "Direct sow",
+        "Watering notes": "Packet note: direct sow 1/4 inch deep; pole beans need trellising.",
+        "Seedling vigor notes": "Packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Melon",
+        Variety: "Charentais",
+        "Lot/packet source": "Roots in the City packet",
+        "Test method": "Direct sow",
+        "Watering notes": "Packet note: direct sow 1/4 inch deep.",
+        "Seedling vigor notes": "Packet visible in IMG_9051; French heirloom melon.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Ratibida columnifera",
+        Variety: "Mexican Hat",
+        "Lot/packet source": "Seed library envelope; marked Schertz",
+        "Test method": "Direct sow",
+        "Watering notes": "Envelope note: plant spring (Feb-May) or fall (Aug-Nov).",
+        "Seedling vigor notes": "Native/wildflower packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Ipomopsis rubra",
+        Variety: "Standing Cypress",
+        "Lot/packet source": "Seed library envelope; marked Schertz",
+        "Test method": "Direct sow",
+        "Watering notes": "Envelope note: plant fall (Aug-Nov).",
+        "Seedling vigor notes": "Native/wildflower packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Cucumber",
+        Variety: "Garden Bush Slicer Hybrid",
+        "Lot/packet source": "Ferry-Morse packet, 900 mg",
+        "Test method": "Direct sow",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 53 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Carrot",
+        Variety: "Petite Sweet Little Finger",
+        "Lot/packet source": "Ferry-Morse packet, 1.5 g",
+        "Test method": "Direct sow",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 60 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Squash, Summer",
+        Variety: "Black Beauty Zucchini",
+        "Lot/packet source": "Ferry-Morse USDA Organic packet, 3 g",
+        "Test method": "Direct sow",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 63 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Chromolaena odorata",
+        Variety: "Crucita",
+        "Lot/packet source": "Seed library envelope; marked Schertz",
+        "Test method": "Direct sow",
+        "Watering notes": "Envelope note: plant fall (Aug-Nov); press seed into soil ahead of rain; plant will emerge in spring.",
+        "Seedling vigor notes": "Native/wildflower packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Monarda citriodora",
+        Variety: "Lemon Mint",
+        "Lot/packet source": "Seed library envelope; marked Schertz",
+        "Test method": "Direct sow",
+        "Watering notes": "Envelope note: plant fall (Aug-Nov).",
+        "Seedling vigor notes": "Native/wildflower packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Zinnia",
+        Variety: "Semi-Dwarf Pumila Mixed Colors",
+        "Lot/packet source": "American Seed packet",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; ornamental flower.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Pumpkin",
+        Variety: "Spookie",
+        "Lot/packet source": "Encino Seed Library envelope",
+        "Test method": "Direct sow",
+        "Seedling vigor notes": "Packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Onion",
+        Variety: "Red Burgundy",
+        "Lot/packet source": "Ferry-Morse packet, 800 mg",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 100 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Celery",
+        Variety: "Tall Utah 5270, Improved",
+        "Lot/packet source": "Ferry-Morse packet, 200 mg",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 90 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Tomato",
+        Variety: "Cherry, Large Fruited",
+        "Lot/packet source": "Ferry-Morse heirloom packet, 450 mg",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 75 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Capsicum annuum",
+        Variety: "Chile Pequin",
+        "Lot/packet source": "Seed library envelope; marked Garden Ridge",
+        "Test method": "Seed-starting tray",
+        "Watering notes": "Envelope note: soak in aerated solution of 1 tbsp potassium nitrate per gallon of rain water 2-3 days before planting in 4 inch pots.",
+        "Seedling vigor notes": "Envelope note: plant in September or April; water with rainwater; germinates in 10-20 days.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Pepper, Sweet",
+        Variety: "Quadrato D'Asti Rosso",
+        "Lot/packet source": "Ferry-Morse packet, 250 mg",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 95 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Pepper, Hot",
+        Variety: "Jalapeno, Mild",
+        "Lot/packet source": "Ferry-Morse packet",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051; 72 days to harvest shown.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Brassica rapa subsp. chinensis",
+        Variety: "Pak Choi",
+        "Lot/packet source": "Encino Seed Library envelope",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Neptunia lutea",
+        Variety: "Yellow Puff / Yellow Sensitive Briar",
+        "Lot/packet source": "Seed library envelope; marked Garden Ridge",
+        "Test method": "Direct sow",
+        "Watering notes": "Envelope note: plant in fall; press seeds into soil and lightly cover ahead of rain. Alternately cold moist stratify over winter and plant seedlings after last frost.",
+        "Seedling vigor notes": "Native/wildflower packet visible in IMG_9051.",
+        "Photo ref": "IMG_9051"
+      },
+      {
+        Seed: "Thai lavender eggplant",
+        Variety: "",
+        "Lot/packet source": "John Igo Branch Library seed donation envelope",
+        "Test method": "Seed-starting tray",
+        "Seedling vigor notes": "Handwritten packet is partly difficult to read; appears to say Thai lavender / fong egg eggplant.",
+        "Photo ref": "IMG_9051"
+      }
+    ];
+
+    const starterRows = photo9051Rows.map(row => ({ ...blankRow, ...row }));
+
+    const tableBody = document.querySelector("#tableBody");
+    const template = document.querySelector("#rowTemplate");
+    const status = document.querySelector("#status");
+    const metaInputs = ["referencePhoto", "trialLocation", "defaultMethod", "batchNotes"].map(id => document.querySelector(`#${id}`));
+    const editPasswordHash = "ff80a81e4b1689f3a5acd1484b10b0081012093b17dda65bb4a651277c8bf7f1";
+    let editUnlocked = sessionStorage.getItem("las-jaras-seed-tracker-edit-unlocked") === "true";
+
+    async function sha256(value) {
+      const bytes = new TextEncoder().encode(value);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
+    }
+
+    function setEditMode(unlocked) {
+      editUnlocked = unlocked;
+      sessionStorage.setItem("las-jaras-seed-tracker-edit-unlocked", String(unlocked));
+      document.body.classList.toggle("edit-unlocked", unlocked);
+      document.querySelector("#modeLabel").textContent = unlocked ? "Edit mode" : "Read-only mode";
+      document.querySelector("#editStatus").textContent = unlocked ? "Editing is unlocked for this browser tab." : "Viewing only. Export and print still work.";
+      document.querySelector("#lockEdit").hidden = !unlocked;
+      document.querySelector("#unlockEdit").hidden = unlocked;
+      document.querySelector("#editPassword").hidden = unlocked;
+      document.querySelector(".gate-label").hidden = unlocked;
+      document
+        .querySelectorAll("#trackerTable input, #trackerTable textarea, #trackerTable select, .meta input, .meta textarea, .meta select, #addRow, #clearSaved, .duplicate, .remove")
+        .forEach(control => {
+          control.disabled = !unlocked;
+        });
+    }
+
+    function rowToData(row) {
+      const data = {};
+      fields.forEach(field => {
+        const control = row.querySelector(`[data-field="${CSS.escape(field)}"]`);
+        data[field] = control ? control.value : row.querySelector(`td[data-field="${CSS.escape(field)}"]`)?.textContent || "";
+      });
+      data["Germination %"] = calculatePercent(data);
+      return data;
+    }
+
+    function calculatePercent(data) {
+      const tested = Number(data["Seeds tested"]);
+      const final = Number(data["Final germinated"]);
+      if (!tested || Number.isNaN(tested) || Number.isNaN(final)) return "";
+      return `${Math.round((final / tested) * 100)}%`;
+    }
+
+    function updateComputed(row) {
+      const data = rowToData(row);
+      const output = row.querySelector('td[data-field="Germination %"]');
+      output.textContent = data["Germination %"];
+    }
+
+    function addRow(data = {}) {
+      const row = template.content.firstElementChild.cloneNode(true);
+      row.querySelectorAll("[data-field]").forEach(control => {
+        const field = control.dataset.field;
+        if (field in data) control.value = data[field] || "";
+      });
+      row.querySelector(".duplicate").addEventListener("click", () => {
+        addRow(rowToData(row));
+        save();
+      });
+      row.querySelector(".remove").addEventListener("click", () => {
+        row.remove();
+        save();
+      });
+      row.querySelectorAll("input, textarea, select").forEach(control => {
+        control.addEventListener("input", () => {
+          updateComputed(row);
+          save();
+        });
+        control.addEventListener("change", () => {
+          updateComputed(row);
+          save();
+        });
+      });
+      tableBody.appendChild(row);
+      updateComputed(row);
+      if (!editUnlocked) setEditMode(false);
+    }
+
+    function seedKey(row) {
+      return [row.Seed, row.Variety, row["Lot/packet source"], row["Photo ref"]]
+        .map(value => String(value || "").trim().toLowerCase())
+        .join("|");
+    }
+
+    function mergeSavedRows(savedRows, defaultRows) {
+      const usableSavedRows = savedRows.filter(row => fields.some(field => String(row[field] || "").trim()));
+      const existingKeys = new Set(usableSavedRows.map(seedKey));
+      const missingDefaults = defaultRows.filter(row => !existingKeys.has(seedKey(row)));
+      return usableSavedRows.concat(missingDefaults);
+    }
+
+    function collectState() {
+      return {
+        meta: Object.fromEntries(metaInputs.map(input => [input.id, input.value])),
+        rows: Array.from(tableBody.querySelectorAll("tr")).map(rowToData)
+      };
+    }
+
+    function save() {
+      localStorage.setItem(storageKey, JSON.stringify(collectState()));
+      status.textContent = `Saved ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+    }
+
+    function load() {
+      const saved = localStorage.getItem(storageKey);
+      const state = saved ? JSON.parse(saved) : { meta: {}, rows: starterRows };
+      metaInputs.forEach(input => {
+        if (state.meta && input.id in state.meta) input.value = state.meta[input.id];
+      });
+      tableBody.innerHTML = "";
+      const rows = state.rows && state.rows.length ? mergeSavedRows(state.rows, starterRows) : starterRows;
+      rows.forEach(addRow);
+      setEditMode(editUnlocked);
+    }
+
+    function escapeCsv(value) {
+      const text = String(value ?? "");
+      return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+    }
+
+    function exportCsv() {
+      const rows = collectState().rows;
+      const csv = [fields.map(escapeCsv).join(",")]
+        .concat(rows.map(row => fields.map(field => escapeCsv(row[field])).join(",")))
+        .join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "las-jaras-seed-germination-tracker.csv";
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.querySelector("#addRow").addEventListener("click", () => {
+      addRow({ "Test method": document.querySelector("#defaultMethod").value, "Photo ref": document.querySelector("#referencePhoto").value });
+      save();
+    });
+    document.querySelector("#exportCsv").addEventListener("click", exportCsv);
+    document.querySelector("#printPage").addEventListener("click", () => window.print());
+    document.querySelector("#clearSaved").addEventListener("click", () => {
+      if (!editUnlocked) return;
+      if (!confirm("Clear saved edits and reset the tracker?")) return;
+      localStorage.removeItem(storageKey);
+      load();
+      status.textContent = "Reset complete.";
+    });
+    metaInputs.forEach(input => {
+      input.addEventListener("input", save);
+      input.addEventListener("change", save);
+    });
+
+    document.querySelector("#unlockEdit").addEventListener("click", async () => {
+      const password = document.querySelector("#editPassword").value;
+      if (await sha256(password) === editPasswordHash) {
+        document.querySelector("#editPassword").value = "";
+        setEditMode(true);
+        return;
+      }
+      document.querySelector("#editStatus").textContent = "Password did not match.";
+    });
+
+    document.querySelector("#editPassword").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") document.querySelector("#unlockEdit").click();
+    });
+
+    document.querySelector("#lockEdit").addEventListener("click", () => {
+      setEditMode(false);
+    });
+
+    load();
+  </script>
+</body>
+</html>
