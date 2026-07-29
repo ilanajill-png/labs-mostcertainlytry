@@ -801,8 +801,39 @@
         .join("|");
     }
 
+    function seedIdentityKey(row) {
+      return [row.Seed, row.Variety, row["Lot/packet source"], row["Photo ref"]]
+        .map(value => String(value || "").trim().toLowerCase())
+        .join("|");
+    }
+
+    function hasTrialData(row) {
+      return [
+        "Start date",
+        "Temperature",
+        "Medium",
+        "Seeds tested",
+        "Day 4 count",
+        "Day 7 count",
+        "Final germinated",
+        "Abnormal/failed count",
+        "Days to first sprout",
+        "Decision"
+      ].some(field => String(row[field] || "").trim());
+    }
+
+    function isLegacyAutoMethodRow(row) {
+      return row["Photo ref"] === "IMG_9051"
+        && !plannedTestMethods.includes(row["Test method"])
+        && photo9051Rows.some(defaultRow => seedIdentityKey(defaultRow) === seedIdentityKey(row))
+        && !hasTrialData(row);
+    }
+
     function mergeSavedRows(savedRows, defaultRows) {
-      const usableSavedRows = savedRows.filter(row => fields.some(field => String(row[field] || "").trim()));
+      const usableSavedRows = savedRows.filter(row => {
+        if (isLegacyAutoMethodRow(row)) return false;
+        return fields.some(field => String(row[field] || "").trim());
+      });
       const existingKeys = new Set(usableSavedRows.map(seedKey));
       const missingDefaults = defaultRows.filter(row => !existingKeys.has(seedKey(row)));
       return usableSavedRows.concat(missingDefaults);
