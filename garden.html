@@ -107,14 +107,23 @@
 
       <section aria-label="Garden tools">
         <div class="garden-tabs" role="tablist" aria-label="Garden sections">
-          <button class="garden-tab" id="seed-library-tab" type="button" role="tab" aria-selected="true" aria-controls="seed-library-panel" data-target="seed-library-panel">San Antonio Seed Library</button>
+          <button class="garden-tab" id="seed-tracker-tab" type="button" role="tab" aria-selected="true" aria-controls="seed-tracker-panel" data-target="seed-tracker-panel">Las Jaras Seed Tracker</button>
+          <button class="garden-tab" id="seed-library-tab" type="button" role="tab" aria-selected="false" aria-controls="seed-library-panel" data-target="seed-library-panel">San Antonio Seed Library</button>
           <button class="garden-tab" id="garden-events-tab" type="button" role="tab" aria-selected="false" aria-controls="garden-events-panel" data-target="garden-events-panel">San Antonio Garden Events</button>
           <button class="garden-tab" id="austin-seed-library-tab" type="button" role="tab" aria-selected="false" aria-controls="austin-seed-library-panel" data-target="austin-seed-library-panel">Austin Seed Library</button>
           <button class="garden-tab" id="austin-garden-events-tab" type="button" role="tab" aria-selected="false" aria-controls="austin-garden-events-panel" data-target="austin-garden-events-panel">Austin Garden Events</button>
-          <button class="garden-tab" id="seed-tracker-tab" type="button" role="tab" aria-selected="false" aria-controls="seed-tracker-panel" data-target="seed-tracker-panel">Las Jaras Seed Tracker</button>
         </div>
 
-        <section class="garden-panel active" id="seed-library-panel" role="tabpanel" aria-labelledby="seed-library-tab">
+        <section class="garden-panel active" id="seed-tracker-panel" role="tabpanel" aria-labelledby="seed-tracker-tab">
+          <div class="garden-link-row">
+            <a href="projects/las-jaras-seed-tracker.html">Open Las Jaras Seed Tracker full page</a>
+          </div>
+          <div class="garden-frame-wrap">
+            <iframe class="garden-frame" src="projects/las-jaras-seed-tracker.html" title="Las Jaras Seed Germination Tracker"></iframe>
+          </div>
+        </section>
+
+        <section class="garden-panel" id="seed-library-panel" role="tabpanel" aria-labelledby="seed-library-tab">
           <div class="garden-link-row">
             <a href="projects/san-antonio-seed-library.html">Open San Antonio Seed Library full page</a>
           </div>
@@ -149,15 +158,6 @@
           </div>
           <div class="garden-frame-wrap">
             <iframe class="garden-frame" src="projects/austin-garden-events.html" title="Austin Garden Events"></iframe>
-          </div>
-        </section>
-
-        <section class="garden-panel" id="seed-tracker-panel" role="tabpanel" aria-labelledby="seed-tracker-tab">
-          <div class="garden-link-row">
-            <a href="projects/las-jaras-seed-tracker.html">Open Las Jaras Seed Tracker full page</a>
-          </div>
-          <div class="garden-frame-wrap">
-            <iframe class="garden-frame" src="projects/las-jaras-seed-tracker.html" title="Las Jaras Seed Germination Tracker"></iframe>
           </div>
         </section>
       </section>
