@@ -383,16 +383,49 @@
         })[char]);
       }
 
+      function parseDate(date) {
+        const parsed = new Date(`${date || ""}T12:00:00`);
+        return Number.isNaN(parsed.getTime()) ? null : parsed;
+      }
+
       function formatDate(date) {
-        return dateFmt.format(new Date(`${date}T12:00:00`));
+        const parsed = parseDate(date);
+        return parsed ? dateFmt.format(parsed) : "Date TBA";
       }
 
       function shortDate(date) {
-        const parsed = new Date(`${date}T12:00:00`);
+        const parsed = parseDate(date);
+        if (!parsed) return { month: "TBA", day: "" };
         return {
           month: parsed.toLocaleDateString("en-US", { month: "short" }),
           day: parsed.toLocaleDateString("en-US", { day: "numeric" }),
         };
+      }
+
+      function validEvents(events) {
+        return (Array.isArray(events) ? events : []).filter((event) => event && event.title && parseDate(event.date));
+      }
+
+      function windowLabel(window) {
+        if (!window?.start || !window?.end) return "Rolling";
+        return `${window.start.slice(5).replace("-", "/")} - ${window.end.slice(5).replace("-", "/")}`;
+      }
+
+      function refreshLabel(data) {
+        const generated = parseDate(String(data.generatedAt || "").slice(0, 10));
+        let refreshed = "recently";
+        if (generated) {
+          try {
+            refreshed = new Date(data.generatedAt).toLocaleString("en-US", { timeZone: data.timezone || "America/Chicago" });
+          } catch {
+            refreshed = generated.toLocaleDateString("en-US");
+          }
+        }
+        const start = data.window?.start || "the current window";
+        const end = data.window?.end || "upcoming dates";
+        const sources = Array.isArray(data.sources) ? data.sources.map((source) => source.name).filter(Boolean) : [];
+        const sourceText = sources.length ? ` Sources: ${sources.join(", ")}.` : "";
+        return `Last refreshed ${refreshed}. Showing ${start} through ${end}.${sourceText}`;
       }
 
       function filteredEvents() {
@@ -453,9 +486,12 @@
       }
 
       fetch("../data/austin-garden-events.json")
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
+          return response.json();
+        })
         .then((data) => {
-          state.events = data.events || [];
+          state.events = validEvents(data.events);
           const types = [...new Set(state.events.map((event) => event.type).filter(Boolean))].sort();
           const sources = [...new Set(state.events.map((event) => event.source).filter(Boolean))].sort();
           fillSelect(els.type, types);
@@ -463,8 +499,8 @@
           els.count.textContent = String(state.events.length);
           els.classes.textContent = String(state.events.filter((event) => /class|workshop/i.test(event.type)).length);
           els.swaps.textContent = String(state.events.filter((event) => /swap|seed/i.test(`${event.type} ${event.title}`)).length);
-          els.window.textContent = `${data.window.start.slice(5).replace("-", "/")} - ${data.window.end.slice(5).replace("-", "/")}`;
-          els.note.textContent = `Last refreshed ${new Date(data.generatedAt).toLocaleString("en-US", { timeZone: data.timezone })}. Showing ${data.window.start} through ${data.window.end}. Sources: ${data.sources.map((source) => source.name).join(", ")}.`;
+          els.window.textContent = windowLabel(data.window);
+          els.note.textContent = refreshLabel(data);
           render();
         })
         .catch((error) => {
