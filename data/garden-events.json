@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-29T07:32:41.966Z",
+  "generatedAt": "2026-07-30T07:45:34.477Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-07-29",
-    "end": "2026-08-28"
+    "start": "2026-07-30",
+    "end": "2026-08-29"
   },
-  "eventCount": 64,
+  "eventCount": 63,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,91 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/:2026-07-29:10 - 10:30 a.m.",
-      "title": "Nature Exploration in the Family Adventure Garden",
-      "date": "2026-07-29",
-      "startDateTime": "2026-07-29",
-      "endDateTime": "2026-07-29",
-      "time": "10 - 10:30 a.m.",
-      "cost": "Included with Garden admission and membership",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/",
-      "registerLink": "https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/",
-      "summary": "Each weekly Nature Exploration features a different nature-play activity designed to inspire a love of nature while engaging in sensory experiences outdoors. Explorations begin at the lawn near Prickly Pear Pavilion in the Family Adventure Garden just past the entrance archway. Recommended for Early Childhood ages 5 and under."
-    },
-    {
-      "id": "Guadalupe County Master Gardeners:10001472:2026-07-29 14:00:00",
-      "title": "Seed Exchange In the MG Library",
-      "date": "2026-07-29",
-      "startDateTime": "2026-07-29 14:00:00",
-      "endDateTime": "2026-07-29 17:00:00",
-      "time": "2 p.m. - 5 p.m.",
-      "cost": "Free",
-      "location": "Seguin Texas Agrilife Extension Office, 210 E. Live Oak St, Seguin, TX, 78155",
-      "city": "Seguin",
-      "source": "Guadalupe County Master Gardeners",
-      "sourceKind": "Master Gardener calendar",
-      "type": "Master Gardener",
-      "link": "https://guadalupecountymastergardeners.org/event/seed-exchange-in-the-mg-library/2026-07-29/",
-      "registerLink": "https://guadalupecountymastergardeners.org/events",
-      "summary": "Master Gardeners Seed Exchange Please note the new dates and times effective Monday February 16th, 2026. In Texas it seems it is always time to start thinking about saving seeds (and the Seed Exchange). As you watch your bountiful harves..."
-    },
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/lawn-begone-2/:2026-07-29:6 - 7 pm",
-      "title": "Lawn Begone!",
-      "date": "2026-07-29",
-      "startDateTime": "2026-07-29",
-      "endDateTime": "2026-07-29",
-      "time": "6 - 7 pm",
-      "cost": "$18 ($13 member).",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Garden Event",
-      "link": "https://sabgtx.org/event/lawn-begone-2/",
-      "registerLink": "https://sabgtx.org/event/lawn-begone-2/",
-      "summary": "Is turf grass maintenance taking over your time and your water bill? Are you interested in supporting the native ecosystem in your own landscape? This class will walk you through different techniques for removing lawn grass, from sod removal to solarization, and explore native and water-saving plant options to replace it with so you can reduce maintenance, lower water use, and create habitat for local wildlife."
-    },
-    {
-      "id": "Garden Style San Antonio:31275:2026-07-29 18:00:00",
-      "title": "Lawn Begone!",
-      "date": "2026-07-29",
-      "startDateTime": "2026-07-29 18:00:00",
-      "endDateTime": "2026-07-29 19:00:00",
-      "time": "6 p.m. - 7 p.m.",
-      "cost": "$18",
-      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/lawn-begone/",
-      "registerLink": "https://sabgtx.org/event/lawn-begone-2/",
-      "summary": "Is turf grass maintenance taking over your time and your water bill? Are you interested in supporting the native ecosystem in your own landscape? This class will walk you through different techniques for removing lawn grass, from sod rem..."
-    },
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/drop-in-guided-tour-conservatory-0729/:2026-07-29:9 - 10 a.m.",
-      "title": "Drop-in Guided Tour: Conservatory",
-      "date": "2026-07-29",
-      "startDateTime": "2026-07-29",
-      "endDateTime": "2026-07-29",
-      "time": "9 - 10 a.m.",
-      "cost": "Free with Garden admission and membership.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/drop-in-guided-tour-conservatory-0729/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-conservatory-0729/",
-      "summary": "Join us on a guided tour of the Lucile Halsell Conservatory buildings."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/storytime-in-the-garden-0730/:2026-07-30:10 - 10:30 a.m.",
       "title": "Storytime in the Garden",
@@ -796,6 +711,23 @@
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Free with membership or Garden admission."
     },
     {
+      "id": "Garden Style San Antonio:31479:2026-08-15 10:00:00",
+      "title": "Desert Rose 101 with Texas Garden Guy",
+      "date": "2026-08-15",
+      "startDateTime": "2026-08-15 10:00:00",
+      "endDateTime": "2026-08-15 11:00:00",
+      "time": "10 a.m. - 11 a.m.",
+      "cost": "Free",
+      "location": "Rainbow Gardens- Thousand Oaks, 2585 Thousand Oaks, San Antonio, TX, 78232",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/desert-rose-101-with-texas-garden-guy/",
+      "registerLink": "https://www.rainbowgardens.biz/event/desert-rose-101-with-texas-garden-guy/",
+      "summary": "Desert Roses are prized for their bold blooms, thick sculptural trunks, and incredible drought tolerance. If you’ve ever wanted to grow one—or help yours flourish—this class is a great place to start. Join Texas Garden Guy as he shares p..."
+    },
+    {
       "id": "Garden Style San Antonio:30739:2026-08-15 10:00:00",
       "title": "Summer Pruning for Fall Blooms",
       "date": "2026-08-15",
@@ -983,6 +915,23 @@
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Free with membership or Garden admission."
     },
     {
+      "id": "Garden Style San Antonio:31483:2026-08-22 10:00:00",
+      "title": "Pocket Prairie 101",
+      "date": "2026-08-22",
+      "startDateTime": "2026-08-22 10:00:00",
+      "endDateTime": "2026-08-22 11:00:00",
+      "time": "10 a.m. - 11 a.m.",
+      "cost": "Free",
+      "location": "Rainbow Gardens- Thousand Oaks, 2585 Thousand Oaks, San Antonio, TX, 78232",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/pocket-prairie-101/",
+      "registerLink": "https://www.rainbowgardens.biz/event/pocket-prairie-101-2/",
+      "summary": "Turn a small space into a thriving native ecosystem! In this class, Shannon Grace of Texas Bean Freak will walk you through how to create your own pocket prairie—a beautifully designed mix of native grasses and wildflowers that supports..."
+    },
+    {
       "id": "Garden Style San Antonio:31337:2026-08-22 08:00:00",
       "title": "4th Saturday Talks- Ethnobotany",
       "date": "2026-08-22",
@@ -1117,6 +1066,40 @@
       "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden/2026-08-28/",
       "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-0828/",
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Free with membership or Garden admission."
+    },
+    {
+      "id": "Garden Style San Antonio:31417:2026-08-29 06:00:00",
+      "title": "Sunrise Native Plant and Bird Walk Breakfast",
+      "date": "2026-08-29",
+      "startDateTime": "2026-08-29 06:00:00",
+      "endDateTime": "2026-08-29 08:00:00",
+      "time": "6 a.m. - 8 a.m.",
+      "cost": "Free",
+      "location": "Mitchell Lake Audubon Center, 10750 Pleasanton Rd, San Antonio, 78221",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/sunrise-native-plant-and-bird-walk-breakfast/",
+      "registerLink": "https://tickets.audubon.org/events/019f5c49-370f-737f-229a-c8e78c66b83d",
+      "summary": "Start your morning surrounded by nature! You'll begin with a light breakfast and coffee while getting to know fellow nature lovers and testing your knowledge with a few fun bird and native plant trivia questions before strolling through..."
+    },
+    {
+      "id": "Garden Style San Antonio:10001855:2026-08-29 09:00:00",
+      "title": "Gardopia Volunteer Day (Saturday)",
+      "date": "2026-08-29",
+      "startDateTime": "2026-08-29 09:00:00",
+      "endDateTime": "2026-08-29 11:00:00",
+      "time": "9 a.m. - 11 a.m.",
+      "cost": "Free",
+      "location": "Gardopia Gardens, 619 N New Braunfels Ave, San Antonio, TX, 78202",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/gardopia-volunteer-day-saturday/2026-08-29/",
+      "registerLink": "https://www.eventbrite.com/e/gardopia-volunteer-day-saturday-tickets-1980569199792",
+      "summary": "Join Gardopia Gardens to learn about and practice healthy lifestyles and environmental sustainability through urban agriculture! During Gardopia's volunteer days, participants will help with general maintenance and special projects. Whil..."
     }
   ]
 }
