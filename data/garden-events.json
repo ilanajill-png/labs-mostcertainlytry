@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-03T15:06:03.400Z",
+  "generatedAt": "2026-08-04T19:57:35.786Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-03",
-    "end": "2026-09-02"
+    "start": "2026-08-04",
+    "end": "2026-09-03"
   },
-  "eventCount": 48,
+  "eventCount": 52,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -31,23 +31,6 @@
   "errors": [],
   "events": [
     {
-      "id": "Garden Style San Antonio:31491:2026-08-03 17:30:00",
-      "title": "Summer Nights at Mission Branch Library- Navigating Garden Style San Antonio",
-      "date": "2026-08-03",
-      "startDateTime": "2026-08-03 17:30:00",
-      "endDateTime": "2026-08-03 20:00:00",
-      "time": "5:30 p.m. - 8 p.m.",
-      "cost": "Free",
-      "location": "Mission Library, 3134 Roosevelt Avenue, San Antonio, TX, 78214",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/summer-nights-at-mission-branch-library-navigating-garden-style-san-antonio/",
-      "registerLink": "https://www.gardenstylesanantonio.com/event/summer-nights-at-mission-branch-library-navigating-garden-style-san-antonio/",
-      "summary": "Participants are invited to utilize the Seed Library while waiting for class. Beginning at 6:00 p.m. Gardening Volunteers of South Texas will demonstrate ways to use the Garden Style San Antonio website. Particiants are encouraged to bri..."
-    },
-    {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/little-sprouts-hike-0804/:2026-08-04:10 - 10:30 a.m.",
       "title": "Little Sprouts Hike",
       "date": "2026-08-04",
@@ -63,6 +46,40 @@
       "link": "https://sabgtx.org/event/little-sprouts-hike-0804/",
       "registerLink": "https://sabgtx.org/event/little-sprouts-hike-0804/",
       "summary": "Each hike features a different nature-based lesson designed to inspire a love and appreciation of the natural world. All hikes begin at the garden gift shop. Some trails are unpaved, so all-terrain strollers are recommended. Recommended for ages 5 and under."
+    },
+    {
+      "id": "Garden Style San Antonio:31550:2026-08-04 17:00:00",
+      "title": "Nature Rx: Summer Seed Series",
+      "date": "2026-08-04",
+      "startDateTime": "2026-08-04 17:00:00",
+      "endDateTime": "2026-08-04 19:00:00",
+      "time": "5 p.m. - 7 p.m.",
+      "cost": "Free",
+      "location": "Mission Library, 3134 Roosevelt Avenue, San Antonio, TX, 78214",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/nature-rx-summer-seed-series/",
+      "registerLink": "https://www.eventbrite.com/e/nature-rx-summer-seed-series-tickets-1987955458290",
+      "summary": "Family Friendly hands-on learning cleaning, sorting, labeling, and packaging native seeds for the Confluence Park and Mission Branch Seed Library. June 23 it will be the Meeting Room #2 July 14 it will be the Meeting Room #1 August 4 it..."
+    },
+    {
+      "id": "Garden Style San Antonio:10001906:2026-08-04 18:00:00",
+      "title": "Tamox Talom Food Forest Tuesday Volunteer Day",
+      "date": "2026-08-04",
+      "startDateTime": "2026-08-04 18:00:00",
+      "endDateTime": "2026-08-04 19:00:00",
+      "time": "6 p.m. - 7 p.m.",
+      "cost": "Free",
+      "location": "Tamox Talom Food Forest, 6515 Padre Drive, San Antonio, 78214",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/tamox-talom-food-forest-tuesday-volunteer-day/2026-08-04/",
+      "registerLink": "https://www.eventbrite.com/e/tamox-talom-food-forest-tuesday-volunteer-day-tickets-1983649505068?aff=erelpanelorg",
+      "summary": "Join Tamox Talom every 1st and 3rd Tuesday at 6pm to connect with community and our plant relatives. Get your hands in the soil and connect with your community at the Tamox Talom Food Forest! Volunteer days are a fun, hands-on way to lea..."
     },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/:2026-08-05:10 - 10:30 a.m.",
@@ -541,6 +558,23 @@
       "summary": "@ Hello! Need Help for Speakers Bureau Development Team COME AND EARN HOURS WHILE YOU STAY COOL AT YOUR OWN HOME! The sub teams of the Speakers Bureau Development Team NEED YOUR HELP to complete some tasks! This includes the Tech Team (S..."
     },
     {
+      "id": "Garden Style San Antonio:10001907:2026-08-18 18:00:00",
+      "title": "Tamox Talom Food Forest Tuesday Volunteer Day",
+      "date": "2026-08-18",
+      "startDateTime": "2026-08-18 18:00:00",
+      "endDateTime": "2026-08-18 19:00:00",
+      "time": "6 p.m. - 7 p.m.",
+      "cost": "Free",
+      "location": "Tamox Talom Food Forest, 6515 Padre Drive, San Antonio, 78214",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/tamox-talom-food-forest-tuesday-volunteer-day/2026-08-18/",
+      "registerLink": "https://www.eventbrite.com/e/tamox-talom-food-forest-tuesday-volunteer-day-tickets-1983649505068?aff=erelpanelorg",
+      "summary": "Join Tamox Talom every 1st and 3rd Tuesday at 6pm to connect with community and our plant relatives. Get your hands in the soil and connect with your community at the Tamox Talom Food Forest! Volunteer days are a fun, hands-on way to lea..."
+    },
+    {
       "id": "Guadalupe County Master Gardeners:10001475:2026-08-19 14:00:00",
       "title": "Seed Exchange In the MG Library",
       "date": "2026-08-19",
@@ -745,6 +779,23 @@
       "summary": "The fall planting season is almost here – are YOU ready? Seeds and propagated plants need extra time to grow before they’re ready to go in the ground! Join the Green Spaces Alliance for the second installment of our two-part fall garden-..."
     },
     {
+      "id": "Garden Style San Antonio:31547:2026-08-28 08:00:00",
+      "title": "Neighbors in Nature Day",
+      "date": "2026-08-28",
+      "startDateTime": "2026-08-28 08:00:00",
+      "endDateTime": "2026-08-28 18:00:00",
+      "time": "8 a.m. - 6 p.m.",
+      "cost": "$7",
+      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Garden Event",
+      "link": "https://www.gardenstylesanantonio.com/event/neighbors-in-nature-day/",
+      "registerLink": "https://sabgtx.org/event/neighbors-in-nature-day-august-2026/",
+      "summary": "Introducing Neighbors in Nature Day (or “Neighbor Day” for short), a recurring community discount program offering Bexar County residents $7 admission to the San Antonio Botanical Garden on select days throughout the year."
+    },
+    {
       "id": "Garden Style San Antonio:10001887:2026-08-28 09:00:00",
       "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
       "date": "2026-08-28",
@@ -811,6 +862,23 @@
       "link": "https://www.gardenstylesanantonio.com/event/author-nights-at-mission-branch-library-3/",
       "registerLink": "https://www.gardenstylesanantonio.com/event/author-nights-at-mission-branch-library-3/",
       "summary": "Pre-event planting demonstration in Friends of Mission Branch Library community garden begins at 4:30. Author will be available for book purchases at 5:00 in meeting room. At 6:00 Haeley Giambalvo, author of “Native Plant Gardening for B..."
+    },
+    {
+      "id": "Garden Style San Antonio:10001908:2026-09-01 18:00:00",
+      "title": "Tamox Talom Food Forest Tuesday Volunteer Day",
+      "date": "2026-09-01",
+      "startDateTime": "2026-09-01 18:00:00",
+      "endDateTime": "2026-09-01 19:00:00",
+      "time": "6 p.m. - 7 p.m.",
+      "cost": "Free",
+      "location": "Tamox Talom Food Forest, 6515 Padre Drive, San Antonio, 78214",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/tamox-talom-food-forest-tuesday-volunteer-day/2026-09-01/",
+      "registerLink": "https://www.eventbrite.com/e/tamox-talom-food-forest-tuesday-volunteer-day-tickets-1983649505068?aff=erelpanelorg",
+      "summary": "Join Tamox Talom every 1st and 3rd Tuesday at 6pm to connect with community and our plant relatives. Get your hands in the soil and connect with your community at the Tamox Talom Food Forest! Volunteer days are a fun, hands-on way to lea..."
     },
     {
       "id": "Guadalupe County Master Gardeners:10001477:2026-09-02 14:00:00",
