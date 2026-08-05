@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-04T19:57:35.786Z",
+  "generatedAt": "2026-08-05T07:30:18.550Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-04",
-    "end": "2026-09-03"
+    "start": "2026-08-05",
+    "end": "2026-09-04"
   },
-  "eventCount": 52,
+  "eventCount": 50,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,57 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/little-sprouts-hike-0804/:2026-08-04:10 - 10:30 a.m.",
-      "title": "Little Sprouts Hike",
-      "date": "2026-08-04",
-      "startDateTime": "2026-08-04",
-      "endDateTime": "2026-08-04",
-      "time": "10 - 10:30 a.m.",
-      "cost": "Included with Garden admission and membership",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/little-sprouts-hike-0804/",
-      "registerLink": "https://sabgtx.org/event/little-sprouts-hike-0804/",
-      "summary": "Each hike features a different nature-based lesson designed to inspire a love and appreciation of the natural world. All hikes begin at the garden gift shop. Some trails are unpaved, so all-terrain strollers are recommended. Recommended for ages 5 and under."
-    },
-    {
-      "id": "Garden Style San Antonio:31550:2026-08-04 17:00:00",
-      "title": "Nature Rx: Summer Seed Series",
-      "date": "2026-08-04",
-      "startDateTime": "2026-08-04 17:00:00",
-      "endDateTime": "2026-08-04 19:00:00",
-      "time": "5 p.m. - 7 p.m.",
-      "cost": "Free",
-      "location": "Mission Library, 3134 Roosevelt Avenue, San Antonio, TX, 78214",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/nature-rx-summer-seed-series/",
-      "registerLink": "https://www.eventbrite.com/e/nature-rx-summer-seed-series-tickets-1987955458290",
-      "summary": "Family Friendly hands-on learning cleaning, sorting, labeling, and packaging native seeds for the Confluence Park and Mission Branch Seed Library. June 23 it will be the Meeting Room #2 July 14 it will be the Meeting Room #1 August 4 it..."
-    },
-    {
-      "id": "Garden Style San Antonio:10001906:2026-08-04 18:00:00",
-      "title": "Tamox Talom Food Forest Tuesday Volunteer Day",
-      "date": "2026-08-04",
-      "startDateTime": "2026-08-04 18:00:00",
-      "endDateTime": "2026-08-04 19:00:00",
-      "time": "6 p.m. - 7 p.m.",
-      "cost": "Free",
-      "location": "Tamox Talom Food Forest, 6515 Padre Drive, San Antonio, 78214",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/tamox-talom-food-forest-tuesday-volunteer-day/2026-08-04/",
-      "registerLink": "https://www.eventbrite.com/e/tamox-talom-food-forest-tuesday-volunteer-day-tickets-1983649505068?aff=erelpanelorg",
-      "summary": "Join Tamox Talom every 1st and 3rd Tuesday at 6pm to connect with community and our plant relatives. Get your hands in the soil and connect with your community at the Tamox Talom Food Forest! Volunteer days are a fun, hands-on way to lea..."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/:2026-08-05:10 - 10:30 a.m.",
       "title": "Nature Exploration in the Family Adventure Garden",
@@ -913,6 +862,23 @@
       "link": "https://www.gardenstylesanantonio.com/event/secrets-to-landscape-success-plan-big-start-small/",
       "registerLink": "https://www.eventbrite.com/e/secrets-to-landscape-success-plan-big-and-start-small-tickets-1995981937706?aff=oddtdtcreator",
       "summary": "Join Pam Peck, a seasoned Alamo Area Master Naturalist, for an inspiring workshop on the power of native plants and how they can help you save water in your landscape. Discover practical tips to plan your landscaping goals with a big vis..."
+    },
+    {
+      "id": "Garden Style San Antonio:10001882:2026-09-04 09:00:00",
+      "title": "Guided Tour: Sustainable Gardening",
+      "date": "2026-09-04",
+      "startDateTime": "2026-09-04 09:00:00",
+      "endDateTime": "2026-09-04 10:30:00",
+      "time": "9 a.m. - 10:30 a.m.",
+      "cost": "$15",
+      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/guided-tour-sustainable-gardening-2/2026-09-04/",
+      "registerLink": "https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/",
+      "summary": "Explore the many sustainable practices in the San Antonio Botanical Garden on this seasonally changing walking tour. Learn about native plants, rain gardens, and sustainable architecture. Explore more ways to conserve our local resources..."
     }
   ]
 }
