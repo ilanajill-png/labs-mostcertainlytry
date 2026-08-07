@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-06T16:42:07.980Z",
+  "generatedAt": "2026-08-07T07:34:19.924Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-06",
-    "end": "2026-09-05"
+    "start": "2026-08-07",
+    "end": "2026-09-06"
   },
-  "eventCount": 50,
+  "eventCount": 48,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,40 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/storytime-in-the-garden/:2026-08-06:10 - 10:30 a.m.",
-      "title": "Storytime in the Garden",
-      "date": "2026-08-06",
-      "startDateTime": "2026-08-06",
-      "endDateTime": "2026-08-06",
-      "time": "10 - 10:30 a.m.",
-      "cost": "Included with Garden admission and membership",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Garden Event",
-      "link": "https://sabgtx.org/event/storytime-in-the-garden/",
-      "registerLink": "https://sabgtx.org/event/storytime-in-the-garden/",
-      "summary": "Each session features different nature themed books designed to stimulate young minds and foster an appreciation for the great outdoors. Families are welcome to bring a blanket to sit on during story time. Recommended for ages 5 and under."
-    },
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/drop-in-guided-tour-otherwild/:2026-08-06:9 - 10 a.m.",
-      "title": "Drop-in Guided Tour: Otherwild",
-      "date": "2026-08-06",
-      "startDateTime": "2026-08-06",
-      "endDateTime": "2026-08-06",
-      "time": "9 - 10 a.m.",
-      "cost": "Included with Garden admission and membership",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/drop-in-guided-tour-otherwild/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-otherwild/",
-      "summary": "Join us on this guided tour to experience, Otherwild, featuring 10 Enchanted Trees throughout the San Antonio Botanical Garden’s 39 acres and a soaring SkyNet installation, Flora Borealis, above the Lucile Halsell Conservatory. This immersive exhibition celebrates color, connection, and the joy of shared experiences. Instructors: Conservation Educators"
-    },
     {
       "id": "Garden Style San Antonio:10001881:2026-08-07 09:00:00",
       "title": "Guided Tour: Sustainable Gardening",
