@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-07T08:03:33.001Z",
+  "generatedAt": "2026-08-08T13:36:12.103Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-07",
-    "end": "2026-09-06"
+    "start": "2026-08-08",
+    "end": "2026-09-07"
   },
-  "eventCount": 48,
+  "eventCount": 47,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,40 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "Garden Style San Antonio:10001881:2026-08-07 09:00:00",
-      "title": "Guided Tour: Sustainable Gardening",
-      "date": "2026-08-07",
-      "startDateTime": "2026-08-07 09:00:00",
-      "endDateTime": "2026-08-07 10:30:00",
-      "time": "9 a.m. - 10:30 a.m.",
-      "cost": "$15",
-      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/guided-tour-sustainable-gardening-2/2026-08-07/",
-      "registerLink": "https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/",
-      "summary": "Explore the many sustainable practices in the San Antonio Botanical Garden on this seasonally changing walking tour. Learn about native plants, rain gardens, and sustainable architecture. Explore more ways to conserve our local resources..."
-    },
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/:2026-08-07:9:00 a.m. - 10:30 a.m.",
-      "title": "Guided Tour: Sustainable Gardening",
-      "date": "2026-08-07",
-      "startDateTime": "2026-08-07",
-      "endDateTime": "2026-08-07",
-      "time": "9:00 a.m. - 10:30 a.m.",
-      "cost": "$15 ($10 member). Registration open until filled.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/",
-      "registerLink": "https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/",
-      "summary": "Explore the many sustainable practices in the Garden on this seasonally changing walking tour. Learn about native plants, rain gardens, and sustainable architecture. Explore more ways to conserve our local resources through sustainable practices."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/:2026-08-08:10 - 10:30 a.m.",
       "title": "Nature Exploration in the Family Adventure Garden",
@@ -199,6 +165,23 @@
       "link": "https://guadalupecountymastergardeners.org/event/lunch-learn-agrilife-extension-bye-bye-bugs-the-consequences-of-pest-elimination-melinda-lucas/",
       "registerLink": "https://guadalupecountymastergardeners.org/events/",
       "summary": "This month’s Lunch & Learn on August 12th is Bye Bye Bugs! The consequences of “Pest” elimination presented by Melinda Lucas Learn more about the reality of eliminating the bugs that drive you buggy! Snacks and water will be available. F..."
+    },
+    {
+      "id": "Garden Style San Antonio:31603:2026-08-12 12:00:00",
+      "title": "Recycling Insects - The Overlooked Gems of the Insect World",
+      "date": "2026-08-12",
+      "startDateTime": "2026-08-12 12:00:00",
+      "endDateTime": "2026-08-12 13:30:00",
+      "time": "12 p.m. - 1:30 p.m.",
+      "cost": "Free",
+      "location": "Eco Centro, 1802 North Main Avenue, San Antonio, 78212",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/recycling-insects-the-overlooked-gems-of-the-insect-world/",
+      "registerLink": "https://www.eventbrite.com/e/recycling-insects-the-overlooked-gems-of-the-insect-world-tickets-1989605237825?aff=oddtdtcreator",
+      "summary": "From below the soil surface to flying above our heads, beneficial insects have profound effects on our gardens. Join Molly Keck of Texas A&M Agrilife to learn about many of the underappreciated insect characters that benefit our landscap..."
     },
     {
       "id": "Guadalupe County Master Gardeners:10001474:2026-08-12 14:00:00",
