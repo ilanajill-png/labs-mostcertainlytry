@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-09T18:58:48.148Z",
+  "generatedAt": "2026-08-10T07:30:32.298Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-09",
-    "end": "2026-09-08"
+    "start": "2026-08-10",
+    "end": "2026-09-09"
   },
-  "eventCount": 76,
+  "eventCount": 77,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -1321,6 +1321,23 @@
       "link": "https://guadalupecountymastergardeners.org/event/plant-sale-the-silver-center-3/",
       "registerLink": "https://guadalupecountymastergardeners.org/events/",
       "summary": "Bring all your Gardening questions, and come check out our plants for sale!"
+    },
+    {
+      "id": "Guadalupe County Master Gardeners:10001478:2026-09-09 14:00:00",
+      "title": "Seed Exchange In the MG Library",
+      "date": "2026-09-09",
+      "startDateTime": "2026-09-09 14:00:00",
+      "endDateTime": "2026-09-09 17:00:00",
+      "time": "2 p.m. - 5 p.m.",
+      "cost": "Free",
+      "location": "Seguin Texas Agrilife Extension Office, 210 E. Live Oak St, Seguin, TX, 78155",
+      "city": "Seguin",
+      "source": "Guadalupe County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://guadalupecountymastergardeners.org/event/seed-exchange-in-the-mg-library/2026-09-09/",
+      "registerLink": "https://guadalupecountymastergardeners.org/events",
+      "summary": "Master Gardeners Seed Exchange Please note the new dates and times effective Monday February 16th, 2026. In Texas it seems it is always time to start thinking about saving seeds (and the Seed Exchange). As you watch your bountiful harves..."
     }
   ]
 }
