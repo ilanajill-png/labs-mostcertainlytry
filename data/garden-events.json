@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-10T07:30:32.298Z",
+  "generatedAt": "2026-08-11T14:51:26.382Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-10",
-    "end": "2026-09-09"
+    "start": "2026-08-11",
+    "end": "2026-09-10"
   },
-  "eventCount": 77,
+  "eventCount": 76,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,23 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "Bexar County Master Gardeners:83062:2026-08-10 13:00:00",
-      "title": "Exploring the Herb Garden",
-      "date": "2026-08-10",
-      "startDateTime": "2026-08-10 13:00:00",
-      "endDateTime": "2026-08-10 15:00:00",
-      "time": "1 p.m. - 3 p.m.",
-      "cost": "$10",
-      "location": "Bexar County Greenies Urban Farm, 1615 Sherman St, San Antonio, Texas, San Antonio, Texas, 78202",
-      "city": "San Antonio",
-      "source": "Bexar County Master Gardeners",
-      "sourceKind": "Master Gardener calendar",
-      "type": "Master Gardener",
-      "link": "https://bexarmg.org/event/exploring-the-herb-garden/",
-      "registerLink": "https://pci.jotform.com/form/260965258184164",
-      "summary": "@ Join the Bexar County Master Gardeners for an immersive, hands-on exploration of herbs at Greenies Urban Garden. The class begins with a fascinating history of herbalism, followed by practical guidance on growing herbs, complete with a..."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/little-sprouts-hike-0811/:2026-08-11:10 - 10:30 a.m.",
       "title": "Little Sprouts Hike",
@@ -214,7 +197,7 @@
       "sourceKind": "Regional garden calendar",
       "type": "Garden Event",
       "link": "https://www.gardenstylesanantonio.com/event/all-about-drought/",
-      "registerLink": "https://www.gardenstylesanantonio.com/event/all-about-drought/",
+      "registerLink": "https://www.bexar.org/Calendar.aspx?EID=7840&amp;month=8&amp;year=2026&amp;day=13&amp;calType=0",
       "summary": "5:00 - 6:00 social time and information displays 6:00 Rene Gonzalez, Senior Resource Analyst of Water Resources of San Antonio Water System What is drought? How do we know when an area is in drought? How does drought affect the San Anton..."
     },
     {
@@ -452,7 +435,7 @@
       "sourceKind": "Regional garden calendar",
       "type": "Class / Workshop",
       "link": "https://www.gardenstylesanantonio.com/event/author-nights-at-mission-branch-library-4/",
-      "registerLink": "https://www.gardenstylesanantonio.com/event/author-nights-at-mission-branch-library-4/",
+      "registerLink": "https://www.mysapl.org/Events-News/Events-Calendar/id/mis?trumbaEmbed=view%3Devent%26eventid%3D204178936",
       "summary": "Friends of Mission Branch Library and Gardening Volunteers of South Texas present Author Night with Shaun McCoshum, PhD on Monday, August 17, 2026 at Mission Branch Library. Schedule of events: 4:30 planting demonstration in community ga..."
     },
     {
