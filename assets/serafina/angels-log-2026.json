@@ -4987,7 +4987,113 @@
       ],
       "tarotMessage": "Household message: The High Priestess asks everyone at Las Jaras to notice the first true need before rushing. The Empress describes the weather inside and outside the walls. The Lovers names what could complicate the day if ignored. The Chariot shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The High Priestess tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-08-13": {
+      "date": "2026-08-13",
+      "weekday": "Thursday",
+      "generatedAt": "2026-08-13T13:18:05.339Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Crown chakra (connection, purpose, and spiritual openness): I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house.",
+      "morningIntentionChakra": {
+        "chakra": "Crown",
+        "focus": "connection, purpose, and spiritual openness",
+        "intention": "I keep ceremony useful: old calendar, moon, lion guardians, and one practical act that blesses the house."
+      },
+      "practicalRite": "I tighten one loose boundary before a squirrel finds it.",
+      "weather": {
+        "sunrise": "07:00 AM",
+        "sunset": "08:15 PM",
+        "highF": "103",
+        "lowF": "76",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "heat",
+          "high UV"
+        ],
+        "uvIndex": "11",
+        "maxGustMph": 29,
+        "maxThunderChance": 0,
+        "moonPhase": "Waxing Crescent",
+        "moonIllumination": "0%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-08-13",
+            "name": "Obon",
+            "origin": "Japanese Buddhist ancestral festival, commonly observed in mid-August in many places.",
+            "crystals": "No crystal rite required.",
+            "cleaning": "Clean photos, altar space, or a family memory shelf.",
+            "food": "Tea, rice, fruit, noodles, or family remembrance food.",
+            "gift": "Give flowers, lantern light, or a story to the dead and kindness to the living.",
+            "modernCelebration": "At Las Jaras I would honor the day by cleaning a memory place, lighting safely, and telling one ancestor story. No borrowed Buddhist ritual required."
+          }
+        ],
+        "alerts": [],
+        "next": {
+          "date": "2026-08-13",
+          "name": "Obon"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "cobalt blue for clear authority",
+        "breakfast": "oatmeal with honey and fruit, slow luck in a bowl",
+        "lunch": "a tuna or chickpea salad sandwich with fruit",
+        "dinner": "pasta with greens and garlic, unless garlic is unwelcome in the house that day",
+        "luckyObject": "a tiny notebook",
+        "personToCall": "a neighbor or local friend who might appreciate a quick check-in",
+        "strangerKindness": "hold a door without needing applause"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 07:00 AM; sunset 08:15 PM; 13h 15m daylight.",
+        "moon": "Waxing Crescent, 0% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Industry",
+        "franklinMeasure": "Lose no useful hour, especially before the Texas sun becomes unreasonable.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Industry: Lose no useful hour, especially before the Texas sun becomes unreasonable. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Weather",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Garden",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Household",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Warning",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Hermit",
+          "reading": "I step outside alone long enough to notice one true thing."
+        }
+      ],
+      "tarotMessage": "Household message: The Emperor asks everyone at Las Jaras to notice the first true need before rushing. The Hierophant describes the weather inside and outside the walls. Strength names what could complicate the day if ignored. The Hermit shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Emperor tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-08-11T14:51:01.972Z"
+  "updatedAt": "2026-08-13T13:18:05.339Z"
 }
