@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Florence Garden Daily | Thursday, August 13, 2026</title>
+    <meta name="description" content="A heat-aware Florence garden newspaper for August 13, 2026, with Bardini Gardens, the Medici Chapels, nature events, and a plant and insect field guide.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+      :root {
+        --paper: #f4efe4;
+        --cream: #fffaf1;
+        --ink: #28231d;
+        --muted: #685d50;
+        --line: rgba(40, 35, 29, 0.16);
+        --cypress: #264f3b;
+        --leaf: #617c47;
+        --terra: #a44f36;
+        --ochre: #c08a38;
+        --sky: #386f91;
+        --rose: #b85562;
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(255, 250, 241, 0.72), rgba(244, 239, 228, 0.92)),
+          radial-gradient(circle at 12% 0%, rgba(192, 138, 56, 0.18), transparent 32%),
+          var(--paper);
+        color: var(--ink);
+      }
+
+      .edition {
+        width: min(1140px, calc(100% - 28px));
+        margin: 0 auto 56px;
+      }
+
+      .masthead {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 370px);
+        gap: clamp(22px, 4vw, 46px);
+        align-items: end;
+        padding: 42px 0 28px;
+        border-bottom: 2px solid var(--line);
+      }
+
+      .kicker,
+      .label,
+      figcaption {
+        margin: 0 0 8px;
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 400;
+        line-height: 0.98;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 790px;
+        color: var(--cypress);
+        font-size: clamp(3.2rem, 9vw, 7rem);
+      }
+
+      h2 {
+        margin: 0 0 14px;
+        color: var(--cypress);
+        font-size: clamp(2rem, 5vw, 3.8rem);
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        color: var(--ink);
+        font-size: 1.44rem;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+        overflow-wrap: break-word;
+      }
+
+      a {
+        color: var(--sky);
+        font-weight: 850;
+        text-underline-offset: 4px;
+      }
+
+      .lede {
+        max-width: 720px;
+        font-size: 1.08rem;
+      }
+
+      .brief,
+      .card,
+      .field-card,
+      .stamp {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.9);
+        box-shadow: 0 24px 70px rgba(40, 35, 29, 0.11);
+      }
+
+      .brief,
+      .card,
+      .stamp {
+        padding: 18px;
+      }
+
+      .brief dl {
+        display: grid;
+        gap: 12px;
+        margin: 0;
+      }
+
+      .brief dt {
+        color: var(--terra);
+        font-size: 0.78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .brief dd {
+        margin: 0;
+        color: var(--ink);
+        font-weight: 850;
+      }
+
+      .nav {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 14px 0 24px;
+      }
+
+      .nav a,
+      .button {
+        flex: 0 0 auto;
+        min-height: 44px;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--cream);
+        color: var(--ink);
+        font-weight: 850;
+        text-decoration: none;
+      }
+
+      .button.primary {
+        border-color: var(--cypress);
+        background: var(--cypress);
+        color: #fff;
+      }
+
+      .section {
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .grid,
+      .field-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .wide-grid {
+        display: grid;
+        grid-template-columns: 1.18fr 0.82fr;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .list {
+        display: grid;
+        gap: 10px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .list li {
+        padding: 12px 14px;
+        border-left: 4px solid var(--terra);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.78);
+      }
+
+      .pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+
+      .pill {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(192, 138, 56, 0.22);
+        color: var(--ink);
+        font-size: 0.8rem;
+        font-weight: 850;
+      }
+
+      .pill.heat {
+        background: rgba(164, 79, 54, 0.16);
+      }
+
+      .pill.green {
+        background: rgba(97, 124, 71, 0.2);
+      }
+
+      .timeline {
+        display: grid;
+        gap: 10px;
+        counter-reset: stop;
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .timeline li {
+        counter-increment: stop;
+        position: relative;
+        padding: 14px 14px 14px 50px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 250, 241, 0.84);
+      }
+
+      .timeline li::before {
+        content: counter(stop);
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        display: grid;
+        width: 25px;
+        height: 25px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--cypress);
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 900;
+      }
+
+      .stamp {
+        position: relative;
+        overflow: hidden;
+        border-style: dashed;
+      }
+
+      .stamp::after {
+        content: "";
+        position: absolute;
+        inset: auto -30px -40px auto;
+        width: 150px;
+        height: 150px;
+        border: 16px solid rgba(97, 124, 71, 0.11);
+        border-radius: 50%;
+      }
+
+      .field-card {
+        display: grid;
+        grid-template-columns: 150px minmax(0, 1fr);
+        gap: 14px;
+        overflow: hidden;
+      }
+
+      .field-card img {
+        width: 150px;
+        height: 100%;
+        min-height: 180px;
+        object-fit: cover;
+        background: #ddd2c3;
+      }
+
+      .field-card div {
+        padding: 16px 16px 16px 0;
+      }
+
+      .field-card p {
+        margin: 0 0 8px;
+      }
+
+      .field-card .id-note {
+        color: var(--ink);
+        font-weight: 850;
+      }
+
+      .source-note {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 780px) {
+        .masthead,
+        .grid,
+        .wide-grid,
+        .field-grid,
+        .field-card {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: 9ch;
+          font-size: clamp(3rem, 14vw, 4rem);
+        }
+
+        .field-card img {
+          width: 100%;
+          height: 230px;
+          min-height: 0;
+        }
+
+        .field-card div {
+          padding: 0 16px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try Labs home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Garden field notes</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../garden.html">Garden</a>
+        <a href="../index.html">Projects</a>
+      </nav>
+    </header>
+
+    <main class="edition">
+      <section class="masthead">
+        <div>
+          <p class="kicker">Florence travel newspaper</p>
+          <h1>The Florence Garden Daily</h1>
+          <p class="lede">A Thursday edition for Florence: do the Medici marble while the day is still manageable, hide from the worst heat, then let Bardini carry the golden-hour garden mood.</p>
+        </div>
+        <aside class="brief" aria-label="Edition details">
+          <dl>
+            <div><dt>Date</dt><dd>Thursday, August 13, 2026</dd></div>
+            <div><dt>City</dt><dd>Florence, Italy</dd></div>
+            <div><dt>Main route</dt><dd>Medici Chapels + Bardini Gardens</dd></div>
+            <div><dt>Weather desk</dt><dd>Red heat-alert posture; outdoor plans belong early or late</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <nav class="nav" aria-label="Edition sections">
+        <a href="#front">Front Page</a>
+        <a href="#route">Today Route</a>
+        <a href="#garden-list">Garden Listings</a>
+        <a href="#field-guide">ID Guide</a>
+        <a href="#heat">Heat Desk</a>
+        <a href="#sources">Sources</a>
+      </nav>
+
+      <section class="section" id="front">
+        <p class="label">Front Page</p>
+        <h2>Do The Marble First, The Garden Later</h2>
+        <div class="grid">
+          <article class="card">
+            <div class="pills">
+              <span class="pill">08:15-18:50</span>
+              <span class="pill green">Indoor anchor</span>
+            </div>
+            <h3>Medici Chapels are the morning headline.</h3>
+            <p>The official museum page lists the Cappelle Medicee as open today from 08:15 to 18:50, with last entrance 40 minutes before closing. Start here before Florence turns into a kiln with better architecture.</p>
+          </article>
+          <article class="card">
+            <div class="pills">
+              <span class="pill">Thursday to 21:00</span>
+              <span class="pill green">Garden anchor</span>
+            </div>
+            <h3>Bardini gets the evening edition.</h3>
+            <p>Villa Bardini lists Thursday late hours for the exhibition, garden, and cocktail bar. Last admission is one hour before closing, so this is the cleanest late-day garden plan.</p>
+          </article>
+          <article class="card">
+            <div class="pills">
+              <span class="pill heat">Heat warning</span>
+              <span class="pill">Pace control</span>
+            </div>
+            <h3>The noon plan is shade, water, and no theatrics.</h3>
+            <p>Florence is under a level-3 heat alert today, and the Met Office forecast shows a 38 C high. Build the day around morning marble, afternoon retreat, and evening terraces.</p>
+          </article>
+          <article class="card">
+            <div class="pills">
+              <span class="pill">21:00+</span>
+              <span class="pill green">Optional night sky</span>
+            </div>
+            <h3>There is one strong nature-adjacent night event.</h3>
+            <p>Marginalia lists a 21:00 star evening on the meadow below San Miniato al Monte, with reservation expected. It is the prettiest add-on if energy survives Bardini.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="route">
+        <p class="label">Today's Route</p>
+        <h2>Medici Chapel, Rest, Bardini</h2>
+        <ol class="timeline">
+          <li><strong>08:45-10:15 | Cappelle Medicee.</strong> Start at Piazza di Madonna degli Aldobrandini 6. See the Cappella dei Principi and Michelangelo's Sagrestia Nuova before the heat gets rude.</li>
+          <li><strong>10:15-11:15 | San Lorenzo / shaded coffee.</strong> Keep this as buffer. If ticketing or lines are annoying, do not punish yourself by cramming in another paid site.</li>
+          <li><strong>11:30-16:45 | Heat retreat.</strong> Lunch, water, rest, and indoor time. The Botanical Garden and Boboli are open, but today they are optional only if your body votes yes.</li>
+          <li><strong>17:15-17:45 | Cross toward Oltrarno.</strong> Taxi if the heat is still sharp; walk only if it feels humane. Bardini has steep, uneven, gravelly paths.</li>
+          <li><strong>17:45-20:15 | Giardino Bardini.</strong> Enter from Costa San Giorgio 2 or Via dei Bardi 1 rosso. Aim for terrace views, shade, sculptures, the wisteria pergola structure, roses, hydrangeas, and the slow city view.</li>
+          <li><strong>20:15 onward | Dinner or stars.</strong> Either stay simple near Oltrarno/San Niccolo, or go to the 21:00 San Miniato meadow event if you reserve and still have energy.</li>
+        </ol>
+      </section>
+
+      <section class="section" id="garden-list">
+        <p class="label">Garden & Nature Listings</p>
+        <h2>Verified Options For Today</h2>
+        <div class="wide-grid">
+          <article class="card">
+            <h3>Best fit with your two requested stops</h3>
+            <ul class="list">
+              <li><strong>Giardino Bardini / Villa Bardini:</strong> Thursday opening runs late to 21:00 for the exhibition, garden, and cocktail bar; last admission one hour before closing. The same site lists the garden's steep paths, no-animal rule, two entrances, and cafe/bar.</li>
+              <li><strong>Cinema in Villa, Bardini:</strong> Nightly outdoor cinema runs at 21:15 through August 30 on the Terrazza Belvedere. Thursday is the family-free strand by reservation, but check the live program before committing tonight.</li>
+              <li><strong>Cappelle Medicee:</strong> Not a garden, but it is the indoor Medici anchor for the day: open today 08:15-18:50, last entrance 40 minutes before close.</li>
+              <li><strong>Serata sotto le stelle with Marginalia:</strong> 21:00 on the meadow below San Miniato al Monte; science, art, poetry, and stargazing. Bring a blanket or folding chair, and reserve before going.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>Open green places if you want more nature</h3>
+            <ul class="list">
+              <li><strong>Boboli Gardens:</strong> open from 08:15; August closing 19:10, last admission one hour before closing. Better as an early add-on than a noon idea.</li>
+              <li><strong>Botanical Garden / Giardino dei Semplici:</strong> June-August hours are Tuesday-Sunday, 10:00-19:00, with the ticket office closing one hour before. Plant-rich, central, and easier than Boboli, but still an outdoor choice in heavy heat.</li>
+              <li><strong>Giardino delle Rose:</strong> open daily 09:00-20:00 in May-September. Good as a quick sunset view stop near Piazzale Michelangelo/San Miniato, not as a hard requirement.</li>
+              <li><strong>Parco d'Arte Pazzagli:</strong> public listings describe a garden/sculpture park with more than 200 works and 300 cypresses; the operator notes August openings mainly Saturday/Sunday evenings, with other times by reservation. Treat any August 13 nature-lab listing as call-before-you-go.</li>
+              <li><strong>Cinema nel Chiostro, Sant'Orsola:</strong> an outdoor cloister cinema runs through September 6 at 21:30. Nature-adjacent rather than a garden, but useful if you want an evening outside without another hill.</li>
+              <li><strong>Spazio Giovani Cure / Fico Bistrot garden:</strong> Portalegiovani lists 2MD original music at 20:00 in the garden tonight. Neighborhood choice, not a garden destination.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="field-guide">
+        <p class="label">Identification Guide</p>
+        <h2>What You Are Likely To Notice At Bardini</h2>
+        <p class="lede">Bardini's own garden description names holm oaks, phyllireas, olive trees, hydrangeas, roses, camellias, azaleas, and the wisteria pergola. In August, expect structure, leaves, shade, insects, and dry-season Mediterranean toughness more than peak spring bloom.</p>
+        <div class="field-grid">
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/wisteria.jpg" alt="Purple wisteria flowers hanging in clusters">
+            <div>
+              <p class="kicker">Plant</p>
+              <h3>Wisteria pergola</h3>
+              <p class="id-note">Look for the long woody vine structure overhead; the famous purple bloom is mostly April-May, so today it is more architecture than flower show.</p>
+              <p>Bardini names Japanese wisteria varieties plus Wisteria sinensis 'Prolific' on the pergola.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/cypress.jpg" alt="Tall Mediterranean cypress trees">
+            <div>
+              <p class="kicker">Tree</p>
+              <h3>Mediterranean cypress</h3>
+              <p class="id-note">Tall, dark, pencil-like silhouettes; classic Tuscan skyline punctuation.</p>
+              <p>Watch for them on views, walls, and neighboring gardens rather than only inside Bardini.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/holm-oak.jpg" alt="Evergreen holm oak with rounded canopy">
+            <div>
+              <p class="kicker">Tree</p>
+              <h3>Holm oak</h3>
+              <p class="id-note">Evergreen oak with dense, leathery, dark leaves; it reads as deep shade in a hot Mediterranean garden.</p>
+              <p>Bardini specifically notes copses and centuries-old trees including holm oaks.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/olive.jpg" alt="Olive trees with silvery leaves">
+            <div>
+              <p class="kicker">Tree</p>
+              <h3>Olive</h3>
+              <p class="id-note">Silvery, narrow leaves; gnarled trunks; a softer gray-green than cypress or oak.</p>
+              <p>Good for training your eye to read the dry Mediterranean palette.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/bay-laurel.jpg" alt="Bay laurel leaves">
+            <div>
+              <p class="kicker">Plant</p>
+              <h3>Bay laurel</h3>
+              <p class="id-note">Glossy, aromatic, lance-shaped leaves; often clipped or tucked into Mediterranean plantings.</p>
+              <p>Do not pick leaves in the garden; just notice the culinary plant language.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/hydrangea.jpg" alt="Hydrangea flowers and green leaves">
+            <div>
+              <p class="kicker">Flowering shrub</p>
+              <h3>Hydrangea / hortensia</h3>
+              <p class="id-note">Broad leaves and rounded flower heads; in heat they may look tired, but they are part of Bardini's named collection.</p>
+              <p>Best spotted where there is more shade and irrigation.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/honey-bee.jpg" alt="Western honey bee on a flower">
+            <div>
+              <p class="kicker">Insect</p>
+              <h3>Honey bee</h3>
+              <p class="id-note">Small, amber-brown, flower-focused; usually too busy to care about you.</p>
+              <p>Watch flowering herbs, roses, and shaded blooms if anything is still active in the heat.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/violet-carpenter-bee.jpg" alt="Violet carpenter bee with dark wings">
+            <div>
+              <p class="kicker">Insect</p>
+              <h3>Violet carpenter bee</h3>
+              <p class="id-note">Large, dark, shiny, with violet-blue wings; looks dramatic, usually solitary.</p>
+              <p>Most likely around big flowers and warm walls if the garden still has nectar.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/swallowtail.jpg" alt="Swallowtail butterfly on flowers">
+            <div>
+              <p class="kicker">Insect</p>
+              <h3>Swallowtail butterfly</h3>
+              <p class="id-note">Yellow wings, black veining, tail-like points; quick and elegant when it appears.</p>
+              <p>Not guaranteed, but plausible in warm gardens with fennel, rue, citrus, or nectar flowers nearby.</p>
+            </div>
+          </article>
+          <article class="field-card">
+            <img src="../assets/florence-field-guide/italian-wall-lizard.jpg" alt="Italian wall lizard on a rock">
+            <div>
+              <p class="kicker">Reptile</p>
+              <h3>Italian wall lizard</h3>
+              <p class="id-note">Small, fast, green-brown, sunning on stone, walls, steps, and dry edges.</p>
+              <p>Most likely in the warm margins of paths and masonry; blink and it has already judged your shoes.</p>
+            </div>
+          </article>
+        </div>
+        <p class="source-note">Image credits: plant photos via Wikimedia Commons source files; olive, bay, hydrangea, honey bee, violet carpenter bee, swallowtail, and Italian wall lizard photos via iNaturalist source files. Local copies are used so the public page does not depend on fragile hotlinks.</p>
+      </section>
+
+      <section class="section" id="heat">
+        <p class="label">Heat Desk</p>
+        <h2>Today Is Not A Noon-Climb Day</h2>
+        <ul class="list">
+          <li>Carry water and refill before crossing the river. A fan, hat, and electrolytes are not overkill.</li>
+          <li>Use taxis more generously than usual. The walk up toward Bardini, Rose Garden, or San Miniato is beautiful and also mean in heat.</li>
+          <li>Do not stack Boboli plus Bardini plus Rose Garden unless the evening is surprisingly forgiving. Pick one major garden and let it breathe.</li>
+          <li>For the cleanest day: Medici Chapels in the morning, rest in the afternoon, Bardini at golden hour, optional San Miniato stars.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="sources">
+        <p class="label">Sources</p>
+        <h2>Checked Today</h2>
+        <div class="wide-grid">
+          <article class="stamp">
+            <h3>Source posture</h3>
+            <p>This is a public-safe travel edition. It avoids household details, accounts, reservations, purchases, and private schedule material. Confirm tickets and reservations before leaving because heat, sellouts, and venue changes are extremely real today.</p>
+            <p><a class="button primary" href="../garden.html">Back to Garden hub</a></p>
+          </article>
+          <article class="card">
+            <ul class="list">
+              <li><a href="https://bargellomusei.it/en/museum/cappelle-medicee/">Musei del Bargello: Cappelle Medicee</a> for opening hours, last entrance, ticket, and access notes.</li>
+              <li><a href="https://www.villabardini.it/en/organize-your-visit/">Villa e Giardino Bardini visit page</a> for Thursday late opening, entrances, tickets, and accessibility notes.</li>
+              <li><a href="https://www.villabardini.it/en/an-enchanted-garden/">Villa Bardini garden description</a> for named plantings and garden structure.</li>
+              <li><a href="https://www.villabardini.it/cinema2026/">Cinema in Villa 2026</a> for evening cinema timing and ticket notes.</li>
+              <li><a href="https://www.uffizi.it/en/boboli-garden">Uffizi Galleries: Boboli Gardens</a> for August hours, last admission, entrances, and closure notes.</li>
+              <li><a href="https://www.feelflorence.it/en/points-interest/museo-di-storia-naturale-delluniversita-di-firenze-botanical-garden-giardino-dei">FeelFlorence: Botanical Garden</a> for summer hours and accessibility.</li>
+              <li><a href="https://www.feelflorence.it/en/points-interest/rose-garden">FeelFlorence: Rose Garden</a> for seasonal hours and access notes.</li>
+              <li><a href="https://www.associazionemarginalia.org/">Associazione Culturale Marginalia</a> for tonight's San Miniato star evening.</li>
+              <li><a href="https://www.metoffice.gov.uk/weather/forecast/spzcp9ckv">Met Office Florence forecast</a> and <a href="https://www.dolcevia.com/en/italy-weather-alerts">Italy weather alerts</a> for today's heat posture.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
