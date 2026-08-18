@@ -1,5 +1,25 @@
 [
   {
+    "id": "rome-vatican-overnight-2026-08-18",
+    "title": "Rome Overnight: Vatican, Roscioli, and FCO Plan",
+    "category": "Travel Plan",
+    "type": "Hour-by-Hour Agenda + Map",
+    "status": "Published",
+    "date": "2026-08-18",
+    "featured": true,
+    "tools": [
+      "OpenClaw",
+      "Codex",
+      "Travel Research",
+      "Leaflet Map",
+      "Static HTML"
+    ],
+    "summary": "A tight Rome overnight plan for arriving at Roma Termini, staying at Hotel Campo de' Fiori, eating at Roscioli, visiting the Vatican, seeing nearby landmarks, and reaching FCO for a 2:20pm flight.",
+    "outcome": "Published a travel sheet with a Vatican booking link, hour-by-hour agenda, Google Maps routing buttons, and a Leaflet map including Hotel Lunetta.",
+    "url": "rome-vatican-overnight-2026-08-18.html",
+    "source": "rome-vatican-overnight-2026-08-18.html"
+  },
+  {
     "id": "glp1-texas-spa-cookbook",
     "title": "GLP-1 Texas Spa Cookbook",
     "category": "Cookbook",
