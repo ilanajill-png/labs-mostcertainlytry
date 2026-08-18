@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rome Overnight: Vatican, Roscioli, and FCO Plan</title>
+  <meta name="description" content="Hour-by-hour Rome overnight agenda for Aug 18-19, 2026 with Vatican booking link, Roscioli plan, hotels, landmarks, and map.">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ6gZyJbM+7kN6E6xgDg9yI8rEtvRGo=" crossorigin="">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1f2528;
+      --muted: #657077;
+      --paper: #fbfaf6;
+      --panel: #ffffff;
+      --line: #d8ded9;
+      --blue: #155da8;
+      --blue-dark: #0d3d72;
+      --green: #2b6a4f;
+      --gold: #a97823;
+      --rose: #a64c44;
+      --shadow: 0 18px 45px rgba(31, 37, 40, .08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; }
+
+    header {
+      min-height: 54vh;
+      display: grid;
+      align-items: end;
+      padding: 40px clamp(18px, 5vw, 64px);
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(16, 32, 45, .90), rgba(16, 32, 45, .52)),
+        url("https://images.unsplash.com/photo-1525874684015-58379d421a52?auto=format&fit=crop&w=1800&q=80") center/cover;
+      border-bottom: 6px solid var(--gold);
+    }
+
+    .hero-inner { max-width: 1040px; }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 9px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255, 255, 255, .38);
+      border-radius: 6px;
+      color: #fff;
+      text-decoration: none;
+      font-size: .9rem;
+      background: rgba(0, 0, 0, .18);
+    }
+
+    .kicker {
+      margin: 0 0 10px;
+      color: #ffe1a6;
+      font-size: .82rem;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      line-height: .94;
+      letter-spacing: 0;
+    }
+
+    .dek {
+      max-width: 790px;
+      margin: 18px 0 0;
+      color: #eef4f6;
+      font-size: clamp(1.02rem, 2vw, 1.22rem);
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 26px 0 58px;
+    }
+
+    .quick-actions,
+    .section,
+    .notice {
+      margin-bottom: 24px;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .button {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button.primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .button.green {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
+
+    .notice {
+      padding: 15px 16px;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--gold);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 1px 0 rgba(31, 37, 40, .04);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(320px, 1.06fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card,
+    .timeline,
+    .map-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .card { padding: 18px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 14px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.55rem;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 10px; }
+
+    .muted { color: var(--muted); }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #edf4ef;
+      color: #234f3e;
+      font-size: .8rem;
+      font-weight: 800;
+    }
+
+    .tag.blue { background: #e8f1fb; color: var(--blue-dark); }
+    .tag.gold { background: #f8eedb; color: #775319; }
+    .tag.rose { background: #faebe8; color: #873c34; }
+
+    .timeline {
+      overflow: hidden;
+    }
+
+    .day {
+      padding: 18px;
+      border-bottom: 1px solid var(--line);
+      background: #f3f7f4;
+    }
+
+    .event {
+      display: grid;
+      grid-template-columns: 84px minmax(0, 1fr);
+      gap: 12px;
+      padding: 14px 18px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .event:first-of-type { border-top: 0; }
+
+    .time {
+      color: var(--blue-dark);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .event strong { display: block; margin-bottom: 3px; }
+
+    .map-panel {
+      position: sticky;
+      top: 16px;
+      overflow: hidden;
+    }
+
+    .map-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    #map {
+      width: 100%;
+      height: min(66vh, 650px);
+      min-height: 470px;
+    }
+
+    .map-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .map-buttons button {
+      min-height: 32px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .9rem;
+      background: #fbfcfb;
+    }
+
+    .source-list {
+      padding-left: 1.2rem;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    footer {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 36px;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout { grid-template-columns: 1fr; }
+      .map-panel { position: static; }
+      .event { grid-template-columns: 72px minmax(0, 1fr); }
+      #map { min-height: 420px; height: 58vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-inner">
+      <a class="back-link" href="index.html">Most Certainly Try Labs</a>
+      <p class="kicker">Rome overnight plan | Aug 18-19, 2026</p>
+      <h1>Vatican, Roscioli, and a clean run to FCO.</h1>
+      <p class="dek">A tight, luggage-aware itinerary from Roma Termini to Hotel Campo de' Fiori, with Hotel Lunetta added as the nearby reference point, Roscioli, an optional Jerry Thomas Speakeasy nightcap, a Vatican tour target, and a no-drama airport departure.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="quick-actions" aria-label="Booking and map links">
+      <a class="button primary" href="https://www.getyourguide.com/rome-l33/vatican-museums-sistine-chapel-st-peter-s-basilica-tour-t1103/" target="_blank" rel="noopener">Book Vatican tour</a>
+      <a class="button" href="https://www.getyourguide.com/rome-l33/vatican-museum-tour-and-morning-sistine-chapel-visit-t199036/" target="_blank" rel="noopener">Earlier Vatican option</a>
+      <a class="button green" href="https://www.roscioli.com/restaurant/" target="_blank" rel="noopener">Roscioli</a>
+      <a class="button" href="https://thejerrythomasproject.it/" target="_blank" rel="noopener">Jerry Thomas</a>
+      <a class="button" href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Campo+de%27+Fiori,+Rome&destination=Vatican+Museums,+Vatican+City&travelmode=driving" target="_blank" rel="noopener">Hotel to Vatican</a>
+      <a class="button" href="https://www.google.com/maps/dir/?api=1&origin=Hotel+Campo+de%27+Fiori,+Rome&destination=Fiumicino+Airport&travelmode=driving" target="_blank" rel="noopener">Hotel to FCO</a>
+    </div>
+
+    <div class="notice">
+      <strong>Booking note:</strong> use the Vatican button to select <strong>Wednesday, Aug 19</strong> and the earliest available English option near <strong>9:15am</strong>. The tour is listed as 2-3 hours; with a 2:20pm FCO flight, leave the tour by <strong>11:15am</strong> even if the Basilica portion is delayed or skipped. The earlier option button points to the 7:45am-style early morning listing, but it is longer, so only use it if you are comfortable leaving before the end.
+    </div>
+
+    <section class="section grid" aria-label="Trip priorities">
+      <article class="card">
+        <h2>Plan Priority</h2>
+        <p>Keep the night centered around Campo de' Fiori and Roscioli, then make the Vatican morning efficient. Skip anything that adds a second major ticketed site.</p>
+        <div class="tag-row">
+          <span class="tag blue">Hotel Campo de' Fiori</span>
+          <span class="tag rose">Roscioli + Jerry Thomas</span>
+          <span class="tag gold">Vatican first</span>
+        </div>
+      </article>
+      <article class="card">
+        <h2>Wednesday Caveat</h2>
+        <p>Aug 19 is a Wednesday, so St. Peter's Basilica access can be affected by the Papal Audience. Treat the Museums and Sistine Chapel as the must-do, and the Basilica as a bonus.</p>
+        <div class="tag-row">
+          <span class="tag gold">Avoid long tours</span>
+          <span class="tag">Taxi to FCO</span>
+        </div>
+      </article>
+    </section>
+
+    <div class="layout">
+      <section class="timeline" aria-label="Hour-by-hour agenda">
+        <div class="day">
+          <h2>Tuesday, Aug 18</h2>
+          <p class="muted">Arrival night: check in, Roscioli, a landmark walk, and an optional speakeasy nightcap.</p>
+        </div>
+        <div class="event">
+          <div class="time">5:05pm</div>
+          <div><strong>Arrive Roma Termini.</strong><p>Take a taxi to Hotel Campo de' Fiori. It is worth avoiding luggage logistics in August heat.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">5:45pm</div>
+          <div><strong>Check in and reset.</strong><p>Hotel Campo de' Fiori is the anchor. Hotel Lunetta is just around the corner and is marked on the map too.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">6:30pm</div>
+          <div><strong>Campo de' Fiori and Piazza Farnese.</strong><p>Easy first walk, no ticket pressure, good pre-dinner atmosphere.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">7:00pm</div>
+          <div><strong>Roscioli dinner target.</strong><p>Best case: Salumeria con Cucina. Backup: Rimessa Roscioli tasting or Antico Forno Roscioli snacks plus nearby dinner.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">8:45pm</div>
+          <div><strong>Evening landmark walk.</strong><p>Piazza Navona, Pantheon exterior, Trevi Fountain. Skip Spanish Steps if you want Jerry Thomas after.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">10:15pm</div>
+          <div><strong>Optional: Jerry Thomas Speakeasy.</strong><p>Book/check the secret-word rules first. It is open late and close enough to the hotel, but keep this to one elegant drink because Vatican morning starts early.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">11:15pm</div>
+          <div><strong>Back to hotel.</strong><p>Pack before sleep. Morning-you deserves the mercy.</p></div>
+        </div>
+
+        <div class="day">
+          <h2>Wednesday, Aug 19</h2>
+          <p class="muted">Vatican morning, then a clean taxi run to FCO for the 2:20pm flight.</p>
+        </div>
+        <div class="event">
+          <div class="time">6:30am</div>
+          <div><strong>Wake up and pack fully.</strong><p>Breakfast/espresso, sunscreen, water, passport check.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">7:45am</div>
+          <div><strong>Taxi to Vatican Museums.</strong><p>Arrive early enough to find the meeting point without sweating through your soul.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">9:15am</div>
+          <div><strong>Vatican Museums + Sistine Chapel tour.</strong><p>Book the earliest 2-3 hour option. Leave by 11:15am if the Basilica portion runs long.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">11:15am</div>
+          <div><strong>Taxi back to hotel.</strong><p>Grab bags and check out. Do not add a second landmark here.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">11:50am</div>
+          <div><strong>Taxi to FCO.</strong><p>Expected arrival around 12:35pm in normal traffic. Leave earlier if checking bags for a long-haul/non-Schengen flight.</p></div>
+        </div>
+        <div class="event">
+          <div class="time">2:20pm</div>
+          <div><strong>Flight departs FCO.</strong><p>That is the curtain. Rome gets one dramatic overnight and no avoidable chaos.</p></div>
+        </div>
+      </section>
+
+      <aside class="map-panel" aria-label="Rome trip map">
+        <div class="map-header">
+          <div>
+            <h2>Trip Map</h2>
+            <p class="muted">Hotels, food, landmarks, Vatican, and airport.</p>
+          </div>
+          <div class="map-buttons">
+            <button type="button" data-view="central">Center Rome</button>
+            <button type="button" data-view="airport">FCO</button>
+            <button type="button" data-view="all">Whole Trip</button>
+          </div>
+        </div>
+        <div id="map"></div>
+        <div class="legend">
+          <span>Blue: transport</span>
+          <span>Green: hotels</span>
+          <span>Rose: food</span>
+          <span>Gold: landmarks</span>
+        </div>
+      </aside>
+    </div>
+
+    <section class="section grid" aria-label="Tour and hotel details">
+      <article class="card">
+        <h2>Tour Suggestion</h2>
+        <p><strong>Best fit:</strong> GetYourGuide "Vatican Museums, Sistine Chapel & St. Peter's Basilica Tour." It is listed as 2-3 hours and exposes current start times during checkout.</p>
+        <p><strong>Earlier but tighter:</strong> GetYourGuide "Early Morning Vatican Tour with Sistine Chapel." It is listed as 3.5 hours; book only if the available start time is early enough and you are willing to peel off by 11:15am.</p>
+        <p class="muted">Pick the earliest English slot that still lets you leave by 11:15am. If the 9:15am slot disappears, choose a Vatican Museums + Sistine Chapel ticket/tour and skip Basilica.</p>
+      </article>
+      <article class="card">
+        <h2>Hotel Notes</h2>
+        <p><strong>Booked:</strong> Hotel Campo de' Fiori.</p>
+        <p><strong>Added to map:</strong> Hotel Lunetta, useful as a nearby navigation landmark and backup reference point.</p>
+      </article>
+      <article class="card">
+        <h2>Jerry Thomas</h2>
+        <p>Optional late stop at Vicolo Cellini 30. Reserve ahead and check the official secret-word instructions before you go.</p>
+        <p class="muted">Official hours show Monday-Saturday, 9:00pm-4:30am. With the Vatican/FCO morning, treat this as one drink, not a second night out.</p>
+      </article>
+      <article class="card">
+        <h2>Sources Checked</h2>
+        <ul class="source-list">
+          <li><a href="https://www.getyourguide.com/rome-l33/vatican-museums-sistine-chapel-st-peter-s-basilica-tour-t1103/" target="_blank" rel="noopener">GetYourGuide Vatican tour listing</a></li>
+          <li><a href="https://www.getyourguide.com/rome-l33/vatican-museum-tour-and-morning-sistine-chapel-visit-t199036/" target="_blank" rel="noopener">GetYourGuide early morning Vatican listing</a></li>
+          <li><a href="https://www.museivaticani.va/" target="_blank" rel="noopener">Vatican Museums official site</a></li>
+          <li><a href="https://www.roscioli.com/restaurant/" target="_blank" rel="noopener">Roscioli restaurant page</a></li>
+          <li><a href="https://thejerrythomasproject.it/" target="_blank" rel="noopener">Jerry Thomas official site</a></li>
+          <li><a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps route links</a></li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    Private travel planning page. Booking availability and airport timing should be rechecked before purchase and departure.
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const points = [
+      { name: "Roma Termini", type: "Transport", color: "#155da8", coords: [41.9009, 12.5020], note: "Arrival: Tue Aug 18, 5:05pm" },
+      { name: "Hotel Campo de' Fiori", type: "Hotel", color: "#2b6a4f", coords: [41.8951, 12.4724], note: "Booked hotel; trip anchor" },
+      { name: "Hotel Lunetta", type: "Hotel", color: "#2b6a4f", coords: [41.8955, 12.4732], note: "Nearby hotel/reference point" },
+      { name: "Roscioli Salumeria con Cucina", type: "Food", color: "#a64c44", coords: [41.8945, 12.4745], note: "Dinner target" },
+      { name: "Jerry Thomas Speakeasy", type: "Food", color: "#a64c44", coords: [41.8978467, 12.4679187], note: "Optional late cocktail; reserve/check secret word" },
+      { name: "Piazza Navona", type: "Landmark", color: "#a97823", coords: [41.8992, 12.4731], note: "Evening walk" },
+      { name: "Pantheon", type: "Landmark", color: "#a97823", coords: [41.8986, 12.4769], note: "Exterior night stop" },
+      { name: "Trevi Fountain", type: "Landmark", color: "#a97823", coords: [41.9009, 12.4833], note: "Optional final landmark" },
+      { name: "Vatican Museums", type: "Vatican", color: "#a97823", coords: [41.9065, 12.4536], note: "Tour meeting area" },
+      { name: "St. Peter's Square", type: "Vatican", color: "#a97823", coords: [41.9022, 12.4573], note: "Bonus if time/access works" },
+      { name: "FCO Airport", type: "Transport", color: "#155da8", coords: [41.8003, 12.2389], note: "Flight departs Wed Aug 19, 2:20pm" }
+    ];
+
+    const map = L.map("map", { scrollWheelZoom: false }).setView([41.8905, 12.4600], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: "&copy; OpenStreetMap contributors"
+    }).addTo(map);
+
+    function markerIcon(color) {
+      return L.divIcon({
+        className: "trip-marker",
+        html: `<span style="display:block;width:15px;height:15px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 1px 8px rgba(0,0,0,.35);"></span>`,
+        iconSize: [15, 15],
+        iconAnchor: [7, 7]
+      });
+    }
+
+    const markers = points.map((point) => {
+      return L.marker(point.coords, { icon: markerIcon(point.color) })
+        .bindPopup(`<strong>${point.name}</strong><br>${point.type}<br>${point.note}`)
+        .addTo(map);
+    });
+
+    const eveningWalk = [
+      [41.8951, 12.4724],
+      [41.8945, 12.4745],
+      [41.8992, 12.4731],
+      [41.8986, 12.4769],
+      [41.9009, 12.4833],
+      [41.8978467, 12.4679187],
+      [41.8951, 12.4724]
+    ];
+
+    const vaticanMorning = [
+      [41.8951, 12.4724],
+      [41.9065, 12.4536],
+      [41.9022, 12.4573],
+      [41.8951, 12.4724],
+      [41.8003, 12.2389]
+    ];
+
+    L.polyline(eveningWalk, { color: "#a64c44", weight: 4, opacity: .78, dashArray: "8 8" }).addTo(map);
+    L.polyline(vaticanMorning, { color: "#155da8", weight: 4, opacity: .72 }).addTo(map);
+
+    const group = L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(.16));
+
+    const views = {
+      central: { center: [41.8986, 12.4728], zoom: 14 },
+      airport: { center: [41.8003, 12.2389], zoom: 12 },
+      all: null
+    };
+
+    document.querySelectorAll("[data-view]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const view = button.dataset.view;
+        if (view === "all") {
+          map.fitBounds(group.getBounds().pad(.16));
+          return;
+        }
+        map.setView(views[view].center, views[view].zoom);
+      });
+    });
+  </script>
+</body>
+</html>
