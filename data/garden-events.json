@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-08-27T16:51:58.246Z",
+  "generatedAt": "2026-08-28T07:30:25.345Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-08-27",
-    "end": "2026-09-26"
+    "start": "2026-08-28",
+    "end": "2026-09-27"
   },
-  "eventCount": 90,
+  "eventCount": 89,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,40 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/storytime-in-the-garden/:2026-08-27:10 - 10:30 a.m.",
-      "title": "Storytime in the Garden",
-      "date": "2026-08-27",
-      "startDateTime": "2026-08-27",
-      "endDateTime": "2026-08-27",
-      "time": "10 - 10:30 a.m.",
-      "cost": "Included with Garden admission and membership",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Garden Event",
-      "link": "https://sabgtx.org/event/storytime-in-the-garden/",
-      "registerLink": "https://sabgtx.org/event/storytime-in-the-garden/",
-      "summary": "Each session features different nature themed books designed to stimulate young minds and foster an appreciation for the great outdoors. Families are welcome to bring a blanket to sit on during story time. Recommended for ages 5 and under."
-    },
-    {
-      "id": "Garden Style San Antonio:31206:2026-08-27 18:00:00",
-      "title": "Planning Your Fall Garden, Part II: Seed Starting & Propagation",
-      "date": "2026-08-27",
-      "startDateTime": "2026-08-27 18:00:00",
-      "endDateTime": "2026-08-27 19:30:00",
-      "time": "6 p.m. - 7:30 p.m.",
-      "cost": "Free",
-      "location": "Eco Centro, 1802 North Main Avenue, San Antonio, 78212",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/planning-your-fall-garden-part-ii-seed-starting-propagation/",
-      "registerLink": "https://secure.lglforms.com/form_engine/s/TumAblmD4toS9F_Qiy1Bnw",
-      "summary": "The fall planting season is almost here – are YOU ready? Seeds and propagated plants need extra time to grow before they’re ready to go in the ground! Join the Green Spaces Alliance for the second installment of our two-part fall garden-..."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/neighbors-in-nature-day-august-2026/:2026-08-28:8 AM – 6 PM",
       "title": "Neighbors in Nature Day",
@@ -1559,6 +1525,23 @@
       "link": "https://www.gardenstylesanantonio.com/event/gardopia-volunteer-day-saturday/2026-09-26/",
       "registerLink": "https://www.eventbrite.com/e/gardopia-volunteer-day-saturday-tickets-1980569199792",
       "summary": "Join Gardopia Gardens to learn about and practice healthy lifestyles and environmental sustainability through urban agriculture! During Gardopia's volunteer days, participants will help with general maintenance and special projects. Whil..."
+    },
+    {
+      "id": "Garden Style San Antonio:10001927:2026-09-27 08:00:00",
+      "title": "Guided Bird Tour at Mitchell Lake",
+      "date": "2026-09-27",
+      "startDateTime": "2026-09-27 08:00:00",
+      "endDateTime": "2026-09-27 12:00:00",
+      "time": "8 a.m. - 12 p.m.",
+      "cost": "$10",
+      "location": "Mitchell Lake Audubon Center, 10750 Pleasanton Rd, San Antonio, 78221",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Garden Event",
+      "link": "https://www.gardenstylesanantonio.com/event/guided-bird-tour-at-mitchell-lake/2026-09-27/",
+      "registerLink": "https://tickets.audubon.org/mitchelllake/events/d13ba5e7-51ca-03d1-0072-a2f859a585ed",
+      "summary": "On this guided bird tour around the various habitats of Mitchell Lake Audubon Center, guests will see 30-50 different bird species with Mitchell Lake Audubon Center's expert guide. Travelling by both car and by foot to access as many are..."
     }
   ]
 }
