@@ -116,6 +116,21 @@ main {
   max-width: 680px;
 }
 
+.ecoregion-hero {
+  grid-template-columns: minmax(0, 0.92fr) minmax(320px, 520px);
+  gap: clamp(22px, 4vw, 44px);
+  padding: 34px 0 24px;
+}
+
+.ecoregion-hero h1 {
+  font-size: clamp(2.45rem, 5.2vw, 4.7rem);
+}
+
+.lookup-stack {
+  display: grid;
+  gap: 14px;
+}
+
 .field-form {
   padding: 22px;
   background: #fff8ee;

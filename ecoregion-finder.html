@@ -26,42 +26,44 @@
     </header>
 
     <main>
-      <section class="field-hero">
+      <section class="field-hero ecoregion-hero">
         <div>
           <p class="kicker">Public Tool</p>
           <h1>Find an Address Ecoregion</h1>
           <p class="lede">Enter a U.S. address, choose the state, and get the matched latitude, longitude, and EPA terrestrial ecoregion levels.</p>
         </div>
-        <form class="field-form" id="ecoregion-form">
-          <label>
-            Street address
-            <input id="address" name="address" autocomplete="street-address" placeholder="Address" required>
-          </label>
-          <label>
-            City
-            <input id="city" name="city" autocomplete="address-level2" placeholder="City" required>
-          </label>
-          <label>
-            State
-            <select id="state" name="state" autocomplete="address-level1" required>
-              <option value="">Choose a state</option>
-            </select>
-          </label>
-          <label>
-            ZIP code
-            <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" placeholder="ZIP">
-          </label>
-          <button class="button primary" type="submit">Find Ecoregion</button>
-          <p class="privacy-note">We do not save the address, coordinates, or result.</p>
-        </form>
+        <div class="lookup-stack">
+          <form class="field-form" id="ecoregion-form">
+            <label>
+              Street address
+              <input id="address" name="address" autocomplete="street-address" placeholder="Address" required>
+            </label>
+            <label>
+              City
+              <input id="city" name="city" autocomplete="address-level2" placeholder="City" required>
+            </label>
+            <label>
+              State
+              <select id="state" name="state" autocomplete="address-level1" required>
+                <option value="">Choose a state</option>
+              </select>
+            </label>
+            <label>
+              ZIP code
+              <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" placeholder="ZIP">
+            </label>
+            <button class="button primary" type="submit">Find Ecoregion</button>
+            <p class="privacy-note">We do not save the address, coordinates, or result.</p>
+          </form>
+          <article class="field-card generated-card" id="result-card" aria-live="polite">
+            <h2>Result</h2>
+            <p id="status-message">Submit an address to run the lookup.</p>
+            <dl id="result-list"></dl>
+          </article>
+        </div>
       </section>
 
-      <section class="field-output-grid" aria-live="polite">
-        <article class="field-card generated-card" id="result-card">
-          <h2>Result</h2>
-          <p id="status-message">Submit an address to run the lookup.</p>
-          <dl id="result-list"></dl>
-        </article>
+      <section class="field-output-grid">
         <article class="field-card">
           <h2>Privacy</h2>
           <p>This page does not use a database, does not write to browser storage, and does not intentionally log submitted addresses.</p>
