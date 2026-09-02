@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Address to EPA Ecoregion | Most Certainly Try Labs</title>
+    <meta name="description" content="Look up latitude, longitude, and EPA terrestrial ecoregions from a U.S. address without saving the submitted address.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+        <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span>
+          <strong>Most Certainly Try Labs</strong>
+          <small>Projects, workflows, case studies</small>
+        </span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="index.html">Projects</a>
+        <a href="garden.html">Garden</a>
+        <a href="field-guide.html">Captain's Log</a>
+        <a href="new-project.html">New Entry</a>
+        <a href="about.html">About</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="field-hero">
+        <div>
+          <p class="kicker">Public Tool</p>
+          <h1>Find an Address Ecoregion</h1>
+          <p class="lede">Enter a U.S. address, choose the state, and get the matched latitude, longitude, and EPA terrestrial ecoregion levels.</p>
+        </div>
+        <form class="field-form" id="ecoregion-form">
+          <label>
+            Street address
+            <input id="address" name="address" autocomplete="street-address" placeholder="406 Brooks Ave" required>
+          </label>
+          <label>
+            City
+            <input id="city" name="city" autocomplete="address-level2" placeholder="Schertz" required>
+          </label>
+          <label>
+            State
+            <select id="state" name="state" autocomplete="address-level1" required>
+              <option value="">Choose a state</option>
+            </select>
+          </label>
+          <label>
+            ZIP code
+            <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" placeholder="78154">
+          </label>
+          <button class="button primary" type="submit">Find Ecoregion</button>
+          <p class="privacy-note">We do not save the address, coordinates, or result.</p>
+        </form>
+      </section>
+
+      <section class="field-output-grid" aria-live="polite">
+        <article class="field-card generated-card" id="result-card">
+          <h2>Result</h2>
+          <p id="status-message">Submit an address to run the lookup.</p>
+          <dl id="result-list"></dl>
+        </article>
+        <article class="field-card">
+          <h2>Privacy</h2>
+          <p>This page does not use a database, does not write to browser storage, and does not intentionally log submitted addresses.</p>
+          <dl>
+            <div>
+              <dt>What leaves the page</dt>
+              <dd>The address is sent to Esri's public geocoder to convert it into a coordinate.</dd>
+            </div>
+            <div>
+              <dt>What the EPA receives</dt>
+              <dd>Only the latitude and longitude are sent to the EPA ecoregion map service to identify the matching polygon.</dd>
+            </div>
+            <div>
+              <dt>What Labs saves</dt>
+              <dd>Nothing from your submission. Results are shown in your browser and disappear when you leave or refresh the page.</dd>
+            </div>
+          </dl>
+          <blockquote>Addresses are sensitive. Use a nearby intersection or landmark if exact-house precision is not needed.</blockquote>
+        </article>
+      </section>
+
+      <section class="table-section">
+        <div class="section-heading">
+          <h2>Sources</h2>
+          <p>The lookup uses public map services and returns EPA ecoregion attributes when the coordinate intersects a mapped polygon.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="card-meta">
+              <span>Geocoding</span>
+              <span>No storage requested</span>
+            </div>
+            <h2><a href="https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer" target="_blank" rel="noopener">Esri World Geocoding Service</a></h2>
+            <p class="project-type">Address to coordinate</p>
+            <p>The request includes <code>forStorage=false</code>. The selected state is included to reduce ambiguous address matches.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta">
+              <span>Ecoregions</span>
+              <span>EPA / ArcGIS</span>
+            </div>
+            <h2><a href="https://services.arcgis.com/U7I2hMhPtOeGx0fs/arcgis/rest/services/EPA_Ecoregions_for_Terrestrial_Levels_1234/FeatureServer" target="_blank" rel="noopener">EPA Ecoregions for Terrestrial Levels 1-4</a></h2>
+            <p class="project-type">Coordinate to ecoregion</p>
+            <p>The coordinate is checked against EPA terrestrial ecoregion polygons, with Level IV used first when available.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Built with static files.</span>
+      <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
+    </footer>
+
+    <script>
+      const states = [
+        ["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"],
+        ["CA", "California"], ["CO", "Colorado"], ["CT", "Connecticut"], ["DE", "Delaware"],
+        ["DC", "District of Columbia"], ["FL", "Florida"], ["GA", "Georgia"], ["HI", "Hawaii"],
+        ["ID", "Idaho"], ["IL", "Illinois"], ["IN", "Indiana"], ["IA", "Iowa"],
+        ["KS", "Kansas"], ["KY", "Kentucky"], ["LA", "Louisiana"], ["ME", "Maine"],
+        ["MD", "Maryland"], ["MA", "Massachusetts"], ["MI", "Michigan"], ["MN", "Minnesota"],
+        ["MS", "Mississippi"], ["MO", "Missouri"], ["MT", "Montana"], ["NE", "Nebraska"],
+        ["NV", "Nevada"], ["NH", "New Hampshire"], ["NJ", "New Jersey"], ["NM", "New Mexico"],
+        ["NY", "New York"], ["NC", "North Carolina"], ["ND", "North Dakota"], ["OH", "Ohio"],
+        ["OK", "Oklahoma"], ["OR", "Oregon"], ["PA", "Pennsylvania"], ["RI", "Rhode Island"],
+        ["SC", "South Carolina"], ["SD", "South Dakota"], ["TN", "Tennessee"], ["TX", "Texas"],
+        ["UT", "Utah"], ["VT", "Vermont"], ["VA", "Virginia"], ["WA", "Washington"],
+        ["WV", "West Virginia"], ["WI", "Wisconsin"], ["WY", "Wyoming"]
+      ];
+
+      const stateSelect = document.querySelector("#state");
+      const form = document.querySelector("#ecoregion-form");
+      const statusMessage = document.querySelector("#status-message");
+      const resultList = document.querySelector("#result-list");
+
+      states.forEach(([abbr, name]) => {
+        const option = document.createElement("option");
+        option.value = abbr;
+        option.textContent = name;
+        stateSelect.append(option);
+      });
+
+      function setBusy(message) {
+        statusMessage.textContent = message;
+        resultList.innerHTML = "";
+      }
+
+      function setError(message) {
+        statusMessage.textContent = message;
+        resultList.innerHTML = "";
+      }
+
+      function renderResult(candidate, attributes) {
+        const { x, y } = candidate.location;
+        const fields = [
+          ["Matched address", candidate.address],
+          ["Latitude", y.toFixed(8)],
+          ["Longitude", x.toFixed(8)],
+          ["Level I", formatRegion(attributes.NA_L1CODE, attributes.NA_L1NAME || attributes.NA_L1KEY)],
+          ["Level II", formatRegion(attributes.NA_L2CODE, attributes.NA_L2NAME || attributes.NA_L2KEY)],
+          ["Level III", formatRegion(attributes.US_L3CODE || attributes.NA_L3CODE, attributes.US_L3NAME || attributes.NA_L3NAME || attributes.NA_L3KEY)],
+          ["Level IV", formatRegion(attributes.US_L4CODE, attributes.US_L4NAME)]
+        ].filter(([, value]) => value);
+
+        statusMessage.textContent = "Found a matching ecoregion.";
+        resultList.innerHTML = fields.map(([label, value]) => `
+          <div>
+            <dt>${escapeHtml(label)}</dt>
+            <dd>${escapeHtml(value)}</dd>
+          </div>
+        `).join("");
+      }
+
+      function formatRegion(code, name) {
+        if (!code && !name) return "";
+        if (!code) return name;
+        if (!name) return code;
+        return `${code} ${name}`;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;"
+        })[char]);
+      }
+
+      async function geocodeAddress(address) {
+        const params = new URLSearchParams({
+          SingleLine: address,
+          category: "Address",
+          countryCode: "USA",
+          sourceCountry: "USA",
+          outFields: "Match_addr,Addr_type,Score",
+          forStorage: "false",
+          maxLocations: "1",
+          f: "json"
+        });
+        const response = await fetch(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?${params}`);
+        if (!response.ok) throw new Error("The geocoder did not respond.");
+        const data = await response.json();
+        const candidate = data.candidates && data.candidates[0];
+        if (!candidate || !candidate.location) throw new Error("No matching address was found.");
+        if (candidate.score < 85) throw new Error("The address match was too uncertain. Try adding ZIP code or checking spelling.");
+        return candidate;
+      }
+
+      async function lookupEcoregion(location) {
+        const layerUrl = "https://services.arcgis.com/U7I2hMhPtOeGx0fs/arcgis/rest/services/EPA_Ecoregions_for_Terrestrial_Levels_1234/FeatureServer/3/query";
+        const params = new URLSearchParams({
+          f: "json",
+          where: "1=1",
+          outFields: "US_L4CODE,US_L4NAME,US_L3CODE,US_L3NAME,NA_L3CODE,NA_L3NAME,NA_L2CODE,NA_L2NAME,NA_L1CODE,NA_L1NAME,L4_KEY,L3_KEY,L2_KEY,L1_KEY",
+          returnGeometry: "false",
+          geometry: JSON.stringify({
+            x: location.x,
+            y: location.y,
+            spatialReference: { wkid: 4326 }
+          }),
+          geometryType: "esriGeometryPoint",
+          inSR: "4326",
+          spatialRel: "esriSpatialRelIntersects"
+        });
+        const response = await fetch(`${layerUrl}?${params}`);
+        if (!response.ok) throw new Error("The EPA map service did not respond.");
+        const data = await response.json();
+        const feature = data.features && data.features[0];
+        if (!feature) throw new Error("No EPA Level IV ecoregion polygon was found for that coordinate.");
+        return feature.attributes;
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const parts = ["address", "city", "state", "zip"]
+          .map((key) => String(formData.get(key) || "").trim())
+          .filter(Boolean);
+        const oneLineAddress = parts.join(", ");
+
+        try {
+          setBusy("Finding the coordinate...");
+          const candidate = await geocodeAddress(oneLineAddress);
+          setBusy("Checking the EPA ecoregion map...");
+          const attributes = await lookupEcoregion(candidate.location);
+          renderResult(candidate, attributes);
+        } catch (error) {
+          setError(error.message || "Something went wrong. Try again in a minute.");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,5 +1,25 @@
 [
   {
+    "id": "address-ecoregion-finder",
+    "title": "Address to EPA Ecoregion Finder",
+    "category": "Public Tool",
+    "type": "Address Geocoder + Ecoregion Lookup",
+    "status": "Published",
+    "date": "2026-09-02",
+    "featured": true,
+    "tools": [
+      "Static HTML",
+      "JavaScript",
+      "Esri Geocoding",
+      "EPA Ecoregions",
+      "ArcGIS FeatureServer"
+    ],
+    "summary": "A privacy-conscious public form where a user enters a U.S. address, chooses a state, and receives latitude, longitude, and EPA terrestrial ecoregion levels.",
+    "outcome": "Added clear privacy language: Labs does not save submitted addresses, coordinates, or results; the address goes to the geocoder and only the coordinate goes to the EPA map service.",
+    "url": "ecoregion-finder.html",
+    "source": "ecoregion-finder.html"
+  },
+  {
     "id": "rome-vatican-overnight-2026-08-18",
     "title": "Rome Overnight: Vatican, Roscioli, and FCO Plan",
     "category": "Travel Plan",
