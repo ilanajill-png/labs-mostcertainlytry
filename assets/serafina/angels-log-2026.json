@@ -5697,7 +5697,121 @@
       ],
       "tarotMessage": "Household message: The Empress asks everyone at Las Jaras to notice the first true need before rushing. The Emperor describes the weather inside and outside the walls. The Chariot names what could complicate the day if ignored. Strength shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Empress tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-09-04": {
+      "date": "2026-09-04",
+      "weekday": "Friday",
+      "generatedAt": "2026-09-04T17:05:56.136Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Root chakra (safety, grounding, and stability): I ground the house first: threshold swept, vulnerable things shaded, water offered only where the soil asks.",
+      "morningIntentionChakra": {
+        "chakra": "Root",
+        "focus": "safety, grounding, and stability",
+        "intention": "I ground the house first: threshold swept, vulnerable things shaded, water offered only where the soil asks."
+      },
+      "practicalRite": "I leave one seed head for the birds if it has earned the honor.",
+      "weather": {
+        "sunrise": "07:12 AM",
+        "sunset": "07:51 PM",
+        "highF": "91",
+        "lowF": "76",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "none flagged"
+        ],
+        "uvIndex": "3",
+        "maxGustMph": 23,
+        "maxThunderChance": 0,
+        "moonPhase": "Last Quarter",
+        "moonIllumination": "54%"
+      },
+      "sacredCalendar": {
+        "today": [
+          {
+            "date": "2026-09-04",
+            "name": "Krishna Janmashtami",
+            "origin": "Hindu celebration of the birth of Krishna; dates vary by regional calendar and tradition.",
+            "crystals": "No crystal rite required.",
+            "cleaning": "Clean a small table for flowers, sweets, or music.",
+            "food": "Milk sweets, butter sweets, fruit, vegetarian food, or fasting-friendly food according to practice.",
+            "gift": "Give sweets, flowers, music, or a donation to children or food relief.",
+            "modernCelebration": "At Las Jaras I would honor the day with music, sweets, and respect. No ritual required unless someone observing leads it."
+          }
+        ],
+        "alerts": [
+          {
+            "days": 7,
+            "date": "2026-09-11",
+            "name": "Rosh Hashanah Begins",
+            "message": "7-day guest reminder: Invite guests for dinner only with observance and dietary needs respected.",
+            "food": "Apples and honey, challah, pomegranate, fish, or a sweet new-year meal.",
+            "gift": "Give hosts honey, apples, flowers, or a sweet kosher-appropriate food if welcomed."
+          }
+        ],
+        "next": {
+          "date": "2026-09-04",
+          "name": "Krishna Janmashtami"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "black for quiet power",
+        "breakfast": "leftover rice with egg or vegetables, because the pantry also deserves respect",
+        "lunch": "a bowl with beans, rice, greens, and something sharp",
+        "dinner": "roasted vegetables with rice or potatoes and a good sauce",
+        "luckyObject": "a key you actually need",
+        "personToCall": "a sibling or cousin who knows an old version of you",
+        "strangerKindness": "carry small cash for a tip jar"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 07:12 AM; sunset 07:51 PM; 12h 39m daylight.",
+        "moon": "Last Quarter, 54% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Cleanliness",
+        "franklinMeasure": "Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "complete one useful household mercy before any decorative ambition",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Cleanliness: Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth. Therefore the household should complete one useful household mercy before any decorative ambition."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Emperor",
+          "reading": "I set boundaries: pots, gates, squirrels, time, and heat."
+        },
+        {
+          "position": "Weather",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Garden",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Household",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Warning",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        },
+        {
+          "position": "Blessing",
+          "card": "The Hermit",
+          "reading": "I step outside alone long enough to notice one true thing."
+        }
+      ],
+      "tarotMessage": "Household message: The Emperor asks everyone at Las Jaras to notice the first true need before rushing. The Hierophant describes the weather inside and outside the walls. Strength names what could complicate the day if ignored. The Hermit shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water. The Emperor tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-09-03T13:18:06.072Z"
+  "updatedAt": "2026-09-04T17:05:56.136Z"
 }
