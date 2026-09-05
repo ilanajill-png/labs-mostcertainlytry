@@ -5811,7 +5811,101 @@
       ],
       "tarotMessage": "Household message: The Emperor asks everyone at Las Jaras to notice the first true need before rushing. The Hierophant describes the weather inside and outside the walls. Strength names what could complicate the day if ignored. The Hermit shows the help already available if everyone moves with care.",
       "note": "I will test soil before offering water. The Emperor tells me how to hold the day's first need, not how to repeat the ledger."
+    },
+    "2026-09-05": {
+      "date": "2026-09-05",
+      "weekday": "Saturday",
+      "generatedAt": "2026-09-05T13:28:28.654Z",
+      "source": {
+        "weather": "https://wttr.in/Schertz,TX?format=j1",
+        "civic": "https://www.schertz.com/"
+      },
+      "morningIntention": "Sacral chakra (creativity, pleasure, and emotional flow): I let the day move like water: useful, clean, and creative without flooding the whole household.",
+      "morningIntentionChakra": {
+        "chakra": "Sacral",
+        "focus": "creativity, pleasure, and emotional flow",
+        "intention": "I let the day move like water: useful, clean, and creative without flooding the whole household."
+      },
+      "practicalRite": "I rinse the basin and keep the crystal business tidy.",
+      "weather": {
+        "sunrise": "07:13 AM",
+        "sunset": "07:50 PM",
+        "highF": "92",
+        "lowF": "78",
+        "rained": false,
+        "rainInches": "0.00",
+        "extremeWeather": [
+          "high UV"
+        ],
+        "uvIndex": "10",
+        "maxGustMph": 16,
+        "maxThunderChance": 0,
+        "moonPhase": "Waning Crescent",
+        "moonIllumination": "42%"
+      },
+      "sacredCalendar": {
+        "today": [],
+        "alerts": [],
+        "next": {
+          "date": "2026-09-11",
+          "name": "Rosh Hashanah Begins"
+        }
+      },
+      "mereSuggestions": {
+        "colorToWear": "sky blue for mercy before noon",
+        "breakfast": "eggs with greens, because protein and leaves make better luck than panic",
+        "lunch": "soup with bread, because a lucky person remembers warmth",
+        "dinner": "fish or chicken with citrus, herbs, and a calm table",
+        "luckyObject": "a coin for giving, not hoarding",
+        "personToCall": "someone who fed you once",
+        "strangerKindness": "pick up one piece of litter near your path"
+      },
+      "grandOrrery": {
+        "sun": "Sunrise 07:13 AM; sunset 07:50 PM; 12h 37m daylight.",
+        "moon": "Waning Crescent, 42% illuminated",
+        "planetWatch": "No special planet alert is recorded today; I do not invent an alignment for decoration.",
+        "franklinVirtue": "Cleanliness",
+        "franklinMeasure": "Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth.",
+        "morningQuestion": "What good shall I do this day?",
+        "usefulWork": "finish mercy work early, shade the vulnerable, and waste no water",
+        "eveningQuestion": "What good have I done today?",
+        "synopsis": "My grand orrery turns from sun to moon to usefulness. Franklin's measure is Cleanliness: Clear standing water, dead leaves, dirty tools, and small disorder before it grows teeth. Therefore the household should finish mercy work early, shade the vulnerable, and waste no water."
+      },
+      "tarot": [
+        {
+          "position": "Need",
+          "card": "The Hierophant",
+          "reading": "I honor the old practice, then make it useful."
+        },
+        {
+          "position": "Weather",
+          "card": "The Lovers",
+          "reading": "I choose what I am actually willing to care for."
+        },
+        {
+          "position": "Garden",
+          "card": "The Chariot",
+          "reading": "I move with purpose, but I secure the cargo."
+        },
+        {
+          "position": "Household",
+          "card": "Strength",
+          "reading": "I remember that soft handling is still power."
+        },
+        {
+          "position": "Warning",
+          "card": "The Hermit",
+          "reading": "I step outside alone long enough to notice one true thing."
+        },
+        {
+          "position": "Blessing",
+          "card": "Wheel of Fortune",
+          "reading": "I know weather turns; I do the part that is mine."
+        }
+      ],
+      "tarotMessage": "Household message: The Hierophant asks everyone at Las Jaras to notice the first true need before rushing. The Lovers describes the weather inside and outside the walls. The Hermit names what could complicate the day if ignored. Wheel of Fortune shows the help already available if everyone moves with care.",
+      "note": "I will test soil before offering water; I will move mercy work ahead of the punishing sun. The Hierophant tells me how to hold the day's first need, not how to repeat the ledger."
     }
   },
-  "updatedAt": "2026-09-04T17:05:56.136Z"
+  "updatedAt": "2026-09-05T13:28:28.654Z"
 }
