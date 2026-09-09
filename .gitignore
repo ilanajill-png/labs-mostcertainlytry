@@ -20,6 +20,12 @@ assets/*
 !assets/howdy-partner-logo.png
 !assets/florence-field-guide/
 !assets/florence-field-guide/**
+!assets/bracken-bat-cave/
+!assets/bracken-bat-cave/**
+!assets/crescent-bend/
+!assets/crescent-bend/**
+!assets/ecoregions/
+!assets/ecoregions/**
 
 !data/
 data/*
@@ -34,3 +40,5 @@ projects/*
 !projects/florence-garden-daily-2026-08-13.html
 !projects/san-antonio-garden-events.html
 !projects/austin-garden-events.html
+!projects/bracken-cave-preserve.html
+!projects/crescent-bend-nature-park.html

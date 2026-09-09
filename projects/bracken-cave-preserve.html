@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bracken Cave Preserve | San Antonio, Texas</title>
+  <meta name="description" content="A public guide to Bracken Cave Preserve near San Antonio, Texas, including its conservation story, visitor access, bat flights, and Mexican free-tailed bat colony.">
+  <meta property="og:title" content="Bracken Cave Preserve">
+  <meta property="og:description" content="History, visiting details, and bat-flight highlights for Bracken Cave Preserve in the Texas Hill Country.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,850&family=Inter:wght@400;500;650;760;850&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canopy: #1f2f28;
+      --cave: #2b251f;
+      --limestone: #f1eadc;
+      --guano: #7a5436;
+      --gold: #d7a85c;
+      --dusk: #5f7580;
+      --ink: #1e1c18;
+      --muted: #676058;
+      --paper: #fff8eb;
+      --white: #ffffff;
+      --line: rgba(30, 28, 24, .14);
+      --shadow: 0 22px 50px rgba(31, 47, 40, .16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--limestone);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-color: rgba(122, 84, 54, .55);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    a:hover { color: var(--guano); }
+
+    .shell {
+      width: min(1160px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(31, 47, 40, .92);
+      color: var(--white);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 62px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 20px;
+      font-weight: 850;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .34);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .1);
+      font-family: Inter, sans-serif;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, .88);
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, .12);
+      color: var(--white);
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 62px);
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(12, 16, 14, .92) 0%, rgba(12, 16, 14, .62) 43%, rgba(12, 16, 14, .14) 100%),
+        linear-gradient(0deg, rgba(12, 16, 14, .78) 0%, rgba(12, 16, 14, .05) 42%),
+        url("../assets/bracken-bat-cave/bracken-bat-cave-hero.png") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 96px;
+      background: linear-gradient(0deg, var(--limestone), rgba(241, 234, 220, 0));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 72px 0 118px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, .88);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Fraunces, Georgia, serif;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(52px, 8vw, 108px);
+      text-wrap: balance;
+    }
+
+    h2 {
+      color: var(--canopy);
+      font-size: clamp(34px, 5vw, 62px);
+    }
+
+    h3 {
+      color: var(--canopy);
+      font-size: 25px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin-top: 22px;
+      color: rgba(255, 255, 255, .9);
+      font-size: clamp(18px, 2vw, 23px);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 6px;
+      background: var(--gold);
+      color: #21160d;
+      font-weight: 850;
+      text-decoration: none;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, .18);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, .12);
+      color: var(--white);
+      box-shadow: none;
+    }
+
+    .quick-strip {
+      position: relative;
+      z-index: 2;
+      margin-top: -58px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .fact {
+      min-height: 118px;
+      padding: 22px;
+      background: var(--paper);
+    }
+
+    .fact span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--guano);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(280px, .6fr);
+      gap: 46px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .section-head p {
+      font-size: 18px;
+    }
+
+    .history-band {
+      background: var(--limestone);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(300px, .48fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 248, 235, .74);
+    }
+
+    .year {
+      color: var(--guano);
+      font-weight: 850;
+    }
+
+    .timeline-item p {
+      font-size: 16px;
+    }
+
+    .feature-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 28px;
+      border-radius: 8px;
+      background: var(--canopy);
+      color: var(--white);
+    }
+
+    .feature-panel h3,
+    .feature-panel p {
+      color: var(--white);
+    }
+
+    .feature-panel p {
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .cave-mark {
+      display: grid;
+      min-height: 260px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02)),
+        radial-gradient(circle at 34% 72%, rgba(215, 168, 92, .25), transparent 30%),
+        radial-gradient(circle at 74% 28%, rgba(95, 117, 128, .24), transparent 29%);
+    }
+
+    .bat-vortex {
+      position: relative;
+      width: min(250px, 78%);
+      height: 172px;
+      border: 3px solid rgba(255, 255, 255, .44);
+      border-top-color: transparent;
+      border-right-color: transparent;
+      border-radius: 52% 42% 50% 36%;
+      transform: rotate(-8deg);
+    }
+
+    .bat-vortex::before {
+      content: "";
+      position: absolute;
+      left: 40px;
+      bottom: 10px;
+      width: 98px;
+      height: 54px;
+      border-radius: 50% 50% 8px 8px;
+      background: rgba(0, 0, 0, .34);
+      box-shadow:
+        76px -40px 0 -36px rgba(255, 255, 255, .75),
+        104px -70px 0 -38px rgba(255, 255, 255, .6),
+        134px -92px 0 -40px rgba(255, 255, 255, .5),
+        158px -116px 0 -42px rgba(255, 255, 255, .42);
+    }
+
+    .bat-vortex::after {
+      content: "";
+      position: absolute;
+      right: 36px;
+      top: 20px;
+      width: 90px;
+      height: 90px;
+      border: 2px solid rgba(215, 168, 92, .75);
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+      border-radius: 50%;
+      transform: rotate(22deg);
+    }
+
+    .visit-band {
+      background: #fbf5e8;
+    }
+
+    .visit-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, .42fr) minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .visit-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 16px 34px rgba(31, 47, 40, .09);
+    }
+
+    .visit-card p + p {
+      margin-top: 16px;
+    }
+
+    .detail-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail-list li {
+      min-height: 118px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .detail-list strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--canopy);
+      font-size: 18px;
+    }
+
+    .detail-list span {
+      color: var(--muted);
+    }
+
+    .nature-band {
+      background: var(--canopy);
+      color: var(--white);
+    }
+
+    .nature-band h2,
+    .nature-band h3,
+    .nature-band p {
+      color: var(--white);
+    }
+
+    .nature-band .section-head p,
+    .nature-card p {
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .nature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .nature-card {
+      min-height: 260px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .species-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .species-list span {
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .86);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .season-note {
+      margin-top: 22px;
+      padding: 20px;
+      border-left: 4px solid var(--gold);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .sources-band {
+      padding: 58px 0;
+      background: var(--paper);
+    }
+
+    .sources {
+      display: grid;
+      grid-template-columns: minmax(0, .5fr) minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .sources ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 26px 0;
+      background: var(--canopy);
+      color: rgba(255, 255, 255, .74);
+      font-size: 14px;
+    }
+
+    footer .shell {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: 720px;
+        background-position: center;
+      }
+
+      .hero-content {
+        padding: 72px 0 112px;
+      }
+
+      .facts,
+      .section-head,
+      .story-grid,
+      .visit-layout,
+      .nature-grid,
+      .sources {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-strip {
+        margin-top: -40px;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        gap: 2px;
+      }
+
+      .nav-links a {
+        padding: 7px 6px;
+        font-size: 13px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .hero {
+        min-height: 680px;
+      }
+
+      .detail-list,
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .fact,
+      .visit-card,
+      .nature-card,
+      .timeline-item {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary">
+      <a class="brand" href="../garden.html" aria-label="Most Certainly Try Nature Work">
+        <span class="brand-mark">BC</span>
+        <span>Most Certainly Try · Bracken Cave</span>
+      </a>
+      <div class="nav-links" aria-label="Sections">
+        <a href="#story">Story</a>
+        <a href="#visit">How to Visit</a>
+        <a href="#bats">Bat Flight</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Bracken Cave Preserve">
+      <div class="shell hero-content">
+        <p class="eyebrow">San Antonio, Texas</p>
+        <h1>Bracken Cave Preserve</h1>
+        <p>The summer home of more than 15 million Mexican free-tailed bats, protected by Bat Conservation International as one of the largest mammal concentrations on Earth.</p>
+        <div class="cta-row">
+          <a class="button" href="https://www.batcon.org/experience-bats/bat-happenings/visit-bracken-cave-preserve/">Plan a Visit</a>
+          <a class="button secondary" href="#bats">See the Bat Flight</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="quick-strip">
+      <div class="shell facts" aria-label="Preserve facts">
+        <div class="fact">
+          <span>Venue</span>
+          <strong>7515 Bracken Cave Road</strong>
+        </div>
+        <div class="fact">
+          <span>Landscape</span>
+          <strong>1,458-acre preserve</strong>
+        </div>
+        <div class="fact">
+          <span>Known For</span>
+          <strong>15-20 million bats</strong>
+        </div>
+        <div class="fact">
+          <span>Access</span>
+          <strong>Advance tickets only</strong>
+        </div>
+      </div>
+    </div>
+
+    <section id="story" class="history-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Story Of The Preserve</h2>
+          <p>Bracken Cave is a rare conservation win: a world-scale maternity colony protected before suburban growth could crowd the cave mouth.</p>
+        </div>
+        <div class="story-grid">
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="year">Ancient</div>
+              <p>The cave's crescent-shaped opening sits at the bottom of a collapsed sinkhole, creating a roost that Mexican free-tailed bats have used for generations.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="year">1992</div>
+              <p>Bat Conservation International purchased Bracken Cave and the surrounding 4.7 acres to protect the world's largest bat colony.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="year">Today</div>
+              <p>Through additional land purchases, the original protected acreage has grown into a 1,458-acre preserve managed for bats, native vegetation, and wildlife habitat.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="year">Summer</div>
+              <p>From May through September, guided evening bat flights let ticketed visitors watch millions of bats spiral from the cave at dusk.</p>
+            </article>
+          </div>
+          <aside class="feature-panel">
+            <div>
+              <h3>A global bat sanctuary</h3>
+              <p>Bracken is not just a spectacle. It is a maternity colony where millions of mothers raise pups, then launch into the Texas night to feed on insects.</p>
+            </div>
+            <div class="cave-mark" aria-hidden="true">
+              <div class="bat-vortex"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit" class="visit-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>How to Visit</h2>
+          <p>This is a sensitive preserve, not a drop-in park. The bat flight is guided, ticketed, seasonal, and tightly managed to protect the colony.</p>
+        </div>
+        <div class="visit-layout">
+          <aside class="visit-card">
+            <h3>Visitor Basics</h3>
+            <p><strong>Location:</strong><br>Bracken Cave Preserve<br>7515 Bracken Cave Road<br>San Antonio, TX 78266</p>
+            <p><strong>Season:</strong><br>Bat flights are typically offered May through September, with schedule details posted in spring.</p>
+            <p><strong>2026 status:</strong><br>BCI currently says all 2026 bat flights are sold out and directs visitors to join the waitlist.</p>
+          </aside>
+          <ul class="detail-list">
+            <li>
+              <strong>Advance Tickets</strong>
+              <span>Tickets must be purchased ahead of time. Bat Conservation International says tickets are never sold at the door.</span>
+            </li>
+            <li>
+              <strong>Arrival Window</strong>
+              <span>BCI posts the current guest arrival time on its visit page and emails ticket holders before their bat flight.</span>
+            </li>
+            <li>
+              <strong>Guided Experience</strong>
+              <span>Visitors watch from a managed viewing area, with staff and volunteers explaining the bats and the preserve.</span>
+            </li>
+            <li>
+              <strong>Preserve Etiquette</strong>
+              <span>Follow staff instructions, keep lights and noise controlled, stay in visitor areas, and give the colony priority over the photo.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="bats" class="nature-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Bat Flight</h2>
+          <p>The emergence is famous because it is both enormous and purposeful: a living column of bats leaving the cave to hunt across the night sky.</p>
+        </div>
+        <div class="nature-grid">
+          <article class="nature-card">
+            <h3>Mexican Free-Tailed Bats</h3>
+            <p>Bracken Cave is the summer home of more than 15 million Mexican free-tailed bats, with some BCI pages describing up to 20 million bats in summer.</p>
+            <div class="species-list" aria-label="Bat colony facts">
+              <span>Tadarida brasiliensis</span>
+              <span>Migratory</span>
+              <span>Maternity colony</span>
+              <span>March-April return</span>
+              <span>Single pups</span>
+              <span>Dusk emergence</span>
+            </div>
+          </article>
+          <article class="nature-card">
+            <h3>Why It Matters</h3>
+            <p>The colony feeds nightly on insects, including agricultural pests, making the cave both a wildlife wonder and a working piece of the regional ecosystem.</p>
+            <div class="species-list" aria-label="Ecology examples">
+              <span>Insect control</span>
+              <span>Crop benefits</span>
+              <span>Native habitat</span>
+              <span>Night migration</span>
+              <span>Predator-prey web</span>
+              <span>Research value</span>
+            </div>
+          </article>
+          <article class="nature-card">
+            <h3>Protected Habitat</h3>
+            <p>The surrounding preserve buffers the cave from development and gives BCI room to manage native vegetation, visitor access, and long-term colony protection.</p>
+            <div class="species-list" aria-label="Preserve habitat examples">
+              <span>Limestone cave</span>
+              <span>Sinkhole opening</span>
+              <span>Hill Country woodland</span>
+              <span>Native grasses</span>
+              <span>Dark sky needs</span>
+              <span>Restricted access</span>
+            </div>
+          </article>
+        </div>
+        <p class="season-note">The best visit is planned early: watch the ticket page in spring, expect a 2-3 hour evening, and keep the night gentle for the bats.</p>
+      </div>
+    </section>
+
+    <section id="sources" class="sources-band">
+      <div class="shell sources">
+        <div>
+          <h2>Sources</h2>
+          <p>Schedules, arrival times, and ticket availability change by season. Check Bat Conservation International before making plans.</p>
+        </div>
+        <ul>
+          <li><a href="https://www.batcon.org/experience-bats/bat-happenings/visit-bracken-cave-preserve/">Bat Conservation International: Visit Bracken Cave Preserve</a></li>
+          <li><a href="https://www.batcon.org/our-work/protect-restore-landscapes/bracken-cave-preserve/">Bat Conservation International: Bracken Cave Preserve project details</a></li>
+          <li><a href="https://www.batcon.org/join-us/protect-bracken-cave-preserve/">Bat Conservation International: Protect Bracken Cave Preserve</a></li>
+          <li><a href="https://tpwd.texas.gov/huntwild/wild/species/bats/bat-watching-sites/bracken-cave-preserve.phtml">Texas Parks and Wildlife: Bracken Cave Preserve bat-watching site</a></li>
+          <li><a href="https://www.simpletix.com/e/evening-bat-flights-at-bracken-cave-preser-tickets-262116">2026 Evening Bat Flights ticketing page</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span>Bracken Cave Preserve overview</span>
+      <a href="../garden.html">More Nature Work</a>
+    </div>
+  </footer>
+</body>
+</html>
