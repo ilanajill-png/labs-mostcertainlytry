@@ -1,6 +1,36 @@
-.DS_Store
-node_modules/
-dist/
-.dev.vars
-.sheriff-admin-token
-.wrangler/
+# This repository deploys directly to the public Labs site. Default-deny keeps
+# household operations, working notes, and new experiments private unless a
+# file is intentionally added to this public allowlist.
+*
+
+!.gitignore
+!.nojekyll
+!CNAME
+!README.md
+!index.html
+!about.html
+!garden.html
+!ecoregion-finder.html
+!styles.css
+!robots.txt
+!sitemap.xml
+
+!assets/
+assets/*
+!assets/howdy-partner-logo.png
+!assets/florence-field-guide/
+!assets/florence-field-guide/**
+
+!data/
+data/*
+!data/garden-events.json
+!data/austin-garden-events.json
+
+!projects/
+projects/*
+!projects/san-antonio-seed-library.html
+!projects/austin-seed-library.html
+!projects/seed-research.html
+!projects/florence-garden-daily-2026-08-13.html
+!projects/san-antonio-garden-events.html
+!projects/austin-garden-events.html
