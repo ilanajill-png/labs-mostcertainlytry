@@ -51,6 +51,8 @@ assets/*
 !assets/crownridge-canyon/**
 !assets/friedrich-wilderness/
 !assets/friedrich-wilderness/**
+!assets/eisenhower-park/
+!assets/eisenhower-park/**
 
 !data/
 data/*
@@ -78,5 +80,6 @@ projects/*
 !projects/comanche-lookout-loop.html
 !projects/crownridge-canyon-natural-area-loop.html
 !projects/friedrich-wilderness-park-loop.html
+!projects/hillview-natural-trail.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
