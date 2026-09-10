@@ -49,6 +49,8 @@ assets/*
 !assets/comanche-lookout/**
 !assets/crownridge-canyon/
 !assets/crownridge-canyon/**
+!assets/friedrich-wilderness/
+!assets/friedrich-wilderness/**
 
 !data/
 data/*
@@ -75,5 +77,6 @@ projects/*
 !projects/chula-vista-loop.html
 !projects/comanche-lookout-loop.html
 !projects/crownridge-canyon-natural-area-loop.html
+!projects/friedrich-wilderness-park-loop.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html

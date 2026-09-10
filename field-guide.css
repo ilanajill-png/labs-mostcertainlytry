@@ -66,6 +66,7 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:26px max(18px
 .chula-vista-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.5) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/government-canyon/chula-vista-loop-hero.png")}
 .comanche-lookout-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.52) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/comanche-lookout/comanche-lookout-loop-hero.png")}
 .crownridge-canyon-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.52) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/crownridge-canyon/crownridge-canyon-loop-hero.png")}
+.friedrich-wilderness-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.52) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/friedrich-wilderness/friedrich-main-loop-hero.png")}
 
 @media(max-width:800px){html,body{overflow-x:hidden}
 .nav{align-items:flex-start;flex-direction:column;padding:12px 0}
@@ -77,7 +78,7 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:26px max(18px
 .section{padding:62px 0}
 .section-head,.split{grid-template-columns:1fr;gap:24px}
 .grid{grid-template-columns:1fr!important}
-.barn-hero,.agrilife-hero,.pollinator-hero,.judson-hero,.gorge-hero,.fischer-hero,.honey-hero,.bluff-spurs-hero,.chula-vista-hero,.comanche-lookout-hero,.crownridge-canyon-hero{background-position:62% center}
+.barn-hero,.agrilife-hero,.pollinator-hero,.judson-hero,.gorge-hero,.fischer-hero,.honey-hero,.bluff-spurs-hero,.chula-vista-hero,.comanche-lookout-hero,.crownridge-canyon-hero,.friedrich-wilderness-hero{background-position:62% center}
 footer{flex-direction:column}
 }
 
