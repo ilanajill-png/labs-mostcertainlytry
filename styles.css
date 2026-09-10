@@ -162,6 +162,75 @@ main {
   padding-bottom: 48px;
 }
 
+.discipline-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 64px;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #eef4ef;
+}
+
+.discipline-nav a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--panel);
+  font-weight: 800;
+}
+
+.discipline-nav a span,
+.nature-section h2 span {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.nature-section {
+  scroll-margin-top: 110px;
+  padding: 0 0 72px;
+}
+
+.nature-section .section-heading {
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 22px;
+}
+
+.nature-section .section-heading h2 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  line-height: 1.04;
+}
+
+.section-number {
+  margin: 0 0 4px;
+  color: var(--coral);
+  font-weight: 900;
+}
+
+.nature-section .project-card {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nature-section .project-card .text-link {
+  margin-top: auto;
+}
+
+.developing {
+  box-shadow: none;
+  border-style: dashed;
+  background: #f6f4ee;
+}
+
+.developing h3 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+}
+
 .feature-card {
   min-height: 355px;
   display: flex;
@@ -403,10 +472,17 @@ textarea {
   font-weight: 800;
 }
 
-.project-card h2 a {
+.project-card h2 a,
+.project-card h3 a {
   text-decoration-color: rgba(36, 107, 79, 0.35);
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
+}
+
+.project-card h3 {
+  margin: 0 0 10px;
+  font-size: 1.35rem;
+  line-height: 1.15;
 }
 
 .project-type {
@@ -701,6 +777,30 @@ footer {
   .hero-actions .button {
     width: 100%;
     text-align: center;
+  }
+
+  .discipline-nav {
+    grid-template-columns: 1fr;
+    margin-bottom: 46px;
+  }
+
+  .discipline-nav a {
+    display: block;
+  }
+
+  .discipline-nav a span {
+    display: block;
+    margin-top: 2px;
+  }
+
+  .nature-section {
+    padding-bottom: 54px;
+  }
+
+  .nature-section .section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .project-card,
