@@ -45,6 +45,8 @@ assets/*
 !assets/honey-creek/**
 !assets/government-canyon/
 !assets/government-canyon/**
+!assets/comanche-lookout/
+!assets/comanche-lookout/**
 
 !data/
 data/*
@@ -69,5 +71,6 @@ projects/*
 !projects/honey-creek-state-natural-area.html
 !projects/north-bluff-spurs-overlook.html
 !projects/chula-vista-loop.html
+!projects/comanche-lookout-loop.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
