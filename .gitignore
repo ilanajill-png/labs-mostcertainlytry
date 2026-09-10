@@ -43,6 +43,8 @@ assets/*
 !assets/fischer-park/**
 !assets/honey-creek/
 !assets/honey-creek/**
+!assets/government-canyon/
+!assets/government-canyon/**
 
 !data/
 data/*
@@ -65,5 +67,6 @@ projects/*
 !projects/canyon-lake-gorge.html
 !projects/fischer-park.html
 !projects/honey-creek-state-natural-area.html
+!projects/north-bluff-spurs-overlook.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
