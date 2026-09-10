@@ -798,12 +798,26 @@ footer {
     padding: 14px 16px;
   }
 
+  .site-header > *,
+  .hero > * {
+    min-width: 0;
+  }
+
   .brand small {
     display: none;
   }
 
-  nav {
-    justify-content: flex-end;
+  .site-header nav {
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .site-header nav::-webkit-scrollbar {
+    display: none;
   }
 
   nav a {
@@ -829,6 +843,11 @@ footer {
   .ecoregion-hero h1 {
     font-size: clamp(2.4rem, 14vw, 4rem);
     line-height: 0.96;
+    overflow-wrap: anywhere;
+  }
+
+  .kicker {
+    overflow-wrap: anywhere;
   }
 
   .featured-grid,

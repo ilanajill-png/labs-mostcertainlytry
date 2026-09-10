@@ -31,6 +31,18 @@ assets/*
 !assets/big-red-barn/**
 !assets/seguin-agrilife/
 !assets/seguin-agrilife/**
+!assets/mitchell-lake/
+!assets/mitchell-lake/**
+!assets/schertz-pollinator/
+!assets/schertz-pollinator/**
+!assets/judson-trails/
+!assets/judson-trails/**
+!assets/canyon-lake-gorge/
+!assets/canyon-lake-gorge/**
+!assets/fischer-park/
+!assets/fischer-park/**
+!assets/honey-creek/
+!assets/honey-creek/**
 
 !data/
 data/*
@@ -47,5 +59,11 @@ projects/*
 !projects/austin-garden-events.html
 !projects/bracken-cave-preserve.html
 !projects/crescent-bend-nature-park.html
+!projects/mitchell-lake-audubon-center.html
+!projects/schertz-pollinator-garden.html
+!projects/judson-nature-trails.html
+!projects/canyon-lake-gorge.html
+!projects/fischer-park.html
+!projects/honey-creek-state-natural-area.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html

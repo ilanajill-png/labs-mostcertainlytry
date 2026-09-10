@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mitchell Lake Audubon Center | San Antonio, Texas</title>
+  <meta name="description" content="A public field guide to Mitchell Lake Audubon Center in San Antonio, including wetland restoration, birds, trails, seasonal hours, admission, and current access guidance.">
+  <meta property="og:title" content="Mitchell Lake Audubon Center">
+  <meta property="og:description" content="Wetlands, migration, restoration, and visitor guidance for a remarkable urban bird habitat on San Antonio's South Side.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,850&amp;family=Inter:wght@400;500;650;760;850&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canopy: #1f2f28;
+      --cave: #2b251f;
+      --limestone: #f1eadc;
+      --guano: #7a5436;
+      --gold: #d7a85c;
+      --dusk: #5f7580;
+      --ink: #1e1c18;
+      --muted: #676058;
+      --paper: #fff8eb;
+      --white: #ffffff;
+      --line: rgba(30, 28, 24, .14);
+      --shadow: 0 22px 50px rgba(31, 47, 40, .16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--limestone);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+      text-decoration-color: rgba(122, 84, 54, .55);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+
+    a:hover { color: var(--guano); }
+
+    .shell {
+      width: min(1160px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(31, 47, 40, .92);
+      color: var(--white);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 62px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 20px;
+      font-weight: 850;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .34);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .1);
+      font-family: Inter, sans-serif;
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, .88);
+      font-size: 14px;
+      font-weight: 650;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, .12);
+      color: var(--white);
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 62px);
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(12, 16, 14, .92) 0%, rgba(12, 16, 14, .62) 43%, rgba(12, 16, 14, .14) 100%),
+        linear-gradient(0deg, rgba(12, 16, 14, .78) 0%, rgba(12, 16, 14, .05) 42%),
+        url("../assets/mitchell-lake/mitchell-lake-hero.png") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 96px;
+      background: linear-gradient(0deg, var(--limestone), rgba(241, 234, 220, 0));
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      padding: 72px 0 118px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, .88);
+      font-size: 13px;
+      font-weight: 760;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: Fraunces, Georgia, serif;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(52px, 8vw, 108px);
+      text-wrap: balance;
+    }
+
+    h2 {
+      color: var(--canopy);
+      font-size: clamp(34px, 5vw, 62px);
+    }
+
+    h3 {
+      color: var(--canopy);
+      font-size: 25px;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin-top: 22px;
+      color: rgba(255, 255, 255, .9);
+      font-size: clamp(18px, 2vw, 23px);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 6px;
+      background: var(--gold);
+      color: #21160d;
+      font-weight: 850;
+      text-decoration: none;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, .18);
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, .12);
+      color: var(--white);
+      box-shadow: none;
+    }
+
+    .quick-strip {
+      position: relative;
+      z-index: 2;
+      margin-top: -58px;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .fact {
+      min-height: 118px;
+      padding: 22px;
+      background: var(--paper);
+    }
+
+    .fact span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--guano);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .fact strong {
+      display: block;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    section {
+      padding: 88px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(280px, .6fr);
+      gap: 46px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+
+    .section-head p {
+      font-size: 18px;
+    }
+
+    .history-band {
+      background: var(--limestone);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(300px, .48fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 248, 235, .74);
+    }
+
+    .year {
+      color: var(--guano);
+      font-weight: 850;
+    }
+
+    .timeline-item p {
+      font-size: 16px;
+    }
+
+    .feature-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 28px;
+      border-radius: 8px;
+      background: var(--canopy);
+      color: var(--white);
+    }
+
+    .feature-panel h3,
+    .feature-panel p {
+      color: var(--white);
+    }
+
+    .feature-panel p {
+      color: rgba(255, 255, 255, .78);
+    }
+
+    .wetland-mark {
+      display: grid;
+      min-height: 260px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02)),
+        radial-gradient(ellipse at 34% 78%, rgba(215, 168, 92, .27), transparent 34%),
+        radial-gradient(ellipse at 72% 30%, rgba(95, 117, 128, .28), transparent 33%);
+    }
+
+    .water-rings {
+      position: relative;
+      width: min(270px, 82%);
+      height: 150px;
+      border: 3px solid rgba(255, 255, 255, .42);
+      border-radius: 50%;
+      transform: perspective(260px) rotateX(62deg);
+    }
+
+    .water-rings::before {
+      content: "";
+      position: absolute;
+      inset: 22px 34px;
+      border: 3px solid rgba(215, 168, 92, .8);
+      border-radius: 50%;
+    }
+
+    .water-rings::after {
+      content: "";
+      position: absolute;
+      inset: 48px 78px;
+      border: 3px solid rgba(255, 255, 255, .55);
+      border-radius: 50%;
+    }
+
+    .visit-band {
+      background: #fbf5e8;
+    }
+
+    .visit-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, .42fr) minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .visit-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 16px 34px rgba(31, 47, 40, .09);
+    }
+
+    .visit-card p + p {
+      margin-top: 16px;
+    }
+
+    .detail-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail-list li {
+      min-height: 118px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .detail-list strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--canopy);
+      font-size: 18px;
+    }
+
+    .detail-list span {
+      color: var(--muted);
+    }
+
+    .nature-band {
+      background: var(--canopy);
+      color: var(--white);
+    }
+
+    .nature-band h2,
+    .nature-band h3,
+    .nature-band p {
+      color: var(--white);
+    }
+
+    .nature-band .section-head p,
+    .nature-card p {
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .nature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .nature-card {
+      min-height: 260px;
+      padding: 24px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .species-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .species-list span {
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .86);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .season-note {
+      margin-top: 22px;
+      padding: 20px;
+      border-left: 4px solid var(--gold);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .sources-band {
+      padding: 58px 0;
+      background: var(--paper);
+    }
+
+    .sources {
+      display: grid;
+      grid-template-columns: minmax(0, .5fr) minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .sources ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 26px 0;
+      background: var(--canopy);
+      color: rgba(255, 255, 255, .74);
+      font-size: 14px;
+    }
+
+    footer .shell {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 0;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: 720px;
+        background-position: center;
+      }
+
+      .hero-content {
+        padding: 72px 0 112px;
+      }
+
+      .facts,
+      .section-head,
+      .story-grid,
+      .visit-layout,
+      .nature-grid,
+      .sources {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-strip {
+        margin-top: -40px;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell {
+        width: min(100% - 28px, 1160px);
+      }
+
+      .brand {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        gap: 2px;
+      }
+
+      .nav-links a {
+        padding: 7px 6px;
+        font-size: 13px;
+      }
+
+      h1 {
+        font-size: 48px;
+      }
+
+      .hero {
+        min-height: 680px;
+      }
+
+      .detail-list,
+      .timeline-item {
+        grid-template-columns: 1fr;
+      }
+
+      .fact,
+      .visit-card,
+      .nature-card,
+      .timeline-item {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary">
+      <a class="brand" href="../garden.html" aria-label="Most Certainly Try Nature Work">
+        <span class="brand-mark">ML</span>
+        <span>Most Certainly Try · Mitchell Lake</span>
+      </a>
+      <div class="nav-links" aria-label="Sections">
+        <a href="#story">Story</a>
+        <a href="#visit">How to Visit</a>
+        <a href="#wetlands">Wetlands &amp; Birds</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Mitchell Lake Audubon Center">
+      <div class="shell hero-content">
+        <p class="eyebrow">San Antonio, Texas</p>
+        <h1>Mitchell Lake Audubon Center</h1>
+        <p>A restored wetland on San Antonio's South Side where migration, water stewardship, urban ecology, and community meet along the Central Flyway.</p>
+        <div class="cta-row">
+          <a class="button" href="https://www.audubon.org/mitchell-lake/visit">Plan a Visit</a>
+          <a class="button secondary" href="#wetlands">Explore Wetlands &amp; Birds</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="quick-strip">
+      <div class="shell facts" aria-label="Mitchell Lake facts">
+        <div class="fact">
+          <span>Location</span>
+          <strong>San Antonio's South Side</strong>
+        </div>
+        <div class="fact">
+          <span>Protected</span>
+          <strong>635 acres</strong>
+        </div>
+        <div class="fact">
+          <span>Bird Record</span>
+          <strong>359 eBird species</strong>
+        </div>
+        <div class="fact">
+          <span>Trails</span>
+          <strong>7.5 walking &amp; driving miles</strong>
+        </div>
+      </div>
+    </div>
+
+    <section id="story" class="history-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Story Of The Wetland</h2>
+          <p>Mitchell Lake is a layered urban conservation story: a historic ephemeral wetland and former piece of San Antonio's sewage system restored into vital habitat and public space.</p>
+        </div>
+        <div class="story-grid">
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="year">Before</div>
+              <p>The landscape was known historically as Laguna de los Patos—“Lagoon of the Ducks”—an ephemeral wetland shaped by wet and dry cycles and used by people and wildlife.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="year">20th C.</div>
+              <p>The site became part of San Antonio's wastewater system. Its later transformation shows how infrastructure landscapes can be reclaimed for habitat, learning, and community.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="year">2004</div>
+              <p>Audubon and the San Antonio Water System formalized a partnership, and Mitchell Lake Audubon Center opened to the public as a protected wetland and education center.</p>
+            </article>
+            <article class="timeline-item">
+              <div class="year">Today</div>
+              <p>Staff, volunteers, and partners manage wetlands and grasslands, monitor birds, restore habitat, and improve water systems for a drier and more variable climate.</p>
+            </article>
+          </div>
+          <aside class="feature-panel">
+            <div>
+              <h3>An urban wetland in motion</h3>
+              <p>Mitchell Lake sits on the Central Flyway. Its ponds, mudflats, open water, grasslands, trees, and shrubs support resident birds and migrants crossing the Americas.</p>
+            </div>
+            <div class="wetland-mark" aria-hidden="true">
+              <div class="water-rings"></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit" class="visit-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>How to Visit</h2>
+          <p>Mitchell Lake is a protected wildlife refuge with paid admission, seasonal hours, limited shade, and changing access during a major improvement project.</p>
+        </div>
+        <div class="visit-layout">
+          <aside class="visit-card">
+            <h3>Visitor Basics</h3>
+            <p><strong>Location:</strong><br>Mitchell Lake Audubon Center<br>10750 Pleasanton Road<br>San Antonio, TX 78221</p>
+            <p><strong>Open:</strong><br>Tuesday–Sunday. Early June–early October: 7 a.m.–3 p.m. Early October–early June: 8 a.m.–4 p.m.</p>
+            <p><strong>Admission:</strong><br>Adults $5; students, teachers, military, veterans, and National Audubon Society members $3; children under five and center members free.</p>
+          </aside>
+          <ul class="detail-list">
+            <li>
+              <strong>Construction Through 2027</strong>
+              <span>Roads, trails, or areas may close temporarily during City of San Antonio bond-funded improvements. Check the official visit page before traveling.</span>
+            </li>
+            <li>
+              <strong>Heat &amp; Weather</strong>
+              <span>Most visitor areas are outdoors with limited shade. Bring water, sun protection, and walking shoes; wetland trail access can change after weather.</span>
+            </li>
+            <li>
+              <strong>Walking &amp; Driving Trails</strong>
+              <span>The center offers routes through wetlands and grasslands. The entrance gate and Visitor Center close 60 minutes before the listed closing time.</span>
+            </li>
+            <li>
+              <strong>Protect the Refuge</strong>
+              <span>No fishing, swimming, boating, kayaking, bicycles, rollerblades, or skateboards. Dogs are limited to service animals and designated Doggy Day events.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="wetlands" class="nature-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Wetlands &amp; Birds</h2>
+          <p>The center's value comes from habitat variety and careful water management: shallow wetlands, ponds, open water, grasslands, and edge habitat create a seasonal mosaic.</p>
+        </div>
+        <div class="nature-grid">
+          <article class="nature-card">
+            <h3>Birds Through the Seasons</h3>
+            <p>More than 300 species use the site through the year. Migration, breeding, water levels, food, and changing habitat conditions continually reshape what visitors may encounter.</p>
+            <div class="species-list" aria-label="Bird examples">
+              <span>American White Pelican</span>
+              <span>Roseate Spoonbill</span>
+              <span>Black-necked Stilt</span>
+              <span>Northern Bobwhite</span>
+              <span>Scissor-tailed Flycatcher</span>
+              <span>Crested Caracara</span>
+            </div>
+          </article>
+          <article class="nature-card">
+            <h3>Water Makes Habitat</h3>
+            <p>Audubon and SAWS are working to modernize how freshwater reaches the wetland basins, sustaining shallow feeding habitat during drought and extreme South Texas heat.</p>
+            <div class="species-list" aria-label="Wetland functions">
+              <span>Shallow-water habitat</span>
+              <span>Sediment capture</span>
+              <span>Nutrient cycling</span>
+              <span>Water quality</span>
+              <span>Food webs</span>
+              <span>Climate resilience</span>
+            </div>
+          </article>
+          <article class="nature-card">
+            <h3>Observe by Habitat</h3>
+            <p>Instead of chasing a single species, notice how bird communities change as the route moves between open water, wetland edges, native grasslands, and woody cover.</p>
+            <div class="species-list" aria-label="Habitat examples">
+              <span>Wetlands</span>
+              <span>Mudflats</span>
+              <span>Ponds</span>
+              <span>Open water</span>
+              <span>Native grasslands</span>
+              <span>Trees &amp; shrubs</span>
+            </div>
+          </article>
+        </div>
+        <p class="season-note">Bring binoculars, but let conditions set the pace. Visit early, check current access, move quietly, and use the changing water, vegetation, and bird activity as the day's field guide.</p>
+      </div>
+    </section>
+
+    <section id="sources" class="sources-band">
+      <div class="shell sources">
+        <div>
+          <h2>Sources</h2>
+          <p>Hours, admission, construction, and trail access can change. Check Mitchell Lake Audubon Center before making plans. The hero is original decorative imagery, not documentary photography.</p>
+        </div>
+        <ul>
+          <li><a href="https://www.audubon.org/mitchell-lake">Audubon: Mitchell Lake Audubon Center</a></li>
+          <li><a href="https://www.audubon.org/mitchell-lake/visit">Audubon: Plan Your Visit</a></li>
+          <li><a href="https://www.audubon.org/mitchell-lake/about-us">Audubon: About Mitchell Lake</a></li>
+          <li><a href="https://www.audubon.org/mitchell-lake/explore/birds">Audubon: Birds of Mitchell Lake</a></li>
+          <li><a href="https://www.audubon.org/texas/news/water-birds-and-people-new-chapter-mitchell-lake-audubon-center">Audubon Texas: Water for Birds and People</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <span>Mitchell Lake Audubon Center field guide</span>
+      <a href="../garden.html">More Nature Work</a>
+    </div>
+  </footer>
+</body>
+</html>
