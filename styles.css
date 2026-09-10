@@ -231,6 +231,76 @@ main {
   font-size: 1.4rem;
 }
 
+.resource-shelf {
+  margin-top: 18px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid #cbd9d0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #edf5ef 0%, #f8faf6 100%);
+}
+
+.resource-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.resource-heading h3 {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 1.35rem;
+}
+
+.resource-heading span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.resource-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resource-list li {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.28fr);
+  gap: 18px;
+  padding: 16px;
+  border: 1px solid rgba(36, 107, 79, 0.16);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.resource-list li > div {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+}
+
+.resource-list a {
+  color: var(--blue);
+  font-weight: 900;
+  text-underline-offset: 3px;
+}
+
+.resource-list span,
+.resource-list p,
+.resource-empty {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.resource-list p,
+.resource-empty {
+  margin: 0;
+}
+
 .feature-card {
   min-height: 355px;
   display: flex;
@@ -801,6 +871,17 @@ footer {
     align-items: start;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .resource-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .resource-list li {
+    grid-template-columns: 1fr;
+    gap: 9px;
   }
 
   .project-card,
