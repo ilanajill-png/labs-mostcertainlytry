@@ -53,6 +53,8 @@ assets/*
 !assets/friedrich-wilderness/**
 !assets/eisenhower-park/
 !assets/eisenhower-park/**
+!assets/medina-river/
+!assets/medina-river/**
 
 !data/
 data/*
@@ -81,5 +83,6 @@ projects/*
 !projects/crownridge-canyon-natural-area-loop.html
 !projects/friedrich-wilderness-park-loop.html
 !projects/hillview-natural-trail.html
+!projects/medina-river-natural-area-loop.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
