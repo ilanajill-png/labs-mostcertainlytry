@@ -55,6 +55,16 @@ assets/*
 !assets/eisenhower-park/**
 !assets/medina-river/
 !assets/medina-river/**
+!assets/mission-concepcion/
+!assets/mission-concepcion/**
+!assets/mission-san-jose/
+!assets/mission-san-jose/**
+!assets/mission-san-juan/
+!assets/mission-san-juan/**
+!assets/mission-espada/
+!assets/mission-espada/**
+!assets/alamo-mission-valero/
+!assets/alamo-mission-valero/**
 
 !data/
 data/*
@@ -84,5 +94,10 @@ projects/*
 !projects/friedrich-wilderness-park-loop.html
 !projects/hillview-natural-trail.html
 !projects/medina-river-natural-area-loop.html
+!projects/mission-concepcion.html
+!projects/mission-san-jose.html
+!projects/mission-san-juan-capistrano.html
+!projects/mission-espada.html
+!projects/the-alamo-mission-valero.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html

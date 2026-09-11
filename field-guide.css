@@ -70,6 +70,11 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:26px max(18px
 .hillview-natural-trail-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.54) 50%,rgba(10,25,18,.08)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/eisenhower-park/hillview-natural-trail-hero.png")}
 .mcallister-park-loop-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.54) 50%,rgba(10,25,18,.08)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/mcallister-park/mcallister-park-loop-hero.png")}
 .medina-river-loop-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.54) 50%,rgba(10,25,18,.08)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/medina-river/medina-river-natural-area-loop-hero.png")}
+.mission-concepcion-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.5) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/mission-concepcion/hero.png")}
+.mission-san-jose-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.5) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/mission-san-jose/hero.png")}
+.mission-san-juan-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.5) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/mission-san-juan/hero.png")}
+.mission-espada-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.5) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/mission-espada/hero.png")}
+.alamo-mission-valero-hero{background-image:linear-gradient(90deg,rgba(10,25,18,.92),rgba(10,25,18,.5) 50%,rgba(10,25,18,.06)),linear-gradient(0deg,rgba(10,25,18,.62),transparent 48%),url("assets/alamo-mission-valero/hero.png")}
 
 @media(max-width:800px){html,body{overflow-x:hidden}
 .nav{align-items:flex-start;flex-direction:column;padding:12px 0}
@@ -81,7 +86,7 @@ footer{display:flex;justify-content:space-between;gap:20px;padding:26px max(18px
 .section{padding:62px 0}
 .section-head,.split{grid-template-columns:1fr;gap:24px}
 .grid{grid-template-columns:1fr!important}
-.barn-hero,.agrilife-hero,.pollinator-hero,.judson-hero,.gorge-hero,.fischer-hero,.honey-hero,.bluff-spurs-hero,.chula-vista-hero,.comanche-lookout-hero,.crownridge-canyon-hero,.friedrich-wilderness-hero,.hillview-natural-trail-hero,.mcallister-park-loop-hero,.medina-river-loop-hero{background-position:62% center}
+.barn-hero,.agrilife-hero,.pollinator-hero,.judson-hero,.gorge-hero,.fischer-hero,.honey-hero,.bluff-spurs-hero,.chula-vista-hero,.comanche-lookout-hero,.crownridge-canyon-hero,.friedrich-wilderness-hero,.hillview-natural-trail-hero,.mcallister-park-loop-hero,.medina-river-loop-hero,.mission-concepcion-hero,.mission-san-jose-hero,.mission-san-juan-hero,.mission-espada-hero,.alamo-mission-valero-hero{background-position:62% center}
 footer{flex-direction:column}
 }
 
