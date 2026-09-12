@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-09-11T07:30:19.727Z",
+  "generatedAt": "2026-09-12T07:30:16.958Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-09-11",
-    "end": "2026-10-11"
+    "start": "2026-09-12",
+    "end": "2026-10-12"
   },
   "eventCount": 112,
   "sources": [
@@ -30,57 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "Bexar County Master Gardeners:78340:2026-09-11 12:00:00",
-      "title": "Lunch & Learn",
-      "date": "2026-09-11",
-      "startDateTime": "2026-09-11 12:00:00",
-      "endDateTime": "2026-09-11 13:00:00",
-      "time": "12 p.m. - 1 p.m.",
-      "cost": "Free",
-      "location": "Bexar County AgriLife Urban Farm - Outdoor Classroom & Kitchen, 1615 Sherman, San Antonio, TX, 78202",
-      "city": "San Antonio",
-      "source": "Bexar County Master Gardeners",
-      "sourceKind": "Master Gardener calendar",
-      "type": "Master Gardener",
-      "link": "https://bexarmg.org/event/lunch-learn-12/",
-      "registerLink": "https://bexarmg.org/event/lunch-learn-12/",
-      "summary": "@ Join Bexar County Master Gardener Nancy for a lunch-hour presentation on Garden Disease, at Bexar County AgriLife Urban Farm “Greenies.” Please sign in with the receptionist upon arrival. VMS: 1 CE Add to calendar Google Calendar iCale..."
-    },
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/:2026-09-11:9 - 10 a.m.",
-      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
-      "date": "2026-09-11",
-      "startDateTime": "2026-09-11",
-      "endDateTime": "2026-09-11",
-      "time": "9 - 10 a.m.",
-      "cost": "Free with membership or Garden admission.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Instructor: Conservation Educator"
-    },
-    {
-      "id": "Garden Style San Antonio:10001997:2026-09-11 09:00:00",
-      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
-      "date": "2026-09-11",
-      "startDateTime": "2026-09-11 09:00:00",
-      "endDateTime": "2026-09-11 10:00:00",
-      "time": "9 a.m. - 10 a.m.",
-      "cost": "See event page",
-      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-3/2026-09-11/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/pollinator-patches-pocket-prairies-2/:2026-09-12:1 - 2 p.m.",
       "title": "Pollinator Patches & Pocket Prairies",
@@ -609,7 +558,7 @@
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Instructor: Conservation Educator"
     },
     {
-      "id": "Garden Style San Antonio:10001998:2026-09-18 09:00:00",
+      "id": "Garden Style San Antonio:10002050:2026-09-18 09:00:00",
       "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
       "date": "2026-09-18",
       "startDateTime": "2026-09-18 09:00:00",
@@ -621,7 +570,7 @@
       "source": "Garden Style San Antonio",
       "sourceKind": "Regional garden calendar",
       "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-3/2026-09-18/",
+      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-2/2026-09-18/",
       "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape."
     },
@@ -966,7 +915,7 @@
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Instructor: Conservation Educator"
     },
     {
-      "id": "Garden Style San Antonio:31719:2026-09-25 09:00:00",
+      "id": "Garden Style San Antonio:10001996:2026-09-25 09:00:00",
       "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
       "date": "2026-09-25",
       "startDateTime": "2026-09-25 09:00:00",
@@ -978,7 +927,7 @@
       "source": "Garden Style San Antonio",
       "sourceKind": "Regional garden calendar",
       "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-2/",
+      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-2/2026-09-25/",
       "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape."
     },
@@ -1255,21 +1204,21 @@
       "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
     },
     {
-      "id": "Garden Style San Antonio:10001883:2026-10-02 09:00:00",
-      "title": "Guided Tour: Sustainable Gardening",
+      "id": "Garden Style San Antonio:10002051:2026-10-02 09:00:00",
+      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
       "date": "2026-10-02",
       "startDateTime": "2026-10-02 09:00:00",
-      "endDateTime": "2026-10-02 10:30:00",
-      "time": "9 a.m. - 10:30 a.m.",
-      "cost": "$15",
+      "endDateTime": "2026-10-02 10:00:00",
+      "time": "9 a.m. - 10 a.m.",
+      "cost": "See event page",
       "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
       "city": "San Antonio",
       "source": "Garden Style San Antonio",
       "sourceKind": "Regional garden calendar",
       "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/guided-tour-sustainable-gardening-2/2026-10-02/",
-      "registerLink": "https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/",
-      "summary": "Explore the many sustainable practices in the San Antonio Botanical Garden on this seasonally changing walking tour. Learn about native plants, rain gardens, and sustainable architecture. Explore more ways to conserve our local resources..."
+      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-2/2026-10-02/",
+      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
+      "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape."
     },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/healthy-trees-and-certified-arborist-prep-course/:2026-10-02:9:00 am - 4:00 pm",
@@ -1731,6 +1680,40 @@
       "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Instructor: Conservation Educator"
     },
     {
+      "id": "Garden Style San Antonio:10002052:2026-10-09 09:00:00",
+      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
+      "date": "2026-10-09",
+      "startDateTime": "2026-10-09 09:00:00",
+      "endDateTime": "2026-10-09 10:00:00",
+      "time": "9 a.m. - 10 a.m.",
+      "cost": "See event page",
+      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-2/2026-10-09/",
+      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
+      "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape."
+    },
+    {
+      "id": "Garden Style San Antonio:10002114:2026-10-09 09:00:00",
+      "title": "Guided Tour: Sustainable Gardening",
+      "date": "2026-10-09",
+      "startDateTime": "2026-10-09 09:00:00",
+      "endDateTime": "2026-10-09 10:30:00",
+      "time": "9 a.m. - 10:30 a.m.",
+      "cost": "$15",
+      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://www.gardenstylesanantonio.com/event/guided-tour-sustainable-gardening-2/2026-10-09/",
+      "registerLink": "https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/",
+      "summary": "Explore the many sustainable practices in the San Antonio Botanical Garden on this seasonally changing walking tour. Learn about native plants, rain gardens, and sustainable architecture. Explore more ways to conserve our local resources..."
+    },
+    {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/guided-tour-sustainable-gardening-fall-2026/:2026-10-09:9:00 a.m. - 10:30 a.m.",
       "title": "Guided Tour: Sustainable Gardening",
       "date": "2026-10-09",
@@ -1932,6 +1915,23 @@
       "type": "Master Gardener",
       "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-11/",
       "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-11/",
+      "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
+    },
+    {
+      "id": "Bexar County Master Gardeners:10003027:2026-10-12 00:00:00",
+      "title": "Annual Poinsettia Sale",
+      "date": "2026-10-12",
+      "startDateTime": "2026-10-12 00:00:00",
+      "endDateTime": "2026-10-12 23:59:59",
+      "time": "All day",
+      "cost": "See event page",
+      "location": "",
+      "city": "",
+      "source": "Bexar County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-12/",
+      "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-12/",
       "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
     }
   ]
