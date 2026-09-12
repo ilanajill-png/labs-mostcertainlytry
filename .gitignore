@@ -65,6 +65,8 @@ assets/*
 !assets/mission-espada/**
 !assets/alamo-mission-valero/
 !assets/alamo-mission-valero/**
+!assets/nikon-p950/
+!assets/nikon-p950/**
 
 !data/
 data/*
