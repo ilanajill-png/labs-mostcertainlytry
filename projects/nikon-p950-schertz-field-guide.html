@@ -87,9 +87,34 @@
     .term{padding:18px;background:var(--paper)}
     .term strong{display:block;color:var(--deep)}
     .term span{display:block;margin-top:5px;color:var(--muted);font-size:14px}
+    .mission{background:var(--deep);color:#fff}
+    .mission .section-head h2,.mission h3{color:#fff}
+    .mission .section-head p,.mission .mission-intro{color:rgba(255,255,255,.78)}
+    .mission-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:24px}
+    .mission-card{padding:22px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(255,255,255,.07)}
+    .mission-card .plain-list{color:rgba(255,255,255,.78)}
+    .mission-card .plain-list strong{color:#fff}
+    .mission-recipe{margin-top:14px;padding:16px;border-left:5px solid var(--gold);border-radius:6px;background:#fffdf7;color:var(--ink)}
+    .mission-recipe strong{display:block;color:var(--clay);font-size:12px;text-transform:uppercase;letter-spacing:.07em}
+    .mission-recipe span{display:block;margin-top:7px;color:var(--deep);font-weight:800;line-height:1.55}
+    .mission-shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px;padding:0;list-style:none;counter-reset:mission-shot}
+    .mission-shots li{counter-increment:mission-shot;padding:14px 15px;border-radius:6px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-size:14px}
+    .mission-shots li:before{content:counter(mission-shot);display:inline-grid;width:24px;height:24px;margin-right:8px;place-items:center;border-radius:50%;background:var(--gold);color:#23180a;font-weight:900}
+    .mission-shots strong{color:#fff}
+    .control-diagrams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:22px 0}
+    .control-diagram{margin:0;overflow:hidden;border-radius:8px;background:#fffdf7}
+    .control-diagram img{display:block;width:100%;height:auto}
+    .control-diagram figcaption{padding:12px 15px;color:var(--muted);font-size:13px;line-height:1.5}
+    .menu-walkthrough{display:grid;gap:12px;margin-top:20px;counter-reset:setting-step}
+    .setting-step{counter-increment:setting-step;padding:20px;border-radius:8px;background:#fffdf7;color:var(--ink)}
+    .setting-step h3{color:var(--deep);font-size:21px}
+    .setting-step h3:before{content:counter(setting-step);display:inline-grid;width:32px;height:32px;margin-right:10px;place-items:center;border-radius:50%;background:var(--gold);color:#23180a;font-family:"Inter",sans-serif;font-size:15px;font-weight:900}
+    .setting-step ol{margin:12px 0 0;padding-left:22px;color:var(--muted)}
+    .setting-step li{margin:8px 0}
+    .screen-result{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:4px;background:rgba(44,98,91,.11);color:var(--deep);font-weight:800}
     @media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}.cadence{grid-template-columns:1fr}.p950-hero:before{display:none}}
     @media(max-width:900px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:700px){.recipe-grid,.timeline,.first-photo,.plain-english,.mode-grid{grid-template-columns:1fr}.ethics .checklist{columns:1}.quick-card dl{grid-template-columns:1fr}.quick-card dd{padding-top:0;border-top:0}.data-table-wrap{margin-inline:-8px}.p950-hero{min-height:75vh}.shot-group summary{padding:15px 16px}.shot-list{padding-left:42px;padding-right:16px}}
+    @media(max-width:700px){.recipe-grid,.timeline,.first-photo,.plain-english,.mode-grid,.mission-grid,.mission-shots,.control-diagrams{grid-template-columns:1fr}.ethics .checklist{columns:1}.quick-card dl{grid-template-columns:1fr}.quick-card dd{padding-top:0;border-top:0}.data-table-wrap{margin-inline:-8px}.p950-hero{min-height:75vh}.shot-group summary{padding:15px 16px}.shot-list{padding-left:42px;padding-right:16px}}
   </style>
 </head>
 <body>
@@ -99,7 +124,7 @@
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="../index.html">Nature by discipline</a>
         <a href="../garden.html#texas">Texas field guides</a>
-        <a href="#field-settings">Camera settings</a>
+        <a href="#hummingbird-mission">Hummingbird mission</a>
         <a href="#places">Places</a>
         <a href="#sources">Sources</a>
       </nav>
@@ -114,11 +139,12 @@
         <p>My journal of upgrading my nature photography skills and equipment. I have decided to upgrade my iPhone 17 shots to a Nikon COOLPIX P950 so I can better capture the birds, wildlife, water, stone, weather, and moon.</p>
         <div class="cta-row">
           <a class="button next-shots-button" href="#crescent-bend-shots">Next 60 Shots</a>
+          <a class="button" href="#hummingbird-mission">Hummingbird Mission</a>
           <a class="button" href="#first-photo">Take your first photo</a>
           <a class="button secondary" href="#places">Choose a field site</a>
         </div>
         <div class="jumpbar" aria-label="Page sections">
-          <a href="#first-photo">First photo</a><a href="#iphone">iPhone</a><a href="#crescent-bend-shots">Next 60 Shots</a><a href="#start">Later setup</a><a href="#field-settings">Settings</a><a href="#practice">Four weeks</a><a href="#social">Social plan</a><a href="#places">Local places</a><a href="#ethics">Ethics</a>
+          <a href="#first-photo">First photo</a><a href="#iphone">iPhone</a><a href="#crescent-bend-shots">Next 60 Shots</a><a href="#start">Later setup</a><a href="#field-settings">Settings</a><a href="#hummingbird-mission">Hummingbird Mission</a><a href="#practice">Four weeks</a><a href="#social">Social plan</a><a href="#places">Local places</a><a href="#ethics">Ethics</a>
         </div>
         <p class="hero-note">Original decorative viewfinder artwork; not documentary photography.</p>
       </div>
@@ -318,7 +344,7 @@
         <p class="source-list" style="margin-top:18px">Planning sources: <a href="https://schertz.com/610/Parks">City of Schertz Parks</a> and the <a href="https://onlinemanual.nikonimglib.com/p950/en/">Nikon COOLPIX P950 Online Manual</a>.</p>
       </div>
     </section>
-+    <section class="section" id="start" style="background:rgba(255,255,255,.42)">
+    <section class="section" id="start" style="background:rgba(255,255,255,.42)">
       <div class="shell">
         <div class="section-head"><div><p class="kicker">After your first 50 photographs</p><h2>Then change a few settings.</h2></div><p>Do not do this all at once. Return here after Auto mode and the basic buttons feel ordinary. Change one item, take a photograph, and confirm that the camera still behaves as expected.</p></div>
         <div class="split">
@@ -354,6 +380,131 @@
           <article class="recipe"><small>Sky</small><h3>The moon</h3><p>Begin with Moon mode, then move to manual exposure. Use the timer so pressing the shutter does not shake the camera.</p><span class="setting">M · ISO 100 · around 1/250 sec · f/6.5 at full tele · tripod · VR off</span></article>
           <article class="recipe"><small>Movement</small><h3>Nature video</h3><p>Record stable 8–12 second clips. Avoid zooming during the take; cut between wide and tight compositions instead.</p><span class="setting">4K/30p for detail · 1080/60p for motion or gentle slow-down</span></article>
         </div>
+      </div>
+    </section>
+
+    <section class="section mission" id="hummingbird-mission">
+      <div class="shell">
+        <div class="section-head"><div><p class="kicker" style="color:var(--gold)">Field mission · Hummingbirds</p><h2>Catch the bird before chasing the wings.</h2></div><p>Your goal is one sharp eye, one hovering bird, one behavior sequence, and one short video. Start at moderate zoom, work from a predictable flower, feeder, or perch, and change only the shutter speed when the light demands it.</p></div>
+
+        <div class="mission-recipe"><strong>Start with these five settings</strong><span>S mode · 1/2000 sec · Auto ISO 100–3200 · Continuous H · Manual (normal) AF area</span></div>
+
+        <div class="control-diagrams">
+          <figure class="control-diagram"><img src="../assets/nikon-p950/p950-top-controls.svg" width="900" height="520" loading="lazy" alt="Simplified top view of the P950 showing S on the mode dial and the command dial used to select 1/2000 second"><figcaption><strong>Top controls:</strong> line up S with the indicator, then turn the ridged command dial until 1/2000 appears on the screen.</figcaption></figure>
+          <figure class="control-diagram"><img src="../assets/nikon-p950/p950-rear-controls.svg" width="900" height="620" loading="lazy" alt="Simplified rear view of the P950 showing the MENU button, directional ring, and center OK button"><figcaption><strong>Rear controls:</strong> press MENU, move with the outer ring, and confirm each highlighted choice with the center OK button. These are original simplified diagrams based on Nikon's labeled control layout, not Nikon manual artwork.</figcaption></figure>
+        </div>
+        <p class="source-list" style="margin-top:-6px;color:rgba(255,255,255,.78)">Nikon's manual includes the original numbered camera diagrams and menu documentation: <a style="color:var(--gold)" href="https://onlinemanual.nikonimglib.com/p950/en/pages/02-01.html">camera body</a>, <a style="color:var(--gold)" href="https://onlinemanual.nikonimglib.com/p950/en/pages/08-29.html">ISO sensitivity</a>, <a style="color:var(--gold)" href="https://onlinemanual.nikonimglib.com/p950/en/pages/08-28.html">Continuous H</a>, and <a style="color:var(--gold)" href="https://onlinemanual.nikonimglib.com/p950/en/pages/08-31.html">AF area mode</a>.</p>
+
+        <div class="menu-walkthrough" aria-label="Button-by-button hummingbird camera setup">
+          <article class="setting-step">
+            <h3>Set S and 1/2000 second</h3>
+            <ol>
+              <li>Turn the large mode dial on top of the camera until <strong>S</strong> lines up with the small white indicator mark.</li>
+              <li>Look at the rear screen. Find the shutter-speed number near the bottom; it may show something like 1/125 or 1/500.</li>
+              <li>Turn the ridged <strong>command dial</strong> on top of the camera, near your right thumb.</li>
+              <li>Stop when the screen reads <strong>1/2000</strong>.</li>
+            </ol>
+            <span class="screen-result">Finished result: mode S · shutter 1/2000</span>
+          </article>
+          <article class="setting-step">
+            <h3>Set Auto ISO 100–3200</h3>
+            <ol>
+              <li>Press the <strong>MENU</strong> button on the lower back of the camera.</li>
+              <li>If needed, press left on the round multi selector until the vertical row of menu icons is active.</li>
+              <li>Press up or down until the <strong>camera icon</strong>—the Shooting menu—is highlighted. Press right or <strong>OK</strong>.</li>
+              <li>Press down to highlight <strong>ISO sensitivity</strong>, then press <strong>OK</strong>.</li>
+              <li>Highlight <strong>ISO sensitivity</strong> again and press <strong>OK</strong>.</li>
+              <li>Scroll to <strong>100–3200</strong> and press <strong>OK</strong>.</li>
+              <li>Press <strong>MENU</strong> to return to the shooting screen.</li>
+            </ol>
+            <span class="screen-result">Finished result: ISO-A lets the camera choose between ISO 100 and 3200</span>
+          </article>
+          <article class="setting-step">
+            <h3>Set Continuous H</h3>
+            <ol>
+              <li>Press <strong>MENU</strong>.</li>
+              <li>Open the <strong>camera icon</strong> Shooting menu.</li>
+              <li>Scroll to <strong>Continuous</strong> and press <strong>OK</strong>.</li>
+              <li>Scroll to <strong>Continuous H</strong> and press <strong>OK</strong>.</li>
+              <li>Press <strong>MENU</strong> to return to shooting.</li>
+            </ol>
+            <span class="screen-result">Finished result: holding the shutter takes up to about 10 pictures at about 7 fps</span>
+          </article>
+          <article class="setting-step">
+            <h3>Set Manual (normal) AF area</h3>
+            <ol>
+              <li>Press <strong>MENU</strong>.</li>
+              <li>Open the <strong>camera icon</strong> Shooting menu.</li>
+              <li>Scroll to <strong>AF area mode</strong> and press <strong>OK</strong>.</li>
+              <li>Scroll to <strong>Manual (normal)</strong> and press <strong>OK</strong>.</li>
+              <li>Press <strong>MENU</strong> to return to shooting. A movable focus box will appear.</li>
+              <li>Use the round multi selector's up, down, left, and right edges to place that box over the flower, feeder port, or perch where the bird is expected.</li>
+              <li>If the arrows change flash or another quick setting instead of moving the box, press the center <strong>OK</strong> button once, then try the arrows again. Pressing OK switches between moving the focus box and using the quick controls.</li>
+            </ol>
+            <span class="screen-result">Finished result: you—not the camera—choose exactly where it tries to focus</span>
+          </article>
+        </div>
+
+        <div class="mission-grid">
+          <article class="mission-card">
+            <h3>Leave everything else alone for now</h3>
+            <p class="mission-intro">Do not add more menu work to your first hummingbird attempt. Leave metering, image quality, autofocus mode, and vibration reduction at their existing settings. Keep the flash lowered and begin at moderate zoom.</p>
+            <div class="mission-recipe"><strong>Before the bird appears</strong><span>Confirm S and 1/2000 on the screen. Make one test burst on the empty flower or feeder port. Then wait.</span></div>
+          </article>
+          <article class="mission-card">
+            <h3>Use the bird's routine</h3>
+            <ul class="plain-list">
+              <li>Watch first. Find the flower, feeder port, or twig the bird revisits.</li>
+              <li>Place the focus box on that spot before the bird returns.</li>
+              <li>At a feeder, focus a few inches in front of the port—the hovering zone.</li>
+              <li>Half-press as the bird approaches, then make a short three-to-five-frame burst.</li>
+              <li>Leave space around the bird for its bill and wings. Crop later.</li>
+              <li>If focus will not lock at extreme zoom, back up: the minimum focusing distance near 2000 mm is about 16½ feet.</li>
+            </ul>
+            <div class="mission-recipe"><strong>The P950 reality</strong><span>At full 2000 mm the lens narrows to f/6.5, so maximum zoom costs light and makes a tiny bird harder to locate. Moderate zoom usually produces more keepers.</span></div>
+          </article>
+        </div>
+
+        <h3 style="margin-top:30px">The 12-capture hummingbird mission</h3>
+        <ol class="mission-shots">
+          <li><strong>Habitat:</strong> one wide view of the flowers, feeder, or garden. P mode · wide.</li>
+          <li><strong>Waiting place:</strong> the empty favorite flower, feeder port, or perch. S · 1/1000.</li>
+          <li><strong>Perched bird:</strong> full body with room around it. S · 1/500.</li>
+          <li><strong>Portrait:</strong> eye, bill, and feather detail. S · 1/1000.</li>
+          <li><strong>Hovering bird:</strong> body sharp with some wing motion. S · 1/2000.</li>
+          <li><strong>Side view:</strong> bird hovering parallel to the camera. S · 1/2000.</li>
+          <li><strong>Approach:</strong> bird entering the flower or feeder zone. S · 1/2000.</li>
+          <li><strong>Takeoff:</strong> one short burst as the bird leaves. S · 1/2500 if the light allows.</li>
+          <li><strong>Wing-blur experiment:</strong> body recognizable, wings translucent. S · 1/250.</li>
+          <li><strong>Behavior:</strong> feeding, guarding, preening, or resting—never provoke it. S · 1/1000.</li>
+          <li><strong>Bright-sky test:</strong> if the bird is dark, try exposure compensation at +0.7 EV, then return it to 0.0.</li>
+          <li><strong>Video:</strong> 10–20 steady seconds at 1080/60p; moderate zoom and no zooming during the clip.</li>
+        </ol>
+
+        <div class="mission-grid">
+          <article class="mission-card">
+            <h3>Change only what the photograph needs</h3>
+            <ul class="plain-list">
+              <li><strong>Bird perched:</strong> 1/500–1/1000 sec; Auto ISO 100–1600.</li>
+              <li><strong>Bird hovering:</strong> 1/2000 sec; Auto ISO 100–3200.</li>
+              <li><strong>Deep shade:</strong> lower to 1/1000 before raising ISO beyond 3200.</li>
+              <li><strong>Intentional wing blur:</strong> 1/250 sec.</li>
+              <li><strong>Bird against bright sky:</strong> try +0.7 EV, review, and reset to 0.0.</li>
+            </ul>
+          </article>
+          <article class="mission-card">
+            <h3>When something goes wrong</h3>
+            <ul class="plain-list">
+              <li><strong>Picture is dark:</strong> lower 1/2000 to 1/1000.</li>
+              <li><strong>Bird is blurry:</strong> return to 1/2000 or move into brighter light.</li>
+              <li><strong>Camera grabs foliage:</strong> keep Manual (normal) AF area on the expected hover point.</li>
+              <li><strong>You lose the bird:</strong> zoom out, find it, then zoom in moderately.</li>
+              <li><strong>Camera pauses after a burst:</strong> it is writing to the card; wait.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="note" style="margin-top:22px"><strong>Feeder and wildlife care</strong><p>Use one part refined white sugar to four parts water—never red dye, honey, brown sugar, or artificial sweetener. In hot Texas weather, empty and clean the feeder daily or every other day. Do not crowd nests, block access to food, call birds, or keep shooting if your presence changes their behavior.</p></div>
       </div>
     </section>
 
@@ -480,6 +631,8 @@
           <li><strong><a href="https://nikonimglib.com/snbr/onlinehelp/en/index.html">Nikon · SnapBridge Online Help</a></strong><span>Bluetooth pairing, selected downloads, 2-megapixel automatic transfers, original-file transfers, viewing, and sharing on iOS.</span></li>
           <li><strong><a href="https://support.apple.com/guide/iphone/import-and-export-photos-and-videos-iph480caa1f3/ios">Apple · Import and export photos and videos on iPhone</a></strong><span>Direct camera and SD-card imports into the Photos app using a compatible USB-C or Lightning reader or adapter.</span></li>
           <li><strong><a href="https://imaging.nikon.com/imaging/lineup/coolpix/p/p950/">Nikon · COOLPIX P950 official overview and specifications</a></strong><span>24–2000 mm-equivalent optical zoom, 16 MP sensor, RAW, VR, video, power, and operating specifications.</span></li>
+          <li><strong><a href="https://www.nikonusa.com/learn-and-explore/c/tips-and-techniques/how-to-photograph-hummingbirds">Nikon · How to Photograph Hummingbirds</a></strong><span>Shutter-speed, autofocus, burst, light, background, and feeder-position guidance used for the hummingbird field mission.</span></li>
+          <li><strong><a href="https://www.audubon.org/magazine/hummingbird-feeding-faqs">Audubon · Hummingbird Feeding FAQs</a></strong><span>Safe nectar recipe, feeder-cleaning guidance, and hummingbird welfare.</span></li>
           <li><strong><a href="https://www.newbraunfels.gov/3379/Fischer-Park">City of New Braunfels · Fischer Park</a></strong><span>Official hours, ponds, trails, nature education, amenities, and visitor information.</span></li>
           <li><strong><a href="https://www.warblerwoods.org/">Warbler Woods</a></strong><span>Private-refuge status and arrange-a-visit model.</span></li>
           <li><strong><a href="https://www.audubon.org/mitchell-lake/visit">Mitchell Lake Audubon Center</a></strong><span>Admission, seasonal hours, access limitations, and construction notice.</span></li>

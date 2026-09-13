@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Nikon P950 top controls for shutter-priority photography</title>
+  <desc id="desc">Simplified original diagram showing the mode dial aligned to S and the command dial used to select a shutter speed of one two-thousandth of a second.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b64b2f"/></marker>
+  </defs>
+  <rect width="900" height="520" rx="28" fill="#fffdf7"/>
+  <path d="M120 370V210c0-45 36-82 82-82h492c48 0 86 39 86 86v156z" fill="#e8e1d2" stroke="#102d36" stroke-width="8"/>
+  <rect x="605" y="95" width="130" height="62" rx="26" fill="#102d36"/>
+  <path d="M620 112h100M620 128h100M620 144h100" stroke="#f0b843" stroke-width="6"/>
+  <circle cx="345" cy="215" r="92" fill="#102d36"/>
+  <circle cx="345" cy="215" r="72" fill="#f2eee4" stroke="#102d36" stroke-width="4"/>
+  <text x="345" y="180" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#102d36">P</text>
+  <text x="395" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="900" fill="#b64b2f">S</text>
+  <text x="345" y="270" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#102d36">A</text>
+  <text x="295" y="220" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#102d36">M</text>
+  <circle cx="440" cy="215" r="8" fill="#b64b2f"/>
+  <path d="M442 216h90" fill="none" stroke="#b64b2f" stroke-width="5" marker-end="url(#arrow)"/>
+  <text x="550" y="190" font-family="Arial,sans-serif" font-size="24" font-weight="800" fill="#102d36">Align S with the</text>
+  <text x="550" y="220" font-family="Arial,sans-serif" font-size="24" font-weight="800" fill="#102d36">small indicator</text>
+  <path d="M660 95V55H785" fill="none" stroke="#b64b2f" stroke-width="5" marker-end="url(#arrow)"/>
+  <text x="500" y="42" font-family="Arial,sans-serif" font-size="23" font-weight="800" fill="#102d36">Command dial</text>
+  <text x="500" y="70" font-family="Arial,sans-serif" font-size="18" fill="#5d6d70">Turn until the screen shows 1/2000</text>
+  <rect x="220" y="395" width="460" height="72" rx="12" fill="#102d36"/>
+  <text x="450" y="440" text-anchor="middle" font-family="Arial,sans-serif" font-size="32" font-weight="900" fill="#fff">S   ·   1/2000</text>
+</svg>

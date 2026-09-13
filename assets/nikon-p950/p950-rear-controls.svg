@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Nikon P950 rear menu controls</title>
+  <desc id="desc">Simplified original diagram showing the MENU button at the lower left of the rear controls and the round multi selector with arrows and center OK button.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#b64b2f"/></marker>
+  </defs>
+  <rect width="900" height="620" rx="28" fill="#fffdf7"/>
+  <rect x="90" y="70" width="720" height="480" rx="60" fill="#e8e1d2" stroke="#102d36" stroke-width="8"/>
+  <rect x="145" y="120" width="430" height="330" rx="12" fill="#102d36" stroke="#5d6d70" stroke-width="6"/>
+  <circle cx="685" cy="315" r="88" fill="#f2eee4" stroke="#102d36" stroke-width="8"/>
+  <circle cx="685" cy="315" r="42" fill="#fff" stroke="#102d36" stroke-width="5"/>
+  <text x="685" y="324" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="900" fill="#102d36">OK</text>
+  <path d="M685 240l-14 20h28zM685 390l-14-20h28zM610 315l20-14v28zM760 315l-20-14v28z" fill="#b64b2f"/>
+  <rect x="590" y="455" width="105" height="54" rx="27" fill="#102d36"/>
+  <text x="642" y="490" text-anchor="middle" font-family="Arial,sans-serif" font-size="19" font-weight="900" fill="#fff">MENU</text>
+  <path d="M590 482H420" fill="none" stroke="#b64b2f" stroke-width="5" marker-end="url(#arrow)"/>
+  <text x="130" y="480" font-family="Arial,sans-serif" font-size="23" font-weight="800" fill="#102d36">1. Press MENU</text>
+  <path d="M770 315h80" fill="none" stroke="#b64b2f" stroke-width="5" marker-end="url(#arrow)"/>
+  <text x="586" y="575" font-family="Arial,sans-serif" font-size="22" font-weight="800" fill="#102d36">2. Use the ring to move</text>
+  <text x="586" y="602" font-family="Arial,sans-serif" font-size="22" font-weight="800" fill="#102d36">3. Press OK to choose</text>
+  <text x="145" y="104" font-family="Arial,sans-serif" font-size="20" font-weight="800" fill="#5d6d70">REAR OF CAMERA</text>
+</svg>
