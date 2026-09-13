@@ -83,6 +83,12 @@
     .shot-list li+li{border-top:1px solid var(--line)}
     .shot-list li::marker{color:var(--clay);font-weight:850}
     .shot-list strong{color:var(--deep)}
+    .capture-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:22px}
+    .capture-card{margin:0;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--paper)}
+    .capture-card img{display:block;width:100%;height:320px;object-fit:contain;background:#e8e3d7}
+    .capture-card figcaption{padding:14px 16px;color:var(--muted);font-size:14px;line-height:1.55}
+    .capture-card figcaption strong{display:block;margin-bottom:4px;color:var(--deep);font-size:15px}
+    .capture-location{display:block;margin-top:6px;color:var(--clay);font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
     .plain-english{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;margin-top:24px;overflow:hidden;border:1px solid var(--line);border-radius:8px;background:var(--line)}
     .term{padding:18px;background:var(--paper)}
     .term strong{display:block;color:var(--deep)}
@@ -117,9 +123,9 @@
     .setting-step ol{margin:12px 0 0;padding-left:22px;color:var(--muted)}
     .setting-step li{margin:8px 0}
     .screen-result{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:4px;background:rgba(44,98,91,.11);color:var(--deep);font-weight:800}
-    @media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}.cadence{grid-template-columns:1fr}.p950-hero:before{display:none}}
+    @media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}.cadence{grid-template-columns:1fr}.capture-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.p950-hero:before{display:none}}
     @media(max-width:900px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:700px){.recipe-grid,.timeline,.first-photo,.plain-english,.mode-grid,.mission-grid,.mission-shots,.control-diagrams{grid-template-columns:1fr}.ethics .checklist{columns:1}.quick-card dl{grid-template-columns:1fr}.quick-card dd{padding-top:0;border-top:0}.data-table-wrap{margin-inline:-8px}.p950-hero{min-height:75vh}.shot-group summary{padding:15px 16px}.shot-list{padding-left:42px;padding-right:16px}}
+    @media(max-width:700px){.recipe-grid,.timeline,.first-photo,.plain-english,.mode-grid,.mission-grid,.mission-shots,.control-diagrams,.capture-gallery{grid-template-columns:1fr}.capture-card img{height:auto;max-height:520px}.ethics .checklist{columns:1}.quick-card dl{grid-template-columns:1fr}.quick-card dd{padding-top:0;border-top:0}.data-table-wrap{margin-inline:-8px}.p950-hero{min-height:75vh}.shot-group summary{padding:15px 16px}.shot-list{padding-left:42px;padding-right:16px}}
   </style>
 </head>
 <body>
@@ -345,6 +351,46 @@
             </ol>
           </details>
         </div>
+        <div class="section-head" style="margin-top:36px"><div><p class="kicker">What I captured</p><h2>Nine birds from my first field practice.</h2></div><p>All nine photographs were taken at Crescent Bend Nature Park. Most came from the bird-blind feeding area, where the feeders, water feature, and fallen-branch perches brought the birds into view.</p></div>
+        <div class="capture-gallery" aria-label="Nine bird photographs from Crescent Bend Nature Park">
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/ladder-backed-woodpecker.jpg" width="518" height="1080" loading="lazy" decoding="async" alt="Male Ladder-backed Woodpecker clinging to a seed feeder, with a female Northern Cardinal partly visible below">
+            <figcaption><strong>Male Ladder-backed Woodpecker</strong>A female Northern Cardinal also appears at the bottom edge of the photograph.<span class="capture-location">Crescent Bend · bird-blind feeder station</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/carolina-wren.jpg" width="579" height="1080" loading="lazy" decoding="async" alt="Carolina Wren standing beside the shallow water feature at the Crescent Bend bird blind">
+            <figcaption><strong>Carolina Wren</strong>The white eyebrow, warm chest, and slightly curved bill help identify this tiny visitor.<span class="capture-location">Crescent Bend · bird-blind water feature</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/painted-bunting-feeder.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Greenish female-type Painted Bunting perched on a seed feeder at Crescent Bend Nature Park">
+            <figcaption><strong>Female-type Painted Bunting · tentative</strong>The greenish-yellow color and seed-eating bill point toward a female or immature Painted Bunting.<span class="capture-location">Crescent Bend · bird-blind seed feeder</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/lesser-goldfinch.jpg" width="508" height="1080" loading="lazy" decoding="async" alt="Male Lesser Goldfinch perched on a weathered fallen branch at Crescent Bend Nature Park">
+            <figcaption><strong>Male Lesser Goldfinch</strong>Black above and bright yellow below, with a clear white wing patch.<span class="capture-location">Crescent Bend · bird-blind branch perch</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/female-northern-cardinal-perch.jpg" width="1440" height="1080" loading="lazy" decoding="async" alt="Female Northern Cardinal perched on a weathered branch among pink flowers at Crescent Bend Nature Park">
+            <figcaption><strong>Female Northern Cardinal</strong>Her warm brown plumage, orange-red bill, crest, and red-tinged wings and tail are visible even in soft evening light.<span class="capture-location">Crescent Bend · bird-blind branch perch</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/female-northern-cardinal-feeder.jpg" width="583" height="1080" loading="lazy" decoding="async" alt="Female Northern Cardinal perched on a green seed feeder at Crescent Bend Nature Park">
+            <figcaption><strong>Female Northern Cardinal</strong>A closer feeder portrait showing the orange-red bill and muted red feathers in her wings and tail.<span class="capture-location">Crescent Bend · bird-blind seed feeder</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/male-northern-cardinal.jpg" width="594" height="1080" loading="lazy" decoding="async" alt="Bright red male Northern Cardinal perched above a shallow water feature at Crescent Bend Nature Park">
+            <figcaption><strong>Male Northern Cardinal</strong>The red plumage, crest, heavy orange bill, and black face mask make this identification delightfully uncomplicated.<span class="capture-location">Crescent Bend · bird-blind water feature</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/probable-female-summer-tanager.jpg" width="612" height="1080" loading="lazy" decoding="async" alt="Distant yellow bird, probably a female Summer Tanager, perched in the woodland canopy at Crescent Bend Nature Park">
+            <figcaption><strong>Probable female Summer Tanager · tentative</strong>The bird is distant and soft in the frame, so this identification should be treated as a field-note hypothesis rather than a confirmed record.<span class="capture-location">Crescent Bend · woodland canopy near the blind</span></figcaption>
+          </figure>
+          <figure class="capture-card">
+            <img src="../assets/nikon-p950/crescent-bend-2026-09-12/possible-painted-bunting-ground.jpg" width="1206" height="1976" loading="lazy" decoding="async" alt="Small olive-green songbird, possibly a female-type Painted Bunting, standing among plants and fallen wood at Crescent Bend Nature Park">
+            <figcaption><strong>Small olive songbird · tentative Painted Bunting</strong>The photograph suggests a female-type Painted Bunting, but the visible field marks are not decisive enough for a firm identification.<span class="capture-location">Crescent Bend · ground habitat beside the bird blind</span></figcaption>
+          </figure>
+        </div>
+        <div class="note" style="margin-top:18px"><strong>About the identifications</strong><p>Names are based on the visible field marks in these photographs and the location. The two tentative identifications are labeled honestly so they can be revised if better views or additional field notes point elsewhere.</p></div>
         <div class="note" style="margin-top:18px"><strong>Wildlife and creek rule</strong><p>If no animal appears, photograph the perch, branch, water, or empty habitat and continue. Do not use flash, call birds, feed wildlife, or approach them. The creek comes first because it is easier and safer to photograph before the light fades.</p></div>
         <p class="source-list" style="margin-top:18px">Planning sources: <a href="https://schertz.com/610/Parks">City of Schertz Parks</a> and the <a href="https://onlinemanual.nikonimglib.com/p950/en/">Nikon COOLPIX P950 Online Manual</a>.</p>
       </div>
