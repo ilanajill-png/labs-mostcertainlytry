@@ -122,6 +122,9 @@
     .setting-step h3:before{content:counter(setting-step);display:inline-grid;width:32px;height:32px;margin-right:10px;place-items:center;border-radius:50%;background:var(--gold);color:#23180a;font-family:"Inter",sans-serif;font-size:15px;font-weight:900}
     .setting-step ol{margin:12px 0 0;padding-left:22px;color:var(--muted)}
     .setting-step li{margin:8px 0}
+    .menu-preview{max-width:420px;margin:14px 0;padding:13px 15px;border:2px solid rgba(16,45,54,.18);border-radius:7px;background:#eef0ec;color:var(--deep);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.7}
+    .menu-preview span{display:block}
+    .menu-preview .selected{margin-inline:-7px;padding-inline:7px;background:var(--gold);color:#23180a;font-weight:900}
     .screen-result{display:inline-block;margin-top:10px;padding:7px 10px;border-radius:4px;background:rgba(44,98,91,.11);color:var(--deep);font-weight:800}
     @media(max-width:900px){.timeline{grid-template-columns:1fr 1fr}.cadence{grid-template-columns:1fr}.capture-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.p950-hero:before{display:none}}
     @media(max-width:900px){.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -462,14 +465,19 @@
             <span class="screen-result">Finished result: mode S · shutter 1/2000</span>
           </article>
           <article class="setting-step">
-            <h3>Set Auto ISO 100–3200</h3>
+            <h3>Let the camera choose ISO from 100 to 3200</h3>
+            <p>Press <strong>MENU</strong>. You are in the correct place when you see <strong>Image quality, Image size, Picture Control, Custom Picture Control, White balance,</strong> and <strong>Metering</strong>.</p>
+            <div class="menu-preview" aria-label="Simplified Shooting menu showing ISO sensitivity below Metering and Continuous">
+              <span>White balance</span>
+              <span>Metering</span>
+              <span>Continuous</span>
+              <span class="selected">ISO sensitivity &nbsp; ← choose this</span>
+            </div>
             <ol>
-              <li>Press the <strong>MENU</strong> button on the lower back of the camera.</li>
-              <li>If needed, press left on the round multi selector until the vertical row of menu icons is active.</li>
-              <li>Press up or down until the <strong>camera icon</strong>—the Shooting menu—is highlighted. Press right or <strong>OK</strong>.</li>
-              <li>Press down to highlight <strong>ISO sensitivity</strong>, then press <strong>OK</strong>.</li>
-              <li>Highlight <strong>ISO sensitivity</strong> again and press <strong>OK</strong>.</li>
-              <li>Scroll to <strong>100–3200</strong> and press <strong>OK</strong>.</li>
+              <li>Use the <strong>bottom edge of the round multi selector</strong> to move down the list. After <strong>Metering</strong>, you will pass <strong>Continuous</strong>. The next item is <strong>ISO sensitivity</strong>.</li>
+              <li>When <strong>ISO sensitivity</strong> is highlighted, press the center <strong>OK</strong> button.</li>
+              <li>A smaller menu opens with two choices: <strong>ISO sensitivity</strong> and <strong>Minimum shutter speed</strong>. Leave <strong>Minimum shutter speed</strong> alone. Highlight the first choice, <strong>ISO sensitivity</strong>, and press <strong>OK</strong>.</li>
+              <li>Choose the single option labeled <strong>100-3200</strong>, then press <strong>OK</strong>. You are not setting 100 and 3200 separately.</li>
               <li>Press <strong>MENU</strong> to return to the shooting screen.</li>
             </ol>
             <span class="screen-result">Finished result: ISO-A lets the camera choose between ISO 100 and 3200</span>
