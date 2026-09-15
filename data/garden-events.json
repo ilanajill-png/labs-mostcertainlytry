@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-14T07:30:16.457Z",
+  "generatedAt": "2026-09-15T07:30:17.366Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-09-14",
-    "end": "2026-10-14"
+    "start": "2026-09-15",
+    "end": "2026-10-15"
   },
-  "eventCount": 101,
+  "eventCount": 106,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -641,6 +641,23 @@
       "link": "https://sabgtx.org/event/how-to-train-your-houseplant/",
       "registerLink": "https://sabgtx.org/event/how-to-train-your-houseplant/",
       "summary": "Houseplants on the loose in your home? In this make and take workshop, you will learn how to train climbing houseplants in a creative way."
+    },
+    {
+      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/guadalupe-dance-academy-performance/:2026-09-26:10 - 11:30 a.m.",
+      "title": "Guadalupe Dance Academy Performance",
+      "date": "2026-09-26",
+      "startDateTime": "2026-09-26",
+      "endDateTime": "2026-09-26",
+      "time": "10 - 11:30 a.m.",
+      "cost": "Free with Garden admission and membership.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
+      "city": "San Antonio",
+      "source": "San Antonio Botanical Garden",
+      "sourceKind": "Botanical garden calendar",
+      "type": "Garden Event",
+      "link": "https://sabgtx.org/event/guadalupe-dance-academy-performance/",
+      "registerLink": "https://sabgtx.org/event/guadalupe-dance-academy-performance/",
+      "summary": "Experience the Guadalupe Dance Academy's Catrina-inspired performance to highlight the San Antonio's Botanical Garden exhibition; Jardín de las Catrinas."
     },
     {
       "id": "Garden Style San Antonio:32071:2026-09-26 10:30:00",
@@ -1745,6 +1762,74 @@
       "type": "Master Gardener",
       "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-14/",
       "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-14/",
+      "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
+    },
+    {
+      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/storytime-in-the-garden/:2026-10-15:10 - 10:30 a.m.",
+      "title": "Storytime in the Garden",
+      "date": "2026-10-15",
+      "startDateTime": "2026-10-15",
+      "endDateTime": "2026-10-15",
+      "time": "10 - 10:30 a.m.",
+      "cost": "Included with Garden admission and membership",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
+      "city": "San Antonio",
+      "source": "San Antonio Botanical Garden",
+      "sourceKind": "Botanical garden calendar",
+      "type": "Garden Event",
+      "link": "https://sabgtx.org/event/storytime-in-the-garden/",
+      "registerLink": "https://sabgtx.org/event/storytime-in-the-garden/",
+      "summary": "Each session features different nature themed books designed to stimulate young minds and foster an appreciation for the great outdoors. Families are welcome to bring a blanket to sit on during story time. Recommended for ages 5 and under."
+    },
+    {
+      "id": "Garden Style San Antonio:31965:2026-10-15 16:00:00",
+      "title": "Imagine a Day without Water",
+      "date": "2026-10-15",
+      "startDateTime": "2026-10-15 16:00:00",
+      "endDateTime": "2026-10-15 18:00:00",
+      "time": "4 p.m. - 6 p.m.",
+      "cost": "See event page",
+      "location": "San Pedro Branch Library, 1315 San Pedro Avenue, San Antonio, 78212",
+      "city": "San Antonio",
+      "source": "Garden Style San Antonio",
+      "sourceKind": "Regional garden calendar",
+      "type": "Garden Event",
+      "link": "https://www.gardenstylesanantonio.com/event/imagine-a-day-without-water/",
+      "registerLink": "https://www.gardenstylesanantonio.com/event/imagine-a-day-without-water/",
+      "summary": "GVST and San Pedro Springs Branch Library will observe the global annual “Imagine a Day without Water” The event will be poetry, prose and music imagining “a day without water” on the outdoor patio behind library. All local elementary th..."
+    },
+    {
+      "id": "Guadalupe County Master Gardeners:10124:2026-10-15 17:45:00",
+      "title": "Monthly Membership Meeting & Social with Lecture",
+      "date": "2026-10-15",
+      "startDateTime": "2026-10-15 17:45:00",
+      "endDateTime": "2026-10-15 20:30:00",
+      "time": "5:45 p.m. - 8:30 p.m.",
+      "cost": "Free",
+      "location": "Guad. Co. AgriLife Extension Office, 210 E. Live Oak St, Seguin, TX, 78155",
+      "city": "Seguin",
+      "source": "Guadalupe County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://guadalupecountymastergardeners.org/event/monthly-membership-meeting-social-with-lecture-9/",
+      "registerLink": "https://guadalupecountymastergardeners.org/events/",
+      "summary": "Flyer coming soon! Monthly Membership Meeting and Social with Lecture This month's lecture will be presented by: Robert & Melinda Creech , Owners of the Creech Prairie Restoration (for people, plants, wildlife) Topic: The Prairie Story 5..."
+    },
+    {
+      "id": "Bexar County Master Gardeners:10003030:2026-10-15 00:00:00",
+      "title": "Annual Poinsettia Sale",
+      "date": "2026-10-15",
+      "startDateTime": "2026-10-15 00:00:00",
+      "endDateTime": "2026-10-15 23:59:59",
+      "time": "All day",
+      "cost": "See event page",
+      "location": "",
+      "city": "",
+      "source": "Bexar County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-15/",
+      "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-15/",
       "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
     }
   ]
