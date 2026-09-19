@@ -67,6 +67,8 @@ assets/*
 !assets/alamo-mission-valero/**
 !assets/nikon-p950/
 !assets/nikon-p950/**
+!assets/neuroterroir/
+!assets/neuroterroir/**
 
 !data/
 data/*
@@ -103,5 +105,6 @@ projects/*
 !projects/the-alamo-mission-valero.html
 !projects/nikon-p950-schertz-field-guide.html
 !projects/neuroterroir-research-ledger.html
+!projects/neuroterroir.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
