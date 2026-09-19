@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeuroTerroir Research Ledger | Most Certainly Try Labs</title>
+  <meta name="description" content="A transparent source and code-review ledger for NeuroTerroir, an experimental wine-aroma and fly-olfaction teaching tool.">
+  <meta property="og:title" content="NeuroTerroir Research Ledger">
+  <meta property="og:description" content="Sources, GitHub projects, biological claims, uncertainties, and non-duplication decisions behind NeuroTerroir.">
+  <link rel="stylesheet" href="../styles.css?v=20260919-neuroterroir-ledger">
+  <style>
+    :root{--ink:#201a1d;--paper:#f6f0e8;--wine:#641f38;--wine-dark:#32111f;--must:#bb8b3d;--leaf:#496451;--line:rgba(50,17,31,.17);--muted:#6d6265}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.62}
+    a{color:var(--wine);text-decoration-thickness:.08em;text-underline-offset:.18em}
+    .shell{width:min(1160px,calc(100% - 36px));margin-inline:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(246,240,232,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:780;text-decoration:none;letter-spacing:-.02em}
+    .brand-mark{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--wine);color:#fff;font-size:.68rem;letter-spacing:.08em}
+    .nav-links{display:flex;gap:20px;flex-wrap:wrap}.nav-links a{color:var(--ink);text-decoration:none;font-size:.9rem}
+    .hero{position:relative;overflow:hidden;background:linear-gradient(125deg,var(--wine-dark),#6f213c 58%,#9f5c3f);color:#fff;padding:88px 0 76px}
+    .hero:before,.hero:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.16)}
+    .hero:before{width:440px;height:440px;right:-80px;top:-210px;box-shadow:0 0 0 55px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.02)}
+    .hero:after{width:180px;height:180px;right:22%;bottom:-110px}
+    .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.55fr);gap:52px;align-items:end}
+    .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800;color:#f2d7b1;margin:0 0 18px}
+    h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.06;margin:0;color:inherit}
+    h1{font-size:clamp(3rem,8vw,6.4rem);letter-spacing:-.055em;max-width:860px}
+    .lede{font-size:clamp(1.05rem,2vw,1.28rem);max-width:760px;color:rgba(255,255,255,.82);margin:24px 0 0}
+    .hero-note{border-left:1px solid rgba(255,255,255,.3);padding-left:24px;font-size:.92rem;color:rgba(255,255,255,.78)}
+    .hero-note strong{display:block;color:#fff;margin-bottom:8px}
+    main{padding:58px 0 92px}
+    .notice{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;border:1px solid rgba(187,139,61,.55);background:#fff9ed;padding:22px;border-radius:18px;margin-bottom:54px}
+    .notice b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--must);color:#fff}
+    .notice p{margin:0}.notice strong{display:block;margin-bottom:4px}
+    .section{margin-top:66px}.section-head{display:grid;grid-template-columns:minmax(0,.8fr) minmax(280px,.55fr);gap:40px;align-items:end;padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:24px}
+    .kicker{margin:0 0 9px;text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;font-weight:800;color:var(--wine)}
+    h2{font-size:clamp(2rem,4.5vw,3.55rem);letter-spacing:-.035em}
+    .section-head>p{margin:0;color:var(--muted)}
+    .principles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .principle{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
+    .principle span{display:block;color:var(--must);font-weight:800;font-size:.76rem;letter-spacing:.09em;margin-bottom:24px}.principle h3{font-size:1.28rem;margin-bottom:8px}.principle p{margin:0;color:var(--muted);font-size:.91rem}
+    .filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 22px}.filter{appearance:none;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink);font:inherit;font-size:.86rem;padding:9px 15px;cursor:pointer}.filter[aria-pressed="true"]{background:var(--wine);border-color:var(--wine);color:#fff}
+    .repo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .repo{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;display:grid;gap:14px;transition:.2s ease}.repo:hover{transform:translateY(-2px);box-shadow:0 13px 36px rgba(50,17,31,.08)}.repo[hidden]{display:none}
+    .repo-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.repo h3{font-size:1.45rem}.repo h3 a{text-decoration:none}.tag{display:inline-flex;border-radius:999px;background:#eee6dc;padding:5px 9px;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}.tag.reviewed{background:#dfece2;color:#274e32}.tag.planned{background:#f7e7b8;color:#704d0a}.tag.watch{background:#eadde5;color:#69213d}
+    .repo p{margin:0;color:var(--muted)}.repo dl{display:grid;gap:10px;margin:0}.repo dl div{border-top:1px solid var(--line);padding-top:10px}.repo dt{font-size:.72rem;text-transform:uppercase;letter-spacing:.11em;font-weight:800;color:var(--wine)}.repo dd{margin:3px 0 0;font-size:.9rem}
+    .source-list{display:grid;gap:10px}.source{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:20px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 18px}.source-type{font-size:.71rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--leaf)}.source strong{display:block}.source p{margin:4px 0 0;color:var(--muted);font-size:.9rem}.confidence{font-size:.72rem;font-weight:800;border-radius:999px;padding:5px 9px;background:#eee6dc;white-space:nowrap}
+    .claims{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden}.claims th,.claims td{text-align:left;vertical-align:top;padding:15px;border-bottom:1px solid var(--line)}.claims tr:last-child td{border-bottom:0}.claims th{background:#eee6dc;font-size:.72rem;text-transform:uppercase;letter-spacing:.09em}.claims td{font-size:.9rem}.claims td:first-child{font-weight:800;color:var(--wine)}
+    .log{display:grid;gap:0;border-left:2px solid var(--must);margin-left:8px}.log-entry{position:relative;padding:0 0 28px 25px}.log-entry:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--must);box-shadow:0 0 0 5px var(--paper)}.log-entry time{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800}.log-entry h3{font-size:1.24rem;margin:4px 0 6px}.log-entry p{margin:0;color:var(--muted)}
+    .empty{border:1px dashed var(--line);padding:22px;border-radius:14px;color:var(--muted)}
+    footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted)}footer .shell{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    @media(max-width:800px){.hero-grid,.section-head{grid-template-columns:1fr}.hero-note{border-left:0;border-top:1px solid rgba(255,255,255,.3);padding:18px 0 0}.principles,.repo-grid{grid-template-columns:1fr 1fr}.source{grid-template-columns:1fr}.confidence{justify-self:start}.claims{display:block;overflow-x:auto;white-space:normal}}
+    @media(max-width:560px){.nav{align-items:flex-start;padding:14px 0}.nav-links{gap:12px}.hero{padding:64px 0 54px}.principles,.repo-grid{grid-template-columns:1fr}.shell{width:min(100% - 24px,1160px)}.claims{font-size:.82rem}.claims th,.claims td{min-width:160px;padding:12px}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="../index.html"><span class="brand-mark">MCT</span>Nature Work</a>
+      <nav class="nav-links" aria-label="Primary"><a href="../garden.html">Projects</a><a href="#repositories">Code reviewed</a><a href="#sources">Sources</a><a href="../about.html">About</a></nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div>
+        <p class="eyebrow">Open methods · evolving record</p>
+        <h1>NeuroTerroir Research Ledger</h1>
+        <p class="lede">Every scientific source, codebase, mapping decision, uncertainty, and non-duplication choice behind an experimental wine-aroma and fly-olfaction teaching tool.</p>
+      </div>
+      <p class="hero-note"><strong>Last updated September 19, 2026</strong>This ledger is published before the interactive lab. Entries will change as claims are checked, mappings are narrowed, and the prototype is tested.</p>
+    </div>
+  </section>
+
+  <main class="shell">
+    <div class="notice"><b>!</b><p><strong>What this project will not claim</strong>A fly connectome cannot judge wine, reproduce human flavor perception, establish quality, or reveal terroir by itself. NeuroTerroir will use documented fly olfactory pathways as an inspectable teaching scaffold. Human sensory language and wine chemistry remain separate layers.</p></div>
+
+    <section class="section" aria-labelledby="method-title">
+      <div class="section-head"><div><p class="kicker">Review protocol</p><h2 id="method-title">How evidence enters the build</h2></div><p>A source can inform the lab only when its role and limits are visible. Code review is for architecture, controls, and failure lessons—not visual or functional cloning.</p></div>
+      <div class="principles">
+        <article class="principle"><span>01</span><h3>Primary first</h3><p>Papers, official datasets, and maintained documentation outrank summaries and demos.</p></article>
+        <article class="principle"><span>02</span><h3>Map cautiously</h3><p>Odorant → receptor → glomerulus claims need direct evidence; uncertain mappings stay uncertain.</p></article>
+        <article class="principle"><span>03</span><h3>Keep controls</h3><p>Biological wiring must be compared with silenced, input-free, and rewired conditions.</p></article>
+        <article class="principle"><span>04</span><h3>No borrowed theater</h3><p>The lab will not copy another project’s visual identity, game loop, or unsupported claims.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="repositories" aria-labelledby="repositories-title">
+      <div class="section-head"><div><p class="kicker">Code provenance</p><h2 id="repositories-title">GitHub projects under review</h2></div><p>The list is intentionally finite. Each entry records why the code matters and the line NeuroTerroir will not cross.</p></div>
+      <div class="filters" role="group" aria-label="Filter repositories">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" type="button" data-filter="foundation" aria-pressed="false">Foundations</button>
+        <button class="filter" type="button" data-filter="olfaction" aria-pressed="false">Olfaction</button>
+        <button class="filter" type="button" data-filter="simulation" aria-pressed="false">Simulation</button>
+        <button class="filter" type="button" data-filter="boundary" aria-pressed="false">Duplication checks</button>
+      </div>
+      <div class="repo-grid" id="repo-grid">
+        <article class="repo" data-category="foundation boundary"><div class="repo-top"><h3><a href="https://github.com/cobanov/awesome-fly">awesome-fly</a></h3><span class="tag reviewed">Reviewed</span></div><p>Curated catalog of contemporary fly-connectome experiments and their stated limitations.</p><dl><div><dt>Used for</dt><dd>Prior-art inventory, vocabulary, and links to source repositories.</dd></div><div><dt>Will not copy</dt><dd>Any listed project’s mechanic, visual presentation, or claim framing.</dd></div></dl></article>
+        <article class="repo" data-category="foundation simulation"><div class="repo-top"><h3><a href="https://github.com/cobanov/fly-connectome-template">fly-connectome-template</a></h3><span class="tag planned">Planned</span></div><p>React and Three.js workbench built around MaleCNS and Flybody assets.</p><dl><div><dt>Used for</dt><dd>Architecture and model-output conventions if its custom license is accepted and visible attribution is provided.</dd></div><div><dt>Will not copy</dt><dd>The starter’s interface styling or treat its documented output format as a pretrained brain.</dd></div></dl></article>
+        <article class="repo" data-category="olfaction simulation"><div class="repo-top"><h3><a href="https://github.com/yukincom/fly-odor-onoff">fly-odor-onoff</a></h3><span class="tag planned">Planned</span></div><p>Reproducible odor ON/OFF interventions using a filtered MaleCNS LIF graph.</p><dl><div><dt>Used for</dt><dd>Input-pathway audits, intervention structure, and honest fixed-circuit limitations.</dd></div><div><dt>Will not copy</dt><dd>Its binary odor experiment or DM1/VA2 readout as NeuroTerroir’s primary experience.</dd></div></dl></article>
+        <article class="repo" data-category="olfaction simulation"><div class="repo-top"><h3><a href="https://github.com/WilliamJones/fly-blackjack">The Fly’s Table</a></h3><span class="tag planned">Planned</span></div><p>Includes a mushroom-body model and separate odor-conditioning experiments with dopamine-cut controls.</p><dl><div><dt>Used for</dt><dd>Measured PN → Kenyon cell → MBON organization and intervention design.</dd></div><div><dt>Will not copy</dt><dd>Card play, shared persistent brain, reward mechanic, or project-defined learning rule.</dd></div></dl></article>
+        <article class="repo" data-category="olfaction simulation"><div class="repo-top"><h3><a href="https://github.com/jniimi/boltzmann-fly">boltzmann-fly</a></h3><span class="tag planned">Planned</span></div><p>Connectome-masked model using a right-hemisphere mushroom-body circuit and rewiring controls.</p><dl><div><dt>Used for</dt><dd>Topology-control design and transparent comparison with dense and randomized models.</dd></div><div><dt>Will not copy</dt><dd>Consumer-behavior prediction, energy-model framing, or its trained couplings.</dd></div></dl></article>
+        <article class="repo" data-category="simulation foundation"><div class="repo-top"><h3><a href="https://github.com/philshiu/Drosophila_brain_model">Drosophila brain model</a></h3><span class="tag planned">Planned</span></div><p>Research implementation of the Shiu et al. connectome-based leaky integrate-and-fire model.</p><dl><div><dt>Used for</dt><dd>Scientific simulation assumptions, activation/silencing patterns, and reproducible experiments.</dd></div><div><dt>Will not copy</dt><dd>Whole-brain fidelity claims unsupported by NeuroTerroir’s reduced teaching circuit.</dd></div></dl></article>
+        <article class="repo" data-category="simulation foundation"><div class="repo-top"><h3><a href="https://github.com/eonsystemspbc/fly-brain">Eon fly-brain</a></h3><span class="tag planned">Planned</span></div><p>FlyWire whole-brain LIF implementation with several simulation backends.</p><dl><div><dt>Used for</dt><dd>Performance comparison and separation of neural runtime from embodiment.</dd></div><div><dt>Will not copy</dt><dd>A full-graph engine where a smaller auditable pathway is sufficient.</dd></div></dl></article>
+        <article class="repo" data-category="foundation"><div class="repo-top"><h3><a href="https://github.com/connectome-neuprint/neuprint-python">neuprint-python</a></h3><span class="tag planned">Planned</span></div><p>Official Python client for querying neuPrint connectome datasets.</p><dl><div><dt>Used for</dt><dd>Reproducible neuron and connection queries rather than hand-entered graph claims.</dd></div><div><dt>Will not copy</dt><dd>No interface concept; this is a data-access dependency candidate.</dd></div></dl></article>
+        <article class="repo" data-category="boundary simulation"><div class="repo-top"><h3><a href="https://github.com/Vortitron/HouseFly">HouseFly</a></h3><span class="tag watch">Boundary</span></div><p>Home Assistant integration connecting household sensor states to a virtual fly.</p><dl><div><dt>Used for</dt><dd>Duplication check and lessons about explicit sensor-to-neuron mappings.</dd></div><div><dt>Will not copy</dt><dd>Home Assistant entities, a persistent household fly, looming-object logic, or room preference.</dd></div></dl></article>
+        <article class="repo" data-category="boundary olfaction"><div class="repo-top"><h3><a href="https://github.com/snedea/flybrain">FlyBrain</a></h3><span class="tag watch">Boundary</span></div><p>Browser FlyWire simulation with food, touch, light, and temperature controls.</p><dl><div><dt>Used for</dt><dd>Duplication check for general-purpose sensory dashboards.</dd></div><div><dt>Will not copy</dt><dd>Generic room simulation, body controls, or its multisensory panel.</dd></div></dl></article>
+      </div>
+    </section>
+
+    <section class="section" id="sources" aria-labelledby="sources-title">
+      <div class="section-head"><div><p class="kicker">Evidence queue</p><h2 id="sources-title">Scientific and domain sources</h2></div><p>“Queued” means the source has been identified but its exact claim has not yet passed the project’s extraction and citation check.</p></div>
+      <div class="source-list">
+        <article class="source"><span class="source-type">Origin article</span><div><strong><a href="https://x.com/insomnia_vip/article/2099466326536290360">The fly-connectome project article</a></strong><p>Prompting context and overview of the current connectome-building wave; not a source for biological claims.</p></div><span class="confidence">Reviewed</span></article>
+        <article class="source"><span class="source-type">Dataset</span><div><strong><a href="https://male-cns.janelia.org/">MaleCNS</a></strong><p>Official adult male central-nervous-system connectome and release history.</p></div><span class="confidence">Primary</span></article>
+        <article class="source"><span class="source-type">Dataset</span><div><strong><a href="https://flywire.ai/">FlyWire</a></strong><p>Adult female brain connectome; a distinct dataset that must not be blended casually with MaleCNS.</p></div><span class="confidence">Primary</span></article>
+        <article class="source"><span class="source-type">Data access</span><div><strong><a href="https://neuprint.janelia.org/">neuPrint</a></strong><p>Graph queries and provenance for named neurons and measured connectivity.</p></div><span class="confidence">Primary</span></article>
+        <article class="source"><span class="source-type">Odor response</span><div><strong><a href="https://doi.org/10.1038/s41598-018-28938-z">DoOR 2.0</a></strong><p>Consensus odorant-response resource for the Drosophila olfactory system.</p></div><span class="confidence">Queued</span></article>
+        <article class="source"><span class="source-type">Olfactory atlas</span><div><strong><a href="https://doi.org/10.1016/j.cell.2020.01.007">The complete map of the Drosophila olfactory projection-neuron network</a></strong><p>Projection-neuron architecture and antennal-lobe organization for downstream mapping.</p></div><span class="confidence">Queued</span></article>
+        <article class="source"><span class="source-type">Wine chemistry</span><div><strong><a href="https://www.awri.com.au/industry_support/winemaking_resources/sensory_assessment/">Australian Wine Research Institute sensory resources</a></strong><p>Wine sensory language and aroma context, kept separate from fly receptor claims.</p></div><span class="confidence">Queued</span></article>
+        <article class="source"><span class="source-type">Compound records</span><div><strong><a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a></strong><p>Compound identifiers and chemical properties for aroma ingredients used by the interface.</p></div><span class="confidence">Primary</span></article>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="claims-title">
+      <div class="section-head"><div><p class="kicker">Claim register</p><h2 id="claims-title">Candidate aroma mappings</h2></div><p>This is a research queue, not a finished receptor table. Only high-confidence pathways will enter the first simulation.</p></div>
+      <table class="claims">
+        <thead><tr><th>Compound</th><th>Wine context</th><th>Fly pathway candidate</th><th>Current status</th></tr></thead>
+        <tbody>
+          <tr><td>Geosmin</td><td>Earthy odor; often a fault or environmental taint context</td><td>Or56a → DA2</td><td>High-confidence candidate; primary-paper check pending</td></tr>
+          <tr><td>Ethyl acetate</td><td>Fruity at low levels; solvent-like at higher levels</td><td>Broad response; Or42b/DM1 among candidates</td><td>Needs concentration-aware evidence review</td></tr>
+          <tr><td>Isoamyl acetate</td><td>Banana/pear-drop ester</td><td>Or22a/ab3A → DM2 candidate</td><td>Needs direct response-source confirmation</td></tr>
+          <tr><td>Acetic acid</td><td>Volatile acidity</td><td>Ionotropic acid-sensing pathways, including Ir64a</td><td>Needs pathway and concentration disambiguation</td></tr>
+          <tr><td>Linalool</td><td>Floral/terpenic aroma</td><td>Potentially distributed receptor response</td><td>No single-pathway claim until reviewed</td></tr>
+          <tr><td>Ethanol</td><td>Matrix component and fermentation volatile</td><td>Multisensory/broad physiological effects</td><td>Will not be reduced to one receptor without evidence</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" aria-labelledby="log-title">
+      <div class="section-head"><div><p class="kicker">Build history</p><h2 id="log-title">Research log</h2></div><p>Dated changes keep later conclusions traceable to the evidence available when they were made.</p></div>
+      <div class="log">
+        <article class="log-entry"><time datetime="2026-09-19">September 19, 2026</time><h3>Ledger opened before implementation</h3><p>Recorded scope, non-claims, initial code-review set, source queue, and tentative odor mappings. Interactive work remains paused until this public evidence surface is in place.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell"><span>Most Certainly Try · NeuroTerroir open methods</span><span>Teaching experiment · not a wine-quality model</span></div></footer>
+  <script>
+    const buttons=[...document.querySelectorAll('.filter')];
+    const repos=[...document.querySelectorAll('.repo')];
+    buttons.forEach(button=>button.addEventListener('click',()=>{
+      const filter=button.dataset.filter;
+      buttons.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      repos.forEach(repo=>{repo.hidden=filter!=='all'&&!repo.dataset.category.split(' ').includes(filter)});
+    }));
+  </script>
+</body>
+</html>
