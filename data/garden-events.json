@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-18T07:30:15.199Z",
+  "generatedAt": "2026-09-19T14:48:30.729Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-09-18",
-    "end": "2026-10-18"
+    "start": "2026-09-19",
+    "end": "2026-10-19"
   },
-  "eventCount": 80,
+  "eventCount": 79,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,40 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/:2026-09-18:9 - 10 a.m.",
-      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
-      "date": "2026-09-18",
-      "startDateTime": "2026-09-18",
-      "endDateTime": "2026-09-18",
-      "time": "9 - 10 a.m.",
-      "cost": "Free with membership or Garden admission.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
-      "city": "San Antonio",
-      "source": "San Antonio Botanical Garden",
-      "sourceKind": "Botanical garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape. Instructor: Conservation Educator"
-    },
-    {
-      "id": "Garden Style San Antonio:10002050:2026-09-18 09:00:00",
-      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
-      "date": "2026-09-18",
-      "startDateTime": "2026-09-18 09:00:00",
-      "endDateTime": "2026-09-18 10:00:00",
-      "time": "9 a.m. - 10 a.m.",
-      "cost": "See event page",
-      "location": "San Antonio Botanical Garden, 555 Funston Place, San Antonio, TX, 76513",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Class / Workshop",
-      "link": "https://www.gardenstylesanantonio.com/event/drop-in-guided-tour-texas-watersaver-garden-2/2026-09-18/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "summary": "Be inspired at the Botanical Garden and learn about the best seasonal plants and design tips for creating a beautiful, drought-tolerant landscape."
-    },
     {
       "id": "San Antonio Botanical Garden:https://sabgtx.org/event/nature-exploration-in-the-family-adventure-garden/:2026-09-19:10 - 10:30 a.m.",
       "title": "Nature Exploration in the Family Adventure Garden",
@@ -1388,6 +1354,23 @@
       "type": "Master Gardener",
       "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-18/",
       "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-18/",
+      "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
+    },
+    {
+      "id": "Bexar County Master Gardeners:10003034:2026-10-19 00:00:00",
+      "title": "Annual Poinsettia Sale",
+      "date": "2026-10-19",
+      "startDateTime": "2026-10-19 00:00:00",
+      "endDateTime": "2026-10-19 23:59:59",
+      "time": "All day",
+      "cost": "See event page",
+      "location": "",
+      "city": "",
+      "source": "Bexar County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-19/",
+      "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-19/",
       "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
     }
   ]
