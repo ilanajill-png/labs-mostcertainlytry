@@ -8,10 +8,10 @@
   <meta property="og:title" content="NeuroTerroir">
   <meta property="og:description" content="An experimental wine-aroma and fly-olfaction teaching laboratory with visible assumptions and controls.">
   <link rel="stylesheet" href="../styles.css?v=20260919-neuroterroir">
-  <link rel="stylesheet" href="../assets/neuroterroir/neuroterroir.css?v=20260919a">
+  <link rel="stylesheet" href="../assets/neuroterroir/neuroterroir.css?v=20260919b">
 </head>
 <body>
-  <header class="nt-topbar"><div class="nt-shell nt-nav"><a class="nt-brand" href="../index.html"><span class="nt-mark">MCT</span>Nature Work</a><nav class="nt-links" aria-label="Primary"><a href="#lab">Aroma lab</a><a href="#method">Method</a><a href="neuroterroir-research-ledger.html">Research ledger</a><a href="../garden.html">Projects</a></nav></div></header>
+  <header class="nt-topbar"><div class="nt-shell nt-nav"><a class="nt-brand" href="../index.html"><span class="nt-mark">MCT</span>Nature Work</a><nav class="nt-links" aria-label="Primary"><a href="#lab">Aroma lab</a><a href="#maison-noir">Maison Noir trial</a><a href="#method">Method</a><a href="neuroterroir-research-ledger.html">Research ledger</a><a href="../garden.html">Projects</a></nav></div></header>
   <section class="nt-hero"><div class="nt-shell nt-hero-grid"><div><p class="nt-eyebrow">Olfaction · connectomes · wine chemistry</p><h1>NeuroTerroir</h1><p class="nt-lede">Build an aroma profile, follow its signals through a reduced fly olfactory circuit, and challenge the result with pathway silencing and rewired controls.</p><div class="nt-hero-actions"><a class="nt-btn" href="#lab">Open the aroma lab</a><a class="nt-btn secondary" href="neuroterroir-research-ledger.html">Read the evidence ledger</a></div></div><div class="nt-hero-side"><p><strong>This is an inspectable teaching experiment.</strong>The fly circuit does not taste wine, predict preference, establish quality, or reveal terroir. Its readouts are deliberately modest and labeled.</p></div></div></section>
   <main class="nt-shell nt-main">
     <div class="nt-disclaimer"><span>!</span><p><strong>Biology and interface assumptions are separated.</strong>Documented odor-response candidates feed a small project-defined circuit for visualization. Slider values are relative inputs—not ppm, sensory thresholds, or bottle measurements.</p></div>
@@ -67,6 +67,42 @@
         </section>
       </div>
       <p id="live-region" class="nt-sr-only" aria-live="polite"></p>
+    </section>
+
+    <section class="nt-section" id="maison-noir" aria-labelledby="maison-title">
+      <div class="nt-heading"><div><p class="nt-kicker">Applied model · equal outdoor exposure</p><h2 id="maison-title">Maison Noir: 30-minute glass trial</h2></div><p>Thirteen wines with usable winery notes are ranked for one specific thought experiment: equal pours in identical, uncovered glasses, placed together outdoors for 30 minutes.</p></div>
+      <div class="nt-trial-summary">
+        <article><span>Least signal</span><strong>Free Gamay</strong><b>39</b></article>
+        <article><span>Highest signal</span><strong>Other People’s Pinot Gris</strong><b>82</b></article>
+        <article><span>Exposure</span><strong>30 minutes outdoors</strong><b>Equal</b></article>
+      </div>
+      <div class="nt-callout nt-callout-critical"><p><strong>This is a comparative exposure index—not a predicted fly count.</strong> It cannot tell you whether any fly will arrive. Weather, shade, wind, temperature, local fly abundance, glass geometry, pour size, microbial activity, and bottle condition are not supplied by the winery and can overwhelm these differences.</p></div>
+      <div class="nt-table-wrap nt-ranking-wrap">
+        <table class="nt-table nt-ranking">
+          <thead><tr><th>Least → most</th><th>Wine</th><th>30-min index</th><th>Winery cues used for the outdoor adjustment</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Free Gamay</td><td><span class="nt-score" style="--score:39">39</span></td><td>General fruit balanced by earthiness; no specific aromatic or sweetness cue.</td></tr>
+            <tr><td>2</td><td>Horseshoes &amp; Handgrenades</td><td><span class="nt-score" style="--score:47">47</span></td><td>Rich, ripe fruit and cherry; leather/structure keep the adjustment modest.</td></tr>
+            <tr><td>3</td><td>Other People’s Pinot Noir</td><td><span class="nt-score" style="--score:49">49</span></td><td>Cherry and floral cues, framed by earth, herbs, spice, and wood.</td></tr>
+            <tr><td>4</td><td>Oregogne Pinot Noir</td><td><span class="nt-score" style="--score:51">51</span></td><td>Bright cherry and blueberry, tempered by bramble and sous-bois.</td></tr>
+            <tr><td>5</td><td>Oregogne Chardonnay</td><td><span class="nt-score" style="--score:55">55</span></td><td>Lemon, pear, and apple with flinty, cucumber, nut, and stone cues.</td></tr>
+            <tr><td>6</td><td>Gamma Ray</td><td><span class="nt-score" style="--score:57">57</span></td><td>Bright, juicy cran-strawberry fruit; spice, leather, and tannin constrain the lift.</td></tr>
+            <tr><td>7</td><td>Bastardo Jackson</td><td><span class="nt-score" style="--score:58">58</span></td><td>Strawberry-rhubarb pie and citrus oil, with a slight earthy beet note.</td></tr>
+            <tr><td>8</td><td>Knock On Wood</td><td><span class="nt-score" style="--score:69">69</span></td><td>Perfumed honeydew, pear, and starfruit; no explicit sweetness.</td></tr>
+            <tr><td>9</td><td>New Noir</td><td><span class="nt-score" style="--score:74">74</span></td><td>Aromatic stone-fruit potpourri from a Gewürztraminer-led skin-contact blend.</td></tr>
+            <tr><td>10</td><td>P-OUI</td><td><span class="nt-score" style="--score:77">77</span></td><td>Strawberry and “Franken Berry jam” plus a fermentation-adjacent “funk” cue.</td></tr>
+            <tr><td>11</td><td>Love Drunk</td><td><span class="nt-score" style="--score:78">78</span></td><td>Provocative strawberry and raspberry aromas with watermelon and kiwi.</td></tr>
+            <tr><td>12</td><td>Bottoms Up</td><td><span class="nt-score" style="--score:79">79</span></td><td>Aromatic peach and citrus plus the only explicit residual-sweetness cue: “a kiss of sweetness.”</td></tr>
+            <tr><td>13</td><td>Other People’s Pinot Gris</td><td><span class="nt-score" style="--score:82">82</span></td><td>Lush, round apple, pear, and peach cues produce the strongest modeled volatile-fruit signal.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="nt-grid-3 nt-trial-notes">
+        <article class="nt-card"><h3>What 30 minutes changes</h3><p>It gives every equal pour the same opportunity to release volatiles and be encountered. The model does not simulate minute-by-minute evaporation because temperature, wind, shade, and measured headspace chemistry are unknown.</p></article>
+        <article class="nt-card"><h3>How the index was built</h3><p>The original NeuroTerroir fruit-esters output is the base. A disclosed 0–6 aromatic-fruit adjustment and 0–4 explicit-sweetness/retention adjustment are added from Maison Noir’s prose. Ethanol is held constant; acetic acid stays near baseline.</p></article>
+        <article class="nt-card"><h3>Three wines withheld</h3><p>XL Magnum, Touché, and Bourgeois are listed as “coming soon” without composition or tasting notes. They are reviewed but not ranked rather than filled with invented inputs.</p></article>
+      </div>
+      <p class="nt-source-note">Wine descriptions: <a href="https://maisonnoirwines.com/wines">Maison Noir Wines</a>. Biological context: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10145260/">fermentation-associated chemical preference in <em>Drosophila</em></a>. Full assumptions and scoring register: <a href="neuroterroir-research-ledger.html#maison-noir-trial">research ledger</a>.</p>
     </section>
 
     <section class="nt-section" id="method" aria-labelledby="method-title"><div class="nt-heading"><div><p class="nt-kicker">Read before interpreting</p><h2 id="method-title">What the model is—and is not</h2></div><p>The educational value comes from exposing the translation layer. Every number after the documented odor response is a project decision that can be inspected or challenged.</p></div>

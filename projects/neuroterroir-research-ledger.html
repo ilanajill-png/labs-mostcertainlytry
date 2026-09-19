@@ -122,7 +122,26 @@
         <article class="source"><span class="source-type">Dedicated pathway</span><div><strong><a href="https://doi.org/10.1016/j.cell.2012.09.046">A conserved dedicated olfactory circuit for detecting harmful microbes in <em>Drosophila</em></a></strong><p>Primary evidence for the dedicated geosmin-sensitive Or56a pathway used as the lab’s highest-confidence input.</p></div><span class="confidence">Primary</span></article>
         <article class="source"><span class="source-type">Wine chemistry</span><div><strong><a href="https://www.awri.com.au/industry_support/winemaking_resources/sensory_assessment/">Australian Wine Research Institute sensory resources</a></strong><p>Wine sensory language and aroma context, kept separate from fly receptor claims.</p></div><span class="confidence">Queued</span></article>
         <article class="source"><span class="source-type">Compound records</span><div><strong><a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a></strong><p>Compound identifiers and chemical properties for aroma ingredients used by the interface.</p></div><span class="confidence">Primary</span></article>
+        <article class="source"><span class="source-type">Applied trial</span><div><strong><a href="https://maisonnoirwines.com/wines">Maison Noir Wines — current wine descriptions</a></strong><p>First-party compositions and tasting notes used to construct the Maison Noir comparison. Wines without usable notes are withheld from ranking.</p></div><span class="confidence">First-party</span></article>
+        <article class="source"><span class="source-type">Behavior study</span><div><strong><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10145260/">Comparison of preference for chemicals associated with fruit fermentation</a></strong><p>Behavioral and antennal evidence that attraction to ethanol, acetic acid, and other fermentation-associated volatiles is concentration- and physiological-state dependent.</p></div><span class="confidence">Primary</span></article>
       </div>
+    </section>
+
+    <section class="section" id="maison-noir-trial" aria-labelledby="maison-ledger-title">
+      <div class="section-head"><div><p class="kicker">Applied model register</p><h2 id="maison-ledger-title">Maison Noir outdoor-glass trial</h2></div><p>The public ranking is a reproducible thought experiment, not a field validation.</p></div>
+      <table class="claims">
+        <thead><tr><th>Decision</th><th>Implementation</th><th>Reason</th><th>Limitation</th></tr></thead>
+        <tbody>
+          <tr><td>Exposure frame</td><td>Equal pours, identical uncovered glasses, colocated outdoors for 30 minutes</td><td>Holds container, volume, place, and time constant</td><td>Weather and local fly abundance remain unknown</td></tr>
+          <tr><td>Base signal</td><td>Published NeuroTerroir Fruit-esters output</td><td>Keeps the comparison tied to the visible reduced circuit</td><td>Inputs come from tasting prose, not headspace measurements</td></tr>
+          <tr><td>Aroma adjustment</td><td>0–6 points for explicit ripe, juicy, jammy, perfumed, or multi-fruit aroma language</td><td>Represents relative volatile-fruit emphasis during equal exposure</td><td>Descriptors are not chemical concentrations</td></tr>
+          <tr><td>Retention adjustment</td><td>0–4 points only for explicit sweetness language</td><td>Acknowledges that a landed fly may encounter sugar</td><td>Sugar itself is not a long-range volatile attractant</td></tr>
+          <tr><td>Ethanol</td><td>Held constant across wines</td><td>ABV is not published for every listed wine</td><td>Real ABV and evaporation rates vary</td></tr>
+          <tr><td>Acetic acid</td><td>Held near baseline</td><td>No wine is described as volatile-acidic</td><td>Absence from tasting prose is not a lab measurement</td></tr>
+          <tr><td>Geosmin</td><td>Zero throughout</td><td>“Earth,” “beet,” leather, and sous-bois do not establish geosmin</td><td>Other earthy volatiles are outside the reduced model</td></tr>
+          <tr><td>Withheld entries</td><td>XL Magnum, Touché, and Bourgeois</td><td>The winery page says “coming soon” without usable composition or tasting notes</td><td>No rank is preferable to invented inputs</td></tr>
+        </tbody>
+      </table>
     </section>
 
     <section class="section" aria-labelledby="claims-title">
@@ -143,6 +162,7 @@
     <section class="section" aria-labelledby="log-title">
       <div class="section-head"><div><p class="kicker">Build history</p><h2 id="log-title">Research log</h2></div><p>Dated changes keep later conclusions traceable to the evidence available when they were made.</p></div>
       <div class="log">
+        <article class="log-entry"><time datetime="2026-09-19">September 19, 2026</time><h3>Maison Noir outdoor-glass comparison added</h3><p>Reviewed all 16 entries on Maison Noir’s wine page, ranked the 13 with usable notes under a controlled 30-minute outdoor exposure assumption, and withheld three undocumented entries. The display explicitly reports a constructed exposure index rather than fly counts or field-tested attraction.</p></article>
         <article class="log-entry"><time datetime="2026-09-19">September 19, 2026</time><h3>First interactive milestone implemented</h3><p>Built a reduced deterministic circuit with six relative inputs, five glomerular channels, A/B comparison, blind profiles, single-pathway silencing, and a seeded rewiring control. Downstream weights and readouts are visibly labeled as project-defined. Automated desktop and mobile tests passed preset recalculation, intervention rendering, comparison distance, console-error, and overflow checks.</p></article>
         <article class="log-entry"><time datetime="2026-09-19">September 19, 2026</time><h3>Ledger opened before implementation</h3><p>Recorded scope, non-claims, initial code-review set, source queue, and tentative odor mappings before interactive code was written.</p></article>
       </div>
