@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bee & Wasp Weekbook | Schertz–San Antonio</title>
+  <meta name="description" content="A private-by-default weekly field notebook for photographing and recording bees and wasps in the Schertz–San Antonio region.">
+  <meta property="og:title" content="Bee & Wasp Weekbook">
+  <meta property="og:description" content="52 weeks of local bee and wasp observation, with browser-only photo storage and live regional occurrence data.">
+  <link rel="stylesheet" href="../styles.css?v=20260920-bee-weekbook">
+  <link rel="stylesheet" href="../assets/bee-wasp-weekbook/weekbook.css?v=20260920a">
+</head>
+<body>
+  <header class="bw-topbar">
+    <div class="bw-shell bw-nav">
+      <a class="bw-brand" href="../index.html"><span aria-hidden="true">MCT</span><b>Nature Work</b></a>
+      <nav aria-label="Page navigation">
+        <a href="#weekbook">Weekbook</a>
+        <a href="#species">Local species</a>
+        <a href="#backup">Backup</a>
+        <a href="schertz-bee-wasp-weekly-log-methods.html">Methods</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="bw-hero">
+    <div class="bw-shell bw-hero-grid">
+      <div>
+        <p class="bw-eyebrow">Schertz–San Antonio · weekly community naturalism</p>
+        <h1>Bee &amp; Wasp<br>Weekbook</h1>
+        <p class="bw-lede">Look closely once a week. Photograph what visits, write down the plant and behavior, and build a year of local evidence.</p>
+        <div class="bw-actions"><a class="bw-button primary" href="#weekbook">Open this week</a><a class="bw-button" href="#species">See what flies when</a></div>
+      </div>
+      <div class="bw-hero-card" aria-label="Privacy summary">
+        <span class="bw-lock">Local-only</span>
+        <h2>Your photographs stay in this browser.</h2>
+        <p>No account, upload server, tracking pixel, or public observation map is used. Export a backup if you want to move the notebook to another device.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="bw-shell">
+    <section class="bw-summary" aria-label="Notebook summary">
+      <article><span>Weeks complete</span><strong id="stat-weeks">0</strong><small id="stat-weeks-total">of 52</small></article>
+      <article><span>Sightings</span><strong id="stat-sightings">0</strong><small>saved locally</small></article>
+      <article><span>Photographs</span><strong id="stat-photos">0</strong><small>on this device</small></article>
+      <article><span>Current streak</span><strong id="stat-streak">0</strong><small>weeks</small></article>
+    </section>
+
+    <section class="bw-section" id="weekbook" aria-labelledby="weekbook-title">
+      <div class="bw-heading">
+        <div><p class="bw-kicker">The field notebook</p><h2 id="weekbook-title">One honest look every week.</h2></div>
+        <p>Complete the same small survey each week. A week with no sightings is still useful evidence.</p>
+      </div>
+      <div class="bw-toolbar">
+        <label>Year <select id="year-select" aria-label="Notebook year"></select></label>
+        <button class="bw-button small" id="jump-current" type="button">Jump to current week</button>
+        <label>Show <select id="week-filter"><option value="all">All weeks</option><option value="open">Open weeks</option><option value="complete">Completed weeks</option><option value="sightings">Weeks with sightings</option></select></label>
+        <label class="bw-search">Find <input id="week-search" type="search" placeholder="species, plant, note…"></label>
+      </div>
+      <div class="bw-progress" aria-label="Annual progress"><span id="progress-bar"></span></div>
+      <div id="week-list" class="bw-week-list" aria-live="polite"></div>
+      <p id="week-empty" class="bw-empty" hidden>No weeks match this view.</p>
+    </section>
+
+    <section class="bw-section" id="species" aria-labelledby="species-title">
+      <div class="bw-heading">
+        <div><p class="bw-kicker">Historical community observations</p><h2 id="species-title">What has been seen locally?</h2></div>
+        <p>Every research-grade bee and non-ant wasp species recorded in the selected period inside the San Antonio–Schertz corridor. <strong>Bold names are the 12 most frequently recorded for that selection.</strong></p>
+      </div>
+      <div class="bw-species-controls">
+        <label>Period <select id="species-month"><option value="0">All year</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></label>
+        <label>Group <select id="species-group"><option value="all">Bees &amp; wasps</option><option value="bee">Bees</option><option value="wasp">Wasps</option></select></label>
+        <label class="bw-search">Search <input id="species-search" type="search" placeholder="common or scientific name"></label>
+      </div>
+      <div class="bw-season-grid">
+        <div class="bw-chart-panel"><div class="bw-panel-head"><div><h3>Recorded activity by month</h3><p>Observation counts, not population estimates</p></div><div class="bw-legend"><span><i class="bee"></i>Bees</span><span><i class="wasp"></i>Wasps</span></div></div><div id="season-chart" class="bw-season-chart" aria-label="Monthly iNaturalist observation counts"></div></div>
+        <aside class="bw-data-note"><strong id="species-total">Loading local records…</strong><p id="species-scope">Querying iNaturalist. The page will cache the latest successful result in this browser.</p><a id="inat-link" href="https://www.inaturalist.org/observations?nelat=29.80&nelng=-98.10&swlat=29.20&swlng=-98.85&taxon_id=124417" target="_blank" rel="noreferrer">Open the source observations ↗</a></aside>
+      </div>
+      <div id="species-status" class="bw-status" role="status" aria-live="polite"></div>
+      <ul id="species-list" class="bw-species-list"></ul>
+      <button class="bw-button" id="species-more" type="button" hidden>Show more species</button>
+      <div class="bw-caution"><strong>Recorded does not mean complete.</strong><p>Observers photograph conspicuous insects more often than tiny or difficult taxa. Bold means frequently recorded in this dataset—not abundant, harmless, or guaranteed to appear.</p></div>
+    </section>
+
+    <section class="bw-section" id="backup" aria-labelledby="backup-title">
+      <div class="bw-heading">
+        <div><p class="bw-kicker">Keep your own copy</p><h2 id="backup-title">Back up the field season.</h2></div>
+        <p>Because entries remain on this device, export them periodically. JSON preserves photographs; CSV is convenient for a spreadsheet but omits image files.</p>
+      </div>
+      <div class="bw-backup-grid">
+        <article><h3>Complete backup</h3><p>Download every checklist, note, and compressed photograph.</p><button class="bw-button primary" id="export-json" type="button">Download JSON backup</button></article>
+        <article><h3>Spreadsheet export</h3><p>Download one row per sighting, with week, date, identification, plant, behavior, and note.</p><button class="bw-button" id="export-csv" type="button">Download CSV</button></article>
+        <article><h3>Restore</h3><p>Import a Weekbook JSON backup. Matching weeks will be replaced by the imported copy.</p><label class="bw-button file-button">Choose backup<input id="import-json" type="file" accept="application/json"></label></article>
+      </div>
+    </section>
+
+    <section class="bw-section bw-method-preview" aria-labelledby="method-preview-title">
+      <div><p class="bw-kicker">Transparent boundary</p><h2 id="method-preview-title">Know what the checklist can—and cannot—say.</h2><p>The local species explorer uses iNaturalist research-grade records in a fixed regional bounding box. It excludes ants, separates bees by taxonomic ancestry, and treats the remaining narrow-waisted Hymenoptera as wasps. Full query details, limitations, privacy behavior, and source links are recorded on the methods page.</p></div>
+      <a class="bw-button" href="schertz-bee-wasp-weekly-log-methods.html">Read methods &amp; sources</a>
+    </section>
+  </main>
+
+  <dialog id="sighting-dialog" class="bw-dialog">
+    <form id="sighting-form" method="dialog">
+      <div class="bw-dialog-head"><div><p class="bw-kicker" id="dialog-week-label">Week</p><h2>Add a sighting</h2></div><button class="bw-icon-button" data-dialog-close type="button" aria-label="Close dialog">×</button></div>
+      <input type="hidden" id="sighting-week">
+      <input type="hidden" id="sighting-id">
+      <div class="bw-form-grid">
+        <label>Date<input id="obs-date" type="date" required></label>
+        <label>Group<select id="obs-kind" required><option value="bee">Bee</option><option value="wasp">Wasp</option><option value="unsure">Not sure yet</option></select></label>
+        <label class="wide">Identification<input id="obs-name" type="text" placeholder="e.g. Southern carpenter bee"></label>
+        <label>Plant or surface<input id="obs-plant" type="text" placeholder="flower, bare soil, wood…"></label>
+        <label>Behavior<input id="obs-behavior" type="text" placeholder="foraging, nesting, hunting…"></label>
+        <label class="wide">General location<input id="obs-location" type="text" placeholder="back garden, park, trail—not a precise address"></label>
+        <label class="wide">Notes<textarea id="obs-note" rows="4" placeholder="Color, size, markings, weather, interactions…"></textarea></label>
+        <label class="wide bw-photo-field">Photograph<input id="obs-photo" type="file" accept="image/*" capture="environment"><span>JPEG, PNG, HEIC where supported. A web copy is compressed and stripped of embedded location metadata before local storage.</span></label>
+      </div>
+      <div id="photo-preview-wrap" class="bw-photo-preview" hidden><img id="photo-preview" alt="Selected observation preview"><button id="remove-photo" class="bw-button danger small" type="button">Remove photo</button></div>
+      <div class="bw-dialog-actions"><button class="bw-button" data-dialog-close type="button">Cancel</button><button class="bw-button primary" id="save-sighting" type="submit">Save sighting</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="confirm-dialog" class="bw-confirm"><form method="dialog"><h2>Delete this sighting?</h2><p>The local note and photograph will be removed from this browser.</p><div><button class="bw-button" value="cancel">Keep it</button><button class="bw-button danger" value="confirm">Delete</button></div></form></dialog>
+
+  <div class="bw-toast" id="toast" role="status" aria-live="polite"></div>
+  <footer class="bw-footer"><div class="bw-shell"><span>Most Certainly Try · Bee &amp; Wasp Weekbook</span><span>Private-by-default field notes · regional source data refreshed from iNaturalist</span></div></footer>
+  <script src="../assets/bee-wasp-weekbook/weekbook.js?v=20260920a"></script>
+</body>
+</html>

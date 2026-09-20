@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bee & Wasp Weekbook | Methods & Sources</title>
+  <meta name="description" content="Data boundary, taxonomy, privacy behavior, and source ledger for the Schertz–San Antonio Bee & Wasp Weekbook.">
+  <link rel="stylesheet" href="../styles.css?v=20260920-bee-weekbook">
+  <link rel="stylesheet" href="../assets/bee-wasp-weekbook/weekbook.css?v=20260920a">
+</head>
+<body>
+  <header class="bw-topbar"><div class="bw-shell bw-nav"><a class="bw-brand" href="../index.html"><span aria-hidden="true">MCT</span><b>Nature Work</b></a><nav aria-label="Primary"><a href="schertz-bee-wasp-weekly-log.html">Weekbook</a><a href="#data">Data</a><a href="#privacy">Privacy</a><a href="#sources">Sources</a></nav></div></header>
+  <main class="bw-shell bw-ledger">
+    <header class="bw-ledger-hero"><p class="bw-eyebrow">Methods · provenance · limitations</p><h1>Weekbook evidence ledger</h1><p>The weekbook separates personal field notes from public occurrence data. This page records exactly what is stored, queried, classified, and emphasized.</p><a class="bw-button primary" href="schertz-bee-wasp-weekly-log.html">Return to the weekbook</a></header>
+
+    <section class="bw-section" id="data"><div class="bw-heading"><div><p class="bw-kicker">Occurrence boundary</p><h2>What “every local species” means.</h2></div></div>
+      <div class="bw-grid-2">
+        <article class="bw-ledger-card"><h3>Geography</h3><p>A fixed rectangle covering the San Antonio–Schertz corridor: southwest 29.20, −98.85 to northeast 29.80, −98.10. It is deliberately regional and does not disclose a home address.</p></article>
+        <article class="bw-ledger-card"><h3>Record quality</h3><p>The species explorer requests iNaturalist <strong>research-grade</strong> species counts. Community identifications can change, and absence from the list is not evidence of true absence.</p></article>
+        <article class="bw-ledger-card"><h3>Bee rule</h3><p>A species is treated as a bee when its iNaturalist taxonomic ancestry includes Anthophila (taxon 630955).</p></article>
+        <article class="bw-ledger-card"><h3>Wasp rule</h3><p>The starting group is Apocrita (124417). Ant descendants (Formicidae, 47336) and bees are excluded; the remaining recorded species are labeled wasps. This practical umbrella includes social, solitary, parasitoid, gall, and other wasp lineages.</p></article>
+      </div>
+      <div class="bw-caution"><strong>Completeness boundary</strong><p>“Every” means every species returned by that query—not every species scientifically possible in the region. Tiny parasitoids, difficult groups, private-land taxa, poorly photographed insects, and species without research-grade records are underrepresented.</p></div>
+    </section>
+
+    <section class="bw-section"><div class="bw-heading"><div><p class="bw-kicker">Emphasis rule</p><h2>Why some names are bold.</h2></div></div><div class="bw-ledger-card"><p>For the selected month (or all year), the page sorts visible records by iNaturalist observation count and bolds the first 12. “Most likely” therefore means <strong>most frequently recorded in this source and geography</strong>. It is not a population estimate, probability forecast, safety judgment, or guarantee. Observation effort, identifiability, body size, season, camera access, and enthusiasm all affect counts.</p></div></section>
+
+    <section class="bw-section" id="privacy"><div class="bw-heading"><div><p class="bw-kicker">Private-by-default architecture</p><h2>Your field records do not leave the browser.</h2></div></div>
+      <div class="bw-grid-2"><article class="bw-ledger-card"><h3>Local database</h3><p>Weekly checklists, text, and compressed web copies of photographs are stored in IndexedDB under this site’s origin. No application server receives them.</p></article><article class="bw-ledger-card"><h3>Photo handling</h3><p>Supported images are redrawn into a canvas, resized to a maximum 1600 pixels on the long edge, and stored as JPEG. That process strips EXIF metadata, including embedded GPS, from the saved copy.</p></article><article class="bw-ledger-card"><h3>Backups</h3><p>A JSON export includes images as data URLs. CSV export omits image content. A browser reset, site-data cleanup, or device loss can erase records unless a JSON backup exists.</p></article><article class="bw-ledger-card"><h3>Public data request</h3><p>The page contacts api.inaturalist.org to retrieve regional species counts and monthly histograms. It sends the public regional bounding box and selected month—not personal notes, photos, or precise observation locations.</p></article></div>
+    </section>
+
+    <section class="bw-section" id="sources"><div class="bw-heading"><div><p class="bw-kicker">Source ledger</p><h2>Public data and documentation.</h2></div></div>
+      <ul class="bw-source-list">
+        <li><a href="https://www.inaturalist.org/observations?nelat=29.80&amp;nelng=-98.10&amp;swlat=29.20&amp;swlng=-98.85&amp;taxon_id=124417">iNaturalist regional observations</a><span>Underlying public observations in the defined San Antonio–Schertz corridor.</span></li>
+        <li><a href="https://api.inaturalist.org/v1/docs/">iNaturalist API documentation</a><span>Species counts, observation histograms, pagination, taxon objects, and quality-grade parameters.</span></li>
+        <li><a href="https://www.inaturalist.org/taxa/630955-Anthophila">Anthophila</a><span>Bee taxonomic boundary used by the filter.</span></li>
+        <li><a href="https://www.inaturalist.org/taxa/124417-Apocrita">Apocrita</a><span>Narrow-waisted Hymenoptera parent group used to assemble bee and wasp records.</span></li>
+        <li><a href="https://www.inaturalist.org/taxa/47336-Formicidae">Formicidae</a><span>Ant family excluded from the practical wasp list.</span></li>
+        <li><a href="https://www.inaturalist.org/pages/community+guidelines">iNaturalist community guidelines</a><span>Identification and community-practice context.</span></li>
+      </ul>
+      <p class="bw-updated">Method published September 20, 2026. Live occurrence values refresh from iNaturalist when the page is opened and are cached locally after a successful response.</p>
+    </section>
+  </main>
+  <footer class="bw-footer"><div class="bw-shell"><span>Most Certainly Try · Bee &amp; Wasp Weekbook</span><span>Methods &amp; source ledger</span></div></footer>
+</body>
+</html>
