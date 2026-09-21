@@ -71,6 +71,8 @@ assets/*
 !assets/neuroterroir/**
 !assets/bee-wasp-weekbook/
 !assets/bee-wasp-weekbook/**
+!assets/de-kiewiet-honey/
+!assets/de-kiewiet-honey/**
 
 !data/
 data/*
@@ -110,5 +112,6 @@ projects/*
 !projects/neuroterroir.html
 !projects/schertz-bee-wasp-weekly-log.html
 !projects/schertz-bee-wasp-weekly-log-methods.html
+!projects/de-kiewiet-honey-shop.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
