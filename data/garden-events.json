@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-20T07:33:36.076Z",
+  "generatedAt": "2026-09-21T07:30:22.766Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-09-20",
-    "end": "2026-10-20"
+    "start": "2026-09-21",
+    "end": "2026-10-21"
   },
-  "eventCount": 105,
+  "eventCount": 107,
   "sources": [
     {
       "name": "Garden Style San Antonio",
@@ -30,23 +30,6 @@
   ],
   "errors": [],
   "events": [
-    {
-      "id": "Garden Style San Antonio:10001926:2026-09-20 08:00:00",
-      "title": "Guided Bird Tour at Mitchell Lake",
-      "date": "2026-09-20",
-      "startDateTime": "2026-09-20 08:00:00",
-      "endDateTime": "2026-09-20 12:00:00",
-      "time": "8 a.m. - 12 p.m.",
-      "cost": "$10",
-      "location": "Mitchell Lake Audubon Center, 10750 Pleasanton Rd, San Antonio, 78221",
-      "city": "San Antonio",
-      "source": "Garden Style San Antonio",
-      "sourceKind": "Regional garden calendar",
-      "type": "Garden Event",
-      "link": "https://www.gardenstylesanantonio.com/event/guided-bird-tour-at-mitchell-lake/2026-09-20/",
-      "registerLink": "https://tickets.audubon.org/mitchelllake/events/d13ba5e7-51ca-03d1-0072-a2f859a585ed",
-      "summary": "On this guided bird tour around the various habitats of Mitchell Lake Audubon Center, guests will see 30-50 different bird species with Mitchell Lake Audubon Center's expert guide. Travelling by both car and by foot to access as many are..."
-    },
     {
       "id": "Garden Style San Antonio:32232:2026-09-21 11:00:00",
       "title": "Gardening Essentials",
@@ -1697,6 +1680,23 @@
       "summary": "Celebrate the season at Bexar County's Pct. 2 Fall Festival , a FREE, family-friendly event packed with activities, entertainment, and festive fun for all ages. Take your family and friends and enjoy an afternoon of costumes, games, trea..."
     },
     {
+      "id": "San Antonio Botanical Garden:https://sabgtx.org/event/drop-in-guided-tour-catrinas/:2026-10-17:9 - 10 a.m.",
+      "title": "Drop-in Guided Tour: Catrinas",
+      "date": "2026-10-17",
+      "startDateTime": "2026-10-17",
+      "endDateTime": "2026-10-17",
+      "time": "9 - 10 a.m.",
+      "cost": "Free with admission or Garden membership.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl, San Antonio, TX 78209",
+      "city": "San Antonio",
+      "source": "San Antonio Botanical Garden",
+      "sourceKind": "Botanical garden calendar",
+      "type": "Class / Workshop",
+      "link": "https://sabgtx.org/event/drop-in-guided-tour-catrinas/",
+      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-catrinas/",
+      "summary": "Join us on this guided tour to experience, Jardín de las Catrinas: De Catrinas a Refranes , featuring monumental living sculptures throughout the San Antonio Botanical Garden."
+    },
+    {
       "id": "Garden Style San Antonio:10001862:2026-10-17 09:00:00",
       "title": "Gardopia Volunteer Day (Saturday)",
       "date": "2026-10-17",
@@ -1813,6 +1813,40 @@
       "type": "Master Gardener",
       "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-20/",
       "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-20/",
+      "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
+    },
+    {
+      "id": "Guadalupe County Master Gardeners:10001484:2026-10-21 14:00:00",
+      "title": "Seed Exchange In the MG Library",
+      "date": "2026-10-21",
+      "startDateTime": "2026-10-21 14:00:00",
+      "endDateTime": "2026-10-21 17:00:00",
+      "time": "2 p.m. - 5 p.m.",
+      "cost": "Free",
+      "location": "Seguin Texas Agrilife Extension Office, 210 E. Live Oak St, Seguin, TX, 78155",
+      "city": "Seguin",
+      "source": "Guadalupe County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://guadalupecountymastergardeners.org/event/seed-exchange-in-the-mg-library/2026-10-21/",
+      "registerLink": "https://guadalupecountymastergardeners.org/events",
+      "summary": "Master Gardeners Seed Exchange Please note the new dates and times effective Monday February 16th, 2026. In Texas it seems it is always time to start thinking about saving seeds (and the Seed Exchange). As you watch your bountiful harves..."
+    },
+    {
+      "id": "Bexar County Master Gardeners:10003036:2026-10-21 00:00:00",
+      "title": "Annual Poinsettia Sale",
+      "date": "2026-10-21",
+      "startDateTime": "2026-10-21 00:00:00",
+      "endDateTime": "2026-10-21 23:59:59",
+      "time": "All day",
+      "cost": "See event page",
+      "location": "",
+      "city": "",
+      "source": "Bexar County Master Gardeners",
+      "sourceKind": "Master Gardener calendar",
+      "type": "Master Gardener",
+      "link": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-21/",
+      "registerLink": "https://bexarmg.org/event/annual-poinsettia-sale/2026-10-21/",
       "summary": "@ The Bexar County Master Gardener Annual Poinsettia sale will run October 1, 2026-November 20, 2026; more details to be shared closer to the sale dates. Proceeds from the sale fund BCMG Scholarships and educational programming. Email co..."
     }
   ]
