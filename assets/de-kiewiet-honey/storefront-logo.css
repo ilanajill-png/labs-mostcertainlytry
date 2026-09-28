@@ -1,0 +1,13 @@
+.brand-logo {
+  width: clamp(260px, 28vw, 430px);
+}
+
+@media (max-width: 650px) {
+  .site-header {
+    gap: 1rem;
+  }
+
+  .brand-logo {
+    width: min(62vw, 260px);
+  }
+}
