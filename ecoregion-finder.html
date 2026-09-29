@@ -50,7 +50,7 @@
         height: 1.1rem;
         border: 1px solid #4f544f;
         border-radius: 0.25rem;
-        background: rgba(252, 179, 220, 0.35);
+        background: linear-gradient(135deg, #f5cc9d 0 33%, #bdd98d 33% 66%, #f7d96a 66%);
       }
 
       .ecoregion-opacity-control {
@@ -64,6 +64,53 @@
       .ecoregion-opacity-control input {
         width: 7rem;
         accent-color: var(--green);
+      }
+
+      .ecoregion-level-one-guide {
+        padding: 1rem;
+        border-top: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .ecoregion-level-one-guide h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.05rem;
+      }
+
+      .ecoregion-level-one-guide p {
+        margin: 0 0 0.9rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .ecoregion-legend-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 0.55rem 1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .ecoregion-legend-item {
+        display: grid;
+        grid-template-columns: 1.15rem 2rem 1fr;
+        gap: 0.45rem;
+        align-items: center;
+        min-width: 0;
+        font-size: 0.88rem;
+      }
+
+      .ecoregion-legend-item span:first-child {
+        width: 1.15rem;
+        height: 1.15rem;
+        border: 1px solid #4f544f;
+        border-radius: 0.2rem;
+      }
+
+      .ecoregion-legend-code {
+        color: var(--muted);
+        font-weight: 800;
       }
 
       .leaflet-popup-content strong {
@@ -144,19 +191,24 @@
         <div class="section-heading">
           <p class="kicker">Live boundary map</p>
           <h2 id="live-map-title">Roads and towns remain visible over the ecoregion colors.</h2>
-          <p>This map stacks a neutral road map at the bottom, translucent EPA Level IV ecoregion polygons in the middle, and road and town labels on top. Search above to center the map on an address, or pan, zoom, and select a colored region.</p>
+          <p>This map stacks a neutral road map at the bottom, Level IV boundary polygons colored by their containing Level I region in the middle, and road and town labels on top. Search above to center the map on an address, or pan, zoom, and select a region.</p>
         </div>
         <div class="ecoregion-map-shell">
-          <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors beneath town and road labels"></div>
+          <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level I ecoregion colors and Level IV boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
-            <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>EPA Level IV ecoregions</span>
-            <span>Color shows the broad Level II group; select a region for its Level III and IV names.</span>
+            <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level I colors · Level IV boundaries</span>
+            <span>Select a region to see its Level I, III, and IV names.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
               <output id="ecoregion-opacity-value" for="ecoregion-opacity">20%</output>
             </label>
           </div>
+          <section class="ecoregion-level-one-guide" aria-labelledby="level-one-guide-title">
+            <h3 id="level-one-guide-title">Level I color guide</h3>
+            <p>All 10 Level I regions represented in the EPA’s continental-U.S. Level IV map. The full North American framework contains 15.</p>
+            <ul class="ecoregion-legend-grid" id="level-one-legend"></ul>
+          </section>
         </div>
         <p class="privacy-note">Map coverage: the continental United States. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community; ecoregion boundaries are from the EPA.</p>
       </section>
@@ -302,30 +354,30 @@
       const mapResultAction = document.querySelector("#map-result-action");
       const opacityControl = document.querySelector("#ecoregion-opacity");
       const opacityValue = document.querySelector("#ecoregion-opacity-value");
+      const levelOneLegend = document.querySelector("#level-one-legend");
 
-      const levelTwoColors = {
-        "ATLANTIC HIGHLANDS": "#56c2cc",
-        "CENTRAL USA PLAINS": "#e1f0e5",
-        "COLD DESERTS": "#e9eb8f",
-        "EVERGLADES": "#c773af",
-        "MARINE WEST COAST FOREST": "#43bfbb",
-        "MEDITERRANEAN CALIFORNIA": "#d4e6b8",
-        "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS": "#b9d67e",
-        "MIXED WOOD PLAINS": "#a3c94b",
-        "MIXED WOOD SHIELD": "#afdee3",
-        "OZARK/OUACHITA-APPALACHIAN FORESTS": "#51bd83",
-        "SOUTH CENTRAL SEMI-ARID PRAIRIES": "#fcb3dc",
-        "SOUTHEASTERN USA PLAINS": "#cfd2fc",
-        "TAMAULIPAS-TEXAS SEMIARID PLAIN": "#c8fcc2",
-        "TEMPERATE PRAIRIES": "#fcf8d7",
-        "TEXAS-LOUISIANA COASTAL PLAIN": "#f1c0fc",
-        "UPPER GILA MOUNTAINS": "#cfddfc",
-        "UPPER GILA MOUNTAINS (?)": "#cfddfc",
-        "WARM DESERTS": "#fcbbd6",
-        "WEST-CENTRAL SEMI-ARID PRAIRIES": "#fcb3b6",
-        "WESTERN CORDILLERA": "#fcd2f9",
-        "WESTERN SIERRA MADRE PIEDMONT": "#c9b3fc"
-      };
+      const levelOneRegions = [
+        { code: "5", key: "NORTHERN FORESTS", name: "Northern Forests", color: "#afdde3" },
+        { code: "6", key: "NORTHWESTERN FORESTED MOUNTAINS", name: "Northwestern Forested Mountains", color: "#60ba56" },
+        { code: "7", key: "MARINE WEST COAST FOREST", name: "Marine West Coast Forest", color: "#45bfbb" },
+        { code: "8", key: "EASTERN TEMPERATE FORESTS", name: "Eastern Temperate Forests", color: "#bdd98d" },
+        { code: "9", key: "GREAT PLAINS", name: "Great Plains", color: "#f5cc9d" },
+        { code: "10", key: "NORTH AMERICAN DESERTS", name: "North American Deserts", color: "#f7d96a" },
+        { code: "11", key: "MEDITERRANEAN CALIFORNIA", name: "Mediterranean California", color: "#d2e3b6" },
+        { code: "12", key: "SOUTHERN SEMI-ARID HIGHLANDS", name: "Southern Semi-Arid Highlands", color: "#d9d291" },
+        { code: "13", key: "TEMPERATE SIERRAS", name: "Temperate Sierras", color: "#bdd98d" },
+        { code: "15", key: "TROPICAL WET FORESTS", name: "Tropical Wet Forests", color: "#c474af" }
+      ];
+
+      const levelOneColors = Object.fromEntries(levelOneRegions.map((region) => [region.key, region.color]));
+
+      levelOneLegend.innerHTML = levelOneRegions.map((region) => `
+        <li class="ecoregion-legend-item">
+          <span style="background:${region.color}" aria-hidden="true"></span>
+          <span class="ecoregion-legend-code">${region.code}</span>
+          <span>${region.name}</span>
+        </li>
+      `).join("");
 
       const map = L.map("ecoregion-map", {
         center: [31.2, -99.3],
@@ -349,7 +401,7 @@
       }).addTo(map);
 
       function ecoregionStyle(feature, fillOpacity = Number(opacityControl.value)) {
-        const color = levelTwoColors[feature.properties.NA_L2NAME] || "#d9cfb8";
+        const color = levelOneColors[feature.properties.NA_L1NAME] || "#d9cfb8";
         return {
           color: "#35423b",
           weight: 1.25,
@@ -377,7 +429,8 @@
         const properties = layer.feature.properties;
         const levelFour = formatRegion(properties.US_L4CODE, properties.US_L4NAME);
         const levelThree = formatRegion(properties.US_L3CODE || properties.NA_L3CODE, properties.US_L3NAME || properties.NA_L3NAME);
-        return `<strong>${escapeHtml(levelFour || "EPA Level IV ecoregion")}</strong><br>${escapeHtml(levelThree || "")}`;
+        const levelOne = formatRegion(properties.NA_L1CODE, properties.NA_L1NAME);
+        return `<strong>${escapeHtml(levelFour || "EPA Level IV ecoregion")}</strong><br>${escapeHtml(levelThree || "")}<br>${escapeHtml(levelOne || "")}`;
       });
 
       const transportationLayer = L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", {
@@ -395,7 +448,7 @@
       const labelLayer = L.layerGroup([transportationLayer, placeLabelLayer]).addTo(map);
 
       L.control.layers(null, {
-        "EPA Level IV colors": ecoregionLayer,
+        "Level I colors + Level IV boundaries": ecoregionLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
 
@@ -443,7 +496,11 @@
         map.setView([y, x], 12);
         if (selectedMarker) selectedMarker.remove();
         selectedMarker = L.marker([y, x], { title: candidate.address }).addTo(map);
-        selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br>${escapeHtml(formatRegion(attributes.US_L4CODE, attributes.US_L4NAME))}`).openPopup();
+        const popupLevels = fields
+          .filter(([label]) => label.startsWith("Level"))
+          .map(([label, value]) => `<strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}`)
+          .join("<br>");
+        selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br>${popupLevels}`).openPopup();
       }
 
       function formatRegion(code, name) {
