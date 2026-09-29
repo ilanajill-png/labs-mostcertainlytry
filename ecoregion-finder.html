@@ -66,21 +66,77 @@
         accent-color: var(--green);
       }
 
-      .ecoregion-level-one-guide {
+      .ecoregion-level-four-guide {
         padding: 1rem;
         border-top: 1px solid var(--line);
         background: #fff;
       }
 
-      .ecoregion-level-one-guide h3 {
+      .ecoregion-level-four-guide h3 {
         margin: 0 0 0.25rem;
         font-size: 1.05rem;
       }
 
-      .ecoregion-level-one-guide p {
+      .ecoregion-level-four-guide > p {
         margin: 0 0 0.9rem;
         color: var(--muted);
         font-size: 0.9rem;
+      }
+
+      .selected-level-four {
+        display: grid;
+        grid-template-columns: 1.5rem 1fr;
+        gap: 0.2rem 0.7rem;
+        align-items: center;
+        margin: 0 0 1rem;
+        padding: 0.8rem;
+        border: 2px solid var(--green);
+        border-radius: 0.75rem;
+        background: var(--field);
+      }
+
+      .selected-level-four[hidden] {
+        display: none;
+      }
+
+      .selected-level-four-swatch {
+        grid-row: 1 / span 2;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 1px solid #4f544f;
+        border-radius: 0.25rem;
+      }
+
+      .selected-level-four small {
+        color: var(--muted);
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .ecoregion-legend-search {
+        display: grid;
+        gap: 0.35rem;
+        margin-bottom: 0.8rem;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .ecoregion-legend-search input {
+        width: 100%;
+        padding: 0.7rem 0.8rem;
+        border: 1px solid var(--line);
+        border-radius: 0.6rem;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+
+      .ecoregion-legend-scroll {
+        max-height: 420px;
+        overflow: auto;
+        padding: 0.2rem 0.35rem 0.2rem 0;
+        scrollbar-gutter: stable;
       }
 
       .ecoregion-legend-grid {
@@ -99,6 +155,17 @@
         align-items: center;
         min-width: 0;
         font-size: 0.88rem;
+      }
+
+      .ecoregion-legend-item[hidden] {
+        display: none;
+      }
+
+      .ecoregion-legend-item.is-selected {
+        padding: 0.35rem;
+        border-radius: 0.45rem;
+        outline: 2px solid var(--green);
+        background: var(--field);
       }
 
       .ecoregion-legend-item span:first-child {
@@ -191,23 +258,34 @@
         <div class="section-heading">
           <p class="kicker">Live boundary map</p>
           <h2 id="live-map-title">Roads and towns remain visible over the ecoregion colors.</h2>
-          <p>This map stacks a neutral road map at the bottom, Level IV boundary polygons colored by their containing Level I region in the middle, and road and town labels on top. Search above to center the map on an address, or pan, zoom, and select a region.</p>
+          <p>This map stacks a neutral road map at the bottom, EPA Level IV colors and boundaries in the middle, and road and town labels on top. Search above to center the map on an address, or pan, zoom, and select a region.</p>
         </div>
         <div class="ecoregion-map-shell">
-          <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level I ecoregion colors and Level IV boundaries beneath town and road labels"></div>
+          <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
-            <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level I colors · Level IV boundaries</span>
-            <span>Select a region to see its Level I, III, and IV names.</span>
+            <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
+            <span>Select a region to see its full ecoregion hierarchy.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
               <output id="ecoregion-opacity-value" for="ecoregion-opacity">20%</output>
             </label>
           </div>
-          <section class="ecoregion-level-one-guide" aria-labelledby="level-one-guide-title">
-            <h3 id="level-one-guide-title">Level I color guide</h3>
-            <p>All 10 Level I regions represented in the EPA’s continental-U.S. Level IV map. The full North American framework contains 15.</p>
-            <ul class="ecoregion-legend-grid" id="level-one-legend"></ul>
+          <section class="ecoregion-level-four-guide" aria-labelledby="level-four-guide-title">
+            <h3 id="level-four-guide-title">Level IV color guide</h3>
+            <p id="level-four-guide-status">Loading all current Level IV regions and their map colors…</p>
+            <div class="selected-level-four" id="selected-level-four" hidden>
+              <span class="selected-level-four-swatch" id="selected-level-four-swatch" aria-hidden="true"></span>
+              <small>Selected Level IV</small>
+              <strong id="selected-level-four-name"></strong>
+            </div>
+            <label class="ecoregion-legend-search" for="level-four-search">
+              Find a Level IV code or name
+              <input id="level-four-search" type="search" placeholder="For example: 32a or Northern Blackland Prairie" autocomplete="off" disabled>
+            </label>
+            <div class="ecoregion-legend-scroll" id="level-four-legend-scroll">
+              <ul class="ecoregion-legend-grid" id="level-four-legend"></ul>
+            </div>
           </section>
         </div>
         <p class="privacy-note">Map coverage: the continental United States. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community; ecoregion boundaries are from the EPA.</p>
@@ -277,6 +355,15 @@
             <h2><a href="https://services.arcgis.com/U7I2hMhPtOeGx0fs/arcgis/rest/services/EPA_Ecoregions_for_Terrestrial_Levels_1234/FeatureServer" target="_blank" rel="noopener">EPA Ecoregions for Terrestrial Levels 1-4</a></h2>
             <p class="project-type">Coordinate to ecoregion</p>
             <p>The coordinate is checked against EPA terrestrial ecoregion polygons, with Level IV used first when available.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta">
+              <span>Map colors</span>
+              <span>EPA national renderer</span>
+            </div>
+            <h2><a href="https://geodata.epa.gov/arcgis/rest/services/ORD/USEPA_Ecoregions_Level_III_and_IV/MapServer/7" target="_blank" rel="noopener">EPA Level IV Ecoregion Polygons</a></h2>
+            <p class="project-type">Level IV color guide</p>
+            <p>The national renderer supplies colors for all 968 current Level IV regions. The guide uses those same colors as the interactive map.</p>
           </article>
         </div>
       </section>
@@ -354,30 +441,77 @@
       const mapResultAction = document.querySelector("#map-result-action");
       const opacityControl = document.querySelector("#ecoregion-opacity");
       const opacityValue = document.querySelector("#ecoregion-opacity-value");
-      const levelOneLegend = document.querySelector("#level-one-legend");
+      const levelFourGuideStatus = document.querySelector("#level-four-guide-status");
+      const levelFourLegend = document.querySelector("#level-four-legend");
+      const levelFourSearch = document.querySelector("#level-four-search");
+      const selectedLevelFour = document.querySelector("#selected-level-four");
+      const selectedLevelFourSwatch = document.querySelector("#selected-level-four-swatch");
+      const selectedLevelFourName = document.querySelector("#selected-level-four-name");
 
-      const levelOneRegions = [
-        { code: "5", key: "NORTHERN FORESTS", name: "Northern Forests", color: "#afdde3" },
-        { code: "6", key: "NORTHWESTERN FORESTED MOUNTAINS", name: "Northwestern Forested Mountains", color: "#60ba56" },
-        { code: "7", key: "MARINE WEST COAST FOREST", name: "Marine West Coast Forest", color: "#45bfbb" },
-        { code: "8", key: "EASTERN TEMPERATE FORESTS", name: "Eastern Temperate Forests", color: "#bdd98d" },
-        { code: "9", key: "GREAT PLAINS", name: "Great Plains", color: "#f5cc9d" },
-        { code: "10", key: "NORTH AMERICAN DESERTS", name: "North American Deserts", color: "#f7d96a" },
-        { code: "11", key: "MEDITERRANEAN CALIFORNIA", name: "Mediterranean California", color: "#d2e3b6" },
-        { code: "12", key: "SOUTHERN SEMI-ARID HIGHLANDS", name: "Southern Semi-Arid Highlands", color: "#d9d291" },
-        { code: "13", key: "TEMPERATE SIERRAS", name: "Temperate Sierras", color: "#bdd98d" },
-        { code: "15", key: "TROPICAL WET FORESTS", name: "Tropical Wet Forests", color: "#c474af" }
+      const fallbackLevelFourPalette = [
+        "#a8d5e2", "#f2b5d4", "#c9e4a7", "#f6d186", "#b8b5e1", "#9dd9c5",
+        "#e7b89c", "#b6d0ef", "#d8c6e8", "#e4d9a8", "#9fc5a8", "#efb7a5"
       ];
+      const levelFourColors = new Map();
+      const levelFourColorsByCode = new Map();
+      let levelFourRegions = [];
+      let selectedLevelFourAttributes = null;
 
-      const levelOneColors = Object.fromEntries(levelOneRegions.map((region) => [region.key, region.color]));
+      function normalizeLevelFourKey(value) {
+        return String(value || "").trim().replace(/\s+/g, " ").toLowerCase();
+      }
 
-      levelOneLegend.innerHTML = levelOneRegions.map((region) => `
-        <li class="ecoregion-legend-item">
-          <span style="background:${region.color}" aria-hidden="true"></span>
-          <span class="ecoregion-legend-code">${region.code}</span>
-          <span>${region.name}</span>
-        </li>
-      `).join("");
+      function fallbackLevelFourColor(value) {
+        const key = normalizeLevelFourKey(value);
+        let hash = 0;
+        for (const character of key) hash = ((hash << 5) - hash + character.charCodeAt(0)) | 0;
+        return fallbackLevelFourPalette[Math.abs(hash) % fallbackLevelFourPalette.length];
+      }
+
+      function levelFourKey(properties) {
+        return properties.L4_KEY || `${properties.US_L4CODE || ""}  ${properties.US_L4NAME || ""}`.trim();
+      }
+
+      function levelFourColor(properties) {
+        const key = levelFourKey(properties);
+        const code = String(properties.US_L4CODE || "").trim().toLowerCase();
+        return levelFourColors.get(normalizeLevelFourKey(key)) || levelFourColorsByCode.get(code) || fallbackLevelFourColor(key);
+      }
+
+      function rgbToHex(color) {
+        if (!Array.isArray(color) || color.length < 3) return null;
+        return `#${color.slice(0, 3).map((value) => Number(value).toString(16).padStart(2, "0")).join("")}`;
+      }
+
+      function renderLevelFourLegend() {
+        const selectedKey = selectedLevelFourAttributes
+          ? normalizeLevelFourKey(levelFourKey(selectedLevelFourAttributes))
+          : "";
+        levelFourLegend.innerHTML = levelFourRegions.map((region) => `
+          <li class="ecoregion-legend-item${region.key === selectedKey ? " is-selected" : ""}" data-key="${escapeHtml(region.key)}" data-search="${escapeHtml(`${region.code} ${region.name}`.toLowerCase())}">
+            <span style="background:${region.color}" aria-hidden="true"></span>
+            <span class="ecoregion-legend-code">${escapeHtml(region.code)}</span>
+            <span${region.official ? "" : " title=\"Newer entry using a stable fallback color\""}>${escapeHtml(region.name)}${region.official ? "" : " *"}</span>
+          </li>
+        `).join("");
+      }
+
+      function updateSelectedLevelFour(attributes) {
+        selectedLevelFourAttributes = attributes;
+        const code = attributes.US_L4CODE || "";
+        const name = attributes.US_L4NAME || "";
+        selectedLevelFourName.textContent = formatRegion(code, name);
+        selectedLevelFourSwatch.style.background = levelFourColor(attributes);
+        selectedLevelFour.hidden = false;
+        if (levelFourRegions.length) renderLevelFourLegend();
+      }
+
+      levelFourSearch.addEventListener("input", () => {
+        const query = levelFourSearch.value.trim().toLowerCase();
+        levelFourLegend.querySelectorAll(".ecoregion-legend-item").forEach((item) => {
+          item.hidden = Boolean(query) && !item.dataset.search.includes(query);
+        });
+      });
 
       const map = L.map("ecoregion-map", {
         center: [31.2, -99.3],
@@ -401,7 +535,7 @@
       }).addTo(map);
 
       function ecoregionStyle(feature, fillOpacity = Number(opacityControl.value)) {
-        const color = levelOneColors[feature.properties.NA_L1NAME] || "#d9cfb8";
+        const color = levelFourColor(feature.properties);
         return {
           color: "#35423b",
           weight: 1.25,
@@ -419,6 +553,77 @@
         style: ecoregionStyle
       }).addTo(map);
 
+      async function loadLevelFourGuide() {
+        const queryParams = new URLSearchParams({
+          f: "json",
+          where: "1=1",
+          outFields: "US_L4CODE,US_L4NAME,L4_KEY",
+          returnGeometry: "false",
+          returnDistinctValues: "true",
+          orderByFields: "US_L4CODE",
+          resultRecordCount: "2000"
+        });
+        const regionUrl = `https://services.arcgis.com/U7I2hMhPtOeGx0fs/arcgis/rest/services/EPA_Ecoregions_for_Terrestrial_Levels_1234/FeatureServer/3/query?${queryParams}`;
+        const rendererUrl = "https://geodata.epa.gov/arcgis/rest/services/ORD/USEPA_Ecoregions_Level_III_and_IV/MapServer/7?f=json";
+
+        try {
+          const [regionResponse, rendererResponse] = await Promise.all([
+            fetch(regionUrl),
+            fetch(rendererUrl)
+          ]);
+          if (!regionResponse.ok || !rendererResponse.ok) throw new Error("A Level IV service did not respond.");
+          const [regionData, rendererData] = await Promise.all([
+            regionResponse.json(),
+            rendererResponse.json()
+          ]);
+          if (!Array.isArray(regionData.features)) throw new Error("The current Level IV list was unavailable.");
+
+          const rendererEntries = rendererData.drawingInfo?.renderer?.uniqueValueInfos || [];
+          rendererEntries.forEach((entry) => {
+            const color = rgbToHex(entry.symbol?.color);
+            if (color) {
+              levelFourColors.set(normalizeLevelFourKey(entry.value), color);
+              const code = String(entry.value || "").trim().split(/\s+/)[0].toLowerCase();
+              if (code) levelFourColorsByCode.set(code, color);
+            }
+          });
+
+          const distinctRegions = new Map();
+          regionData.features.forEach(({ attributes }) => {
+            const identity = `${attributes.US_L4CODE || ""}|${attributes.US_L4NAME || ""}`.toLowerCase();
+            if (!distinctRegions.has(identity)) distinctRegions.set(identity, attributes);
+          });
+
+          levelFourRegions = [...distinctRegions.values()].map((attributes) => {
+            const key = normalizeLevelFourKey(levelFourKey(attributes));
+            const codeKey = String(attributes.US_L4CODE || "").trim().toLowerCase();
+            const official = levelFourColors.has(key) || levelFourColorsByCode.has(codeKey);
+            return {
+              code: attributes.US_L4CODE || "",
+              name: attributes.US_L4NAME || "Unnamed Level IV region",
+              key,
+              official,
+              color: levelFourColors.get(key) || levelFourColorsByCode.get(codeKey) || fallbackLevelFourColor(key)
+            };
+          }).sort((a, b) => a.code.localeCompare(b.code, undefined, { numeric: true }));
+
+          const officialCount = levelFourRegions.filter((region) => region.official).length;
+          const fallbackCount = levelFourRegions.length - officialCount;
+          levelFourGuideStatus.textContent = fallbackCount
+            ? `${levelFourRegions.length} current Level IV regions. ${officialCount} use EPA national renderer colors; ${fallbackCount} newer entries use stable fallback colors marked with an asterisk.`
+            : `All ${levelFourRegions.length} current Level IV regions, using the EPA national renderer colors shown on the map.`;
+          levelFourSearch.disabled = false;
+          renderLevelFourLegend();
+          ecoregionLayer.setStyle((feature) => ecoregionStyle(feature));
+          if (selectedLevelFourAttributes) updateSelectedLevelFour(selectedLevelFourAttributes);
+        } catch (error) {
+          levelFourGuideStatus.textContent = "The complete Level IV guide could not load. The map is using stable fallback colors; try refreshing in a moment.";
+          console.error(error);
+        }
+      }
+
+      loadLevelFourGuide();
+
       opacityControl.addEventListener("input", () => {
         const opacity = Number(opacityControl.value);
         opacityValue.value = `${Math.round(opacity * 100)}%`;
@@ -429,8 +634,9 @@
         const properties = layer.feature.properties;
         const levelFour = formatRegion(properties.US_L4CODE, properties.US_L4NAME);
         const levelThree = formatRegion(properties.US_L3CODE || properties.NA_L3CODE, properties.US_L3NAME || properties.NA_L3NAME);
+        const levelTwo = formatRegion(properties.NA_L2CODE, properties.NA_L2NAME);
         const levelOne = formatRegion(properties.NA_L1CODE, properties.NA_L1NAME);
-        return `<strong>${escapeHtml(levelFour || "EPA Level IV ecoregion")}</strong><br>${escapeHtml(levelThree || "")}<br>${escapeHtml(levelOne || "")}`;
+        return `<strong>${escapeHtml(levelFour || "EPA Level IV ecoregion")}</strong><br>${escapeHtml(levelThree || "")}<br>${escapeHtml(levelTwo || "")}<br>${escapeHtml(levelOne || "")}`;
       });
 
       const transportationLayer = L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", {
@@ -448,7 +654,7 @@
       const labelLayer = L.layerGroup([transportationLayer, placeLabelLayer]).addTo(map);
 
       L.control.layers(null, {
-        "Level I colors + Level IV boundaries": ecoregionLayer,
+        "Level IV colors and boundaries": ecoregionLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
 
@@ -501,6 +707,7 @@
           .map(([label, value]) => `<strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}`)
           .join("<br>");
         selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br>${popupLevels}`).openPopup();
+        updateSelectedLevelFour(attributes);
       }
 
       function formatRegion(code, name) {
