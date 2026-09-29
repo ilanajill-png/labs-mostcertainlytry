@@ -14,7 +14,7 @@
         border: 1px solid var(--line);
         border-radius: 1.25rem;
         background: #f4f0e7;
-        box-shadow: var(--shadow-soft);
+        box-shadow: var(--shadow);
       }
 
       #ecoregion-map {
@@ -50,7 +50,20 @@
         height: 1.1rem;
         border: 1px solid #4f544f;
         border-radius: 0.25rem;
-        background: rgba(252, 179, 220, 0.68);
+        background: rgba(252, 179, 220, 0.35);
+      }
+
+      .ecoregion-opacity-control {
+        display: inline-flex;
+        gap: 0.55rem;
+        align-items: center;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .ecoregion-opacity-control input {
+        width: 7rem;
+        accent-color: var(--green);
       }
 
       .leaflet-popup-content strong {
@@ -121,7 +134,7 @@
             <p id="status-message">Submit an address to run the lookup.</p>
             <dl id="result-list"></dl>
             <p id="map-result-action" hidden>
-              <a class="button primary" id="map-result-link" href="#" target="_blank" rel="noopener">See this location on the live map</a>
+              <a class="button primary" id="map-result-link" href="#ecoregion-map">See this result on the map below</a>
             </p>
           </article>
         </div>
@@ -138,10 +151,14 @@
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>EPA Level IV ecoregions</span>
             <span>Color shows the broad Level II group; select a region for its Level III and IV names.</span>
+            <label class="ecoregion-opacity-control" for="ecoregion-opacity">
+              Color strength
+              <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
+              <output id="ecoregion-opacity-value" for="ecoregion-opacity">20%</output>
+            </label>
           </div>
         </div>
         <p class="privacy-note">Map coverage: the continental United States. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community; ecoregion boundaries are from the EPA.</p>
-        <p><a class="button" href="https://www.arcgis.com/apps/mapviewer/index.html?layers=3cc13a1b3b8c4f57827f29c09a55b4a9" target="_blank" rel="noopener">Open the EPA layer in full-screen ArcGIS</a></p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -283,7 +300,8 @@
       const statusMessage = document.querySelector("#status-message");
       const resultList = document.querySelector("#result-list");
       const mapResultAction = document.querySelector("#map-result-action");
-      const mapResultLink = document.querySelector("#map-result-link");
+      const opacityControl = document.querySelector("#ecoregion-opacity");
+      const opacityValue = document.querySelector("#ecoregion-opacity-value");
 
       const levelTwoColors = {
         "ATLANTIC HIGHLANDS": "#56c2cc",
@@ -330,22 +348,30 @@
         attribution: "Tiles &copy; Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community"
       }).addTo(map);
 
+      function ecoregionStyle(feature, fillOpacity = Number(opacityControl.value)) {
+        const color = levelTwoColors[feature.properties.NA_L2NAME] || "#d9cfb8";
+        return {
+          color: "#35423b",
+          weight: 1.25,
+          opacity: 0.9,
+          fillColor: color,
+          fillOpacity
+        };
+      }
+
       const ecoregionLayer = L.esri.featureLayer({
         url: "https://services.arcgis.com/U7I2hMhPtOeGx0fs/arcgis/rest/services/EPA_Ecoregions_for_Terrestrial_Levels_1234/FeatureServer/3",
         pane: "ecoregions",
         simplifyFactor: 0.35,
         precision: 5,
-        style(feature) {
-          const color = levelTwoColors[feature.properties.NA_L2NAME] || "#d9cfb8";
-          return {
-            color: "#48534d",
-            weight: 1,
-            opacity: 0.8,
-            fillColor: color,
-            fillOpacity: 0.52
-          };
-        }
+        style: ecoregionStyle
       }).addTo(map);
+
+      opacityControl.addEventListener("input", () => {
+        const opacity = Number(opacityControl.value);
+        opacityValue.value = `${Math.round(opacity * 100)}%`;
+        ecoregionLayer.setStyle((feature) => ecoregionStyle(feature, opacity));
+      });
 
       ecoregionLayer.bindPopup((layer) => {
         const properties = layer.feature.properties;
@@ -413,11 +439,6 @@
             <dd>${escapeHtml(value)}</dd>
           </div>
         `).join("");
-        const viewerUrl = new URL("https://www.arcgis.com/apps/mapviewer/index.html");
-        viewerUrl.searchParams.set("layers", "3cc13a1b3b8c4f57827f29c09a55b4a9");
-        viewerUrl.searchParams.set("center", `${x},${y}`);
-        viewerUrl.searchParams.set("level", "12");
-        mapResultLink.href = viewerUrl.toString();
         mapResultAction.hidden = false;
         map.setView([y, x], 12);
         if (selectedMarker) selectedMarker.remove();
