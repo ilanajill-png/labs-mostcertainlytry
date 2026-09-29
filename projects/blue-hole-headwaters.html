@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blue Hole at Headwaters Sanctuary | San Antonio, Texas</title>
+  <meta name="description" content="A visitor guide to Blue Hole at the Headwaters Sanctuary in San Antonio, including directions, trail etiquette, spring hydrology, and a fully sourced historical timeline.">
+  <meta property="og:title" content="Blue Hole at Headwaters Sanctuary">
+  <meta property="og:description" content="Plan a respectful visit to San Antonio's traditional river headwaters and explore the spring's sourced history.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../assets/blue-hole/blue-hole-hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,850&amp;family=Inter:wght@400;500;650;760;850&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --canopy: #153f38;
+      --river: #176f79;
+      --water: #72c7c2;
+      --limestone: #f4efe5;
+      --sand: #d8c09a;
+      --clay: #a4482d;
+      --sun: #e8b550;
+      --ink: #16211d;
+      --muted: #5d6c66;
+      --paper: #fffaf0;
+      --white: #ffffff;
+      --line: rgba(22, 33, 29, .14);
+      --shadow: 0 22px 50px rgba(21, 63, 47, .16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--limestone);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration-color: rgba(164, 72, 45, .55); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    a:hover { color: var(--clay); }
+    .shell { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(21, 63, 56, .94); color: var(--white);
+      backdrop-filter: blur(14px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 62px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: Fraunces, Georgia, serif; font-size: 20px; font-weight: 850; line-height: 1; text-decoration: none; }
+    .brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.34); border-radius: 50%; background: rgba(255,255,255,.1); font-family: Inter, sans-serif; font-size: 13px; font-weight: 850; }
+    .nav-links { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { flex: 0 0 auto; padding: 8px 10px; border-radius: 999px; color: rgba(255,255,255,.88); font-size: 14px; font-weight: 650; text-decoration: none; }
+    .nav-links a:hover { background: rgba(255,255,255,.12); color: var(--white); }
+
+    .hero {
+      position: relative; min-height: calc(100vh - 62px);
+      display: grid; align-items: end; overflow: hidden; color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(6, 22, 19, .93) 0%, rgba(6, 22, 19, .62) 43%, rgba(6, 22, 19, .12) 100%),
+        linear-gradient(0deg, rgba(6, 22, 19, .7) 0%, rgba(6, 22, 19, .04) 45%),
+        url("../assets/blue-hole/blue-hole-hero.jpg") center / cover no-repeat;
+    }
+    .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 96px; background: linear-gradient(0deg, var(--limestone), rgba(244,239,229,0)); pointer-events: none; }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; padding: 72px 0 118px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; color: rgba(255,255,255,.88); font-size: 13px; font-weight: 760; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 38px; height: 2px; background: var(--sun); }
+    h1, h2, h3 { margin: 0; font-family: Fraunces, Georgia, serif; line-height: 1.02; }
+    h1 { max-width: 760px; font-size: clamp(56px, 9vw, 112px); text-wrap: balance; }
+    h2 { color: var(--canopy); font-size: clamp(34px, 5vw, 62px); }
+    h3 { color: var(--canopy); font-size: 25px; }
+    p { margin: 0; color: var(--muted); font-size: 17px; }
+    .hero p { max-width: 640px; margin-top: 22px; color: rgba(255,255,255,.9); font-size: clamp(18px, 2vw, 23px); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 18px; border: 1px solid rgba(255,255,255,.28); border-radius: 6px; background: var(--sun); color: #20160a; font-weight: 850; text-decoration: none; box-shadow: 0 12px 26px rgba(0,0,0,.18); }
+    .button.secondary { background: rgba(255,255,255,.12); color: var(--white); box-shadow: none; }
+
+    .quick-strip { position: relative; z-index: 2; margin-top: -58px; }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--line); box-shadow: var(--shadow); }
+    .fact { min-height: 118px; padding: 22px; background: var(--paper); }
+    .fact span { display: block; margin-bottom: 7px; color: var(--clay); font-size: 12px; font-weight: 850; text-transform: uppercase; }
+    .fact strong { display: block; color: var(--ink); font-size: 20px; line-height: 1.2; }
+
+    section { padding: 88px 0; }
+    .section-head { display: grid; grid-template-columns: minmax(0,.85fr) minmax(280px,.6fr); gap: 46px; align-items: end; margin-bottom: 36px; }
+    .section-head p { font-size: 18px; }
+    .visit-band { background: #fbf6ea; }
+    .visit-layout { display: grid; grid-template-columns: minmax(280px,.42fr) minmax(0,1fr); gap: 34px; align-items: start; }
+    .visit-card { padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: 0 16px 34px rgba(21,63,47,.09); }
+    .visit-card p + p { margin-top: 16px; }
+    .visit-card .button { width: 100%; margin-top: 20px; background: var(--river); color: white; box-shadow: none; }
+    .detail-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .detail-list li { min-height: 138px; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    .detail-list strong { display: block; margin-bottom: 8px; color: var(--canopy); font-size: 18px; }
+    .detail-list span { color: var(--muted); }
+    .visit-note { margin-top: 20px; padding: 18px 20px; border-left: 4px solid var(--sun); background: rgba(255,255,255,.7); color: var(--muted); }
+
+    .history-band { background: var(--limestone); }
+    .story-grid { display: grid; grid-template-columns: minmax(0,.95fr) minmax(280px,.42fr); gap: 34px; align-items: start; }
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item { display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 18px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,250,240,.74); }
+    .year { color: var(--clay); font-weight: 850; }
+    .timeline-item p { font-size: 16px; }
+    .timeline-item .citation { display: inline-block; margin-top: 8px; color: var(--river); font-size: 13px; font-weight: 760; }
+    .feature-panel { position: sticky; top: 86px; display: flex; flex-direction: column; gap: 24px; padding: 28px; border-radius: 8px; background: var(--canopy); color: var(--white); }
+    .feature-panel h3, .feature-panel p { color: var(--white); }
+    .feature-panel p { color: rgba(255,255,255,.78); }
+    .water-mark { position: relative; min-height: 260px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 8px; background: radial-gradient(circle at 50% 62%, rgba(114,199,194,.75) 0 14%, rgba(23,111,121,.55) 15% 30%, transparent 31%), linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.02)); }
+    .water-mark::before, .water-mark::after { content: ""; position: absolute; border: 2px solid rgba(255,255,255,.42); border-radius: 50%; }
+    .water-mark::before { inset: 30% 22% 14%; }
+    .water-mark::after { inset: 40% 32% 24%; }
+    .threshold { padding: 20px; border-left: 4px solid var(--water); background: rgba(255,255,255,.08); }
+    .threshold strong { display: block; color: var(--water); font-family: Fraunces, Georgia, serif; font-size: 36px; }
+
+    .water-band { background: var(--canopy); color: var(--white); }
+    .water-band h2, .water-band h3, .water-band p { color: var(--white); }
+    .water-band .section-head p, .process-card p { color: rgba(255,255,255,.75); }
+    .process-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .process-card { min-height: 250px; padding: 24px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: rgba(255,255,255,.08); }
+    .process-card .step { display: block; margin-bottom: 42px; color: var(--water); font-family: Fraunces,Georgia,serif; font-size: 30px; font-weight: 850; }
+    .process-card h3 { margin-bottom: 10px; }
+    .water-note { margin-top: 22px; padding: 20px; border-left: 4px solid var(--sun); background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); }
+
+    .sources-band { padding: 58px 0; background: var(--paper); }
+    .sources { display: grid; grid-template-columns: minmax(0,.5fr) minmax(0,1fr); gap: 34px; align-items: start; }
+    .sources ul { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: var(--muted); }
+    .image-note { margin-top: 26px; font-size: 13px; color: var(--muted); }
+    footer { padding: 26px 0; background: var(--canopy); color: rgba(255,255,255,.74); font-size: 14px; }
+    footer .shell { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    @media (max-width: 860px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 13px 0; }
+      .nav-links { width: 100%; }
+      .hero { min-height: 720px; background-position: 58% center; }
+      .hero-content { padding: 72px 0 112px; }
+      .facts, .section-head, .story-grid, .visit-layout, .process-grid, .sources { grid-template-columns: 1fr; }
+      .feature-panel { position: static; }
+      .quick-strip { margin-top: -40px; }
+      section { padding: 68px 0; }
+    }
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px,1160px); }
+      .brand { font-size: 18px; }
+      .nav-links { gap: 2px; }
+      .nav-links a { padding: 7px 6px; font-size: 13px; }
+      h1 { font-size: 52px; }
+      .hero { min-height: 680px; }
+      .detail-list, .timeline-item { grid-template-columns: 1fr; }
+      .fact, .visit-card, .process-card, .timeline-item { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="shell nav" aria-label="Primary">
+      <a class="brand" href="../garden.html" aria-label="Most Certainly Try Nature Work">
+        <span class="brand-mark">BH</span>
+        <span>Most Certainly Try · Blue Hole</span>
+      </a>
+      <div class="nav-links" aria-label="Sections">
+        <a href="#visit">How to Visit</a>
+        <a href="#history">History</a>
+        <a href="#water">The Water</a>
+        <a href="#sources">Sources</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Blue Hole at Headwaters Sanctuary">
+      <div class="shell hero-content">
+        <p class="eyebrow">San Antonio, Texas</p>
+        <h1>Blue Hole at Headwaters Sanctuary</h1>
+        <p>Visit the traditional headwaters of the San Antonio River, then follow the story of a sacred spring, a growing city, and the aquifer beneath them both.</p>
+        <div class="cta-row">
+          <a class="button" href="#visit">Plan a Visit</a>
+          <a class="button secondary" href="#history">Explore the Timeline</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="quick-strip">
+      <div class="shell facts" aria-label="Visitor facts">
+        <div class="fact"><span>Address</span><strong>4503 Broadway</strong></div>
+        <div class="fact"><span>Setting</span><strong>53-acre sanctuary</strong></div>
+        <div class="fact"><span>Hours</span><strong>Dawn to dusk, daily</strong></div>
+        <div class="fact"><span>Known For</span><strong>San Antonio River headwaters</strong></div>
+      </div>
+    </div>
+
+    <section id="visit" class="visit-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>How to Visit</h2>
+          <p>Blue Hole is part of a wildlife sanctuary on the University of the Incarnate Word campus—not a swimming hole. Come for a quiet walk, living history, and a close look at the river’s traditional beginning.</p>
+        </div>
+        <div class="visit-layout">
+          <aside class="visit-card">
+            <h3>Visitor Basics</h3>
+            <p><strong>Headwaters Sanctuary</strong><br>4503 Broadway<br>San Antonio, TX 78209</p>
+            <p><strong>Open:</strong><br>365 days a year, dawn to dusk.</p>
+            <p><strong>Entrance:</strong><br>Enter from the US 281 north access road through the UIW gate and follow Headwaters signage to the main trailhead.</p>
+            <a class="button" href="https://www.headwaters-iw.org/directions-and-conduct" target="_blank" rel="noopener">Official directions ↗</a>
+          </aside>
+          <div>
+            <ul class="detail-list">
+              <li><strong>Parking</strong><span>UIW requires an online visitor parking permit Monday–Friday during fall and spring semesters. Weekend parking generally does not require one.</span></li>
+              <li><strong>The Walk</strong><span>Explore on foot and stay on marked trails. The sanctuary welcomes walking, nature study, photography, and quiet observation.</span></li>
+              <li><strong>Protect the Sanctuary</strong><span>No bikes or motorized vehicles. Do not collect plants or wildlife, litter, swim, or enter protected restoration areas.</span></li>
+              <li><strong>Check Before You Go</strong><span>Review current directions, parking instructions, trail maps, events, and closures on the official Headwaters website.</span></li>
+            </ul>
+            <p class="visit-note"><strong>Set expectations:</strong> Blue Hole is an intermittent spring. In dry conditions the stone basin may hold little or no visible water, but the place remains historically, culturally, and hydrologically significant.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="history" class="history-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>History of Blue Hole</h2>
+          <p>People have gathered around these springs for millennia. Each event below includes a direct source so the chronology can be followed beyond this guide.</p>
+        </div>
+        <div class="story-grid">
+          <div class="timeline">
+            <article class="timeline-item"><div class="year">~12,000 years ago</div><div><p>Archaeological evidence places people around the San Antonio Springs for nearly 12,000 years. Indigenous communities depended on and regarded the springs as sacred.</p><a class="citation" href="https://www.headwaters-iw.org/history" target="_blank" rel="noopener">Headwaters history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">Before colonization</div><div><p>Blue Hole was the largest outlet in a network of Edwards Aquifer springs. Traditional accounts describe a sacred gathering and pilgrimage place for the Payaya and other Indigenous peoples.</p><a class="citation" href="https://sanantonioreport.org/do-you-know-where-your-river-starts-blue-hole-exhibit-celebrates-san-antonio-heritage/" target="_blank" rel="noopener">San Antonio Report ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1691</div><div><p>On June 13, Domingo Terán de los Ríos and Father Damián Massanet’s expedition camped near the headwaters with Payaya people. The Spanish named the place San Antonio de Padua.</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1745–c. 1776</div><div><p>The Spanish built the Alamo Madre acequia in 1745, then the Upper Labor dam and acequia around 1776, diverting spring and river water for settlement and irrigation.</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1857</div><div><p>Frederick Law Olmsted saw the spring before extensive aquifer pumping and wrote that “the whole river gushes up in one sparkling burst from the earth.”</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Olmsted quotation and context ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1869–1880s</div><div><p>Isabella Brackenridge purchased the estate in 1869. Beginning in 1877, the San Antonio Water Supply Company used spring flow to operate a pumping plant and supply the city.</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1891</div><div><p>Concerned that spring flow was unreliable, George W. Brackenridge drilled large artesian wells into the Edwards Aquifer for municipal water. Numerous additional wells followed.</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">Late 1890s</div><div><p>Artesian pumping and prolonged drought dramatically reduced Blue Hole’s flow. Brackenridge reportedly lamented that the river was “dying” and attributed it to the wells.</p><a class="citation" href="https://www.headwaters-iw.org/history" target="_blank" rel="noopener">Headwaters history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1897</div><div><p>Brackenridge sold approximately 280 acres, including the springs, to the Sisters of Charity of the Incarnate Word.</p><a class="citation" href="https://www.tshaonline.org/handbook/entries/sisters-of-charity-of-the-incarnate-word-san-antonio" target="_blank" rel="noopener">Handbook of Texas ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1940s–1970s</div><div><p>Increasing groundwater withdrawals made the spring intermittent. Blue Hole entered roughly three decades of dormancy before returning during exceptionally wet conditions in the 1970s.</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1978–1989</div><div><p>Blue Hole became part of the National Register-listed Source of the River Historic District in 1978. The present octagonal limestone wall and walkway were installed in 1989.</p><a class="citation" href="https://www.tclf.org/blue-hole" target="_blank" rel="noopener">Cultural Landscape Foundation ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1992</div><div><p>The Edwards Aquifer reached a recorded high of 703.3 feet at the J-17 index well. Blue Hole flowed, though at only a fraction of the nineteenth-century volume.</p><a class="citation" href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer history ↗</a></div></article>
+            <article class="timeline-item"><div class="year">1999–2000</div><div><p>San Antonio began using highly treated recycled water to conserve aquifer water and support dependable river flow during dry periods. It supplements the river downstream; it does not refill Blue Hole.</p><a class="citation" href="https://www.saws.org/your-water/management-sources/recycled-water-program/" target="_blank" rel="noopener">SAWS recycled water program ↗</a></div></article>
+            <article class="timeline-item"><div class="year">2006</div><div><p>The 53-acre Headwaters Sanctuary was established to protect Blue Hole, its forest, and the headwaters landscape.</p><a class="citation" href="https://www.tclf.org/blue-hole" target="_blank" rel="noopener">Cultural Landscape Foundation ↗</a></div></article>
+            <article class="timeline-item"><div class="year">2015 &amp; 2018</div><div><p>Wet periods raised the aquifer enough for Blue Hole to flow again temporarily. In September 2018, its water crossed the formerly dry channel and mixed with Olmos Creek water.</p><a class="citation" href="https://sanantonioreport.org/the-blue-hole-mother-spring-of-the-san-antonio-river-is-flowing-again/" target="_blank" rel="noopener">San Antonio Report ↗</a></div></article>
+            <article class="timeline-item"><div class="year">Today</div><div><p>Blue Hole is an intermittent spring. Sources place its approximate flowing threshold around 670–676 feet above mean sea level at the J-17 index well.</p><a class="citation" href="https://www.tclf.org/blue-hole" target="_blank" rel="noopener">Cultural Landscape Foundation ↗</a></div></article>
+          </div>
+          <aside class="feature-panel">
+            <div><h3>A sacred spring beneath a growing city</h3><p>The timeline is not simply a story of a spring “drying up.” It follows changing aquifer pressure as drought, recharge, wells, and urban water demand interact.</p></div>
+            <div class="water-mark" aria-hidden="true"></div>
+            <div class="threshold"><strong>670–676 ft</strong><p>Approximate J-17 aquifer range associated with Blue Hole beginning to flow.</p></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="water" class="water-band">
+      <div class="shell">
+        <div class="section-head">
+          <h2>What Happened to the Water?</h2>
+          <p>Blue Hole is an artesian outlet of the Edwards Aquifer, not a conventional pond that was drained. Visible flow depends on underground water rising high enough to reach the spring opening.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-card"><span class="step">01</span><h3>Rain recharges limestone</h3><p>Rain over the Edwards Aquifer recharge zone enters cracks, caves, and porous limestone.</p></article>
+          <article class="process-card"><span class="step">02</span><h3>Pressure raises the spring</h3><p>When the aquifer rises high enough, groundwater pressure pushes water naturally through Blue Hole.</p></article>
+          <article class="process-card"><span class="step">03</span><h3>Wells share the source</h3><p>Since the 1890s, regional wells have drawn from the same aquifer, reducing pressure and water level.</p></article>
+          <article class="process-card"><span class="step">04</span><h3>Drought lowers recharge</h3><p>Dry periods reduce the water entering the aquifer while pumping continues across the region.</p></article>
+          <article class="process-card"><span class="step">05</span><h3>The outlet falls dry</h3><p>Below Blue Hole’s outlet elevation, the water remains underground or is withdrawn through wells elsewhere.</p></article>
+          <article class="process-card"><span class="step">06</span><h3>Rain can wake it again</h3><p>After sustained rainfall raises the aquifer, Blue Hole can flow into the river channel once more.</p></article>
+        </div>
+        <p class="water-note"><strong>Downstream is different:</strong> Water visible in Brackenridge Park or downtown is not necessarily from Blue Hole. In dry conditions, SAWS uses highly treated recycled water to help maintain the river’s base flow. Blue Hole remains the river’s traditional and cultural headwater, while the Olmos Basin’s technical hydrology includes multiple springs and channels.</p>
+      </div>
+    </section>
+
+    <section id="sources" class="sources-band">
+      <div class="shell sources">
+        <div><h2>Sources</h2><p>Visitor requirements and spring conditions can change. Check the official Headwaters site before making a special trip.</p><p class="image-note">Hero image: an AI-generated visual interpretation made for this guide, not documentary evidence of current spring conditions.</p></div>
+        <ul>
+          <li><a href="https://www.headwaters-iw.org/welcome-to-headwaters" target="_blank" rel="noopener">Headwaters Sanctuary: visitor welcome and hours</a></li>
+          <li><a href="https://www.headwaters-iw.org/directions-and-conduct" target="_blank" rel="noopener">Headwaters Sanctuary: directions, parking, and conduct</a></li>
+          <li><a href="https://www.headwaters-iw.org/history" target="_blank" rel="noopener">Headwaters at Incarnate Word: history</a></li>
+          <li><a href="https://www.tclf.org/blue-hole" target="_blank" rel="noopener">The Cultural Landscape Foundation: Blue Hole</a></li>
+          <li><a href="https://www.edwardsaquifer.net/saspring.html" target="_blank" rel="noopener">Edwards Aquifer: San Antonio Springs and the San Antonio River</a></li>
+          <li><a href="https://www.saws.org/your-water/management-sources/recycled-water-program/" target="_blank" rel="noopener">SAWS Recycled Water Program</a></li>
+          <li><a href="https://www.tshaonline.org/handbook/entries/sisters-of-charity-of-the-incarnate-word-san-antonio" target="_blank" rel="noopener">Handbook of Texas: Sisters of Charity of the Incarnate Word</a></li>
+          <li><a href="https://sanantonioreport.org/the-blue-hole-mother-spring-of-the-san-antonio-river-is-flowing-again/" target="_blank" rel="noopener">San Antonio Report: Blue Hole flowing again</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell"><span>Blue Hole at Headwaters Sanctuary visitor guide</span><a href="../garden.html">More Nature Work</a></div></footer>
+</body>
+</html>
