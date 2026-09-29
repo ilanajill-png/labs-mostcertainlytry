@@ -58,7 +58,21 @@
             <h2>Result</h2>
             <p id="status-message">Submit an address to run the lookup.</p>
             <dl id="result-list"></dl>
+            <p id="map-result-action" hidden>
+              <a class="button primary" id="map-result-link" href="#" target="_blank" rel="noopener">See this location on the live map</a>
+            </p>
           </article>
+        </div>
+      </section>
+
+      <section class="table-section" aria-labelledby="live-map-title">
+        <div class="section-heading">
+          <p class="kicker">Live boundary map</p>
+          <h2 id="live-map-title">Search an address, then zoom through its ecoregion.</h2>
+          <p>The EPA’s Level IV ecoregion layer is available in Esri’s interactive ArcGIS Map Viewer. Use the viewer’s search button to enter an address, zoom in or out, and select a colored region to inspect it.</p>
+          <p>Google Maps and Apple Maps do not include EPA ecoregion boundaries as a standard layer. This official ArcGIS viewer provides the address search and live zooming without requiring a Google or Apple account.</p>
+          <p><a class="button primary" href="https://www.arcgis.com/apps/mapviewer/index.html?layers=3cc13a1b3b8c4f57827f29c09a55b4a9" target="_blank" rel="noopener">Open the live EPA ecoregion map</a></p>
+          <p class="privacy-note">Coverage: the continental United States. The address is handled by Esri’s map search; use a nearby intersection or landmark if exact-house precision is unnecessary.</p>
         </div>
       </section>
 
@@ -198,6 +212,8 @@
       const form = document.querySelector("#ecoregion-form");
       const statusMessage = document.querySelector("#status-message");
       const resultList = document.querySelector("#result-list");
+      const mapResultAction = document.querySelector("#map-result-action");
+      const mapResultLink = document.querySelector("#map-result-link");
 
       states.forEach(([abbr, name]) => {
         const option = document.createElement("option");
@@ -209,11 +225,13 @@
       function setBusy(message) {
         statusMessage.textContent = message;
         resultList.innerHTML = "";
+        mapResultAction.hidden = true;
       }
 
       function setError(message) {
         statusMessage.textContent = message;
         resultList.innerHTML = "";
+        mapResultAction.hidden = true;
       }
 
       function renderResult(candidate, attributes) {
@@ -235,6 +253,12 @@
             <dd>${escapeHtml(value)}</dd>
           </div>
         `).join("");
+        const viewerUrl = new URL("https://www.arcgis.com/apps/mapviewer/index.html");
+        viewerUrl.searchParams.set("layers", "3cc13a1b3b8c4f57827f29c09a55b4a9");
+        viewerUrl.searchParams.set("center", `${x},${y}`);
+        viewerUrl.searchParams.set("level", "12");
+        mapResultLink.href = viewerUrl.toString();
+        mapResultAction.hidden = false;
       }
 
       function formatRegion(code, name) {
