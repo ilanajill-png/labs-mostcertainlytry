@@ -4,8 +4,70 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Address to EPA Ecoregion | Most Certainly Try Labs</title>
-    <meta name="description" content="Look up latitude, longitude, and EPA terrestrial ecoregions from a U.S. address without saving the submitted address.">
+    <meta name="description" content="Look up EPA terrestrial ecoregions from a U.S. address and explore their boundaries beneath live road and town labels.">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+    <style>
+      .ecoregion-map-shell {
+        margin-top: 1.5rem;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        background: #f4f0e7;
+        box-shadow: var(--shadow-soft);
+      }
+
+      #ecoregion-map {
+        width: 100%;
+        height: min(68vh, 620px);
+        min-height: 460px;
+        background: #e9e4d8;
+      }
+
+      .ecoregion-map-note {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem 1.25rem;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1rem;
+        border-top: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.88);
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+      }
+
+      .ecoregion-map-key {
+        display: inline-flex;
+        gap: 0.5rem;
+        align-items: center;
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      .ecoregion-map-swatch {
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 1px solid #4f544f;
+        border-radius: 0.25rem;
+        background: rgba(252, 179, 220, 0.68);
+      }
+
+      .leaflet-popup-content strong {
+        color: #17251e;
+      }
+
+      .leaflet-control-layers {
+        font-family: inherit;
+      }
+
+      @media (max-width: 640px) {
+        #ecoregion-map {
+          height: 62vh;
+          min-height: 420px;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -68,12 +130,18 @@
       <section class="table-section" aria-labelledby="live-map-title">
         <div class="section-heading">
           <p class="kicker">Live boundary map</p>
-          <h2 id="live-map-title">Search an address, then zoom through its ecoregion.</h2>
-          <p>The EPA’s Level IV ecoregion layer is available in Esri’s interactive ArcGIS Map Viewer. Use the viewer’s search button to enter an address, zoom in or out, and select a colored region to inspect it.</p>
-          <p>Google Maps and Apple Maps do not include EPA ecoregion boundaries as a standard layer. This official ArcGIS viewer provides the address search and live zooming without requiring a Google or Apple account.</p>
-          <p><a class="button primary" href="https://www.arcgis.com/apps/mapviewer/index.html?layers=3cc13a1b3b8c4f57827f29c09a55b4a9" target="_blank" rel="noopener">Open the live EPA ecoregion map</a></p>
-          <p class="privacy-note">Coverage: the continental United States. The address is handled by Esri’s map search; use a nearby intersection or landmark if exact-house precision is unnecessary.</p>
+          <h2 id="live-map-title">Roads and towns remain visible over the ecoregion colors.</h2>
+          <p>This map stacks a neutral road map at the bottom, translucent EPA Level IV ecoregion polygons in the middle, and road and town labels on top. Search above to center the map on an address, or pan, zoom, and select a colored region.</p>
         </div>
+        <div class="ecoregion-map-shell">
+          <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors beneath town and road labels"></div>
+          <div class="ecoregion-map-note">
+            <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>EPA Level IV ecoregions</span>
+            <span>Color shows the broad Level II group; select a region for its Level III and IV names.</span>
+          </div>
+        </div>
+        <p class="privacy-note">Map coverage: the continental United States. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community; ecoregion boundaries are from the EPA.</p>
+        <p><a class="button" href="https://www.arcgis.com/apps/mapviewer/index.html?layers=3cc13a1b3b8c4f57827f29c09a55b4a9" target="_blank" rel="noopener">Open the EPA layer in full-screen ArcGIS</a></p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -102,15 +170,15 @@
           <dl>
             <div>
               <dt>What leaves the page</dt>
-              <dd>The address is sent to Esri's public geocoder to convert it into a coordinate.</dd>
+              <dd>The address is sent to Esri's public geocoder to convert it into a coordinate. The map also requests basemap and label tiles from Esri.</dd>
             </div>
             <div>
-              <dt>What the EPA receives</dt>
-              <dd>Only the latitude and longitude are sent to the EPA ecoregion map service to identify the matching polygon.</dd>
+              <dt>What the ecoregion service receives</dt>
+              <dd>The matched coordinate and the visible map bounds are sent to the EPA ecoregion layer hosted by ArcGIS so it can identify and draw the intersecting polygons.</dd>
             </div>
             <div>
               <dt>What Labs saves</dt>
-              <dd>Nothing from your submission. Results are shown in your browser and disappear when you leave or refresh the page.</dd>
+              <dd>Nothing from your submission. Results are shown in your browser and disappear when you leave or refresh the page. Third-party map services may retain standard request logs under their own policies.</dd>
             </div>
           </dl>
           <blockquote>Addresses are sensitive. Use a nearby intersection or landmark if exact-house precision is not needed.</blockquote>
@@ -191,6 +259,8 @@
       <a href="https://mostcertainlytry.com">mostcertainlytry.com</a>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.15/dist/esri-leaflet.js" crossorigin="anonymous"></script>
     <script>
       const states = [
         ["AL", "Alabama"], ["AK", "Alaska"], ["AZ", "Arizona"], ["AR", "Arkansas"],
@@ -214,6 +284,96 @@
       const resultList = document.querySelector("#result-list");
       const mapResultAction = document.querySelector("#map-result-action");
       const mapResultLink = document.querySelector("#map-result-link");
+
+      const levelTwoColors = {
+        "ATLANTIC HIGHLANDS": "#56c2cc",
+        "CENTRAL USA PLAINS": "#e1f0e5",
+        "COLD DESERTS": "#e9eb8f",
+        "EVERGLADES": "#c773af",
+        "MARINE WEST COAST FOREST": "#43bfbb",
+        "MEDITERRANEAN CALIFORNIA": "#d4e6b8",
+        "MISSISSIPPI ALLUVIAL AND SOUTHEAST USA COASTAL PLAINS": "#b9d67e",
+        "MIXED WOOD PLAINS": "#a3c94b",
+        "MIXED WOOD SHIELD": "#afdee3",
+        "OZARK/OUACHITA-APPALACHIAN FORESTS": "#51bd83",
+        "SOUTH CENTRAL SEMI-ARID PRAIRIES": "#fcb3dc",
+        "SOUTHEASTERN USA PLAINS": "#cfd2fc",
+        "TAMAULIPAS-TEXAS SEMIARID PLAIN": "#c8fcc2",
+        "TEMPERATE PRAIRIES": "#fcf8d7",
+        "TEXAS-LOUISIANA COASTAL PLAIN": "#f1c0fc",
+        "UPPER GILA MOUNTAINS": "#cfddfc",
+        "UPPER GILA MOUNTAINS (?)": "#cfddfc",
+        "WARM DESERTS": "#fcbbd6",
+        "WEST-CENTRAL SEMI-ARID PRAIRIES": "#fcb3b6",
+        "WESTERN CORDILLERA": "#fcd2f9",
+        "WESTERN SIERRA MADRE PIEDMONT": "#c9b3fc"
+      };
+
+      const map = L.map("ecoregion-map", {
+        center: [31.2, -99.3],
+        zoom: 6,
+        minZoom: 4,
+        maxZoom: 16,
+        scrollWheelZoom: false
+      });
+
+      map.createPane("ecoregions");
+      map.getPane("ecoregions").style.zIndex = "450";
+      map.createPane("labels");
+      map.getPane("labels").style.zIndex = "650";
+      map.getPane("labels").style.pointerEvents = "none";
+      map.getPane("markerPane").style.zIndex = "700";
+      map.getPane("popupPane").style.zIndex = "750";
+
+      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+        maxZoom: 16,
+        attribution: "Tiles &copy; Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community"
+      }).addTo(map);
+
+      const ecoregionLayer = L.esri.featureLayer({
+        url: "https://services.arcgis.com/U7I2hMhPtOeGx0fs/arcgis/rest/services/EPA_Ecoregions_for_Terrestrial_Levels_1234/FeatureServer/3",
+        pane: "ecoregions",
+        simplifyFactor: 0.35,
+        precision: 5,
+        style(feature) {
+          const color = levelTwoColors[feature.properties.NA_L2NAME] || "#d9cfb8";
+          return {
+            color: "#48534d",
+            weight: 1,
+            opacity: 0.8,
+            fillColor: color,
+            fillOpacity: 0.52
+          };
+        }
+      }).addTo(map);
+
+      ecoregionLayer.bindPopup((layer) => {
+        const properties = layer.feature.properties;
+        const levelFour = formatRegion(properties.US_L4CODE, properties.US_L4NAME);
+        const levelThree = formatRegion(properties.US_L3CODE || properties.NA_L3CODE, properties.US_L3NAME || properties.NA_L3NAME);
+        return `<strong>${escapeHtml(levelFour || "EPA Level IV ecoregion")}</strong><br>${escapeHtml(levelThree || "")}`;
+      });
+
+      const transportationLayer = L.tileLayer("https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}", {
+        pane: "labels",
+        maxZoom: 16,
+        interactive: false
+      });
+
+      const placeLabelLayer = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {
+        pane: "labels",
+        maxZoom: 16,
+        interactive: false
+      });
+
+      const labelLayer = L.layerGroup([transportationLayer, placeLabelLayer]).addTo(map);
+
+      L.control.layers(null, {
+        "EPA Level IV colors": ecoregionLayer,
+        "Town and road labels": labelLayer
+      }, { collapsed: false }).addTo(map);
+
+      let selectedMarker;
 
       states.forEach(([abbr, name]) => {
         const option = document.createElement("option");
@@ -259,6 +419,10 @@
         viewerUrl.searchParams.set("level", "12");
         mapResultLink.href = viewerUrl.toString();
         mapResultAction.hidden = false;
+        map.setView([y, x], 12);
+        if (selectedMarker) selectedMarker.remove();
+        selectedMarker = L.marker([y, x], { title: candidate.address }).addTo(map);
+        selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br>${escapeHtml(formatRegion(attributes.US_L4CODE, attributes.US_L4NAME))}`).openPopup();
       }
 
       function formatRegion(code, name) {
