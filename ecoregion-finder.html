@@ -195,6 +195,27 @@
         overflow: auto;
       }
 
+      .layer-control-minimize {
+        width: 100%;
+        margin: 0.55rem 0 0;
+        padding: 0.42rem 0.6rem;
+        border: 1px solid #8b948e;
+        border-radius: 0.4rem;
+        background: #fff;
+        color: #26362d;
+        font: inherit;
+        font-size: 0.78rem;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .layer-control-minimize:hover,
+      .layer-control-minimize:focus-visible {
+        border-color: #315f49;
+        outline: 2px solid rgba(49, 95, 73, 0.2);
+        outline-offset: 1px;
+      }
+
       .source-layer-guide {
         padding: 1rem;
         border-top: 1px solid var(--line);
@@ -220,16 +241,22 @@
 
       .source-layer-card {
         display: grid;
-        grid-template-columns: 1.25rem 1fr;
+        grid-template-columns: 1.25rem minmax(0, 1fr) auto;
         gap: 0.25rem 0.65rem;
         padding: 0.75rem;
         border: 1px solid var(--line);
         border-radius: 0.75rem;
         background: #fff;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+      }
+
+      .source-layer-card.is-active {
+        border-color: #315f49;
+        box-shadow: 0 0 0 2px rgba(49, 95, 73, 0.12);
       }
 
       .source-layer-card .source-layer-swatch {
-        grid-row: 1 / span 3;
+        grid-row: 1 / span 4;
         width: 1.25rem;
         height: 1.25rem;
         margin-top: 0.1rem;
@@ -239,18 +266,112 @@
 
       .source-layer-card strong,
       .source-layer-card small,
-      .source-layer-card a {
+      .source-layer-card a,
+      .source-layer-card .layer-color-guide {
         min-width: 0;
       }
 
       .source-layer-card small {
+        grid-column: 2 / -1;
         color: var(--muted);
         line-height: 1.35;
       }
 
       .source-layer-card a {
+        grid-column: 2 / -1;
         font-size: 0.82rem;
         font-weight: 750;
+      }
+
+      .layer-status {
+        align-self: start;
+        padding: 0.15rem 0.42rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.68rem;
+        font-weight: 850;
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .source-layer-card.is-active .layer-status {
+        border-color: #315f49;
+        background: #315f49;
+        color: #fff;
+      }
+
+      .layer-color-guide {
+        grid-column: 1 / -1;
+        display: grid;
+        gap: 0.38rem;
+        margin: 0.45rem 0 0;
+        padding: 0.62rem;
+        border-radius: 0.55rem;
+        background: #f6f3eb;
+      }
+
+      .layer-color-guide-title {
+        color: #26362d;
+        font-size: 0.72rem;
+        font-weight: 850;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .layer-color-key {
+        display: grid;
+        grid-template-columns: 1rem minmax(0, 1fr);
+        gap: 0.45rem;
+        align-items: center;
+        color: #45534b;
+        font-size: 0.78rem;
+        line-height: 1.25;
+      }
+
+      .layer-color-chip {
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid rgba(42, 50, 45, 0.55);
+        border-radius: 0.18rem;
+        background: var(--chip-color, transparent);
+      }
+
+      .layer-color-chip.line {
+        height: 0;
+        border: 0;
+        border-top: 3px solid var(--chip-color, #000);
+        border-radius: 0;
+      }
+
+      .layer-color-chip.dashed {
+        height: 0;
+        border: 0;
+        border-top: 3px dashed var(--chip-color, #000);
+        border-radius: 0;
+      }
+
+      .hillshade-ramp {
+        height: 1rem;
+        border: 1px solid #6d736f;
+        border-radius: 0.2rem;
+        background: linear-gradient(90deg, #252a27, #777d79 50%, #f1eee5);
+      }
+
+      .hillshade-labels {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        color: var(--muted);
+        font-size: 0.72rem;
+      }
+
+      .layer-guide-empty {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.78rem;
+        line-height: 1.35;
       }
 
       .source-layer-swatch.geology {
@@ -274,6 +395,11 @@
         #ecoregion-map {
           height: 62vh;
           min-height: 420px;
+        }
+
+        .leaflet-control-layers-expanded {
+          max-width: min(17rem, calc(100vw - 5rem));
+          max-height: 48vh;
         }
       }
     </style>
@@ -355,30 +481,53 @@
           </div>
           <section class="source-layer-guide" aria-labelledby="source-layer-guide-title">
             <h3 id="source-layer-guide-title">Source layers</h3>
-            <p>Optional layers are off by default. Turn on one or more with the map control. Select geology or aquifer polygons for source attributes; soil units become readable when you zoom in.</p>
+            <p>Optional layers are off by default. Turn on one or more with the map control. The most recently enabled layer and its color guide move to the first position.</p>
             <div class="source-layer-grid">
-              <article class="source-layer-card">
+              <article class="source-layer-card" data-source-layer="geology">
                 <span class="source-layer-swatch geology" aria-hidden="true"></span>
                 <strong>Geology</strong>
+                <span class="layer-status">Off</span>
                 <small>Texas surface rock units at 1:250,000 scale. Texas only.</small>
+                <div class="layer-color-guide" id="geology-color-guide" aria-label="Geology color guide">
+                  <span class="layer-color-guide-title">Visible rock-unit colors</span>
+                  <p class="layer-guide-empty">Enable Geology to list the rock-unit colors visible in the current map.</p>
+                </div>
                 <a href="https://services2.arcgis.com/iDGPUUUgFO4fjN9P/arcgis/rest/services/Tx_Geology250k_TPWD/FeatureServer/0" target="_blank" rel="noopener">Open source service</a>
               </article>
-              <article class="source-layer-card">
+              <article class="source-layer-card" data-source-layer="landforms">
                 <span class="source-layer-swatch landforms" aria-hidden="true"></span>
                 <strong>Landforms</strong>
+                <span class="layer-status">Off</span>
                 <small>USGS 3DEP multidirectional hillshade reveals ridges, valleys, terraces, and drainage form. U.S. coverage.</small>
+                <div class="layer-color-guide" aria-label="Landforms color guide">
+                  <span class="layer-color-guide-title">Modeled illumination</span>
+                  <div class="hillshade-ramp" aria-hidden="true"></div>
+                  <div class="hillshade-labels"><span>Shadowed face</span><span>Midtone</span><span>Illuminated face</span></div>
+                  <p class="layer-guide-empty">Brightness describes terrain illumination—not elevation, geology, or land-cover class.</p>
+                </div>
                 <a href="https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer" target="_blank" rel="noopener">Open source service</a>
               </article>
-              <article class="source-layer-card">
+              <article class="source-layer-card" data-source-layer="aquifers">
                 <span class="source-layer-swatch aquifers" aria-hidden="true"></span>
                 <strong>Aquifers</strong>
+                <span class="layer-status">Off</span>
                 <small>TWDB major and minor aquifer boundaries. Texas only; boundaries are approximate.</small>
+                <div class="layer-color-guide" id="aquifers-color-guide" aria-label="Aquifer color guide">
+                  <span class="layer-color-guide-title">Visible aquifer colors</span>
+                  <p class="layer-guide-empty">Enable Aquifers to list the aquifer colors visible in the current map.</p>
+                </div>
                 <a href="https://www.twdb.texas.gov/mapping/gisdata.asp" target="_blank" rel="noopener">Open TWDB GIS data</a>
               </article>
-              <article class="source-layer-card">
+              <article class="source-layer-card" data-source-layer="soils">
                 <span class="source-layer-swatch soils" aria-hidden="true"></span>
                 <strong>Soils</strong>
-                <small>USDA NRCS SSURGO soil map units. Zoom to neighborhood or parcel scale for detail.</small>
+                <span class="layer-status">Off</span>
+                <small>USDA NRCS SSURGO soil map units. Zoom to neighborhood or parcel scale, then select a unit for details.</small>
+                <div class="layer-color-guide" aria-label="Soils color guide">
+                  <span class="layer-color-guide-title">SSURGO map-unit display</span>
+                  <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#ff8a00" aria-hidden="true"></span><span>Orange boundary and code = individual soil map unit</span></span>
+                  <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:transparent" aria-hidden="true"></span><span>Clear interior = basemap remains visible; fill color does not classify soil type</span></span>
+                </div>
                 <a href="https://websoilsurvey.nrcs.usda.gov/" target="_blank" rel="noopener">Open Web Soil Survey</a>
               </article>
             </div>
@@ -583,6 +732,15 @@
       const selectedLevelFour = document.querySelector("#selected-level-four");
       const selectedLevelFourSwatch = document.querySelector("#selected-level-four-swatch");
       const selectedLevelFourName = document.querySelector("#selected-level-four-name");
+      const sourceLayerGrid = document.querySelector(".source-layer-grid");
+      const mapShell = document.querySelector(".ecoregion-map-shell");
+      const sourceLayerGuide = document.querySelector(".source-layer-guide");
+      const levelFourGuide = document.querySelector(".ecoregion-level-four-guide");
+      const sourceLayerCards = new Map(
+        [...document.querySelectorAll("[data-source-layer]")].map((card) => [card.dataset.sourceLayer, card])
+      );
+      const geologyColorGuide = document.querySelector("#geology-color-guide");
+      const aquifersColorGuide = document.querySelector("#aquifers-color-guide");
 
       const fallbackLevelFourPalette = [
         "#a8d5e2", "#f2b5d4", "#c9e4a7", "#f6d186", "#b8b5e1", "#9dd9c5",
@@ -762,14 +920,13 @@
       const aquifersLayer = L.layerGroup([majorAquifersLayer, minorAquifersLayer]);
 
       const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
-        layers: "mapunitpoly",
+        layers: "mapunitpolyextended",
         styles: "default",
         format: "image/png",
         transparent: true,
         version: "1.1.1",
         pane: "soils",
         opacity: 0.72,
-        minZoom: 9,
         maxZoom: 16,
         attribution: "Soils: USDA NRCS SSURGO"
       });
@@ -893,14 +1050,214 @@
 
       const labelLayer = L.layerGroup([transportationLayer, placeLabelLayer]).addTo(map);
 
-      L.control.layers(null, {
+      const sourceLayers = new Map([
+        ["geology", geologyLayer],
+        ["landforms", landformsLayer],
+        ["aquifers", aquifersLayer],
+        ["soils", soilsLayer]
+      ]);
+      const sourceLayerKeys = [...sourceLayers.keys()];
+      let activeSourceLayerKeys = [];
+
+      function colorKeyMarkup(color, label, className = "") {
+        return `<span class="layer-color-key"><span class="layer-color-chip ${className}" style="--chip-color:${escapeHtml(color)}" aria-hidden="true"></span><span>${escapeHtml(label)}</span></span>`;
+      }
+
+      function activeFeatureLayers(featureLayer) {
+        const layers = [];
+        const collect = (layer) => {
+          if (layer && layer.feature && layer.feature.properties) layers.push(layer);
+        };
+        if (typeof featureLayer.eachActiveFeature === "function") {
+          featureLayer.eachActiveFeature(collect);
+        } else if (typeof featureLayer.eachLayer === "function") {
+          featureLayer.eachLayer(collect);
+        }
+        return layers;
+      }
+
+      function renderGeologyColorGuide() {
+        if (!map.hasLayer(geologyLayer)) {
+          geologyColorGuide.innerHTML = `<span class="layer-color-guide-title">Visible rock-unit colors</span><p class="layer-guide-empty">Enable Geology to list the rock-unit colors visible in the current map.</p>`;
+          return;
+        }
+        const units = new Map();
+        activeFeatureLayers(geologyLayer).forEach((layer) => {
+          const properties = layer.feature.properties;
+          const name = String(properties.ROCKUNIT_C || properties.ROCKUNIT_I || "Unnamed rock unit");
+          units.set(name, paletteColor(properties.ROCKUNIT_C, geologyPalette));
+        });
+        const entries = [...units.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+        const shown = entries.slice(0, 12);
+        geologyColorGuide.innerHTML = `<span class="layer-color-guide-title">Visible rock-unit colors</span>${shown.length
+          ? shown.map(([name, color]) => colorKeyMarkup(color, name)).join("")
+          : `<p class="layer-guide-empty">No mapped Texas rock units are visible at this extent.</p>`}${entries.length > shown.length
+          ? `<p class="layer-guide-empty">+ ${entries.length - shown.length} more visible units. Zoom in to shorten the guide.</p>`
+          : ""}`;
+      }
+
+      function renderAquiferColorGuide() {
+        if (!map.hasLayer(aquifersLayer)) {
+          aquifersColorGuide.innerHTML = `<span class="layer-color-guide-title">Visible aquifer colors</span><p class="layer-guide-empty">Enable Aquifers to list the aquifer colors visible in the current map.</p>`;
+          return;
+        }
+        const aquifers = new Map();
+        [[majorAquifersLayer, "Major"], [minorAquifersLayer, "Minor"]].forEach(([featureLayer, kind]) => {
+          activeFeatureLayers(featureLayer).forEach((layer) => {
+            const properties = layer.feature.properties;
+            const name = String(properties.AQ_NAME || properties.AQU_NAME || "Unnamed aquifer");
+            const subcrop = Number(properties.AQUIFER) === 2;
+            aquifers.set(`${kind}|${name}|${subcrop}`, {
+              name: `${name} · ${kind.toLowerCase()}${subcrop ? " · subcrop" : ""}`,
+              color: paletteColor(name, aquiferPalette),
+              className: subcrop ? "dashed" : "line"
+            });
+          });
+        });
+        const entries = [...aquifers.values()].sort((a, b) => a.name.localeCompare(b.name));
+        const shown = entries.slice(0, 12);
+        aquifersColorGuide.innerHTML = `<span class="layer-color-guide-title">Visible aquifer colors</span>${shown.length
+          ? shown.map((entry) => colorKeyMarkup(entry.color, entry.name, entry.className)).join("")
+          : `<p class="layer-guide-empty">No mapped Texas aquifers are visible at this extent.</p>`}${entries.length > shown.length
+          ? `<p class="layer-guide-empty">+ ${entries.length - shown.length} more visible aquifers. Zoom in to shorten the guide.</p>`
+          : ""}`;
+      }
+
+      function renderSourceLayerGuides() {
+        renderGeologyColorGuide();
+        renderAquiferColorGuide();
+      }
+
+      function refreshSourceLayerOrder() {
+        const activeInPriorityOrder = [...activeSourceLayerKeys].reverse();
+        const orderedKeys = [
+          ...activeInPriorityOrder,
+          ...sourceLayerKeys.filter((key) => !activeInPriorityOrder.includes(key))
+        ];
+        orderedKeys.forEach((key) => {
+          const card = sourceLayerCards.get(key);
+          const active = activeInPriorityOrder.includes(key);
+          card.classList.toggle("is-active", active);
+          card.querySelector(".layer-status").textContent = active ? "Viewing" : "Off";
+          sourceLayerGrid.append(card);
+        });
+        if (activeInPriorityOrder.length) {
+          mapShell.insertBefore(sourceLayerGuide, levelFourGuide);
+        } else {
+          mapShell.insertBefore(levelFourGuide, sourceLayerGuide);
+        }
+        renderSourceLayerGuides();
+      }
+
+      function sourceLayerKeyFor(layer) {
+        return sourceLayerKeys.find((key) => sourceLayers.get(key) === layer);
+      }
+
+      map.on("overlayadd", (event) => {
+        const key = sourceLayerKeyFor(event.layer);
+        if (!key) return;
+        activeSourceLayerKeys = activeSourceLayerKeys.filter((activeKey) => activeKey !== key);
+        activeSourceLayerKeys.push(key);
+        refreshSourceLayerOrder();
+      });
+
+      map.on("overlayremove", (event) => {
+        const key = sourceLayerKeyFor(event.layer);
+        if (!key) return;
+        activeSourceLayerKeys = activeSourceLayerKeys.filter((activeKey) => activeKey !== key);
+        refreshSourceLayerOrder();
+      });
+
+      geologyLayer.on("load", renderGeologyColorGuide);
+      majorAquifersLayer.on("load", renderAquiferColorGuide);
+      minorAquifersLayer.on("load", renderAquiferColorGuide);
+      map.on("moveend", renderSourceLayerGuides);
+
+      const layerControl = L.control.layers(null, {
         "Level IV colors and boundaries": ecoregionLayer,
         "Geology · Texas": geologyLayer,
         "Landforms · USGS 3DEP": landformsLayer,
         "Aquifers · Texas major + minor": aquifersLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
         "Town and road labels": labelLayer
-      }, { collapsed: false }).addTo(map);
+      }, { collapsed: window.matchMedia("(max-width: 640px)").matches }).addTo(map);
+
+      const layerControlContainer = layerControl.getContainer();
+      const layerToggle = layerControlContainer.querySelector(".leaflet-control-layers-toggle");
+      if (layerToggle) {
+        layerToggle.setAttribute("aria-label", "Show map layers");
+        layerToggle.title = "Show map layers";
+      }
+      const layerControlList = layerControlContainer.querySelector(".leaflet-control-layers-list");
+      if (layerControlList) {
+        const minimizeButton = document.createElement("button");
+        minimizeButton.type = "button";
+        minimizeButton.className = "layer-control-minimize";
+        minimizeButton.textContent = "Minimize layer chooser";
+        minimizeButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          layerControl.collapse();
+          if (layerToggle) layerToggle.focus();
+        });
+        layerControlList.append(minimizeButton);
+      }
+
+      refreshSourceLayerOrder();
+
+      function parseSoilFeatureInfo(text) {
+        const values = {};
+        for (const match of text.matchAll(/^\s*([A-Za-z0-9_]+)\s*=\s*'(.*)'\s*$/gm)) {
+          values[match[1]] = match[2];
+        }
+        return values;
+      }
+
+      async function identifySoilAt(event) {
+        if (!map.hasLayer(soilsLayer)) return;
+        const size = map.getSize();
+        const bounds = map.getBounds();
+        const point = map.latLngToContainerPoint(event.latlng);
+        const parameters = new URLSearchParams({
+          SERVICE: "WMS",
+          VERSION: "1.1.1",
+          REQUEST: "GetFeatureInfo",
+          LAYERS: "mapunitpolyextended",
+          QUERY_LAYERS: "mapunitpolyextended",
+          STYLES: "default",
+          FORMAT: "image/png",
+          TRANSPARENT: "true",
+          SRS: "EPSG:4326",
+          BBOX: [bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()].join(","),
+          WIDTH: String(size.x),
+          HEIGHT: String(size.y),
+          X: String(Math.round(point.x)),
+          Y: String(Math.round(point.y)),
+          INFO_FORMAT: "text/plain",
+          FEATURE_COUNT: "1"
+        });
+        try {
+          const response = await fetch(`https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms?${parameters}`);
+          if (!response.ok) throw new Error(`SSURGO identify request returned ${response.status}`);
+          const properties = parseSoilFeatureInfo(await response.text());
+          if (!properties.mukey) return;
+          const details = [
+            properties.musym ? `Map-unit code: ${escapeHtml(properties.musym)}` : "",
+            properties.areasymbol ? `Survey area: ${escapeHtml(properties.areasymbol)}` : "",
+            properties.drclassdcd ? `Drainage: ${escapeHtml(properties.drclassdcd)}` : "",
+            properties.hydgrpdcd ? `Hydrologic group: ${escapeHtml(properties.hydgrpdcd)}` : "",
+            properties.slopegradwta ? `Representative slope: ${escapeHtml(properties.slopegradwta)}%` : ""
+          ].filter(Boolean).join("<br>");
+          L.popup()
+            .setLatLng(event.latlng)
+            .setContent(`<strong>${escapeHtml(properties.muname || "USDA SSURGO soil map unit")}</strong><br>${details}<br><small>Map-unit key ${escapeHtml(properties.mukey)}. Regional soil-survey interpretation; verify site conditions before design or construction.</small>`)
+            .openOn(map);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      map.on("preclick", identifySoilAt);
 
       let selectedMarker;
 
