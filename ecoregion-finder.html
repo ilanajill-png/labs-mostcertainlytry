@@ -1180,7 +1180,7 @@
         "Aquifers · Texas major + minor": aquifersLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
         "Town and road labels": labelLayer
-      }, { collapsed: window.matchMedia("(max-width: 640px)").matches }).addTo(map);
+      }, { collapsed: false }).addTo(map);
 
       const layerControlContainer = layerControl.getContainer();
       const layerToggle = layerControlContainer.querySelector(".leaflet-control-layers-toggle");
