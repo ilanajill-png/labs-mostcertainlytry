@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Address to EPA Ecoregion | Most Certainly Try Labs</title>
     <meta name="description" content="Look up EPA terrestrial ecoregions from a U.S. address and explore their boundaries beneath live road and town labels.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232f5d46'/%3E%3Cpath d='M9 19c4-8 11-9 14-9-1 7-5 12-14 9Z' fill='%23f6f0df'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
     <style>
@@ -188,6 +189,87 @@
         font-family: inherit;
       }
 
+      .leaflet-control-layers-expanded {
+        max-width: min(19rem, calc(100vw - 4rem));
+        max-height: min(60vh, 28rem);
+        overflow: auto;
+      }
+
+      .source-layer-guide {
+        padding: 1rem;
+        border-top: 1px solid var(--line);
+        background: #f8f5ed;
+      }
+
+      .source-layer-guide h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.05rem;
+      }
+
+      .source-layer-guide > p {
+        margin: 0 0 0.9rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .source-layer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 0.7rem;
+      }
+
+      .source-layer-card {
+        display: grid;
+        grid-template-columns: 1.25rem 1fr;
+        gap: 0.25rem 0.65rem;
+        padding: 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 0.75rem;
+        background: #fff;
+      }
+
+      .source-layer-card .source-layer-swatch {
+        grid-row: 1 / span 3;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-top: 0.1rem;
+        border: 1px solid #4f544f;
+        border-radius: 0.22rem;
+      }
+
+      .source-layer-card strong,
+      .source-layer-card small,
+      .source-layer-card a {
+        min-width: 0;
+      }
+
+      .source-layer-card small {
+        color: var(--muted);
+        line-height: 1.35;
+      }
+
+      .source-layer-card a {
+        font-size: 0.82rem;
+        font-weight: 750;
+      }
+
+      .source-layer-swatch.geology {
+        background: linear-gradient(135deg, #d69c68 0 50%, #8cae8a 50%);
+      }
+
+      .source-layer-swatch.landforms {
+        background: linear-gradient(135deg, #f1eee5, #777e78);
+      }
+
+      .source-layer-swatch.aquifers {
+        background: rgba(43, 132, 180, 0.35);
+        border-color: #17638d;
+      }
+
+      .source-layer-swatch.soils {
+        background: repeating-linear-gradient(135deg, #fff 0 3px, #6f4a2e 3px 5px);
+      }
+
       @media (max-width: 640px) {
         #ecoregion-map {
           height: 62vh;
@@ -264,13 +346,43 @@
           <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
-            <span>Select a region to see its full ecoregion hierarchy.</span>
+            <span>Use the layer control to add geology, landforms, aquifers, or soils.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
               <output id="ecoregion-opacity-value" for="ecoregion-opacity">20%</output>
             </label>
           </div>
+          <section class="source-layer-guide" aria-labelledby="source-layer-guide-title">
+            <h3 id="source-layer-guide-title">Source layers</h3>
+            <p>Optional layers are off by default. Turn on one or more with the map control. Select geology or aquifer polygons for source attributes; soil units become readable when you zoom in.</p>
+            <div class="source-layer-grid">
+              <article class="source-layer-card">
+                <span class="source-layer-swatch geology" aria-hidden="true"></span>
+                <strong>Geology</strong>
+                <small>Texas surface rock units at 1:250,000 scale. Texas only.</small>
+                <a href="https://services2.arcgis.com/iDGPUUUgFO4fjN9P/arcgis/rest/services/Tx_Geology250k_TPWD/FeatureServer/0" target="_blank" rel="noopener">Open source service</a>
+              </article>
+              <article class="source-layer-card">
+                <span class="source-layer-swatch landforms" aria-hidden="true"></span>
+                <strong>Landforms</strong>
+                <small>USGS 3DEP multidirectional hillshade reveals ridges, valleys, terraces, and drainage form. U.S. coverage.</small>
+                <a href="https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer" target="_blank" rel="noopener">Open source service</a>
+              </article>
+              <article class="source-layer-card">
+                <span class="source-layer-swatch aquifers" aria-hidden="true"></span>
+                <strong>Aquifers</strong>
+                <small>TWDB major and minor aquifer boundaries. Texas only; boundaries are approximate.</small>
+                <a href="https://www.twdb.texas.gov/mapping/gisdata.asp" target="_blank" rel="noopener">Open TWDB GIS data</a>
+              </article>
+              <article class="source-layer-card">
+                <span class="source-layer-swatch soils" aria-hidden="true"></span>
+                <strong>Soils</strong>
+                <small>USDA NRCS SSURGO soil map units. Zoom to neighborhood or parcel scale for detail.</small>
+                <a href="https://websoilsurvey.nrcs.usda.gov/" target="_blank" rel="noopener">Open Web Soil Survey</a>
+              </article>
+            </div>
+          </section>
           <section class="ecoregion-level-four-guide" aria-labelledby="level-four-guide-title">
             <h3 id="level-four-guide-title">Level IV color guide</h3>
             <p id="level-four-guide-status">Loading all current Level IV regions and their map colors…</p>
@@ -288,7 +400,7 @@
             </div>
           </section>
         </div>
-        <p class="privacy-note">Map coverage: the continental United States. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community; ecoregion boundaries are from the EPA.</p>
+        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; geology and aquifers are Texas-only. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -321,7 +433,7 @@
             </div>
             <div>
               <dt>What the ecoregion service receives</dt>
-              <dd>The matched coordinate and the visible map bounds are sent to the EPA ecoregion layer hosted by ArcGIS so it can identify and draw the intersecting polygons.</dd>
+              <dd>The matched coordinate and visible map bounds are sent to the EPA ecoregion service. When optional layers are enabled, the visible bounds are also requested from USGS, USDA NRCS, and ArcGIS-hosted Texas geology or TWDB-derived aquifer services.</dd>
             </div>
             <div>
               <dt>What Labs saves</dt>
@@ -364,6 +476,30 @@
             <h2><a href="https://geodata.epa.gov/arcgis/rest/services/ORD/USEPA_Ecoregions_Level_III_and_IV/MapServer/7" target="_blank" rel="noopener">EPA Level IV Ecoregion Polygons</a></h2>
             <p class="project-type">Level IV color guide</p>
             <p>The national renderer supplies colors for all 968 current Level IV regions. The guide uses those same colors as the interactive map.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Geology</span><span>Texas 1:250,000</span></div>
+            <h2><a href="https://services2.arcgis.com/iDGPUUUgFO4fjN9P/arcgis/rest/services/Tx_Geology250k_TPWD/FeatureServer/0" target="_blank" rel="noopener">Texas Surface Geology</a></h2>
+            <p class="project-type">Mapped rock units</p>
+            <p>Rock-unit polygons derived from the Texas Geologic Atlas dataset. Colors on this page are a readable web palette, not the printed atlas palette.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Landforms</span><span>USGS 3DEP</span></div>
+            <h2><a href="https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer" target="_blank" rel="noopener">3DEP Elevation Image Service</a></h2>
+            <p class="project-type">Multidirectional hillshade</p>
+            <p>A terrain visualization derived from the national elevation model. It shows form, not named landform boundaries.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Aquifers</span><span>TWDB</span></div>
+            <h2><a href="https://www.twdb.texas.gov/mapping/gisdata.asp" target="_blank" rel="noopener">Texas Water Development Board GIS Data</a></h2>
+            <p class="project-type">Major and minor aquifer boundaries</p>
+            <p>Statewide aquifer extents are approximate and intended for regional reference, not site-specific groundwater determinations.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Soils</span><span>USDA NRCS SSURGO</span></div>
+            <h2><a href="https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms?service=WMS&amp;request=GetCapabilities" target="_blank" rel="noopener">Soil Data Access Web Map Service</a></h2>
+            <p class="project-type">Soil map-unit polygons</p>
+            <p>The official SSURGO web service supplies neighborhood-scale soil boundaries; Web Soil Survey remains the authoritative tool for reports and interpretations.</p>
           </article>
         </div>
       </section>
@@ -523,6 +659,14 @@
 
       map.createPane("ecoregions");
       map.getPane("ecoregions").style.zIndex = "450";
+      map.createPane("landforms");
+      map.getPane("landforms").style.zIndex = "350";
+      map.createPane("geology");
+      map.getPane("geology").style.zIndex = "470";
+      map.createPane("aquifers");
+      map.getPane("aquifers").style.zIndex = "480";
+      map.createPane("soils");
+      map.getPane("soils").style.zIndex = "490";
       map.createPane("labels");
       map.getPane("labels").style.zIndex = "650";
       map.getPane("labels").style.pointerEvents = "none";
@@ -533,6 +677,102 @@
         maxZoom: 16,
         attribution: "Tiles &copy; Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community"
       }).addTo(map);
+
+      const geologyPalette = ["#c97f54", "#d6a96b", "#8cae8a", "#7da6b8", "#b28aaf", "#d0bd72", "#9a8f77", "#79a99a"];
+      const aquiferPalette = ["#17638d", "#2980a8", "#4d9fbd", "#2b6f9c", "#55a6a3", "#477cab", "#2f8bb0"];
+
+      function paletteColor(value, palette) {
+        const key = String(value || "unknown");
+        let hash = 0;
+        for (const character of key) hash = ((hash << 5) - hash + character.charCodeAt(0)) | 0;
+        return palette[Math.abs(hash) % palette.length];
+      }
+
+      const landformsLayer = L.esri.imageMapLayer({
+        url: "https://elevation.nationalmap.gov/arcgis/rest/services/3DEPElevation/ImageServer",
+        pane: "landforms",
+        opacity: 0.64,
+        attribution: "Landforms: USGS 3DEP",
+        renderingRule: { rasterFunction: "Hillshade Multidirectional" }
+      });
+
+      const geologyLayer = L.esri.featureLayer({
+        url: "https://services2.arcgis.com/iDGPUUUgFO4fjN9P/arcgis/rest/services/Tx_Geology250k_TPWD/FeatureServer/0",
+        pane: "geology",
+        simplifyFactor: 0.45,
+        precision: 5,
+        attribution: "Texas surface geology: Texas Geologic Atlas / TPWD-hosted service",
+        style: (feature) => ({
+          color: "#594b3f",
+          weight: 0.8,
+          opacity: 0.9,
+          fillColor: paletteColor(feature.properties.ROCKUNIT_C, geologyPalette),
+          fillOpacity: 0.34
+        })
+      });
+
+      geologyLayer.bindPopup((layer) => {
+        const properties = layer.feature.properties;
+        return `<strong>Texas surface geology</strong><br>Rock unit: ${escapeHtml(properties.ROCKUNIT_C || "Not named")}<br>Unit identifier: ${escapeHtml(properties.ROCKUNIT_I || "Not listed")}<br><small>Regional 1:250,000 mapping; not a site investigation.</small>`;
+      });
+
+      function aquiferStyle(feature, kind) {
+        const name = feature.properties.AQ_NAME || feature.properties.AQU_NAME || "Aquifer";
+        const isSubcrop = Number(feature.properties.AQUIFER) === 2;
+        const color = paletteColor(name, aquiferPalette);
+        return {
+          color,
+          weight: kind === "major" ? 2 : 1.4,
+          dashArray: isSubcrop ? "6 4" : null,
+          opacity: 0.95,
+          fillColor: color,
+          fillOpacity: kind === "major" ? 0.22 : 0.12
+        };
+      }
+
+      const majorAquifersLayer = L.esri.featureLayer({
+        url: "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Major_Aquifers/FeatureServer/0",
+        pane: "aquifers",
+        simplifyFactor: 0.4,
+        precision: 5,
+        attribution: "Aquifers: Texas Water Development Board",
+        style: (feature) => aquiferStyle(feature, "major")
+      });
+
+      const minorAquifersLayer = L.esri.featureLayer({
+        url: "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Minor_Aquifers/FeatureServer/0",
+        pane: "aquifers",
+        simplifyFactor: 0.4,
+        precision: 5,
+        attribution: "Aquifers: Texas Water Development Board",
+        style: (feature) => aquiferStyle(feature, "minor")
+      });
+
+      function aquiferPopup(kind) {
+        return (layer) => {
+          const properties = layer.feature.properties;
+          const name = properties.AQ_NAME || properties.AQU_NAME || "Unnamed aquifer";
+          const occurrence = Number(properties.AQUIFER) === 2 ? "subcrop" : "outcrop / mapped extent";
+          return `<strong>${escapeHtml(name)}</strong><br>${escapeHtml(kind)} aquifer · ${escapeHtml(occurrence)}<br><small>TWDB regional boundary; approximate and not for site-specific groundwater decisions.</small>`;
+        };
+      }
+
+      majorAquifersLayer.bindPopup(aquiferPopup("Major"));
+      minorAquifersLayer.bindPopup(aquiferPopup("Minor"));
+      const aquifersLayer = L.layerGroup([majorAquifersLayer, minorAquifersLayer]);
+
+      const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
+        layers: "mapunitpoly",
+        styles: "default",
+        format: "image/png",
+        transparent: true,
+        version: "1.1.1",
+        pane: "soils",
+        opacity: 0.72,
+        minZoom: 9,
+        maxZoom: 16,
+        attribution: "Soils: USDA NRCS SSURGO"
+      });
 
       function ecoregionStyle(feature, fillOpacity = Number(opacityControl.value)) {
         const color = levelFourColor(feature.properties);
@@ -655,6 +895,10 @@
 
       L.control.layers(null, {
         "Level IV colors and boundaries": ecoregionLayer,
+        "Geology · Texas": geologyLayer,
+        "Landforms · USGS 3DEP": landformsLayer,
+        "Aquifers · Texas major + minor": aquifersLayer,
+        "Soils · USDA SSURGO (zoom in)": soilsLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
 
