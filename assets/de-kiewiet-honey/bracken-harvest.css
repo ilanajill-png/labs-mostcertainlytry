@@ -6,6 +6,7 @@
 }
 
 .preserve-copy > p:not(.eyebrow) { max-width: 720px; }
+.hero-copy .lede-follow { margin-top: -.8rem; }
 
 .preserve-facts {
   display: grid;
