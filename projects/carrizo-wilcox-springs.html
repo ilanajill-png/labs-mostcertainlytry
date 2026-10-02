@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,850&amp;family=Inter:wght@400;500;700;850&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous" />
     <link rel="stylesheet" href="../field-guide.css" />
     <style>
       .carrizo-hero {
@@ -41,7 +42,32 @@
       .access-label { display:inline-block; margin-bottom:12px; padding:5px 9px; border-radius:999px; background:rgba(47,102,80,.11); color:var(--leaf); font-size:12px; font-weight:850; text-transform:uppercase; }
       .access-label.caution { background:rgba(169,77,50,.11); color:var(--clay); }
       .data-note { margin-top:22px; font-size:14px; }
-      @media(max-width:800px){.access-grid,.aquifer-diagram{grid-template-columns:1fr}.access-card .button{width:100%}.access-card .button + .button{margin-left:0;margin-top:8px}}
+      .aquifer-map-shell { overflow:hidden; margin-top:28px; border:1px solid var(--line); border-radius:8px; background:#e6e1d7; box-shadow:0 20px 45px rgba(26,44,37,.12); }
+      #carrizo-aquifer-map { width:100%; height:min(68vh,620px); min-height:480px; }
+      .aquifer-map-footer { display:flex; flex-wrap:wrap; gap:14px 24px; align-items:flex-start; justify-content:space-between; padding:18px 20px; border-top:1px solid var(--line); background:var(--paper); }
+      .aquifer-map-legend { display:flex; flex-wrap:wrap; gap:12px 18px; max-width:760px; }
+      .aquifer-map-key { display:inline-flex; gap:8px; align-items:center; color:var(--deep); font-size:13px; font-weight:700; }
+      .aquifer-map-swatch { width:24px; height:14px; border:2px solid #8a4f23; border-radius:3px; background:rgba(210,141,69,.5); }
+      .aquifer-map-swatch.subcrop { border-color:#6b508b; border-style:dashed; background:rgba(128,100,162,.35); }
+      .aquifer-map-swatch.generalized { border-color:#b15b5b; border-style:dashed; background:rgba(217,139,134,.35); }
+      .aquifer-map-swatch.wells { width:14px; height:14px; border:2px solid #fff; border-radius:50%; background:#0d7286; box-shadow:0 0 0 1px #0d4c58; }
+      .aquifer-map-meta { display:grid; gap:5px; max-width:380px; color:var(--muted); font-size:13px; line-height:1.45; }
+      .aquifer-map-meta strong { color:var(--deep); }
+      .aquifer-map-meta a { color:var(--leaf); font-weight:800; }
+      .leaflet-popup-content { font-family:Inter,Arial,sans-serif; line-height:1.45; }
+      .leaflet-popup-content a { color:#2f6650; font-weight:700; }
+      .timeline { display:grid; gap:0; margin-top:28px; border-top:1px solid var(--line); }
+      .timeline-item { display:grid; grid-template-columns:130px 1fr; gap:24px; padding:22px 0; border-bottom:1px solid var(--line); }
+      .timeline-date { color:var(--clay); font-family:Fraunces,Georgia,serif; font-size:23px; font-weight:850; }
+      .timeline-item h3 { margin-bottom:7px; }
+      .timeline-item p + p { margin-top:8px; }
+      .evidence-tag { display:inline-block; margin-left:8px; padding:3px 7px; border-radius:999px; background:rgba(47,102,80,.11); color:var(--leaf); font-family:Inter,Arial,sans-serif; font-size:10px; font-weight:850; letter-spacing:.04em; text-transform:uppercase; vertical-align:middle; }
+      .evidence-tag.reported { background:rgba(169,77,50,.11); color:var(--clay); }
+      .trip-card { display:flex; flex-direction:column; }
+      .trip-card .trip-meta { margin:0 0 12px; color:var(--clay); font-size:12px; font-weight:850; letter-spacing:.04em; text-transform:uppercase; }
+      .trip-card p:last-child { margin-top:auto; padding-top:14px; }
+      @media(max-width:800px){.access-grid,.aquifer-diagram{grid-template-columns:1fr}.access-card .button{width:100%}.access-card .button + .button{margin-left:0;margin-top:8px}#carrizo-aquifer-map{height:520px;min-height:420px}.aquifer-map-footer{padding:16px}.aquifer-map-legend{display:grid;gap:9px}}
+      @media(max-width:620px){.timeline-item{grid-template-columns:1fr;gap:6px}.timeline-date{font-size:20px}}
     </style>
   </head>
   <body>
@@ -50,6 +76,9 @@
         <a class="brand" href="../index.html"><span class="brand-mark">MCT</span>Nature Work</a>
         <nav class="nav-links" aria-label="Primary">
           <a href="#visit">Plan a Visit</a>
+          <a href="#camp-history">Camp History</a>
+          <a href="#aquifer-map-section">Aquifer Map</a>
+          <a href="#nearby-nature">Nearby Nature</a>
           <a href="#indigenous-history">Indigenous Context</a>
           <a href="#landscapes">Spring Regions</a>
           <a href="#access">Access Guide</a>
@@ -70,6 +99,70 @@
           </div>
           <p class="art-note">Hero background is an original schematic interpretation of layered groundwater—not a documentary map.</p>
         </div>
+      </section>
+
+      <section id="camp-history" class="section" style="background:#f7f1e6">
+        <div class="shell">
+          <div class="section-head">
+            <div><p class="kicker">Camp Tonkawa history</p><h2>A spring, a Scout-era swimming place, and a later Ozarka agreement.</h2></div>
+            <p>The parcel record and later recollections support several distinct chapters. The Boy Scout period belongs to the 1930s; Ozarka’s documented association is late twentieth century—not the same event.</p>
+          </div>
+          <div class="timeline" aria-label="Camp Tonkawa Springs history timeline">
+            <article class="timeline-item">
+              <div class="timeline-date">Before 1912</div>
+              <div><h3>A natural spring landscape</h3><p>The Carrizo-fed spring and pond predate modern recreation. The current tourism listing says people have visited the springs for more than a century; no claim is made here about the first human use.</p></div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">1912</div>
+              <div><h3>Earliest transaction in the currently indexed parcel chain <span class="evidence-tag">Deed index</span></h3><p>This is the earliest transaction found in the present appraisal and official-record chain, not necessarily the land’s first ownership record.</p></div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">March 9, 1929</div>
+              <div><h3>S. B. Tucker acquires the property <span class="evidence-tag">Deed index</span></h3><p>Nacogdoches County’s indexed records place the property in the Tucker family’s chain before the reported Scout-camp period.</p></div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">1930s</div>
+              <div><h3>Reported Boy Scout camp and swimming hole <span class="evidence-tag reported">Secondary recollection</span></h3><p>A 2009 regional-history video describes Tonkawa Springs as a former Boy Scout swimming hole. The exact Scout council, operating dates, and any lease instrument still need confirmation from a council archive or contemporary newspaper.</p></div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">Late 20th century</div>
+              <div><h3>Tucker-family trust and Ozarka association</h3><p>Local accounts place Ozarka activity in the 1980s, but the searchable deed index does not yet prove that start date. The land remained in the Tucker-family chain and later appears under Acrey Mill Pond Trust.</p></div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">March 1992</div>
+              <div><h3>Acrey Mill Pond Trust–Ozarka memorandum recorded <span class="evidence-tag">Official record</span></h3><p>The county index records a Memorandum of Agreement between Acrey Mill Pond Trust and Ozarka Water Co. This proves a documented relationship by 1992; examining the instrument itself is still necessary to establish its full terms or whether it memorialized an earlier agreement.</p></div>
+            </article>
+            <article class="timeline-item">
+              <div class="timeline-date">Today</div>
+              <div><h3>Camp Tonkawa Springs RV Park and campground</h3><p>The spring-fed pond remains the center of a privately operated swimming and camping destination. Visitors should call before traveling because dependable public hours, day-use fees, and temporary conditions are not posted.</p></div>
+            </article>
+          </div>
+          <div class="note data-note"><strong>Keep the Ozarka records separate</strong>A 1995 TWDB well at Roher Springs in Henderson County is explicitly coded “Bottling” and Carrizo–Wilcox / Wilcox Group. That modern Ozarka source is verified, but it is a different property from Camp Tonkawa. This page does not claim that Camp Tonkawa water was bottled without the underlying agreement or a matching well record.</div>
+        </div>
+      </section>
+
+      <section id="aquifer-map-section" class="section shell" aria-labelledby="aquifer-map-title">
+        <div class="section-head">
+          <div><p class="kicker">Regional aquifer map</p><h2 id="aquifer-map-title">Follow the Carrizo–Wilcox across three states.</h2></div>
+          <p>The named aquifer system is mapped in Texas, Louisiana, and Arkansas. Texas and Louisiana use Carrizo–Wilcox terminology; Arkansas maps connected Carrizo and Wilcox units separately. Select a polygon for its state, component, boundary type, precision, and source.</p>
+        </div>
+        <div class="aquifer-map-shell">
+          <div id="carrizo-aquifer-map" role="region" aria-label="Interactive map of the Carrizo–Wilcox aquifer system in Texas, Louisiana, and Arkansas"></div>
+          <div class="aquifer-map-footer">
+            <div class="aquifer-map-legend" aria-label="Aquifer map legend">
+              <span class="aquifer-map-key"><span class="aquifer-map-swatch" aria-hidden="true"></span>Official mapped outcrop</span>
+              <span class="aquifer-map-key"><span class="aquifer-map-swatch subcrop" aria-hidden="true"></span>Texas confined / subcrop extent</span>
+              <span class="aquifer-map-key"><span class="aquifer-map-swatch generalized" aria-hidden="true"></span>Generalized Arkansas Carrizo extent</span>
+              <span class="aquifer-map-key"><span class="aquifer-map-swatch wells" aria-hidden="true"></span>Documented Texas use well</span>
+            </div>
+            <div class="aquifer-map-meta">
+              <span><strong>Coverage:</strong> United States only. No Mexican continuation is asserted by the reviewed sources.</span>
+              <span><strong>Privacy:</strong> Map viewing requests basemap and label tiles from Esri. Enabling the well layer requests records from the TWDB-hosted ArcGIS service.</span>
+              <a href="../ecoregion-finder.html#live-map-title">Open the full Ecoregion Finder map →</a>
+            </div>
+          </div>
+        </div>
+        <p class="note data-note"><strong>Boundary and use caution</strong>This is a regional hydrogeologic reference, not a parcel-scale groundwater determination. The optional well layer shows Texas records with a stated consumptive use; it does not establish that a well is active today or identify every parcel, irrigation field, or utility customer receiving its water. Arkansas’s Carrizo extent is generalized from a published statewide map.</p>
       </section>
 
       <div class="shell quick-strip">
@@ -204,6 +297,46 @@
         </div>
       </section>
 
+      <section id="nearby-nature" class="section shell">
+        <div class="section-head">
+          <div><p class="kicker">Make a nature day of it</p><h2>Other outdoor places around Nacogdoches.</h2></div>
+          <p>Approximate one-way driving mileages begin at Camp Tonkawa Springs and are rounded from current road routing. Access details come from the operating agency or destination manager; check alerts and weather before leaving.</p>
+        </div>
+        <div class="grid">
+          <article class="card trip-card">
+            <p class="trip-meta">About 19 miles · free · dawn to dusk</p>
+            <h3>SFA Gardens</h3>
+            <p>Six themed gardens cover 138 acres with nearly seven miles of trails. The 11-acre Ruby M. Mize Azalea Garden adds loblolly forest, Lanana Creek, camellias, Japanese maples, hydrangeas, and seasonal azalea displays.</p>
+            <p><a href="https://www.sfasu.edu/gardens" target="_blank" rel="noopener"><strong>Plan a garden visit →</strong></a></p>
+          </article>
+          <article class="card trip-card">
+            <p class="trip-meta">About 22 miles · urban trail · partial damage remains</p>
+            <h3>Lanana Creek Trail</h3>
+            <p>A 6.9- to 7.1-mile corridor through creek forest, the SFA Mast Arboretum, and northern floodplain prairie. The city says the trail has reopened after 2023 flood damage, but some repairs remain; obey caution tape and erosion closures.</p>
+            <p><a href="https://www.nactx.us/899/Parks-Trails-Lakes-and-Cemeteries" target="_blank" rel="noopener"><strong>Check the city trail notice →</strong></a></p>
+          </article>
+          <article class="card trip-card">
+            <p class="trip-meta">About 30 miles · free · daylight hours</p>
+            <h3>Stephen F. Austin Experimental Forest</h3>
+            <p>Two interpretive loops cross mature bottomland hardwood and pine forest. The 0.8-mile Jack Creek Loop is surfaced and universally accessible; the 2-mile Management Loop is more strenuous. Foot and wheelchair traffic only; leashed pets are allowed.</p>
+            <p><a href="https://research.fs.usda.gov/srs/forestsandranges/locations/austin" target="_blank" rel="noopener"><strong>Open the Forest Service guide →</strong></a></p>
+          </article>
+          <article class="card trip-card">
+            <p class="trip-meta">About 30 miles · reservoir parks</p>
+            <h3>Lake Nacogdoches</h3>
+            <p>A 2,212-acre reservoir with largemouth bass, crappie, sunfish, lotus, and hydrilla. West Park offers restrooms, playground, disc golf, fishing pier, sand beach, and boat access; East Park has restrooms, fishing pier, and boat access.</p>
+            <p><a href="https://nactx.us/1625/Parks-Trails-Lakes" target="_blank" rel="noopener"><strong>See city lake access →</strong></a></p>
+          </article>
+          <article class="card trip-card">
+            <p class="trip-meta">About 50 miles · cultural landscape · admission</p>
+            <h3>Caddo Mounds State Historic Site</h3>
+            <p>A sacred Caddo ceremonial landscape with three earthen mounds, a museum, and outdoor trails. It is not a spring, but it adds essential Indigenous context for the East Texas Carrizo–Wilcox landscape.</p>
+            <p><a href="https://thc.texas.gov/state-historic-sites/caddo-mounds/plan-your-visit-caddo-mounds" target="_blank" rel="noopener"><strong>Plan a Caddo Mounds visit →</strong></a></p>
+          </article>
+        </div>
+        <p class="note data-note"><strong>Trail conditions matter</strong>Avoid unpaved trails when footprints or tires leave ruts. Heat, flooding, hunting seasons, and research activity can change access; operator notices take priority over this guide.</p>
+      </section>
+
       <section class="section shell" aria-labelledby="nature-spotted">
         <div class="section-head"><div><p class="kicker">Community observations</p><h2 id="nature-spotted">Nature Spotted near Camp Tonkawa</h2></div><p>These links provide nearby community records—not a verified species checklist for the campground. Identifications and access conditions can change.</p></div>
         <div class="grid">
@@ -224,8 +357,16 @@
         <div class="section-head"><div><p class="kicker">Source ledger</p><h2>Follow the records.</h2></div><p>Sources checked October 2, 2026. Access, flow, prices, and operating conditions can change.</p></div>
         <ul class="source-list">
           <li><a href="https://www.twdb.texas.gov/groundwater/aquifer/majors/carrizo-wilcox.asp" target="_blank" rel="noopener"><strong>Texas Water Development Board · Carrizo–Wilcox resources</strong><span>Aquifer studies, groundwater reports, and county-scale hydrogeology.</span></a></li>
+          <li><a href="https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0" target="_blank" rel="noopener"><strong>Texas Water Development Board · Groundwater wells</strong><span>Well locations, aquifer assignments, stated uses, depths, drill years, and database identifiers used by the optional documented-use layer. Records do not prove current operation or define receiving parcels.</span></a></li>
           <li><a href="https://services1.arcgis.com/lDFzr3JyGEn5Eymu/arcgis/rest/services/Springs_of_Texas/FeatureServer/0" target="_blank" rel="noopener"><strong>USGS / TWDB / TPWD · Springs of Texas GIS</strong><span>Spring names, coordinates, aquifer codes, remarks, and dataset limitations. Counts on this page use unique site numbers for codes 124CRRZ, 124CZWX, and 124WLCX.</span></a></li>
           <li><a href="https://www.visitnacogdoches.org/listing/camp-tonkawa-springs-rv-park/67ae6160615bfa21d09826b4" target="_blank" rel="noopener"><strong>Visit Nacogdoches · Camp Tonkawa Springs RV Park</strong><span>Current visitor description, address, contact information, swimming, and recreation.</span></a></li>
+          <li><a href="https://nacogdoches.tx.publicsearch.us/" target="_blank" rel="noopener"><strong>Nacogdoches County · Official Records Search</strong><span>Parcel-chain evidence, the 1929 Tucker acquisition, and the recorded 1992 Acrey Mill Pond Trust–Ozarka memorandum.</span></a></li>
+          <li><a href="https://nacocad.maps.arcgis.com/apps/webappviewer/index.html?id=58a300ad9bfe466381bb3ff83941079a" target="_blank" rel="noopener"><strong>Nacogdoches Central Appraisal District · Property Map</strong><span>Present parcel context and appraisal-chain cross-check; current ownership contact details are intentionally not reproduced here.</span></a></li>
+          <li><a href="https://www.youtube.com/watch?v=I0QLo9uIQW4" target="_blank" rel="noopener"><strong>Secret Nacogdoches · Tonkawa Springs (2009)</strong><span>Secondary recollection describing the spring as a former Boy Scout swimming hole; exact Scout operator and dates remain unconfirmed.</span></a></li>
+          <li><a href="https://www.sfasu.edu/gardens" target="_blank" rel="noopener"><strong>SFA Gardens</strong><span>Current acreage, trail total, daily dawn-to-dusk access, and free admission.</span></a></li>
+          <li><a href="https://www.nactx.us/899/Parks-Trails-Lakes-and-Cemeteries" target="_blank" rel="noopener"><strong>City of Nacogdoches · Trails and Lakes</strong><span>Lanana Creek Trail mileage and repair caution; Lake Nacogdoches park facilities.</span></a></li>
+          <li><a href="https://research.fs.usda.gov/srs/forestsandranges/locations/austin" target="_blank" rel="noopener"><strong>USDA Forest Service · Stephen F. Austin Experimental Forest</strong><span>Trail lengths, accessibility, forest ecology, visitor rules, maps, and daylight access.</span></a></li>
+          <li><a href="https://tpwd.texas.gov/fishboat/fish/recreational/lakes/nacogdoches/" target="_blank" rel="noopener"><strong>Texas Parks and Wildlife · Lake Nacogdoches</strong><span>Reservoir characteristics, aquatic vegetation, fishery, and current regulations.</span></a></li>
           <li><a href="https://www.tshaonline.org/handbook/entries/carrizo-springs-tx" target="_blank" rel="noopener"><strong>Handbook of Texas · Carrizo Springs</strong><span>Town naming, settlement, and artesian irrigation history.</span></a></li>
           <li><a href="https://www.tshaonline.org/handbook/entries/dalby-springs-tx" target="_blank" rel="noopener"><strong>Handbook of Texas · Dalby Springs</strong><span>Community history and the springs’ former reputation as a medicinal-water destination.</span></a></li>
           <li><a href="https://indigenouscultures.org/sacred-sites/" target="_blank" rel="noopener"><strong>Indigenous Cultures Institute · Sacred Sites</strong><span>Coahuiltecan ceremonies connecting Barton Springs, Spring Lake, Comal Springs, and Blue Hole; useful evidence for what a documented sacred-water relationship looks like.</span></a></li>
@@ -239,5 +380,117 @@
     </main>
 
     <footer><span>Most Certainly Try · Nature Work</span><a href="https://www.mostcertainlytry.com/contact">Contact Ilana</a></footer>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/esri-leaflet@3.0.15/dist/esri-leaflet.js" crossorigin="anonymous"></script>
+    <script>
+      (() => {
+        const mapElement = document.querySelector("#carrizo-aquifer-map");
+        if (!mapElement || typeof L === "undefined") return;
+
+        const map = L.map(mapElement, {
+          center: [31.5, -96.7],
+          zoom: 5,
+          minZoom: 4,
+          maxZoom: 13,
+          scrollWheelZoom: false
+        });
+
+        map.createPane("aquifer");
+        map.getPane("aquifer").style.zIndex = "450";
+        map.createPane("labels");
+        map.getPane("labels").style.zIndex = "650";
+        map.getPane("labels").style.pointerEvents = "none";
+
+        L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}", {
+          maxZoom: 13,
+          attribution: "Basemap © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community"
+        }).addTo(map);
+
+        function styleAquifer(feature) {
+          const properties = feature.properties || {};
+          const generalized = String(properties.precision || "").startsWith("Generalized");
+          const subcrop = String(properties.extent_type || "").includes("confined");
+          const color = generalized ? "#b15b5b" : subcrop ? "#6b508b" : "#8a4f23";
+          return {
+            pane: "aquifer",
+            color,
+            weight: generalized ? 2.2 : 2,
+            dashArray: generalized ? "3 5" : subcrop ? "8 5" : null,
+            opacity: .95,
+            fillColor: generalized ? "#d98b86" : subcrop ? "#8064a2" : "#d28d45",
+            fillOpacity: generalized ? .18 : subcrop ? .14 : .32
+          };
+        }
+
+        const escapeHtml = (value) => String(value ?? "").replace(/[&<>'"]/g, (character) => ({
+          "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", "\"": "&quot;"
+        })[character]);
+
+        const aquiferLayer = L.geoJSON(null, {
+          pane: "aquifer",
+          style: styleAquifer,
+          onEachFeature: (feature, layer) => {
+            const properties = feature.properties || {};
+            layer.bindPopup(`<strong>${escapeHtml(properties.name || "Carrizo–Wilcox Aquifer")}</strong><br>${escapeHtml(properties.state || "")} · ${escapeHtml(properties.component || "")}`
+              + `<br>${escapeHtml(properties.extent_type || "Mapped extent")}`
+              + `<br><small>${escapeHtml(properties.precision || "Regional boundary")}. Source: <a href="${escapeHtml(properties.source_url || "#")}" target="_blank" rel="noopener">${escapeHtml(properties.source || "official hydrogeologic source")}</a>.</small>`);
+          },
+          attribution: "Carrizo–Wilcox boundaries: TWDB and USGS"
+        }).addTo(map);
+
+        const documentedUseWhere = "(UPPER(Aquifer) LIKE '%CARRIZO%' OR UPPER(Aquifer) LIKE '%WILCOX%') AND WellUse IS NOT NULL AND WellUse <> '' AND WellUse NOT IN ('Monitor','Plugged or Destroyed','Unknown','Unused')";
+        const documentedUseWells = L.esri.featureLayer({
+          url: "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0",
+          where: documentedUseWhere,
+          fields: ["StWellID", "County", "Aquifer", "AquCdDesc", "WellUse", "WellDepth", "DrillYear"],
+          pointToLayer: (_feature, latlng) => L.circleMarker(latlng, {
+            radius: 3.5,
+            color: "#fff",
+            weight: 1,
+            opacity: .95,
+            fillColor: "#0d7286",
+            fillOpacity: .78
+          }),
+          attribution: "Documented use wells: Texas Water Development Board"
+        });
+
+        documentedUseWells.bindPopup((layer) => {
+          const properties = layer.feature.properties || {};
+          const depthValue = Number(properties.WellDepth);
+          const yearValue = Number(properties.DrillYear);
+          const depth = Number.isFinite(depthValue) && depthValue > 0 ? `${depthValue.toLocaleString()} ft` : "Not listed";
+          const year = Number.isFinite(yearValue) && yearValue > 0 ? String(Math.trunc(yearValue)) : "Not listed";
+          return `<strong>Documented Carrizo–Wilcox use well</strong><br>${escapeHtml(properties.WellUse || "Use not listed")} · ${escapeHtml(properties.County || "County not listed")} County`
+            + `<br>${escapeHtml(properties.AquCdDesc || properties.Aquifer || "Carrizo–Wilcox")}`
+            + `<br>Depth: ${escapeHtml(depth)} · Drilled: ${escapeHtml(year)}`
+            + `<br><small>TWDB well ID ${escapeHtml(properties.StWellID || "not listed")}. A database record does not confirm current operation or define the land receiving its water.</small>`;
+        });
+
+        L.control.layers(null, {
+          "Carrizo–Wilcox aquifer extent": aquiferLayer,
+          "Documented use wells · Texas": documentedUseWells
+        }, { collapsed: false }).addTo(map);
+
+        L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}", {
+          pane: "labels",
+          maxZoom: 13,
+          attribution: "Labels © Esri"
+        }).addTo(map);
+
+        fetch("../assets/ecoregions/carrizo-wilcox-regional.geojson")
+          .then((response) => {
+            if (!response.ok) throw new Error("Aquifer map data did not respond.");
+            return response.json();
+          })
+          .then((data) => {
+            aquiferLayer.addData(data);
+            if (aquiferLayer.getBounds().isValid()) map.fitBounds(aquiferLayer.getBounds(), { padding: [20, 20], maxZoom: 6 });
+          })
+          .catch((error) => {
+            console.error(error);
+            mapElement.insertAdjacentHTML("beforeend", '<p style="position:absolute;inset:auto 20px 20px;z-index:800;margin:0;padding:12px;background:#fff;border:1px solid #d4c8b7;border-radius:6px">The aquifer layer could not load. <a href="../ecoregion-finder.html#live-map-title">Open the full map instead.</a></p>');
+          });
+      })();
+    </script>
   </body>
 </html>

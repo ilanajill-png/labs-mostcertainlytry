@@ -392,6 +392,13 @@
         border-color: #74451f;
       }
 
+      .source-layer-swatch.carrizo-use {
+        border: 3px solid #fff;
+        border-radius: 50%;
+        background: #0d7286;
+        box-shadow: 0 0 0 1px #0d4c58;
+      }
+
       .source-layer-swatch.soils {
         background: repeating-linear-gradient(135deg, #fff 0 3px, #6f4a2e 3px 5px);
       }
@@ -537,6 +544,18 @@
                 <button class="button" id="show-carrizo-extent" type="button">View full mapped extent</button>
                 <a href="https://www.twdb.texas.gov/groundwater/aquifer/majors/carrizo-wilcox.asp" target="_blank" rel="noopener">Open Texas aquifer summary</a>
               </article>
+              <article class="source-layer-card" data-source-layer="carrizo-use">
+                <span class="source-layer-swatch carrizo-use" aria-hidden="true"></span>
+                <strong>Documented use wells</strong>
+                <span class="layer-status">Off</span>
+                <small>Texas Carrizo–Wilcox well records with a stated consumptive use. Points do not define parcels, service areas, or current operation.</small>
+                <div class="layer-color-guide" aria-label="Documented well-use guide">
+                  <span class="layer-color-guide-title">Evidence of aquifer use</span>
+                  <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#0d7286;border-radius:50%" aria-hidden="true"></span><span>Teal point = TWDB well record with a stated use</span></span>
+                  <p class="layer-guide-empty">Includes domestic, public-supply, irrigation, stock, commercial, industrial, and other listed uses; excludes monitoring, unused, unknown, and plugged records.</p>
+                </div>
+                <a href="https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0" target="_blank" rel="noopener">Open TWDB source service</a>
+              </article>
               <article class="source-layer-card" data-source-layer="soils">
                 <span class="source-layer-swatch soils" aria-hidden="true"></span>
                 <strong>Soils</strong>
@@ -568,7 +587,7 @@
             </div>
           </section>
         </div>
-        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. No Mexican extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
+        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. No Mexican extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -857,6 +876,8 @@
       map.getPane("aquifers").style.zIndex = "480";
       map.createPane("carrizo");
       map.getPane("carrizo").style.zIndex = "485";
+      map.createPane("carrizoUse");
+      map.getPane("carrizoUse").style.zIndex = "495";
       map.createPane("soils");
       map.getPane("soils").style.zIndex = "490";
       map.createPane("labels");
@@ -998,6 +1019,36 @@
           showCarrizoExtentButton.textContent = "Regional layer unavailable";
         });
 
+      const carrizoUseWhere = "(UPPER(Aquifer) LIKE '%CARRIZO%' OR UPPER(Aquifer) LIKE '%WILCOX%') AND WellUse IS NOT NULL AND WellUse <> '' AND WellUse NOT IN ('Monitor','Plugged or Destroyed','Unknown','Unused')";
+      const carrizoUseWellsLayer = L.esri.featureLayer({
+        url: "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0",
+        pane: "carrizoUse",
+        where: carrizoUseWhere,
+        fields: ["StWellID", "County", "Aquifer", "AquCdDesc", "WellUse", "WellDepth", "DrillYear"],
+        pointToLayer: (_feature, latlng) => L.circleMarker(latlng, {
+          pane: "carrizoUse",
+          radius: 3.5,
+          color: "#fff",
+          weight: 1,
+          opacity: 0.95,
+          fillColor: "#0d7286",
+          fillOpacity: 0.78
+        }),
+        attribution: "Carrizo–Wilcox use wells: Texas Water Development Board"
+      });
+
+      carrizoUseWellsLayer.bindPopup((layer) => {
+        const properties = layer.feature.properties || {};
+        const depthValue = Number(properties.WellDepth);
+        const yearValue = Number(properties.DrillYear);
+        const depth = Number.isFinite(depthValue) && depthValue > 0 ? `${depthValue.toLocaleString()} ft` : "Not listed";
+        const year = Number.isFinite(yearValue) && yearValue > 0 ? String(Math.trunc(yearValue)) : "Not listed";
+        return `<strong>Documented Carrizo–Wilcox use well</strong><br>${escapeHtml(properties.WellUse || "Use not listed")} · ${escapeHtml(properties.County || "County not listed")} County`
+          + `<br>${escapeHtml(properties.AquCdDesc || properties.Aquifer || "Carrizo–Wilcox")}`
+          + `<br>Depth: ${escapeHtml(depth)} · Drilled: ${escapeHtml(year)}`
+          + `<br><small>TWDB well ID ${escapeHtml(properties.StWellID || "not listed")}. A database record does not confirm current operation or define the land receiving its water.</small>`;
+      });
+
       const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
         layers: "mapunitpolyextended",
         styles: "default",
@@ -1134,6 +1185,7 @@
         ["landforms", landformsLayer],
         ["aquifers", aquifersLayer],
         ["carrizo", carrizoWilcoxLayer],
+        ["carrizo-use", carrizoUseWellsLayer],
         ["soils", soilsLayer]
       ]);
       const sourceLayerKeys = [...sourceLayers.keys()];
@@ -1261,6 +1313,7 @@
         "Landforms · USGS 3DEP": landformsLayer,
         "Aquifers · Texas major + minor": aquifersLayer,
         "Carrizo–Wilcox · TX + LA + AR": carrizoWilcoxLayer,
+        "Carrizo–Wilcox documented use wells · Texas": carrizoUseWellsLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
@@ -1641,6 +1694,64 @@
         };
       }
 
+      async function lookupCarrizoUseResult(location) {
+        const layerUrl = "https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0/query";
+        const params = new URLSearchParams({
+          f: "json",
+          where: carrizoUseWhere,
+          outFields: "StWellID,County,Aquifer,AquCdDesc,WellUse,WellDepth,DrillYear",
+          returnGeometry: "true",
+          outSR: "4326",
+          geometry: JSON.stringify({ x: location.x, y: location.y, spatialReference: { wkid: 4326 } }),
+          geometryType: "esriGeometryPoint",
+          inSR: "4326",
+          spatialRel: "esriSpatialRelIntersects",
+          distance: "8.04672",
+          units: "esriSRUnit_Kilometer",
+          resultRecordCount: "2000"
+        });
+        const response = await fetch(`${layerUrl}?${params}`);
+        if (!response.ok) throw new Error("The TWDB groundwater-well service did not respond.");
+        const data = await response.json();
+        if (data.error) throw new Error(data.error.message || "The TWDB groundwater-well service returned an error.");
+        const features = data.features || [];
+        const toRadians = (value) => value * Math.PI / 180;
+        const distanceMiles = (feature) => {
+          const geometry = feature.geometry || {};
+          if (!Number.isFinite(geometry.x) || !Number.isFinite(geometry.y)) return Infinity;
+          const earthRadiusMiles = 3958.8;
+          const latitudeDifference = toRadians(geometry.y - location.y);
+          const longitudeDifference = toRadians(geometry.x - location.x);
+          const originLatitude = toRadians(location.y);
+          const destinationLatitude = toRadians(geometry.y);
+          const a = Math.sin(latitudeDifference / 2) ** 2
+            + Math.cos(originLatitude) * Math.cos(destinationLatitude) * Math.sin(longitudeDifference / 2) ** 2;
+          return earthRadiusMiles * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        };
+        const nearest = features
+          .map((feature) => ({ ...feature, distance: distanceMiles(feature) }))
+          .sort((left, right) => left.distance - right.distance)[0];
+        const attributes = nearest?.attributes || null;
+        return {
+          title: "Documented Carrizo–Wilcox use wells",
+          status: features.length
+            ? `Found ${features.length.toLocaleString()} TWDB well record${features.length === 1 ? "" : "s"} with a stated use within 5 miles of this address.`
+            : "No TWDB Carrizo–Wilcox well with a stated consumptive use was found within 5 miles of this address.",
+          fields: attributes ? [
+            ["Nearest documented well", `${nearest.distance.toFixed(1)} miles away · ${attributes.WellUse || "Use not listed"}`],
+            ["Aquifer unit", attributes.AquCdDesc || attributes.Aquifer || "Carrizo–Wilcox"],
+            ["County", attributes.County || "Not listed"],
+            ["Well depth", Number.isFinite(Number(attributes.WellDepth)) && Number(attributes.WellDepth) > 0 ? `${Number(attributes.WellDepth).toLocaleString()} ft` : "Not listed"],
+            ["Drilled", Number.isFinite(Number(attributes.DrillYear)) && Number(attributes.DrillYear) > 0 ? String(Math.trunc(Number(attributes.DrillYear))) : "Not listed"],
+            ["TWDB well ID", attributes.StWellID || "Not listed"],
+            ["Coverage note", "Texas records only; points do not define parcels, service areas, customers, or current operation"]
+          ] : [
+            ["Nearby records", "None within 5 miles"],
+            ["Coverage note", "Texas records only; absence from this search does not prove the address does not receive Carrizo–Wilcox water"]
+          ]
+        };
+      }
+
       async function lookupSoilsResult(location) {
         const properties = await lookupSoilAtLocation(location);
         return {
@@ -1686,6 +1797,7 @@
         if (key === "landforms") return lookupLandformsResult(location);
         if (key === "aquifers") return lookupAquifersResult(location);
         if (key === "carrizo") return lookupCarrizoResult(location);
+        if (key === "carrizo-use") return lookupCarrizoUseResult(location);
         if (key === "soils") return lookupSoilsResult(location);
         return lookupEcoregionResult(location);
       }
@@ -1700,6 +1812,7 @@
           landforms: "USGS landforms",
           aquifers: "Texas aquifers",
           carrizo: "regional Carrizo–Wilcox coverage",
+          "carrizo-use": "documented Carrizo–Wilcox use wells",
           soils: "USDA soils"
         };
         setBusy(`Checking ${labels[key]} at the matched address...`);
