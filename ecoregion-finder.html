@@ -387,6 +387,11 @@
         border-color: #17638d;
       }
 
+      .source-layer-swatch.carrizo {
+        background: linear-gradient(135deg, rgba(210, 141, 69, 0.48) 0 50%, rgba(128, 100, 162, 0.28) 50%);
+        border-color: #74451f;
+      }
+
       .source-layer-swatch.soils {
         background: repeating-linear-gradient(135deg, #fff 0 3px, #6f4a2e 3px 5px);
       }
@@ -472,7 +477,7 @@
           <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
-            <span>Use the layer control to add geology, landforms, aquifers, or soils.</span>
+            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, or soils.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
@@ -518,6 +523,20 @@
                 </div>
                 <a href="https://www.twdb.texas.gov/mapping/gisdata.asp" target="_blank" rel="noopener">Open TWDB GIS data</a>
               </article>
+              <article class="source-layer-card" data-source-layer="carrizo">
+                <span class="source-layer-swatch carrizo" aria-hidden="true"></span>
+                <strong>Carrizo–Wilcox</strong>
+                <span class="layer-status">Off</span>
+                <small>Regional U.S. extent assembled from official Texas, Louisiana, and Arkansas sources. Mexico is not included because the named aquifer is mapped only to the border.</small>
+                <div class="layer-color-guide" aria-label="Carrizo–Wilcox extent guide">
+                  <span class="layer-color-guide-title">Regional hydrogeologic extent</span>
+                  <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#8a4f23" aria-hidden="true"></span><span>Solid brown = published outcrop</span></span>
+                  <span class="layer-color-key"><span class="layer-color-chip dashed" style="--chip-color:#6b508b" aria-hidden="true"></span><span>Dashed purple = Texas confined / subcrop extent</span></span>
+                  <span class="layer-color-key"><span class="layer-color-chip dashed" style="--chip-color:#b15b5b" aria-hidden="true"></span><span>Rose dash = Arkansas Carrizo extent generalized from the published statewide map</span></span>
+                </div>
+                <button class="button" id="show-carrizo-extent" type="button">View full mapped extent</button>
+                <a href="https://www.twdb.texas.gov/groundwater/aquifer/majors/carrizo-wilcox.asp" target="_blank" rel="noopener">Open Texas aquifer summary</a>
+              </article>
               <article class="source-layer-card" data-source-layer="soils">
                 <span class="source-layer-swatch soils" aria-hidden="true"></span>
                 <strong>Soils</strong>
@@ -549,7 +568,7 @@
             </div>
           </section>
         </div>
-        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; geology and aquifers are Texas-only. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
+        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. No Mexican extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -582,7 +601,7 @@
             </div>
             <div>
               <dt>What the ecoregion service receives</dt>
-              <dd>The matched coordinate and visible map bounds are sent to the EPA ecoregion service. When optional layers are enabled, the visible bounds are also requested from USGS, USDA NRCS, and ArcGIS-hosted Texas geology or TWDB-derived aquifer services.</dd>
+              <dd>The matched coordinate and visible map bounds are sent to the EPA ecoregion service. When optional layers are enabled, the visible bounds are also requested from USGS, USDA NRCS, and ArcGIS-hosted Texas geology or TWDB-derived aquifer services. The regional Carrizo–Wilcox layer is a static Labs-hosted compilation and sends no additional coordinate request.</dd>
             </div>
             <div>
               <dt>What Labs saves</dt>
@@ -643,6 +662,18 @@
             <h2><a href="https://www.twdb.texas.gov/mapping/gisdata.asp" target="_blank" rel="noopener">Texas Water Development Board GIS Data</a></h2>
             <p class="project-type">Major and minor aquifer boundaries</p>
             <p>Statewide aquifer extents are approximate and intended for regional reference, not site-specific groundwater determinations.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Carrizo–Wilcox</span><span>Texas · Louisiana · Arkansas</span></div>
+            <h2><a href="https://www.sciencebase.gov/catalog/item/5a303adce4b08e6a89d58779" target="_blank" rel="noopener">Regional Carrizo–Wilcox source set</a></h2>
+            <p class="project-type">Interstate aquifer extent</p>
+            <p>Texas outcrop and confined extent come from TWDB; Louisiana outcrop units come from the USGS Carrizo–Wilcox framework; Arkansas follows USGS SIR 2014–5149, where Carrizo and Wilcox are named separately. State classifications do not form one falsely seamless polygon.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Arkansas</span><span>USGS SIR 2014–5149</span></div>
+            <h2><a href="https://pubs.usgs.gov/sir/2014/5149/" target="_blank" rel="noopener">Aquifers of Arkansas</a></h2>
+            <p class="project-type">Carrizo and Wilcox mapped separately</p>
+            <p>The Carrizo band is generalized from figure 3; the Wilcox outcrop follows the USGS State Geologic Map Compilation. Use the original report for detailed hydrogeologic interpretation.</p>
           </article>
           <article class="project-card">
             <div class="card-meta"><span>Soils</span><span>USDA NRCS SSURGO</span></div>
@@ -741,6 +772,7 @@
       );
       const geologyColorGuide = document.querySelector("#geology-color-guide");
       const aquifersColorGuide = document.querySelector("#aquifers-color-guide");
+      const showCarrizoExtentButton = document.querySelector("#show-carrizo-extent");
 
       const fallbackLevelFourPalette = [
         "#a8d5e2", "#f2b5d4", "#c9e4a7", "#f6d186", "#b8b5e1", "#9dd9c5",
@@ -823,6 +855,8 @@
       map.getPane("geology").style.zIndex = "470";
       map.createPane("aquifers");
       map.getPane("aquifers").style.zIndex = "480";
+      map.createPane("carrizo");
+      map.getPane("carrizo").style.zIndex = "485";
       map.createPane("soils");
       map.getPane("soils").style.zIndex = "490";
       map.createPane("labels");
@@ -918,6 +952,51 @@
       majorAquifersLayer.bindPopup(aquiferPopup("Major"));
       minorAquifersLayer.bindPopup(aquiferPopup("Minor"));
       const aquifersLayer = L.layerGroup([majorAquifersLayer, minorAquifersLayer]);
+
+      let carrizoWilcoxData = { type: "FeatureCollection", features: [] };
+
+      function carrizoStyle(feature) {
+        const properties = feature.properties || {};
+        const generalized = String(properties.precision || "").startsWith("Generalized");
+        const subcrop = String(properties.extent_type || "").includes("confined");
+        const color = generalized ? "#b15b5b" : subcrop ? "#6b508b" : "#8a4f23";
+        return {
+          color,
+          weight: generalized ? 2.2 : 2,
+          dashArray: generalized ? "3 5" : subcrop ? "8 5" : null,
+          opacity: 0.95,
+          fillColor: generalized ? "#d98b86" : subcrop ? "#8064a2" : "#d28d45",
+          fillOpacity: generalized ? 0.14 : subcrop ? 0.12 : 0.25
+        };
+      }
+
+      const carrizoWilcoxLayer = L.geoJSON(null, {
+        pane: "carrizo",
+        style: carrizoStyle,
+        onEachFeature: (feature, layer) => {
+          const properties = feature.properties || {};
+          layer.bindPopup(`<strong>${escapeHtml(properties.name || "Carrizo–Wilcox Aquifer")}</strong><br>${escapeHtml(properties.state || "")} · ${escapeHtml(properties.component || "")}`
+            + `<br>${escapeHtml(properties.extent_type || "Mapped extent")}`
+            + `<br><small>${escapeHtml(properties.precision || "Regional boundary")}. Source: <a href="${escapeHtml(properties.source_url || "#")}" target="_blank" rel="noopener">${escapeHtml(properties.source || "official hydrogeologic source")}</a>.</small>`);
+        },
+        attribution: "Carrizo–Wilcox: TWDB and USGS"
+      });
+
+      const carrizoLoadPromise = fetch("assets/ecoregions/carrizo-wilcox-regional.geojson")
+        .then((response) => {
+          if (!response.ok) throw new Error("The Carrizo–Wilcox map asset did not respond.");
+          return response.json();
+        })
+        .then((data) => {
+          carrizoWilcoxData = data;
+          carrizoWilcoxLayer.addData(data);
+          return data;
+        })
+        .catch((error) => {
+          console.error(error);
+          showCarrizoExtentButton.disabled = true;
+          showCarrizoExtentButton.textContent = "Regional layer unavailable";
+        });
 
       const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
         layers: "mapunitpolyextended",
@@ -1054,6 +1133,7 @@
         ["geology", geologyLayer],
         ["landforms", landformsLayer],
         ["aquifers", aquifersLayer],
+        ["carrizo", carrizoWilcoxLayer],
         ["soils", soilsLayer]
       ]);
       const sourceLayerKeys = [...sourceLayers.keys()];
@@ -1180,9 +1260,18 @@
         "Geology · Texas": geologyLayer,
         "Landforms · USGS 3DEP": landformsLayer,
         "Aquifers · Texas major + minor": aquifersLayer,
+        "Carrizo–Wilcox · TX + LA + AR": carrizoWilcoxLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
+
+      showCarrizoExtentButton.addEventListener("click", async () => {
+        if (!map.hasLayer(carrizoWilcoxLayer)) carrizoWilcoxLayer.addTo(map);
+        await carrizoLoadPromise;
+        if (carrizoWilcoxLayer.getLayers().length) {
+          map.fitBounds(carrizoWilcoxLayer.getBounds(), { padding: [24, 24], maxZoom: 6 });
+        }
+      });
 
       const layerControlContainer = layerControl.getContainer();
       const layerToggle = layerControlContainer.querySelector(".leaflet-control-layers-toggle");
@@ -1420,6 +1509,32 @@
         return data.features || [];
       }
 
+      function pointInRing(point, ring) {
+        let inside = false;
+        for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
+          const [x, y] = ring[index];
+          const [previousX, previousY] = ring[previous];
+          const crosses = ((y > point[1]) !== (previousY > point[1]))
+            && (point[0] < ((previousX - x) * (point[1] - y)) / ((previousY - y) || Number.EPSILON) + x);
+          if (crosses) inside = !inside;
+        }
+        return inside;
+      }
+
+      function pointInPolygonCoordinates(point, polygonCoordinates) {
+        if (!polygonCoordinates.length || !pointInRing(point, polygonCoordinates[0])) return false;
+        return !polygonCoordinates.slice(1).some((hole) => pointInRing(point, hole));
+      }
+
+      function pointInGeoJsonGeometry(point, geometry) {
+        if (!geometry) return false;
+        if (geometry.type === "Polygon") return pointInPolygonCoordinates(point, geometry.coordinates);
+        if (geometry.type === "MultiPolygon") {
+          return geometry.coordinates.some((polygon) => pointInPolygonCoordinates(point, polygon));
+        }
+        return false;
+      }
+
       async function lookupGeologyResult(location) {
         const features = await queryArcGisFeatures(
           "https://services2.arcgis.com/iDGPUUUgFO4fjN9P/arcgis/rest/services/Tx_Geology250k_TPWD/FeatureServer/0",
@@ -1500,6 +1615,32 @@
         };
       }
 
+      async function lookupCarrizoResult(location) {
+        await carrizoLoadPromise;
+        const point = [location.x, location.y];
+        const matches = (carrizoWilcoxData.features || []).filter((feature) => pointInGeoJsonGeometry(point, feature.geometry));
+        return {
+          title: "Regional Carrizo–Wilcox system",
+          status: matches.length
+            ? "Found published Carrizo–Wilcox coverage at this address."
+            : "This address is outside the regional Carrizo–Wilcox extents shown on this map.",
+          fields: matches.length ? matches.flatMap((feature) => {
+            const properties = feature.properties || {};
+            return [
+              [properties.state || "State", `${properties.component || "Carrizo–Wilcox"} · ${properties.extent_type || "mapped extent"}`],
+              ["Boundary quality", properties.precision || "Regional mapping"]
+            ];
+          }).concat([
+            ["Countries", "United States only in the authoritative mapped sources reviewed"],
+            ["Use note", "Regional hydrogeologic context; not a well-site or groundwater-availability determination"]
+          ]) : [
+            ["Carrizo–Wilcox", "No mapped regional extent at this coordinate"],
+            ["Mapped states", "Texas, Louisiana, and Arkansas"],
+            ["International limit", "Texas mapping reaches the Mexico border; no Mexican continuation is asserted"]
+          ]
+        };
+      }
+
       async function lookupSoilsResult(location) {
         const properties = await lookupSoilAtLocation(location);
         return {
@@ -1544,6 +1685,7 @@
         if (key === "geology") return lookupGeologyResult(location);
         if (key === "landforms") return lookupLandformsResult(location);
         if (key === "aquifers") return lookupAquifersResult(location);
+        if (key === "carrizo") return lookupCarrizoResult(location);
         if (key === "soils") return lookupSoilsResult(location);
         return lookupEcoregionResult(location);
       }
@@ -1557,6 +1699,7 @@
           geology: "Texas geology",
           landforms: "USGS landforms",
           aquifers: "Texas aquifers",
+          carrizo: "regional Carrizo–Wilcox coverage",
           soils: "USDA soils"
         };
         setBusy(`Checking ${labels[key]} at the matched address...`);
