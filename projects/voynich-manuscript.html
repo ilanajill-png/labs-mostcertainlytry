@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Voynich Manuscript | Most Certainly Try</title>
+  <meta name="description" content="A source-led guide to the Voynich Manuscript: Yale's high-resolution scan, manuscript history, ownership timeline, proposed decipherments, and the researchers testing them.">
+  <meta property="og:title" content="The Voynich Manuscript | Most Certainly Try">
+  <meta property="og:description" content="Read the manuscript in high resolution, trace its owners, and compare the leading decipherment hypotheses without mistaking a claim for a solution.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://collections.library.yale.edu/iiif/2/1006231/full/1200,/0/default.jpg">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    :root {
+      --vm-ink: #1e2a26;
+      --vm-deep: #273d34;
+      --vm-green: #486b57;
+      --vm-sage: #a8b8a0;
+      --vm-gold: #b9863d;
+      --vm-rose: #9d5f58;
+      --vm-paper: #f4eddb;
+      --vm-paper-2: #e8dcc1;
+      --vm-line: rgba(52, 65, 55, .22);
+    }
+
+    body {
+      color: var(--vm-ink);
+      background:
+        radial-gradient(circle at 18% 0%, rgba(185, 134, 61, .12), transparent 34rem),
+        linear-gradient(180deg, #f7f2e7 0%, #eee5d2 48%, #f7f2e7 100%);
+    }
+
+    .vm-shell { width: min(1180px, calc(100% - 36px)); margin-inline: auto; }
+    .vm-header { background: rgba(247,242,231,.94); border-bottom: 1px solid var(--vm-line); }
+    .vm-header .site-header { background: transparent; border: 0; }
+
+    .vm-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .7fr);
+      gap: 34px;
+      align-items: center;
+      padding: 58px 0 42px;
+    }
+    .vm-hero h1 { max-width: 760px; font-size: clamp(3.3rem, 8vw, 7.6rem); line-height: .84; letter-spacing: -.065em; margin: 8px 0 24px; }
+    .vm-hero h1 span { display: block; color: var(--vm-green); font-style: italic; font-weight: 500; }
+    .vm-hero .lede { max-width: 720px; font-size: clamp(1.08rem, 2vw, 1.35rem); }
+    .vm-kicker { text-transform: uppercase; letter-spacing: .15em; font-size: .76rem; font-weight: 900; color: var(--vm-rose); }
+    .vm-verdict { margin-top: 24px; padding: 17px 19px; border-left: 4px solid var(--vm-gold); background: rgba(255,255,255,.48); font-size: .98rem; }
+    .vm-verdict strong { display: block; margin-bottom: 4px; }
+    .vm-hero-figure { margin: 0; transform: rotate(1.2deg); }
+    .vm-hero-figure img { width: 100%; max-height: 620px; object-fit: cover; object-position: center; border: 10px solid #ede2c9; box-shadow: 0 20px 44px rgba(44, 39, 26, .22); }
+    .vm-hero-figure figcaption, .vm-gallery figcaption { margin-top: 10px; font-size: .78rem; color: #5d655f; line-height: 1.5; }
+
+    .vm-jump { position: sticky; top: 0; z-index: 8; display: flex; gap: 8px; overflow-x: auto; padding: 11px max(18px, calc((100vw - 1180px)/2)); background: rgba(31,48,41,.96); scrollbar-width: thin; }
+    .vm-jump a { flex: 0 0 auto; color: #f6f0df; text-decoration: none; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 7px 11px; font-size: .82rem; font-weight: 800; }
+    .vm-jump a:hover, .vm-jump a:focus-visible { background: #f6f0df; color: var(--vm-deep); }
+
+    .vm-section { padding: 66px 0; border-top: 1px solid var(--vm-line); }
+    .vm-heading { display: grid; grid-template-columns: minmax(0,.72fr) minmax(280px,1fr); gap: 28px; align-items: end; margin-bottom: 30px; }
+    .vm-heading h2 { margin: 4px 0 0; font-size: clamp(2rem, 5vw, 4rem); line-height: .94; letter-spacing: -.04em; }
+    .vm-heading p { margin: 0; font-size: 1.03rem; line-height: 1.7; }
+
+    .vm-access { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .vm-access article, .vm-card, .vm-person, .vm-source, .vm-history-card { background: rgba(255,255,255,.58); border: 1px solid var(--vm-line); border-radius: 14px; padding: 22px; box-shadow: 0 10px 24px rgba(52,43,29,.055); }
+    .vm-access h3, .vm-card h3, .vm-person h3 { margin: 5px 0 8px; }
+    .vm-access p, .vm-card p, .vm-person p { margin: 0; line-height: 1.62; }
+    .vm-access .button { margin-top: 16px; width: 100%; text-align: center; }
+    .vm-meta { display: inline-flex; border-radius: 999px; padding: 5px 8px; background: #dfe7dc; color: var(--vm-deep); font-size: .72rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+    .vm-meta.caution { background: #efe1bd; color: #6f4b18; }
+    .vm-meta.disputed { background: #efd6d2; color: #753a34; }
+
+    .vm-facts { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; margin: 24px 0; }
+    .vm-facts div { padding: 18px; border-top: 3px solid var(--vm-green); background: rgba(255,255,255,.42); }
+    .vm-facts strong { display: block; font-size: 1.45rem; }
+    .vm-facts span { display: block; margin-top: 4px; color: #5a625c; font-size: .84rem; }
+
+    .vm-history-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+    .vm-history-card p { line-height: 1.72; }
+    .vm-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .vm-gallery figure { margin: 0; }
+    .vm-gallery img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border: 8px solid #eee3ca; }
+
+    .vm-timeline { list-style: none; margin: 0; padding: 0; }
+    .vm-timeline li { position: relative; display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 0 0 30px 32px; }
+    .vm-timeline li::before { content:""; position:absolute; left:7px; top:8px; bottom:-8px; width:1px; background:var(--vm-line); }
+    .vm-timeline li::after { content:""; position:absolute; left:0; top:6px; width:15px; height:15px; border-radius:50%; background:var(--vm-paper); border:4px solid var(--vm-green); box-sizing:border-box; }
+    .vm-timeline li:last-child::before { display:none; }
+    .vm-year { font-weight: 900; color: var(--vm-rose); }
+    .vm-timeline h3 { margin: 0 0 5px; font-size: 1.08rem; }
+    .vm-timeline p { margin: 0; line-height: 1.6; }
+    .vm-confidence { display:inline-block; margin-top:7px; font-size:.72rem; font-weight:900; text-transform:uppercase; letter-spacing:.08em; color:#677068; }
+
+    .vm-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+    .vm-card { position: relative; overflow: hidden; }
+    .vm-card::before { content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--vm-sage); }
+    .vm-card ul { margin: 14px 0 0; padding-left: 1.2rem; }
+    .vm-card li + li { margin-top: 6px; }
+    .vm-card a, .vm-person a, .vm-source a { font-weight: 850; color: #315844; }
+
+    .vm-standard { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:1px; margin-top:22px; background:var(--vm-line); border:1px solid var(--vm-line); }
+    .vm-standard div { background:#f6f0e2; padding:16px; }
+    .vm-standard strong { display:block; margin-bottom:5px; }
+    .vm-standard span { font-size:.84rem; line-height:1.45; color:#58615b; }
+
+    .vm-people { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+    .vm-person { display:flex; flex-direction:column; }
+    .vm-person .vm-role { color:var(--vm-rose); font-size:.78rem; font-weight:900; text-transform:uppercase; letter-spacing:.08em; }
+    .vm-person a { margin-top:auto; padding-top:16px; }
+
+    .vm-sources { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .vm-source { padding:16px 18px; }
+    .vm-source span { display:block; margin-top:4px; color:#626a64; font-size:.83rem; line-height:1.5; }
+    .vm-note { margin-top:22px; padding:20px; border:1px dashed rgba(54,70,59,.45); background:rgba(241,233,214,.74); line-height:1.65; }
+
+    @media (max-width: 860px) {
+      .vm-hero, .vm-heading, .vm-history-grid { grid-template-columns: 1fr; }
+      .vm-hero-figure { max-width: 620px; }
+      .vm-access, .vm-people { grid-template-columns: 1fr 1fr; }
+      .vm-facts { grid-template-columns: 1fr 1fr; }
+      .vm-standard { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .vm-shell { width: min(100% - 24px, 1180px); }
+      .vm-hero { padding-top: 36px; }
+      .vm-hero h1 { font-size: clamp(3rem, 17vw, 5rem); }
+      .vm-access, .vm-grid, .vm-people, .vm-sources, .vm-gallery { grid-template-columns: 1fr; }
+      .vm-timeline li { grid-template-columns: 1fr; gap: 5px; padding-left: 28px; }
+      .vm-section { padding: 48px 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="vm-header">
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="Most Certainly Try home">
+        <img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48">
+        <span><strong>Most Certainly Try</strong><small>Research cabinet</small></span>
+      </a>
+      <nav aria-label="Primary navigation">
+        <a href="../index.html">Nature Work</a>
+        <a href="#history">History</a>
+        <a href="#translations">Translations</a>
+        <a href="#researchers">Researchers</a>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <div class="vm-shell">
+      <section class="vm-hero">
+        <div>
+          <p class="vm-kicker">Beinecke MS 408 · source-led research guide</p>
+          <h1>The Voynich <span>Manuscript</span></h1>
+          <p class="lede">A fifteenth-century parchment codex filled with an unidentified script, botanical forms, zodiac diagrams, bathing figures, cosmological foldouts, and one stubborn fact: nobody has produced a generally accepted translation.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://collections.library.yale.edu/catalog/2002046" target="_blank" rel="noopener">Open Yale’s high-res viewer ↗</a>
+            <a class="button" href="#translations">Compare the theories</a>
+          </div>
+          <div class="vm-verdict"><strong>Current scholarly status</strong>The text remains undeciphered. A plausible solution must work across the manuscript, explain its grammar and repetition, make testable predictions, and be reproducible by researchers other than its proposer.</div>
+        </div>
+        <figure class="vm-hero-figure">
+          <img src="https://collections.library.yale.edu/iiif/2/1006231/full/1200,/0/default.jpg" alt="The Voynich Manuscript rosettes foldout, an intricate diagram of circular medallions connected by pathways" width="1200" height="900">
+          <figcaption>Beinecke MS 408, folios 85v–86r, the “rosettes” foldout. Image: Yale University Library. <a href="https://collections.library.yale.edu/catalog/2002046?child_oid=1006231" target="_blank" rel="noopener">Inspect this image at Yale ↗</a></figcaption>
+        </figure>
+      </section>
+    </div>
+
+    <nav class="vm-jump" aria-label="Page sections">
+      <a href="#high-res">High-res copy</a>
+      <a href="#history">History</a>
+      <a href="#owners">Ownership timeline</a>
+      <a href="#translations">Possible translations</a>
+      <a href="#researchers">Researchers</a>
+      <a href="#sources">Sources</a>
+    </nav>
+
+    <section class="vm-section" id="high-res">
+      <div class="vm-shell">
+        <div class="vm-heading"><div><p class="vm-kicker">Read the object</p><h2>High-resolution copy</h2></div><p>Yale’s digital surrogate is the authoritative place to begin. The full manuscript is digitized; the viewer supports page-by-page zooming, while the PDF and IIIF manifest support continuous reading and scholarly image tools.</p></div>
+        <div class="vm-access">
+          <article><span class="vm-meta">Recommended</span><h3>Yale digital viewer</h3><p>Browse every cover, folio, foldout, and blank leaf. Open individual images at full size or download original files.</p><a class="button primary" href="https://collections.library.yale.edu/catalog/2002046" target="_blank" rel="noopener">Open the manuscript ↗</a></article>
+          <article><span class="vm-meta">Single file</span><h3>Complete Yale PDF</h3><p>Download the manuscript as one PDF for offline reading. This is a large file supplied by Yale University Library.</p><a class="button" href="https://collections.library.yale.edu/pdfs/2002046.pdf" target="_blank" rel="noopener">Download Yale PDF ↗</a></article>
+          <article><span class="vm-meta">Research tools</span><h3>IIIF manifest</h3><p>Open Yale’s machine-readable manifest in a compatible IIIF viewer, annotation tool, or digital-humanities workflow.</p><a class="button" href="https://collections.library.yale.edu/manifests/2002046" target="_blank" rel="noopener">Open IIIF manifest ↗</a></article>
+        </div>
+        <div class="vm-note"><strong>Image-use note.</strong> Yale provides public access to the scans and states that use may remain subject to copyright law or other rights-management terms. Check the catalog’s current rights statement before republishing images.</div>
+      </div>
+    </section>
+
+    <section class="vm-section" id="history">
+      <div class="vm-shell">
+        <div class="vm-heading"><div><p class="vm-kicker">What the object can tell us</p><h2>History of the manuscript</h2></div><p>The book’s materials are medieval, but its language, author, workshop, place of production, and purpose remain unknown. Its illustrations suggest subject areas; they do not provide a translation.</p></div>
+        <div class="vm-facts">
+          <div><strong>1404–1438</strong><span>95% radiocarbon range for sampled parchment</span></div>
+          <div><strong>Central Europe?</strong><span>Yale catalog’s cautious place attribution</span></div>
+          <div><strong>102 + 1 folios</strong><span>surviving extent in Yale’s catalog</span></div>
+          <div><strong>225 × 160 mm</strong><span>closed-page dimensions</span></div>
+        </div>
+        <div class="vm-history-grid">
+          <article class="vm-history-card">
+            <h3>A book with several visual systems</h3>
+            <p>Most pages combine the unknown script with drawings. Modern descriptions group the imagery into herbal or botanical pages, astronomy and astrology, bathing or “balneological” scenes, cosmological foldouts, pharmaceutical vessels and plant parts, and short entries often called recipes. Those labels are descriptive conveniences, not decoded chapter titles.</p>
+            <h3>What scientific testing established</h3>
+            <p>Four parchment samples were radiocarbon dated to 1404–1438 at 95% probability. That dates the animal skins, not automatically the moment every line was written. Yale’s material analysis found inks, pigments, and construction consistent with a historical manuscript; it did not reveal the language or prove any decipherment.</p>
+            <h3>Why “Roger Bacon’s book” does not hold</h3>
+            <p>A seventeenth-century letter reports that Emperor Rudolf II believed the manuscript to be by the thirteenth-century English friar Roger Bacon. The parchment dating makes Bacon’s authorship untenable. The same letter is evidence for the belief and reported purchase—not proof of authorship.</p>
+          </article>
+          <div class="vm-gallery" aria-label="Selected Voynich Manuscript folios">
+            <figure><img loading="lazy" src="https://collections.library.yale.edu/iiif/2/1006076/full/800,/0/default.jpg" alt="Voynich Manuscript folio 1r showing an unidentified plant and lines of unknown script" width="800" height="1050"><figcaption>Folio 1r · botanical section. <a href="https://collections.library.yale.edu/catalog/2002046?child_oid=1006076" target="_blank" rel="noopener">Yale image ↗</a></figcaption></figure>
+            <figure><img loading="lazy" src="https://collections.library.yale.edu/iiif/2/1006194/full/800,/0/default.jpg" alt="Voynich Manuscript folio 67r showing circular astronomical or astrological diagrams" width="800" height="1050"><figcaption>Folio 67r · circular diagrams. <a href="https://collections.library.yale.edu/catalog/2002046?child_oid=1006194" target="_blank" rel="noopener">Yale image ↗</a></figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vm-section" id="owners">
+      <div class="vm-shell">
+        <div class="vm-heading"><div><p class="vm-kicker">Evidence, not legend</p><h2>Who owned it?</h2></div><p>The early chain is reconstructed from inscriptions and letters. “Reported” means a later document describes the ownership; “documented” means the manuscript, a surviving letter, or a modern transaction directly supports it.</p></div>
+        <ol class="vm-timeline">
+          <li><div class="vm-year">Before 1612</div><div><h3>Emperor Rudolf II, Prague — reported</h3><p>Johannes Marcus Marci’s 1665/66 covering letter says the manuscript had belonged to Rudolf II, who reportedly paid 600 ducats and believed it was Roger Bacon’s work. No surviving imperial purchase record has settled the details.</p><span class="vm-confidence">Reported in a later letter</span></div></li>
+          <li><div class="vm-year">Early 1600s</div><div><h3>Jacobus Horčický de Tepenec — probable</h3><p>A faded ownership inscription on folio 1r links the manuscript to Rudolf’s pharmacist and courtier, also known as Jacobus Sinapius. Imaging made the erased signature legible.</p><span class="vm-confidence">Physical inscription</span></div></li>
+          <li><div class="vm-year">By 1637</div><div><h3>Georg Baresch — documented</h3><p>The Prague alchemist described the mysterious book in correspondence with Jesuit polymath Athanasius Kircher and sought Kircher’s help interpreting it.</p><span class="vm-confidence">Surviving correspondence</span></div></li>
+          <li><div class="vm-year">1662</div><div><h3>Johannes Marcus Marci — bequest</h3><p>Baresch left his library to Marci, a physician and scholar in Prague. Marci later sent the manuscript to Kircher.</p><span class="vm-confidence">Documented chain</span></div></li>
+          <li><div class="vm-year">1665/66</div><div><h3>Athanasius Kircher and the Collegio Romano</h3><p>Marci’s letter, still bound with the manuscript, accompanied the gift. The codex entered the Jesuit collection in Rome and later moved with parts of that collection.</p><span class="vm-confidence">Manuscript + letter</span></div></li>
+          <li><div class="vm-year">1912</div><div><h3>Wilfrid M. Voynich</h3><p>The antiquarian bookseller bought the manuscript from the Jesuits at Villa Mondragone near Frascati. His publicity campaign gave the codex the name used today.</p><span class="vm-confidence">Documented modern acquisition</span></div></li>
+          <li><div class="vm-year">1930–1960</div><div><h3>Ethel Lilian Voynich</h3><p>Wilfrid’s widow inherited the manuscript. After her death, it passed to Anne Nill, a close friend and former assistant.</p><span class="vm-confidence">Estate history</span></div></li>
+          <li><div class="vm-year">1961</div><div><h3>Anne Nill → Hans P. Kraus</h3><p>Nill sold the manuscript to New York rare-book dealer Hans P. Kraus. Kraus offered it for sale but did not find a buyer.</p><span class="vm-confidence">Documented sale</span></div></li>
+          <li><div class="vm-year">1969–present</div><div><h3>Beinecke Library, Yale University</h3><p>Kraus donated the manuscript to Yale. It is cataloged as Beinecke MS 408 and is now fully digitized for public research.</p><span class="vm-confidence">Institutional custody</span></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="vm-section" id="translations">
+      <div class="vm-shell">
+        <div class="vm-heading"><div><p class="vm-kicker">Claims under comparison</p><h2>Possible translations</h2></div><p>“Possible” does not mean “solved.” These are major hypothesis families and published proposals. None is an accepted translation of the whole manuscript.</p></div>
+        <div class="vm-grid">
+          <article class="vm-card"><span class="vm-meta">Open hypothesis</span><h3>Meaningful language beneath an unknown script or cipher</h3><p>Information-theoretic and linguistic studies find non-random, topic-sensitive patterns compatible with meaningful text. That supports investigation, but statistical resemblance cannot identify the language or produce a translation.</p><ul><li><a href="https://doi.org/10.1146/annurev-linguistics-011619-030613" target="_blank" rel="noopener">Bowern &amp; Lindemann: linguistic review ↗</a></li><li><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0066344" target="_blank" rel="noopener">Montemurro &amp; Zanette: information theory ↗</a></li></ul></article>
+          <article class="vm-card"><span class="vm-meta disputed">Proposed · unconfirmed</span><h3>Hebrew with anagrammed substitution</h3><p>Bradley Hauer and Greg Kondrak tested an algorithm for unknown scripts and anagrammed substitution ciphers; their model ranked Hebrew highly and produced a speculative reading. The result depends on strong cipher assumptions and does not constitute a generally accepted decipherment.</p><ul><li><a href="https://aclanthology.org/Q16-1006/" target="_blank" rel="noopener">Read the ACL paper ↗</a></li></ul></article>
+          <article class="vm-card"><span class="vm-meta disputed">Partial proposal</span><h3>Proper names and phonetic values</h3><p>Applied linguist Stephen Bax proposed readings for a small set of plant and constellation labels, using putative names as cribs to infer sound values. The method never yielded a full translation and has not been independently validated.</p><ul><li><a href="https://stephenbax.net/?page_id=11" target="_blank" rel="noopener">Bax’s Voynich research archive ↗</a></li></ul></article>
+          <article class="vm-card"><span class="vm-meta disputed">Published claim · disputed</span><h3>Proto-Romance shorthand</h3><p>Gerard Cheshire argued that the text records a previously undocumented Proto-Romance language in an unusual writing system. The proposal attracted substantial criticism over method, linguistic reconstruction, and selective readings; it has not become a scholarly consensus.</p><ul><li><a href="https://doi.org/10.1080/02639904.2019.1599566" target="_blank" rel="noopener">Read the original claim ↗</a></li></ul></article>
+          <article class="vm-card"><span class="vm-meta caution">Alternative explanation</span><h3>Generated pseudo-text or elaborate hoax</h3><p>Gordon Rugg demonstrated that a Cardan-grille-like method could generate Voynich-looking text; Torsten Timm has modeled local copying and mutation as a production process. These studies show mechanisms that deserve testing. They do not prove which process made this manuscript—or that it lacks meaning.</p><ul><li><a href="https://doi.org/10.1080/0161-110491892755" target="_blank" rel="noopener">Rugg: “An Elegant Hoax?” ↗</a></li><li><a href="https://doi.org/10.1080/01611194.2019.1596999" target="_blank" rel="noopener">Timm: generating algorithm ↗</a></li></ul></article>
+          <article class="vm-card"><span class="vm-meta">Content inference</span><h3>Herbal, medical, astrological, or recipe compendium</h3><p>The pictures make these subject labels plausible and useful for navigation. But an image of a plant does not prove the adjacent words name that plant, and the bathing figures do not prove a medical prescription. This is a genre hypothesis, not a translation.</p><ul><li><a href="https://beinecke.library.yale.edu/beinecke/collections/beinecke-cipher-voynich-manuscript" target="_blank" rel="noopener">Yale’s manuscript overview ↗</a></li></ul></article>
+        </div>
+        <div class="vm-standard" aria-label="Standards for evaluating a claimed decipherment">
+          <div><strong>Coverage</strong><span>Does the key work beyond a few selected labels?</span></div>
+          <div><strong>Consistency</strong><span>Are the same glyphs and rules read the same way?</span></div>
+          <div><strong>Grammar</strong><span>Does the result form a coherent language, not a word salad?</span></div>
+          <div><strong>Prediction</strong><span>Can the method predict unread text before seeing the answer?</span></div>
+          <div><strong>Replication</strong><span>Can independent researchers reproduce the reading?</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vm-section" id="researchers">
+      <div class="vm-shell">
+        <div class="vm-heading"><div><p class="vm-kicker">People and methods</p><h2>Who is studying it?</h2></div><p>This is a selective directory of researchers and research-builders whose work is public and methodologically distinct—not an endorsement of every conclusion and not a complete census of the Voynich community.</p></div>
+        <div class="vm-people">
+          <article class="vm-person"><span class="vm-role">Paleography · scribal hands</span><h3>Lisa Fagin Davis</h3><p>Used digital paleography to distinguish five scribal hands, sharpening questions about collaboration, production order, and the manuscript’s internal structure.</p><a href="https://doi.org/10.1353/mns.2020.0011" target="_blank" rel="noopener">Read “How Many Glyphs and How Many Scribes?” ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Historical linguistics</span><h3>Claire Bowern &amp; Luke Lindemann</h3><p>Surveyed the manuscript’s linguistic evidence, transcription problems, word structure, and competing language-versus-cipher hypotheses.</p><a href="https://doi.org/10.1146/annurev-linguistics-011619-030613" target="_blank" rel="noopener">Read “The Linguistics of the Voynich Manuscript” ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Information theory</span><h3>Marcelo Montemurro &amp; Damián Zanette</h3><p>Measured long-range word distributions and co-occurrence networks, finding organization compatible with meaningful language sequences.</p><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0066344" target="_blank" rel="noopener">Read the open-access study ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Computational decipherment</span><h3>Bradley Hauer &amp; Greg Kondrak</h3><p>Tested automated language identification and anagrammed substitution decoding, then applied the method to the Voynich text and proposed Hebrew as a candidate.</p><a href="https://aclanthology.org/Q16-1006/" target="_blank" rel="noopener">Read the ACL paper ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Hoax-generation hypothesis</span><h3>Gordon Rugg</h3><p>Explored whether period-appropriate tools could generate text with Voynich-like surface properties, offering a falsifiable alternative to a hidden-language solution.</p><a href="https://doi.org/10.1080/0161-110491892755" target="_blank" rel="noopener">Read “An Elegant Hoax?” ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Text-generation models</span><h3>Torsten Timm</h3><p>Studies local similarity, repetition, and possible generation algorithms, arguing that copying and modifying nearby tokens can reproduce important textual features.</p><a href="https://doi.org/10.1080/01611194.2019.1596999" target="_blank" rel="noopener">Read the generating-algorithm paper ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Historical research infrastructure</span><h3>René Zandbergen</h3><p>Maintains a long-running research site documenting provenance, physical structure, transcriptions, radiocarbon dating, and the history of decipherment attempts.</p><a href="https://www.voynich.nu/" target="_blank" rel="noopener">Explore the Voynich.nu research site ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Partial decipherment · historical contribution</span><h3>Stephen Bax</h3><p>Proposed a bottom-up method using illustrated labels as possible proper-name cribs. His archive remains useful for evaluating both the promise and limits of partial readings.</p><a href="https://stephenbax.net/?page_id=11" target="_blank" rel="noopener">Open Bax’s research archive ↗</a></article>
+          <article class="vm-person"><span class="vm-role">Curatorial scholarship</span><h3>Raymond Clemens</h3><p>As a Yale curator and editor of the 2016 facsimile volume, helped place the object in its manuscript, material, and historical contexts rather than treating it only as a cipher.</p><a href="https://search.library.yale.edu/catalog/99129535573408651" target="_blank" rel="noopener">Find Yale’s facsimile and essays ↗</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="vm-section" id="sources">
+      <div class="vm-shell">
+        <div class="vm-heading"><div><p class="vm-kicker">Source ledger</p><h2>Start with the evidence</h2></div><p>Institutional records establish the object and its custody. Peer-reviewed papers test narrower hypotheses. Independent research sites are most useful when they expose primary documents, data, and methods.</p></div>
+        <div class="vm-sources">
+          <div class="vm-source"><a href="https://beinecke.library.yale.edu/beinecke/collections/beinecke-cipher-voynich-manuscript" target="_blank" rel="noopener">Beinecke Library · manuscript overview</a><span>History, provenance, access, sections, physical-research links.</span></div>
+          <div class="vm-source"><a href="https://collections.library.yale.edu/catalog/2002046" target="_blank" rel="noopener">Yale Digital Collections · MS 408</a><span>Complete digitization, catalog metadata, image downloads, rights statement.</span></div>
+          <div class="vm-source"><a href="https://pre1600ms.beinecke.library.yale.edu/docs/pre1600.ms408.HTM" target="_blank" rel="noopener">Yale · detailed codicological description</a><span>Collation, foliation, missing leaves, decoration, binding, and provenance.</span></div>
+          <div class="vm-source"><a href="https://library.yale.edu/sites/default/files/2026-06/voynich_analysis.pdf" target="_blank" rel="noopener">Yale · materials analysis report</a><span>Scientific examination of inks, pigments, parchment, and construction.</span></div>
+          <div class="vm-source"><a href="https://www.voynich.nu/extra/carbon.html" target="_blank" rel="noopener">René Zandbergen · radiocarbon dating dossier</a><span>Sampling history, University of Arizona results, calibration, and limitations.</span></div>
+          <div class="vm-source"><a href="https://doi.org/10.1146/annurev-linguistics-011619-030613" target="_blank" rel="noopener">Bowern &amp; Lindemann · Annual Review of Linguistics</a><span>Critical synthesis of linguistic structure and decipherment constraints.</span></div>
+          <div class="vm-source"><a href="https://doi.org/10.1353/mns.2020.0011" target="_blank" rel="noopener">Davis · Manuscript Studies</a><span>Digital-paleographic analysis identifying five scribal hands.</span></div>
+          <div class="vm-source"><a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0066344" target="_blank" rel="noopener">Montemurro &amp; Zanette · PLOS ONE</a><span>Open-access information-theoretic analysis of word distribution and co-occurrence.</span></div>
+          <div class="vm-source"><a href="https://aclanthology.org/Q16-1006/" target="_blank" rel="noopener">Hauer &amp; Kondrak · Transactions of the ACL</a><span>Automated language identification and anagrammed-substitution proposal.</span></div>
+          <div class="vm-source"><a href="https://doi.org/10.1080/0161-110491892755" target="_blank" rel="noopener">Rugg · Cryptologia</a><span>Cardan-grille-style pseudo-text generation and hoax hypothesis.</span></div>
+          <div class="vm-source"><a href="https://doi.org/10.1080/01611194.2019.1596999" target="_blank" rel="noopener">Timm · Cryptologia</a><span>Possible generating algorithm based on copying and modifying similar words.</span></div>
+          <div class="vm-source"><a href="https://doi.org/10.1080/02639904.2019.1599566" target="_blank" rel="noopener">Cheshire · Romance Studies</a><span>Original Proto-Romance proposal, included as a disputed decipherment claim.</span></div>
+        </div>
+        <div class="vm-note"><strong>Editorial method.</strong> This guide does not rank a theory by publicity. It distinguishes object records, peer-reviewed analysis, reproducible data, and personal decipherment claims. Last reviewed October 6, 2026.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>Most Certainly Try · Research Cabinet</span><a href="https://www.mostcertainlytry.com">Main site</a></footer>
+</body>
+</html>
