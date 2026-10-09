@@ -197,7 +197,10 @@
 
       .layer-control-minimize {
         width: 100%;
-        margin: 0.55rem 0 0;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        margin: 0 0 0.55rem;
         padding: 0.42rem 0.6rem;
         border: 1px solid #8b948e;
         border-radius: 0.4rem;
@@ -399,6 +402,11 @@
         box-shadow: 0 0 0 1px #0d4c58;
       }
 
+      .source-layer-swatch.council {
+        background: repeating-linear-gradient(135deg, rgba(76, 67, 142, 0.38) 0 6px, rgba(255, 255, 255, 0.92) 6px 10px);
+        border-color: #4c438e;
+      }
+
       .source-layer-swatch.soils {
         background: repeating-linear-gradient(135deg, #fff 0 3px, #6f4a2e 3px 5px);
       }
@@ -484,7 +492,7 @@
           <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
-            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, or soils.</span>
+            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, or local council districts.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
@@ -556,6 +564,19 @@
                 </div>
                 <a href="https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0" target="_blank" rel="noopener">Open TWDB source service</a>
               </article>
+              <article class="source-layer-card" data-source-layer="council">
+                <span class="source-layer-swatch council" aria-hidden="true"></span>
+                <strong>Find your council member</strong>
+                <span class="layer-status">Off</span>
+                <small>Official San Antonio council-district boundaries and member names. Municipal council geography is not nationally standardized; Schertz uses seven at-large places rather than geographic districts.</small>
+                <div class="layer-color-guide" aria-label="Council district guide">
+                  <span class="layer-color-guide-title">Local representation</span>
+                  <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#4c438e" aria-hidden="true"></span><span>Purple boundary = San Antonio council district</span></span>
+                  <p class="layer-guide-empty">Search a San Antonio address while this layer is active to return the district and current council member. Outside San Antonio, the result explains the coverage limit.</p>
+                </div>
+                <a href="https://data.sanantonio.gov/dataset/council-districts" target="_blank" rel="noopener">Open official San Antonio dataset</a>
+                <a href="https://www.schertz.com/226/City-Council" target="_blank" rel="noopener">Open Schertz at-large council</a>
+              </article>
               <article class="source-layer-card" data-source-layer="soils">
                 <span class="source-layer-swatch soils" aria-hidden="true"></span>
                 <strong>Soils</strong>
@@ -587,7 +608,7 @@
             </div>
           </section>
         </div>
-        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. No Mexican extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
+        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. The council-member layer currently covers San Antonio geographic districts; Schertz council seats are elected at large and therefore have no district polygons. No Mexican Carrizo–Wilcox extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -620,7 +641,7 @@
             </div>
             <div>
               <dt>What the ecoregion service receives</dt>
-              <dd>The matched coordinate and visible map bounds are sent to the EPA ecoregion service. When optional layers are enabled, the visible bounds are also requested from USGS, USDA NRCS, and ArcGIS-hosted Texas geology or TWDB-derived aquifer services. The regional Carrizo–Wilcox layer is a static Labs-hosted compilation and sends no additional coordinate request.</dd>
+              <dd>The matched coordinate and visible map bounds are sent to the EPA ecoregion service. When optional layers are enabled, the visible bounds are also requested from USGS, USDA NRCS, City of San Antonio Open Data, and ArcGIS-hosted Texas geology or TWDB-derived aquifer services. The regional Carrizo–Wilcox layer is a static Labs-hosted compilation and sends no additional coordinate request.</dd>
             </div>
             <div>
               <dt>What Labs saves</dt>
@@ -699,6 +720,12 @@
             <h2><a href="https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms?service=WMS&amp;request=GetCapabilities" target="_blank" rel="noopener">Soil Data Access Web Map Service</a></h2>
             <p class="project-type">Soil map-unit polygons</p>
             <p>The official SSURGO web service supplies neighborhood-scale soil boundaries; Web Soil Survey remains the authoritative tool for reports and interpretations.</p>
+          </article>
+          <article class="project-card">
+            <div class="card-meta"><span>Civic geography</span><span>San Antonio</span></div>
+            <h2><a href="https://data.sanantonio.gov/dataset/council-districts" target="_blank" rel="noopener">City of San Antonio Council Districts</a></h2>
+            <p class="project-type">Address to council district and member</p>
+            <p>The official city feature service supplies ten council-district polygons and current member names. This is local—not nationwide—coverage. Schertz is linked separately because its seven council places are elected at large and do not have geographic district boundaries.</p>
           </article>
         </div>
       </section>
@@ -878,6 +905,8 @@
       map.getPane("carrizo").style.zIndex = "485";
       map.createPane("carrizoUse");
       map.getPane("carrizoUse").style.zIndex = "495";
+      map.createPane("council");
+      map.getPane("council").style.zIndex = "500";
       map.createPane("soils");
       map.getPane("soils").style.zIndex = "490";
       map.createPane("labels");
@@ -893,6 +922,7 @@
 
       const geologyPalette = ["#c97f54", "#d6a96b", "#8cae8a", "#7da6b8", "#b28aaf", "#d0bd72", "#9a8f77", "#79a99a"];
       const aquiferPalette = ["#17638d", "#2980a8", "#4d9fbd", "#2b6f9c", "#55a6a3", "#477cab", "#2f8bb0"];
+      const councilPalette = ["#584b9b", "#7b5da7", "#4568a6", "#8265a0", "#5a7aa8", "#73528f", "#4d6396", "#8a6aae", "#526fa2", "#685596"];
 
       function paletteColor(value, palette) {
         const key = String(value || "unknown");
@@ -1049,6 +1079,29 @@
           + `<br><small>TWDB well ID ${escapeHtml(properties.StWellID || "not listed")}. A database record does not confirm current operation or define the land receiving its water.</small>`;
       });
 
+      const councilLayerUrl = "https://services.arcgis.com/g1fRTDLeMgspWrYp/arcgis/rest/services/CouncilDistricts/FeatureServer/2";
+      const councilLayer = L.esri.featureLayer({
+        url: councilLayerUrl,
+        pane: "council",
+        simplifyFactor: 0.35,
+        precision: 5,
+        attribution: "Council districts: City of San Antonio Open Data",
+        style: (feature) => ({
+          color: "#4c438e",
+          weight: 2,
+          opacity: 0.95,
+          fillColor: councilPalette[(Math.max(1, Number(feature.properties.District) || 1) - 1) % councilPalette.length],
+          fillOpacity: 0.22
+        })
+      });
+
+      councilLayer.bindPopup((layer) => {
+        const properties = layer.feature.properties;
+        const district = properties.District || "Not listed";
+        const member = properties.Name || "See official directory";
+        return `<strong>San Antonio City Council District ${escapeHtml(district)}</strong><br>Council member: ${escapeHtml(member)}<br><a href="https://www.sa.gov/Directory/Departments/Mayor-Council" target="_blank" rel="noopener">Open the official Mayor &amp; City Council directory</a><br><small>Boundary and member name from City of San Antonio Open Data. Verify the directory before contacting an office.</small>`;
+      });
+
       const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
         layers: "mapunitpolyextended",
         styles: "default",
@@ -1186,6 +1239,7 @@
         ["aquifers", aquifersLayer],
         ["carrizo", carrizoWilcoxLayer],
         ["carrizo-use", carrizoUseWellsLayer],
+        ["council", councilLayer],
         ["soils", soilsLayer]
       ]);
       const sourceLayerKeys = [...sourceLayers.keys()];
@@ -1314,6 +1368,7 @@
         "Aquifers · Texas major + minor": aquifersLayer,
         "Carrizo–Wilcox · TX + LA + AR": carrizoWilcoxLayer,
         "Carrizo–Wilcox documented use wells · Texas": carrizoUseWellsLayer,
+        "Find your council member · San Antonio": councilLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
@@ -1344,7 +1399,7 @@
           layerControl.collapse();
           if (layerToggle) layerToggle.focus();
         });
-        layerControlList.append(minimizeButton);
+        layerControlList.prepend(minimizeButton);
       }
 
       refreshSourceLayerOrder();
@@ -1752,6 +1807,30 @@
         };
       }
 
+      async function lookupCouncilResult(location) {
+        const features = await queryArcGisFeatures(councilLayerUrl, location, "District,Name,SqMiles");
+        const attributes = features[0]?.attributes;
+        return {
+          title: "City council representation",
+          status: attributes
+            ? "Found the San Antonio council district and current member listed in the official city dataset."
+            : "No San Antonio council district intersects this address.",
+          fields: attributes ? [
+            ["City", "San Antonio"],
+            ["Council district", `District ${attributes.District}`],
+            ["Council member", attributes.Name || "See official city directory"],
+            ["District area", Number.isFinite(Number(attributes.SqMiles)) ? `${Number(attributes.SqMiles).toLocaleString()} square miles` : "Not listed"],
+            ["Verify before contact", "City of San Antonio Mayor & City Council directory"],
+            ["Coverage note", "This layer currently covers San Antonio geographic districts. Schertz elects seven at-large places, so every council member represents the whole city."]
+          ] : [
+            ["Council district", "Outside the San Antonio district layer"],
+            ["Coverage", "San Antonio geographic districts only"],
+            ["Schertz note", "Schertz has no geographic council districts; its seven numbered places are elected at large"],
+            ["Next step", "Use the official council directory for the municipality in the matched address"]
+          ]
+        };
+      }
+
       async function lookupSoilsResult(location) {
         const properties = await lookupSoilAtLocation(location);
         return {
@@ -1798,6 +1877,7 @@
         if (key === "aquifers") return lookupAquifersResult(location);
         if (key === "carrizo") return lookupCarrizoResult(location);
         if (key === "carrizo-use") return lookupCarrizoUseResult(location);
+        if (key === "council") return lookupCouncilResult(location);
         if (key === "soils") return lookupSoilsResult(location);
         return lookupEcoregionResult(location);
       }
@@ -1813,6 +1893,7 @@
           aquifers: "Texas aquifers",
           carrizo: "regional Carrizo–Wilcox coverage",
           "carrizo-use": "documented Carrizo–Wilcox use wells",
+          council: "San Antonio council representation",
           soils: "USDA soils"
         };
         setBusy(`Checking ${labels[key]} at the matched address...`);
