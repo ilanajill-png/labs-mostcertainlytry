@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Menstrual Blood in Gardens and Medicine | Most Certainly Try</title>
-  <meta name="description" content="A source-led history of menstrual blood in ancient gardening, pest control, medicine, and protective ritual—with a careful distinction between documented texts and modern folklore.">
+  <meta name="description" content="A chronological, source-led history of menstrual blood in ancient Egyptian, Chinese, Indian, Greco-Roman, and later North American records—with a careful distinction between documented texts and modern folklore.">
   <meta property="og:title" content="Menstrual Blood in Gardens and Medicine | Most Certainly Try">
-  <meta property="og:description" content="What historical sources actually say about menstruating women, crop protection, healing, and the modern claim that menstrual blood was an ancient fertilizer.">
+  <meta property="og:description" content="What historical sources across Africa, Asia, Europe, and later North American ethnography actually document about menstrual blood, healing, agriculture, ritual, and fertility.">
   <meta property="og:type" content="article">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../styles.css">
@@ -69,6 +69,17 @@
     .mb-table th { background:rgba(73,101,76,.1); font-size:.77rem; text-transform:uppercase; letter-spacing:.08em; }
     .mb-table tr:last-child td { border-bottom:0; }
     .mb-claim-source { display:block; width:fit-content; margin-top:8px; color:var(--mb-leaf); font-size:.76rem; font-weight:850; line-height:1.35; }
+    .mb-timeline { position:relative; display:grid; gap:14px; margin:0; padding:0; list-style:none; }
+    .mb-timeline::before { content:""; position:absolute; top:12px; bottom:12px; left:108px; width:1px; background:var(--mb-line); }
+    .mb-era { position:relative; display:grid; grid-template-columns:92px minmax(0,1fr); gap:32px; align-items:start; }
+    .mb-era::before { content:""; position:absolute; top:24px; left:102px; width:13px; height:13px; border:3px solid var(--mb-paper); border-radius:50%; background:var(--mb-wine); box-shadow:0 0 0 1px var(--mb-line); }
+    .mb-era-date { padding-top:19px; color:var(--mb-wine); font-size:.78rem; font-weight:900; line-height:1.35; text-align:right; }
+    .mb-era-card { padding:21px 23px; background:rgba(255,255,255,.62); border:1px solid var(--mb-line); border-radius:16px; box-shadow:0 12px 28px rgba(74,42,46,.055); }
+    .mb-era-card h3 { margin:7px 0 8px; font-size:1.2rem; }
+    .mb-era-card p { margin:0; line-height:1.68; }
+    .mb-era-card p + p { margin-top:9px; }
+    .mb-era-source { display:inline-block; margin-top:11px; margin-right:14px; color:var(--mb-leaf); font-size:.82rem; font-weight:850; }
+    .mb-era-card.is-limit { border-style:dashed; background:rgba(238,235,214,.64); }
     .mb-evidence { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; background:var(--mb-line); border:1px solid var(--mb-line); border-radius:16px; overflow:hidden; }
     .mb-evidence div { padding:22px; background:#fffaf1; }
     .mb-evidence strong { display:block; color:var(--mb-wine); margin-bottom:6px; }
@@ -82,14 +93,14 @@
     .mb-source span { display:block; margin-top:4px; color:#655d5f; font-size:.84rem; line-height:1.5; }
     .mb-note { margin-top:22px; padding:20px; border:1px dashed rgba(73,101,76,.5); background:rgba(238,235,214,.75); line-height:1.68; }
     @media (max-width:820px) { .mb-hero, .mb-heading { grid-template-columns:1fr; } .mb-symbol { min-height:300px; } .mb-evidence { grid-template-columns:1fr; } }
-    @media (max-width:620px) { .mb-shell { width:min(100% - 24px,1120px); } .mb-hero { padding-top:42px; } .mb-hero h1 { font-size:clamp(3rem,16vw,4.9rem); } .mb-grid, .mb-sources { grid-template-columns:1fr; } .mb-section { padding:50px 0; } }
+    @media (max-width:620px) { .mb-shell { width:min(100% - 24px,1120px); } .mb-hero { padding-top:42px; } .mb-hero h1 { font-size:clamp(3rem,16vw,4.9rem); } .mb-grid, .mb-sources { grid-template-columns:1fr; } .mb-section { padding:50px 0; } .mb-timeline::before { left:7px; } .mb-era { grid-template-columns:1fr; gap:6px; padding-left:27px; } .mb-era::before { top:8px; left:1px; } .mb-era-date { padding-top:0; text-align:left; } }
   </style>
 </head>
 <body>
   <div class="mb-header">
     <header class="site-header">
       <a class="brand" href="../index.html" aria-label="Most Certainly Try home"><img src="../assets/howdy-partner-logo.png" alt="" width="48" height="48"><span><strong>Most Certainly Try</strong><small>Research cabinet</small></span></a>
-      <nav aria-label="Primary navigation"><a href="../index.html">Nature Work</a><a href="#gardens">Gardens</a><a href="#medicine">Medicine</a><a href="#sources">Sources</a></nav>
+      <nav aria-label="Primary navigation"><a href="../index.html">Nature Work</a><a href="#world">Across cultures</a><a href="#gardens">Gardens</a><a href="#medicine">Medicine</a><a href="#sources">Sources</a></nav>
     </header>
   </div>
 
@@ -107,16 +118,57 @@
       </section>
     </div>
 
-    <nav class="mb-jump" aria-label="Page sections"><a href="#answer">What is documented?</a><a href="#gardens">Gardens</a><a href="#medicine">Medicine</a><a href="#women">Women in the record</a><a href="#fertilizer">Fertilizer claim</a><a href="#safety">Modern safety</a><a href="#sources">Sources</a></nav>
+    <nav class="mb-jump" aria-label="Page sections"><a href="#answer">What is documented?</a><a href="#world">Across cultures</a><a href="#gardens">Gardens</a><a href="#medicine">Medicine</a><a href="#women">Women in the record</a><a href="#fertilizer">Fertilizer claim</a><a href="#safety">Modern safety</a><a href="#sources">Sources</a></nav>
 
     <section class="mb-section" id="answer">
       <div class="mb-shell">
-        <div class="mb-heading"><div><p class="mb-kicker">Read the evidence carefully</p><h2>What is actually documented?</h2></div><p>The strongest evidence is textual and Greco-Roman. It shows what agricultural and medical writers said people could do—not how often anyone did it, whether a remedy worked, or whether women understood their own practices in the same terms.</p></div>
+        <div class="mb-heading"><div><p class="mb-kicker">Read the evidence carefully</p><h2>What is actually documented?</h2></div><p>The surviving evidence is cross-cultural but uneven. Egyptian and Chinese texts preserve direct remedies; Indian medical traditions theorize menstrual blood as reproductive material; Greco-Roman writers record medicine, magic, and crop ritual. North American evidence is much later and cannot be projected back to Pliny’s time.</p></div>
         <div class="mb-evidence">
           <div><strong>Well documented in texts</strong><span>Menstruating women assigned ritual crop-protection roles; menstrual fluid prescribed in topical remedies, amulets, reproductive recipes, and protective magic.</span></div>
           <div><strong>Historically plausible, not measurable</strong><span>Some remedies may preserve women’s medical knowledge, especially where Pliny names female writers and a midwife. Surviving male-authored accounts remain an imperfect filter.</span></div>
           <div><strong>Not established</strong><span>A continuous ancient tradition of collecting menstrual fluid, diluting it, and feeding it to garden soil as fertilizer.</span></div>
         </div>
+      </div>
+    </section>
+
+    <section class="mb-section" id="world">
+      <div class="mb-shell">
+        <div class="mb-heading"><div><p class="mb-kicker">Africa · Asia · Europe · North America</p><h2>The verified record, in chronological order</h2></div><p>Dates refer to the surviving manuscript, archaeological context, or modern study—not necessarily the first appearance of a belief. A written recipe records a tradition; it does not prove effectiveness or widespread use.</p></div>
+        <ol class="mb-timeline">
+          <li class="mb-era">
+            <div class="mb-era-date">c. 1550 BCE</div>
+            <article class="mb-era-card"><span class="mb-tag">Africa · Egypt</span><h3>Papyrus Ebers: first-menstruation blood used on the body</h3><p>Remedy Eb 808 directs that a woman’s breasts be bathed in the blood of someone experiencing menstruation for the first time, with the abdomen and thighs rubbed as well, to prevent sagging and excess breast milk.</p><p><strong>Evidence:</strong> direct medical text, but roughly 1,600 years earlier than Pliny.</p><a class="mb-era-source" href="https://sae.saw-leipzig.de/en/documents/papyrus-ebers?set_language=en&amp;version=320" target="_blank" rel="noopener">Read Papyrus Ebers, Eb 808 — Leipzig Academy of Sciences ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">Before 168 BCE</div>
+            <article class="mb-era-card"><span class="mb-tag">Asia · China</span><h3>Mawangdui manuscripts: menstrual cloth and blood in remedies</h3><p>Medical texts from Mawangdui Tomb 3 record treatments for <em>gu</em>—a category encompassing poisoning, infestation, or demonic illness—including ingesting the burnt remains of a menstrual cloth and applying menstrual blood mixed with cinnamon.</p><p><strong>Evidence:</strong> securely excavated Western Han manuscripts buried in 168 BCE, about 245 years before Pliny’s encyclopedia.</p><a class="mb-era-source" href="https://www.cambridge.org/core/elements/medicine-and-healing-in-ancient-east-asia/63BDA5E61EEE44FE0AC23712789C9321" target="_blank" rel="noopener">Read the Cambridge history and translated evidence ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">Western Han<br>206 BCE–9 CE</div>
+            <article class="mb-era-card"><span class="mb-tag textual">Asia · China</span><h3><em>Random Jottings on Medical Recipes</em>: a menstrual cloth rinsed into water</h3><p>One bamboo-strip recipe says that, for “madness (or seizures?)” accompanied by internal bleeding that would not emerge, a young woman’s menstrual cloth should be rinsed in a cup of water and the liquid drunk.</p><p><strong>Evidence:</strong> a direct Han-period text, but acquired through the antiquities market rather than a controlled excavation; its provenance is weaker than Mawangdui’s.</p><a class="mb-era-source" href="https://www.cambridge.org/core/elements/medicine-and-healing-in-ancient-east-asia/63BDA5E61EEE44FE0AC23712789C9321" target="_blank" rel="noopener">Read the translation and provenance discussion ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">Early centuries<br>BCE–CE</div>
+            <article class="mb-era-card"><span class="mb-tag textual">Asia · India</span><h3>Ayurvedic compendia: reproductive and diagnostic substance</h3><p>The layered <em>Caraka Saṃhitā</em> and <em>Suśruta Saṃhitā</em> traditions describe menstrual blood (<em>ārtava</em> or <em>rajas</em>) as a female reproductive material that combines with semen, and assess its color, smell, and consistency when discussing health and fertility.</p><p><strong>Evidence:</strong> a near-period medical tradition with later redaction—not a recipe for administering collected menstrual blood and not a gardening practice.</p><a class="mb-era-source" href="https://hekint.org/2023/01/09/menstrual-health-in-early-indian-medical-tradition/" target="_blank" rel="noopener">Read the sourced overview of early Indian medical texts ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">c. 60–77 CE</div>
+            <article class="mb-era-card"><span class="mb-tag">Europe · Rome</span><h3>Columella and Pliny: crop ritual, medicine, amulets, and counter-magic</h3><p>Columella describes a menstruating woman circling garden beds to repel caterpillars. Pliny catalogs agricultural danger and protection alongside topical remedies, fever and epilepsy treatments, reproductive recipes, amulets, and doorway protection—sometimes credulously and sometimes with explicit disbelief.</p><p><strong>Evidence:</strong> direct elite male-authored agricultural and encyclopedic texts. They report claims, not clinical outcomes or women’s own testimony.</p><a class="mb-era-source" href="https://feminaeromanae.org/columella2.html" target="_blank" rel="noopener">Columella, <em>De Re Rustica</em> 10.357–368 ↗</a><a class="mb-era-source" href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.02.0137:book=28:chapter=23" target="_blank" rel="noopener">Pliny, <em>Natural History</em> 28.23 ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">Roman–late antique</div>
+            <article class="mb-era-card"><span class="mb-tag caution">Africa · Greco-Egyptian</span><h3>Greek Magical Papyri: menstrual blood in a contraceptive ritual</h3><p>PGM XXXVI.320–332 instructs the practitioner to steep bitter-vetch seeds in a menstruating woman’s menses as part of a larger contraceptive procedure involving a frog and an amulet.</p><p><strong>Evidence:</strong> a magical handbook preserved from Egypt. It is geographically African and culturally Greco-Egyptian; it should not be generalized to all Egyptian or African practice.</p><a class="mb-era-source" href="https://mahabodhi.saranagamana.org/studies/texts/other/The_Greek_Magical_Papyri_in_Translation.pdf" target="_blank" rel="noopener">Read PGM XXXVI.320–332 in Betz’s translation ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">1982</div>
+            <article class="mb-era-card is-limit"><span class="mb-tag textual">North America · Yurok</span><h3>Power and ritual—not an ancient medical recipe</h3><p>Thomas Buckley’s cultural reconstruction examines Yurok menstrual observances as sources of women’s spiritual and personal power, challenging earlier interpretations that reduced them to pollution or male exclusion.</p><p><strong>Chronology warning:</strong> this is twentieth-century ethnographic reconstruction, not first-century evidence, and it does not document menstrual blood as fertilizer.</p><a class="mb-era-source" href="https://doi.org/10.1525/ae.1982.9.1.02a00030" target="_blank" rel="noopener">Buckley, “Menstruation and the Power of Yurok Women” ↗</a></article>
+          </li>
+          <li class="mb-era">
+            <div class="mb-era-date">2001</div>
+            <article class="mb-era-card is-limit"><span class="mb-tag textual">North America · Navajo</span><h3>Later accounts of danger and disease causation</h3><p>Maureen Trudelle Schwarz records Navajo consultants connecting inappropriate contact with menstruating women or menstrual blood to arthritis and rheumatism, with explanations linked to oral histories.</p><p><strong>Chronology warning:</strong> this documents contemporary understandings of danger and illness—not medicinal or gardening use, and not evidence from Pliny’s period.</p><a class="mb-era-source" href="https://doi.org/10.1525/ae.2001.28.3.650" target="_blank" rel="noopener">Schwarz, “Allusions to Ancestral Impropriety” ↗</a></article>
+          </li>
+        </ol>
+        <p class="mb-note"><strong>Comparative finding:</strong> the closest securely dated parallel to Pliny is Western Han China. No comparably dated North American record was found, and none of these African, Asian, European, or North American sources documents menstrual blood being used as garden fertilizer.</p>
       </div>
     </section>
 
@@ -186,10 +238,20 @@
 
     <section class="mb-section" id="sources">
       <div class="mb-shell">
-        <div class="mb-heading"><div><p class="mb-kicker">Source ledger</p><h2>Read the record</h2></div><p>Primary texts establish what ancient authors wrote. Modern scholarship helps explain the gender, labor, environmental, and medical assumptions inside those claims.</p></div>
+        <div class="mb-heading"><div><p class="mb-kicker">Source ledger</p><h2>Read the record</h2></div><p>The historical sources appear first in chronological order. Interpretive scholarship and current safety guidance follow separately so ancient claims are not confused with modern evidence.</p></div>
         <div class="mb-sources">
-          <div class="mb-source"><a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.02.0137:book=28:chapter=23" target="_blank" rel="noopener">Pliny, <em>Natural History</em> 28.23 ↗</a><span>Primary text · crop ritual, harmful effects, remedies, named female authorities, and Pliny’s skepticism.</span></div>
-          <div class="mb-source"><a href="https://feminaeromanae.org/columella2.html" target="_blank" rel="noopener">Columella, <em>De Re Rustica</em> 10.357–368 ↗</a><span>Primary agricultural passage with contextual notes on menstruation and caterpillar control.</span></div>
+          <div class="mb-source"><a href="https://sae.saw-leipzig.de/en/documents/papyrus-ebers?set_language=en&amp;version=320" target="_blank" rel="noopener">c. 1550 BCE · Papyrus Ebers, Eb 808 ↗</a><span>Primary Egyptian medical text · first-menstruation blood applied to breasts, abdomen, and thighs.</span></div>
+          <div class="mb-source"><a href="https://www.cambridge.org/core/elements/medicine-and-healing-in-ancient-east-asia/63BDA5E61EEE44FE0AC23712789C9321" target="_blank" rel="noopener">Before 168 BCE · Mawangdui medical manuscripts ↗</a><span>Excavated Western Han evidence · menstrual cloth and menstrual blood included in remedies for <em>gu</em>.</span></div>
+          <div class="mb-source"><a href="https://www.cambridge.org/core/elements/medicine-and-healing-in-ancient-east-asia/63BDA5E61EEE44FE0AC23712789C9321" target="_blank" rel="noopener">Western Han · <em>Random Jottings on Medical Recipes</em> ↗</a><span>Translated bamboo-strip recipe · menstrual cloth rinsed in water and drunk; manuscript provenance is not archaeological.</span></div>
+          <div class="mb-source"><a href="https://hekint.org/2023/01/09/menstrual-health-in-early-indian-medical-tradition/" target="_blank" rel="noopener">Early centuries BCE–CE · Indian medical traditions ↗</a><span>Sourced overview of layered Ayurvedic texts · menstrual blood as reproductive and diagnostic material, not an administered ingredient.</span></div>
+          <div class="mb-source"><a href="https://feminaeromanae.org/columella2.html" target="_blank" rel="noopener">c. 60 CE · Columella, <em>De Re Rustica</em> 10.357–368 ↗</a><span>Primary Roman agricultural passage · menstruation and ritual caterpillar control.</span></div>
+          <div class="mb-source"><a href="https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.02.0137:book=28:chapter=23" target="_blank" rel="noopener">77 CE · Pliny, <em>Natural History</em> 28.23 ↗</a><span>Primary text · crop ritual, harmful effects, remedies, named female authorities, and Pliny’s skepticism.</span></div>
+          <div class="mb-source"><a href="https://mahabodhi.saranagamana.org/studies/texts/other/The_Greek_Magical_Papyri_in_Translation.pdf" target="_blank" rel="noopener">Roman–late antique Egypt · PGM XXXVI.320–332 ↗</a><span>Greco-Egyptian magical handbook · menstrual blood used to steep bitter-vetch seeds in a contraceptive ritual.</span></div>
+          <div class="mb-source"><a href="https://doi.org/10.1525/ae.1982.9.1.02a00030" target="_blank" rel="noopener">1982 · “Menstruation and the Power of Yurok Women” ↗</a><span>Later North American ethnographic reconstruction · spiritual and personal power, not an ancient medical or gardening recipe.</span></div>
+          <div class="mb-source"><a href="https://doi.org/10.1525/ae.2001.28.3.650" target="_blank" rel="noopener">2001 · “Allusions to Ancestral Impropriety” ↗</a><span>Later Navajo ethnography · menstrual contact, illness causation, and oral histories; not first-century evidence.</span></div>
+        </div>
+        <h3 style="margin:28px 0 12px">Interpretation, transmission, and modern safety</h3>
+        <div class="mb-sources">
           <div class="mb-source"><a href="https://www.gutenberg.org/files/61113/61113-h/61113-h.htm" target="_blank" rel="noopener">Pliny, <em>Natural History</em>, Volume IV ↗</a><span>Open nineteenth-century English translation covering Roman grain and garden agriculture.</span></div>
           <div class="mb-source"><a href="https://talks.cam.ac.uk/talk/index/247205/" target="_blank" rel="noopener">“Menstrual Blood as an Environmental Agent in Early Imperial Rome” ↗</a><span>University of Cambridge seminar abstract · environmental agency, farm risk, and women’s labor.</span></div>
           <div class="mb-source"><a href="https://medhistorypedia.org/entry/enc-menstrual-blood-properties-of-according-to-pliny-still-being/" target="_blank" rel="noopener">Pliny’s menstrual-blood traditions in early-modern Europe ↗</a><span>Medical-history note · later reading and an epilepsy remedy involving a menstrual cloth.</span></div>
