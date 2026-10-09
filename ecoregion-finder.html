@@ -479,7 +479,7 @@
               <a class="button primary" id="map-result-link" href="#ecoregion-map">See this result on the map below</a>
             </p>
             <p id="official-council-action" hidden>
-              <a class="button" href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Verify with San Antonio’s official lookup</a>
+              <a class="button" id="official-council-link" href="https://directory.tml.org/search/city" target="_blank" rel="noopener">Open council directory</a>
             </p>
           </article>
         </div>
@@ -495,7 +495,7 @@
           <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
-            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, or local council districts.</span>
+            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, or Texas city-council information.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
@@ -567,20 +567,6 @@
                 </div>
                 <a href="https://services2.arcgis.com/LYMgRMwHfrWWEg3s/arcgis/rest/services/TWDB_Groundwater_Wells/FeatureServer/0" target="_blank" rel="noopener">Open TWDB source service</a>
               </article>
-              <article class="source-layer-card" data-source-layer="council">
-                <span class="source-layer-swatch council" aria-hidden="true"></span>
-                <strong>Find your council member</strong>
-                <span class="layer-status">Off</span>
-                <small>Official San Antonio council-district boundaries and member names. Municipal council geography is not nationally standardized; Schertz uses seven at-large places rather than geographic districts.</small>
-                <div class="layer-color-guide" aria-label="Council district guide">
-                  <span class="layer-color-guide-title">Local representation</span>
-                  <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#4c438e" aria-hidden="true"></span><span>Purple boundary = San Antonio council district</span></span>
-                  <p class="layer-guide-empty">Search a San Antonio address while this layer is active to return the district and current council member. Outside San Antonio, the result explains the coverage limit.</p>
-                </div>
-                <a href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Use San Antonio’s official address lookup</a>
-                <a href="https://data.sanantonio.gov/dataset/council-districts" target="_blank" rel="noopener">Open official San Antonio dataset</a>
-                <a href="https://www.schertz.com/226/City-Council" target="_blank" rel="noopener">Open Schertz at-large council</a>
-              </article>
               <article class="source-layer-card" data-source-layer="soils">
                 <span class="source-layer-swatch soils" aria-hidden="true"></span>
                 <strong>Soils</strong>
@@ -592,6 +578,21 @@
                   <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:transparent" aria-hidden="true"></span><span>Clear interior = basemap remains visible; fill color does not classify soil type</span></span>
                 </div>
                 <a href="https://websoilsurvey.nrcs.usda.gov/" target="_blank" rel="noopener">Open Web Soil Survey</a>
+              </article>
+              <article class="source-layer-card" data-source-layer="council">
+                <span class="source-layer-swatch council" aria-hidden="true"></span>
+                <strong>Find your council member</strong>
+                <span class="layer-status">Off</span>
+                <small>Texas-wide municipality lookup using official Comptroller city boundaries and the Texas Municipal League officials directory. San Antonio also includes official geographic council districts and current member names.</small>
+                <div class="layer-color-guide" aria-label="Council coverage guide">
+                  <span class="layer-color-guide-title">Texas municipal representation</span>
+                  <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#177f76" aria-hidden="true"></span><span>Teal boundary = incorporated Texas municipality</span></span>
+                  <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#4c438e" aria-hidden="true"></span><span>Purple boundary = San Antonio council district</span></span>
+                  <p class="layer-guide-empty">Search any Texas address to identify its municipality and open that city’s TML officials roster. Where a city publishes compatible district GIS, the map can return a specific district; statewide district polygons do not exist.</p>
+                </div>
+                <a href="https://directory.tml.org/search/city" target="_blank" rel="noopener">Search Texas Municipal League officials</a>
+                <a href="https://feature.geographic.texas.gov/arcgis/rest/services/City_Boundaries/Texas_City_Boundaries/MapServer/0" target="_blank" rel="noopener">Open official Texas city boundaries</a>
+                <a href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Use San Antonio’s official address lookup</a>
               </article>
             </div>
           </section>
@@ -612,7 +613,7 @@
             </div>
           </section>
         </div>
-        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. The council-member layer currently covers San Antonio geographic districts; Schertz council seats are elected at large and therefore have no district polygons. No Mexican Carrizo–Wilcox extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
+        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. The council-member layer identifies incorporated municipalities across Texas and links to the Texas Municipal League roster; San Antonio additionally has official district polygons. Municipal district systems are maintained city by city, and some councils are elected at large. No Mexican Carrizo–Wilcox extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -726,10 +727,10 @@
             <p>The official SSURGO web service supplies neighborhood-scale soil boundaries; Web Soil Survey remains the authoritative tool for reports and interpretations.</p>
           </article>
           <article class="project-card">
-            <div class="card-meta"><span>Civic geography</span><span>San Antonio</span></div>
-            <h2><a href="https://data.sanantonio.gov/dataset/council-districts" target="_blank" rel="noopener">City of San Antonio Council Districts</a></h2>
-            <p class="project-type">Address to council district and member</p>
-            <p>The official city feature service supplies ten council-district polygons and current member names. This is local—not nationwide—coverage. Schertz is linked separately because its seven council places are elected at large and do not have geographic district boundaries.</p>
+            <div class="card-meta"><span>Civic geography</span><span>Texas statewide</span></div>
+            <h2><a href="https://directory.tml.org/search/city" target="_blank" rel="noopener">Texas Municipal League City Officials Directory</a></h2>
+            <p class="project-type">Address to municipality and council roster</p>
+            <p>The <a href="https://feature.geographic.texas.gov/arcgis/rest/services/City_Boundaries/Texas_City_Boundaries/MapServer/0" target="_blank" rel="noopener">Texas Comptroller city-boundary service</a> identifies incorporated municipalities statewide; TML supplies city-filtered elected and appointed officials for member cities. San Antonio adds <a href="https://data.sanantonio.gov/dataset/council-districts" target="_blank" rel="noopener">official district polygons and current member names</a>. Other internal council districts remain city-maintained and are not inferred.</p>
           </article>
         </div>
       </section>
@@ -806,6 +807,7 @@
       const resultList = document.querySelector("#result-list");
       const mapResultAction = document.querySelector("#map-result-action");
       const officialCouncilAction = document.querySelector("#official-council-action");
+      const officialCouncilLink = document.querySelector("#official-council-link");
       const opacityControl = document.querySelector("#ecoregion-opacity");
       const opacityValue = document.querySelector("#ecoregion-opacity-value");
       const levelFourGuideStatus = document.querySelector("#level-four-guide-status");
@@ -910,6 +912,8 @@
       map.getPane("carrizo").style.zIndex = "485";
       map.createPane("carrizoUse");
       map.getPane("carrizoUse").style.zIndex = "495";
+      map.createPane("texasCities");
+      map.getPane("texasCities").style.zIndex = "497";
       map.createPane("council");
       map.getPane("council").style.zIndex = "500";
       map.createPane("soils");
@@ -1084,9 +1088,44 @@
           + `<br><small>TWDB well ID ${escapeHtml(properties.StWellID || "not listed")}. A database record does not confirm current operation or define the land receiving its water.</small>`;
       });
 
-      const councilLayerUrl = "https://services.arcgis.com/g1fRTDLeMgspWrYp/arcgis/rest/services/CouncilDistricts/FeatureServer/2";
-      const councilLayer = L.esri.featureLayer({
-        url: councilLayerUrl,
+      function tmlCityDirectoryUrl(city) {
+        const params = new URLSearchParams({
+          "search[city]": city,
+          "search[type]": "city"
+        });
+        return `https://directory.tml.org/results?${params}`;
+      }
+
+      const texasCityBoundaryUrl = "https://feature.geographic.texas.gov/arcgis/rest/services/City_Boundaries/Texas_City_Boundaries/MapServer/0";
+      const texasCityBoundaryLayer = L.esri.featureLayer({
+        url: texasCityBoundaryUrl,
+        pane: "texasCities",
+        simplifyFactor: 0.45,
+        precision: 5,
+        fields: ["city_name", "geo_id", "popest2025"],
+        attribution: "Texas city boundaries: Texas Comptroller of Public Accounts",
+        style: {
+          color: "#177f76",
+          weight: 1.4,
+          opacity: 0.9,
+          fillColor: "#5fb7a6",
+          fillOpacity: 0.08
+        }
+      });
+
+      texasCityBoundaryLayer.bindPopup((layer) => {
+        const properties = layer.feature.properties || {};
+        const city = properties.city_name || "Texas municipality";
+        const population = Number(properties.popest2025);
+        const populationText = Number.isFinite(population) ? `<br>2025 population estimate: ${population.toLocaleString()}` : "";
+        return `<strong>${escapeHtml(city)}</strong>${populationText}`
+          + `<br><a href="${escapeHtml(tmlCityDirectoryUrl(city))}" target="_blank" rel="noopener">Open this city’s TML officials roster</a>`
+          + `<br><small>Municipal boundary from the Texas Comptroller. Council members may be elected by district, at large, or through a mixed system; verify the city roster before contacting an office.</small>`;
+      });
+
+      const sanAntonioCouncilLayerUrl = "https://services.arcgis.com/g1fRTDLeMgspWrYp/arcgis/rest/services/CouncilDistricts/FeatureServer/2";
+      const sanAntonioCouncilLayer = L.esri.featureLayer({
+        url: sanAntonioCouncilLayerUrl,
         pane: "council",
         simplifyFactor: 0.35,
         precision: 5,
@@ -1100,12 +1139,14 @@
         })
       });
 
-      councilLayer.bindPopup((layer) => {
+      sanAntonioCouncilLayer.bindPopup((layer) => {
         const properties = layer.feature.properties;
         const district = properties.District || "Not listed";
         const member = properties.Name || "See official directory";
         return `<strong>San Antonio City Council District ${escapeHtml(district)}</strong><br>Council member: ${escapeHtml(member)}<br><a href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Verify with San Antonio’s official address lookup</a><br><small>Boundary and member name from City of San Antonio Open Data. Verify the official lookup before contacting an office.</small>`;
       });
+
+      const councilLayer = L.layerGroup([texasCityBoundaryLayer, sanAntonioCouncilLayer]);
 
       const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
         layers: "mapunitpolyextended",
@@ -1244,8 +1285,8 @@
         ["aquifers", aquifersLayer],
         ["carrizo", carrizoWilcoxLayer],
         ["carrizo-use", carrizoUseWellsLayer],
-        ["council", councilLayer],
-        ["soils", soilsLayer]
+        ["soils", soilsLayer],
+        ["council", councilLayer]
       ]);
       const sourceLayerKeys = [...sourceLayers.keys()];
       let activeSourceLayerKeys = [];
@@ -1373,8 +1414,8 @@
         "Aquifers · Texas major + minor": aquifersLayer,
         "Carrizo–Wilcox · TX + LA + AR": carrizoWilcoxLayer,
         "Carrizo–Wilcox documented use wells · Texas": carrizoUseWellsLayer,
-        "Find your council member · San Antonio": councilLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
+        "Find your council member · Texas": councilLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
 
@@ -1531,6 +1572,10 @@
         `).join("");
         mapResultAction.hidden = false;
         officialCouncilAction.hidden = !result.officialCouncilLookup;
+        if (result.officialCouncilLookup) {
+          officialCouncilLink.href = result.councilLookupUrl || "https://directory.tml.org/search/city";
+          officialCouncilLink.textContent = result.councilLookupLabel || "Open council directory";
+        }
         map.setView([y, x], 12);
         if (selectedMarker) selectedMarker.remove();
         selectedMarker = L.marker([y, x], { title: candidate.address }).addTo(map);
@@ -1816,27 +1861,60 @@
       }
 
       async function lookupCouncilResult(location) {
-        const features = await queryArcGisFeatures(councilLayerUrl, location, "District,Name,SqMiles");
-        const attributes = features[0]?.attributes;
+        const [cityFeatures, districtFeatures] = await Promise.all([
+          queryArcGisFeatures(texasCityBoundaryUrl, location, "city_name,geo_id,popest2025"),
+          queryArcGisFeatures(sanAntonioCouncilLayerUrl, location, "District,Name,SqMiles")
+        ]);
+        const city = cityFeatures[0]?.attributes;
+        const district = districtFeatures[0]?.attributes;
+        const cityName = city?.city_name || "";
+        const population = Number(city?.popest2025);
+        if (district) {
+          return {
+            title: "City council representation",
+            status: "Found the San Antonio council district and current member listed in the official city dataset.",
+            fields: [
+              ["City", "San Antonio"],
+              ["Council district", `District ${district.District}`],
+              ["Council member", district.Name || "See official city directory"],
+              ["District area", Number.isFinite(Number(district.SqMiles)) ? `${Number(district.SqMiles).toLocaleString()} square miles` : "Not listed"],
+              ["Statewide source", "Texas Comptroller municipal boundary"],
+              ["Verify before contact", "City of San Antonio Find My Council Member"]
+            ],
+            officialCouncilLookup: true,
+            councilLookupUrl: "https://www.sanantonio.gov/Council/Find-My-Council-Member",
+            councilLookupLabel: "Verify with San Antonio’s official lookup"
+          };
+        }
+        if (cityName) {
+          return {
+            title: "Texas municipal representation",
+            status: `Found the incorporated municipality of ${cityName}. Open its Texas Municipal League roster for current elected and appointed officials.`,
+            fields: [
+              ["Municipality", cityName],
+              ["2025 population estimate", Number.isFinite(population) ? population.toLocaleString() : "Not listed"],
+              ["Council members", "Open the city-filtered TML roster below"],
+              ["Election system", "Varies by city: geographic districts, at-large places, or a mixed system"],
+              ["Boundary source", "Texas Comptroller of Public Accounts"],
+              ["Verification note", "Confirm the city’s own website before contacting an official"]
+            ],
+            officialCouncilLookup: true,
+            councilLookupUrl: tmlCityDirectoryUrl(cityName),
+            councilLookupLabel: `Open ${cityName} officials roster`
+          };
+        }
         return {
-          title: "City council representation",
-          status: attributes
-            ? "Found the San Antonio council district and current member listed in the official city dataset."
-            : "No San Antonio council district intersects this address.",
-          fields: attributes ? [
-            ["City", "San Antonio"],
-            ["Council district", `District ${attributes.District}`],
-            ["Council member", attributes.Name || "See official city directory"],
-            ["District area", Number.isFinite(Number(attributes.SqMiles)) ? `${Number(attributes.SqMiles).toLocaleString()} square miles` : "Not listed"],
-            ["Verify before contact", "City of San Antonio Mayor & City Council directory"],
-            ["Coverage note", "This layer currently covers San Antonio geographic districts. Schertz elects seven at-large places, so every council member represents the whole city."]
-          ] : [
-            ["Council district", "Outside the San Antonio district layer"],
-            ["Coverage", "San Antonio geographic districts only"],
-            ["Schertz note", "Schertz has no geographic council districts; its seven numbered places are elected at large"],
-            ["Next step", "Use the official council directory for the municipality in the matched address"]
+          title: "Texas municipal representation",
+          status: "This point is not inside an incorporated Texas municipality in the statewide boundary service.",
+          fields: [
+            ["Municipality", "None returned at this coordinate"],
+            ["Possible representation", "The address may be unincorporated, in an extraterritorial jurisdiction, or near a recently changed boundary"],
+            ["Next step", "Check the county government or search the Texas Municipal League directory by city name"],
+            ["Coverage", "Incorporated Texas municipalities; city council districts are maintained locally"]
           ],
-          officialCouncilLookup: true
+          officialCouncilLookup: true,
+          councilLookupUrl: "https://directory.tml.org/search/city",
+          councilLookupLabel: "Search Texas city officials"
         };
       }
 
@@ -1902,7 +1980,7 @@
           aquifers: "Texas aquifers",
           carrizo: "regional Carrizo–Wilcox coverage",
           "carrizo-use": "documented Carrizo–Wilcox use wells",
-          council: "San Antonio council representation",
+          council: "Texas council representation",
           soils: "USDA soils"
         };
         setBusy(`Checking ${labels[key]} at the matched address...`);
