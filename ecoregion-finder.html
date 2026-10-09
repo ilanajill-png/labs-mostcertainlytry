@@ -478,6 +478,9 @@
             <p id="map-result-action" hidden>
               <a class="button primary" id="map-result-link" href="#ecoregion-map">See this result on the map below</a>
             </p>
+            <p id="official-council-action" hidden>
+              <a class="button" href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Verify with San Antonio’s official lookup</a>
+            </p>
           </article>
         </div>
       </section>
@@ -574,6 +577,7 @@
                   <span class="layer-color-key"><span class="layer-color-chip line" style="--chip-color:#4c438e" aria-hidden="true"></span><span>Purple boundary = San Antonio council district</span></span>
                   <p class="layer-guide-empty">Search a San Antonio address while this layer is active to return the district and current council member. Outside San Antonio, the result explains the coverage limit.</p>
                 </div>
+                <a href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Use San Antonio’s official address lookup</a>
                 <a href="https://data.sanantonio.gov/dataset/council-districts" target="_blank" rel="noopener">Open official San Antonio dataset</a>
                 <a href="https://www.schertz.com/226/City-Council" target="_blank" rel="noopener">Open Schertz at-large council</a>
               </article>
@@ -801,6 +805,7 @@
       const statusMessage = document.querySelector("#status-message");
       const resultList = document.querySelector("#result-list");
       const mapResultAction = document.querySelector("#map-result-action");
+      const officialCouncilAction = document.querySelector("#official-council-action");
       const opacityControl = document.querySelector("#ecoregion-opacity");
       const opacityValue = document.querySelector("#ecoregion-opacity-value");
       const levelFourGuideStatus = document.querySelector("#level-four-guide-status");
@@ -1099,7 +1104,7 @@
         const properties = layer.feature.properties;
         const district = properties.District || "Not listed";
         const member = properties.Name || "See official directory";
-        return `<strong>San Antonio City Council District ${escapeHtml(district)}</strong><br>Council member: ${escapeHtml(member)}<br><a href="https://www.sa.gov/Directory/Departments/Mayor-Council" target="_blank" rel="noopener">Open the official Mayor &amp; City Council directory</a><br><small>Boundary and member name from City of San Antonio Open Data. Verify the directory before contacting an office.</small>`;
+        return `<strong>San Antonio City Council District ${escapeHtml(district)}</strong><br>Council member: ${escapeHtml(member)}<br><a href="https://www.sanantonio.gov/Council/Find-My-Council-Member" target="_blank" rel="noopener">Verify with San Antonio’s official address lookup</a><br><small>Boundary and member name from City of San Antonio Open Data. Verify the official lookup before contacting an office.</small>`;
       });
 
       const soilsLayer = L.tileLayer.wms("https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms", {
@@ -1498,12 +1503,14 @@
         statusMessage.textContent = message;
         resultList.innerHTML = "";
         mapResultAction.hidden = true;
+        officialCouncilAction.hidden = true;
       }
 
       function setError(message) {
         statusMessage.textContent = message;
         resultList.innerHTML = "";
         mapResultAction.hidden = true;
+        officialCouncilAction.hidden = true;
       }
 
       function renderResult(candidate, result) {
@@ -1523,6 +1530,7 @@
           </div>
         `).join("");
         mapResultAction.hidden = false;
+        officialCouncilAction.hidden = !result.officialCouncilLookup;
         map.setView([y, x], 12);
         if (selectedMarker) selectedMarker.remove();
         selectedMarker = L.marker([y, x], { title: candidate.address }).addTo(map);
@@ -1827,7 +1835,8 @@
             ["Coverage", "San Antonio geographic districts only"],
             ["Schertz note", "Schertz has no geographic council districts; its seven numbered places are elected at large"],
             ["Next step", "Use the official council directory for the municipality in the matched address"]
-          ]
+          ],
+          officialCouncilLookup: true
         };
       }
 
