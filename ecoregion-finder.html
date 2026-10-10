@@ -407,6 +407,11 @@
         border-color: #4c438e;
       }
 
+      .source-layer-swatch.bees {
+        background: linear-gradient(135deg, rgba(47, 125, 74, 0.48) 0 33%, rgba(185, 133, 31, 0.34) 33% 66%, rgba(111, 119, 130, 0.2) 66%);
+        border-color: #72591d;
+      }
+
       .source-layer-swatch.soils {
         background: repeating-linear-gradient(135deg, #fff 0 3px, #6f4a2e 3px 5px);
       }
@@ -468,6 +473,10 @@
               ZIP code
               <input id="zip" name="zip" autocomplete="postal-code" inputmode="numeric" placeholder="ZIP">
             </label>
+            <label>
+              Lot size in acres <small>(optional)</small>
+              <input id="lot-size-acres" name="lot-size-acres" type="number" min="0" step="0.001" inputmode="decimal" placeholder="For example: 0.25">
+            </label>
             <button class="button primary" type="submit">Find map details</button>
             <p class="privacy-note">We do not save the address, coordinates, or result.</p>
           </form>
@@ -480,6 +489,10 @@
             </p>
             <p id="official-council-action" hidden>
               <a class="button" id="official-council-link" href="https://directory.tml.org/search/city" target="_blank" rel="noopener">Open council directory</a>
+            </p>
+            <p id="official-bee-action" hidden>
+              <a class="button" id="official-bee-link" href="https://statutes.capitol.texas.gov/Docs/AG/htm/AG.131.htm" target="_blank" rel="noopener">Open bee law</a>
+              <a class="button" id="state-bee-link" href="https://statutes.capitol.texas.gov/Docs/AG/htm/AG.131.htm" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>
             </p>
           </article>
         </div>
@@ -495,7 +508,7 @@
           <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
-            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, or Texas city-council information.</span>
+            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, San Antonio-area bee rules, or Texas city-council information.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
@@ -579,6 +592,21 @@
                 </div>
                 <a href="https://websoilsurvey.nrcs.usda.gov/" target="_blank" rel="noopener">Open Web Soil Survey</a>
               </article>
+              <article class="source-layer-card" data-source-layer="bees">
+                <span class="source-layer-swatch bees" aria-hidden="true"></span>
+                <strong>Can I keep bees?</strong>
+                <span class="layer-status">Off</span>
+                <small>Texas state baseline plus municipal honey-bee rules for every incorporated locality whose boundary falls within 90 miles of downtown San Antonio. This is a research aid, not legal advice.</small>
+                <div class="layer-color-guide" aria-label="Bee-law coverage guide">
+                  <span class="layer-color-guide-title">Local-rule confidence</span>
+                  <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#2f7d4a" aria-hidden="true"></span><span>Green = verified municipal hive-count rule</span></span>
+                  <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#b9851f" aria-hidden="true"></span><span>Amber = published code searched; no bee-specific cap found</span></span>
+                  <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#6f7782" aria-hidden="true"></span><span>Gray = official local confirmation still required</span></span>
+                  <p class="layer-guide-empty">This layer concerns ordinary residential honey-bee keeping. It does not authorize possession or import of exotic stingless bees such as <em>Melipona beecheii</em>. No local rule found does not mean unrestricted: nuisance law, zoning, permits, setbacks, deed restrictions, and HOA rules can still apply. Click a city for its rule and law links.</p>
+                </div>
+                <a href="https://statutes.capitol.texas.gov/Docs/AG/htm/AG.131.htm" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>
+                <a href="https://feature.geographic.texas.gov/arcgis/rest/services/City_Boundaries/Texas_City_Boundaries/MapServer/0" target="_blank" rel="noopener">Official Texas city boundaries</a>
+              </article>
               <article class="source-layer-card" data-source-layer="council">
                 <span class="source-layer-swatch council" aria-hidden="true"></span>
                 <strong>Find your council member</strong>
@@ -613,7 +641,7 @@
             </div>
           </section>
         </div>
-        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. The council-member layer identifies incorporated municipalities across Texas and links to the Texas Municipal League roster; San Antonio additionally has official district polygons. Municipal district systems are maintained city by city, and some councils are elected at large. No Mexican Carrizo–Wilcox extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
+        <p class="privacy-note">Map coverage: EPA ecoregions, USGS landforms, and USDA soils cover the continental United States; general geology and aquifers are Texas-only. The dedicated Carrizo–Wilcox layer covers its published U.S. extent in Texas, Louisiana, and Arkansas. Its documented-use well layer is Texas-only and does not identify every parcel or water customer. The bee-law layer catalogs all 133 incorporated localities whose official boundary intersects a 90-mile radius from downtown San Antonio; gray localities still require direct confirmation, and unincorporated land is governed by the Texas baseline plus applicable county, nuisance, deed, and HOA restrictions. The council-member layer identifies incorporated municipalities across Texas and links to the Texas Municipal League roster; San Antonio additionally has official district polygons. Municipal district systems are maintained city by city, and some councils are elected at large. No Mexican Carrizo–Wilcox extent is shown because the sources reviewed map the named system only to the international border. Basemap, roads, and place labels © Esri, HERE, Garmin, OpenStreetMap contributors, and the GIS user community. Thematic layers are credited in the source guide.</p>
       </section>
 
       <section class="table-section region-map-section" aria-labelledby="texas-region-map-title">
@@ -808,6 +836,9 @@
       const mapResultAction = document.querySelector("#map-result-action");
       const officialCouncilAction = document.querySelector("#official-council-action");
       const officialCouncilLink = document.querySelector("#official-council-link");
+      const officialBeeAction = document.querySelector("#official-bee-action");
+      const officialBeeLink = document.querySelector("#official-bee-link");
+      const stateBeeLink = document.querySelector("#state-bee-link");
       const opacityControl = document.querySelector("#ecoregion-opacity");
       const opacityValue = document.querySelector("#ecoregion-opacity-value");
       const levelFourGuideStatus = document.querySelector("#level-four-guide-status");
@@ -914,6 +945,8 @@
       map.getPane("carrizoUse").style.zIndex = "495";
       map.createPane("texasCities");
       map.getPane("texasCities").style.zIndex = "497";
+      map.createPane("beeRules");
+      map.getPane("beeRules").style.zIndex = "498";
       map.createPane("council");
       map.getPane("council").style.zIndex = "500";
       map.createPane("soils");
@@ -1096,7 +1129,146 @@
         return `https://directory.tml.org/results?${params}`;
       }
 
+      const texasBeeStateLawUrl = "https://statutes.capitol.texas.gov/Docs/AG/htm/AG.131.htm";
+      const sanAntonioCenter = [29.4241, -98.4936];
+      const beeCoverageMiles = 90;
+      const nearSanAntonioBeeCities = [
+        "Alamo Heights", "Austin", "Balcones Heights", "Bandera", "Bastrop", "Bear Creek", "Bee Cave", "Beeville", "Big Wells", "Blanco", "Boerne", "Briarcliff", "Buda", "Bulverde", "Burnet", "Castle Hills", "Castroville", "Cedar Park", "Charlotte", "China Grove", "Christine", "Cibolo", "Converse", "Cottonwood Shores", "Cotulla", "Creedmoor", "Cuero", "Devine", "Dilley", "Dripping Springs", "Elgin", "Elmendorf", "Fair Oaks Ranch", "Falls City", "Flatonia", "Floresville", "Fredericksburg", "Garden Ridge", "George West", "Goliad", "Gonzales", "Granite Shoals", "Grey Forest", "Hays", "Helotes", "Highland Haven", "Hill Country Village", "Hollywood Park", "Hondo", "Horseshoe Bay", "Ingram", "Johnson City", "Jonestown", "Jourdanton", "Karnes City", "Kenedy", "Kerrville", "Kingsbury", "Kirby", "Kyle", "La Coste", "Lago Vista", "Lakeway", "La Vernia", "Leakey", "Leander", "Leon Valley", "Liberty Hill", "Live Oak", "Lockhart", "Luling", "Lytle", "Manor", "Marble Falls", "Marion", "Martindale", "Meadowlakes", "Moulton", "Mountain City", "Mustang Ridge", "Natalia", "New Berlin", "New Braunfels", "Niederwald", "Nixon", "Nordheim", "Olmos Park", "Pearsall", "Pflugerville", "Pleasanton", "Point Venture", "Poteet", "Poth", "Rollingwood", "Round Mountain", "Round Rock", "Runge", "Sabinal", "San Antonio", "Sandy Oaks", "San Leanna", "San Marcos", "Santa Clara", "Schertz", "Seguin", "Selma", "Shavano Park", "Shiner", "Smiley", "Smithville", "Somerset", "Spring Branch", "Staples", "St. Hedwig", "Stockdale", "Sunrise Beach Village", "Sunset Valley", "Terrell Hills", "The Hills", "Three Rivers", "Uhland", "Universal City", "Uvalde", "Volente", "Von Ormy", "Waelder", "Webberville", "West Lake Hills", "Wimberley", "Windcrest", "Woodcreek", "Yoakum", "Yorktown"
+      ];
+      const defaultBeeRule = {
+        status: "review",
+        summary: "Official local confirmation still required; the Texas state baseline applies, but local nuisance, zoning, setback, permit, deed, or HOA rules may add restrictions.",
+        lawUrl: texasBeeStateLawUrl,
+        lawLabel: "Texas Agriculture Code Chapter 131"
+      };
+      const tieredBeeRule = {
+        status: "numeric",
+        summary: "Verified density schedule: 2 colonies on 1/4 acre or less; 4 on more than 1/4 but less than 1/2 acre; 6 on 1/2 to less than 1 acre; 8 on 1 acre or more. Unlimited only when every hive is at least 200 feet from property lines or the ordinance's adjacent-vacant-property exception applies.",
+        tiers: [[0.25, 2], [0.5, 4], [1, 6], [Infinity, 8]]
+      };
+      const beeRuleOverrides = {
+        Austin: {
+          ...tieredBeeRule,
+          lawUrl: "https://library.municode.com/tx/austin/codes/code_of_ordinances?nodeId=TIT3ANRE_CH3-6BERE",
+          lawLabel: "Austin Code Chapter 3-6",
+          conditions: "A 10-foot property-line setback and a 6-foot flyway barrier within 25 feet of a property line can apply; provide water and maintain movable-frame hives."
+        },
+        Kyle: {
+          ...tieredBeeRule,
+          lawUrl: "https://ecode360.com/45927734",
+          lawLabel: "Kyle Code § 5-65",
+          conditions: "A 10-foot property-line setback, flyway barrier within 25 feet, on-site water, and movable-frame hive requirements apply."
+        },
+        "Round Rock": {
+          ...tieredBeeRule,
+          lawUrl: "https://roundrock.legistar.com/View.ashx?GUID=1BFF3964-80DB-48AB-9BEE-222F1E58DE9B&ID=6846302&M=F",
+          lawLabel: "Round Rock adopted animal-control ordinance",
+          conditions: "Setback, flyway-barrier, water, and hive-maintenance requirements apply; read the adopted ordinance before siting hives."
+        },
+        "San Antonio": {
+          status: "baseline",
+          summary: "No bee-specific residential hive-number cap was found in the current published city-code search. Texas law still applies; verify zoning, nuisance enforcement, deed restrictions, and HOA rules before installing hives.",
+          lawUrl: "https://library.municode.com/tx/san_antonio/codes/code_of_ordinances",
+          lawLabel: "San Antonio Code of Ordinances"
+        },
+        Schertz: {
+          status: "baseline",
+          summary: "No bee-specific hive-number provision was found in the current published Schertz animal-control chapter. Texas law still applies; confirm zoning, nuisance enforcement, deed restrictions, and HOA rules.",
+          lawUrl: "https://library.municode.com/tx/schertz/codes/code_of_ordinances?nodeId=PTIICOOR_CH14ANCO",
+          lawLabel: "Schertz Code Chapter 14"
+        }
+      };
+
+      function beeRuleForCity(city) {
+        return beeRuleOverrides[city] || {
+          ...defaultBeeRule,
+          lawUrl: tmlCityDirectoryUrl(city),
+          lawLabel: `Contact ${city} through its official TML roster`
+        };
+      }
+
+      function beeRuleColor(status) {
+        if (status === "numeric") return "#2f7d4a";
+        if (status === "baseline") return "#b9851f";
+        return "#6f7782";
+      }
+
+      function hiveCountForAcres(rule, acres) {
+        if (!rule.tiers || !Number.isFinite(acres) || acres <= 0) return null;
+        if (acres <= 0.25) return 2;
+        if (acres < 0.5) return 4;
+        if (acres < 1) return 6;
+        return 8;
+      }
+
+      function sqlString(value) {
+        return `'${String(value).replaceAll("'", "''")}'`;
+      }
+
       const texasCityBoundaryUrl = "https://feature.geographic.texas.gov/arcgis/rest/services/City_Boundaries/Texas_City_Boundaries/MapServer/0";
+      const beeCityWhere = `city_name IN (${nearSanAntonioBeeCities.map(sqlString).join(",")})`;
+      const beeCityLayer = L.geoJSON(null, {
+        pane: "beeRules",
+        style: (feature) => {
+          const rule = beeRuleForCity(feature.properties.city_name);
+          const color = beeRuleColor(rule.status);
+          return { color, weight: 1.7, opacity: 0.95, fillColor: color, fillOpacity: rule.status === "review" ? 0.08 : 0.2 };
+        },
+        onEachFeature: (feature, layer) => {
+          const city = feature.properties.city_name || "Texas municipality";
+          const rule = beeRuleForCity(city);
+          const statusLabel = rule.status === "numeric" ? "Verified hive-count rule" : rule.status === "baseline" ? "No bee-specific cap found in published-code search" : "Local confirmation required";
+          layer.bindPopup(`<strong>${escapeHtml(city)} bee rules</strong><br><b>${escapeHtml(statusLabel)}</b><br>${escapeHtml(rule.summary)}`
+            + (rule.conditions ? `<br><small>${escapeHtml(rule.conditions)}</small>` : "")
+            + `<br><a href="${escapeHtml(rule.lawUrl)}" target="_blank" rel="noopener">${escapeHtml(rule.lawLabel)}</a>`
+            + `<br><a href="${escapeHtml(texasBeeStateLawUrl)}" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>`
+            + `<br><small>Residential honey-bee research checked October 2026. This does not authorize exotic stingless bees. A map result is not legal advice; confirm current city, zoning, nuisance, deed, and HOA requirements before adding hives.</small>`);
+        },
+        attribution: "Bee-rule municipalities: Texas Comptroller city boundaries"
+      });
+
+      const beeRulesLoadParameters = new URLSearchParams({
+        f: "geojson",
+        where: beeCityWhere,
+        outFields: "city_name,geo_id,popest2025",
+        returnGeometry: "true",
+        outSR: "4326",
+        geometryPrecision: "5",
+        maxAllowableOffset: "0.0005"
+      });
+      const beeRulesLoadPromise = fetch(`${texasCityBoundaryUrl}/query`, {
+        method: "POST",
+        body: beeRulesLoadParameters
+      })
+        .then((response) => {
+          if (!response.ok) throw new Error(`Texas city-boundary request returned ${response.status}`);
+          return response.json();
+        })
+        .then((data) => {
+          if (!Array.isArray(data.features) || data.features.length !== nearSanAntonioBeeCities.length) {
+            throw new Error(`Expected ${nearSanAntonioBeeCities.length} bee-rule municipalities; received ${data.features?.length || 0}.`);
+          }
+          beeCityLayer.addData(data);
+          return data;
+        })
+        .catch((error) => {
+          console.error(error);
+          const card = document.querySelector("[data-source-layer='bees'] .layer-status");
+          if (card) card.textContent = "Boundary load failed";
+        });
+
+      const beeCoverageCircle = L.circle(sanAntonioCenter, {
+        pane: "beeRules",
+        radius: beeCoverageMiles * 1609.344,
+        color: "#72591d",
+        weight: 2,
+        opacity: 0.9,
+        dashArray: "8 6",
+        fill: false,
+        interactive: true
+      }).bindPopup(`<strong>Bee-law priority coverage</strong><br>${beeCoverageMiles} miles from downtown San Antonio.<br>All 133 incorporated municipalities whose official boundary intersects this circle are included.<br><a href="${texasBeeStateLawUrl}" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>`);
+      const beeRulesLayer = L.layerGroup([beeCityLayer, beeCoverageCircle]);
+
       const texasCityBoundaryLayer = L.esri.featureLayer({
         url: texasCityBoundaryUrl,
         pane: "texasCities",
@@ -1286,6 +1458,7 @@
         ["carrizo", carrizoWilcoxLayer],
         ["carrizo-use", carrizoUseWellsLayer],
         ["soils", soilsLayer],
+        ["bees", beeRulesLayer],
         ["council", councilLayer]
       ]);
       const sourceLayerKeys = [...sourceLayers.keys()];
@@ -1390,6 +1563,7 @@
         if (!key) return;
         activeSourceLayerKeys = activeSourceLayerKeys.filter((activeKey) => activeKey !== key);
         activeSourceLayerKeys.push(key);
+        if (key === "bees") map.fitBounds(beeCoverageCircle.getBounds(), { padding: [24, 24], maxZoom: 7 });
         refreshSourceLayerOrder();
         updateAddressResultForSelectedLayer();
       });
@@ -1415,6 +1589,7 @@
         "Carrizo–Wilcox · TX + LA + AR": carrizoWilcoxLayer,
         "Carrizo–Wilcox documented use wells · Texas": carrizoUseWellsLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
+        "Can I keep bees? · San Antonio + 90 mi": beeRulesLayer,
         "Find your council member · Texas": councilLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
@@ -1545,6 +1720,7 @@
         resultList.innerHTML = "";
         mapResultAction.hidden = true;
         officialCouncilAction.hidden = true;
+        officialBeeAction.hidden = true;
       }
 
       function setError(message) {
@@ -1552,6 +1728,7 @@
         resultList.innerHTML = "";
         mapResultAction.hidden = true;
         officialCouncilAction.hidden = true;
+        officialBeeAction.hidden = true;
       }
 
       function renderResult(candidate, result) {
@@ -1576,6 +1753,12 @@
           officialCouncilLink.href = result.councilLookupUrl || "https://directory.tml.org/search/city";
           officialCouncilLink.textContent = result.councilLookupLabel || "Open council directory";
         }
+        officialBeeAction.hidden = !result.officialBeeLookup;
+        if (result.officialBeeLookup) {
+          officialBeeLink.href = result.beeLawUrl || texasBeeStateLawUrl;
+          officialBeeLink.textContent = result.beeLawLabel || "Open local bee law";
+          stateBeeLink.href = texasBeeStateLawUrl;
+        }
         map.setView([y, x], 12);
         if (selectedMarker) selectedMarker.remove();
         selectedMarker = L.marker([y, x], { title: candidate.address }).addTo(map);
@@ -1583,7 +1766,10 @@
           .slice(0, 5)
           .map(([label, value]) => `<strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}`)
           .join("<br>");
-        selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br><em>${escapeHtml(result.title)}</em><br>${popupDetails}`).openPopup();
+        const popupLinks = result.officialBeeLookup
+          ? `<br><a href="${escapeHtml(result.beeLawUrl || texasBeeStateLawUrl)}" target="_blank" rel="noopener">${escapeHtml(result.beeLawLabel || "Open bee law")}</a><br><a href="${escapeHtml(texasBeeStateLawUrl)}" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>`
+          : "";
+        selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br><em>${escapeHtml(result.title)}</em><br>${popupDetails}${popupLinks}`).openPopup();
         if (result.ecoregionAttributes) updateSelectedLevelFour(result.ecoregionAttributes);
       }
 
@@ -1918,6 +2104,94 @@
         };
       }
 
+      function milesBetween(firstLat, firstLon, secondLat, secondLon) {
+        const radians = (degrees) => degrees * Math.PI / 180;
+        const earthRadiusMiles = 3958.8;
+        const latDistance = radians(secondLat - firstLat);
+        const lonDistance = radians(secondLon - firstLon);
+        const firstLatRadians = radians(firstLat);
+        const secondLatRadians = radians(secondLat);
+        const a = Math.sin(latDistance / 2) ** 2
+          + Math.cos(firstLatRadians) * Math.cos(secondLatRadians) * Math.sin(lonDistance / 2) ** 2;
+        return 2 * earthRadiusMiles * Math.asin(Math.sqrt(a));
+      }
+
+      async function lookupBeeRulesResult(location) {
+        const cityFeatures = await queryArcGisFeatures(texasCityBoundaryUrl, location, "city_name,geo_id,popest2025");
+        const cityName = cityFeatures[0]?.attributes?.city_name || "";
+        const inPriorityCatalog = nearSanAntonioBeeCities.includes(cityName);
+        const distance = milesBetween(sanAntonioCenter[0], sanAntonioCenter[1], location.y, location.x);
+        const pointWithinRadius = distance <= beeCoverageMiles;
+        const lotAcres = Number(document.querySelector("#lot-size-acres").value);
+
+        if (cityName && inPriorityCatalog) {
+          const rule = beeRuleForCity(cityName);
+          const count = hiveCountForAcres(rule, lotAcres);
+          const ruleStatus = rule.status === "numeric"
+            ? "Verified municipal hive-count rule"
+            : rule.status === "baseline"
+              ? "Published city code searched; no bee-specific cap found"
+              : "Local code confirmation still required";
+          return {
+            title: "Texas bee rules",
+            status: rule.status === "numeric"
+              ? `Found a verified municipal hive-count rule for ${cityName}.`
+              : `Found ${cityName} in the 133-locality San Antonio bee-law catalog; read the confidence note before relying on the result.`,
+            fields: [
+              ["Municipality", cityName],
+              ["Rule status", ruleStatus],
+              ["Maximum colonies", count ? `${count} at ${lotAcres.toLocaleString()} acre${lotAcres === 1 ? "" : "s"}` : rule.status === "numeric" ? "2 / 4 / 6 / 8 depending on lot acreage; enter lot size for an address-specific count" : "No verified numeric cap in this catalog"],
+              ["Local rule", rule.summary],
+              ["Operational conditions", rule.conditions || "Confirm nuisance, zoning, setback, permit, deed, and HOA requirements"],
+              ["State baseline", "Texas Agriculture Code Chapter 131; Texas has no universal residential honey-bee hive-count cap"],
+              ["Species scope", "Ordinary honey bees; not authorization to possess or import exotic stingless bees such as Melipona beecheii"],
+              ["Coverage", "One of 133 incorporated localities whose official boundary intersects 90 miles from downtown San Antonio"],
+              ["Checked", "October 2026; confirm current law before installing hives"]
+            ],
+            officialBeeLookup: true,
+            beeLawUrl: rule.lawUrl,
+            beeLawLabel: rule.lawLabel
+          };
+        }
+
+        if (!cityName && pointWithinRadius) {
+          return {
+            title: "Texas bee rules",
+            status: "This point is inside the 90-mile study area but outside an incorporated municipality in the statewide boundary service.",
+            fields: [
+              ["Municipality", "No incorporated city returned"],
+              ["Maximum colonies", "No statewide numeric cap"],
+              ["State baseline", "Texas Agriculture Code Chapter 131 applies to ordinary honey-bee keeping"],
+              ["Species scope", "Not authorization to possess or import exotic stingless bees such as Melipona beecheii"],
+              ["Still verify", "County nuisance rules, subdivision covenants, deed restrictions, HOA rules, and any extraterritorial-jurisdiction requirements"],
+              ["Distance from downtown San Antonio", `${distance.toFixed(1)} miles`],
+              ["Legal caution", "Absence of a municipal polygon does not itself establish permission"]
+            ],
+            officialBeeLookup: true,
+            beeLawUrl: texasBeeStateLawUrl,
+            beeLawLabel: "Texas Agriculture Code Chapter 131"
+          };
+        }
+
+        return {
+          title: "Texas bee rules",
+          status: cityName
+            ? `${cityName} is outside the 90-mile San Antonio priority catalog; only the Texas baseline is shown.`
+            : "This point is outside an incorporated municipality and outside the 90-mile San Antonio priority catalog.",
+          fields: [
+            ["Municipality", cityName || "No incorporated city returned"],
+            ["Maximum colonies", "No statewide numeric cap; local research not yet cataloged here"],
+            ["State baseline", "Texas Agriculture Code Chapter 131 applies to ordinary honey-bee keeping"],
+            ["Species scope", "Not authorization to possess or import exotic stingless bees such as Melipona beecheii"],
+            ["Next step", "Check the current municipal or county code, zoning, nuisance rules, deed restrictions, and HOA rules"],
+            ["Priority coverage", `133 municipalities intersecting ${beeCoverageMiles} miles from downtown San Antonio`]
+          ],
+          officialBeeLookup: true,
+          beeLawUrl: texasBeeStateLawUrl,
+          beeLawLabel: "Texas Agriculture Code Chapter 131"
+        };
+      }
+
       async function lookupSoilsResult(location) {
         const properties = await lookupSoilAtLocation(location);
         return {
@@ -1964,6 +2238,7 @@
         if (key === "aquifers") return lookupAquifersResult(location);
         if (key === "carrizo") return lookupCarrizoResult(location);
         if (key === "carrizo-use") return lookupCarrizoUseResult(location);
+        if (key === "bees") return lookupBeeRulesResult(location);
         if (key === "council") return lookupCouncilResult(location);
         if (key === "soils") return lookupSoilsResult(location);
         return lookupEcoregionResult(location);
@@ -1980,6 +2255,7 @@
           aquifers: "Texas aquifers",
           carrizo: "regional Carrizo–Wilcox coverage",
           "carrizo-use": "documented Carrizo–Wilcox use wells",
+          bees: "Texas and local bee rules",
           council: "Texas council representation",
           soils: "USDA soils"
         };
