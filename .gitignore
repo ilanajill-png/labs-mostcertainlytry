@@ -75,6 +75,8 @@ assets/*
 !assets/bee-research/**
 !assets/de-kiewiet-honey/
 !assets/de-kiewiet-honey/**
+!assets/on-a-mission/
+!assets/on-a-mission/**
 
 !data/
 data/*
@@ -119,6 +121,7 @@ projects/*
 !projects/tbd-honey.html
 !projects/voynich-manuscript.html
 !projects/menstrual-blood-gardens-medicine-history.html
+!projects/on-a-mission.html
 !projects/heb-weekly-meal-deal-menu-2026-10-01.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
