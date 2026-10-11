@@ -508,7 +508,7 @@
           <div id="ecoregion-map" role="region" aria-label="Interactive map showing EPA Level IV ecoregion colors and boundaries beneath town and road labels"></div>
           <div class="ecoregion-map-note">
             <span class="ecoregion-map-key"><span class="ecoregion-map-swatch" aria-hidden="true"></span>Level IV colors and boundaries</span>
-            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, San Antonio-area bee rules, or Texas city-council information.</span>
+            <span>Use the layer control to add geology, landforms, aquifers, the regional Carrizo–Wilcox system, soils, residential honey-bee rules, or Texas city-council information.</span>
             <label class="ecoregion-opacity-control" for="ecoregion-opacity">
               Color strength
               <input id="ecoregion-opacity" type="range" min="0.06" max="0.42" step="0.02" value="0.20">
@@ -594,7 +594,7 @@
               </article>
               <article class="source-layer-card" data-source-layer="bees">
                 <span class="source-layer-swatch bees" aria-hidden="true"></span>
-                <strong>Can I keep bees?</strong>
+                <strong>Residential honey-bee rules</strong>
                 <span class="layer-status">Off</span>
                 <small>Texas state baseline plus municipal honey-bee rules for every incorporated locality whose boundary falls within 90 miles of downtown San Antonio. This is a research aid, not legal advice.</small>
                 <div class="layer-color-guide" aria-label="Bee-law coverage guide">
@@ -602,7 +602,7 @@
                   <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#2f7d4a" aria-hidden="true"></span><span>Green = verified municipal hive-count rule</span></span>
                   <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#b9851f" aria-hidden="true"></span><span>Amber = published code searched; no bee-specific cap found</span></span>
                   <span class="layer-color-key"><span class="layer-color-chip" style="--chip-color:#6f7782" aria-hidden="true"></span><span>Gray = official local confirmation still required</span></span>
-                  <p class="layer-guide-empty">This layer concerns ordinary residential honey-bee keeping. It does not authorize possession or import of exotic stingless bees such as <em>Melipona beecheii</em>. No local rule found does not mean unrestricted: nuisance law, zoning, permits, setbacks, deed restrictions, and HOA rules can still apply. Click a city for its rule and law links.</p>
+                  <p class="layer-guide-empty">Rules for residential honey-bee (<em>Apis mellifera</em>) keeping. No local rule found does not mean unrestricted: nuisance law, zoning, permits, setbacks, deed restrictions, and HOA rules can still apply. Click a city for its rule and law links.</p>
                 </div>
                 <a href="https://statutes.capitol.texas.gov/Docs/AG/htm/AG.131.htm" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>
                 <a href="https://feature.geographic.texas.gov/arcgis/rest/services/City_Boundaries/Texas_City_Boundaries/MapServer/0" target="_blank" rel="noopener">Official Texas city boundaries</a>
@@ -1222,7 +1222,7 @@
             + (rule.conditions ? `<br><small>${escapeHtml(rule.conditions)}</small>` : "")
             + `<br><a href="${escapeHtml(rule.lawUrl)}" target="_blank" rel="noopener">${escapeHtml(rule.lawLabel)}</a>`
             + `<br><a href="${escapeHtml(texasBeeStateLawUrl)}" target="_blank" rel="noopener">Texas Agriculture Code Chapter 131</a>`
-            + `<br><small>Residential honey-bee research checked October 2026. This does not authorize exotic stingless bees. A map result is not legal advice; confirm current city, zoning, nuisance, deed, and HOA requirements before adding hives.</small>`);
+            + `<br><small>Rules for residential honey-bee (<em>Apis mellifera</em>) keeping, checked October 2026. A map result is not legal advice; confirm current city, zoning, nuisance, deed, and HOA requirements before adding hives.</small>`);
         },
         attribution: "Bee-rule municipalities: Texas Comptroller city boundaries"
       });
@@ -1589,7 +1589,7 @@
         "Carrizo–Wilcox · TX + LA + AR": carrizoWilcoxLayer,
         "Carrizo–Wilcox documented use wells · Texas": carrizoUseWellsLayer,
         "Soils · USDA SSURGO (zoom in)": soilsLayer,
-        "Can I keep bees? · San Antonio + 90 mi": beeRulesLayer,
+        "Residential honey-bee rules · San Antonio + 90 mi": beeRulesLayer,
         "Find your council member · Texas": councilLayer,
         "Town and road labels": labelLayer
       }, { collapsed: false }).addTo(map);
@@ -2144,7 +2144,7 @@
               ["Local rule", rule.summary],
               ["Operational conditions", rule.conditions || "Confirm nuisance, zoning, setback, permit, deed, and HOA requirements"],
               ["State baseline", "Texas Agriculture Code Chapter 131; Texas has no universal residential honey-bee hive-count cap"],
-              ["Species scope", "Ordinary honey bees; not authorization to possess or import exotic stingless bees such as Melipona beecheii"],
+              ["Species scope", "Residential honey-bee (Apis mellifera) keeping"],
               ["Coverage", "One of 133 incorporated localities whose official boundary intersects 90 miles from downtown San Antonio"],
               ["Checked", "October 2026; confirm current law before installing hives"]
             ],
@@ -2162,7 +2162,7 @@
               ["Municipality", "No incorporated city returned"],
               ["Maximum colonies", "No statewide numeric cap"],
               ["State baseline", "Texas Agriculture Code Chapter 131 applies to ordinary honey-bee keeping"],
-              ["Species scope", "Not authorization to possess or import exotic stingless bees such as Melipona beecheii"],
+              ["Species scope", "Residential honey-bee (Apis mellifera) keeping"],
               ["Still verify", "County nuisance rules, subdivision covenants, deed restrictions, HOA rules, and any extraterritorial-jurisdiction requirements"],
               ["Distance from downtown San Antonio", `${distance.toFixed(1)} miles`],
               ["Legal caution", "Absence of a municipal polygon does not itself establish permission"]
@@ -2182,7 +2182,7 @@
             ["Municipality", cityName || "No incorporated city returned"],
             ["Maximum colonies", "No statewide numeric cap; local research not yet cataloged here"],
             ["State baseline", "Texas Agriculture Code Chapter 131 applies to ordinary honey-bee keeping"],
-            ["Species scope", "Not authorization to possess or import exotic stingless bees such as Melipona beecheii"],
+            ["Species scope", "Residential honey-bee (Apis mellifera) keeping"],
             ["Next step", "Check the current municipal or county code, zoning, nuisance rules, deed restrictions, and HOA rules"],
             ["Priority coverage", `133 municipalities intersecting ${beeCoverageMiles} miles from downtown San Antonio`]
           ],
