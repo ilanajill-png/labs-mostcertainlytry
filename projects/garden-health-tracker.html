@@ -72,7 +72,7 @@
           <article><h3>Restore backup</h3><p>Imports an exported JSON file. Existing entries with different IDs are preserved.</p><label class="file-action">Choose backup<input id="import-json" type="file" accept="application/json,.json"></label></article>
           <article><h3>Storage</h3><p id="storage-status">Calculating local storage…</p><button id="clear-data" class="danger-action" type="button">Delete all observations</button></article>
         </div>
-        <div class="data-dictionary"><h3>What the app tracks</h3><p><strong>Identity:</strong> specimen ID, cultivar, location, planted date, source, acquisition cost, tag photo. <strong>Growth:</strong> height, two-axis spread, stem diameter, phenology, vigor. <strong>Health:</strong> health score, soil moisture, leaf color, wilt, damage percentage, pests and symptoms. <strong>Inputs:</strong> water, rain, fertilizer, amendment, treatment. <strong>Yield:</strong> harvest count and weight. <strong>Evidence:</strong> overview photo, symptom detail, notes, and next action.</p></div>
+        <div class="data-dictionary"><h3>What the app tracks</h3><p><strong>Identity:</strong> specimen ID, cultivar, location, planted date, source, acquisition cost, and multiple tag photos. <strong>Growth:</strong> height, two-axis spread, stem diameter, phenology, vigor. <strong>Health:</strong> health score, soil moisture, leaf color, wilt, damage percentage, pests and symptoms. <strong>Inputs:</strong> water, rain, fertilizer, amendment, treatment. <strong>Yield:</strong> harvest count and weight. <strong>Evidence:</strong> multiple plant photos, filenames, capture date/time, save timestamp, symptom detail, notes, and next action.</p></div>
       </section>
     </main>
 
@@ -92,11 +92,11 @@
               <label><span>Started as</span><select id="profile-origin" name="profileOrigin"><option value="">Not recorded</option><option>nursery transplant</option><option>home-grown transplant</option><option>direct-sown seed</option><option>division / cutting</option></select></label>
               <label><span>Source / nursery</span><input id="profile-source" name="profileSource" type="text" placeholder="seller, seed company, friend…"></label>
               <label><span>Cost ($)</span><input id="profile-cost" name="profileCost" type="number" min="0" step="0.01" inputmode="decimal"></label>
-              <label class="full"><span>Plant-tag photo</span><input id="profile-photo" name="profilePhoto" type="file" accept="image/*" capture="environment"><small>Photograph both sides of the cultivar tag when available.</small></label>
             </div>
           </details>
-          <label class="photo-field full"><span>Overview photo</span><input id="obs-photo" name="photo" type="file" accept="image/*" capture="environment"><small>Stand in the same place and frame the whole plant when possible.</small><img id="photo-preview" alt="" hidden></label>
-          <label class="full"><span>Photo type</span><select name="photoType"><option selected>whole-plant overview</option><option>symptom close-up</option><option>pest evidence</option><option>flower / fruit / harvest</option><option>other</option></select></label>
+          <label class="full"><span>Photo category</span><select id="photo-category" name="photoCategory"><option value="plant" selected>plant photo</option><option value="tag">plant-tag photo</option></select><small>Choose whether this batch shows the living plant or its nursery/seed tag.</small></label>
+          <label class="photo-field full"><span id="photo-field-label">Plant photos</span><input id="obs-photo" name="photos" type="file" accept="image/*" capture="environment" multiple><small id="photo-field-help">Add one or several photos. Each image is saved separately with its observation date, time, filename, and save timestamp.</small><div id="photo-previews" class="photo-previews" aria-live="polite"></div></label>
+          <label id="photo-type-field" class="full"><span>Plant-photo detail</span><select name="photoType"><option selected>whole-plant overview</option><option>symptom close-up</option><option>pest evidence</option><option>flower / fruit / harvest</option><option>other</option></select></label>
           <label><span>Height (in)</span><input name="height" type="number" min="0" step="0.1" inputmode="decimal"></label>
           <label><span>Spread N–S (in)</span><input name="widthNS" type="number" min="0" step="0.1" inputmode="decimal"></label>
           <label><span>Spread E–W (in)</span><input name="widthEW" type="number" min="0" step="0.1" inputmode="decimal"></label>
@@ -118,7 +118,7 @@
           <label class="full"><span>Observation notes</span><textarea name="notes" rows="3" placeholder="What changed? Where did symptoms start? What might explain it?"></textarea></label>
           <label class="full"><span>Next action</span><input name="nextAction" type="text" placeholder="recheck tomorrow, thin leaves, isolate, harvest…"></label>
         </div>
-        <footer><button class="secondary-action close-dialog" type="button">Cancel</button><button class="primary-action" type="submit">Save observation</button></footer>
+        <footer><span id="save-status" class="save-status" role="status" aria-live="polite"></span><button class="secondary-action close-dialog" type="button">Cancel</button><button id="save-observation" class="primary-action" type="submit">Save observation</button></footer>
       </form>
     </dialog>
 
