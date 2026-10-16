@@ -249,6 +249,43 @@
 .garden-card li + li { margin-top: 6px; }
 .garden-card .zone-number { display: block; margin-bottom: 8px; color: var(--garden-clay); font-weight: 900; }
 
+.plant-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.plant-evidence-card {
+  padding: 20px;
+  border: 1px solid #cad3c8;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.plant-card-head { display: flex; gap: 10px; align-items: center; }
+.plant-card-head span {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--garden-deep);
+  color: #fff;
+  font-size: .76rem;
+  font-weight: 900;
+}
+.plant-card-head h3 { margin: 0; color: var(--garden-ink); font-size: 1.08rem; }
+.plant-site { margin: 10px 0 14px; color: var(--garden-clay); font-weight: 800; }
+.plant-evidence-card dl { margin: 0; }
+.plant-evidence-card dt { margin-top: 11px; color: var(--garden-ink); font-size: .75rem; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; }
+.plant-evidence-card dd { margin: 3px 0 0; color: var(--muted); }
+.plant-sources { margin: 16px 0 0; padding-top: 12px; border-top: 1px solid var(--garden-line); font-size: .8rem; }
+.plant-sources a { font-weight: 900; }
+.evidence-ledger { padding-left: 1.4rem; list-style: decimal; }
+.evidence-ledger li { padding-left: .35rem; }
+.context-ledger { margin-top: 14px; }
+
 .garden-table-wrap {
   overflow-x: auto;
   border: 1px solid #c7d0c5;
