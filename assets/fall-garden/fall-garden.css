@@ -35,7 +35,7 @@
   isolation: isolate;
   background:
     linear-gradient(90deg, rgba(19,45,32,.94) 0%, rgba(19,45,32,.78) 42%, rgba(19,45,32,.18) 70%, rgba(19,45,32,.04) 100%),
-    url("watercolors/garden-overview-v1.jpg") center 54% / cover no-repeat;
+    url("watercolors/garden-coherent-diamond-v3.jpg") center 50% / cover no-repeat;
   color: #fff;
   overflow: hidden;
 }
@@ -190,6 +190,7 @@
   background: rgba(255,248,224,.46);
   box-shadow: 0 28px 64px rgba(52,52,32,.28), inset 0 0 0 7px rgba(255,248,224,.38);
 }
+.full-garden-poster + .full-garden-poster{margin-top:28px}.labeled-poster{background:rgba(234,220,181,.76)}
 
 .full-garden-poster a,
 .full-garden-poster img {
@@ -215,7 +216,7 @@
   border-radius: 8px 26px 10px 24px;
   background:
     linear-gradient(rgba(202,187,145,.78), rgba(202,187,145,.78)),
-    url("watercolors/garden-overview-v1.jpg") center / cover;
+    url("watercolors/garden-coherent-diamond-v3.jpg") center / cover;
   box-shadow: 0 22px 54px rgba(52,52,32,.24), inset 0 0 0 7px rgba(255,248,224,.45);
 }
 
@@ -325,9 +326,9 @@
 
 @media (max-width: 820px){.spiral-layout{grid-template-columns:1fr}.spiral-frame{padding:8px}.spiral-key ol{padding-left:1.75rem}}
 
-.plant-blueprint{display:block;width:100%;min-width:1900px;height:auto;background:#d7cda8}.blueprint-boundary{fill:#caba8a;stroke:#423e2a;stroke-width:9}.blueprint-grid line{stroke:#455744;stroke-width:1.3;opacity:.09}.blueprint-bed{fill:#91aa73;stroke:#4c5638;stroke-width:5}.blueprint-spiral{fill:#c7ad72;stroke:#4c5638;stroke-width:6}.blueprint-dry{fill:#bd9a63;stroke:#795c31;stroke-width:5}.blueprint-tender{fill:#9eb795;stroke:#4c633e;stroke-width:5}.blueprint-trellis{stroke:#4c5439;stroke-width:12;stroke-dasharray:20 14}.blueprint-title,.blueprint-north,.blueprint-south{font:800 25px/1 var(--garden-hand);fill:#24382c;text-anchor:middle;letter-spacing:.02em}.blueprint-north,.blueprint-south{font-size:28px}.plant-footprint{fill:rgba(49,102,63,.12);stroke:rgba(42,84,54,.42);stroke-width:3;stroke-dasharray:8 7}.plant-leader{stroke:rgba(38,67,47,.58);stroke-width:2;stroke-linecap:round}.plant-index-disc{fill:#385b45;stroke:#f3e6bd;stroke-width:3}.plant-index-text{font:800 13px/1 system-ui,sans-serif;fill:#fff;text-anchor:middle}.watercolor-label-card{fill:rgba(239,225,188,.76);stroke:rgba(52,84,65,.34);stroke-width:2;filter:drop-shadow(0 5px 5px rgba(42,60,48,.14))}.watercolor-crop{overflow:hidden;pointer-events:none;filter:saturate(1.05) contrast(1.02) drop-shadow(0 4px 4px rgba(37,60,42,.16))}.watercolor-name{font:700 13px/1 var(--garden-hand);fill:#20352b;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:rgba(243,231,196,.9);stroke-width:3px;stroke-linejoin:round}.blueprint-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:5px 14px;margin-top:16px;padding:18px;border-radius:18px;background:rgba(228,213,171,.68);font-size:.9rem}.watercolor-legend-item{display:grid!important;grid-template-columns:52px 1fr auto;gap:9px;align-items:center;border-bottom:1px solid rgba(72,82,54,.24);padding:.4rem 0!important}.watercolor-legend-item em{font-family:var(--garden-hand);font-size:1.05rem;font-style:normal;font-weight:700;color:var(--garden-deep)}.watercolor-legend-item b{font-size:.78rem;color:var(--garden-clay)}
+.plant-blueprint{display:block;width:100%;min-width:1900px;height:auto;background:#d7cda8}.blueprint-boundary{fill:#caba8a;stroke:#423e2a;stroke-width:9}.blueprint-grid line{stroke:#455744;stroke-width:1.3;opacity:.09}.blueprint-bed{fill:#91aa73;stroke:#4c5638;stroke-width:5}.blueprint-spiral{fill:#c7ad72;stroke:#4c5638;stroke-width:6}.blueprint-dry{fill:#bd9a63;stroke:#795c31;stroke-width:5}.blueprint-tender{fill:#9eb795;stroke:#4c633e;stroke-width:5}.blueprint-trellis{stroke:#4c5439;stroke-width:12;stroke-dasharray:20 14}.blueprint-seed-strip{stroke:#c06e35;stroke-width:20;stroke-linecap:round;stroke-dasharray:5 12}.blueprint-corner,.blueprint-zone-title,.blueprint-seed-label{font:800 27px/1 var(--garden-hand);fill:#24382c;text-anchor:middle;letter-spacing:.025em;paint-order:stroke;stroke:#eadcb8;stroke-width:8px;stroke-linejoin:round}.blueprint-corner.small{font-size:20px}.blueprint-zone-title{font-size:20px}.blueprint-seed-label{font-size:16px;fill:#8d482f}.plant-footprint{fill:rgba(49,102,63,.12);stroke:rgba(42,84,54,.42);stroke-width:3;stroke-dasharray:8 7}.plant-leader{stroke:rgba(38,67,47,.58);stroke-width:2;stroke-linecap:round}.plant-index-disc{fill:#385b45;stroke:#f3e6bd;stroke-width:3}.plant-index-text{font:800 13px/1 system-ui,sans-serif;fill:#fff;text-anchor:middle}.watercolor-label-card{fill:rgba(239,225,188,.76);stroke:rgba(52,84,65,.34);stroke-width:2;filter:drop-shadow(0 5px 5px rgba(42,60,48,.14))}.watercolor-crop{overflow:hidden;pointer-events:none;filter:saturate(1.05) contrast(1.02) drop-shadow(0 4px 4px rgba(37,60,42,.16))}.watercolor-name{font:700 13px/1 var(--garden-hand);fill:#20352b;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:rgba(243,231,196,.9);stroke-width:3px;stroke-linejoin:round}.blueprint-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:5px 14px;margin-top:16px;padding:18px;border-radius:18px;background:rgba(228,213,171,.68);font-size:.9rem}.watercolor-legend-item{display:grid!important;grid-template-columns:52px 1fr auto;gap:9px;align-items:center;border-bottom:1px solid rgba(72,82,54,.24);padding:.4rem 0!important}.watercolor-legend-item em{font-family:var(--garden-hand);font-size:1.05rem;font-style:normal;font-weight:700;color:var(--garden-deep)}.watercolor-legend-item b{font-size:.78rem;color:var(--garden-clay)}
 
-.watercolor-thumb{--sprite-x:0;display:inline-block;width:52px;height:52px;flex:0 0 52px;border-radius:50%;background-color:var(--garden-paper);background-image:var(--sprite);background-repeat:no-repeat;background-size:800% 100%;background-position:calc(var(--sprite-x) * 14.285714%) center;box-shadow:0 5px 14px rgba(45,69,54,.14);vertical-align:middle}.watercolor-thumb.large{width:76px;height:76px;flex-basis:76px;border-radius:24px;background-color:#fbf8ed}
+.watercolor-thumb{--sprite-x:0;display:inline-block;width:52px;height:52px;flex:0 0 52px;border-radius:50%;background-color:var(--garden-paper);background-image:var(--sprite);background-repeat:no-repeat;background-size:800% 100%;background-position:calc(var(--sprite-x) * 14.285714%) center;box-shadow:0 5px 14px rgba(45,69,54,.14);vertical-align:middle}.watercolor-thumb.single{background-size:contain;background-position:center}.watercolor-thumb.large{width:76px;height:76px;flex-basis:76px;border-radius:24px;background-color:#fbf8ed}
 
 .garden-cards,
 .zone-cards,
@@ -369,6 +370,7 @@
 }
 
 .plant-card-head { display: flex; gap: 10px; align-items: center; }
+.seed-strip-icon{display:grid;place-items:center;width:76px;height:76px;flex:0 0 76px;border-radius:24px;background:#ead9ac;color:#b85d41;font:900 1rem/1 Georgia,serif;letter-spacing:.1em;box-shadow:inset 0 0 0 2px rgba(114,81,60,.18)}
 .plant-card-head h3 { margin: 0; color: var(--garden-ink); font-family:var(--garden-hand);font-size:1.38rem;font-weight:700;line-height:1.05; }
 .plant-site { margin: 10px 0 14px; color: var(--garden-clay); font-weight: 800; }
 .plant-evidence-card dl { margin: 0; }
