@@ -84,7 +84,13 @@
               <text x="1100" y="2170" class="blueprint-south">south / entry</text>
             </svg>
           </div>
-          <p class="plot-note"><strong>Every watercolor label is one individual plant.</strong> Full cultivar names replace the former abbreviations. The spiral is enlarged in the next section. Scroll sideways on a small screen. Final orientation still needs a field check for true north, direct-sun hours, and afternoon shade. <em>The original watercolor illustrations are AI-generated decorative planning aids—not diagnostic identification images.</em></p>
+          <p class="plot-note"><strong>Every watercolor label is one individual plant.</strong> Repeated cultivars are numbered one by one, and the dashed circle beneath each image shows that specimen’s planned mature canopy or contained-pot footprint at the same scale as the 20-foot grid. Full cultivar names replace abbreviations. Scroll sideways on a small screen. Final orientation still needs a field check for true north, direct-sun hours, and afternoon shade. <em>The original watercolor illustrations are AI-generated decorative planning aids—not diagnostic identification images.</em></p>
+          <div class="plan-completeness" aria-label="Plant plan completeness">
+            <span><strong>77 / 77</strong> individual images</span>
+            <span><strong>77 / 77</strong> full labels</span>
+            <span><strong>77 / 77</strong> numbered specimens</span>
+            <span><strong>77 / 77</strong> scaled footprints</span>
+          </div>
           <div class="blueprint-legend" id="blueprint-legend" aria-label="Plant code legend"></div>
 
           <div class="garden-cards" style="margin-top:22px">
@@ -126,7 +132,7 @@
                 <g class="plant-pin shade"><circle cx="210" cy="130" r="24"/><text x="210" y="137">10</text></g>
                 <g class="plant-pin shade"><circle cx="300" cy="105" r="24"/><text x="300" y="112">11</text></g>
                 <g class="plant-pin shade"><circle cx="390" cy="132" r="24"/><text x="390" y="139">12</text></g>
-                <g class="plant-pin fruit"><circle cx="445" cy="405" r="24"/><text x="445" y="412">13</text></g>
+                <g class="plant-pin fruit"><circle cx="465" cy="470" r="24"/><text x="465" y="477">13</text></g>
                 <g class="plant-pin fruit"><circle cx="355" cy="468" r="24"/><text x="355" y="475">14</text></g>
                 <g class="plant-pin fruit"><circle cx="265" cy="470" r="24"/><text x="265" y="477">15</text></g>
                 <text x="300" y="255" text-anchor="middle" class="spiral-zone-label">DRY CROWN</text>
@@ -343,13 +349,13 @@
           ['LG','Galactic lettuce',[[16.7,10]]],['LT','Tropicana lettuce',[[17.8,10]]],
           ['TU','Scarlet Queen turnip',[[15.4,9.15],[16.4,9.15],[17.4,9.15],[18.4,9.15]]],
           ['RA','French Breakfast radish',[[16,8.65],[17.2,8.65],[18.4,8.65]]],
-          ['RO','Rosemary',[[1.5,7],[4.7,7],[10,5]]],
-          ['SG','Sage',[[8.9,4.3]]],['MJ','Compact marjoram',[[11.1,4.3]]],
-          ['BA','Basil',[[11.1,4.2],[12.2,4.8]]],
-          ['VC','Vietnamese cilantro · sunk pots',[[12.4,6.5],[12.65,5.65]]],
-          ['LB','Lemon balm · sunk pots',[[7.35,4.5],[7.45,5.55]]],
-          ['SW','Sweet woodruff · removable pots',[[8.2,7.2],[10,7.6],[11.8,7.2]]],
-          ['ST','Strawberries',[[12.3,3.25],[11,2.55],[9.3,2.5]]],
+          ['RO','Rosemary',[[1.5,7],[4.7,7],[10,5.1]]],
+          ['SG','Sage',[[9.35,4.7]]],['MJ','Compact marjoram',[[10.65,4.7]]],
+          ['BA','Basil',[[11.05,4.1],[11.65,4.55]]],
+          ['VC','Vietnamese cilantro · sunk pots',[[11.65,5.95],[11.86,5.3]]],
+          ['LB','Lemon balm · sunk pots',[[8.35,4.6],[8.45,5.3]]],
+          ['SW','Sweet woodruff · removable pots',[[9.1,6.7],[10,6.95],[10.9,6.68]]],
+          ['ST','Strawberries',[[11.65,3.3],[10.55,3.32],[9.65,3.3]]],
           ['RU','Rue',[[1.5,4.7],[3.5,4.7]]],['CP','Chile pequín',[[5.5,4.7]]],
           ['MM','Mexican mint marigold',[[2,2],[4,2],[6,2]]],
           ['LM','Lemongrass · containers',[[14.8,7],[18.2,7]]],
@@ -370,31 +376,79 @@
         };
         const spriteRoot = '../assets/fall-garden/watercolors/';
         const spriteCssRoot = '/assets/fall-garden/watercolors/';
-        const spriteCenters = [95,230,365,500,635,770,905,1030];
-        const cropWidth = 110;
+        const spriteCenters = [68,202,338,474,610,746,882,1018];
+        const cropWidth = 124;
+        const cropTop = 24;
+        const cropHeight = 314;
+        let watercolorSerial = 0;
+        const spreadMap = {
+          BS:2, CF:2, CB:2, BR:2, KW:.8, KP:.8, CO:2, KA:1.5,
+          CH:1.5, PC:1, MU:1, LG:.8, LT:1, TU:.5, RA:.3,
+          RO:3, SG:2.5, MJ:1.5, BA:1.5, VC:.85, LB:1, SW:.7, ST:1,
+          RU:2.5, CP:3, MM:2.25, LM:3, MS:1.5, NA:1.5, FO:2, FD:1, BE:1.25
+        };
+        const labelOffsetMap = {
+          KP:[[-12,68],[12,68]],
+          MU:[[-18,45]], LG:[[0,45]], LT:[[18,45]],
+          TU:[[-28,60],[-10,74],[10,60],[28,74]],
+          RA:[[-28,88],[0,100],[28,88]],
+          SG:[[-64,48]], MJ:[[60,48]],
+          BA:[[46,82],[82,42]],
+          VC:[[92,-34],[100,48]],
+          LB:[[-94,48],[-92,-34]],
+          SW:[[-74,-56],[0,-82],[74,-56]],
+          ST:[[82,48],[0,92],[-82,48]]
+        };
         const cleanName = name => name.replace(/\s*·.*$/, '').replace(/\s*×\d+$/, '').toLowerCase();
         const wrapName = (name, max=16) => {
           const words=cleanName(name).split(/\s+/); const lines=[]; let line='';
           words.forEach(word=>{ const next=line ? `${line} ${word}` : word; if(next.length>max && line){lines.push(line);line=word;}else line=next; });
           if(line) lines.push(line); return lines;
         };
-        const addWatercolor = (parent, code, name, cx, cy, size=70, label=true) => {
+        const addWatercolor = (parent, code, name, cx, cy, size=70, label=true, instance=1, total=1, offset=null) => {
           const [file,index]=spriteMap[code];
-          const card=document.createElementNS(NS,'rect');
-          card.setAttribute('x',cx-(label?52:32)); card.setAttribute('y',cy-(label?58:32)); card.setAttribute('width',label?104:64); card.setAttribute('height',label?112:64); card.setAttribute('rx',label?20:28); card.setAttribute('class','watercolor-label-card'); parent.append(card);
-          const crop=document.createElementNS(NS,'svg'); crop.setAttribute('x',cx-size/2); crop.setAttribute('y',label?cy-54:cy-size/2); crop.setAttribute('width',size); crop.setAttribute('height',size); crop.setAttribute('viewBox',`${spriteCenters[index]-cropWidth/2} 0 ${cropWidth} 362`); crop.setAttribute('preserveAspectRatio','xMidYMid meet'); crop.setAttribute('class','watercolor-crop');
-          const image=document.createElementNS(NS,'image'); image.setAttribute('href',spriteRoot+file); image.setAttribute('x',0); image.setAttribute('y',0); image.setAttribute('width',1086); image.setAttribute('height',362); crop.append(image); parent.append(crop);
+          const displayName = `${cleanName(name)}${total > 1 ? ` ${instance}` : ''}`;
+          const spread = spreadMap[code] || 1;
+          const renderedSize=label?Math.max(58,Math.min(92,54+spread*12)):size;
+          if (label) {
+            const footprint=document.createElementNS(NS,'circle');
+            footprint.setAttribute('cx',cx); footprint.setAttribute('cy',cy);
+            footprint.setAttribute('r',Math.max(15,spread*50)); footprint.setAttribute('class','plant-footprint');
+            const footprintTitle=document.createElementNS(NS,'title'); footprintTitle.textContent=`${displayName}: ${spread} ft planned mature/contained footprint`; footprint.append(footprintTitle);
+            parent.append(footprint);
+          }
+          if (!label) {
+            const card=document.createElementNS(NS,'rect'); card.setAttribute('x',cx-32); card.setAttribute('y',cy-32); card.setAttribute('width',64); card.setAttribute('height',64); card.setAttribute('rx',28); card.setAttribute('class','watercolor-label-card'); parent.append(card);
+          }
+          const clipId=`watercolor-crop-${++watercolorSerial}`;
+          const defs=document.createElementNS(NS,'defs');
+          const clip=document.createElementNS(NS,'clipPath'); clip.setAttribute('id',clipId);
+          const spriteScale=renderedSize/cropHeight;
+          const renderedCropWidth=cropWidth*spriteScale;
+          const clipRect=document.createElementNS(NS,'rect'); clipRect.setAttribute('x',cx-renderedCropWidth/2); clipRect.setAttribute('y',cy-renderedSize/2); clipRect.setAttribute('width',renderedCropWidth); clipRect.setAttribute('height',renderedSize); clipRect.setAttribute('rx',Math.min(8,renderedCropWidth*.15)); clip.append(clipRect); defs.append(clip); parent.append(defs);
+          const image=document.createElementNS(NS,'image'); image.setAttribute('href',spriteRoot+file); image.setAttribute('x',cx-spriteCenters[index]*spriteScale); image.setAttribute('y',cy-(cropTop+cropHeight/2)*spriteScale); image.setAttribute('width',1086*spriteScale); image.setAttribute('height',362*spriteScale); image.setAttribute('preserveAspectRatio','none'); image.setAttribute('clip-path',`url(#${clipId})`); image.setAttribute('class','watercolor-crop'); parent.append(image);
           if(label){
-            const text=document.createElementNS(NS,'text'); text.setAttribute('x',cx); text.setAttribute('y',cy+27); text.setAttribute('class','watercolor-name');
-            wrapName(name).slice(0,3).forEach((line,i)=>{const span=document.createElementNS(NS,'tspan');span.setAttribute('x',cx);span.setAttribute('dy',i===0?0:15);span.textContent=line;text.append(span);});
+            const [dx,dy]=offset || [0,Math.max(58,renderedSize*.5+24)];
+            const lx=cx+dx, ly=cy+dy;
+            if (Math.abs(dx)>2 || Math.abs(dy)>2) {
+              const leader=document.createElementNS(NS,'line'); leader.setAttribute('x1',cx); leader.setAttribute('y1',cy); leader.setAttribute('x2',lx); leader.setAttribute('y2',ly); leader.setAttribute('class','plant-leader'); parent.append(leader);
+            }
+            const labelLines=wrapName(displayName,17).slice(0,3);
+            const labelHeight=Math.max(34,labelLines.length*14+10);
+            const card=document.createElementNS(NS,'rect'); card.setAttribute('x',lx-55); card.setAttribute('y',ly-labelHeight/2); card.setAttribute('width',110); card.setAttribute('height',labelHeight); card.setAttribute('rx',13); card.setAttribute('class','watercolor-label-card'); parent.append(card);
+            const text=document.createElementNS(NS,'text'); text.setAttribute('x',lx); text.setAttribute('y',ly-(labelLines.length-1)*7+4); text.setAttribute('class','watercolor-name');
+            labelLines.forEach((line,i)=>{const span=document.createElementNS(NS,'tspan');span.setAttribute('x',lx);span.setAttribute('dy',i===0?0:14);span.textContent=line;text.append(span);});
             parent.append(text);
+            const discX=cx+renderedSize*.38, discY=cy-renderedSize*.38;
+            const disc=document.createElementNS(NS,'circle'); disc.setAttribute('cx',discX); disc.setAttribute('cy',discY); disc.setAttribute('r',12); disc.setAttribute('class','plant-index-disc'); parent.append(disc);
+            const indexText=document.createElementNS(NS,'text'); indexText.setAttribute('x',discX); indexText.setAttribute('y',discY+5); indexText.setAttribute('class','plant-index-text'); indexText.textContent=instance; parent.append(indexText);
           }
         };
         groups.forEach(([code,name,positions],index) => {
           positions.forEach(([x,y],i) => {
             const g=document.createElementNS(NS,'g'); g.setAttribute('class','blueprint-marker');
-            const title=document.createElementNS(NS,'title'); title.textContent=`${name} ${i+1} of ${positions.length}`;g.append(title);
-            addWatercolor(g,code,name,px(x),py(y)); plantLayer.append(g);
+            const title=document.createElementNS(NS,'title'); title.textContent=`${name} ${i+1} of ${positions.length} · ${spreadMap[code]} ft planned mature/contained footprint`;g.append(title);
+            addWatercolor(g,code,name,px(x),py(y),70,true,i+1,positions.length,labelOffsetMap[code]?.[i] || null); plantLayer.append(g);
           });
           const [file,spriteIndex]=spriteMap[code];
           const item=document.createElement('span');item.className='watercolor-legend-item';
