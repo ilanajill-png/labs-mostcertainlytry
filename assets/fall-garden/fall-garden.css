@@ -175,6 +175,39 @@
   font-size: 1.05rem;
 }
 
+.poster-section {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(117,139,74,.23), transparent 30%),
+    radial-gradient(circle at 88% 84%, rgba(171,91,59,.18), transparent 27%),
+    linear-gradient(125deg, #d7d7b1, #ead7ae 55%, #c9b483);
+}
+
+.full-garden-poster {
+  margin: 0;
+  padding: clamp(8px, 1.2vw, 16px);
+  border: 3px solid #665d3c;
+  border-radius: 12px 28px 14px 26px;
+  background: rgba(255,248,224,.46);
+  box-shadow: 0 28px 64px rgba(52,52,32,.28), inset 0 0 0 7px rgba(255,248,224,.38);
+}
+
+.full-garden-poster a,
+.full-garden-poster img {
+  display: block;
+  width: 100%;
+}
+
+.full-garden-poster img {
+  height: auto;
+  border-radius: 6px 20px 7px 18px;
+}
+
+.full-garden-poster figcaption {
+  padding: 14px 8px 4px;
+  color: var(--muted);
+  font-size: .94rem;
+}
+
 .plot-frame {
   overflow-x: auto;
   padding: clamp(8px, 1.4vw, 18px);
