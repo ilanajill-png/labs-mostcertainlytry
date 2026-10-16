@@ -1,0 +1,11 @@
+{
+  "name": "Las Jaras Garden Health Tracker",
+  "short_name": "Garden Tracker",
+  "description": "Private, device-local photo and measurement journal for the Las Jaras fall garden.",
+  "start_url": "/projects/garden-health-tracker.html",
+  "scope": "/projects/",
+  "display": "standalone",
+  "background_color": "#f4efe3",
+  "theme_color": "#173f35",
+  "icons": [{"src":"/assets/garden-tracker-icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

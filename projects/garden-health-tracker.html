@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#173f35">
+    <meta name="description" content="A private-by-default mobile garden journal for tracking 77 individual South Texas fall-garden plants with photos, measurements, health observations, treatments, and harvests.">
+    <title>Garden Health Tracker | Most Certainly Try</title>
+    <link rel="manifest" href="../garden-tracker-manifest.json">
+    <link rel="icon" href="../assets/garden-tracker-icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../assets/garden-tracker.css">
+  </head>
+  <body class="tracker-body">
+    <header class="tracker-header">
+      <a class="tracker-brand" href="../index.html"><img src="../assets/howdy-partner-logo.png" alt="" width="42" height="42"><span><strong>Most Certainly Try</strong><small>garden field notebook</small></span></a>
+      <button id="install-app" class="small-button" type="button" hidden>Install app</button>
+    </header>
+
+    <main class="tracker-shell">
+      <section class="tracker-hero">
+        <div><p class="eyebrow">Las Jaras · fall garden</p><h1>Every plant has a story.</h1><p>Track health, measurements, photos, care, problems, treatments, and harvests for all <strong>77 individual plants</strong> in the measured garden plan.</p></div>
+        <div class="privacy-note"><strong>Private by default.</strong><span>Your entries and photos stay in this browser on this device. Nothing is uploaded to the public website.</span></div>
+      </section>
+
+      <section class="stat-grid" aria-label="Garden summary">
+        <article><span id="stat-plants">77</span><small>plants</small></article>
+        <article><span id="stat-observed">0</span><small>observed</small></article>
+        <article><span id="stat-attention">0</span><small>need attention</small></article>
+        <article><span id="stat-photos">0</span><small>photos</small></article>
+      </section>
+
+      <nav class="app-tabs" aria-label="Garden tracker sections">
+        <button class="tab-button active" data-tab="plants" type="button">Plants</button>
+        <button class="tab-button" data-tab="timeline" type="button">Timeline</button>
+        <button class="tab-button" data-tab="research" type="button">50 sources</button>
+        <button class="tab-button" data-tab="backup" type="button">Backup</button>
+      </nav>
+
+      <section id="tab-plants" class="tab-panel active">
+        <div class="toolbar">
+          <label class="search-field"><span>Find a plant</span><input id="plant-search" type="search" placeholder="rosemary, bed b, #12…"></label>
+          <label><span>Health</span><select id="health-filter"><option value="all">All plants</option><option value="unobserved">Not observed</option><option value="attention">Needs attention</option><option value="healthy">Healthy</option></select></label>
+          <label><span>Location</span><select id="location-filter"><option value="all">Everywhere</option></select></label>
+        </div>
+        <div class="list-heading"><div><h2>Plant roster</h2><p id="roster-count">77 individual records</p></div><button id="quick-add" class="primary-action" type="button">＋ New observation</button></div>
+        <div id="plant-list" class="plant-list" aria-live="polite"></div>
+      </section>
+
+      <section id="tab-timeline" class="tab-panel">
+        <div class="section-intro"><p class="eyebrow">Field history</p><h2>Observation timeline</h2><p>Newest entries first. Open a plant to see its measurements and photo sequence.</p></div>
+        <div id="timeline-list" class="timeline-list"></div>
+      </section>
+
+      <section id="tab-research" class="tab-panel">
+        <div class="section-intro"><p class="eyebrow">Research audit</p><h2>Fifty garden-tracking sources</h2><p>This benchmark combines 30 digital garden tools, 12 university/extension articles, and 8 paper-notebook products. It is a feature and methods audit—not a paid ranking or endorsement.</p></div>
+        <div class="research-findings">
+          <article><strong>Photograph consistently</strong><span>Use the same angle and distance for growth comparison; take separate close-ups of symptoms.</span></article>
+          <article><strong>Measure two widths</strong><span>North–south and east–west spread reveal uneven growth better than one width alone.</span></article>
+          <article><strong>Record context</strong><span>Date, weather, water, soil moisture, phenology, pests, treatments, and harvest explain the picture.</span></article>
+          <article><strong>Keep stable identities</strong><span>Each specimen has a permanent ID so a replacement or disease event never erases its history.</span></article>
+        </div>
+        <div class="toolbar source-toolbar"><label><span>Source type</span><select id="source-filter"><option value="all">All 50 sources</option><option value="Digital tool">Digital tools</option><option value="Extension / article">Extension &amp; articles</option><option value="Notebook">Paper notebooks</option></select></label></div>
+        <ol id="source-list" class="source-grid"></ol>
+      </section>
+
+      <section id="tab-backup" class="tab-panel">
+        <div class="section-intro"><p class="eyebrow">Device-local records</p><h2>Back up your field notebook</h2><p>Browser storage can be cleared or lost with a device. Export a full backup regularly—especially after adding many photos.</p></div>
+        <div class="backup-grid">
+          <article><h3>Complete backup</h3><p>Exports observations and photos as one JSON file. Use this to restore the app on this or another device.</p><button id="export-json" class="primary-action" type="button">Export backup</button></article>
+          <article><h3>Spreadsheet copy</h3><p>Exports observation fields as CSV. Photos are excluded, but their filenames remain in the table.</p><button id="export-csv" class="secondary-action" type="button">Export CSV</button></article>
+          <article><h3>Restore backup</h3><p>Imports an exported JSON file. Existing entries with different IDs are preserved.</p><label class="file-action">Choose backup<input id="import-json" type="file" accept="application/json,.json"></label></article>
+          <article><h3>Storage</h3><p id="storage-status">Calculating local storage…</p><button id="clear-data" class="danger-action" type="button">Delete all observations</button></article>
+        </div>
+        <div class="data-dictionary"><h3>What the app tracks</h3><p><strong>Identity:</strong> specimen ID, cultivar, location, planted date, source, acquisition cost, tag photo. <strong>Growth:</strong> height, two-axis spread, stem diameter, phenology, vigor. <strong>Health:</strong> health score, soil moisture, leaf color, wilt, damage percentage, pests and symptoms. <strong>Inputs:</strong> water, rain, fertilizer, amendment, treatment. <strong>Yield:</strong> harvest count and weight. <strong>Evidence:</strong> overview photo, symptom detail, notes, and next action.</p></div>
+      </section>
+    </main>
+
+    <button id="floating-add" class="floating-add" type="button" aria-label="Add garden observation">＋</button>
+
+    <dialog id="observation-dialog" class="sheet-dialog">
+      <form id="observation-form" method="dialog">
+        <header><div><p class="eyebrow">Field entry</p><h2>New observation</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close">×</button></header>
+        <div class="form-grid">
+          <label class="full"><span>Plant</span><select id="obs-plant" name="plantId" required></select></label>
+          <label><span>Date</span><input id="obs-date" name="date" type="date" required></label>
+          <label><span>Time</span><input id="obs-time" name="time" type="time"></label>
+          <details class="profile-fields full">
+            <summary>One-time plant profile</summary>
+            <div class="form-grid">
+              <label><span>Planting date</span><input id="profile-planted-date" name="profilePlantedDate" type="date"></label>
+              <label><span>Started as</span><select id="profile-origin" name="profileOrigin"><option value="">Not recorded</option><option>nursery transplant</option><option>home-grown transplant</option><option>direct-sown seed</option><option>division / cutting</option></select></label>
+              <label><span>Source / nursery</span><input id="profile-source" name="profileSource" type="text" placeholder="seller, seed company, friend…"></label>
+              <label><span>Cost ($)</span><input id="profile-cost" name="profileCost" type="number" min="0" step="0.01" inputmode="decimal"></label>
+              <label class="full"><span>Plant-tag photo</span><input id="profile-photo" name="profilePhoto" type="file" accept="image/*" capture="environment"><small>Photograph both sides of the cultivar tag when available.</small></label>
+            </div>
+          </details>
+          <label class="photo-field full"><span>Overview photo</span><input id="obs-photo" name="photo" type="file" accept="image/*" capture="environment"><small>Stand in the same place and frame the whole plant when possible.</small><img id="photo-preview" alt="" hidden></label>
+          <label class="full"><span>Photo type</span><select name="photoType"><option selected>whole-plant overview</option><option>symptom close-up</option><option>pest evidence</option><option>flower / fruit / harvest</option><option>other</option></select></label>
+          <label><span>Height (in)</span><input name="height" type="number" min="0" step="0.1" inputmode="decimal"></label>
+          <label><span>Spread N–S (in)</span><input name="widthNS" type="number" min="0" step="0.1" inputmode="decimal"></label>
+          <label><span>Spread E–W (in)</span><input name="widthEW" type="number" min="0" step="0.1" inputmode="decimal"></label>
+          <label><span>Stem diameter (mm)</span><input name="stemDiameter" type="number" min="0" step="0.1" inputmode="decimal"></label>
+          <label><span>Health (1–5)</span><select name="health"><option value="5">5 · thriving</option><option value="4">4 · good</option><option value="3" selected>3 · watch</option><option value="2">2 · stressed</option><option value="1">1 · critical</option></select></label>
+          <label><span>Vigor (1–5)</span><select name="vigor"><option value="5">5 · rapid growth</option><option value="4">4 · steady growth</option><option value="3" selected>3 · moderate</option><option value="2">2 · slow</option><option value="1">1 · declining</option></select></label>
+          <label><span>Growth stage</span><select name="stage"><option>transplant establishment</option><option selected>vegetative growth</option><option>budding</option><option>flowering</option><option>fruiting / heading</option><option>harvest</option><option>senescent</option><option>removed / dead</option></select></label>
+          <label><span>Soil moisture</span><select name="soilMoisture"><option>dry</option><option selected>slightly moist</option><option>evenly moist</option><option>wet</option><option>waterlogged</option></select></label>
+          <label><span>Leaf color</span><select name="leafColor"><option selected>normal for cultivar</option><option>pale</option><option>yellowing</option><option>purple / stressed</option><option>browning / scorched</option><option>spotted / mottled</option></select></label>
+          <label><span>Wilt</span><select name="wilt"><option selected>none</option><option>morning</option><option>afternoon only</option><option>persistent</option></select></label>
+          <label><span>Damage (%)</span><input name="damage" type="number" min="0" max="100" step="1" inputmode="numeric"></label>
+          <label><span>Pest count</span><input name="pestCount" type="number" min="0" step="1" inputmode="numeric"></label>
+          <label class="full"><span>Pests or symptoms</span><input name="symptoms" type="text" placeholder="holes, aphids, spots, chewed stem…"></label>
+          <label><span>Water given (gal)</span><input name="water" type="number" min="0" step="0.1" inputmode="decimal"></label>
+          <label><span>Rain since last check (in)</span><input name="rain" type="number" min="0" step="0.01" inputmode="decimal"></label>
+          <label class="full"><span>Fertilizer, amendment, or treatment</span><input name="treatment" type="text" placeholder="product, amount, method"></label>
+          <label><span>Harvest count</span><input name="harvestCount" type="number" min="0" step="1" inputmode="numeric"></label>
+          <label><span>Harvest weight (oz)</span><input name="harvestWeight" type="number" min="0" step="0.1" inputmode="decimal"></label>
+          <label class="full"><span>Observation notes</span><textarea name="notes" rows="3" placeholder="What changed? Where did symptoms start? What might explain it?"></textarea></label>
+          <label class="full"><span>Next action</span><input name="nextAction" type="text" placeholder="recheck tomorrow, thin leaves, isolate, harvest…"></label>
+        </div>
+        <footer><button class="secondary-action close-dialog" type="button">Cancel</button><button class="primary-action" type="submit">Save observation</button></footer>
+      </form>
+    </dialog>
+
+    <dialog id="plant-dialog" class="sheet-dialog detail-dialog"><div id="plant-detail"></div></dialog>
+
+    <footer class="tracker-footer"><a href="south-texas-fall-garden-plan.html">Measured garden plan</a><span>·</span><a href="../index.html#plants">Plants collection</a><span>·</span><span>Local-first field notebook</span></footer>
+    <script src="../assets/garden-tracker.js" defer></script>
+  </body>
+</html>

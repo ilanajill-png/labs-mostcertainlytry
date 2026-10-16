@@ -15,10 +15,15 @@
 !field-guide.css
 !robots.txt
 !sitemap.xml
+!garden-tracker-manifest.json
+!garden-tracker-sw.js
 
 !assets/
 assets/*
 !assets/howdy-partner-logo.png
+!assets/garden-tracker.css
+!assets/garden-tracker.js
+!assets/garden-tracker-icon.svg
 !assets/florence-field-guide/
 !assets/florence-field-guide/**
 !assets/bracken-bat-cave/
@@ -126,6 +131,7 @@ projects/*
 !projects/magnolia-seed-usage.html
 !projects/on-a-mission.html
 !projects/south-texas-fall-garden-plan.html
+!projects/garden-health-tracker.html
 !projects/heb-weekly-meal-deal-menu-2026-10-01.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
