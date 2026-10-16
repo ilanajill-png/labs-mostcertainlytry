@@ -222,6 +222,12 @@
   font-size: .86rem;
 }
 
+.spiral-layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:28px;align-items:start}.spiral-frame{overflow:auto;border:1px solid var(--garden-line);border-radius:22px;background:#f5f0df;padding:12px}.spiral-map{display:block;width:100%;min-width:520px;height:auto}.spiral-axis{font:700 14px/1 system-ui,sans-serif;fill:#355d4d;letter-spacing:.08em}.spiral-zone-label{font:800 12px/1 system-ui,sans-serif;fill:#355d4d;letter-spacing:.08em}.plant-pin circle{fill:#315f47;stroke:#fffaf0;stroke-width:4}.plant-pin text{font:800 18px/1 system-ui,sans-serif;fill:#fff;text-anchor:middle}.plant-pin.contained circle{fill:#326b75}.plant-pin.shade circle{fill:#584e86}.plant-pin.fruit circle{fill:#a14f43}.spiral-key ol{margin:0;padding-left:2.2rem;columns:1}.spiral-key li{padding:0 0 .58rem .25rem;break-inside:avoid}.spiral-key strong{color:var(--garden-deep)}
+
+@media (max-width: 820px){.spiral-layout{grid-template-columns:1fr}.spiral-frame{padding:8px}.spiral-key ol{padding-left:1.75rem}}
+
+.plant-blueprint{display:block;width:100%;min-width:760px;height:auto;background:#faf7ed}.blueprint-boundary{fill:#f5f0df;stroke:#213f34;stroke-width:4}.blueprint-grid line{stroke:#315f47;stroke-width:.7;opacity:.14}.blueprint-bed{fill:#dce9c9;stroke:#315f47;stroke-width:2}.blueprint-spiral{fill:#e8d7a8;stroke:#315f47;stroke-width:3}.blueprint-dry{fill:#ead2a8;stroke:#8a6638;stroke-width:2}.blueprint-tender{fill:#d8e4d2;stroke:#315f47;stroke-width:2}.blueprint-trellis{stroke:#315f47;stroke-width:6;stroke-dasharray:10 7}.blueprint-title,.blueprint-north,.blueprint-south{font:800 12px/1 system-ui,sans-serif;fill:#213f34;text-anchor:middle;letter-spacing:.06em}.blueprint-north,.blueprint-south{font-size:14px}.blueprint-marker circle{fill:#315f47;stroke:#fffaf0;stroke-width:2}.blueprint-marker text{font:800 8px/1 system-ui,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}.blueprint-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:7px 16px;margin-top:16px;font-size:.86rem}.blueprint-legend span{display:block;border-bottom:1px solid var(--garden-line);padding:.35rem 0}.blueprint-legend b{display:inline-block;min-width:2.3rem;color:var(--garden-deep)}
+
 .garden-cards,
 .zone-cards,
 .harvest-grid {
@@ -317,4 +323,3 @@
   .garden-jump .garden-shell { flex-wrap: nowrap; overflow-x: auto; }
   .garden-jump a { flex: 0 0 auto; }
 }
-

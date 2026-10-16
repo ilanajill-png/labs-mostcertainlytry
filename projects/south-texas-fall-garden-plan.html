@@ -49,6 +49,8 @@
       <nav class="garden-jump" aria-label="Page sections">
         <div class="garden-shell">
           <a href="#grid">Planting grid</a>
+          <a href="#spiral">Herb spiral</a>
+          <a href="#companions">Companion audit</a>
           <a href="#inventory">Crop inventory</a>
           <a href="#watering">Watering plan</a>
           <a href="#harvest">Harvest tracking</a>
@@ -63,25 +65,123 @@
             <p>North is shown at the top and the entry at the south/front. The herb spiral begins two feet inside the front edge. If field north differs, rotate the whole plan while keeping the trellis and tallest crops on true north.</p>
           </div>
 
-          <div class="plot-frame" tabindex="0" aria-label="Scrollable 20 by 20 foot garden plan">
-            <div class="plot" role="img" aria-label="Twenty-by-twenty-foot garden with three northern vegetable beds, north trellis, front herb spiral, dry perennial zone, and tender container zone">
-              <span class="plot-label north">North / back</span>
-              <span class="plot-label south">South / entry</span>
-              <article class="plot-zone trellis-zone"><h3>North trellis</h3><p>Pearl Pod beans ×4</p></article>
-              <article class="plot-zone bed-a"><h3>Bed A · 4 × 10 ft</h3><p>Jade Cross Brussels sprouts ×4<strong>Snow Crown cauliflower ×4</strong></p></article>
-              <article class="plot-zone bed-b"><h3>Bed B · 4 × 10 ft</h3><p>Red Express cabbage ×4 · Green Magic broccoli ×4<strong>White kohlrabi ×2 · Purple kohlrabi ×2</strong></p></article>
-              <article class="plot-zone bed-c"><h3>Bed C · 4 × 10 ft</h3><p>Collards ×2 · Redbor kale ×3 · Swiss chard ×4 · red pak choi ×3<strong>Mustard ×1 · lettuces ×2 · turnips ×4 · radishes ×3</strong></p></article>
-              <article class="plot-zone dry-zone"><h3>Dry / pollinator zone</h3><p>Rosemary ×3 · rue ×2 · chile pequín ×1<strong>Mexican mint marigold ×3</strong></p></article>
-              <article class="plot-zone spiral-zone"><h3>6-ft herb spiral</h3><p>Dry crown → moist base<strong>sage · marjoram · basil · herbs · strawberries</strong></p></article>
-              <article class="plot-zone tender-zone"><h3>Tender / container zone</h3><p>Lemongrass ×2 · Malabar spinach ×1 · nasturtium ×1<strong>Orion fennel ×1 · “leaf fennel/dill” ×3</strong></p></article>
-            </div>
+          <div class="plot-frame" tabindex="0" aria-label="Scrollable plant-by-numbers plan with every plant marked">
+            <svg id="plant-by-numbers" class="plant-blueprint" viewBox="0 0 800 800" role="img" aria-labelledby="pbn-title pbn-desc">
+              <title id="pbn-title">Plant-by-numbers plan for all 77 plants</title>
+              <desc id="pbn-desc">A measured twenty-foot-square garden. Every plant is represented by an individually labeled marker within one of three vegetable beds, a six-foot herb spiral, dry perimeter, tender container area, or north trellis.</desc>
+              <rect x="60" y="60" width="680" height="680" rx="12" class="blueprint-boundary"/>
+              <g class="blueprint-grid"></g>
+              <rect x="94" y="94" width="136" height="340" rx="10" class="blueprint-bed"/><text x="162" y="116" class="blueprint-title">BED A</text>
+              <rect x="332" y="94" width="136" height="340" rx="10" class="blueprint-bed"/><text x="400" y="116" class="blueprint-title">BED B</text>
+              <rect x="570" y="94" width="136" height="340" rx="10" class="blueprint-bed"/><text x="638" y="116" class="blueprint-title">BED C</text>
+              <circle cx="400" cy="570" r="102" class="blueprint-spiral"/><text x="400" y="570" class="blueprint-title">SPIRAL</text>
+              <rect x="88" y="465" width="190" height="225" rx="18" class="blueprint-dry"/><text x="183" y="487" class="blueprint-title">DRY EDGE</text>
+              <rect x="522" y="465" width="190" height="225" rx="18" class="blueprint-tender"/><text x="617" y="487" class="blueprint-title">POTS / TENDER</text>
+              <line x1="264" y1="77" x2="536" y2="77" class="blueprint-trellis"/><text x="400" y="72" class="blueprint-title">NORTH TRELLIS</text>
+              <g class="individual-plants"></g>
+              <text x="400" y="28" class="blueprint-north">NORTH / BACK ↑</text>
+              <text x="400" y="780" class="blueprint-south">SOUTH / ENTRY</text>
+            </svg>
           </div>
-          <p class="plot-note">The drawing is to scale by zone. Scroll sideways on a small screen. Final orientation still needs a field check for true north, direct-sun hours, and afternoon shade.</p>
+          <p class="plot-note"><strong>Every circle is one plant.</strong> Codes match the key below. The spiral is enlarged in the next section. Scroll sideways on a small screen. Final orientation still needs a field check for true north, direct-sun hours, and afternoon shade.</p>
+          <div class="blueprint-legend" id="blueprint-legend" aria-label="Plant code legend"></div>
 
           <div class="garden-cards" style="margin-top:22px">
             <article class="garden-card"><h3>Bed A · large brassicas</h3><p>Twenty-four-inch centers protect airflow and leave room for full heads and sprouts. Put fine insect mesh on immediately after planting.</p></article>
             <article class="garden-card"><h3>Bed B · heads and stems</h3><p>Cabbage and broccoli get the deeper rows; compact kohlrabi sits along the accessible southern edge for easy stem checks.</p></article>
             <article class="garden-card"><h3>Bed C · repeat harvests</h3><p>Leaf crops and quick roots use closer spacing. Harvest outer leaves, baby roots, and crowded starts early rather than letting the bed close over.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="garden-section alt" id="spiral">
+        <div class="garden-shell">
+          <div class="garden-heading">
+            <div><p class="garden-kicker">Individual herb placement</p><h2>Fourteen plants. Fourteen exact positions.</h2></div>
+            <p>The diagram assumes north is at the top. Build the mound highest at the center and descend toward a cooler, moister north opening. The south half receives the strongest sun; the north base is the refuge from South Texas afternoon heat.</p>
+          </div>
+
+          <div class="spiral-layout">
+            <div class="spiral-frame" tabindex="0" aria-label="Scrollable detailed six-foot herb spiral">
+              <svg class="spiral-map" viewBox="0 0 600 600" role="img" aria-labelledby="spiral-title spiral-desc">
+                <title id="spiral-title">Numbered six-foot herb spiral planting plan</title>
+                <desc id="spiral-desc">Sage and marjoram occupy the dry central crown, basil the middle sunny slope, contained lemon balm and Vietnamese cilantro the lower sides, sweet woodruff the shaded north base, and strawberries the sunny outer south edge.</desc>
+                <defs>
+                  <radialGradient id="terrace" cx="50%" cy="48%" r="52%"><stop offset="0" stop-color="#e9d69c"/><stop offset=".48" stop-color="#dce6b7"/><stop offset="1" stop-color="#b7d9c4"/></radialGradient>
+                </defs>
+                <circle cx="300" cy="300" r="250" fill="url(#terrace)" stroke="#213f34" stroke-width="4"/>
+                <path d="M300 300 C395 225 445 315 390 385 C325 468 172 430 145 320 C112 187 237 82 373 124 C465 153 505 231 495 300" fill="none" stroke="#fffaf0" stroke-width="18" stroke-linecap="round" opacity=".9"/>
+                <text x="300" y="31" text-anchor="middle" class="spiral-axis">NORTH · cool / moist base</text>
+                <text x="300" y="586" text-anchor="middle" class="spiral-axis">SOUTH · sunny / warmer face</text>
+                <g class="plant-pin"><circle cx="300" cy="290" r="24"/><text x="300" y="297">1</text></g>
+                <g class="plant-pin"><circle cx="245" cy="344" r="24"/><text x="245" y="351">2</text></g>
+                <g class="plant-pin"><circle cx="352" cy="350" r="24"/><text x="352" y="357">3</text></g>
+                <g class="plant-pin"><circle cx="410" cy="310" r="24"/><text x="410" y="317">4</text></g>
+                <g class="plant-pin contained"><circle cx="465" cy="205" r="24"/><text x="465" y="212">5</text></g>
+                <g class="plant-pin contained"><circle cx="486" cy="270" r="24"/><text x="486" y="277">6</text></g>
+                <g class="plant-pin contained"><circle cx="135" cy="340" r="24"/><text x="135" y="347">7</text></g>
+                <g class="plant-pin contained"><circle cx="145" cy="270" r="24"/><text x="145" y="277">8</text></g>
+                <g class="plant-pin shade"><circle cx="210" cy="130" r="24"/><text x="210" y="137">9</text></g>
+                <g class="plant-pin shade"><circle cx="300" cy="105" r="24"/><text x="300" y="112">10</text></g>
+                <g class="plant-pin shade"><circle cx="390" cy="132" r="24"/><text x="390" y="139">11</text></g>
+                <g class="plant-pin fruit"><circle cx="445" cy="405" r="24"/><text x="445" y="412">12</text></g>
+                <g class="plant-pin fruit"><circle cx="355" cy="468" r="24"/><text x="355" y="475">13</text></g>
+                <g class="plant-pin fruit"><circle cx="265" cy="470" r="24"/><text x="265" y="477">14</text></g>
+                <text x="300" y="255" text-anchor="middle" class="spiral-zone-label">DRY CROWN</text>
+                <text x="392" y="376" text-anchor="middle" class="spiral-zone-label">MIDDLE</text>
+                <text x="300" y="170" text-anchor="middle" class="spiral-zone-label">MOIST / SHADED BASE</text>
+              </svg>
+            </div>
+
+            <div class="spiral-key">
+              <ol>
+                <li><strong>Sage</strong> — crown center; highest, fastest-draining point.</li>
+                <li><strong>Compact marjoram</strong> — upper southwest shoulder, 14–16 in from sage.</li>
+                <li><strong>Basil 1</strong> — sunny southeast middle terrace.</li>
+                <li><strong>Basil 2</strong> — east middle terrace, 14–16 in from Basil 1.</li>
+                <li><strong>Vietnamese cilantro 1</strong> — northeast lower terrace in a sunk 8–10 in pot.</li>
+                <li><strong>Vietnamese cilantro 2</strong> — east-northeast base in its own sunk pot.</li>
+                <li><strong>Lemon balm 1</strong> — west lower terrace in a sunk 10–12 in pot.</li>
+                <li><strong>Lemon balm 2</strong> — northwest base in its own sunk pot; deadhead before seed.</li>
+                <li><strong>Sweet woodruff 1</strong> — northwestern shaded base in a removable 6–8 in pot.</li>
+                <li><strong>Sweet woodruff 2</strong> — true-north shaded base in a removable pot.</li>
+                <li><strong>Sweet woodruff 3</strong> — northeastern shaded base in a removable pot.</li>
+                <li><strong>Strawberry 1</strong> — sunny southeast outer apron.</li>
+                <li><strong>Strawberry 2</strong> — south outer apron.</li>
+                <li><strong>Strawberry 3</strong> — south-southwest outer apron.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="garden-alert"><strong>Why the pots matter:</strong> lemon balm spreads aggressively; Vietnamese cilantro expands in warm, wet soil; sweet woodruff can spread in favorable shade but may fail in Schertz heat. Sunk or removable pots preserve the spiral without mixing incompatible root systems. Lift the woodruff pots into deeper shade if foliage scorches.</div>
+
+          <div class="garden-table-wrap" style="margin-top:20px">
+            <table class="garden-table">
+              <thead><tr><th>Keep outside the spiral</th><th>Exact placement</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td>Rosemary ×3</td><td>Dry west perimeter, 36 in on center</td><td>Three mature shrubs overwhelm a six-foot spiral and need drier roots.</td></tr>
+                <tr><td>Rue ×2</td><td>Dry northwest perimeter, 30–36 in apart and away from the main path</td><td>Woody 2–3 ft plants; gloves are advised when handling foliage.</td></tr>
+                <tr><td>Mexican mint marigold ×3</td><td>Back/east pollinator edge, 24–30 in apart</td><td>Tall perennial mass would shade the small spiral herbs.</td></tr>
+                <tr><td>Lemongrass ×2</td><td>Separate 10–15 gal containers, south/east of the spiral</td><td>Large, thirsty, frost-tender clumps need far more root room.</td></tr>
+                <tr><td>Orion fennel ×1</td><td>Own container outside the spiral</td><td>Large upright plant; isolation simplifies space and watering.</td></tr>
+                <tr><td>“Leaf fennel/dill” ×3</td><td>Three individual pots until the tag is confirmed</td><td>Dill and leaf fennel have different mature sizes and permanence.</td></tr>
+                <tr><td>Nasturtium ×1</td><td>Pot at the south outer edge; allow it to trail outward</td><td>Prevents the vine from smothering strawberries and middle herbs.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="garden-section" id="companions">
+        <div class="garden-shell">
+          <div class="garden-heading">
+            <div><p class="garden-kicker">Companion-planting audit</p><h2>Yes—but compatibility, not folklore.</h2></div>
+            <p>The layout used shared moisture, mature size, shade, airflow, harvest access, and pest protection. It did not assume that one scented herb reliably protects another crop.</p>
+          </div>
+          <div class="garden-cards">
+            <article class="garden-card"><h3>What works</h3><p>Brassicas share irrigation and can sit beneath one insect-mesh system. Quick roots occupy accessible edges. Tall beans stay north so they do not shade the beds. Dry woody herbs are separated from thirsty greens.</p></article>
+            <article class="garden-card"><h3>What needs management</h3><p>Grouping brassicas also concentrates brassica pests and disease. Fine mesh, weekly leaf checks, sanitation, and next-season rotation matter more than aromatic neighbors.</p></article>
+            <article class="garden-card"><h3>What is isolated</h3><p>Fennel is containerized for size and root competition; aggressive lemon balm is contained; rue stays away from paths; rosemary and lemongrass remain outside the spiral because their mature dimensions are incompatible.</p></article>
           </div>
         </div>
       </section>
@@ -152,6 +252,11 @@
             <p>Garden-specific placement reflects the listed inventory and 20 × 20-foot footprint. Timing, spacing, and watering principles use Texas A&amp;M AgriLife guidance.</p>
           </div>
           <ul class="source-list">
+            <li><a href="https://aggie-horticulture.tamu.edu/wp-content/uploads/sites/12/2011/03/E-561_growing_herbs_texas.pdf">Texas A&amp;M AgriLife · Growing Herbs in Texas (PDF) ↗</a></li>
+            <li><a href="https://plants.ces.ncsu.edu/plants/galium-odoratum/">NC State Extension · Sweet woodruff light, moisture, and spread ↗</a></li>
+            <li><a href="https://plants.ces.ncsu.edu/plants/melissa-officinalis/">NC State Extension · Lemon balm growth and containment ↗</a></li>
+            <li><a href="https://plants.ces.ncsu.edu/plants/ruta-graveolens/">NC State Extension · Rue size, drainage, and handling ↗</a></li>
+            <li><a href="https://www.gardenstylesanantonio.com/resources/plant-by-numbers/">Garden Style San Antonio · Plant by Numbers planning model ↗</a></li>
             <li><a href="https://agrilifeextension.tamu.edu/browse/featured-solutions/gardening-landscaping/fall-vegetable-gardening-guide-for-texas/">Texas A&amp;M AgriLife · Fall Vegetable Gardening Guide for Texas ↗</a></li>
             <li><a href="https://aggie-horticulture.tamu.edu/wp-content/uploads/sites/10/2013/09/EHT-067.pdf">Texas A&amp;M AgriLife · Cole Crop Production guidance (PDF) ↗</a></li>
             <li><a href="https://aggie-horticulture.tamu.edu/earthkind/drought/efficient-use-of-water-in-the-garden-and-landscape/">Texas A&amp;M AgriLife · Efficient Use of Water in the Garden and Landscape ↗</a></li>
@@ -165,5 +270,59 @@
       <span>Most Certainly Try · Nature Work</span>
       <a href="https://www.mostcertainlytry.com/contact">Contact Ilana</a>
     </footer>
+    <script>
+      (() => {
+        const svg = document.getElementById('plant-by-numbers');
+        const plantLayer = svg.querySelector('.individual-plants');
+        const gridLayer = svg.querySelector('.blueprint-grid');
+        const legend = document.getElementById('blueprint-legend');
+        const NS = 'http://www.w3.org/2000/svg';
+        const px = x => 60 + x * 34;
+        const py = y => 740 - y * 34;
+        for (let i=1;i<20;i++) {
+          const v=document.createElementNS(NS,'line'); v.setAttribute('x1',px(i));v.setAttribute('x2',px(i));v.setAttribute('y1',60);v.setAttribute('y2',740);gridLayer.append(v);
+          const h=document.createElementNS(NS,'line'); h.setAttribute('x1',60);h.setAttribute('x2',740);h.setAttribute('y1',py(i));h.setAttribute('y2',py(i));gridLayer.append(h);
+        }
+        const groups = [
+          ['BS','Jade Cross Brussels sprouts',[[2,18],[4,18],[2,15.5],[4,15.5]]],
+          ['CF','Snow Crown cauliflower',[[2,13],[4,13],[2,10.5],[4,10.5]]],
+          ['CB','Red Express cabbage',[[9,18],[11,18],[9,15.5],[11,15.5]]],
+          ['BR','Green Magic broccoli',[[9,13],[11,13],[9,10.7],[11,10.7]]],
+          ['KW','White kohlrabi',[[8.5,9.35],[9.7,9.35]]],
+          ['KP','Purple kohlrabi',[[10.9,9.35],[11.8,9.35]]],
+          ['CO','Georgia collards',[[16,18],[18,18]]],
+          ['KA','Redbor kale',[[15.7,15.7],[17,15.2],[18.3,15.7]]],
+          ['CH','Swiss chard',[[15.5,13.3],[16.6,13],[17.7,13],[18.8,13.3]]],
+          ['PC','Red pak choi',[[15.7,11.2],[17,11.5],[18.3,11.2]]],
+          ['MU','Red Giant mustard',[[15.6,9.9]]],
+          ['LG','Galactic lettuce',[[16.7,10]]],['LT','Tropicana lettuce',[[17.8,10]]],
+          ['TU','Scarlet Queen turnip',[[15.4,9.15],[16.4,9.15],[17.4,9.15],[18.4,9.15]]],
+          ['RA','French Breakfast radish',[[16,8.65],[17.2,8.65],[18.4,8.65]]],
+          ['SG','Sage',[[10,5]]],['MJ','Compact marjoram',[[8.9,4.3]]],
+          ['BA','Basil',[[11.1,4.2],[12.2,4.8]]],
+          ['VC','Vietnamese cilantro · sunk pots',[[12.4,6.5],[12.65,5.65]]],
+          ['LB','Lemon balm · sunk pots',[[7.35,4.5],[7.45,5.55]]],
+          ['SW','Sweet woodruff · removable pots',[[8.2,7.2],[10,7.6],[11.8,7.2]]],
+          ['ST','Strawberries',[[12.3,3.25],[11,2.55],[9.3,2.5]]],
+          ['RO','Rosemary',[[1.5,7],[3.5,7],[5.5,7]]],
+          ['RU','Rue',[[1.5,4.7],[3.5,4.7]]],['CP','Chile pequín',[[5.5,4.7]]],
+          ['MM','Mexican mint marigold',[[2,2],[4,2],[6,2]]],
+          ['LM','Lemongrass · containers',[[14.8,7],[18.2,7]]],
+          ['MS','Malabar spinach · trellised pot',[[16.5,7]]],['NA','Nasturtium · trailing pot',[[14.8,3.5]]],
+          ['FO','Orion fennel · container',[[18.2,4.5]]],
+          ['FD','Leaf fennel/dill · pots; confirm',[[16,2],[17.2,2],[18.4,2]]],
+          ['BE','Pearl Pod bean · confirm climbing',[[7,19.5],[9,19.5],[11,19.5],[13,19.5]]]
+        ];
+        groups.forEach(([code,name,positions],index) => {
+          positions.forEach(([x,y],i) => {
+            const g=document.createElementNS(NS,'g'); g.setAttribute('class','blueprint-marker');
+            const title=document.createElementNS(NS,'title'); title.textContent=`${name} ${i+1} of ${positions.length}`;g.append(title);
+            const c=document.createElementNS(NS,'circle');c.setAttribute('cx',px(x));c.setAttribute('cy',py(y));c.setAttribute('r',positions.length>3?13:15);g.append(c);
+            const t=document.createElementNS(NS,'text');t.setAttribute('x',px(x));t.setAttribute('y',py(y)+4);t.textContent=code;g.append(t);plantLayer.append(g);
+          });
+          const item=document.createElement('span');item.innerHTML=`<b>${code}</b> ${name} ×${positions.length}`;legend.append(item);
+        });
+      })();
+    </script>
   </body>
 </html>
