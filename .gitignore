@@ -77,6 +77,8 @@ assets/*
 !assets/de-kiewiet-honey/**
 !assets/on-a-mission/
 !assets/on-a-mission/**
+!assets/fall-garden/
+!assets/fall-garden/**
 
 !data/
 data/*
@@ -123,6 +125,7 @@ projects/*
 !projects/menstrual-blood-gardens-medicine-history.html
 !projects/magnolia-seed-usage.html
 !projects/on-a-mission.html
+!projects/south-texas-fall-garden-plan.html
 !projects/heb-weekly-meal-deal-menu-2026-10-01.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
