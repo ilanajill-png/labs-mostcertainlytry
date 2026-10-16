@@ -66,25 +66,25 @@
             <p>North is shown at the top and the entry at the south/front. The herb spiral begins two feet inside the front edge. If field north differs, rotate the whole plan while keeping the trellis and tallest crops on true north.</p>
           </div>
 
-          <div class="plot-frame" tabindex="0" aria-label="Scrollable plant-by-numbers plan with every plant marked">
-            <svg id="plant-by-numbers" class="plant-blueprint" viewBox="0 0 800 800" role="img" aria-labelledby="pbn-title pbn-desc">
+          <div class="plot-frame" tabindex="0" aria-label="Scrollable watercolor plant-by-numbers plan with every plant named">
+            <svg id="plant-by-numbers" class="plant-blueprint" viewBox="0 0 2200 2200" role="img" aria-labelledby="pbn-title pbn-desc">
               <title id="pbn-title">Plant-by-numbers plan for all 77 plants</title>
-              <desc id="pbn-desc">A measured twenty-foot-square garden. Every plant is represented by an individually labeled marker within one of three vegetable beds, a six-foot herb spiral, dry perimeter, tender container area, or north trellis.</desc>
-              <rect x="60" y="60" width="680" height="680" rx="12" class="blueprint-boundary"/>
+              <desc id="pbn-desc">A measured twenty-foot-square garden. Every individual plant is represented by a watercolor botanical portrait and its full lowercase name within one of three vegetable beds, a six-foot herb spiral, dry perimeter, tender container area, or north trellis.</desc>
+              <rect x="100" y="100" width="2000" height="2000" rx="28" class="blueprint-boundary"/>
               <g class="blueprint-grid"></g>
-              <rect x="94" y="94" width="136" height="340" rx="10" class="blueprint-bed"/><text x="162" y="116" class="blueprint-title">BED A</text>
-              <rect x="332" y="94" width="136" height="340" rx="10" class="blueprint-bed"/><text x="400" y="116" class="blueprint-title">BED B</text>
-              <rect x="570" y="94" width="136" height="340" rx="10" class="blueprint-bed"/><text x="638" y="116" class="blueprint-title">BED C</text>
-              <circle cx="400" cy="570" r="102" class="blueprint-spiral"/><text x="400" y="570" class="blueprint-title">SPIRAL</text>
-              <rect x="88" y="465" width="190" height="225" rx="18" class="blueprint-dry"/><text x="183" y="487" class="blueprint-title">DRY EDGE</text>
-              <rect x="522" y="465" width="190" height="225" rx="18" class="blueprint-tender"/><text x="617" y="487" class="blueprint-title">POTS / TENDER</text>
-              <line x1="264" y1="77" x2="536" y2="77" class="blueprint-trellis"/><text x="400" y="72" class="blueprint-title">NORTH TRELLIS</text>
+              <rect x="200" y="200" width="400" height="1000" rx="24" class="blueprint-bed"/><text x="400" y="245" class="blueprint-title">bed a · large brassicas</text>
+              <rect x="900" y="200" width="400" height="1000" rx="24" class="blueprint-bed"/><text x="1100" y="245" class="blueprint-title">bed b · heads + stems</text>
+              <rect x="1600" y="200" width="400" height="1000" rx="24" class="blueprint-bed"/><text x="1800" y="245" class="blueprint-title">bed c · leaves + roots</text>
+              <circle cx="1100" cy="1600" r="300" class="blueprint-spiral"/><text x="1100" y="1600" class="blueprint-title">herb spiral</text>
+              <rect x="160" y="1320" width="540" height="650" rx="34" class="blueprint-dry"/><text x="430" y="1370" class="blueprint-title">dry perimeter</text>
+              <rect x="1500" y="1320" width="540" height="650" rx="34" class="blueprint-tender"/><text x="1770" y="1370" class="blueprint-title">pots + tender plants</text>
+              <line x1="700" y1="150" x2="1500" y2="150" class="blueprint-trellis"/><text x="1100" y="135" class="blueprint-title">north trellis</text>
               <g class="individual-plants"></g>
-              <text x="400" y="28" class="blueprint-north">NORTH / BACK ↑</text>
-              <text x="400" y="780" class="blueprint-south">SOUTH / ENTRY</text>
+              <text x="1100" y="55" class="blueprint-north">north / back ↑</text>
+              <text x="1100" y="2170" class="blueprint-south">south / entry</text>
             </svg>
           </div>
-          <p class="plot-note"><strong>Every circle is one plant.</strong> Codes match the key below. The spiral is enlarged in the next section. Scroll sideways on a small screen. Final orientation still needs a field check for true north, direct-sun hours, and afternoon shade.</p>
+          <p class="plot-note"><strong>Every watercolor label is one individual plant.</strong> Full cultivar names replace the former abbreviations. The spiral is enlarged in the next section. Scroll sideways on a small screen. Final orientation still needs a field check for true north, direct-sun hours, and afternoon shade. <em>The original watercolor illustrations are AI-generated decorative planning aids—not diagnostic identification images.</em></p>
           <div class="blueprint-legend" id="blueprint-legend" aria-label="Plant code legend"></div>
 
           <div class="garden-cards" style="margin-top:22px">
@@ -322,11 +322,11 @@
         const gridLayer = svg.querySelector('.blueprint-grid');
         const legend = document.getElementById('blueprint-legend');
         const NS = 'http://www.w3.org/2000/svg';
-        const px = x => 60 + x * 34;
-        const py = y => 740 - y * 34;
+        const px = x => 100 + x * 100;
+        const py = y => 2100 - y * 100;
         for (let i=1;i<20;i++) {
-          const v=document.createElementNS(NS,'line'); v.setAttribute('x1',px(i));v.setAttribute('x2',px(i));v.setAttribute('y1',60);v.setAttribute('y2',740);gridLayer.append(v);
-          const h=document.createElementNS(NS,'line'); h.setAttribute('x1',60);h.setAttribute('x2',740);h.setAttribute('y1',py(i));h.setAttribute('y2',py(i));gridLayer.append(h);
+          const v=document.createElementNS(NS,'line'); v.setAttribute('x1',px(i));v.setAttribute('x2',px(i));v.setAttribute('y1',100);v.setAttribute('y2',2100);gridLayer.append(v);
+          const h=document.createElementNS(NS,'line'); h.setAttribute('x1',100);h.setAttribute('x2',2100);h.setAttribute('y1',py(i));h.setAttribute('y2',py(i));gridLayer.append(h);
         }
         const groups = [
           ['BS','Jade Cross Brussels sprouts',[[2,18],[4,18],[2,15.5],[4,15.5]]],
@@ -358,14 +358,63 @@
           ['FD','Leaf fennel/dill · pots; confirm',[[16,2],[17.2,2],[18.4,2]]],
           ['BE','Pearl Pod bean · confirm climbing',[[7,19.5],[9,19.5],[11,19.5],[13,19.5]]]
         ];
+        const spriteMap = {
+          BS:['brassicas.png',0], CF:['brassicas.png',1], CB:['brassicas.png',2], BR:['brassicas.png',3],
+          KW:['brassicas.png',4], KP:['brassicas.png',5], CO:['brassicas.png',6], KA:['brassicas.png',7],
+          CH:['leaves-roots-beans.png',0], PC:['leaves-roots-beans.png',1], MU:['leaves-roots-beans.png',2], LG:['leaves-roots-beans.png',3],
+          LT:['leaves-roots-beans.png',4], TU:['leaves-roots-beans.png',5], RA:['leaves-roots-beans.png',6], BE:['leaves-roots-beans.png',7],
+          RO:['spiral-herbs.png',0], SG:['spiral-herbs.png',1], MJ:['spiral-herbs.png',2], BA:['spiral-herbs.png',3],
+          VC:['spiral-herbs.png',4], LB:['spiral-herbs.png',5], SW:['spiral-herbs.png',6], ST:['spiral-herbs.png',7],
+          RU:['perimeter-plants.png',0], CP:['perimeter-plants.png',1], MM:['perimeter-plants.png',2], LM:['perimeter-plants.png',3],
+          MS:['perimeter-plants.png',4], NA:['perimeter-plants.png',5], FO:['perimeter-plants.png',6], FD:['perimeter-plants.png',7]
+        };
+        const spriteRoot = '../assets/fall-garden/watercolors/';
+        const spriteCssRoot = '/assets/fall-garden/watercolors/';
+        const spriteCenters = [95,230,365,500,635,770,905,1030];
+        const cropWidth = 110;
+        const cleanName = name => name.replace(/\s*·.*$/, '').replace(/\s*×\d+$/, '').toLowerCase();
+        const wrapName = (name, max=16) => {
+          const words=cleanName(name).split(/\s+/); const lines=[]; let line='';
+          words.forEach(word=>{ const next=line ? `${line} ${word}` : word; if(next.length>max && line){lines.push(line);line=word;}else line=next; });
+          if(line) lines.push(line); return lines;
+        };
+        const addWatercolor = (parent, code, name, cx, cy, size=70, label=true) => {
+          const [file,index]=spriteMap[code];
+          const card=document.createElementNS(NS,'rect');
+          card.setAttribute('x',cx-(label?52:32)); card.setAttribute('y',cy-(label?58:32)); card.setAttribute('width',label?104:64); card.setAttribute('height',label?112:64); card.setAttribute('rx',label?20:28); card.setAttribute('class','watercolor-label-card'); parent.append(card);
+          const crop=document.createElementNS(NS,'svg'); crop.setAttribute('x',cx-size/2); crop.setAttribute('y',label?cy-54:cy-size/2); crop.setAttribute('width',size); crop.setAttribute('height',size); crop.setAttribute('viewBox',`${spriteCenters[index]-cropWidth/2} 0 ${cropWidth} 362`); crop.setAttribute('preserveAspectRatio','xMidYMid meet'); crop.setAttribute('class','watercolor-crop');
+          const image=document.createElementNS(NS,'image'); image.setAttribute('href',spriteRoot+file); image.setAttribute('x',0); image.setAttribute('y',0); image.setAttribute('width',1086); image.setAttribute('height',362); crop.append(image); parent.append(crop);
+          if(label){
+            const text=document.createElementNS(NS,'text'); text.setAttribute('x',cx); text.setAttribute('y',cy+27); text.setAttribute('class','watercolor-name');
+            wrapName(name).slice(0,3).forEach((line,i)=>{const span=document.createElementNS(NS,'tspan');span.setAttribute('x',cx);span.setAttribute('dy',i===0?0:15);span.textContent=line;text.append(span);});
+            parent.append(text);
+          }
+        };
         groups.forEach(([code,name,positions],index) => {
           positions.forEach(([x,y],i) => {
             const g=document.createElementNS(NS,'g'); g.setAttribute('class','blueprint-marker');
             const title=document.createElementNS(NS,'title'); title.textContent=`${name} ${i+1} of ${positions.length}`;g.append(title);
-            const c=document.createElementNS(NS,'circle');c.setAttribute('cx',px(x));c.setAttribute('cy',py(y));c.setAttribute('r',positions.length>3?13:15);g.append(c);
-            const t=document.createElementNS(NS,'text');t.setAttribute('x',px(x));t.setAttribute('y',py(y)+4);t.textContent=code;g.append(t);plantLayer.append(g);
+            addWatercolor(g,code,name,px(x),py(y)); plantLayer.append(g);
           });
-          const item=document.createElement('span');item.innerHTML=`<b>${code}</b> ${name} ×${positions.length}`;legend.append(item);
+          const [file,spriteIndex]=spriteMap[code];
+          const item=document.createElement('span');item.className='watercolor-legend-item';
+          item.innerHTML=`<i class="watercolor-thumb" style="--sprite:url('${spriteCssRoot+file}');--sprite-x:${spriteIndex}"></i><em>${cleanName(name)}</em><b>×${positions.length}</b>`;legend.append(item);
+        });
+
+        const spiralPlants=[
+          ['RO','rosemary'],['SG','culinary sage'],['MJ','compact marjoram'],['BA','basil'],['BA','basil'],
+          ['VC','vietnamese cilantro'],['VC','vietnamese cilantro'],['LB','lemon balm'],['LB','lemon balm'],
+          ['SW','sweet woodruff'],['SW','sweet woodruff'],['SW','sweet woodruff'],
+          ['ST','strawberry'],['ST','strawberry'],['ST','strawberry']
+        ];
+        document.querySelectorAll('.spiral-map .plant-pin').forEach((pin,i)=>{
+          const circle=pin.querySelector('circle'); const cx=Number(circle.getAttribute('cx')); const cy=Number(circle.getAttribute('cy'));
+          pin.replaceChildren(); addWatercolor(pin,spiralPlants[i][0],spiralPlants[i][1],cx,cy,48,false);
+          const n=document.createElementNS(NS,'text'); n.setAttribute('x',cx+23); n.setAttribute('y',cy+27); n.setAttribute('class','watercolor-pin-number'); n.textContent=i+1; pin.append(n);
+        });
+        document.querySelectorAll('.spiral-key li').forEach((item,i)=>{
+          const [code]=spiralPlants[i]; const [file,spriteIndex]=spriteMap[code];
+          const thumb=document.createElement('i'); thumb.className='watercolor-thumb'; thumb.style.setProperty('--sprite',`url('${spriteCssRoot+file}')`); thumb.style.setProperty('--sprite-x',spriteIndex); item.prepend(thumb);
         });
 
         const plantCards = [
@@ -406,7 +455,8 @@
         plantCards.forEach(([code,name,site,care,neighbors,separate,refs])=>{
           const card=document.createElement('article');card.className='plant-evidence-card';
           const links=refs.map(ref=>`<a href="#${ref}">${ref.toUpperCase()}</a>`).join(' · ');
-          card.innerHTML=`<div class="plant-card-head"><span>${code}</span><h3>${name}</h3></div><p class="plant-site">${site}</p><dl><dt>Needs</dt><dd>${care}</dd><dt>Best nearby</dt><dd>${neighbors}</dd><dt>Keep separate / watch</dt><dd>${separate}</dd></dl><p class="plant-sources">Sources: ${links}</p>`;
+          const [file,spriteIndex]=spriteMap[code];
+          card.innerHTML=`<div class="plant-card-head"><i class="watercolor-thumb large" style="--sprite:url('${spriteCssRoot+file}');--sprite-x:${spriteIndex}"></i><h3>${name.toLowerCase()}</h3></div><p class="plant-site">${site}</p><dl><dt>Needs</dt><dd>${care}</dd><dt>Best nearby</dt><dd>${neighbors}</dd><dt>Keep separate / watch</dt><dd>${separate}</dd></dl><p class="plant-sources">Sources: ${links}</p>`;
           cardGrid.append(card);
         });
       })();
