@@ -35,13 +35,13 @@
   isolation: isolate;
   background:
     linear-gradient(90deg, rgba(19,45,32,.94) 0%, rgba(19,45,32,.78) 42%, rgba(19,45,32,.18) 70%, rgba(19,45,32,.04) 100%),
-    url("watercolors/garden-coherent-diamond-v3.jpg") center 50% / cover no-repeat;
+    url("watercolors/garden-approved-bed-layout-v4.jpg") center 50% / cover no-repeat;
   color: #fff;
   overflow: hidden;
 }
 
 .garden-hero::after {
-  content: "original watercolor gardenscape · decorative view";
+  content: "approved-bed watercolor · decorative view";
   position: absolute;
   right: 24px;
   bottom: 18px;
@@ -216,7 +216,7 @@
   border-radius: 8px 26px 10px 24px;
   background:
     linear-gradient(rgba(202,187,145,.78), rgba(202,187,145,.78)),
-    url("watercolors/garden-coherent-diamond-v3.jpg") center / cover;
+    url("watercolors/garden-approved-bed-layout-v4.jpg") center / cover;
   box-shadow: 0 22px 54px rgba(52,52,32,.24), inset 0 0 0 7px rgba(255,248,224,.45);
 }
 
