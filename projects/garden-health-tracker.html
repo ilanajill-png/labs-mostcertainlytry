@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#173f35">
-    <meta name="description" content="A private-by-default mobile garden journal for tracking 81 individual South Texas fall-garden plants and one carrot seed batch with photos, measurements, health observations, treatments, and harvests.">
+    <meta name="description" content="A private-by-default mobile garden journal for tracking 81 individual South Texas fall-garden plants and four seed batches with photos, measurements, health observations, treatments, and harvests.">
     <title>Garden Health Tracker | Most Certainly Try</title>
     <link rel="manifest" href="../garden-tracker-manifest.json">
     <link rel="icon" href="../assets/garden-tracker-icon.svg" type="image/svg+xml">
@@ -19,12 +19,12 @@
 
     <main class="tracker-shell">
       <section class="tracker-hero">
-        <div><p class="eyebrow">Las Jaras · fall garden</p><h1>Every plant has a story.</h1><p>Track health, measurements, photos, care, problems, treatments, and harvests for <strong>81 individual plants plus one carrot seed batch</strong> in the field-oriented garden plan.</p></div>
+        <div><p class="eyebrow">Las Jaras · fall garden</p><h1>Every plant has a story.</h1><p>Track health, measurements, photos, care, problems, treatments, and harvests for <strong>81 individual plants plus carrot, scallion, broccoli, and cauliflower seed batches</strong> in the simplified constructed-bed plan.</p></div>
         <div class="privacy-note"><strong>Private by default.</strong><span>Your entries and photos stay in this browser on this device. Nothing is uploaded to the public website.</span></div>
       </section>
 
       <section class="stat-grid" aria-label="Garden summary">
-        <article><span id="stat-plants">82</span><small>tracked records</small></article>
+        <article><span id="stat-plants">85</span><small>tracked records</small></article>
         <article><span id="stat-observed">0</span><small>observed</small></article>
         <article><span id="stat-attention">0</span><small>need attention</small></article>
         <article><span id="stat-photos">0</span><small>photos</small></article>
@@ -39,11 +39,11 @@
 
       <section id="tab-plants" class="tab-panel active">
         <div class="toolbar">
-          <label class="search-field"><span>Find a plant</span><input id="plant-search" type="search" placeholder="rosemary, bed b, #12…"></label>
+          <label class="search-field"><span>Find a plant</span><input id="plant-search" type="search" placeholder="rosemary, lane B, scallion…"></label>
           <label><span>Health</span><select id="health-filter"><option value="all">All plants</option><option value="unobserved">Not observed</option><option value="attention">Needs attention</option><option value="healthy">Healthy</option></select></label>
           <label><span>Location</span><select id="location-filter"><option value="all">Everywhere</option></select></label>
         </div>
-        <div class="list-heading"><div><h2>Garden roster</h2><p id="roster-count">82 tracked records</p></div><button id="quick-add" class="primary-action" type="button">＋ New observation</button></div>
+        <div class="list-heading"><div><h2>Garden roster</h2><p id="roster-count">85 tracked records</p></div><button id="quick-add" class="primary-action" type="button">＋ New observation</button></div>
         <div id="plant-list" class="plant-list" aria-live="polite"></div>
       </section>
 
