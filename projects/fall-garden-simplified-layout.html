@@ -26,11 +26,19 @@
       .station{fill:#fff7da;stroke:#986719;stroke-width:2}
       .trellis{stroke:var(--accent);stroke-width:5;stroke-dasharray:10 7;fill:none}
       .beam{stroke:#9a7753;stroke-width:12;stroke-linecap:square}
+      .plant-dot{fill:#fffdf5;stroke:#315e4a;stroke-width:2}
+      .plant-code{font-size:9px;font-weight:850;fill:#173e32;text-anchor:middle;dominant-baseline:central}
       .note{fill:#fff;stroke:#9cad9f;stroke-width:1.5}
       .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px}
       .card{background:#fff;border:1px solid #c9d3cb;border-radius:14px;padding:16px}
       .card h2{font-size:17px;margin:0 0 6px}.card p,.card ul{margin:0;color:var(--muted)}
       .card ul{padding-left:18px}.warning{border-color:#d69b7f;background:#fff8f3}
+      .list-wrap{margin-top:20px;overflow:auto;background:#fff;border:1px solid #c9d3cb;border-radius:16px}
+      table{width:100%;border-collapse:collapse;min-width:760px}
+      th,td{padding:11px 13px;text-align:left;border-bottom:1px solid #dde4df;vertical-align:top}
+      th{background:#edf3ed;color:var(--fg);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+      tbody tr:last-child td{border-bottom:0}
+      .bed-id{font-weight:800;color:var(--accent);white-space:nowrap}
       @media print{body{background:#fff}.map{box-shadow:none}.cards{grid-template-columns:repeat(2,1fr)}}
     </style>
   </head>
@@ -50,54 +58,85 @@
           <text x="500" y="138" text-anchor="middle" class="label">2-foot top gap</text>
 
           <rect x="160" y="170" width="160" height="320" rx="12" class="bed large"/>
-          <text x="240" y="210" text-anchor="middle" class="title">Upper-left</text>
-          <text x="240" y="236" text-anchor="middle" class="label">8 × 4 ft</text>
-          <text x="240" y="285" text-anchor="middle" class="small">Brussels sprouts ×4</text>
-          <text x="240" y="310" text-anchor="middle" class="small">Cauliflower starts ×4</text>
-          <text x="240" y="350" text-anchor="middle" class="tiny">2 rows × 4 plants</text>
-          <text x="240" y="370" text-anchor="middle" class="tiny">24-in centers</text>
+          <text x="240" y="200" text-anchor="middle" class="title">Bed 1</text>
+          <text x="240" y="222" text-anchor="middle" class="tiny">upper-left · 8 × 4 · 24-in centers</text>
+          <g aria-label="Four Brussels sprouts and four cauliflower starts in alternating rows">
+            <circle cx="200" cy="270" r="18" class="plant-dot"/><text x="200" y="270" class="plant-code">BS1</text>
+            <circle cx="280" cy="270" r="18" class="plant-dot"/><text x="280" y="270" class="plant-code">CF1</text>
+            <circle cx="200" cy="338" r="18" class="plant-dot"/><text x="200" y="338" class="plant-code">CF2</text>
+            <circle cx="280" cy="338" r="18" class="plant-dot"/><text x="280" y="338" class="plant-code">BS2</text>
+            <circle cx="200" cy="406" r="18" class="plant-dot"/><text x="200" y="406" class="plant-code">BS3</text>
+            <circle cx="280" cy="406" r="18" class="plant-dot"/><text x="280" y="406" class="plant-code">CF3</text>
+            <circle cx="200" cy="464" r="18" class="plant-dot"/><text x="200" y="464" class="plant-code">CF4</text>
+            <circle cx="280" cy="464" r="18" class="plant-dot"/><text x="280" y="464" class="plant-code">BS4</text>
+          </g>
 
           <circle cx="500" cy="330" r="120" class="bed spiral"/>
           <path d="M500 330c58-58 112 0 65 50-50 52-137 12-112-62 23-70 122-83 164-14" fill="none" stroke="#fff8e9" stroke-width="14" stroke-linecap="round"/>
-          <text x="500" y="312" text-anchor="middle" class="title">Existing herb garden</text>
-          <text x="500" y="340" text-anchor="middle" class="label">6-ft circle</text>
-          <text x="500" y="372" text-anchor="middle" class="tiny">Keep established moisture tiers</text>
+          <text x="500" y="304" text-anchor="middle" class="title">Herb circle</text>
+          <text x="500" y="330" text-anchor="middle" class="label">6 ft</text>
+          <text x="500" y="357" text-anchor="middle" class="tiny">dry crown · moist base</text>
+          <text x="500" y="378" text-anchor="middle" class="tiny">15 plants; see alphabetical key</text>
 
           <rect x="680" y="170" width="160" height="320" rx="12" class="bed large"/>
-          <text x="760" y="210" text-anchor="middle" class="title">Upper-right</text>
-          <text x="760" y="236" text-anchor="middle" class="label">8 × 4 ft</text>
-          <text x="760" y="285" text-anchor="middle" class="small">Broccoli starts ×4</text>
-          <text x="760" y="310" text-anchor="middle" class="small">Red cabbage ×4</text>
-          <text x="760" y="350" text-anchor="middle" class="tiny">2 rows × 4 plants</text>
-          <text x="760" y="370" text-anchor="middle" class="tiny">18–24-in centers</text>
+          <text x="760" y="200" text-anchor="middle" class="title">Bed 2</text>
+          <text x="760" y="222" text-anchor="middle" class="tiny">upper-right · 8 × 4 · 18–24-in centers</text>
+          <g aria-label="Four broccoli and four red cabbage plants in alternating rows">
+            <circle cx="720" cy="270" r="18" class="plant-dot"/><text x="720" y="270" class="plant-code">BR1</text>
+            <circle cx="800" cy="270" r="18" class="plant-dot"/><text x="800" y="270" class="plant-code">CB1</text>
+            <circle cx="720" cy="338" r="18" class="plant-dot"/><text x="720" y="338" class="plant-code">CB2</text>
+            <circle cx="800" cy="338" r="18" class="plant-dot"/><text x="800" y="338" class="plant-code">BR2</text>
+            <circle cx="720" cy="406" r="18" class="plant-dot"/><text x="720" y="406" class="plant-code">BR3</text>
+            <circle cx="800" cy="406" r="18" class="plant-dot"/><text x="800" y="406" class="plant-code">CB3</text>
+            <circle cx="720" cy="464" r="18" class="plant-dot"/><text x="720" y="464" class="plant-code">CB4</text>
+            <circle cx="800" cy="464" r="18" class="plant-dot"/><text x="800" y="464" class="plant-code">BR4</text>
+          </g>
 
           <rect x="100" y="490" width="800" height="80" class="path"/>
           <text x="500" y="538" text-anchor="middle" class="label">2-foot center path</text>
 
           <rect x="160" y="570" width="160" height="320" rx="12" class="bed leaf"/>
-          <text x="240" y="610" text-anchor="middle" class="title">Lower-left</text>
-          <text x="240" y="636" text-anchor="middle" class="label">8 × 4 ft</text>
-          <text x="240" y="686" text-anchor="middle" class="small">Collards ×2 · kale ×3</text>
-          <text x="240" y="711" text-anchor="middle" class="small">Swiss chard ×4</text>
-          <text x="240" y="750" text-anchor="middle" class="tiny">Repeat outer-leaf harvest</text>
+          <text x="240" y="600" text-anchor="middle" class="title">Bed 3</text>
+          <text x="240" y="622" text-anchor="middle" class="tiny">lower-left · 8 × 4 · harvest outer leaves</text>
+          <g aria-label="Two collards and three kale in one row, four Swiss chard in the other">
+            <circle cx="200" cy="666" r="17" class="plant-dot"/><text x="200" y="666" class="plant-code">CO1</text>
+            <circle cx="200" cy="718" r="17" class="plant-dot"/><text x="200" y="718" class="plant-code">KA1</text>
+            <circle cx="200" cy="770" r="17" class="plant-dot"/><text x="200" y="770" class="plant-code">KA2</text>
+            <circle cx="200" cy="822" r="17" class="plant-dot"/><text x="200" y="822" class="plant-code">KA3</text>
+            <circle cx="200" cy="870" r="17" class="plant-dot"/><text x="200" y="870" class="plant-code">CO2</text>
+            <circle cx="280" cy="680" r="17" class="plant-dot"/><text x="280" y="680" class="plant-code">CH1</text>
+            <circle cx="280" cy="742" r="17" class="plant-dot"/><text x="280" y="742" class="plant-code">CH2</text>
+            <circle cx="280" cy="804" r="17" class="plant-dot"/><text x="280" y="804" class="plant-code">CH3</text>
+            <circle cx="280" cy="866" r="17" class="plant-dot"/><text x="280" y="866" class="plant-code">CH4</text>
+          </g>
 
           <rect x="380" y="570" width="240" height="320" rx="12" class="bed leaf"/>
-          <text x="500" y="610" text-anchor="middle" class="title">Lower-center</text>
-          <text x="500" y="636" text-anchor="middle" class="label">8 × 6 ft total · beam divider</text>
+          <text x="500" y="600" text-anchor="middle" class="title">Bed 4A | Bed 4B</text>
+          <text x="500" y="622" text-anchor="middle" class="tiny">two touching 8 × 3 sections · beam divider</text>
           <line x1="500" y1="652" x2="500" y2="890" class="beam"/>
-          <text x="440" y="680" text-anchor="middle" class="label">8 × 3 section</text>
-          <text x="440" y="712" text-anchor="middle" class="tiny">Kohlrabi ×4</text>
-          <text x="440" y="733" text-anchor="middle" class="tiny">Pak choi ×3</text>
-          <text x="440" y="754" text-anchor="middle" class="tiny">Mustard ×1</text>
-          <text x="560" y="680" text-anchor="middle" class="label">8 × 3 section</text>
-          <text x="560" y="712" text-anchor="middle" class="tiny">Lettuce ×2</text>
-          <text x="560" y="733" text-anchor="middle" class="tiny">Turnips ×4</text>
-          <text x="560" y="754" text-anchor="middle" class="tiny">Radishes ×3</text>
-          <text x="500" y="842" text-anchor="middle" class="tiny">Touching sections; harvest quick crops early</text>
+          <text x="440" y="650" text-anchor="middle" class="label">4A</text>
+          <circle cx="410" cy="690" r="16" class="plant-dot"/><text x="410" y="690" class="plant-code">KW1</text>
+          <circle cx="470" cy="690" r="16" class="plant-dot"/><text x="470" y="690" class="plant-code">KP1</text>
+          <circle cx="410" cy="748" r="16" class="plant-dot"/><text x="410" y="748" class="plant-code">KW2</text>
+          <circle cx="470" cy="748" r="16" class="plant-dot"/><text x="470" y="748" class="plant-code">KP2</text>
+          <circle cx="410" cy="806" r="16" class="plant-dot"/><text x="410" y="806" class="plant-code">PC1</text>
+          <circle cx="470" cy="806" r="16" class="plant-dot"/><text x="470" y="806" class="plant-code">PC2</text>
+          <circle cx="410" cy="864" r="16" class="plant-dot"/><text x="410" y="864" class="plant-code">PC3</text>
+          <circle cx="470" cy="864" r="16" class="plant-dot"/><text x="470" y="864" class="plant-code">MU1</text>
+          <text x="560" y="650" text-anchor="middle" class="label">4B</text>
+          <circle cx="530" cy="690" r="16" class="plant-dot"/><text x="530" y="690" class="plant-code">LG1</text>
+          <circle cx="590" cy="690" r="16" class="plant-dot"/><text x="590" y="690" class="plant-code">LT1</text>
+          <circle cx="530" cy="750" r="15" class="plant-dot"/><text x="530" y="750" class="plant-code">TU1</text>
+          <circle cx="590" cy="750" r="15" class="plant-dot"/><text x="590" y="750" class="plant-code">TU2</text>
+          <circle cx="530" cy="810" r="15" class="plant-dot"/><text x="530" y="810" class="plant-code">TU3</text>
+          <circle cx="590" cy="810" r="15" class="plant-dot"/><text x="590" y="810" class="plant-code">TU4</text>
+          <circle cx="525" cy="866" r="14" class="plant-dot"/><text x="525" y="866" class="plant-code">RA1</text>
+          <circle cx="560" cy="866" r="14" class="plant-dot"/><text x="560" y="866" class="plant-code">RA2</text>
+          <circle cx="595" cy="866" r="14" class="plant-dot"/><text x="595" y="866" class="plant-code">RA3</text>
 
           <rect x="680" y="570" width="160" height="320" rx="12" class="bed seed"/>
-          <text x="760" y="610" text-anchor="middle" class="title">Lower-right</text>
-          <text x="760" y="636" text-anchor="middle" class="label">8 × 4 ft · seed bed</text>
+          <text x="760" y="600" text-anchor="middle" class="title">Bed 5</text>
+          <text x="760" y="622" text-anchor="middle" class="tiny">lower-right · 8 × 4 · seed bed</text>
           <line x1="710" y1="680" x2="810" y2="680" class="seedline"/>
           <text x="760" y="704" text-anchor="middle" class="tiny">Carrots · 2 rows × 6 ft</text>
           <line x1="710" y1="730" x2="810" y2="730" class="seedline"/>
@@ -116,6 +155,54 @@
         <section class="card"><h2>Watering-can rule</h2><p>Keep seed surfaces evenly damp with a gentle rose. Water established transplants deeply at their root zones only after the two-inch soil check shows drying.</p></section>
         <section class="card warning"><h2>Geometry check</h2><p>The vertical dimensions total exactly 20 feet. Do not alter the five rectangular beds or six-foot herb circle. Preserve the horizontal access spaces already present in the field.</p></section>
       </div>
+      <section aria-labelledby="alphabetical-heading">
+        <h2 id="alphabetical-heading" style="margin:28px 0 8px">Alphabetical planting list</h2>
+        <p class="lede">Bed numbers match the diagram. Counts are individual plants unless the row says seed batch.</p>
+        <div class="list-wrap">
+          <table>
+            <thead><tr><th>Plant</th><th>Count</th><th>Bed / zone</th><th>Exact placement</th></tr></thead>
+            <tbody>
+              <tr><td>Basil</td><td>2</td><td class="bed-id">Herb circle</td><td>Middle, moderate-moisture terrace; keep movable during cold weather.</td></tr>
+              <tr><td>Broccoli, Green Magic</td><td>4</td><td class="bed-id">Bed 2</td><td>Alternating checkerboard with cabbage, 18–24 inches apart.</td></tr>
+              <tr><td>Broccoli seed</td><td>1 batch</td><td class="bed-id">Bed 5</td><td>Two nursery stations; transplant later into harvested gaps.</td></tr>
+              <tr><td>Brussels sprouts, Jade Cross</td><td>4</td><td class="bed-id">Bed 1</td><td>Alternating checkerboard with cauliflower, 24 inches apart.</td></tr>
+              <tr><td>Cabbage, Red Express</td><td>4</td><td class="bed-id">Bed 2</td><td>Alternating checkerboard with broccoli, 18–24 inches apart.</td></tr>
+              <tr><td>Carrots</td><td>1 seed batch</td><td class="bed-id">Bed 5</td><td>Two six-foot rows in an 18-inch-wide loose-soil strip.</td></tr>
+              <tr><td>Cauliflower, Snow Crown</td><td>4</td><td class="bed-id">Bed 1</td><td>Alternating checkerboard with Brussels sprouts, 24 inches apart.</td></tr>
+              <tr><td>Cauliflower seed</td><td>1 batch</td><td class="bed-id">Bed 5</td><td>Two nursery stations; transplant later into harvested gaps.</td></tr>
+              <tr><td>Chamomile — confirm type</td><td>4</td><td class="bed-id">Sunny path pots</td><td>Keep movable until German versus Roman type is confirmed.</td></tr>
+              <tr><td>Chile pequín</td><td>1</td><td class="bed-id">Dry perimeter</td><td>Sunny east-side edge with mature shrub room.</td></tr>
+              <tr><td>Collards, Georgia</td><td>2</td><td class="bed-id">Bed 3</td><td>At opposite ends of the kale row; harvest outer leaves.</td></tr>
+              <tr><td>Fennel, Orion</td><td>1</td><td class="bed-id">Separate pot</td><td>Sunny perimeter; do not crowd the herb circle.</td></tr>
+              <tr><td>French Breakfast radish</td><td>3</td><td class="bed-id">Bed 4B</td><td>Three plants along the most accessible beam/path edge.</td></tr>
+              <tr><td>Galactic lettuce</td><td>1</td><td class="bed-id">Bed 4B</td><td>First position in the lettuce line.</td></tr>
+              <tr><td>Kale, Redbor</td><td>3</td><td class="bed-id">Bed 3</td><td>Between the two collards in one long row.</td></tr>
+              <tr><td>Kohlrabi, purple</td><td>2</td><td class="bed-id">Bed 4A</td><td>Alternating with white kohlrabi in the first row.</td></tr>
+              <tr><td>Kohlrabi, white</td><td>2</td><td class="bed-id">Bed 4A</td><td>Alternating with purple kohlrabi in the first row.</td></tr>
+              <tr><td>Leaf fennel / dill — confirm</td><td>3</td><td class="bed-id">West entrance pots</td><td>Keep separately labeled until identity is confirmed.</td></tr>
+              <tr><td>Lemon balm</td><td>2</td><td class="bed-id">Herb circle</td><td>Contained pots on the moist lower terrace.</td></tr>
+              <tr><td>Lemongrass</td><td>2</td><td class="bed-id">Movable containers</td><td>Sunny south/southeast perimeter; protect from cold.</td></tr>
+              <tr><td>Lettuce, Tropicana</td><td>1</td><td class="bed-id">Bed 4B</td><td>Second position in the lettuce line.</td></tr>
+              <tr><td>Malabar spinach</td><td>1</td><td class="bed-id">Container + trellis</td><td>Warm-season hold on the sunny perimeter.</td></tr>
+              <tr><td>Marjoram, compact</td><td>1</td><td class="bed-id">Herb circle</td><td>Upper dry shoulder below the rosemary crown.</td></tr>
+              <tr><td>Mexican mint marigold</td><td>3</td><td class="bed-id">Pollinator perimeter</td><td>East/northeast edge where mature height will not shade beds.</td></tr>
+              <tr><td>Mustard, Red Giant</td><td>1</td><td class="bed-id">Bed 4A</td><td>End of the pak-choi row; harvest young if space tightens.</td></tr>
+              <tr><td>Nasturtium</td><td>1</td><td class="bed-id">Movable pot</td><td>Near brassicas for observation, but outside the beds to prevent sprawl.</td></tr>
+              <tr><td>Pak choi, red</td><td>3</td><td class="bed-id">Bed 4A</td><td>Second row with mustard; 8–12 inches apart.</td></tr>
+              <tr><td>Pearl Pod bean — confirm habit</td><td>4</td><td class="bed-id">North trellis</td><td>Use trellis only if tag confirms climbing beans.</td></tr>
+              <tr><td>Rosemary</td><td>3</td><td class="bed-id">Herb circle + dry perimeter</td><td>One pruned crown plant; two on the dry east-side perimeter.</td></tr>
+              <tr><td>Rue</td><td>2</td><td class="bed-id">Dry perimeter</td><td>Away from entrance and skin-contact paths.</td></tr>
+              <tr><td>Sage</td><td>1</td><td class="bed-id">Herb circle</td><td>Upper dry shoulder with excellent drainage.</td></tr>
+              <tr><td>Scallions</td><td>1 seed batch</td><td class="bed-id">Bed 5</td><td>One six-foot band beside—but separately labeled from—carrots.</td></tr>
+              <tr><td>Strawberries</td><td>3</td><td class="bed-id">Herb circle</td><td>Sunny lower apron with even moisture.</td></tr>
+              <tr><td>Sweet woodruff</td><td>3</td><td class="bed-id">Herb circle</td><td>Removable pots at the coolest shaded base.</td></tr>
+              <tr><td>Swiss chard</td><td>4</td><td class="bed-id">Bed 3</td><td>One long row parallel to the collard/kale row.</td></tr>
+              <tr><td>Turnip, Scarlet Queen</td><td>4</td><td class="bed-id">Bed 4B</td><td>Middle succession line; harvest before roots crowd.</td></tr>
+              <tr><td>Vietnamese cilantro</td><td>2</td><td class="bed-id">Herb circle</td><td>Contained pots on the moist lower terrace.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   </body>
 </html>
