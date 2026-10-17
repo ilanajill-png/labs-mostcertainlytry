@@ -1,4 +1,4 @@
-const CACHE='garden-tracker-v7';
+const CACHE='garden-tracker-v9';
 const ASSETS=['/projects/garden-health-tracker.html','/assets/garden-tracker.css','/assets/garden-tracker.js','/assets/garden-tracker-icon.svg','/assets/howdy-partner-logo.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

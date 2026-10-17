@@ -1,18 +1,18 @@
 (()=>{
   'use strict';
   const GROUPS=[
-    ['BS','Jade Cross Brussels sprouts',4,'Lane A'],['CF','Snow Crown cauliflower',4,'Lane A'],
-    ['CB','Red Express cabbage',4,'Lane B'],['BR','Green Magic broccoli',4,'Lane B'],['KW','White kohlrabi',2,'Lane B entrance edge'],['KP','Purple kohlrabi',2,'Lane B entrance edge'],
-    ['CO','Georgia collards',2,'Lane C'],['KA','Redbor kale',3,'Lane C'],['CH','Swiss chard',4,'Lane C'],['PC','Red pak choi',3,'Lane D'],['MU','Red Giant mustard',1,'Lane D'],['LG','Galactic lettuce',1,'Lane D'],['LT','Tropicana lettuce',1,'Lane D'],['TU','Scarlet Queen turnip',4,'Lane D'],['RA','French Breakfast radish',3,'Lane D'],
+    ['BS','Jade Cross Brussels sprouts',4,'Upper-left 8 × 4 bed'],['CF','Snow Crown cauliflower',4,'Upper-left 8 × 4 bed'],
+    ['CB','Red Express cabbage',4,'Upper-right 8 × 4 bed'],['BR','Green Magic broccoli',4,'Upper-right 8 × 4 bed'],['KW','White kohlrabi',2,'Lower-center section 1 · 8 × 3'],['KP','Purple kohlrabi',2,'Lower-center section 1 · 8 × 3'],
+    ['CO','Georgia collards',2,'Lower-left 8 × 4 bed'],['KA','Redbor kale',3,'Lower-left 8 × 4 bed'],['CH','Swiss chard',4,'Lower-left 8 × 4 bed'],['PC','Red pak choi',3,'Lower-center section 1 · 8 × 3'],['MU','Red Giant mustard',1,'Lower-center section 1 · 8 × 3'],['LG','Galactic lettuce',1,'Lower-center section 2 · 8 × 3'],['LT','Tropicana lettuce',1,'Lower-center section 2 · 8 × 3'],['TU','Scarlet Queen turnip',4,'Lower-center section 2 · 8 × 3'],['RA','French Breakfast radish',3,'Lower-center section 2 · 8 × 3'],
     ['RO','Rosemary',3,'Herb spiral / east dry edge'],['SG','Culinary sage',1,'Herb spiral'],['MJ','Compact marjoram',1,'Herb spiral'],['BA','Basil',2,'Herb spiral'],['VC','Vietnamese cilantro',2,'Herb spiral'],['LB','Lemon balm',2,'Herb spiral'],['SW','Sweet woodruff',3,'Herb spiral'],['ST','Strawberry',3,'Herb spiral'],
     ['RU','Rue',2,'East dry edge'],['CP','Chile pequín',1,'East dry edge'],['MM','Mexican mint marigold',3,'East / northeast pollinator edge'],
     ['LM','Lemongrass',2,'South / southeast containers'],['MS','Malabar spinach',1,'South / southeast containers'],['NA','Nasturtium',1,'Movable container'],['FO','Orion fennel',1,'Movable container'],['FD','Leaf fennel / dill — confirm',3,'West entrance pots'],
     ['BE','Pearl Pod bean — confirm habit',4,'V-shaped north trellis'],
     ['CM','Chamomile — confirm German or Roman',4,'Sunny south path pots'],
-    ['CA','Carrot seed strip — batch',1,'Separate seed/root bed'],
-    ['SC','Scallion seed band — batch',1,'Separate seed/root bed'],
-    ['BRS','Broccoli seed nursery — batch',1,'Separate seed/root bed'],
-    ['CFS','Cauliflower seed nursery — batch',1,'Separate seed/root bed']
+    ['CA','Carrot seed strip — batch',1,'Lower-right 8 × 4 seed bed'],
+    ['SC','Scallion seed band — batch',1,'Lower-right 8 × 4 seed bed'],
+    ['BRS','Broccoli seed nursery — batch',1,'Lower-right 8 × 4 seed bed'],
+    ['CFS','Cauliflower seed nursery — batch',1,'Lower-right 8 × 4 seed bed']
   ];
   let serial=0;
   const PLANTS=GROUPS.flatMap(([code,name,count,location])=>Array.from({length:count},(_,i)=>({id:`${code}-${String(i+1).padStart(2,'0')}`,number:++serial,code,name,specimen:i+1,total:count,location})));
