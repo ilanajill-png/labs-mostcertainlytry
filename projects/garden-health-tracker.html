@@ -44,6 +44,7 @@
           <label><span>Location</span><select id="location-filter"><option value="all">Everywhere</option></select></label>
         </div>
         <div class="list-heading"><div><h2>Garden roster</h2><p id="roster-count">85 tracked records</p></div><button id="quick-add" class="primary-action" type="button">＋ New observation</button></div>
+        <div class="daily-brief" aria-labelledby="daily-brief-title"><div><p class="eyebrow">Monday · October 19</p><h3 id="daily-brief-title">Today’s watering checklist</h3><p>Clear and mild, 55–78°F, with no meaningful rain expected. Every plant gets its own applicable checklist inside its plant record.</p></div><p><strong>Start with the soil.</strong> Check two inches down before watering; forecast rain does not count.</p></div>
         <div id="plant-list" class="plant-list" aria-live="polite"></div>
       </section>
 
@@ -72,14 +73,14 @@
           <article><h3>Restore backup</h3><p>Imports an exported JSON file. Existing entries with different IDs are preserved.</p><label class="file-action">Choose backup<input id="import-json" type="file" accept="application/json,.json"></label></article>
           <article><h3>Storage</h3><p id="storage-status">Calculating local storage…</p><button id="clear-data" class="danger-action" type="button">Delete all observations</button></article>
         </div>
-        <div class="data-dictionary"><h3>What the app tracks</h3><p><strong>Identity:</strong> specimen ID, cultivar, location, planted date, source, acquisition cost, and multiple tag photos. <strong>Growth:</strong> height, two-axis spread, stem diameter, phenology, vigor. <strong>Health:</strong> health score, soil moisture, leaf color, wilt, damage percentage, pests and symptoms. <strong>Inputs:</strong> water, rain, fertilizer, amendment, treatment. <strong>Yield:</strong> harvest count and weight. <strong>Evidence:</strong> multiple plant photos, filenames, capture date/time, save timestamp, symptom detail, notes, and next action.</p></div>
+        <div class="data-dictionary"><h3>What the app tracks</h3><p><strong>Identity:</strong> specimen ID, cultivar, location, planted date, source, acquisition cost, and multiple tag photos. <strong>Daily care:</strong> dated, plant-specific watering checklists and completion times. <strong>Growth:</strong> height, two-axis spread, stem diameter, phenology, vigor. <strong>Health:</strong> health score, soil moisture, leaf color, wilt, damage percentage, pests and symptoms. <strong>Inputs:</strong> water, rain, fertilizer, amendment, treatment. <strong>Yield:</strong> harvest count and weight. <strong>Evidence:</strong> multiple plant photos, filenames, capture date/time, save timestamp, symptom detail, notes, and next action.</p></div>
       </section>
     </main>
 
     <button id="floating-add" class="floating-add" type="button" aria-label="Add garden observation">＋</button>
 
     <dialog id="observation-dialog" class="sheet-dialog">
-      <form id="observation-form" method="dialog">
+      <form id="observation-form">
         <header><div><p class="eyebrow">Field entry</p><h2>New observation</h2></div><button class="icon-button close-dialog" type="button" aria-label="Close">×</button></header>
         <div class="form-grid">
           <label class="full"><span>Plant</span><select id="obs-plant" name="plantId" required></select></label>
