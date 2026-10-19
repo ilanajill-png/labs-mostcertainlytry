@@ -68,6 +68,9 @@
       .freedom-table strong,.freedom-table small { display:block; }
       .freedom-table small { margin-top:.2rem; color:var(--muted); }
       .freedom-table select,.freedom-notes input,.freedom-notes textarea { width:100%; padding:.58rem .65rem; border:1px solid var(--line); border-radius:.5rem; background:#fff; color:var(--ink); font:inherit; }
+      .answer-source { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr); gap:.45rem; margin-top:.5rem; }
+      .answer-source input { width:100%; min-width:0; padding:.5rem; border:1px solid var(--line); border-radius:.45rem; background:#fff; color:var(--ink); font:inherit; font-size:.82rem; }
+      .answer-source a { grid-column:1/-1; width:max-content; font-size:.8rem; font-weight:800; }
       .freedom-notes { display:grid; gap:.75rem; padding:1rem; border:1px solid var(--line); border-radius:.85rem; background:#fff; }
       .freedom-notes label { display:grid; gap:.3rem; font-weight:800; }
       .freedom-notes textarea { min-height:8rem; resize:vertical; }
@@ -137,7 +140,7 @@
             <p class="reverse-status" id="amenity-search-status">Facility data is loading…</p>
           </article>
         </div>
-        <div class="reverse-help"><strong>How matching works:</strong> Policy matches use only answers you verified; unresearched homes remain unknown. Nearby-place searches query public place indexes and route a maximum of 12 facilities in the entered area. A route match is a planning lead—not proof of sidewalks, accessibility, admission, water safety, or current business hours.</div>
+        <div class="reverse-help"><strong>How matching works:</strong> Policy matches use only answers you verified; unresearched homes remain unknown. Each result links its saved evidence or warns when no source was recorded. Nearby-place searches query public place indexes, cite the place used, and route a maximum of 12 facilities in the entered area. A route match is a planning lead—not proof of sidewalks, accessibility, admission, water safety, or current business hours.</div>
         <div class="reverse-results" id="reverse-results" aria-live="polite"></div>
       </section>
 
@@ -164,7 +167,7 @@
       </section>
 
       <section class="table-section" aria-labelledby="freedom-title">
-        <div class="section-head"><div><p class="kicker">Daily freedom &amp; comfort</p><h2 id="freedom-title">Ask what everyday life actually feels like.</h2></div><p>These policies are not in CMS Care Compare. Record verified answers for each facility; they remain only in this browser.</p></div>
+        <div class="section-head"><div><p class="kicker">Daily freedom &amp; comfort</p><h2 id="freedom-title">Ask what everyday life actually feels like.</h2></div><p>These policies are not in CMS Care Compare. Record an answer and its evidence for each facility; both remain only in this browser.</p></div>
         <div class="freedom-shell">
           <div>
             <table class="freedom-table">
@@ -180,6 +183,8 @@
           <aside class="freedom-notes">
             <h3 id="freedom-facility-name">Select a nursing home</h3>
             <label>Visiting hours<input id="visiting-hours" type="text" placeholder="Example: 8 AM–8 PM; after-hours by arrangement" disabled></label>
+            <label>Visiting-hours source label<input id="visiting-source-label" type="text" placeholder="Example: Resident handbook" disabled></label>
+            <label>Visiting-hours source URL<input id="visiting-source-url" type="url" inputmode="url" placeholder="https://…" disabled></label>
             <label>Verified on<input id="policy-verified-date" type="date" disabled></label>
             <label>Notes<textarea id="policy-notes" placeholder="Who answered, conditions, delivery entrance, guest meal cost, leave paperwork…" disabled></textarea></label>
             <div class="freedom-actions"><a class="button" id="call-facility" href="#" aria-disabled="true">Call facility</a><button class="button" id="copy-questions" type="button" disabled>Copy question script</button><button class="button" id="clear-policy" type="button" disabled>Clear saved answers</button></div>
@@ -270,6 +275,8 @@
       const freedomQuestions = document.querySelector("#freedom-questions");
       const freedomFacilityName = document.querySelector("#freedom-facility-name");
       const visitingHours = document.querySelector("#visiting-hours");
+      const visitingSourceLabel = document.querySelector("#visiting-source-label");
+      const visitingSourceUrl = document.querySelector("#visiting-source-url");
       const policyVerifiedDate = document.querySelector("#policy-verified-date");
       const policyNotes = document.querySelector("#policy-notes");
       const callFacility = document.querySelector("#call-facility");
@@ -306,22 +313,23 @@
       function renderInitialCards() { amenityGrid.innerHTML=categories.map(c=>`<article class="amenity-card is-empty" id="amenity-${c.id}"><header><span class="amenity-icon" aria-hidden="true">${c.icon}</span><h3>${c.label}</h3></header><p class="amenity-note">Select a nursing home, then run the comparison.</p></article>`).join(""); }
       renderInitialCards();
 
-      function emptyPolicy() { return { answers:Object.fromEntries(policyQuestions.map(q=>[q.id,"unchecked"])), visitingHours:"", verifiedDate:"", notes:"" }; }
+      function emptyPolicy() { return { answers:Object.fromEntries(policyQuestions.map(q=>[q.id,"unchecked"])), sources:Object.fromEntries(policyQuestions.map(q=>[q.id,{label:"",url:""}])), visitingHours:"", visitingSource:{label:"",url:""}, verifiedDate:"", notes:"" }; }
       function policyKey(id) { return `happy-life-policy-${id}`; }
-      function loadPolicy(id) { try { return {...emptyPolicy(),...JSON.parse(localStorage.getItem(policyKey(id))||"{}")}; } catch { return emptyPolicy(); } }
+      function loadPolicy(id) { try { const base=emptyPolicy(), raw=JSON.parse(localStorage.getItem(policyKey(id))||"{}"); return {...base,...raw,answers:{...base.answers,...(raw.answers||{})},sources:{...base.sources,...(raw.sources||{})},visitingSource:{...base.visitingSource,...(raw.visitingSource||{})}}; } catch { return emptyPolicy(); } }
+      function safeSourceUrl(value) { try { const url=new URL((value||"").trim()); return /^https?:$/.test(url.protocol)?url.href:""; } catch { return ""; } }
       function renderPolicy() {
         const data=selected?loadPolicy(selected.id):emptyPolicy();
-        freedomQuestions.innerHTML=policyQuestions.map(q=>`<tr><td><strong>${esc(q.label)}</strong><small>${esc(q.detail)}</small></td><td><select data-policy-question="${q.id}" ${selected?"":"disabled"} aria-label="Answer for ${esc(q.label)}">${policyOptions.map(([value,label])=>`<option value="${value}" ${data.answers?.[q.id]===value?"selected":""}>${label}</option>`).join("")}</select></td></tr>`).join("");
-        freedomFacilityName.textContent=selected?selected.name:"Select a nursing home"; visitingHours.value=data.visitingHours||""; policyVerifiedDate.value=data.verifiedDate||""; policyNotes.value=data.notes||"";
-        [visitingHours,policyVerifiedDate,policyNotes,copyQuestions,clearPolicy].forEach(el=>el.disabled=!selected);
+        freedomQuestions.innerHTML=policyQuestions.map(q=>{ const source=data.sources?.[q.id]||{}, href=safeSourceUrl(source.url); return `<tr><td><strong>${esc(q.label)}</strong><small>${esc(q.detail)}</small></td><td><select data-policy-question="${q.id}" ${selected?"":"disabled"} aria-label="Answer for ${esc(q.label)}">${policyOptions.map(([value,label])=>`<option value="${value}" ${data.answers?.[q.id]===value?"selected":""}>${label}</option>`).join("")}</select><div class="answer-source"><input data-source-label="${q.id}" type="text" value="${esc(source.label||"")}" placeholder="Source label" ${selected?"":"disabled"} aria-label="Source label for ${esc(q.label)}"><input data-source-url="${q.id}" type="url" inputmode="url" value="${esc(source.url||"")}" placeholder="https://…" ${selected?"":"disabled"} aria-label="Source URL for ${esc(q.label)}">${href?`<a href="${esc(href)}" target="_blank" rel="noopener">Open ${esc(source.label||"source")}</a>`:""}</div></td></tr>`; }).join("");
+        freedomFacilityName.textContent=selected?selected.name:"Select a nursing home"; visitingHours.value=data.visitingHours||""; visitingSourceLabel.value=data.visitingSource?.label||""; visitingSourceUrl.value=data.visitingSource?.url||""; policyVerifiedDate.value=data.verifiedDate||""; policyNotes.value=data.notes||"";
+        [visitingHours,visitingSourceLabel,visitingSourceUrl,policyVerifiedDate,policyNotes,copyQuestions,clearPolicy].forEach(el=>el.disabled=!selected);
         if(selected){ callFacility.href=`tel:${selected.phone}`; callFacility.removeAttribute("aria-disabled"); policySaveState.textContent="Answers save automatically in this browser only."; }
         else { callFacility.href="#"; callFacility.setAttribute("aria-disabled","true"); policySaveState.textContent="Select a facility to record answers."; }
       }
       function savePolicy() {
-        if(!selected)return; const answers={}; document.querySelectorAll("[data-policy-question]").forEach(el=>answers[el.dataset.policyQuestion]=el.value);
-        localStorage.setItem(policyKey(selected.id),JSON.stringify({answers,visitingHours:visitingHours.value,verifiedDate:policyVerifiedDate.value,notes:policyNotes.value})); policySaveState.textContent=`Saved locally at ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}.`;
+        if(!selected)return; const answers={},sources={}; document.querySelectorAll("[data-policy-question]").forEach(el=>answers[el.dataset.policyQuestion]=el.value); policyQuestions.forEach(q=>{ sources[q.id]={label:document.querySelector(`[data-source-label="${q.id}"]`)?.value||"",url:document.querySelector(`[data-source-url="${q.id}"]`)?.value||""}; });
+        localStorage.setItem(policyKey(selected.id),JSON.stringify({answers,sources,visitingHours:visitingHours.value,visitingSource:{label:visitingSourceLabel.value,url:visitingSourceUrl.value},verifiedDate:policyVerifiedDate.value,notes:policyNotes.value})); policySaveState.textContent=`Saved locally at ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}.`;
       }
-      document.querySelector("#freedom-questions").addEventListener("change",savePolicy); [visitingHours,policyVerifiedDate,policyNotes].forEach(el=>el.addEventListener("input",savePolicy));
+      document.querySelector("#freedom-questions").addEventListener("change",savePolicy); document.querySelector("#freedom-questions").addEventListener("input",savePolicy); [visitingHours,visitingSourceLabel,visitingSourceUrl,policyVerifiedDate,policyNotes].forEach(el=>el.addEventListener("input",savePolicy));
       copyQuestions.addEventListener("click",async()=>{ if(!selected)return; const script=`Questions for ${selected.name}\n\n${policyQuestions.map((q,i)=>`${i+1}. ${q.label}: ${q.detail}`).join("\n")}\n7. What are the current visiting hours, including evenings, weekends, holidays, and after-hours exceptions?`; try { await navigator.clipboard.writeText(script); policySaveState.textContent="Question script copied."; } catch { policySaveState.textContent="Copy was blocked by the browser."; } });
       clearPolicy.addEventListener("click",()=>{ if(!selected||!confirm(`Clear locally saved answers for ${selected.name}?`))return; localStorage.removeItem(policyKey(selected.id)); renderPolicy(); policySaveState.textContent="Saved answers cleared."; });
       renderPolicy();
@@ -352,7 +360,7 @@
       function renderReverseMatches(matches,emptyMessage) {
         requirementLayer.clearLayers();
         if(!matches.length){ reverseResults.innerHTML=`<div class="reverse-help">${esc(emptyMessage)}</div>`; return; }
-        reverseResults.innerHTML=matches.map(({facility,detail})=>`<article class="reverse-result"><div><strong>${esc(facility.name)}</strong><span>${esc(facility.city)}, TX ${esc(facility.zip)}${facility.rating?` · ${facility.rating}★ CMS overall`:""}</span><span class="match-note">${esc(detail)}</span></div><button class="button" type="button" data-reverse-facility="${esc(facility.id)}">Open facility</button></article>`).join("");
+        reverseResults.innerHTML=matches.map(({facility,detail,source})=>{ const href=safeSourceUrl(source?.url); return `<article class="reverse-result"><div><strong>${esc(facility.name)}</strong><span>${esc(facility.city)}, TX ${esc(facility.zip)}${facility.rating?` · ${facility.rating}★ CMS overall`:""}</span><span class="match-note">${esc(detail)}</span>${href?`<span><a href="${esc(href)}" target="_blank" rel="noopener">Source: ${esc(source.label||"Open evidence")}</a></span>`:`<span>Source not recorded—confirm before relying on this answer.</span>`}</div><button class="button" type="button" data-reverse-facility="${esc(facility.id)}">Open facility</button></article>`; }).join("");
         matches.forEach(({facility})=>requirementLayer.addLayer(L.circleMarker([facility.lat,facility.lon],{radius:8,color:"#214e61",weight:2,fillColor:"#d89b42",fillOpacity:.9}).bindPopup(`<strong>${esc(facility.name)}</strong><br><small>Requirement match</small>`)));
         if(matches.length===1) map.setView([matches[0].facility.lat,matches[0].facility.lon],12); else map.fitBounds(matches.map(x=>[x.facility.lat,x.facility.lon]),{padding:[30,30],maxZoom:11});
       }
@@ -363,9 +371,10 @@
         const candidates=facilitiesInScope(scope); let researched=0;
         const matches=candidates.flatMap(f=>{
           const data=loadPolicy(f.id); let matched=false,detail="";
-          if(requirement==="visiting_hours") { matched=Boolean(data.visitingHours?.trim()); detail=matched?`Visiting hours: ${data.visitingHours.trim()}`:""; researched+=matched?1:0; }
-          else { const answer=data.answers?.[requirement]||"unchecked"; if(answer!=="unchecked")researched++; matched=answer==="yes"||(allowConditional&&answer==="conditional"); const label=policyOptions.find(x=>x[0]===answer)?.[1]||answer; detail=matched?`${policyQuestions.find(q=>q.id===requirement)?.label}: ${label}${data.verifiedDate?` · verified ${data.verifiedDate}`:""}`:""; }
-          return matched?[{facility:f,detail}]:[];
+          let source=null;
+          if(requirement==="visiting_hours") { matched=Boolean(data.visitingHours?.trim()); detail=matched?`Visiting hours: ${data.visitingHours.trim()}`:""; researched+=matched?1:0; source=data.visitingSource; }
+          else { const answer=data.answers?.[requirement]||"unchecked"; if(answer!=="unchecked")researched++; matched=answer==="yes"||(allowConditional&&answer==="conditional"); const label=policyOptions.find(x=>x[0]===answer)?.[1]||answer; detail=matched?`${policyQuestions.find(q=>q.id===requirement)?.label}: ${label}${data.verifiedDate?` · verified ${data.verifiedDate}`:""}`:""; source=data.sources?.[requirement]; }
+          return matched?[{facility:f,detail,source}]:[];
         }).sort((a,b)=>(b.facility.rating||0)-(a.facility.rating||0)||a.facility.name.localeCompare(b.facility.name));
         policySearchStatus.textContent=`${matches.length} match${matches.length===1?"":"es"} from ${researched} researched record${researched===1?"":"s"}${scope.trim()?` in “${scope.trim()}”`:" statewide"}.`;
         renderReverseMatches(matches,"No verified match is saved for this requirement. That means no match is documented in this browser—not that facilities necessarily lack it.");
@@ -423,7 +432,7 @@
         amenitySearchStatus.textContent=`Checking ${batch.length} facility${batch.length===1?"":"ies"} for ${category.label.toLowerCase()} access…`;
         let completed=0;
         const checked=await mapLimited(batch,3,async facility=>{ const result=await checkAmenityRequirement(facility,category,costing); completed++; reverseProgress.value=completed; amenitySearchStatus.textContent=`Checked ${completed} of ${batch.length} facilities…`; return result; });
-        const matches=checked.filter(x=>Number.isFinite(x.route?.distance)&&x.route.distance<=maximum).sort((a,b)=>a.route.distance-b.route.distance).map(x=>({facility:x.facility,detail:`${category.label}: ${x.place.name} · ${costing==="pedestrian"?"walk":"drive"} ${formatDistance(x.route.distance)} · ${formatTime(x.route.time)}`}));
+        const matches=checked.filter(x=>Number.isFinite(x.route?.distance)&&x.route.distance<=maximum).sort((a,b)=>a.route.distance-b.route.distance).map(x=>({facility:x.facility,detail:`${category.label}: ${x.place.name} · ${costing==="pedestrian"?"walk":"drive"} ${formatDistance(x.route.distance)} · ${formatTime(x.route.time)}`,source:{label:x.place.source?"Official place information":"Mapped place used for this route",url:x.place.source||`https://www.arcgis.com/home/webmap/viewer.html?center=${x.place.lon},${x.place.lat}&level=17`}}));
         const failed=checked.filter(x=>x.error||x.routeFailed).length, capped=scoped.length>batch.length;
         amenitySearchStatus.textContent=`${matches.length} route match${matches.length===1?"":"es"} within ${maximum} mile${maximum===1?"":"s"} after checking ${batch.length} facilit${batch.length===1?"y":"ies"}.${capped?` ${scoped.length-batch.length} more matched the location filter; narrow the area to check them.`:""}${failed?` ${failed} route check${failed===1?"":"s"} could not be completed.`:""}`;
         renderReverseMatches(matches,`No checked facility had a routed ${costing==="pedestrian"?"walk":"drive"} to a mapped ${category.label.toLowerCase()} within ${maximum} mile${maximum===1?"":"s"}. This does not prove none exists.`);
