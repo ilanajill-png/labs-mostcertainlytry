@@ -11,6 +11,7 @@
 !about.html
 !garden.html
 !ecoregion-finder.html
+!happy-life.html
 !styles.css
 !field-guide.css
 !robots.txt
@@ -21,6 +22,8 @@
 !assets/
 assets/*
 !assets/howdy-partner-logo.png
+!assets/happy-life/
+!assets/happy-life/**
 !assets/garden-tracker.css
 !assets/garden-tracker.js
 !assets/garden-tracker-icon.svg

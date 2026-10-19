@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Happy Life | Texas Nursing Homes & Everyday Places</title>
+    <meta name="description" content="Compare every CMS-listed Texas nursing home with nearby nature, culture, food, errands, and recreation using separate walking and driving routes.">
+    <meta property="og:title" content="Happy Life | Texas Nursing Homes & Everyday Places">
+    <meta property="og:description" content="A statewide map connecting CMS-listed nursing homes with nearby bird blinds, preserves, libraries, trails, food, culture, and everyday services.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin="anonymous">
+    <style>
+      :root { --happy-blue:#214e61; --happy-sky:#dceef3; --happy-gold:#d89b42; --happy-coral:#bc6a5b; }
+      .happy-hero { background:linear-gradient(135deg,#edf6f4 0%,#f9f1df 55%,#f6e7e1 100%); }
+      .happy-hero .snapshot { background:rgba(255,255,255,.82); }
+      .happy-layout { display:grid; grid-template-columns:minmax(18rem,25rem) minmax(0,1fr); gap:1rem; align-items:start; }
+      .happy-panel { position:sticky; top:1rem; display:grid; gap:1rem; max-height:calc(100vh - 2rem); overflow:auto; padding:1rem; border:1px solid var(--line); border-radius:1rem; background:#fff; box-shadow:var(--shadow); }
+      .happy-panel h2,.happy-panel h3 { margin:0; }
+      .happy-field { display:grid; gap:.4rem; }
+      .happy-field label { font-weight:800; }
+      .happy-field input,.happy-field select { width:100%; padding:.72rem .8rem; border:1px solid var(--line); border-radius:.55rem; background:#fff; color:var(--ink); font:inherit; }
+      .facility-list { display:grid; gap:.45rem; margin:0; padding:0; list-style:none; }
+      .facility-list button { width:100%; padding:.7rem; border:1px solid var(--line); border-radius:.65rem; background:#fff; color:var(--ink); text-align:left; cursor:pointer; }
+      .facility-list button:hover,.facility-list button:focus-visible { border-color:var(--happy-blue); outline:2px solid rgba(33,78,97,.15); }
+      .facility-list strong,.facility-list span { display:block; }
+      .facility-list span { margin-top:.15rem; color:var(--muted); font-size:.84rem; }
+      .facility-summary { padding:.85rem; border-radius:.8rem; background:var(--happy-sky); }
+      .facility-summary p { margin:.35rem 0 0; }
+      .happy-map-shell { overflow:hidden; border:1px solid var(--line); border-radius:1rem; background:#e8eee9; box-shadow:var(--shadow); }
+      #happy-map { width:100%; height:min(70vh,660px); min-height:500px; }
+      .happy-map-note { padding:.75rem 1rem; border-top:1px solid var(--line); background:#fff; color:var(--muted); font-size:.86rem; }
+      .amenity-toolbar { display:flex; flex-wrap:wrap; gap:.55rem; align-items:center; justify-content:space-between; margin:1.5rem 0 .8rem; }
+      .amenity-toolbar h2 { margin:0; }
+      .amenity-status { margin:0; color:var(--muted); }
+      .amenity-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(245px,1fr)); gap:.8rem; }
+      .amenity-card { display:grid; gap:.6rem; min-width:0; padding:1rem; border:1px solid var(--line); border-radius:.9rem; background:#fff; }
+      .amenity-card.is-walkable { border-color:#528267; box-shadow:inset 0 4px 0 #528267; }
+      .amenity-card.is-drive { box-shadow:inset 0 4px 0 var(--happy-gold); }
+      .amenity-card.is-empty { background:#f7f5ef; }
+      .amenity-card header { display:grid; grid-template-columns:auto 1fr; gap:.55rem; align-items:center; }
+      .amenity-icon { display:grid; width:2rem; height:2rem; place-items:center; border-radius:50%; background:var(--happy-sky); font-size:1.05rem; }
+      .amenity-card h3 { margin:0; font-size:1rem; }
+      .amenity-name { margin:0; font-weight:800; }
+      .amenity-address,.amenity-note { margin:0; color:var(--muted); font-size:.86rem; }
+      .route-pair { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+      .route-stat { padding:.55rem; border-radius:.55rem; background:#f4f6f3; }
+      .route-stat strong,.route-stat span { display:block; }
+      .route-stat strong { font-size:.86rem; }
+      .route-stat span { margin-top:.1rem; color:var(--muted); font-size:.8rem; }
+      .walk-badge { display:inline-flex; width:max-content; padding:.25rem .5rem; border-radius:999px; background:#dcebdd; color:#244c35; font-size:.75rem; font-weight:900; text-transform:uppercase; }
+      .drive-badge { display:inline-flex; width:max-content; padding:.25rem .5rem; border-radius:999px; background:#f4e2c3; color:#6f4815; font-size:.75rem; font-weight:900; text-transform:uppercase; }
+      .amenity-links { display:flex; flex-wrap:wrap; gap:.5rem 1rem; font-size:.84rem; }
+      .happy-legend { display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; margin:.8rem 0 0; color:var(--muted); font-size:.86rem; }
+      .happy-legend i { display:inline-block; width:.75rem; height:.75rem; margin-right:.25rem; border-radius:50%; vertical-align:-.05rem; }
+      .happy-legend .walk { background:#528267; }.happy-legend .drive { background:var(--happy-gold); }.happy-legend .home { background:var(--happy-coral); }
+      .method-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; }
+      .method-card { padding:1rem; border:1px solid var(--line); border-radius:.85rem; background:#fff; }
+      .method-card h3 { margin-top:0; }
+      .freedom-shell { display:grid; grid-template-columns:minmax(0,1fr) minmax(16rem,22rem); gap:1rem; align-items:start; }
+      .freedom-shell > * { min-width:0; }
+      .freedom-table { width:100%; min-width:0; table-layout:fixed; border-collapse:separate; border-spacing:0 .55rem; }
+      .freedom-table th { padding:.35rem .55rem; color:var(--muted); font-size:.78rem; letter-spacing:.04em; text-align:left; text-transform:uppercase; }
+      .freedom-table td { padding:.7rem .55rem; background:#fff; border-block:1px solid var(--line); vertical-align:top; }
+      .freedom-table td:first-child { border-left:1px solid var(--line); border-radius:.65rem 0 0 .65rem; }
+      .freedom-table td:last-child { border-right:1px solid var(--line); border-radius:0 .65rem .65rem 0; }
+      .freedom-table strong,.freedom-table small { display:block; }
+      .freedom-table small { margin-top:.2rem; color:var(--muted); }
+      .freedom-table select,.freedom-notes input,.freedom-notes textarea { width:100%; padding:.58rem .65rem; border:1px solid var(--line); border-radius:.5rem; background:#fff; color:var(--ink); font:inherit; }
+      .freedom-notes { display:grid; gap:.75rem; padding:1rem; border:1px solid var(--line); border-radius:.85rem; background:#fff; }
+      .freedom-notes label { display:grid; gap:.3rem; font-weight:800; }
+      .freedom-notes textarea { min-height:8rem; resize:vertical; }
+      .freedom-actions { display:flex; flex-wrap:wrap; gap:.55rem; }
+      .save-state { margin:0; color:var(--muted); font-size:.84rem; }
+      .rights-note { margin-top:1rem; padding:1rem; border-left:4px solid var(--happy-blue); background:var(--happy-sky); }
+      .rights-note p { margin:.35rem 0; }
+      .rights-note,.rights-note *,.freedom-table td { overflow-wrap:anywhere; }
+      .leaflet-popup-content { min-width:210px; }
+      .leaflet-popup-content .button { display:inline-block; margin-top:.55rem; padding:.45rem .65rem; }
+      @media (max-width:900px) { .happy-layout,.freedom-shell { grid-template-columns:1fr; }.happy-panel { position:static; max-height:none; }.facility-list { max-height:16rem; overflow:auto; } #happy-map { min-height:430px; height:60vh; } }
+      @media (max-width:520px) { .route-pair { grid-template-columns:1fr; } #happy-map { min-height:390px; }.freedom-table thead { display:none; }.freedom-table,.freedom-table tbody,.freedom-table tr,.freedom-table td { display:block; width:100%; min-width:0; }.freedom-table tr { margin-bottom:.8rem; }.freedom-table td { border-inline:1px solid var(--line); }.freedom-table td:first-child { border-radius:.65rem .65rem 0 0; }.freedom-table td:last-child { border-radius:0 0 .65rem .65rem; }.freedom-table td:last-child::before { content:"Answer"; display:block; margin-bottom:.3rem; color:var(--muted); font-size:.72rem; font-weight:900; text-transform:uppercase; } }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html"><img src="assets/howdy-partner-logo.png" alt="" width="48" height="48"><span><strong>Most Certainly Try</strong><small>Nature work &amp; public tools</small></span></a>
+      <nav aria-label="Primary navigation"><a href="index.html">Nature Work</a><a href="ecoregion-finder.html">Eco Finder</a><a href="happy-life.html" aria-current="page">Happy Life</a><a href="about.html">About</a></nav>
+    </header>
+    <main>
+      <section class="hero happy-hero">
+        <div><p class="kicker">Texas nursing homes / nature / everyday life</p><h1>Happy Life</h1><p class="lede">Explore every active Texas nursing home in CMS Care Compare, then compare nearby nature, culture, food, recreation, and everyday services with separate walking and driving routes.</p></div>
+        <aside class="snapshot" aria-label="Map scope"><div><span class="metric" id="facility-count">—</span><span>CMS-listed Texas nursing homes</span></div><div><span class="metric">14</span><span>quality-of-life categories</span></div><div><span class="metric">2</span><span>travel modes compared</span></div></aside>
+      </section>
+
+      <section class="table-section" aria-labelledby="map-title">
+        <div class="section-head"><div><p class="kicker">Statewide explorer</p><h2 id="map-title">Choose a nursing home, then see what daily life can reach.</h2></div><p>Search by facility, city, ZIP, or county. Map clusters open as you zoom.</p></div>
+        <div class="happy-layout">
+          <aside class="happy-panel" aria-label="Nursing home search and selection">
+            <div class="happy-field"><label for="facility-search">Find a nursing home</label><input id="facility-search" type="search" placeholder="Name, city, ZIP, or county" autocomplete="off"><small id="search-count">Loading facilities…</small></div>
+            <div class="happy-field"><label for="rating-filter">Minimum CMS overall rating</label><select id="rating-filter"><option value="0">Any rating</option><option value="3">3 stars or higher</option><option value="4">4 stars or higher</option><option value="5">5 stars only</option></select></div>
+            <ul class="facility-list" id="facility-list" aria-label="Matching nursing homes"></ul>
+            <div class="facility-summary" id="facility-summary"><strong>No nursing home selected.</strong><p>Select a map marker or search result to calculate nearby places.</p></div>
+          </aside>
+          <div>
+            <div class="happy-map-shell"><div id="happy-map" role="region" aria-label="Interactive map of CMS-listed Texas nursing homes and nearby quality-of-life destinations"></div><div class="happy-map-note">Facility points: CMS Care Compare. Nearby places and basemap: Esri and OpenStreetMap contributors. Routes: Valhalla/OpenStreetMap. Results are planning leads, not accessibility or safety certifications.</div></div>
+            <div class="happy-legend" aria-label="Map legend"><span><i class="home"></i>Nursing home</span><span><i class="walk"></i>Within a one-mile walking route</span><span><i class="drive"></i>Better treated as a drive</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="table-section" aria-labelledby="nearby-title">
+        <div class="amenity-toolbar"><div><p class="kicker">Closest mapped places</p><h2 id="nearby-title">Fourteen parts of a happy daily life</h2></div><button class="button primary" id="find-nearby" type="button" disabled>Find nearby places</button></div>
+        <p class="amenity-status" id="amenity-status">Select a nursing home to begin.</p>
+        <div class="amenity-grid" id="amenity-grid"></div>
+      </section>
+
+      <section class="table-section" aria-labelledby="freedom-title">
+        <div class="section-head"><div><p class="kicker">Daily freedom &amp; comfort</p><h2 id="freedom-title">Ask what everyday life actually feels like.</h2></div><p>These policies are not in CMS Care Compare. Record verified answers for each facility; they remain only in this browser.</p></div>
+        <div class="freedom-shell">
+          <div>
+            <table class="freedom-table">
+              <thead><tr><th scope="col">Question</th><th scope="col">Verified answer</th></tr></thead>
+              <tbody id="freedom-questions"></tbody>
+            </table>
+            <div class="rights-note">
+              <strong>Federal baseline—not a facility-specific answer</strong>
+              <p>Federal nursing-home rules address resident choice, suitable meal alternatives, private communications and mail, visitation, and notice around leave/transfer rules. Exact Wi‑Fi/streaming access, delivery procedures, sign-out steps, diet restrictions, and visiting logistics still require facility confirmation.</p>
+              <p><a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-483/subpart-B/section-483.10" target="_blank" rel="noopener">42 CFR §483.10 · Resident rights</a> · <a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-483/subpart-B/section-483.60" target="_blank" rel="noopener">42 CFR §483.60 · Food and nutrition</a></p>
+            </div>
+          </div>
+          <aside class="freedom-notes">
+            <h3 id="freedom-facility-name">Select a nursing home</h3>
+            <label>Visiting hours<input id="visiting-hours" type="text" placeholder="Example: 8 AM–8 PM; after-hours by arrangement" disabled></label>
+            <label>Verified on<input id="policy-verified-date" type="date" disabled></label>
+            <label>Notes<textarea id="policy-notes" placeholder="Who answered, conditions, delivery entrance, guest meal cost, leave paperwork…" disabled></textarea></label>
+            <div class="freedom-actions"><a class="button" id="call-facility" href="#" aria-disabled="true">Call facility</a><button class="button" id="copy-questions" type="button" disabled>Copy question script</button><button class="button" id="clear-policy" type="button" disabled>Clear saved answers</button></div>
+            <p class="save-state" id="policy-save-state">Select a facility to record answers.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="table-section" aria-labelledby="reading-title">
+        <div class="section-head"><div><p class="kicker">How to read the map</p><h2 id="reading-title">Distance is useful. Lived accessibility requires more.</h2></div></div>
+        <div class="method-grid">
+          <article class="method-card"><h3>Walking highlight</h3><p>A destination is highlighted as a potential walk when Valhalla finds a pedestrian route of one mile or less. Confirm sidewalks, crossings, shade, slope, gates, operating hours, wheelchair access, and personal mobility needs before relying on it.</p></article>
+          <article class="method-card"><h3>Driving distance</h3><p>Driving mileage and time use the current OpenStreetMap road network. They are estimates, not live traffic predictions. The nearest place by map route may not be the best or most accessible choice.</p></article>
+          <article class="method-card"><h3>Natural water</h3><p>A mapped lake, beach, swimming area, or swimming hole is not proof that swimming is permitted or that water quality is safe. Check the current land manager and health advisories.</p></article>
+          <article class="method-card"><h3>Coverage limits</h3><p>Bird blinds, butterfly gardens, fishing access, trailheads, galleries, and small local businesses are not mapped uniformly. “Not found” means the current public index returned no suitable candidate—not that none exists.</p></article>
+        </div>
+      </section>
+
+      <section class="table-section" aria-labelledby="sources-title">
+        <div class="section-head"><div><p class="kicker">Sources and privacy</p><h2 id="sources-title">Transparent public data, calculated only when requested.</h2></div></div>
+        <div class="method-grid">
+          <article class="method-card"><h3>Facilities</h3><p><a href="https://data.cms.gov/provider-data/dataset/4pq5-n9py" target="_blank" rel="noopener">CMS Care Compare Provider Information</a>, modified September 30, 2026; facility records processed September 1, 2026. The scope is active Medicare/Medicaid-certified nursing homes, not every assisted-living residence.</p></article>
+          <article class="method-card"><h3>Nearby places</h3><p>Esri World Geocoding supplies public place candidates. A small curated bird-blind seed list supplements rare-feature coverage. Names, categories, and operating status can change; verify before travel.</p></article>
+          <article class="method-card"><h3>Routing</h3><p><a href="https://valhalla.github.io/valhalla/" target="_blank" rel="noopener">Valhalla</a> calculates pedestrian and automobile route estimates over OpenStreetMap. If routing is unavailable, the card shows straight-line distance and says so.</p></article>
+          <article class="method-card"><h3>Privacy</h3><p>The tool does not request or store the visitor’s location. Selecting a public facility sends its coordinate and nearby candidate coordinates to map/search/routing services, which may retain standard request logs.</p></article>
+        </div>
+      </section>
+    </main>
+    <footer><span>Happy Life · A Most Certainly Try public tool</span><a href="https://www.mostcertainlytry.com/contact">Contact</a></footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin="anonymous"></script>
+    <script>
+      const DATA_URL = "assets/happy-life/texas-nursing-homes-2026-09.json";
+      const WALKABLE_MILES = 1;
+      const LOCAL_RADIUS_MILES = 30;
+      const NATURE_RADIUS_MILES = 80;
+      const categories = [
+        { id:"bird", label:"Bird blind", icon:"◉", query:"bird blind", radius:NATURE_RADIUS_MILES, note:"Purpose-built blind or hide; rare features are incompletely indexed." },
+        { id:"preserve", label:"Nature preserve", icon:"🌿", esri:"Nature Reserve", radius:NATURE_RADIUS_MILES },
+        { id:"butterfly", label:"Butterfly garden", icon:"🦋", query:"butterfly garden", radius:NATURE_RADIUS_MILES },
+        { id:"fishing", label:"Fishing location", icon:"🎣", query:"fishing pier", radius:NATURE_RADIUS_MILES, note:"Confirm license, access, seasons, and site rules." },
+        { id:"swimming", label:"Natural swimming water", icon:"≈", esri:"Lake", radius:NATURE_RADIUS_MILES, note:"Mapped natural water; confirm legal swimming access and water quality." },
+        { id:"library", label:"Public library", icon:"▤", esri:"Library", radius:LOCAL_RADIUS_MILES, accept:["Library"], rejectName:/school|elementary|junior high|high school|university|college|campus|\bisd\b|church|synagogue|mosque|temple/i },
+        { id:"trail", label:"Walking trail", icon:"↝", esri:"Trail", radius:LOCAL_RADIUS_MILES },
+        { id:"coffee", label:"Coffee shop", icon:"☕", esri:"Coffee Shop", radius:LOCAL_RADIUS_MILES },
+        { id:"breakfast", label:"Breakfast diner", icon:"☀", query:"diner", radius:LOCAL_RADIUS_MILES, accept:["Restaurant","Coffee Shop","Café/Coffee Shop"] },
+        { id:"post", label:"Post office", icon:"✉", esri:"Post Office", radius:LOCAL_RADIUS_MILES },
+        { id:"market", label:"Supermarket", icon:"⌂", esri:"Grocery", radius:LOCAL_RADIUS_MILES },
+        { id:"museum", label:"Museum", icon:"◇", esri:"Museum", radius:LOCAL_RADIUS_MILES },
+        { id:"gallery", label:"Art gallery", icon:"▧", query:"art gallery", radius:LOCAL_RADIUS_MILES, accept:["Museum","Tourist Attraction","Art Gallery"] },
+        { id:"cinema", label:"Movie theatre", icon:"▶", esri:"Cinema", radius:LOCAL_RADIUS_MILES }
+      ];
+      const policyQuestions = [
+        { id:"streaming", label:"Streaming services", detail:"Is resident Wi‑Fi included? Are smart TVs or casting devices allowed, and does staff help with setup?" },
+        { id:"meal_choice", label:"Choice of meals", detail:"How many entrée choices are offered, and how are preferences, cultural foods, allergies, and therapeutic diets handled?" },
+        { id:"outside_food", label:"Outside food delivery", detail:"May residents receive Uber Eats, DoorDash, restaurant, or family food? Where is it delivered and are diet orders checked?" },
+        { id:"packages", label:"Amazon and other packages", detail:"May residents order packages? Who receives them, how quickly are they delivered, and are any items restricted?" },
+        { id:"day_leave", label:"Sign out for a day", detail:"What capacity, physician, medication, transportation, escort, or notice requirements apply?" },
+        { id:"weekend_leave", label:"Sign out for a weekend", detail:"What therapeutic-leave, medication, bed-hold, payer, return-time, and care-plan rules apply?" }
+      ];
+      const policyOptions = [["unchecked","Not yet verified"],["yes","Yes"],["no","No"],["conditional","Conditional"],["unknown","Staff could not confirm"]];
+      const curatedBirdBlinds = [
+        { name:"Crescent Bend Nature Park bird blinds", address:"12805 Schaefer Road, Schertz, Texas", lat:29.58463, lon:-98.23662, source:"https://www.schertz.com/Facilities/Facility/Details/Crescent-Bend-Nature-Park-8" },
+        { name:"Warbler Woods Bird Sanctuary blinds", address:"Cibolo, Texas · access by arrangement", lat:29.6062, lon:-98.1915, source:"https://warblerwoods.org/" },
+        { name:"Phil Hardberger Park bird blind", address:"San Antonio, Texas", lat:29.55535, lon:-98.53042, source:"https://www.philhardbergerpark.org/" },
+        { name:"Guadalupe River State Park bird blind", address:"Spring Branch, Texas", lat:29.8532, lon:-98.5046, source:"https://tpwd.texas.gov/state-parks/guadalupe-river" },
+        { name:"Boerne City Lake Park bird blind", address:"Boerne, Texas", lat:29.8057, lon:-98.7322, source:"https://www.ci.boerne.tx.us/89/City-Lake-Park" },
+        { name:"James Kiehl River Bend Park bird blind", address:"Comfort, Texas", lat:29.9349, lon:-98.8436, source:"https://www.kendallcountyparks.org/james-kiehl-river-bend-park" },
+        { name:"Pedernales Falls State Park bird blind", address:"Johnson City, Texas", lat:30.3083, lon:-98.2579, source:"https://tpwd.texas.gov/state-parks/pedernales-falls" }
+      ];
+
+      const map = L.map("happy-map", { minZoom:5 }).setView([31.15,-99.35],6);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom:19, attribution:"&copy; OpenStreetMap contributors" }).addTo(map);
+      const clusters = L.markerClusterGroup({ chunkedLoading:true, showCoverageOnHover:false, maxClusterRadius:52 });
+      const resultLayer = L.layerGroup().addTo(map);
+      map.addLayer(clusters);
+
+      const searchInput = document.querySelector("#facility-search");
+      const ratingFilter = document.querySelector("#rating-filter");
+      const facilityList = document.querySelector("#facility-list");
+      const searchCount = document.querySelector("#search-count");
+      const facilitySummary = document.querySelector("#facility-summary");
+      const amenityGrid = document.querySelector("#amenity-grid");
+      const amenityStatus = document.querySelector("#amenity-status");
+      const findButton = document.querySelector("#find-nearby");
+      const freedomQuestions = document.querySelector("#freedom-questions");
+      const freedomFacilityName = document.querySelector("#freedom-facility-name");
+      const visitingHours = document.querySelector("#visiting-hours");
+      const policyVerifiedDate = document.querySelector("#policy-verified-date");
+      const policyNotes = document.querySelector("#policy-notes");
+      const callFacility = document.querySelector("#call-facility");
+      const copyQuestions = document.querySelector("#copy-questions");
+      const clearPolicy = document.querySelector("#clear-policy");
+      const policySaveState = document.querySelector("#policy-save-state");
+      let facilities=[]; let selected=null; let markerById=new Map(); let requestToken=0;
+
+      function esc(value) { return String(value ?? "").replace(/[&<>'"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c])); }
+      function phone(value) { const d=String(value||"").replace(/\D/g,""); return d.length===10?`(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`:value; }
+      function miles(a,b) { const r=3958.8, p=Math.PI/180, dLat=(b.lat-a.lat)*p, dLon=(b.lon-a.lon)*p; const x=Math.sin(dLat/2)**2+Math.cos(a.lat*p)*Math.cos(b.lat*p)*Math.sin(dLon/2)**2; return 2*r*Math.asin(Math.sqrt(x)); }
+      function formatTime(seconds) { if(!Number.isFinite(seconds)) return "Route unavailable"; const m=Math.round(seconds/60); return m<60?`${m} min`:`${Math.floor(m/60)} hr ${m%60?`${m%60} min`:""}`.trim(); }
+      function formatDistance(value) { return Number.isFinite(value)?`${value<10?value.toFixed(1):Math.round(value)} mi`:"—"; }
+      function bbox(lat,lon,radiusMiles) { const dy=radiusMiles/69, dx=radiusMiles/(69*Math.cos(lat*Math.PI/180)); return `${lon-dx},${lat-dy},${lon+dx},${lat+dy}`; }
+      function cmsUrl(f) { return `https://www.medicare.gov/care-compare/details/nursing-home/${encodeURIComponent(f.id)}`; }
+
+      function renderInitialCards() { amenityGrid.innerHTML=categories.map(c=>`<article class="amenity-card is-empty" id="amenity-${c.id}"><header><span class="amenity-icon" aria-hidden="true">${c.icon}</span><h3>${c.label}</h3></header><p class="amenity-note">Select a nursing home, then run the comparison.</p></article>`).join(""); }
+      renderInitialCards();
+
+      function emptyPolicy() { return { answers:Object.fromEntries(policyQuestions.map(q=>[q.id,"unchecked"])), visitingHours:"", verifiedDate:"", notes:"" }; }
+      function policyKey(id) { return `happy-life-policy-${id}`; }
+      function loadPolicy(id) { try { return {...emptyPolicy(),...JSON.parse(localStorage.getItem(policyKey(id))||"{}")}; } catch { return emptyPolicy(); } }
+      function renderPolicy() {
+        const data=selected?loadPolicy(selected.id):emptyPolicy();
+        freedomQuestions.innerHTML=policyQuestions.map(q=>`<tr><td><strong>${esc(q.label)}</strong><small>${esc(q.detail)}</small></td><td><select data-policy-question="${q.id}" ${selected?"":"disabled"} aria-label="Answer for ${esc(q.label)}">${policyOptions.map(([value,label])=>`<option value="${value}" ${data.answers?.[q.id]===value?"selected":""}>${label}</option>`).join("")}</select></td></tr>`).join("");
+        freedomFacilityName.textContent=selected?selected.name:"Select a nursing home"; visitingHours.value=data.visitingHours||""; policyVerifiedDate.value=data.verifiedDate||""; policyNotes.value=data.notes||"";
+        [visitingHours,policyVerifiedDate,policyNotes,copyQuestions,clearPolicy].forEach(el=>el.disabled=!selected);
+        if(selected){ callFacility.href=`tel:${selected.phone}`; callFacility.removeAttribute("aria-disabled"); policySaveState.textContent="Answers save automatically in this browser only."; }
+        else { callFacility.href="#"; callFacility.setAttribute("aria-disabled","true"); policySaveState.textContent="Select a facility to record answers."; }
+      }
+      function savePolicy() {
+        if(!selected)return; const answers={}; document.querySelectorAll("[data-policy-question]").forEach(el=>answers[el.dataset.policyQuestion]=el.value);
+        localStorage.setItem(policyKey(selected.id),JSON.stringify({answers,visitingHours:visitingHours.value,verifiedDate:policyVerifiedDate.value,notes:policyNotes.value})); policySaveState.textContent=`Saved locally at ${new Date().toLocaleTimeString([], {hour:"numeric",minute:"2-digit"})}.`;
+      }
+      document.querySelector("#freedom-questions").addEventListener("change",savePolicy); [visitingHours,policyVerifiedDate,policyNotes].forEach(el=>el.addEventListener("input",savePolicy));
+      copyQuestions.addEventListener("click",async()=>{ if(!selected)return; const script=`Questions for ${selected.name}\n\n${policyQuestions.map((q,i)=>`${i+1}. ${q.label}: ${q.detail}`).join("\n")}\n7. What are the current visiting hours, including evenings, weekends, holidays, and after-hours exceptions?`; try { await navigator.clipboard.writeText(script); policySaveState.textContent="Question script copied."; } catch { policySaveState.textContent="Copy was blocked by the browser."; } });
+      clearPolicy.addEventListener("click",()=>{ if(!selected||!confirm(`Clear locally saved answers for ${selected.name}?`))return; localStorage.removeItem(policyKey(selected.id)); renderPolicy(); policySaveState.textContent="Saved answers cleared."; });
+      renderPolicy();
+
+      function popupHtml(f) { return `<strong>${esc(f.name)}</strong><br>${esc(f.address)}<br>${esc(f.city)}, TX ${esc(f.zip)}<br><small>${f.rating?`${f.rating}★ CMS overall · `:""}${f.beds||"—"} certified beds</small><br><button class="button primary" type="button" data-select-facility="${esc(f.id)}">Compare nearby places</button>`; }
+      function selectFacility(f, openMarker=true) {
+        selected=f; findButton.disabled=false; resultLayer.clearLayers();
+        facilitySummary.innerHTML=`<strong>${esc(f.name)}</strong><p>${esc(f.address)}, ${esc(f.city)}, TX ${esc(f.zip)}</p><p>${f.rating?`${f.rating} of 5 CMS overall stars · `:"Rating unavailable · "}${f.beds||"—"} certified beds · ${esc(f.county)} County</p><p><a href="tel:${esc(f.phone)}">${esc(phone(f.phone))}</a> · <a href="${cmsUrl(f)}" target="_blank" rel="noopener">CMS Care Compare</a></p>`;
+        amenityStatus.textContent=`Ready to compare places near ${f.name}.`;
+        if(openMarker){ map.setView([f.lat,f.lon],13); const m=markerById.get(f.id); if(m){ clusters.zoomToShowLayer(m,()=>m.openPopup()); } }
+        renderInitialCards(); renderPolicy();
+      }
+      document.addEventListener("click",e=>{ const id=e.target.closest("[data-select-facility]")?.dataset.selectFacility; if(id){ const f=facilities.find(x=>x.id===id); if(f) selectFacility(f,false); } });
+
+      function renderFacilityList() {
+        const q=searchInput.value.trim().toLowerCase(), min=+ratingFilter.value;
+        const matches=facilities.filter(f=>(!min||(f.rating||0)>=min)&&(!q||`${f.name} ${f.city} ${f.zip} ${f.county}`.toLowerCase().includes(q))).slice(0,60);
+        searchCount.textContent=`${matches.length}${matches.length===60?"+":""} matching facilities`;
+        facilityList.innerHTML=matches.map(f=>`<li><button type="button" data-list-id="${f.id}"><strong>${esc(f.name)}</strong><span>${esc(f.city)}, TX ${esc(f.zip)}${f.rating?` · ${f.rating}★`:""}</span></button></li>`).join("") || "<li>No matching CMS-listed facility.</li>";
+      }
+      facilityList.addEventListener("click",e=>{ const id=e.target.closest("[data-list-id]")?.dataset.listId; const f=facilities.find(x=>x.id===id); if(f) selectFacility(f); });
+      searchInput.addEventListener("input",renderFacilityList); ratingFilter.addEventListener("change",renderFacilityList);
+
+      async function loadFacilities() {
+        const res=await fetch(DATA_URL); if(!res.ok) throw new Error("Facility data did not load."); const payload=await res.json(); facilities=payload.facilities;
+        document.querySelector("#facility-count").textContent=payload.count.toLocaleString();
+        facilities.forEach(f=>{ const marker=L.circleMarker([f.lat,f.lon],{radius:6,color:"#7a3f35",weight:1.5,fillColor:"#bc6a5b",fillOpacity:.82}); marker.bindPopup(popupHtml(f)); marker.on("click",()=>selectFacility(f,false)); markerById.set(f.id,marker); clusters.addLayer(marker); });
+        renderFacilityList();
+      }
+
+      async function esriCandidates(category, home) {
+        const params=new URLSearchParams({ f:"json", maxLocations:"8", outFields:"PlaceName,Type,Addr_type,Address,City,Region,Postal,URL", location:`${home.lon},${home.lat}`, distance:String(Math.round(category.radius*1609.344)), searchExtent:bbox(home.lat,home.lon,category.radius) });
+        if(category.esri){ params.set("SingleLine",""); params.set("category",category.esri); } else params.set("SingleLine",category.query);
+        const url=`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?${params}`;
+        const res=await fetch(url); if(!res.ok) throw new Error("Place search unavailable"); const data=await res.json();
+        return (data.candidates||[]).map((x,i)=>({ id:`${category.id}-esri-${i}`, name:x.attributes?.PlaceName||x.address, address:[x.attributes?.Address,x.attributes?.City,x.attributes?.Region,x.attributes?.Postal].filter(Boolean).join(", ")||x.address, type:x.attributes?.Type||x.attributes?.Addr_type||"Mapped place", lat:x.location.y, lon:x.location.x, source:null })).filter(x=>Number.isFinite(x.lat)&&Number.isFinite(x.lon)&&miles(home,x)<=category.radius&&(!category.accept||category.accept.includes(x.type))&&(!category.rejectName||!category.rejectName.test(x.name)));
+      }
+      async function candidatesFor(category,home) {
+        let found=[]; try { found=await esriCandidates(category,home); } catch(e) { console.warn(category.id,e); }
+        if(category.id==="bird") found.push(...curatedBirdBlinds.map((x,i)=>({...x,id:`bird-curated-${i}`,type:"Verified bird blind"})).filter(x=>miles(home,x)<=category.radius));
+        const dedup=[]; const seen=new Set(); for(const x of found.sort((a,b)=>miles(home,a)-miles(home,b))){ const key=`${x.name.toLowerCase()}-${x.lat.toFixed(3)}-${x.lon.toFixed(3)}`; if(!seen.has(key)){seen.add(key);dedup.push(x);} }
+        return dedup.slice(0,3);
+      }
+
+      async function routeMatrix(home, targets, costing) {
+        if(!targets.length) return [];
+        const eligible=targets.map((target,index)=>({target,index})).filter(x=>costing!=="pedestrian"||miles(home,x.target)<=5);
+        const output=Array(targets.length).fill(null); if(!eligible.length)return output;
+        const json=JSON.stringify({sources:[{lat:home.lat,lon:home.lon}],targets:eligible.map(x=>({lat:x.target.lat,lon:x.target.lon})),costing,units:"miles"});
+        const res=await fetch(`https://valhalla1.openstreetmap.de/sources_to_targets?json=${encodeURIComponent(json)}`); if(!res.ok) throw new Error(`${costing} routes unavailable`); const data=await res.json(); const rows=data.sources_to_targets?.[0]||[]; rows.forEach((row,i)=>{ output[eligible[i].index]=row; }); return output;
+      }
+
+      function renderAmenity(category,result) {
+        const card=document.querySelector(`#amenity-${category.id}`);
+        if(!result){ card.className="amenity-card is-empty"; card.innerHTML=`<header><span class="amenity-icon" aria-hidden="true">${category.icon}</span><h3>${category.label}</h3></header><p class="amenity-note">No suitable mapped candidate was found within ${category.radius} miles. This does not prove none exists.</p>`; return; }
+        const walk=result.walk, drive=result.drive, walkable=walk&&walk.distance<=WALKABLE_MILES;
+        card.className=`amenity-card ${walkable?"is-walkable":"is-drive"}`;
+        const directions=`https://www.google.com/maps/dir/?api=1&origin=${selected.lat},${selected.lon}&destination=${result.place.lat},${result.place.lon}`;
+        card.innerHTML=`<header><span class="amenity-icon" aria-hidden="true">${category.icon}</span><h3>${category.label}</h3></header><p class="amenity-name">${esc(result.place.name)}</p><p class="amenity-address">${esc(result.place.address||result.place.type)}</p>${walkable?'<span class="walk-badge">Potential walking distance</span>':'<span class="drive-badge">Driving is more practical</span>'}<div class="route-pair"><div class="route-stat"><strong>Walk · ${formatDistance(walk?.distance)}</strong><span>${formatTime(walk?.time)}</span></div><div class="route-stat"><strong>Drive · ${formatDistance(drive?.distance)}</strong><span>${formatTime(drive?.time)}</span></div></div><p class="amenity-note">${esc(category.note||result.place.type||"Mapped place")}</p><div class="amenity-links"><a href="${directions}" target="_blank" rel="noopener">Directions</a>${result.place.source?`<a href="${esc(result.place.source)}" target="_blank" rel="noopener">Official information</a>`:""}</div>`;
+        const color=walkable?"#528267":"#d89b42"; const marker=L.circleMarker([result.place.lat,result.place.lon],{radius:7,color,weight:2,fillColor:color,fillOpacity:.9}).bindPopup(`<strong>${esc(category.label)}</strong><br>${esc(result.place.name)}<br><small>Walk ${formatDistance(walk?.distance)} · Drive ${formatDistance(drive?.distance)}</small>`); resultLayer.addLayer(marker);
+      }
+
+      async function findNearby() {
+        if(!selected) return; const token=++requestToken; findButton.disabled=true; findButton.textContent="Finding places…"; amenityStatus.textContent="Searching public place indexes, then comparing walking and driving routes…"; resultLayer.clearLayers();
+        amenityGrid.innerHTML=categories.map(c=>`<article class="amenity-card is-empty" id="amenity-${c.id}"><header><span class="amenity-icon" aria-hidden="true">${c.icon}</span><h3>${c.label}</h3></header><p class="amenity-note">Searching…</p></article>`).join("");
+        try {
+          const groups=await Promise.all(categories.map(c=>candidatesFor(c,selected))); if(token!==requestToken)return;
+          const targets=[]; const lookup=[]; groups.forEach((group,ci)=>group.forEach(place=>{lookup.push({ci,place});targets.push(place);}));
+          let walk=[],drive=[]; const routed=await Promise.allSettled([routeMatrix(selected,targets,"pedestrian"),routeMatrix(selected,targets,"auto")]); walk=routed[0].status==="fulfilled"?routed[0].value:[]; drive=routed[1].status==="fulfilled"?routed[1].value:[]; routed.filter(x=>x.status==="rejected").forEach(x=>console.warn(x.reason));
+          const results=categories.map((c,ci)=>{ const options=lookup.map((x,i)=>({...x,index:i})).filter(x=>x.ci===ci).map(x=>({place:x.place,walk:walk[x.index]&&Number.isFinite(walk[x.index].distance)?walk[x.index]:null,drive:drive[x.index]&&Number.isFinite(drive[x.index].distance)?drive[x.index]:null,straight:miles(selected,x.place)})); if(!options.length)return null; options.sort((a,b)=>(a.drive?.distance??a.straight)-(b.drive?.distance??b.straight)); return options[0]; });
+          results.forEach((r,i)=>renderAmenity(categories[i],r));
+          const points=results.filter(Boolean).map(r=>[r.place.lat,r.place.lon]); map.fitBounds([[selected.lat,selected.lon],...points],{padding:[30,30],maxZoom:13}); amenityStatus.textContent=`Closest mapped candidates for ${selected.name}. Walking and driving routes were calculated separately.`;
+        } catch(e) { console.error(e); amenityStatus.textContent="The nearby-place comparison could not finish. The facility map still works; try the comparison again in a moment."; }
+        finally { if(token===requestToken){ findButton.disabled=false; findButton.textContent="Refresh nearby places"; } }
+      }
+      findButton.addEventListener("click",findNearby);
+      loadFacilities().catch(e=>{ console.error(e); searchCount.textContent="Facility data could not load. Please refresh."; });
+    </script>
+  </body>
+</html>
