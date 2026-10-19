@@ -416,6 +416,106 @@
         background: repeating-linear-gradient(135deg, #fff 0 3px, #6f4a2e 3px 5px);
       }
 
+      .bird-blind-panel {
+        margin: 1.5rem 0 2.5rem;
+        padding: clamp(1rem, 2.4vw, 1.6rem);
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        background: #f8f5ed;
+        box-shadow: var(--shadow);
+      }
+
+      .bird-blind-panel .section-heading {
+        margin-bottom: 1rem;
+      }
+
+      .bird-blind-status {
+        max-width: 70ch;
+        margin: 0.45rem 0 0;
+        color: var(--muted);
+      }
+
+      .bird-blind-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 0.85rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .bird-blind-card {
+        display: grid;
+        grid-template-rows: auto auto 1fr auto;
+        gap: 0.55rem;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 0.85rem;
+        background: #fff;
+      }
+
+      .bird-blind-rank {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.035em;
+        text-transform: uppercase;
+      }
+
+      .bird-blind-rank strong {
+        display: inline-grid;
+        width: 1.65rem;
+        height: 1.65rem;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--green);
+        color: #fff;
+      }
+
+      .bird-blind-card h3,
+      .bird-blind-card p {
+        margin: 0;
+      }
+
+      .bird-blind-card h3 {
+        font-size: 1.12rem;
+      }
+
+      .bird-blind-distance {
+        color: var(--green);
+        font-weight: 800;
+      }
+
+      .bird-blind-access {
+        color: var(--ink-soft);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .bird-blind-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        align-items: center;
+        padding-top: 0.25rem;
+      }
+
+      .bird-blind-actions a {
+        font-size: 0.86rem;
+        font-weight: 800;
+      }
+
+      .bird-blind-method {
+        margin: 1rem 0 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        line-height: 1.45;
+      }
+
       @media (max-width: 640px) {
         #ecoregion-map {
           height: 62vh;
@@ -496,6 +596,16 @@
             </p>
           </article>
         </div>
+      </section>
+
+      <section class="bird-blind-panel" id="closest-bird-blinds" aria-labelledby="closest-bird-blinds-title">
+        <div class="section-heading">
+          <p class="kicker">Quiet wildlife watching</p>
+          <h2 id="closest-bird-blinds-title">Closest verified bird blinds</h2>
+          <p class="bird-blind-status" id="bird-blind-status" aria-live="polite">Submit an address above to rank verified public and arranged-access bird blinds in the Central Texas collection.</p>
+        </div>
+        <ol class="bird-blind-grid" id="bird-blind-list"></ol>
+        <p class="bird-blind-method">Coverage is deliberately limited to Central Texas locations whose operator or official park materials document a blind. Distances are straight-line estimates calculated in this browser—not driving mileage. Open directions for the actual route, and check the operator page for current hours, fees, reservations, closures, or gate instructions before leaving.</p>
       </section>
 
       <section class="table-section" aria-labelledby="live-map-title">
@@ -839,6 +949,8 @@
       const officialBeeAction = document.querySelector("#official-bee-action");
       const officialBeeLink = document.querySelector("#official-bee-link");
       const stateBeeLink = document.querySelector("#state-bee-link");
+      const birdBlindStatus = document.querySelector("#bird-blind-status");
+      const birdBlindList = document.querySelector("#bird-blind-list");
       const opacityControl = document.querySelector("#ecoregion-opacity");
       const opacityValue = document.querySelector("#ecoregion-opacity-value");
       const levelFourGuideStatus = document.querySelector("#level-four-guide-status");
@@ -866,6 +978,120 @@
       const levelFourColorsByCode = new Map();
       let levelFourRegions = [];
       let selectedLevelFourAttributes = null;
+
+      const birdBlindSites = [
+        {
+          name: "Crescent Bend Nature Park",
+          place: "Schertz",
+          lat: 29.5518019,
+          lon: -98.2360913,
+          feature: "Two feeder-and-water bird blinds near the parking area.",
+          access: "Drop-in public park. Check the City of Schertz page and posted entrance hours before visiting.",
+          operatorUrl: "https://schertz.com/610/Parks",
+          guideUrl: "projects/crescent-bend-nature-park.html"
+        },
+        {
+          name: "Warbler Woods Bird Sanctuary",
+          place: "Cibolo area",
+          lat: 29.6106,
+          lon: -98.2416,
+          feature: "Feeder-and-water viewing areas at Thomas' Meadow and The Hideout.",
+          access: "Arranged access only: submit the contact form in advance and wait for the current gate code.",
+          operatorUrl: "https://www.warblerwoods.org/visitor-instructions.html"
+        },
+        {
+          name: "Phil Hardberger Park",
+          place: "San Antonio",
+          lat: 29.56105,
+          lon: -98.52345,
+          feature: "A palisade bird-water blind plus two art-integrated wildlife blinds on the land bridge.",
+          access: "Drop-in city park. Use the Blanco Road side for the dedicated Bird Water Feature.",
+          operatorUrl: "https://www.philhardbergerpark.org/bird-water-feature",
+          secondaryUrl: "https://www.philhardbergerpark.org/wildlife-blinds"
+        },
+        {
+          name: "Guadalupe River State Park",
+          place: "Spring Branch",
+          lat: 29.868712,
+          lon: -98.486918,
+          feature: "A bird-watching blind near the Bald Cypress Trail and Discovery Center area.",
+          access: "State-park day-use admission. Reserve ahead when capacity closures are possible.",
+          operatorUrl: "https://tpwd.texas.gov/state-parks/guadalupe-river",
+          secondaryUrl: "https://tpwd.texas.gov/publications/pwdpubs/media/park_maps/pwd_mp_p4505_0040j.pdf"
+        },
+        {
+          name: "Boerne City Lake Park",
+          place: "Boerne",
+          lat: 29.826973,
+          lon: -98.7719983,
+          feature: "City-operated bird observation blind beside lake, trail, and butterfly-garden habitat.",
+          access: "Controlled-access city park; seasonal admission and operating hours can apply.",
+          operatorUrl: "https://www.ci.boerne.tx.us/169/Boerne-City-Lake-Park"
+        },
+        {
+          name: "James Kiehl River Bend Park",
+          place: "Comfort",
+          lat: 29.97127,
+          lon: -98.83513,
+          feature: "Wildlife observation blind above Guadalupe River grassland, woodland, and riparian habitat.",
+          access: "Public Kendall County park. Verify current hours and any river or weather restrictions.",
+          operatorUrl: "https://www.kendallcountytx.gov/facilities/facility/details/James-Kiehl-River-Bend-Park-10"
+        },
+        {
+          name: "Pedernales Falls State Park",
+          place: "Johnson City area",
+          lat: 30.3079852,
+          lon: -98.2576729,
+          feature: "Dedicated bird blind shown in the official state-park visitor materials.",
+          access: "State-park day-use admission; reservations are strongly recommended and closures can occur.",
+          operatorUrl: "https://tpwd.texas.gov/state-parks/pedernales-falls",
+          secondaryUrl: "https://tpwd.texas.gov/publications/pwdpubs/media/park_maps/pwd_mp_p4507_0026n.pdf"
+        }
+      ];
+
+      function distanceMiles(from, site) {
+        const radians = (degrees) => degrees * Math.PI / 180;
+        const earthRadiusMiles = 3958.8;
+        const latitudeDelta = radians(site.lat - from.y);
+        const longitudeDelta = radians(site.lon - from.x);
+        const a = Math.sin(latitudeDelta / 2) ** 2
+          + Math.cos(radians(from.y)) * Math.cos(radians(site.lat)) * Math.sin(longitudeDelta / 2) ** 2;
+        return earthRadiusMiles * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      }
+
+      function renderClosestBirdBlinds(location) {
+        const ranked = birdBlindSites
+          .map((site) => ({ ...site, distance: distanceMiles(location, site) }))
+          .sort((a, b) => a.distance - b.distance);
+        birdBlindStatus.textContent = "Ranked from the matched coordinate. No additional location request is made.";
+        birdBlindList.innerHTML = ranked.map((site, index) => {
+          const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${site.lat},${site.lon}`;
+          const distanceLabel = site.distance < 10 ? site.distance.toFixed(1) : Math.round(site.distance);
+          const secondaryLink = site.guideUrl
+            ? `<a href="${escapeHtml(site.guideUrl)}">Local guide</a>`
+            : site.secondaryUrl
+              ? `<a href="${escapeHtml(site.secondaryUrl)}" target="_blank" rel="noopener">Blind/map detail</a>`
+              : "";
+          return `
+            <li class="bird-blind-card">
+              <div class="bird-blind-rank"><strong>${index + 1}</strong><span>${escapeHtml(site.place)}</span></div>
+              <div>
+                <h3>${escapeHtml(site.name)}</h3>
+                <p class="bird-blind-distance">≈ ${distanceLabel} miles straight-line</p>
+              </div>
+              <div class="bird-blind-access">
+                <p>${escapeHtml(site.feature)}</p>
+                <p><strong>Access:</strong> ${escapeHtml(site.access)}</p>
+              </div>
+              <div class="bird-blind-actions">
+                <a href="${escapeHtml(site.operatorUrl)}" target="_blank" rel="noopener">Official access</a>
+                ${secondaryLink}
+                <a href="${escapeHtml(directionsUrl)}" target="_blank" rel="noopener">Directions</a>
+              </div>
+            </li>
+          `;
+        }).join("");
+      }
 
       function normalizeLevelFourKey(value) {
         return String(value || "").trim().replace(/\s+/g, " ").toLowerCase();
@@ -1721,6 +1947,10 @@
         mapResultAction.hidden = true;
         officialCouncilAction.hidden = true;
         officialBeeAction.hidden = true;
+        if (!lastCandidate) {
+          birdBlindStatus.textContent = "Waiting for a matched coordinate before ranking the Central Texas bird-blind collection.";
+          birdBlindList.innerHTML = "";
+        }
       }
 
       function setError(message) {
@@ -1729,6 +1959,8 @@
         mapResultAction.hidden = true;
         officialCouncilAction.hidden = true;
         officialBeeAction.hidden = true;
+        birdBlindStatus.textContent = "A matched coordinate is needed to rank the bird blinds.";
+        birdBlindList.innerHTML = "";
       }
 
       function renderResult(candidate, result) {
@@ -1771,6 +2003,7 @@
           : "";
         selectedMarker.bindPopup(`<strong>${escapeHtml(candidate.address)}</strong><br><em>${escapeHtml(result.title)}</em><br>${popupDetails}${popupLinks}`).openPopup();
         if (result.ecoregionAttributes) updateSelectedLevelFour(result.ecoregionAttributes);
+        renderClosestBirdBlinds(candidate.location);
       }
 
       function formatRegion(code, name) {
