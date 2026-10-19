@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Happy Life | Texas Nursing Homes & Everyday Places</title>
-    <meta name="description" content="Start with a daily-life requirement, then compare CMS-listed Texas nursing homes by verified policies or nearby nature, culture, food, errands, and recreation.">
+    <meta name="description" content="Choose a CMS-listed Texas nursing home, then compare its documented policies and nearby nature, culture, food, errands, and recreation.">
     <meta property="og:title" content="Happy Life | Texas Nursing Homes & Everyday Places">
-    <meta property="og:description" content="Search Texas nursing homes by the life you want: verified daily policies or routed access to bird blinds, preserves, libraries, trails, food, culture, and everyday services.">
+    <meta property="og:description" content="Compare Texas nursing homes, documented daily-life policies, and routed access to bird blinds, preserves, libraries, trails, food, culture, and everyday services.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="anonymous">
@@ -58,6 +58,10 @@
       .method-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:1rem; }
       .method-card { padding:1rem; border:1px solid var(--line); border-radius:.85rem; background:#fff; }
       .method-card h3 { margin-top:0; }
+      .source-list { display:grid; gap:.65rem; margin:.9rem 0 0; padding-left:1.25rem; }
+      .source-list li { padding-left:.2rem; }
+      .source-list strong,.source-list span { display:block; }
+      .source-list span { margin-top:.15rem; color:var(--muted); font-size:.88rem; }
       .freedom-shell { display:grid; grid-template-columns:minmax(0,1fr) minmax(16rem,22rem); gap:1rem; align-items:start; }
       .freedom-shell > * { min-width:0; }
       .freedom-table { width:100%; min-width:0; table-layout:fixed; border-collapse:separate; border-spacing:0 .55rem; }
@@ -156,13 +160,27 @@
       </section>
 
       <section class="table-section" aria-labelledby="sources-title">
-        <div class="section-head"><div><p class="kicker">Sources and privacy</p><h2 id="sources-title">Transparent public data, calculated only when requested.</h2></div></div>
+        <div class="section-head"><div><p class="kicker">Public data sources</p><h2 id="sources-title">What Happy Life uses—and what each source supplies.</h2></div><p>Facility facts come from CMS. Nearby places and routes are calculated from public mapping services only after you select a nursing home.</p></div>
         <div class="method-grid">
           <article class="method-card"><h3>Facilities</h3><p><a href="https://data.cms.gov/provider-data/dataset/4pq5-n9py" target="_blank" rel="noopener">CMS Care Compare Provider Information</a>, modified September 30, 2026; facility records processed September 1, 2026. The scope is active Medicare/Medicaid-certified nursing homes, not every assisted-living residence.</p></article>
-          <article class="method-card"><h3>Nearby places</h3><p>Esri World Geocoding supplies public place candidates. A small curated bird-blind seed list supplements rare-feature coverage. Names, categories, and operating status can change; verify before travel.</p></article>
-          <article class="method-card"><h3>Routing</h3><p><a href="https://valhalla.github.io/valhalla/" target="_blank" rel="noopener">Valhalla</a> calculates pedestrian and automobile route estimates over OpenStreetMap. If routing is unavailable, the card shows straight-line distance and says so.</p></article>
+          <article class="method-card"><h3>Nearby places</h3><p><a href="https://developers.arcgis.com/rest/geocode/" target="_blank" rel="noopener">Esri World Geocoding Service</a> supplies public place candidates for libraries, trails, food, errands, culture, nature, and recreation. Names, categories, and operating status can change; verify before travel.</p></article>
+          <article class="method-card"><h3>Maps and routing</h3><p><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> supply the basemap and routable street/path network. <a href="https://valhalla.github.io/valhalla/" target="_blank" rel="noopener">Valhalla</a> calculates pedestrian and automobile route estimates. If routing is unavailable, the result says so.</p></article>
+          <article class="method-card"><h3>Resident-rights baseline</h3><p><a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-483/subpart-B/section-483.10" target="_blank" rel="noopener">42 CFR §483.10</a> and <a href="https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-G/part-483/subpart-B/section-483.60" target="_blank" rel="noopener">42 CFR §483.60</a> provide the federal resident-rights and food/nutrition baseline. They do not substitute for a facility-specific answer.</p></article>
           <article class="method-card"><h3>Privacy</h3><p>The tool does not request or store the visitor’s location. Selecting a public facility sends its coordinate and nearby candidate coordinates to map/search/routing services, which may retain standard request logs.</p></article>
         </div>
+        <article class="method-card" style="margin-top:1rem">
+          <h3>Curated bird-blind sources</h3>
+          <p>Because bird blinds are inconsistently indexed in general place databases, Happy Life supplements map search with these public operator pages:</p>
+          <ul class="source-list">
+            <li><strong><a href="https://www.schertz.com/610/Parks" target="_blank" rel="noopener">Crescent Bend Nature Park</a></strong><span>City of Schertz parks directory · bird blinds and park access</span></li>
+            <li><strong><a href="https://warblerwoods.org/" target="_blank" rel="noopener">Warbler Woods Bird Sanctuary</a></strong><span>Sanctuary operator · blinds and arranged access</span></li>
+            <li><strong><a href="https://www.philhardbergerpark.org/" target="_blank" rel="noopener">Phil Hardberger Park</a></strong><span>Park operator · bird-blind information</span></li>
+            <li><strong><a href="https://tpwd.texas.gov/state-parks/guadalupe-river" target="_blank" rel="noopener">Guadalupe River State Park</a></strong><span>Texas Parks &amp; Wildlife Department · access and visitor information</span></li>
+            <li><strong><a href="https://www.ci.boerne.tx.us/89/City-Lake-Park" target="_blank" rel="noopener">Boerne City Lake Park</a></strong><span>City of Boerne · park and access information</span></li>
+            <li><strong><a href="https://www.kendallcountytx.gov/Facilities/Facility/Details/James-Kiehl-River-Bend-Park-10" target="_blank" rel="noopener">James Kiehl River Bend Park</a></strong><span>Kendall County · bird blind and park information</span></li>
+            <li><strong><a href="https://tpwd.texas.gov/state-parks/pedernales-falls" target="_blank" rel="noopener">Pedernales Falls State Park</a></strong><span>Texas Parks &amp; Wildlife Department · access and visitor information</span></li>
+          </ul>
+        </article>
       </section>
     </main>
     <footer><span>Happy Life · A Most Certainly Try public tool</span><a href="https://www.mostcertainlytry.com/contact">Contact</a></footer>
@@ -200,12 +218,12 @@
       ];
       const policyOptions = [["unchecked","Not yet verified"],["yes","Yes"],["no","No"],["conditional","Conditional"],["unknown","Staff could not confirm"]];
       const curatedBirdBlinds = [
-        { name:"Crescent Bend Nature Park bird blinds", address:"12805 Schaefer Road, Schertz, Texas", lat:29.58463, lon:-98.23662, source:"https://www.schertz.com/Facilities/Facility/Details/Crescent-Bend-Nature-Park-8" },
+        { name:"Crescent Bend Nature Park bird blinds", address:"12805 Schaefer Road, Schertz, Texas", lat:29.58463, lon:-98.23662, source:"https://www.schertz.com/610/Parks" },
         { name:"Warbler Woods Bird Sanctuary blinds", address:"Cibolo, Texas · access by arrangement", lat:29.6062, lon:-98.1915, source:"https://warblerwoods.org/" },
         { name:"Phil Hardberger Park bird blind", address:"San Antonio, Texas", lat:29.55535, lon:-98.53042, source:"https://www.philhardbergerpark.org/" },
         { name:"Guadalupe River State Park bird blind", address:"Spring Branch, Texas", lat:29.8532, lon:-98.5046, source:"https://tpwd.texas.gov/state-parks/guadalupe-river" },
         { name:"Boerne City Lake Park bird blind", address:"Boerne, Texas", lat:29.8057, lon:-98.7322, source:"https://www.ci.boerne.tx.us/89/City-Lake-Park" },
-        { name:"James Kiehl River Bend Park bird blind", address:"Comfort, Texas", lat:29.9349, lon:-98.8436, source:"https://www.kendallcountyparks.org/james-kiehl-river-bend-park" },
+        { name:"James Kiehl River Bend Park bird blind", address:"Comfort, Texas", lat:29.9349, lon:-98.8436, source:"https://www.kendallcountytx.gov/Facilities/Facility/Details/James-Kiehl-River-Bend-Park-10" },
         { name:"Pedernales Falls State Park bird blind", address:"Johnson City, Texas", lat:30.3083, lon:-98.2579, source:"https://tpwd.texas.gov/state-parks/pedernales-falls" }
       ];
 
