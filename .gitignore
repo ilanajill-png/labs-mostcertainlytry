@@ -92,6 +92,7 @@ assets/*
 data/*
 !data/garden-events.json
 !data/austin-garden-events.json
+!data/f1-events-austin-2026-10-23.kml
 
 !projects/
 projects/*
@@ -137,5 +138,6 @@ projects/*
 !projects/fall-garden-simplified-layout.html
 !projects/garden-health-tracker.html
 !projects/heb-weekly-meal-deal-menu-2026-10-01.html
+!projects/free-f1-events-austin-today.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html

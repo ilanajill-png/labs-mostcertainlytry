@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Free F1 Events in Austin — October 23, 2026</name>
+    <Style id="f1pin"><IconStyle><color>ff1111ff</color><scale>1.1</scale><Icon><href>https://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon></IconStyle></Style>
+    <Placemark><name>Big Race Wellness Pop-Up</name><description>6:00–11:00 a.m. · Free, first come</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7382490,30.2620509,0</coordinates></Point></Placemark>
+    <Placemark><name>The Weekend Edit: Austin Race Edition</name><description>8:30 a.m.–5:00 p.m. programming · Free lobby activation</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7413932,30.2668114,0</coordinates></Point></Placemark>
+    <Placemark><name>Lando's Original Service Dept.</name><description>9:00 a.m.–7:00 p.m. · Free entry</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7373009,30.2766010,0</coordinates></Point></Placemark>
+    <Placemark><name>Williams F1 Team Austin Fan Zone</name><description>10:00 a.m.–7:00 p.m. · Free Williams ID required</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7423010,30.2701550,0</coordinates></Point></Placemark>
+    <Placemark><name>Official F1 Hub Austin</name><description>10:00 a.m.–9:00 p.m. · Free entry</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7502410,30.2488510,0</coordinates></Point></Placemark>
+    <Placemark><name>FQ Lounge @ Austin Grand Prix</name><description>10:00 a.m.–1:30 p.m. · Registration required</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7413932,30.2668114,0</coordinates></Point></Placemark>
+    <Placemark><name>Enchanté × Ford Racing</name><description>11:00 a.m.–7:00 p.m. · Free entry</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7281210,30.2617940,0</coordinates></Point></Placemark>
+    <Placemark><name>Keep It Classic × Carchives Automotive Archive</name><description>11:00 a.m.–7:00 p.m. · Free entry</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7526719,30.2424090,0</coordinates></Point></Placemark>
+    <Placemark><name>Mercedes-AMG PETRONAS F1 Fan Hub</name><description>Noon–8:30 p.m. · Free, capacity permitting</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7438880,30.2665000,0</coordinates></Point></Placemark>
+    <Placemark><name>Claim Your Second</name><description>Noon–6:00 p.m. · Free race-week pop-up</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7269361,30.4015968,0</coordinates></Point></Placemark>
+    <Placemark><name>MINI Race Weekend Takeover</name><description>Noon–midnight · Free entry</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7386042,30.2584159,0</coordinates></Point></Placemark>
+    <Placemark><name>Red Bull Austin Race Nights</name><description>4:00–10:00 p.m. · Free RSVP requested</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7269952,30.2640267,0</coordinates></Point></Placemark>
+    <Placemark><name>Cadillac Formula 1 Team Ranch House</name><description>5:00–10:00 p.m. · Free registration; at capacity</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7712879,30.2478111,0</coordinates></Point></Placemark>
+    <Placemark><name>The Paddock Bar by Formula 1</name><description>From 8:00 p.m. · Free; RSVP honored until 9</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7745369,30.2066578,0</coordinates></Point></Placemark>
+    <Placemark><name>F1 Gran Premio: Practice Day</name><description>8:00 p.m.–2:00 a.m. · Free, 21+</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7272452,30.2634251,0</coordinates></Point></Placemark>
+    <Placemark><name>AREA 51TWO: Full Throttle</name><description>9:00 p.m.–2:00 a.m. · Free, limited capacity</description><styleUrl>#f1pin</styleUrl><Point><coordinates>-97.7021935,30.2528045,0</coordinates></Point></Placemark>
+  </Document>
+</kml>
