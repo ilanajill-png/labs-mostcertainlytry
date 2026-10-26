@@ -1,0 +1,150 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fischer Park Demonstration Garden & Monarch Waystation | Nature Work</title><meta name="description" content="Explore Fischer Park’s demonstration garden and Monarch Waystation in New Braunfels, with an interactive aerial garden survey map and a growing plant inventory."><link rel="canonical" href="https://labs.mostcertainlytry.com/projects/fischer-park-garden.html"><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,850&family=Inter:wght@400;500;700;850&display=swap" rel="stylesheet"><style>
+    :root {
+      --canopy: #153f38;
+      --river: #176f79;
+      --water: #72c7c2;
+      --limestone: #f4efe5;
+      --sand: #d8c09a;
+      --clay: #a4482d;
+      --sun: #e8b550;
+      --ink: #16211d;
+      --muted: #5d6c66;
+      --paper: #fffaf0;
+      --white: #ffffff;
+      --line: rgba(22, 33, 29, .14);
+      --shadow: 0 22px 50px rgba(21, 63, 47, .16);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--limestone);
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; text-decoration-color: rgba(164, 72, 45, .55); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    a:hover { color: var(--clay); }
+    .shell { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      border-bottom: 1px solid rgba(255, 255, 255, .22);
+      background: rgba(21, 63, 56, .94); color: var(--white);
+      backdrop-filter: blur(14px);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 62px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-family: Fraunces, Georgia, serif; font-size: 20px; font-weight: 850; line-height: 1; text-decoration: none; }
+    .brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(255,255,255,.34); border-radius: 50%; background: rgba(255,255,255,.1); font-family: Inter, sans-serif; font-size: 13px; font-weight: 850; }
+    .nav-links { display: flex; align-items: center; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { flex: 0 0 auto; padding: 8px 10px; border-radius: 999px; color: rgba(255,255,255,.88); font-size: 14px; font-weight: 650; text-decoration: none; }
+    .nav-links a:hover { background: rgba(255,255,255,.12); color: var(--white); }
+
+    .hero {
+      position: relative; min-height: calc(100vh - 62px);
+      display: grid; align-items: end; overflow: hidden; color: var(--white);
+      background:
+        linear-gradient(90deg, rgba(6, 22, 19, .93) 0%, rgba(6, 22, 19, .62) 43%, rgba(6, 22, 19, .12) 100%),
+        linear-gradient(0deg, rgba(6, 22, 19, .7) 0%, rgba(6, 22, 19, .04) 45%),
+        url("../assets/blue-hole/blue-hole-hero.jpg") center / cover no-repeat;
+    }
+    .hero::after { content: ""; position: absolute; inset: auto 0 0; height: 96px; background: linear-gradient(0deg, var(--limestone), rgba(244,239,229,0)); pointer-events: none; }
+    .hero-content { position: relative; z-index: 1; max-width: 780px; padding: 72px 0 118px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 18px; color: rgba(255,255,255,.88); font-size: 13px; font-weight: 760; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 38px; height: 2px; background: var(--sun); }
+    h1, h2, h3 { margin: 0; font-family: Fraunces, Georgia, serif; line-height: 1.02; }
+    h1 { max-width: 760px; font-size: clamp(56px, 9vw, 112px); text-wrap: balance; }
+    h2 { color: var(--canopy); font-size: clamp(34px, 5vw, 62px); }
+    h3 { color: var(--canopy); font-size: 25px; }
+    p { margin: 0; color: var(--muted); font-size: 17px; }
+    .hero p { max-width: 640px; margin-top: 22px; color: rgba(255,255,255,.9); font-size: clamp(18px, 2vw, 23px); }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 18px; border: 1px solid rgba(255,255,255,.28); border-radius: 6px; background: var(--sun); color: #20160a; font-weight: 850; text-decoration: none; box-shadow: 0 12px 26px rgba(0,0,0,.18); }
+    .button.secondary { background: rgba(255,255,255,.12); color: var(--white); box-shadow: none; }
+
+    .quick-strip { position: relative; z-index: 2; margin-top: -58px; }
+    .facts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: var(--line); box-shadow: var(--shadow); }
+    .fact { min-height: 118px; padding: 22px; background: var(--paper); }
+    .fact span { display: block; margin-bottom: 7px; color: var(--clay); font-size: 12px; font-weight: 850; text-transform: uppercase; }
+    .fact strong { display: block; color: var(--ink); font-size: 20px; line-height: 1.2; }
+
+    section { padding: 88px 0; }
+    .section-head { display: grid; grid-template-columns: minmax(0,.85fr) minmax(280px,.6fr); gap: 46px; align-items: end; margin-bottom: 36px; }
+    .section-head p { font-size: 18px; }
+    .visit-band { background: #fbf6ea; }
+    .visit-layout { display: grid; grid-template-columns: minmax(280px,.42fr) minmax(0,1fr); gap: 34px; align-items: start; }
+    .visit-card { padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--white); box-shadow: 0 16px 34px rgba(21,63,47,.09); }
+    .visit-card p + p { margin-top: 16px; }
+    .visit-card .button { width: 100%; margin-top: 20px; background: var(--river); color: white; box-shadow: none; }
+    .detail-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .detail-list li { min-height: 138px; padding: 20px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+    .detail-list strong { display: block; margin-bottom: 8px; color: var(--canopy); font-size: 18px; }
+    .detail-list span { color: var(--muted); }
+    .visit-note { margin-top: 20px; padding: 18px 20px; border-left: 4px solid var(--sun); background: rgba(255,255,255,.7); color: var(--muted); }
+
+    .history-band { background: var(--limestone); }
+    .story-grid { display: grid; grid-template-columns: minmax(0,.95fr) minmax(280px,.42fr); gap: 34px; align-items: start; }
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item { display: grid; grid-template-columns: 120px minmax(0,1fr); gap: 18px; padding: 22px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,250,240,.74); }
+    .year { color: var(--clay); font-weight: 850; }
+    .timeline-item p { font-size: 16px; }
+    .timeline-item .citation { display: inline-block; margin-top: 8px; color: var(--river); font-size: 13px; font-weight: 760; }
+    .feature-panel { position: sticky; top: 86px; display: flex; flex-direction: column; gap: 24px; padding: 28px; border-radius: 8px; background: var(--canopy); color: var(--white); }
+    .feature-panel h3, .feature-panel p { color: var(--white); }
+    .feature-panel p { color: rgba(255,255,255,.78); }
+    .water-mark { position: relative; min-height: 260px; overflow: hidden; border: 1px solid rgba(255,255,255,.2); border-radius: 8px; background: radial-gradient(circle at 50% 62%, rgba(114,199,194,.75) 0 14%, rgba(23,111,121,.55) 15% 30%, transparent 31%), linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.02)); }
+    .water-mark::before, .water-mark::after { content: ""; position: absolute; border: 2px solid rgba(255,255,255,.42); border-radius: 50%; }
+    .water-mark::before { inset: 30% 22% 14%; }
+    .water-mark::after { inset: 40% 32% 24%; }
+    .threshold { padding: 20px; border-left: 4px solid var(--water); background: rgba(255,255,255,.08); }
+    .threshold strong { display: block; color: var(--water); font-family: Fraunces, Georgia, serif; font-size: 36px; }
+
+    .water-band { background: var(--canopy); color: var(--white); }
+    .water-band h2, .water-band h3, .water-band p { color: var(--white); }
+    .water-band .section-head p, .process-card p { color: rgba(255,255,255,.75); }
+    .process-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .process-card { min-height: 250px; padding: 24px; border: 1px solid rgba(255,255,255,.16); border-radius: 8px; background: rgba(255,255,255,.08); }
+    .process-card .step { display: block; margin-bottom: 42px; color: var(--water); font-family: Fraunces,Georgia,serif; font-size: 30px; font-weight: 850; }
+    .process-card h3 { margin-bottom: 10px; }
+    .water-note { margin-top: 22px; padding: 20px; border-left: 4px solid var(--sun); background: rgba(255,255,255,.08); color: rgba(255,255,255,.8); }
+
+    .sources-band { padding: 58px 0; background: var(--paper); }
+    .sources { display: grid; grid-template-columns: minmax(0,.5fr) minmax(0,1fr); gap: 34px; align-items: start; }
+    .sources ul { display: grid; gap: 10px; margin: 0; padding-left: 20px; color: var(--muted); }
+    .image-note { margin-top: 26px; font-size: 13px; color: var(--muted); }
+    footer { padding: 26px 0; background: var(--canopy); color: rgba(255,255,255,.74); font-size: 14px; }
+    footer .shell { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+
+    @media (max-width: 860px) {
+      .nav { align-items: flex-start; flex-direction: column; padding: 13px 0; }
+      .nav-links { width: 100%; }
+      .hero { min-height: 720px; background-position: 58% center; }
+      .hero-content { padding: 72px 0 112px; }
+      .facts, .section-head, .story-grid, .visit-layout, .process-grid, .sources { grid-template-columns: 1fr; }
+      .feature-panel { position: static; }
+      .quick-strip { margin-top: -40px; }
+      section { padding: 68px 0; }
+    }
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px,1160px); }
+      .brand { font-size: 18px; }
+      .nav-links { gap: 2px; }
+      .nav-links a { padding: 7px 6px; font-size: 13px; }
+      h1 { font-size: 52px; }
+      .hero { min-height: 680px; }
+      .detail-list, .timeline-item { grid-template-columns: 1fr; }
+      .fact, .visit-card, .process-card, .timeline-item { padding: 20px; }
+    }
+  
+.hero{background:linear-gradient(90deg,rgba(6,22,19,.94),rgba(6,22,19,.5)),url('../assets/fischer-garden/garden-aerial.jpg') center/cover;min-height:640px}h1{font-size:clamp(44px,7vw,88px)}.map-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,.7fr);gap:30px;align-items:start}.map-stage{position:relative;max-width:600px;margin:auto;width:100%}.map-stage img{display:block;width:100%;height:auto;border-radius:8px}.pin{position:absolute;transform:translate(-50%,-50%);border:2px solid white;border-radius:50%;width:42px;height:42px;background:#153f38;color:white;font-weight:bold;cursor:pointer;box-shadow:0 2px 8px #0008}.pin[aria-pressed=true]{background:#a4482d;outline:3px solid #e8b550}.pin:focus-visible{outline:4px solid #e8b550}.map-key{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.map-key button{padding:12px;border:1px solid #153f38;background:#fffaf0;cursor:pointer;border-radius:6px}.survey{margin-top:24px}.survey p{margin:15px 0}.map-panel{position:sticky;top:100px}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:550px}th,td{text-align:left;padding:15px;border-bottom:1px solid var(--line)}iframe{width:100%;height:320px;border:0;border-radius:8px}.small{font-size:14px;margin-top:16px} @media(max-width:860px){.map-layout{grid-template-columns:1fr}.map-panel{position:static}}
+</style></head><body><header class="topbar"><nav class="shell nav" aria-label="Primary"><a class="brand" href="../index.html"><span class="brand-mark">FP</span>Most Certainly Try · Nature Work</a><div class="nav-links"><a href="#visit">Visit</a><a href="#garden-map">Garden Map</a><a href="#plants">Plants</a><a href="#sources">Sources</a></div></nav></header><main><section class="hero"><div class="shell hero-content"><p class="eyebrow">New Braunfels, Texas · A living field guide</p><h1>Fischer Park Demonstration Garden &amp; Monarch Waystation</h1><p>A small garden with a long-distance purpose. Explore the paths, watch pollinators at work, and follow a growing bed-by-bed record of the plants that make this habitat possible.</p><div class="cta-row"><a class="button" href="#garden-map">Explore the Garden</a><a class="button secondary" href="#visit">Plan a Visit</a></div></div></section><div class="quick-strip"><div class="shell facts"><div class="fact"><span>Place</span><strong>Fischer Park</strong></div><div class="fact"><span>Habitat</span><strong>Host plants + nectar</strong></div><div class="fact"><span>Explore</span><strong>Self-guided garden walk</strong></div><div class="fact"><span>Fieldwork</span><strong>Plant survey coming next</strong></div></div></div>
+<section id="visit" class="visit-band"><div class="shell"><div class="section-head"><h2>How to Visit</h2><p>Come for a close look at a working pollinator habitat. The City describes the garden as a place for demonstration, classes, community involvement and guided or self-guided walks.</p></div><div class="visit-layout"><aside class="visit-card"><h3>Find the garden</h3><p><strong>Fischer Park</strong><br>1935 Hilltop Summit Road<br>New Braunfels, TX 78130</p><p>Use park signage to find the Nature Education Center and butterfly garden. Check the City’s current information for access, programs and facility hours.</p><a class="button" href="https://www.google.com/maps/search/?api=1&query=Fischer+Park+Nature+Education+Center+New+Braunfels">Open directions ↗</a><p class="small"><a href="fischer-park.html">Explore the whole Fischer Park guide →</a></p></aside><div><ul class="detail-list"><li><strong>Slow down</strong><span>Observe from the paths. Look for feeding, egg-laying, caterpillar activity and changing blooms without handling wildlife.</span></li><li><strong>Look beyond monarchs</strong><span>The City also highlights Queens, Gulf Fritillaries and other butterflies. A waystation supports a wider community.</span></li><li><strong>Bring a field notebook</strong><span>Record the date, survey-area number and photographs. A leaf, flower and whole-plant view will help with identification later.</span></li><li><strong>Leave the garden growing</strong><span>Keep out of planted beds and leave flowers, seeds and insects in place. Use the benches to sit and watch.</span></li></ul><p class="visit-note">The map below is a garden observation aid, not a surveyed plan or an accessible-route assessment.</p></div></div></div></section>
+<section id="garden-map"><div class="shell"><div class="section-head"><h2>A garden, mapped for discovery.</h2><p>Select a numbered area to begin exploring. These provisional survey markers help organize future plant photographs; they are not official bed numbers or confirmed boundaries.</p></div><div class="map-layout"><div><div class="map-stage"><img src="../assets/fischer-garden/garden-aerial.jpg" width="495" height="712" alt="User-provided aerial view of Fischer Park garden, with curving paths and planted islands; numbered survey markers are overlaid."><button class="pin" style="left:48%;top:20%" data-area="1" aria-label="Survey area 1" aria-pressed="false">1</button><button class="pin" style="left:66%;top:24%" data-area="2" aria-label="Survey area 2" aria-pressed="false">2</button><button class="pin" style="left:26%;top:29%" data-area="3" aria-label="Survey area 3" aria-pressed="false">3</button><button class="pin" style="left:44%;top:32%" data-area="4" aria-label="Survey area 4" aria-pressed="false">4</button><button class="pin" style="left:59%;top:35%" data-area="5" aria-label="Survey area 5" aria-pressed="false">5</button><button class="pin" style="left:37%;top:43%" data-area="6" aria-label="Survey area 6" aria-pressed="false">6</button><button class="pin" style="left:57%;top:49%" data-area="7" aria-label="Survey area 7" aria-pressed="false">7</button><button class="pin" style="left:38%;top:54%" data-area="8" aria-label="Survey area 8" aria-pressed="false">8</button><button class="pin" style="left:47%;top:66%" data-area="9" aria-label="Survey area 9" aria-pressed="false">9</button><button class="pin" style="left:24%;top:68%" data-area="10" aria-label="Survey area 10" aria-pressed="false">10</button></div><p class="small">Base image: supplied garden aerial, IMG_3437 2.jpg. Capture date, north direction and scale are unverified. Markers indicate approximate survey locations only.</p><p class="small"><a href="../assets/fischer-garden/garden-aerial.jpg" target="_blank" rel="noopener">Open the original aerial image ↗</a></p></div><aside class="visit-card map-panel"><p class="eyebrow" style="color:var(--clay)">Start with observation</p><h3 id="area-title" aria-live="polite">Choose a survey area</h3><div class="survey"><p id="area-description">Tap a marker on the image or choose a number below. Plant identifications will be added after an on-site photo survey.</p><p><strong>Identification status:</strong> Not yet surveyed.</p><p><strong>Next field notes:</strong> whole-plant photo, leaf arrangement, flowers or seed heads, plant label if present, and observation date.</p><p>No plant species have been inferred from this aerial image.</p></div><div class="map-key" aria-label="Survey areas"><button data-area="1">Area 1</button><button data-area="2">Area 2</button><button data-area="3">Area 3</button><button data-area="4">Area 4</button><button data-area="5">Area 5</button><button data-area="6">Area 6</button><button data-area="7">Area 7</button><button data-area="8">Area 8</button><button data-area="9">Area 9</button><button data-area="10">Area 10</button></div></aside></div></div></section>
+<section class="water-band"><div class="shell"><div class="section-head"><h2>More than a flower stop.</h2><p>A useful butterfly garden supports different needs at different life stages.</p></div><div class="process-grid"><article class="process-card"><span class="step">01 / Feed</span><h3>Nectar for adults</h3><p>Flowers provide fuel for adult butterflies. Observe which blooms are being visited and how that changes through the seasons.</p></article><article class="process-card"><span class="step">02 / Grow</span><h3>Host plants for young</h3><p>Monarch caterpillars depend on milkweed. Other butterfly species use different hosts. Nectar visits alone do not establish a plant as a caterpillar host.</p></article><article class="process-card"><span class="step">03 / Return</span><h3>Habitat across seasons</h3><p>The City describes native berry-producing plants, larval plants and bird resources here. Our survey will document the individual plants and where they grow.</p></article></div><p class="water-note">Explore the bigger journey in <a href="monarchs.html">Monarchs in Motion →</a></p></div></section>
+<section id="plants"><div class="shell"><div class="section-head"><h2>The plant notebook.</h2><p>We will identify the garden’s plants later, one area at a time. Unknown is a starting point—not a species name.</p></div><div class="table-wrap"><table><thead><tr><th>Survey area</th><th>Plant identification</th><th>Evidence needed</th></tr></thead><tbody><tr><td><a href="#garden-map" data-area="1">Area 1</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="2">Area 2</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="3">Area 3</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="4">Area 4</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="5">Area 5</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="6">Area 6</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="7">Area 7</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="8">Area 8</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="9">Area 9</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr><tr><td><a href="#garden-map" data-area="10">Area 10</a></td><td>Awaiting field survey</td><td>Plant photographs, label and date</td></tr></tbody></table></div><p class="small">Future entries will include common and scientific names, identification confidence, nectar/host role, bloom observations and supporting photographs. Several plants may share one area; markers can be refined after fieldwork.</p></div></section>
+<section id="sources" class="sources-band"><div class="shell sources"><div><h2>Follow the original.</h2><p class="small">Sources checked October 26, 2026. Independent visitor guide; not an official City publication.</p></div><ul><li><a href="https://newbraunfels.gov/4221/Nature-Education-Center">City of New Braunfels · Nature Education Center</a> — confirms the Monarch Waystation, demonstration garden, educational uses and habitat features.</li><li><a href="https://www.newbraunfels.gov/3379/Fischer-Park">City of New Braunfels · Fischer Park</a> — park location and current visitor information.</li><li><a href="https://monarchwatch.org/waystations/">Monarch Watch · Monarch Waystations</a> — habitat needs and the waystation program.</li><li>Garden aerial supplied by the site owner. Survey-area positions are editorial annotations, not official garden records.</li></ul></div></section></main><footer><div class="shell"><span>Most Certainly Try · Nature Work</span><a href="../index.html">Explore more places →</a></div></footer><script>
+function selectArea(id){document.querySelectorAll('.pin').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.area===id)));document.getElementById('area-title').textContent='Survey area '+id;document.getElementById('area-description').textContent='Area '+id+' is a provisional reference point for future plant photographs. Its plant list and exact bed boundaries have not yet been confirmed.';}
+document.querySelectorAll('[data-area]').forEach(b=>b.addEventListener('click',()=>selectArea(b.dataset.area)));
+</script></body></html>
