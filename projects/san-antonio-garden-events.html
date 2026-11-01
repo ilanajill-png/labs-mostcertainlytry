@@ -312,7 +312,7 @@
       <section class="hero">
         <p class="eyebrow">Bexar + Guadalupe County rolling calendar</p>
         <h1>Plant swaps, garden events, flower happenings, and Master Gardener classes.</h1>
-        <p class="lede">A public 30-day list for San Antonio, Schertz, Seguin, and nearby communities. Updated from official and local garden calendars, sorted by date.</p>
+        <p class="lede">A public 30-day list for San Antonio, Schertz, Seguin, and nearby communities. Selected listings checked against organizer calendars, sorted by date. Past dates are automatically hidden.</p>
         <div class="stats" aria-label="Calendar status">
           <div class="stat"><span class="metric" id="event-count">0</span><span class="label">Events</span></div>
           <div class="stat"><span class="metric" id="master-count">0</span><span class="label">Master Gardener</span></div>
@@ -340,7 +340,9 @@
             </select>
           </label>
         </div>
-        <p class="notice" id="updated-note">Loading garden events...</p>
+        <p class="notice" id="updated-note" role="status">Loading garden events...</p>
+        <p class="notice" id="coverage-note"></p>
+        <p>More calendars: <a href="https://guadalupecountymastergardeners.org/events/">Guadalupe County Master Gardeners</a> · <a href="https://www.gardenstylesanantonio.com/events/">Garden Style San Antonio</a> · <a href="https://sabgtx.org/calendar/">Botanical Garden</a>. Confirm availability with the organizer before going.</p>
       </section>
 
       <section aria-label="Garden events table">
@@ -364,11 +366,15 @@
     </main>
 
     <footer>
-      <span>Data refreshes nightly.</span>
+      <span>Organizer-checked listings. See the last-checked date above.</span>
       <a href="../data/garden-events.json">Open JSON feed</a>
     </footer>
 
     <script>
+      const today = new Intl.DateTimeFormat("en-CA", { timeZone: "America/Chicago", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+      const horizonDate = new Date(`${today}T12:00:00Z`);
+      horizonDate.setUTCDate(horizonDate.getUTCDate() + 29);
+      const horizon = horizonDate.toISOString().slice(0, 10);
       const state = { events: [], query: "", type: "all", source: "all" };
       const dateFmt = new Intl.DateTimeFormat("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
 
@@ -416,7 +422,7 @@
       }
 
       function validEvents(events) {
-        return (Array.isArray(events) ? events : []).filter((event) => event && event.title && parseDate(event.date));
+        return (Array.isArray(events) ? events : []).filter((event) => event && event.title && parseDate(event.date) && event.date >= today && event.date <= horizon);
       }
 
       function windowLabel(window) {
@@ -438,7 +444,8 @@
         const end = data.window?.end || "upcoming dates";
         const sources = Array.isArray(data.sources) ? data.sources.map((source) => source.name).filter(Boolean) : [];
         const sourceText = sources.length ? ` Sources: ${sources.join(", ")}.` : "";
-        return `Last refreshed ${refreshed}. Showing ${start} through ${end}.${sourceText}`;
+        const stale = !generated || Date.now() - new Date(data.generatedAt).getTime() > 7 * 86400000;
+        return `${stale ? "Update overdue — check organizer calendars. " : ""}Last checked ${refreshed}. Showing upcoming dates ${today} through ${horizon}. Reviewed coverage: ${start} through ${end}.${sourceText}`;
       }
 
       function filteredEvents() {
@@ -462,6 +469,12 @@
 
       function render() {
         const events = filteredEvents();
+        if (!events.length) {
+          const message = "No verified upcoming events match this view. Try clearing filters or check the organizer calendars above.";
+          els.rows.innerHTML = `<tr><td colspan="6">${message}</td></tr>`;
+          els.cards.innerHTML = `<p class="notice">${message}</p>`;
+          return;
+        }
         els.rows.innerHTML = events.map((event) => `
           <tr>
             <td><strong>${escapeHtml(formatDate(event.date))}</strong></td>
@@ -498,7 +511,7 @@
         }).join("");
       }
 
-      fetch("../data/garden-events.json")
+      fetch("../data/garden-events.json", { cache: "no-cache" })
         .then((response) => {
           if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
           return response.json();
@@ -510,10 +523,11 @@
           fillSelect(els.type, types);
           fillSelect(els.source, sources);
           els.count.textContent = String(state.events.length);
-          els.master.textContent = String(state.events.filter((event) => event.type === "Master Gardener").length);
-          els.swaps.textContent = String(state.events.filter((event) => /swap|exchange/i.test(event.type)).length);
-          els.window.textContent = windowLabel(data.window);
+          els.master.textContent = String(state.events.filter((event) => /master gardener/i.test(event.source + " " + event.type)).length);
+          els.swaps.textContent = String(state.events.filter((event) => /swap|exchange/i.test(event.type + " " + event.title)).length);
+          els.window.textContent = windowLabel({ start: today, end: horizon });
           els.note.textContent = refreshLabel(data);
+          document.querySelector("#coverage-note").textContent = data.coverageNote || "Check event details with the organizer.";
           render();
         })
         .catch((error) => {
