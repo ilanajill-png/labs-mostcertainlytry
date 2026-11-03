@@ -1,0 +1,15 @@
+/* Public-site accessibility and portfolio polish — 2026-11-03 */
+.vm-jump a { background:#f6f0df; color:#1f3029; }
+.vm-jump a:hover, .vm-jump a:focus-visible { background:#d9e6dc; color:#17251e; outline:2px solid #fff; outline-offset:2px; }
+.mct-career-footer { position:relative; clear:both; display:flex; flex-wrap:wrap; justify-content:center; gap:12px 24px; padding:24px; border-top:1px solid #c8d5ce; background:#f5f7f2; color:#173e2c; font:500 15px/1.5 system-ui,sans-serif; }
+.mct-career-footer a { color:#173e2c; text-decoration:underline; text-underline-offset:3px; padding:8px 0; }
+.mct-scroll-hint { margin:10px 0; font:600 14px/1.5 system-ui,sans-serif; color:#174632; background:#f2f7f4; padding:10px 14px; border-left:3px solid #246b4f; }
+.mct-scroll-region { overflow-x:auto; max-width:100%; scrollbar-width:auto; }
+.mct-scroll-region:focus-visible { outline:3px solid #246b4f; outline-offset:3px; }
+.mct-archive { margin:0; padding:16px 24px; background:#fff2c9; color:#493b13; border-bottom:2px solid #9f7621; font:600 16px/1.5 system-ui,sans-serif; }
+@media(max-width:700px) {
+ header nav, header .nav-links, .topbar .nav-links, .site-header nav { flex-wrap:wrap !important; overflow:visible !important; max-width:100%; white-space:normal; }
+ header nav a, header .nav-links a { min-height:40px; display:inline-flex; align-items:center; }
+ header.topbar, header.site-header { position:relative; }
+ .vm-jump, .mg-jump, .mb-jump { flex-wrap:wrap; position:relative; padding:12px 16px; }
+}

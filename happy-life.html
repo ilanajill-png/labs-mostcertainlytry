@@ -88,11 +88,14 @@
       @media (max-width:900px) { .happy-layout,.freedom-shell { grid-template-columns:1fr; }.happy-panel { position:static; max-height:none; }.facility-list { max-height:16rem; overflow:auto; } #happy-map { min-height:430px; height:60vh; } }
       @media (max-width:520px) { .route-pair { grid-template-columns:1fr; } #happy-map { min-height:390px; }.freedom-table thead { display:none; }.freedom-table,.freedom-table tbody,.freedom-table tr,.freedom-table td { display:block; width:100%; min-width:0; }.freedom-table tr { margin-bottom:.8rem; }.freedom-table td { border-inline:1px solid var(--line); }.freedom-table td:first-child { border-radius:.65rem .65rem 0 0; }.freedom-table td:last-child { border-radius:0 0 .65rem .65rem; }.freedom-table td:last-child::before { content:"Answer"; display:block; margin-bottom:.3rem; color:var(--muted); font-size:.72rem; font-weight:900; text-transform:uppercase; } }
     </style>
-  </head>
+    <link rel="canonical" href="https://labs.mostcertainlytry.com/happy-life.html">
+  <link rel="icon" type="image/png" href="assets/howdy-partner-logo.png">
+  <link rel="stylesheet" href="assets/site-cleanup.css?v=20261103">
+</head>
   <body>
     <header class="site-header">
-      <a class="brand" href="index.html"><img src="assets/howdy-partner-logo.png" alt="" width="48" height="48"><span><strong>Most Certainly Try</strong><small>Nature work &amp; public tools</small></span></a>
-      <nav aria-label="Primary navigation"><a href="index.html">Nature Work</a><a href="ecoregion-finder.html">Eco Finder</a><a href="happy-life.html" aria-current="page">Happy Life</a><a href="about.html">About</a></nav>
+      <a class="brand" href="/"><img src="assets/howdy-partner-logo.png" alt="" width="48" height="48"><span><strong>Most Certainly Try</strong><small>Nature work &amp; public tools</small></span></a>
+      <nav aria-label="Primary navigation"><a href="/">Nature Work</a><a href="ecoregion-finder.html">Eco Finder</a><a href="happy-life.html" aria-current="page">Happy Life</a><a href="about.html">About</a></nav>
     </header>
     <main>
       <section class="hero happy-hero">
@@ -360,5 +363,7 @@
       findButton.addEventListener("click",findNearby);
       loadFacilities().catch(e=>{ console.error(e); searchCount.textContent="Facility data could not load. Please refresh."; });
     </script>
-  </body>
+  <footer class="mct-career-footer" aria-label="Portfolio navigation"><a href="https://www.mostcertainlytry.com/">Ilana Sztaimberg · Portfolio</a><a href="/selected-work.html">Selected work</a><a href="/experience.html">Experience</a><a href="/">Nature Work</a><a href="https://www.mostcertainlytry.com/contact">Contact</a></footer>
+<script src="assets/site-cleanup.js?v=20261103" defer></script>
+</body>
 </html>

@@ -26,7 +26,7 @@
     .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.55fr);gap:52px;align-items:end}
     .eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:800;color:#f2d7b1;margin:0 0 18px}
     h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.06;margin:0;color:inherit}
-    h1{font-size:clamp(3rem,8vw,6.4rem);letter-spacing:-.055em;max-width:860px}
+    h1{font-size:clamp(2.25rem,5vw,4.5rem);overflow-wrap:normal;word-break:normal;letter-spacing:-.055em;max-width:860px}
     .lede{font-size:clamp(1.05rem,2vw,1.28rem);max-width:760px;color:rgba(255,255,255,.82);margin:24px 0 0}
     .hero-note{border-left:1px solid rgba(255,255,255,.3);padding-left:24px;font-size:.92rem;color:rgba(255,255,255,.78)}
     .hero-note strong{display:block;color:#fff;margin-bottom:8px}
@@ -54,11 +54,14 @@
     @media(max-width:800px){.hero-grid,.section-head{grid-template-columns:1fr}.hero-note{border-left:0;border-top:1px solid rgba(255,255,255,.3);padding:18px 0 0}.principles,.repo-grid{grid-template-columns:1fr 1fr}.source{grid-template-columns:1fr}.confidence{justify-self:start}.claims{table-layout:fixed}.claims th,.claims td{overflow-wrap:anywhere}}
     @media(max-width:560px){.nav{align-items:flex-start;padding:14px 0}.nav-links{gap:12px}.hero{padding:64px 0 54px}.principles,.repo-grid{grid-template-columns:1fr}.shell{width:min(100% - 24px,1160px)}.claims{font-size:.75rem}.claims th,.claims td{padding:9px 7px}.claims th{font-size:.6rem}}
   </style>
+  <link rel="canonical" href="https://labs.mostcertainlytry.com/projects/neuroterroir-research-ledger.html">
+  <link rel="icon" type="image/png" href="../assets/howdy-partner-logo.png">
+  <link rel="stylesheet" href="../assets/site-cleanup.css?v=20261103">
 </head>
 <body>
   <header class="topbar">
     <div class="shell nav">
-      <a class="brand" href="../index.html"><span class="brand-mark">MCT</span>Nature Work</a>
+      <a class="brand" href="/"><span class="brand-mark">MCT</span>Nature Work</a>
       <nav class="nav-links" aria-label="Primary"><a href="neuroterroir.html">Open the lab</a><a href="#repositories">Code reviewed</a><a href="#sources">Sources</a><a href="../about.html">About</a></nav>
     </div>
   </header>
@@ -179,5 +182,7 @@
       repos.forEach(repo=>{repo.hidden=filter!=='all'&&!repo.dataset.category.split(' ').includes(filter)});
     }));
   </script>
+<footer class="mct-career-footer" aria-label="Portfolio navigation"><a href="https://www.mostcertainlytry.com/">Ilana Sztaimberg · Portfolio</a><a href="/selected-work.html">Selected work</a><a href="/experience.html">Experience</a><a href="/">Nature Work</a><a href="https://www.mostcertainlytry.com/contact">Contact</a></footer>
+<script src="../assets/site-cleanup.js?v=20261103" defer></script>
 </body>
 </html>

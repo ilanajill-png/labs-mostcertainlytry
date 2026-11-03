@@ -527,11 +527,18 @@
           max-height: 48vh;
         }
       }
-    </style>
-  </head>
+      .leaflet-control-layers .leaflet-control-layers-toggle {
+        width:auto; min-width:74px; height:44px; padding:0 12px;
+        background:#fff; color:#174632; font:700 15px/44px system-ui,sans-serif;
+        text-align:center; text-decoration:none;
+      }
+</style>
+    <link rel="canonical" href="https://labs.mostcertainlytry.com/ecoregion-finder.html">
+  <link rel="stylesheet" href="assets/site-cleanup.css?v=20261103">
+</head>
   <body>
     <header class="site-header">
-      <a class="brand" href="index.html" aria-label="Most Certainly Try Labs home">
+      <a class="brand" href="/" aria-label="Most Certainly Try Labs home">
         <img src="assets/howdy-partner-logo.png" alt="" width="48" height="48">
         <span>
           <strong>Most Certainly Try</strong>
@@ -539,7 +546,7 @@
         </span>
       </a>
       <nav aria-label="Primary navigation">
-        <a href="index.html">Nature Work</a>
+        <a href="/">Nature Work</a>
         <a href="ecoregion-finder.html" aria-current="page">Ecoregion Finder</a>
         <a href="happy-life.html">Happy Life</a>
         <a href="about.html">About</a>
@@ -1834,6 +1841,16 @@
       if (layerToggle) {
         layerToggle.setAttribute("aria-label", "Show map layers");
         layerToggle.title = "Show map layers";
+        layerToggle.textContent = "Layers";
+        layerToggle.setAttribute("role", "button");
+        layerToggle.setAttribute("aria-expanded", "true");
+        const openLayers = (event) => {
+          event.preventDefault(); event.stopPropagation();
+          layerControl.expand(); layerToggle.setAttribute("aria-expanded", "true");
+          layerControlContainer.querySelector(".layer-control-minimize")?.focus();
+        };
+        layerToggle.addEventListener("click", openLayers);
+        layerToggle.addEventListener("keydown", (event) => { if (event.key === " ") openLayers(event); });
       }
       const layerControlList = layerControlContainer.querySelector(".leaflet-control-layers-list");
       if (layerControlList) {
@@ -1845,7 +1862,7 @@
           event.preventDefault();
           event.stopPropagation();
           layerControl.collapse();
-          if (layerToggle) layerToggle.focus();
+          if (layerToggle) { layerToggle.setAttribute("aria-expanded", "false"); layerToggle.focus(); }
         });
         layerControlList.prepend(minimizeButton);
       }
@@ -2523,5 +2540,7 @@
         }
       });
     </script>
-  </body>
+  <footer class="mct-career-footer" aria-label="Portfolio navigation"><a href="https://www.mostcertainlytry.com/">Ilana Sztaimberg · Portfolio</a><a href="/selected-work.html">Selected work</a><a href="/experience.html">Experience</a><a href="/">Nature Work</a><a href="https://www.mostcertainlytry.com/contact">Contact</a></footer>
+<script src="assets/site-cleanup.js?v=20261103" defer></script>
+</body>
 </html>

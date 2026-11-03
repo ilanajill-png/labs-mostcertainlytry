@@ -142,3 +142,14 @@ projects/*
 !projects/austin-tech-week-2026.html
 !big-red-barn-field-guide.html
 !seguin-agrilife-field-guide.html
+
+# Reviewed public portfolio and shared visual cleanup, November 2026.
+!selected-work.html
+!experience.html
+!assets/site-cleanup.css
+!assets/site-cleanup.js
+!assets/portfolio/
+!assets/portfolio/ecoregion.jpg
+!assets/portfolio/bracken.jpg
+!assets/portfolio/garden-tracker.jpg
+!assets/portfolio/ilana-sztaimberg-experience.pdf
