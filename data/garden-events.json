@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-06T08:49:17.282522+00:00",
+  "generatedAt": "2026-11-06T09:13:25.070476+00:00",
   "timezone": "America/Chicago",
   "window": {
     "start": "2026-11-06",
@@ -28,7 +28,7 @@
       "url": "https://www.gardenstylesanantonio.com/events/"
     }
   ],
-  "coverageNote": "Selected gardening and native-plant listings, not a complete calendar. November 6 check: Botanical Garden calendar pages 1–11 and retained event detail pages reviewed; AgriLife seminar announcement rechecked. Added organizer-confirmed November 11 Dementia-Friendly Gardening. November 6 Sustainable Gardening omitted because the organizer’s visible date list ends in October, conflicting with its metadata and regional listing; cancellation is not confirmed. Bexar homepage and event page returned HTTP 403; five retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage accessible but events calendar returned HTTP 403; no Guadalupe listings added. Garden Style calendar pages 1–3 and rainwater-harvesting detail reviewed, but extracted regional details lack complete dates/locations; no unconfirmed listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. Previously cancelled Felted Ornament class remains omitted.",
+  "coverageNote": "Selected gardening and native-plant listings, not a complete calendar. November 6 follow-up: Botanical Garden calendar pages 1–11 and all retained event detail pages rechecked; AgriLife seminar dates, costs and location reconfirmed. Bexar homepage and event page returned HTTP 403; five retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage and events calendar returned HTTP 403; no Guadalupe listings added. Garden Style calendar pages 1–3 reviewed, but extracted regional listings lack complete dates and locations; no unconfirmed listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. November 6 Sustainable Gardening remains omitted because an organizer date could not be confirmed; cancellation is not confirmed. Previously cancelled Felted Ornament class remains omitted.",
   "events": [
     {
       "id": "2026-11-06:Fall and Winter Vegetable Gardening",
