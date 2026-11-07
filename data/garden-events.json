@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-07T08:38:27.898928+00:00",
+  "generatedAt": "2026-11-07T09:02:06.585619+00:00",
   "timezone": "America/Chicago",
   "window": {
     "start": "2026-11-07",
@@ -28,7 +28,7 @@
       "url": "https://www.gardenstylesanantonio.com/events/"
     }
   ],
-  "coverageNote": "Selected gardening and native-plant listings, not a complete calendar. November 7 refresh: Botanical Garden calendar pages 1–11 and all retained event detail pages checked; AgriLife seminar dates, costs and location reconfirmed. Bexar homepage and event page returned HTTP 403; five retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage and events calendar returned HTTP 403; no Guadalupe listings added. Garden Style calendar pages 1–3 reviewed, but extracted regional listings lack complete dates and locations; no unconfirmed listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. Previously cancelled Felted Ornament class remains omitted. Past events removed; window uses America/Chicago dates.",
+  "coverageNote": "Selected gardening and native-plant listings, not a complete calendar. November 7 refresh: Botanical Garden calendar pages 1–11 and all retained event detail pages checked; AgriLife seminar dates, costs and location reconfirmed. Bexar homepage and event page returned HTTP 403; five retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage reviewed, but its events calendar returned HTTP 403; no date-specific Guadalupe listings could be verified or added. Garden Style calendar pages 1–3 reviewed, but extracted regional listings lack complete dates and locations; no unconfirmed listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. Previously cancelled Felted Ornament class remains omitted. Past events removed; window uses America/Chicago dates.",
   "events": [
     {
       "id": "2026-11-07:Fall is for Planting",
