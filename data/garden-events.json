@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-08T09:09:39.244423+00:00",
+  "generatedAt": "2026-11-08T09:59:22.003243+00:00",
   "timezone": "America/Chicago",
   "window": {
     "start": "2026-11-08",
     "end": "2026-12-07"
   },
-  "eventCount": 14,
+  "eventCount": 15,
   "sources": [
     {
       "name": "Bexar County Master Gardeners",
@@ -28,7 +28,7 @@
       "url": "https://www.gardenstylesanantonio.com/events/"
     }
   ],
-  "coverageNote": "Selected gardening and native-plant listings, not a complete calendar. November 8 refresh: Botanical Garden calendar pages 1–11 and all retained event detail pages checked; AgriLife seminar date, cost and location reconfirmed. Bexar homepage and event page returned HTTP 403; four retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage reviewed, but its events calendar returned HTTP 403; no date-specific Guadalupe listings could be verified or added. Garden Style calendar pages 1–3 reviewed across tonight’s checks; previously timed-out page 2 loaded successfully on the follow-up. Extracted regional calendar listings lack complete dates and locations; no unconfirmed listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. Previously cancelled Felted Ornament class remains omitted. Three past events removed; window uses America/Chicago dates.",
+  "coverageNote": "Selected gardening, flower and native-plant listings, not a complete calendar. November 8 refresh: Botanical Garden calendar pages 1–11 and all retained Botanical Garden event detail pages checked; AgriLife seminar date, cost and location reconfirmed. Added the organizer-confirmed November 21 Fall Table Centerpieces workshop. Bexar homepage and event page returned HTTP 403; four retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage reviewed, but its events calendar returned HTTP 403; no date-specific Guadalupe listings could be verified or added. Garden Style calendar pages 1–3 reviewed; extracted regional listings lack complete dates and locations, so no unconfirmed listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. Previously cancelled Felted Ornament class remains omitted. Window uses America/Chicago dates.",
   "events": [
     {
       "id": "2026-11-11:Dementia-Friendly Gardening",
@@ -168,6 +168,20 @@
       "registerLink": "https://agrilifetoday.tamu.edu/event-advance/san-antonio/",
       "type": "Class / Workshop",
       "summary": "Weekend Gardening Series with David Rodriguez. Registration link on organizer announcement.",
+      "verifiedOn": "2026-11-08"
+    },
+    {
+      "id": "2026-11-21:Fall Table Centerpieces",
+      "date": "2026-11-21",
+      "title": "Fall Table Centerpieces",
+      "time": "10–11 a.m.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
+      "cost": "$65 ($60 members)",
+      "source": "San Antonio Botanical Garden",
+      "link": "https://sabgtx.org/event/fall-table-centerpieces/",
+      "registerLink": "https://sabgtx.org/event/fall-table-centerpieces/",
+      "type": "Class / Workshop",
+      "summary": "Design a low seasonal centerpiece with fresh flowers and foliage. All supplies provided; instructor Andrea Cisneros.",
       "verifiedOn": "2026-11-08"
     },
     {
