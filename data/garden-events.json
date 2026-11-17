@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-11-09T16:07:20.011329+00:00",
+  "generatedAt": "2026-11-17T09:07:24.311Z",
   "timezone": "America/Chicago",
   "window": {
-    "start": "2026-11-09",
-    "end": "2026-12-08"
+    "start": "2026-11-17",
+    "end": "2026-12-16"
   },
-  "eventCount": 15,
+  "eventCount": 14,
   "sources": [
     {
       "name": "Bexar County Master Gardeners",
@@ -28,78 +28,8 @@
       "url": "https://www.gardenstylesanantonio.com/events/"
     }
   ],
-  "coverageNote": "Selected gardening, flower and native-plant listings, not a complete calendar. November 9 refresh: Botanical Garden calendar pages 1–11 and all retained Botanical Garden event detail pages checked; AgriLife seminar date, cost and location reconfirmed. Bexar homepage and event page returned HTTP 403; four retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage reviewed, but its events calendar returned HTTP 403; no date-specific Guadalupe listings could be verified or added. Garden Style calendar first page reviewed; additional calendar pagination timed out, and no unconfirmed regional listings imported. Organizer exclusions take precedence: no WaterSaver tour November 6 or 27. Previously cancelled Felted Ornament class remains omitted. Window uses America/Chicago dates.",
+  "coverageNote": "Selected gardening, flower and native-plant listings, not a complete calendar. November 17 refresh: Botanical Garden calendar pages 1–11 and all included Botanical Garden event detail pages checked; AgriLife seminar date, cost and location reconfirmed. Bexar homepage returned HTTP 403; two retained Bexar listings remain last verified November 1, not reverified today. Guadalupe homepage reviewed, but its events calendar returned HTTP 403; no date-specific Guadalupe listings verified or added. Garden Style calendar pages 1–2 and selected detail pages reviewed; extracted detail pages lacked dates and locations, so no unconfirmed regional listings imported. Organizer exclusions take precedence: no WaterSaver tour November 27. Previously cancelled Felted Ornament class remains omitted. Five past events removed. Window uses America/Chicago dates.",
   "events": [
-    {
-      "id": "2026-11-11:Dementia-Friendly Gardening",
-      "date": "2026-11-11",
-      "title": "Dementia-Friendly Gardening",
-      "time": "11 a.m.–12:30 p.m.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
-      "cost": "Free; registration required",
-      "source": "San Antonio Botanical Garden",
-      "link": "https://sabgtx.org/event/dementia-friendly-gardening-1104/",
-      "registerLink": "https://sabgtx.org/event/dementia-friendly-gardening-1104/",
-      "type": "Class / Workshop",
-      "summary": "For people living with dementia and their caregivers. Bring water and dress for the weather.",
-      "verifiedOn": "2026-11-09"
-    },
-    {
-      "id": "2026-11-11:Drop-in Guided Tour: Birds of Texas",
-      "date": "2026-11-11",
-      "title": "Drop-in Guided Tour: Birds of Texas",
-      "time": "8–9 a.m.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
-      "cost": "Included with admission or membership",
-      "source": "San Antonio Botanical Garden",
-      "link": "https://sabgtx.org/event/drop-in-guided-tour-birds-of-texas-fall-2026/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-birds-of-texas-fall-2026/",
-      "type": "Class / Workshop",
-      "summary": "Learn which native plants attract resident and migrating birds. Wednesdays through November 18.",
-      "verifiedOn": "2026-11-09"
-    },
-    {
-      "id": "2026-11-13:Drop-in Guided Tour: Texas WaterSaver Garden",
-      "date": "2026-11-13",
-      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
-      "time": "9–10 a.m.",
-      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
-      "cost": "Included with admission or membership",
-      "source": "San Antonio Botanical Garden",
-      "link": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
-      "type": "Class / Workshop",
-      "summary": "Organizer excludes November 6 and 27; only confirmed dates within the rolling window shown.",
-      "verifiedOn": "2026-11-09"
-    },
-    {
-      "id": "2026-11-13:Lunch & Learn: Poinsettia Gardening",
-      "date": "2026-11-13",
-      "title": "Lunch & Learn: Poinsettia Gardening",
-      "time": "Noon–1 p.m.",
-      "location": "Greenies Urban Farm, 1615 Sherman St., San Antonio",
-      "cost": "Free",
-      "source": "Bexar County Master Gardeners",
-      "link": "https://bexarmg.org/event/lunch-learn-14/",
-      "registerLink": "https://bexarmg.org/event/lunch-learn-14/",
-      "type": "Master Gardener",
-      "summary": "",
-      "verifiedOn": "2026-11-01"
-    },
-    {
-      "id": "2026-11-14:Texas Tough Trees",
-      "date": "2026-11-14",
-      "title": "Texas Tough Trees",
-      "time": "10 a.m.; end time not published",
-      "location": "Rainbow Gardens, 8516 Bandera Rd., San Antonio",
-      "cost": "Free; open to the public",
-      "source": "Bexar County Master Gardeners",
-      "link": "https://bexarmg.org/",
-      "registerLink": "https://bexarmg.org/",
-      "type": "Class / Workshop",
-      "summary": "Gardening with David Rodriguez; listed on the Master Gardeners’ official homepage.",
-      "verifiedOn": "2026-11-01"
-    },
     {
       "id": "2026-11-17:Texas Water, Native Plants, and Soil",
       "date": "2026-11-17",
@@ -126,7 +56,7 @@
       "registerLink": "https://sabgtx.org/event/dementia-friendly-gardening-1118/",
       "type": "Class / Workshop",
       "summary": "For people living with dementia and their caregivers. Bring water and dress for the weather.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-11-18:Drop-in Guided Tour: Birds of Texas",
@@ -140,7 +70,7 @@
       "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-birds-of-texas-fall-2026/",
       "type": "Class / Workshop",
       "summary": "Learn which native plants attract resident and migrating birds. Wednesdays through November 18.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-11-20:Drop-in Guided Tour: Texas WaterSaver Garden",
@@ -154,7 +84,7 @@
       "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
       "type": "Class / Workshop",
       "summary": "Organizer excludes November 6 and 27; only confirmed dates within the rolling window shown.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-11-20:Seasonal Plants, Holiday Gifts & Winter Color",
@@ -168,7 +98,7 @@
       "registerLink": "https://agrilifetoday.tamu.edu/event-advance/san-antonio/",
       "type": "Class / Workshop",
       "summary": "Weekend Gardening Series with David Rodriguez. Registration link on organizer announcement.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-11-21:Fall Table Centerpieces",
@@ -182,7 +112,21 @@
       "registerLink": "https://sabgtx.org/event/fall-table-centerpieces/",
       "type": "Class / Workshop",
       "summary": "Design a low seasonal centerpiece with fresh flowers and foliage. All supplies provided; instructor Andrea Cisneros.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
+    },
+    {
+      "id": "2026-11-21:Marigold Natural Dye",
+      "date": "2026-11-21",
+      "title": "Marigold Natural Dye",
+      "time": "10 a.m.–1 p.m.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
+      "cost": "$65 ($60 members)",
+      "source": "San Antonio Botanical Garden",
+      "link": "https://sabgtx.org/event/marigold-natural-dye/",
+      "registerLink": "https://sabgtx.org/event/marigold-natural-dye/",
+      "type": "Class / Workshop",
+      "summary": "Learn to dye cotton and silk with marigold flowers. Includes a cotton bandana, small silk scarf and process handout.",
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-11-21:Tree Planting 101",
@@ -210,7 +154,7 @@
       "registerLink": "https://sabgtx.org/event/dementia-friendly-gardening-1125/",
       "type": "Class / Workshop",
       "summary": "For people living with dementia and their caregivers. Bring water and dress for the weather.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-12-02:Dementia-Friendly Gardening",
@@ -224,7 +168,7 @@
       "registerLink": "https://sabgtx.org/event/dementia-friendly-gardening-1202/",
       "type": "Class / Workshop",
       "summary": "For people living with dementia and their caregivers. Bring water and dress for the weather.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
     },
     {
       "id": "2026-12-04:Drop-in Guided Tour: Texas WaterSaver Garden",
@@ -238,7 +182,49 @@
       "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
       "type": "Class / Workshop",
       "summary": "Organizer excludes November 6 and 27; only confirmed dates within the rolling window shown.",
-      "verifiedOn": "2026-11-09"
+      "verifiedOn": "2026-11-17"
+    },
+    {
+      "id": "2026-12-09:Dementia-Friendly Gardening",
+      "date": "2026-12-09",
+      "title": "Dementia-Friendly Gardening",
+      "time": "11 a.m.–12:30 p.m.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
+      "cost": "Free; registration required",
+      "source": "San Antonio Botanical Garden",
+      "link": "https://sabgtx.org/event/dementia-friendly-gardening-1209/",
+      "registerLink": "https://sabgtx.org/event/dementia-friendly-gardening-1209/",
+      "type": "Class / Workshop",
+      "summary": "For people living with dementia and their caregivers. Bring water and dress for the weather.",
+      "verifiedOn": "2026-11-17"
+    },
+    {
+      "id": "2026-12-11:Drop-in Guided Tour: Texas WaterSaver Garden",
+      "date": "2026-12-11",
+      "title": "Drop-in Guided Tour: Texas WaterSaver Garden",
+      "time": "9–10 a.m.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
+      "cost": "Included with admission or membership",
+      "source": "San Antonio Botanical Garden",
+      "link": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
+      "registerLink": "https://sabgtx.org/event/drop-in-guided-tour-texas-watersaver-garden-fall/",
+      "type": "Class / Workshop",
+      "summary": "Organizer excludes November 6 and 27; only confirmed dates within the rolling window shown.",
+      "verifiedOn": "2026-11-17"
+    },
+    {
+      "id": "2026-12-11:Winter Wreath Making",
+      "date": "2026-12-11",
+      "title": "Winter Wreath Making",
+      "time": "10–11:30 a.m.",
+      "location": "San Antonio Botanical Garden, 555 Funston Pl., San Antonio",
+      "cost": "$65 ($60 members)",
+      "source": "San Antonio Botanical Garden",
+      "link": "https://sabgtx.org/event/winter-wreath-making/",
+      "registerLink": "https://sabgtx.org/event/winter-wreath-making/",
+      "type": "Class / Workshop",
+      "summary": "Make an evergreen wreath; supplies provided. Registration closes December 9 at 10 a.m.",
+      "verifiedOn": "2026-11-17"
     }
   ]
 }
